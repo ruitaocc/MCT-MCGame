@@ -23,7 +23,7 @@
 		self.vertexes = verts;
 		self.vertexCount = vertCount;
 		self.vertexSize = vertSize;
-		self.renderStyle =  style;
+		self.renderStyle =   style;
 	}
 	return self;
 }
