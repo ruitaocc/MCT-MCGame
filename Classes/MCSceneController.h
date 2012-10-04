@@ -10,34 +10,55 @@
 
 @class MCInputViewController;
 @class EAGLView;
-
+@class MCSceneObject;
 @interface MCSceneController : NSObject {
-	NSMutableArray * sceneObjects;
-	
+	//maintain all the scene objects
+    NSMutableArray * sceneObjects;
+    //queue that store object to remove next update gameloop
+	NSMutableArray * objectsToRemove;
+     //queue that store object to add next update gameloop,and add to the sceneObject array.
+	NSMutableArray * objectsToAdd;
+    
+    //inputcontroller
 	MCInputViewController * inputController;
 	EAGLView * openGLView;
 	
+    //MCCollisionController * collisionController;
+    
 	NSTimer *animationTimer;
 	NSTimeInterval animationInterval;
+    
+	NSTimeInterval deltaTime;
+	NSTimeInterval lastFrameStartTime;
+	NSTimeInterval thisFrameStartTime;
+	NSDate * levelStartDate;
+	//NSInteger UFOCountDown;
+	BOOL needToLoadScene;
 }
 
 @property (retain) MCInputViewController * inputController;
 @property (retain) EAGLView * openGLView;
-
+@property (retain) NSDate *levelStartDate;
+@property NSTimeInterval deltaTime;
 @property NSTimeInterval animationInterval;
 @property (nonatomic, assign) NSTimer *animationTimer;
 
 + (MCSceneController*)sharedSceneController;
-- (void) dealloc;
-- (void) loadScene;
-- (void) startScene;
+- (void)dealloc;
+- (void)loadScene;
+- (void)startScene;
+- (void)addObjectToScene:(MCSceneObject*)sceneObject; 
 - (void)gameLoop;
+- (void)gameOver;
+- (void)removeObjectFromScene:(MCSceneObject*)sceneObject;
 - (void)renderScene;
+- (void)restartScene;
 - (void)setAnimationInterval:(NSTimeInterval)interval ;
 - (void)setAnimationTimer:(NSTimer *)newTimer ;
 - (void)startAnimation ;
 - (void)stopAnimation ;
 - (void)updateModel;
+- (void)setupLighting;
 
 // 11 methods
 

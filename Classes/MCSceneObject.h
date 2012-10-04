@@ -12,46 +12,49 @@
 #import <OpenGLES/ES1/glext.h>
 #import <QuartzCore/QuartzCore.h>
 #include "Quaternion.hpp"
+#import "MCPoint.h"
+#import "MCMaterialController.h"
+#import "MCTexturedQuad.h"
+#import "MCSceneController.h"
+#import "MCTexturedMesh.h"
+#import "MCPoint.h"
+#import "MCConfiguration.h"
 //#include "MeshRenderEngine.hpp"
 @class MCMesh;
 
 @interface MCSceneObject : NSObject {
 	// transform values
-	CGFloat x,y,z;
-	CGFloat xRotation,yRotation,zRotation;
-	CGFloat xScale,yScale,zScale;
+	MCPoint translation;
+	MCPoint rotation;
+	MCPoint scale;
 	
 	MCMesh * mesh;
-	//MeshRenderEngine *mesh;
+	
 	BOOL active;
+    
+    
+	CGFloat * matrix;
+	
+	CGRect meshBounds;
+	
+	//MCCollider * collider;
+
     
 }
 
-@property (assign) CGFloat x;
-@property (assign) CGFloat y;
-@property (assign) CGFloat z;
-
-@property (assign) CGFloat xRotation;
-@property (assign) CGFloat yRotation;
-@property (assign) CGFloat zRotation;
-
-@property (assign) CGFloat xScale;
-@property (assign) CGFloat yScale;
-@property (assign) CGFloat zScale;
-
+@property (retain) MCMesh * mesh;
+@property (assign) MCPoint translation;
+@property (assign) CGFloat * matrix;
+@property (assign) MCPoint rotation;
+@property (assign) MCPoint scale;
 @property (assign) BOOL active;
-
+@property (assign) CGRect meshBounds;
 - (id) init;
 - (void) dealloc;
 - (void)awake;
 - (void)render;
 - (void)update;
 
-- (void) OnFingerUp:(ivec2) location;
-- (void) OnFingerDown:(ivec2) location;
-- (void) OnFingerMove:(ivec2) oldLocation
-                     newLocation:(ivec2) newLocation;
-- (vec3) MapToSphere:(ivec2) touchpoint;
 
 
 

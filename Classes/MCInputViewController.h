@@ -11,19 +11,47 @@
 
 @interface MCInputViewController : UIViewController {
 	NSMutableSet* touchEvents;
+  	
+	NSMutableArray * interfaceObjects;
 }
 
 @property (retain) NSMutableSet* touchEvents;
 
+
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil ;
 - (BOOL)touchesDidBegin;
 - (void)clearEvents;
 - (void)dealloc ;
 - (void)didReceiveMemoryWarning ;
 - (void)loadView ;
-- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event;
 - (void)viewDidUnload ;
 
-// 7 methods
+- (CGRect)screenRectFromMeshRect:(CGRect)rect atPoint:(CGPoint)meshCenter;
+
+- (void)loadInterface;
+- (void)renderInterface;
+- (void)updateInterface;
+
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event;
+- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event;
+- (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event;
+
+-(void)countingPlayBtnDown;
+-(void)countingPlayBtnUp;
+-(void)normalPlayBtnDown;
+-(void)normalPlayBtnUp;
+-(void)randomSolveBtnDown;
+-(void)randomSolveBtnUp;
+-(void)systemSettingBtnDown;
+-(void)systemSettingBtnUp;
+-(void)heroBoardBtnDown;
+-(void)heroBoardBtnUp;
+
+
+
+
+
+
 
 
 
