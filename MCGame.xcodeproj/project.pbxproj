@@ -20,6 +20,22 @@
 		48A858E30FFAFC450060F0B8 /* MCSceneController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 48A858E20FFAFC450060F0B8 /* MCSceneController.mm */; };
 		48A858E60FFAFC4D0060F0B8 /* MCSceneObject.mm in Sources */ = {isa = PBXBuildFile; fileRef = 48A858E50FFAFC4D0060F0B8 /* MCSceneObject.mm */; };
 		48C2AB8A10032DE100F0CFA0 /* MCMesh.mm in Sources */ = {isa = PBXBuildFile; fileRef = 48C2AB8910032DE100F0CFA0 /* MCMesh.mm */; };
+		A30C47D1161C38E70057C5E1 /* MCButton.m in Sources */ = {isa = PBXBuildFile; fileRef = A30C47D0161C38E70057C5E1 /* MCButton.m */; };
+		A30C47D4161C694F0057C5E1 /* MCTexturedButton.m in Sources */ = {isa = PBXBuildFile; fileRef = A30C47D3161C694F0057C5E1 /* MCTexturedButton.m */; };
+		A30C47D8161C723F0057C5E1 /* MCTexturedMesh.m in Sources */ = {isa = PBXBuildFile; fileRef = A30C47D7161C723E0057C5E1 /* MCTexturedMesh.m */; };
+		A30C47DF161C86F70057C5E1 /* TestCube.m in Sources */ = {isa = PBXBuildFile; fileRef = A30C47DE161C86F70057C5E1 /* TestCube.m */; };
+		A30C47E2161C874F0057C5E1 /* MCMobileObject.m in Sources */ = {isa = PBXBuildFile; fileRef = A30C47E1161C874F0057C5E1 /* MCMobileObject.m */; };
+		A30C47E5161C8A370057C5E1 /* particleAtlas.plist in Resources */ = {isa = PBXBuildFile; fileRef = A30C47E3161C8A360057C5E1 /* particleAtlas.plist */; };
+		A30C47E6161C8A370057C5E1 /* particleAtlas.png in Resources */ = {isa = PBXBuildFile; fileRef = A30C47E4161C8A370057C5E1 /* particleAtlas.png */; };
+		A3BF9205161D4C4600829D13 /* cubeTexture.png in Resources */ = {isa = PBXBuildFile; fileRef = A3BF9204161D4C4600829D13 /* cubeTexture.png */; };
+		A3BF9208161D73E000829D13 /* inputInterface.png in Resources */ = {isa = PBXBuildFile; fileRef = A3BF9207161D73E000829D13 /* inputInterface.png */; };
+		A3BF920A161D746400829D13 /* inputInterface1.plist in Resources */ = {isa = PBXBuildFile; fileRef = A3BF9209161D746400829D13 /* inputInterface1.plist */; };
+		A3BF920C161D840800829D13 /* inputInterface1.png in Resources */ = {isa = PBXBuildFile; fileRef = A3BF920B161D840800829D13 /* inputInterface1.png */; };
+		A3D30BAA1619356200BA477E /* MCTexturedQuad.m in Sources */ = {isa = PBXBuildFile; fileRef = A3D30BA91619356200BA477E /* MCTexturedQuad.m */; };
+		A3D30BAE161937DF00BA477E /* MCAnimatedQuad.m in Sources */ = {isa = PBXBuildFile; fileRef = A3D30BAD161937DF00BA477E /* MCAnimatedQuad.m */; };
+		A3F2ACB61616CE6700D622B8 /* MCMaterialController.m in Sources */ = {isa = PBXBuildFile; fileRef = A3F2ACB51616CE6700D622B8 /* MCMaterialController.m */; };
+		A3F2ACBA1616CF9900D622B8 /* MCParticleSystem.m in Sources */ = {isa = PBXBuildFile; fileRef = A3F2ACB91616CF9900D622B8 /* MCParticleSystem.m */; };
+		A3F2ACC01616D9BB00D622B8 /* MCParticle.m in Sources */ = {isa = PBXBuildFile; fileRef = A3F2ACBF1616D9BB00D622B8 /* MCParticle.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -45,10 +61,39 @@
 		48C2AB8810032DE100F0CFA0 /* MCMesh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCMesh.h; sourceTree = "<group>"; };
 		48C2AB8910032DE100F0CFA0 /* MCMesh.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MCMesh.mm; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* MCGame-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "MCGame-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
+		A30C47CF161C38E70057C5E1 /* MCButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCButton.h; sourceTree = "<group>"; };
+		A30C47D0161C38E70057C5E1 /* MCButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCButton.m; sourceTree = "<group>"; };
+		A30C47D2161C694F0057C5E1 /* MCTexturedButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCTexturedButton.h; sourceTree = "<group>"; };
+		A30C47D3161C694F0057C5E1 /* MCTexturedButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCTexturedButton.m; sourceTree = "<group>"; };
+		A30C47D6161C723E0057C5E1 /* MCTexturedMesh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCTexturedMesh.h; sourceTree = "<group>"; };
+		A30C47D7161C723E0057C5E1 /* MCTexturedMesh.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCTexturedMesh.m; sourceTree = "<group>"; };
+		A30C47DA161C72CD0057C5E1 /* TestCubeData.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TestCubeData.h; sourceTree = "<group>"; };
+		A30C47DD161C86F70057C5E1 /* TestCube.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestCube.h; sourceTree = "<group>"; };
+		A30C47DE161C86F70057C5E1 /* TestCube.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestCube.m; sourceTree = "<group>"; };
+		A30C47E0161C874F0057C5E1 /* MCMobileObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCMobileObject.h; sourceTree = "<group>"; };
+		A30C47E1161C874F0057C5E1 /* MCMobileObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCMobileObject.m; sourceTree = "<group>"; };
+		A30C47E3161C8A360057C5E1 /* particleAtlas.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = particleAtlas.plist; path = Classes/particleAtlas.plist; sourceTree = "<group>"; };
+		A30C47E4161C8A370057C5E1 /* particleAtlas.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = particleAtlas.png; path = Classes/particleAtlas.png; sourceTree = "<group>"; };
+		A3BF9204161D4C4600829D13 /* cubeTexture.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = cubeTexture.png; path = Classes/cubeTexture.png; sourceTree = "<group>"; };
+		A3BF9207161D73E000829D13 /* inputInterface.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = inputInterface.png; sourceTree = "<group>"; };
+		A3BF9209161D746400829D13 /* inputInterface1.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = inputInterface1.plist; sourceTree = "<group>"; };
+		A3BF920B161D840800829D13 /* inputInterface1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = inputInterface1.png; sourceTree = "<group>"; };
 		A3CB360515FF55D600914E58 /* Quaternion.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Quaternion.hpp; sourceTree = "<group>"; };
 		A3CB360615FF55D600914E58 /* Matrix.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Matrix.hpp; sourceTree = "<group>"; };
 		A3CB360715FF55D600914E58 /* Vector.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Vector.hpp; sourceTree = "<group>"; };
+		A3D30BA81619356200BA477E /* MCTexturedQuad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCTexturedQuad.h; sourceTree = "<group>"; };
+		A3D30BA91619356200BA477E /* MCTexturedQuad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCTexturedQuad.m; sourceTree = "<group>"; };
+		A3D30BAC161937DF00BA477E /* MCAnimatedQuad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCAnimatedQuad.h; sourceTree = "<group>"; };
+		A3D30BAD161937DF00BA477E /* MCAnimatedQuad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCAnimatedQuad.m; sourceTree = "<group>"; };
 		A3EFD13916024BA5008E109C /* MeshRenderEngine.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = MeshRenderEngine.hpp; sourceTree = "<group>"; };
+		A3F2ACB41616CE6700D622B8 /* MCMaterialController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCMaterialController.h; sourceTree = "<group>"; };
+		A3F2ACB51616CE6700D622B8 /* MCMaterialController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCMaterialController.m; sourceTree = "<group>"; };
+		A3F2ACB81616CF9900D622B8 /* MCParticleSystem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCParticleSystem.h; path = ../MCParticleSystem.h; sourceTree = "<group>"; };
+		A3F2ACB91616CF9900D622B8 /* MCParticleSystem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MCParticleSystem.m; path = ../MCParticleSystem.m; sourceTree = "<group>"; };
+		A3F2ACBB1616D23E00D622B8 /* MCPoint.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MCPoint.h; sourceTree = "<group>"; };
+		A3F2ACBE1616D9BB00D622B8 /* MCParticle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCParticle.h; sourceTree = "<group>"; };
+		A3F2ACBF1616D9BB00D622B8 /* MCParticle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCParticle.m; sourceTree = "<group>"; };
+		A3F2ACC11616E1CE00D622B8 /* MCConfiguration.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MCConfiguration.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -70,22 +115,32 @@
 		080E96DDFE201D6D7F000001 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				A3CB360515FF55D600914E58 /* Quaternion.hpp */,
-				A3CB360615FF55D600914E58 /* Matrix.hpp */,
-				A3CB360715FF55D600914E58 /* Vector.hpp */,
+				A30C47D9161C72A70057C5E1 /* Config */,
+				A30C47D5161C6F1C0057C5E1 /* MathUtil */,
+				A3F2ACBD1616D97800D622B8 /* SceneObjects */,
 				1D3623240D0F684500981E51 /* MCGameAppDelegate.h */,
 				1D3623250D0F684500981E51 /* MCGameAppDelegate.mm */,
 				48A858DC0FFAFB550060F0B8 /* EAGLView.h */,
 				48A858DB0FFAFB550060F0B8 /* EAGLView.mm */,
 				48A858DE0FFAFC3B0060F0B8 /* MCInputViewController.h */,
 				48A858DF0FFAFC3B0060F0B8 /* MCInputViewController.mm */,
+				A30C47D2161C694F0057C5E1 /* MCTexturedButton.h */,
+				A30C47D3161C694F0057C5E1 /* MCTexturedButton.m */,
+				A3F2ACB41616CE6700D622B8 /* MCMaterialController.h */,
+				A3F2ACB51616CE6700D622B8 /* MCMaterialController.m */,
 				48A858E10FFAFC450060F0B8 /* MCSceneController.h */,
 				48A858E20FFAFC450060F0B8 /* MCSceneController.mm */,
 				48A858E40FFAFC4D0060F0B8 /* MCSceneObject.h */,
+				A30C47D6161C723E0057C5E1 /* MCTexturedMesh.h */,
+				A30C47D7161C723E0057C5E1 /* MCTexturedMesh.m */,
 				48A858E50FFAFC4D0060F0B8 /* MCSceneObject.mm */,
 				48C2AB8910032DE100F0CFA0 /* MCMesh.mm */,
 				48C2AB8810032DE100F0CFA0 /* MCMesh.h */,
 				A3EFD13916024BA5008E109C /* MeshRenderEngine.hpp */,
+				A3D30BAC161937DF00BA477E /* MCAnimatedQuad.h */,
+				A3D30BAD161937DF00BA477E /* MCAnimatedQuad.m */,
+				A3D30BA81619356200BA477E /* MCTexturedQuad.h */,
+				A3D30BA91619356200BA477E /* MCTexturedQuad.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -122,6 +177,12 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				A3BF9204161D4C4600829D13 /* cubeTexture.png */,
+				A3BF9207161D73E000829D13 /* inputInterface.png */,
+				A3BF920B161D840800829D13 /* inputInterface1.png */,
+				A3BF9209161D746400829D13 /* inputInterface1.plist */,
+				A30C47E3161C8A360057C5E1 /* particleAtlas.plist */,
+				A30C47E4161C8A370057C5E1 /* particleAtlas.png */,
 				28AD733E0D9D9553002E5188 /* MainWindow.xib */,
 				8D1107310486CEB800E47090 /* MCGame-Info.plist */,
 			);
@@ -138,6 +199,43 @@
 				288765FC0DF74451002DB57D /* CoreGraphics.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		A30C47D5161C6F1C0057C5E1 /* MathUtil */ = {
+			isa = PBXGroup;
+			children = (
+				A3CB360515FF55D600914E58 /* Quaternion.hpp */,
+				A3CB360615FF55D600914E58 /* Matrix.hpp */,
+				A3CB360715FF55D600914E58 /* Vector.hpp */,
+				A3F2ACBB1616D23E00D622B8 /* MCPoint.h */,
+			);
+			name = MathUtil;
+			sourceTree = "<group>";
+		};
+		A30C47D9161C72A70057C5E1 /* Config */ = {
+			isa = PBXGroup;
+			children = (
+				A30C47DA161C72CD0057C5E1 /* TestCubeData.h */,
+			);
+			name = Config;
+			sourceTree = "<group>";
+		};
+		A3F2ACBD1616D97800D622B8 /* SceneObjects */ = {
+			isa = PBXGroup;
+			children = (
+				A3F2ACB81616CF9900D622B8 /* MCParticleSystem.h */,
+				A3F2ACBE1616D9BB00D622B8 /* MCParticle.h */,
+				A3F2ACB91616CF9900D622B8 /* MCParticleSystem.m */,
+				A3F2ACBF1616D9BB00D622B8 /* MCParticle.m */,
+				A30C47DD161C86F70057C5E1 /* TestCube.h */,
+				A30C47DE161C86F70057C5E1 /* TestCube.m */,
+				A30C47E0161C874F0057C5E1 /* MCMobileObject.h */,
+				A30C47E1161C874F0057C5E1 /* MCMobileObject.m */,
+				A30C47CF161C38E70057C5E1 /* MCButton.h */,
+				A30C47D0161C38E70057C5E1 /* MCButton.m */,
+				A3F2ACC11616E1CE00D622B8 /* MCConfiguration.h */,
+			);
+			name = SceneObjects;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -187,6 +285,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				28AD733F0D9D9553002E5188 /* MainWindow.xib in Resources */,
+				A30C47E5161C8A370057C5E1 /* particleAtlas.plist in Resources */,
+				A30C47E6161C8A370057C5E1 /* particleAtlas.png in Resources */,
+				A3BF9205161D4C4600829D13 /* cubeTexture.png in Resources */,
+				A3BF9208161D73E000829D13 /* inputInterface.png in Resources */,
+				A3BF920A161D746400829D13 /* inputInterface1.plist in Resources */,
+				A3BF920C161D840800829D13 /* inputInterface1.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -204,6 +308,16 @@
 				48A858E30FFAFC450060F0B8 /* MCSceneController.mm in Sources */,
 				48A858E60FFAFC4D0060F0B8 /* MCSceneObject.mm in Sources */,
 				48C2AB8A10032DE100F0CFA0 /* MCMesh.mm in Sources */,
+				A3F2ACB61616CE6700D622B8 /* MCMaterialController.m in Sources */,
+				A3F2ACBA1616CF9900D622B8 /* MCParticleSystem.m in Sources */,
+				A3F2ACC01616D9BB00D622B8 /* MCParticle.m in Sources */,
+				A3D30BAA1619356200BA477E /* MCTexturedQuad.m in Sources */,
+				A3D30BAE161937DF00BA477E /* MCAnimatedQuad.m in Sources */,
+				A30C47D1161C38E70057C5E1 /* MCButton.m in Sources */,
+				A30C47D4161C694F0057C5E1 /* MCTexturedButton.m in Sources */,
+				A30C47D8161C723F0057C5E1 /* MCTexturedMesh.m in Sources */,
+				A30C47DF161C86F70057C5E1 /* TestCube.m in Sources */,
+				A30C47E2161C874F0057C5E1 /* MCMobileObject.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
