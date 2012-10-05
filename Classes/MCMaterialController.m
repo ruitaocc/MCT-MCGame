@@ -35,8 +35,10 @@
         
 		// preload all our textures and atlases
 		[self loadTextureImage:@"cubeTexture.png" materialKey:@"cubeTexture"];
-        [self loadAtlasData:@"inputInterface1"];
+        
 		[self loadAtlasData:@"particleAtlas"];
+        
+        [self loadAtlasData:@"ButtonMerged"];
 	}
 	return self;
 }
