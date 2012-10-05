@@ -86,12 +86,20 @@
 {
 	if (interfaceObjects == nil) interfaceObjects = [[NSMutableArray alloc] init];
 	[interfaceObjects removeAllObjects];
+
+    CGFloat xBased = -155.0;
+    CGFloat yBased = 110.0;
+    CGFloat xGap = 0.0;
+    CGFloat yGap = 10.0;
+    
+    CGFloat btnWidth = 110.0;
+    CGFloat btnHeight = 44.0;
     
 	// countingPlayBtn 
 	
 	MCTexturedButton * countingPlayBtn = [[MCTexturedButton alloc] initWithUpKey:@"countingPlayBtnUp" downKey:@"countingPlayBtnDown"];
-	countingPlayBtn.scale = MCPointMake(50.0, 50.0, 1.0);
-	countingPlayBtn.translation = MCPointMake(-155.0, -130.0, 0.0);
+	countingPlayBtn.scale = MCPointMake(btnWidth, btnHeight, 1.0);
+	countingPlayBtn.translation = MCPointMake(xBased , yBased, 0.0);
 	countingPlayBtn.target = self;
 	countingPlayBtn.buttonDownAction = @selector(countingPlayBtnDown);
 	countingPlayBtn.buttonUpAction = @selector(countingPlayBtnUp);
@@ -100,10 +108,10 @@
 	[interfaceObjects addObject:countingPlayBtn];
 	[countingPlayBtn release];
 	
-	// normalPlayBtn
+   	// normalPlayBtn
 	MCTexturedButton * normalPlayBtn = [[MCTexturedButton alloc] initWithUpKey:@"normalPlayBtnUp" downKey:@"normalPlayBtnDown"];
-	normalPlayBtn.scale = MCPointMake(50.0, 50.0, 1.0);
-	normalPlayBtn.translation = MCPointMake(-210.0, -130.0, 0.0);
+	normalPlayBtn.scale = MCPointMake(btnWidth, btnHeight, 1.0);
+	normalPlayBtn.translation = MCPointMake(xBased , yBased-(btnHeight+yGap), 0.0);
 	normalPlayBtn.target = self;
 	normalPlayBtn.buttonDownAction = @selector(normalPlayBtnDown);
 	normalPlayBtn.buttonUpAction = @selector(normalPlayBtnUp);
@@ -114,8 +122,8 @@
 	
 	// randomSolveBtn
 	MCTexturedButton * randomSolveBtn = [[MCTexturedButton alloc] initWithUpKey:@"randomSolveBtnUp" downKey:@"randomSolveBtnDown"];
-	randomSolveBtn.scale = MCPointMake(50.0, 50.0, 1.0);
-	randomSolveBtn.translation = MCPointMake(-185.0, -75.0, 0.0);
+	randomSolveBtn.scale = MCPointMake(btnWidth, btnHeight, 1.0);
+	randomSolveBtn.translation = MCPointMake(xBased , yBased-(btnHeight+yGap)*2, 0.0);
 	randomSolveBtn.target = self;
 	randomSolveBtn.buttonDownAction = @selector(randomSolveBtnDown);
 	randomSolveBtn.buttonUpAction = @selector(randomSolveBtnUp);	
@@ -126,8 +134,8 @@
 	
 	// systemSettingBtn
 	MCTexturedButton * systemSettingBtn = [[MCTexturedButton alloc] initWithUpKey:@"systemSettingBtnUp" downKey:@"systemSettingBtnDown"];
-	systemSettingBtn.scale = MCPointMake(50.0, 50.0, 1.0);
-	systemSettingBtn.translation = MCPointMake(210.0, -130.0, 0.0);
+	systemSettingBtn.scale = MCPointMake(btnWidth, btnHeight, 1.0);
+	systemSettingBtn.translation = MCPointMake(xBased , yBased-(btnHeight+yGap)*3, 0.0);
 	systemSettingBtn.target = self;
 	systemSettingBtn.buttonDownAction = @selector(systemSettingBtnDown);
 	systemSettingBtn.buttonUpAction = @selector(systemSettingBtnUp);
@@ -138,8 +146,8 @@
 	
 	// heroBoardBtn
 	MCTexturedButton * heroBoardBtn = [[MCTexturedButton alloc] initWithUpKey:@"heroBoardBtnUp" downKey:@"heroBoardBtnDown"];
-	heroBoardBtn.scale = MCPointMake(50.0, 50.0, 1.0);
-	heroBoardBtn.translation = MCPointMake(155.0, -130.0, 0.0);
+	heroBoardBtn.scale = MCPointMake(btnWidth, btnHeight, 1.0);
+	heroBoardBtn.translation = MCPointMake(xBased , yBased-(btnHeight+yGap)*4, 0.0);
 	heroBoardBtn.target = self;
 	heroBoardBtn.buttonDownAction = @selector(heroBoardBtnDown);
 	heroBoardBtn.buttonUpAction = @selector(heroBoardBtnUp);

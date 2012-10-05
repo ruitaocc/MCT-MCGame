@@ -16,26 +16,22 @@
 }
 
 @property (retain) NSMutableSet* touchEvents;
-
-
+//10
+- (CGRect)screenRectFromMeshRect:(CGRect)rect atPoint:(CGPoint)meshCenter;
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil ;
-- (BOOL)touchesDidBegin;
 - (void)clearEvents;
 - (void)dealloc ;
 - (void)didReceiveMemoryWarning ;
 - (void)loadView ;
 - (void)viewDidUnload ;
-
-- (CGRect)screenRectFromMeshRect:(CGRect)rect atPoint:(CGPoint)meshCenter;
-
 - (void)loadInterface;
 - (void)renderInterface;
 - (void)updateInterface;
-
+//3
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event;
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event;
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event;
-
+//selectors
 -(void)countingPlayBtnDown;
 -(void)countingPlayBtnUp;
 -(void)normalPlayBtnDown;
