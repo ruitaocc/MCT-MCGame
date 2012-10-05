@@ -32,8 +32,8 @@
 	CGPoint screenCenter = CGPointZero;
 	CGPoint rectOrigin = CGPointZero;
 	// since our view is rotated, then our x and y are flipped
-	screenCenter.x = meshCenter.y + 160.0; // need to shift it over
-	screenCenter.y = meshCenter.x + 240.0; // need to shift it up
+	screenCenter.x = meshCenter.y + 384.0; // need to shift it over
+	screenCenter.y = meshCenter.x + 512.0; // need to shift it up
 	
 	rectOrigin.x = screenCenter.x - (CGRectGetHeight(rect)/2.0); // height and width 
 	rectOrigin.y = screenCenter.y - (CGRectGetWidth(rect)/2.0); // are flipped
@@ -87,13 +87,13 @@
 	if (interfaceObjects == nil) interfaceObjects = [[NSMutableArray alloc] init];
 	[interfaceObjects removeAllObjects];
 
-    CGFloat xBased = -155.0;
-    CGFloat yBased = 110.0;
+    CGFloat xBased = -270.0;
+    CGFloat yBased = 200.0;
     CGFloat xGap = 0.0;
     CGFloat yGap = 10.0;
     
-    CGFloat btnWidth = 110.0;
-    CGFloat btnHeight = 44.0;
+    CGFloat btnWidth = 220.0;
+    CGFloat btnHeight = 88.0;
     
 	// countingPlayBtn 
 	
@@ -171,7 +171,7 @@
 	glRotatef(-90.0f, 0.0f, 0.0f, 1.0f);
 	
 	// set up the viewport so that it is analagous to the screen pixels
-	glOrthof(-240, 240, -160, 160, -1.0f, 50.0f);
+	glOrthof(-512, 512, -384, 384, -1.0f, 50.0f);
 	
 	glMatrixMode(GL_MODELVIEW);
 	glDisable(GL_LIGHTING);
