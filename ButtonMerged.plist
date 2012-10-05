@@ -4,297 +4,143 @@
 <array>
 	<dict>
 		<key>area</key>
-		<real>16384</real>
+		<integer>4840</integer>
 		<key>height</key>
-		<real>128</real>
+		<integer>44</integer>
 		<key>name</key>
-		<string>rockTexture</string>
+		<string>countingPlayBtnUp</string>
 		<key>width</key>
-		<real>128</real>
+		<integer>110</integer>
 		<key>xLocation</key>
-		<real>1</real>
+		<integer>3</integer>
 		<key>yLocation</key>
-		<real>127</real>
+		<integer>3</integer>
 	</dict>
 	<dict>
 		<key>area</key>
-		<real>3600</real>
+		<integer>4840</integer>
 		<key>height</key>
-		<real>45</real>
+		<integer>44</integer>
 		<key>name</key>
-		<string>gameOver</string>
+		<string>countingPlayBtnDown</string>
 		<key>width</key>
-		<real>80</real>
+		<integer>110</integer>
 		<key>xLocation</key>
-		<real>131</real>
+		<integer>116</integer>
 		<key>yLocation</key>
-		<real>210</real>
+		<integer>3</integer>
 	</dict>
 	<dict>
 		<key>area</key>
-		<real>2500</real>
+		<integer>4840</integer>
 		<key>height</key>
-		<real>50</real>
+		<integer>44</integer>
 		<key>name</key>
-		<string>fireDown</string>
+		<string>normalPlayBtnUp</string>
 		<key>width</key>
-		<real>50</real>
+		<integer>110</integer>
 		<key>xLocation</key>
-		<real>131</real>
+		<integer>3</integer>
 		<key>yLocation</key>
-		<real>158</real>
+		<integer>49</integer>
 	</dict>
 	<dict>
 		<key>area</key>
-		<real>2500</real>
+		<integer>4840</integer>
 		<key>height</key>
-		<real>50</real>
+		<integer>44</integer>
 		<key>name</key>
-		<string>fireUp</string>
+		<string>normalPlayBtnDown</string>
 		<key>width</key>
-		<real>50</real>
+		<integer>110</integer>
 		<key>xLocation</key>
-		<real>183</real>
+		<integer>116</integer>
 		<key>yLocation</key>
-		<real>158</real>
+		<integer>49</integer>
 	</dict>
 	<dict>
 		<key>area</key>
-		<real>2500</real>
+		<integer>4840</integer>
 		<key>height</key>
-		<real>50</real>
+		<integer>44</integer>
 		<key>name</key>
-		<string>leftUp</string>
+		<string>randomSolveBtnUp</string>
 		<key>width</key>
-		<real>50</real>
+		<integer>110</integer>
 		<key>xLocation</key>
-		<real>131</real>
+		<integer>3</integer>
 		<key>yLocation</key>
-		<real>106</real>
+		<integer>98</integer>
 	</dict>
 	<dict>
 		<key>area</key>
-		<real>2500</real>
+		<integer>4840</integer>
 		<key>height</key>
-		<real>50</real>
+		<integer>44</integer>
 		<key>name</key>
-		<string>leftDown</string>
+		<string>randomSolveBtnDown</string>
 		<key>width</key>
-		<real>50</real>
+		<integer>110</integer>
 		<key>xLocation</key>
-		<real>183</real>
+		<integer>116</integer>
 		<key>yLocation</key>
-		<real>106</real>
+		<integer>98</integer>
 	</dict>
 	<dict>
 		<key>area</key>
-		<real>2500</real>
+		<integer>4840</integer>
 		<key>height</key>
-		<real>50</real>
+		<integer>44</integer>
 		<key>name</key>
-		<string>rightUp</string>
+		<string>systemSettingBtnUp</string>
 		<key>width</key>
-		<real>50</real>
+		<integer>110</integer>
 		<key>xLocation</key>
-		<real>3</real>
+		<integer>3</integer>
 		<key>yLocation</key>
-		<real>75</real>
+		<integer>145</integer>
 	</dict>
 	<dict>
 		<key>area</key>
-		<real>2500</real>
+		<integer>4840</integer>
 		<key>height</key>
-		<real>50</real>
+		<integer>44</integer>
 		<key>name</key>
-		<string>rightDown</string>
+		<string>systemSettingBtnDown</string>
 		<key>width</key>
-		<real>50</real>
+		<integer>110</integer>
 		<key>xLocation</key>
-		<real>55</real>
+		<integer>116</integer>
 		<key>yLocation</key>
-		<real>75</real>
+		<integer>145</integer>
 	</dict>
 	<dict>
 		<key>area</key>
-		<real>2500</real>
+		<integer>4840</integer>
 		<key>height</key>
-		<real>50</real>
+		<integer>44</integer>
 		<key>name</key>
-		<string>thrustUp</string>
+		<string>heroBoardBtnUp</string>
 		<key>width</key>
-		<real>50</real>
+		<integer>110</integer>
 		<key>xLocation</key>
-		<real>107</real>
+		<integer>3</integer>
 		<key>yLocation</key>
-		<real>54</real>
+		<integer>191</integer>
 	</dict>
 	<dict>
 		<key>area</key>
-		<real>2500</real>
+		<integer>4840</integer>
 		<key>height</key>
-		<real>50</real>
+		<integer>44</integer>
 		<key>name</key>
-		<string>thrustDown</string>
+		<string>heroBoardBtnDown</string>
 		<key>width</key>
-		<real>50</real>
+		<integer>110</integer>
 		<key>xLocation</key>
-		<real>159</real>
+		<integer>116</integer>
 		<key>yLocation</key>
-		<real>54</real>
-	</dict>
-	<dict>
-		<key>area</key>
-		<real>1600</real>
-		<key>height</key>
-		<real>40</real>
-		<key>name</key>
-		<string>ship</string>
-		<key>width</key>
-		<real>40</real>
-		<key>xLocation</key>
-		<real>211</real>
-		<key>yLocation</key>
-		<real>64</real>
-	</dict>
-	<dict>
-		<key>area</key>
-		<real>1600</real>
-		<key>height</key>
-		<real>40</real>
-		<key>name</key>
-		<string>shipDestroy1</string>
-		<key>width</key>
-		<real>40</real>
-		<key>xLocation</key>
-		<real>3</real>
-		<key>yLocation</key>
-		<real>33</real>
-	</dict>
-	<dict>
-		<key>area</key>
-		<real>1600</real>
-		<key>height</key>
-		<real>40</real>
-		<key>name</key>
-		<string>shipDestroy2</string>
-		<key>width</key>
-		<real>40</real>
-		<key>xLocation</key>
-		<real>45</real>
-		<key>yLocation</key>
-		<real>33</real>
-	</dict>
-	<dict>
-		<key>area</key>
-		<real>1600</real>
-		<key>height</key>
-		<real>40</real>
-		<key>name</key>
-		<string>shipDestroy3</string>
-		<key>width</key>
-		<real>40</real>
-		<key>xLocation</key>
-		<real>211</real>
-		<key>yLocation</key>
-		<real>22</real>
-	</dict>
-	<dict>
-		<key>area</key>
-		<real>1600</real>
-		<key>height</key>
-		<real>40</real>
-		<key>name</key>
-		<string>shipDestroy4</string>
-		<key>width</key>
-		<real>40</real>
-		<key>xLocation</key>
-		<real>87</real>
-		<key>yLocation</key>
-		<real>12</real>
-	</dict>
-	<dict>
-		<key>area</key>
-		<real>1224</real>
-		<key>height</key>
-		<real>36</real>
-		<key>name</key>
-		<string>bang1</string>
-		<key>width</key>
-		<real>34</real>
-		<key>xLocation</key>
-		<real>213</real>
-		<key>yLocation</key>
-		<real>219</real>
-	</dict>
-	<dict>
-		<key>area</key>
-		<real>1224</real>
-		<key>height</key>
-		<real>36</real>
-		<key>name</key>
-		<string>bang2</string>
-		<key>width</key>
-		<real>34</real>
-		<key>xLocation</key>
-		<real>129</real>
-		<key>yLocation</key>
-		<real>16</real>
-	</dict>
-	<dict>
-		<key>area</key>
-		<real>1224</real>
-		<key>height</key>
-		<real>36</real>
-		<key>name</key>
-		<string>bang3</string>
-		<key>width</key>
-		<real>34</real>
-		<key>xLocation</key>
-		<real>165</real>
-		<key>yLocation</key>
-		<real>16</real>
-	</dict>
-	<dict>
-		<key>area</key>
-		<real>372</real>
-		<key>height</key>
-		<real>31</real>
-		<key>name</key>
-		<string>missile1</string>
-		<key>width</key>
-		<real>12</real>
-		<key>xLocation</key>
-		<real>235</real>
-		<key>yLocation</key>
-		<real>186</real>
-	</dict>
-	<dict>
-		<key>area</key>
-		<real>372</real>
-		<key>height</key>
-		<real>31</real>
-		<key>name</key>
-		<string>missile2</string>
-		<key>width</key>
-		<real>12</real>
-		<key>xLocation</key>
-		<real>235</real>
-		<key>yLocation</key>
-		<real>153</real>
-	</dict>
-	<dict>
-		<key>area</key>
-		<real>372</real>
-		<key>height</key>
-		<real>31</real>
-		<key>name</key>
-		<string>missile3</string>
-		<key>width</key>
-		<real>12</real>
-		<key>xLocation</key>
-		<real>235</real>
-		<key>yLocation</key>
-		<real>120</real>
+		<integer>191</integer>
 	</dict>
 </array>
 </plist>
