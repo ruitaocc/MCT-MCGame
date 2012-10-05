@@ -35,7 +35,10 @@ Note that setting the view non-opaque will only work if the EAGL surface has an 
 
 - (void)beginDraw;
 - (void)finishDraw;
-- (void)setupView;
-
-
+- (void)setupViewLandscape;
+- (void)setupViewPortrait;
+-(void)perspectiveFovY:(GLfloat)fovY 
+                aspect:(GLfloat)aspect 
+                 zNear:(GLfloat)zNear
+                  zFar:(GLfloat)zFar ;
 @end

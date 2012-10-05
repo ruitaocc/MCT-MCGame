@@ -54,12 +54,30 @@
             [self release];
             return nil;
         }
-		}
+        self.multipleTouchEnabled = YES;
+    }
     return self;
 }
 
 
-- (void)setupView
+- (void)setupViewLandscape
+{			
+	// Sets up matrices and transforms for OpenGL ES
+	glViewport(0, 0, backingWidth, backingHeight);
+	glMatrixMode(GL_PROJECTION);
+	glLoadIdentity();
+	glRotatef(-90.0f, 0.0f, 0.0f, 1.0f);
+	// set up the viewport so that it is analagous to the screen pixels
+	[self perspectiveFovY:60 aspect:480.0/320.0 zNear:0.01 zFar:1000.0];
+    //	glOrthof(-backingHeight/2.0, backingHeight/2.0, -backingWidth/2.0, backingWidth/2.0, -100.0f, 100.0f);
+	glTranslatef(0.0, 0.0, -280.0);
+	glMatrixMode(GL_MODELVIEW);
+    
+	// Clears the view with black
+	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+}
+
+- (void)setupViewPortrait
 {		
 	// Set up the window that we will view the scene through
 	glViewport(0, 0, backingWidth, backingHeight);
@@ -68,7 +86,7 @@
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
 	glOrthof(-1.0f, 1.0f, -1.5f, 1.5f, -1.0f, 1.0f);	
-
+    
 	// switch to model mode and set our background color
 	glMatrixMode(GL_MODELVIEW);
 	glClearColor(0.5f, 0.5f, 0.5f, 1.0f);
@@ -81,7 +99,7 @@
 	glBindFramebufferOES(GL_FRAMEBUFFER_OES, viewFramebuffer);
 	// make sure we are in model matrix mode and clear the frame
 	glMatrixMode(GL_MODELVIEW);
-	glClear(GL_COLOR_BUFFER_BIT);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	// set a clean transform
 	glLoadIdentity();	
 }
@@ -97,7 +115,7 @@
 	[EAGLContext setCurrentContext:context];
 	[self destroyFramebuffer];
 	[self createFramebuffer];
-	[self setupView];
+	[self setupViewLandscape];
 }
 
 - (BOOL)createFramebuffer {    
@@ -118,7 +136,7 @@
         glBindRenderbufferOES(GL_RENDERBUFFER_OES, depthRenderbuffer);
         glRenderbufferStorageOES(GL_RENDERBUFFER_OES, GL_DEPTH_COMPONENT16_OES, backingWidth, backingHeight);
         glFramebufferRenderbufferOES(GL_FRAMEBUFFER_OES, GL_DEPTH_ATTACHMENT_OES, GL_RENDERBUFFER_OES, depthRenderbuffer);
-            }
+    }
     
     if(glCheckFramebufferStatusOES(GL_FRAMEBUFFER_OES) != GL_FRAMEBUFFER_COMPLETE_OES) {
         NSLog(@"failed to make complete framebuffer object %x", glCheckFramebufferStatusOES(GL_FRAMEBUFFER_OES));
@@ -144,11 +162,10 @@
 
 
 -(void)perspectiveFovY:(GLfloat)fovY 
-								aspect:(GLfloat)aspect 
-								 zNear:(GLfloat)zNear
-									zFar:(GLfloat)zFar 
+                aspect:(GLfloat)aspect 
+                 zNear:(GLfloat)zNear
+                  zFar:(GLfloat)zFar 
 {
-    //视角转换函数
 	const GLfloat pi = 3.1415926;
 	//	Half of the size of the x and y clipping planes.
 	// - halfWidth = left, halfWidth = right
@@ -176,3 +193,4 @@
 }
 
 @end
+
