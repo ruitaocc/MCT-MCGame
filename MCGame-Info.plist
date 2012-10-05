@@ -26,5 +26,11 @@
 	<true/>
 	<key>NSMainNibFile</key>
 	<string>MainWindow</string>
+	<key>NSMainNibFile~ipad</key>
+	<string>MainWindow-iPad</string>
+	<key>UISupportedInterfaceOrientations~ipad</key>
+	<array/>
+	<key>UIStatusBarHidden</key>
+	<true/>
 </dict>
 </plist>

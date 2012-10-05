@@ -27,10 +27,10 @@
 		A30C47E2161C874F0057C5E1 /* MCMobileObject.m in Sources */ = {isa = PBXBuildFile; fileRef = A30C47E1161C874F0057C5E1 /* MCMobileObject.m */; };
 		A30C47E5161C8A370057C5E1 /* particleAtlas.plist in Resources */ = {isa = PBXBuildFile; fileRef = A30C47E3161C8A360057C5E1 /* particleAtlas.plist */; };
 		A30C47E6161C8A370057C5E1 /* particleAtlas.png in Resources */ = {isa = PBXBuildFile; fileRef = A30C47E4161C8A370057C5E1 /* particleAtlas.png */; };
+		A358750F161F146000998085 /* ButtonMerged.plist in Resources */ = {isa = PBXBuildFile; fileRef = A358750D161F146000998085 /* ButtonMerged.plist */; };
+		A3587515161F2C3000998085 /* ButtonMerged.png in Resources */ = {isa = PBXBuildFile; fileRef = A3587514161F2C3000998085 /* ButtonMerged.png */; };
+		A3587518161F355400998085 /* MainWindow-iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = A3587517161F355400998085 /* MainWindow-iPad.xib */; };
 		A3BF9205161D4C4600829D13 /* cubeTexture.png in Resources */ = {isa = PBXBuildFile; fileRef = A3BF9204161D4C4600829D13 /* cubeTexture.png */; };
-		A3BF9208161D73E000829D13 /* inputInterface.png in Resources */ = {isa = PBXBuildFile; fileRef = A3BF9207161D73E000829D13 /* inputInterface.png */; };
-		A3BF920A161D746400829D13 /* inputInterface1.plist in Resources */ = {isa = PBXBuildFile; fileRef = A3BF9209161D746400829D13 /* inputInterface1.plist */; };
-		A3BF920C161D840800829D13 /* inputInterface1.png in Resources */ = {isa = PBXBuildFile; fileRef = A3BF920B161D840800829D13 /* inputInterface1.png */; };
 		A3D30BAA1619356200BA477E /* MCTexturedQuad.m in Sources */ = {isa = PBXBuildFile; fileRef = A3D30BA91619356200BA477E /* MCTexturedQuad.m */; };
 		A3D30BAE161937DF00BA477E /* MCAnimatedQuad.m in Sources */ = {isa = PBXBuildFile; fileRef = A3D30BAD161937DF00BA477E /* MCAnimatedQuad.m */; };
 		A3F2ACB61616CE6700D622B8 /* MCMaterialController.m in Sources */ = {isa = PBXBuildFile; fileRef = A3F2ACB51616CE6700D622B8 /* MCMaterialController.m */; };
@@ -74,10 +74,10 @@
 		A30C47E1161C874F0057C5E1 /* MCMobileObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCMobileObject.m; sourceTree = "<group>"; };
 		A30C47E3161C8A360057C5E1 /* particleAtlas.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = particleAtlas.plist; path = Classes/particleAtlas.plist; sourceTree = "<group>"; };
 		A30C47E4161C8A370057C5E1 /* particleAtlas.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = particleAtlas.png; path = Classes/particleAtlas.png; sourceTree = "<group>"; };
+		A358750D161F146000998085 /* ButtonMerged.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = ButtonMerged.plist; sourceTree = "<group>"; };
+		A3587514161F2C3000998085 /* ButtonMerged.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ButtonMerged.png; sourceTree = "<group>"; };
+		A3587517161F355400998085 /* MainWindow-iPad.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = "MainWindow-iPad.xib"; path = "iPad/MainWindow-iPad.xib"; sourceTree = "<group>"; };
 		A3BF9204161D4C4600829D13 /* cubeTexture.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = cubeTexture.png; path = Classes/cubeTexture.png; sourceTree = "<group>"; };
-		A3BF9207161D73E000829D13 /* inputInterface.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = inputInterface.png; sourceTree = "<group>"; };
-		A3BF9209161D746400829D13 /* inputInterface1.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = inputInterface1.plist; sourceTree = "<group>"; };
-		A3BF920B161D840800829D13 /* inputInterface1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = inputInterface1.png; sourceTree = "<group>"; };
 		A3CB360515FF55D600914E58 /* Quaternion.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Quaternion.hpp; sourceTree = "<group>"; };
 		A3CB360615FF55D600914E58 /* Matrix.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Matrix.hpp; sourceTree = "<group>"; };
 		A3CB360715FF55D600914E58 /* Vector.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Vector.hpp; sourceTree = "<group>"; };
@@ -131,9 +131,9 @@
 				48A858E10FFAFC450060F0B8 /* MCSceneController.h */,
 				48A858E20FFAFC450060F0B8 /* MCSceneController.mm */,
 				48A858E40FFAFC4D0060F0B8 /* MCSceneObject.h */,
+				48A858E50FFAFC4D0060F0B8 /* MCSceneObject.mm */,
 				A30C47D6161C723E0057C5E1 /* MCTexturedMesh.h */,
 				A30C47D7161C723E0057C5E1 /* MCTexturedMesh.m */,
-				48A858E50FFAFC4D0060F0B8 /* MCSceneObject.mm */,
 				48C2AB8910032DE100F0CFA0 /* MCMesh.mm */,
 				48C2AB8810032DE100F0CFA0 /* MCMesh.h */,
 				A3EFD13916024BA5008E109C /* MeshRenderEngine.hpp */,
@@ -159,6 +159,7 @@
 				080E96DDFE201D6D7F000001 /* Classes */,
 				29B97315FDCFA39411CA2CEA /* Other Sources */,
 				29B97317FDCFA39411CA2CEA /* Resources */,
+				A3587516161F355200998085 /* iPad */,
 				29B97323FDCFA39411CA2CEA /* Frameworks */,
 				19C28FACFE9D520D11CA2CBB /* Products */,
 			);
@@ -177,12 +178,7 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				A3BF9204161D4C4600829D13 /* cubeTexture.png */,
-				A3BF9207161D73E000829D13 /* inputInterface.png */,
-				A3BF920B161D840800829D13 /* inputInterface1.png */,
-				A3BF9209161D746400829D13 /* inputInterface1.plist */,
-				A30C47E3161C8A360057C5E1 /* particleAtlas.plist */,
-				A30C47E4161C8A370057C5E1 /* particleAtlas.png */,
+				A3587519161F3FFD00998085 /* imageResource */,
 				28AD733E0D9D9553002E5188 /* MainWindow.xib */,
 				8D1107310486CEB800E47090 /* MCGame-Info.plist */,
 			);
@@ -218,6 +214,26 @@
 				A30C47DA161C72CD0057C5E1 /* TestCubeData.h */,
 			);
 			name = Config;
+			sourceTree = "<group>";
+		};
+		A3587516161F355200998085 /* iPad */ = {
+			isa = PBXGroup;
+			children = (
+				A3587517161F355400998085 /* MainWindow-iPad.xib */,
+			);
+			name = iPad;
+			sourceTree = "<group>";
+		};
+		A3587519161F3FFD00998085 /* imageResource */ = {
+			isa = PBXGroup;
+			children = (
+				A358750D161F146000998085 /* ButtonMerged.plist */,
+				A3587514161F2C3000998085 /* ButtonMerged.png */,
+				A30C47E3161C8A360057C5E1 /* particleAtlas.plist */,
+				A30C47E4161C8A370057C5E1 /* particleAtlas.png */,
+				A3BF9204161D4C4600829D13 /* cubeTexture.png */,
+			);
+			name = imageResource;
 			sourceTree = "<group>";
 		};
 		A3F2ACBD1616D97800D622B8 /* SceneObjects */ = {
@@ -288,9 +304,9 @@
 				A30C47E5161C8A370057C5E1 /* particleAtlas.plist in Resources */,
 				A30C47E6161C8A370057C5E1 /* particleAtlas.png in Resources */,
 				A3BF9205161D4C4600829D13 /* cubeTexture.png in Resources */,
-				A3BF9208161D73E000829D13 /* inputInterface.png in Resources */,
-				A3BF920A161D746400829D13 /* inputInterface1.plist in Resources */,
-				A3BF920C161D840800829D13 /* inputInterface1.png in Resources */,
+				A358750F161F146000998085 /* ButtonMerged.plist in Resources */,
+				A3587515161F2C3000998085 /* ButtonMerged.png in Resources */,
+				A3587518161F355400998085 /* MainWindow-iPad.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -334,8 +350,10 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = MCGame_Prefix.pch;
 				INFOPLIST_FILE = "MCGame-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				New_Setting = "";
 				PRODUCT_NAME = MCGame;
+				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Debug;
 		};
@@ -347,8 +365,10 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = MCGame_Prefix.pch;
 				INFOPLIST_FILE = "MCGame-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				New_Setting = "";
 				PRODUCT_NAME = MCGame;
+				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Release;
 		};

@@ -50,11 +50,11 @@
 	if (sceneObjects == nil) sceneObjects = [[NSMutableArray alloc] init];	
 	
 	// our 'character' object
-	TestCube * magicCube = [[TestCube alloc] init];
-	magicCube.translation = MCPointMake(0.0, 0.0, 0.0);
-	magicCube.scale = MCPointMake(30, 30, 30.0);
-	[self addObjectToScene:magicCube];
-	[magicCube release];	
+//	TestCube * magicCube = [[TestCube alloc] init];
+//	magicCube.translation = MCPointMake(0.0, 0.0, 0.0);
+//	magicCube.scale = MCPointMake(30, 30, 30.0);
+//	[self addObjectToScene:magicCube];
+//	[magicCube release];	
     
 	
 	// if we do not have a collision controller, then make one and link it to our
