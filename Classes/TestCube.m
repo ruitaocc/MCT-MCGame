@@ -10,8 +10,8 @@
 
 
 
-
-#import "TestCubeData.h"
+#import "data.hpp"
+//#import "TestCubeData.h"
 #import "MCParticleSystem.h"
 @implementation TestCube
 
@@ -27,7 +27,7 @@
 -(void)awake
 {
 	mesh = [[MCTexturedMesh alloc] initWithVertexes:Cube_vertex_coordinates 
-                                        vertexCount:Cube_vertex_array_size 
+                                        vertexCount:Cube_vertex_array_size
                                          vertexSize:3 
                                         renderStyle:GL_TRIANGLES];
 	[(MCTexturedMesh*)mesh setMaterialKey:@"cubeTexture"];
@@ -93,7 +93,9 @@
 // called once every frame
 -(void)update
 {
-	[super update];
+    
+    	[super update];
+    
 //	if (dead) {
 //		[self deadUpdate];
 //		return;		

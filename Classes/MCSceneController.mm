@@ -50,11 +50,13 @@
 	if (sceneObjects == nil) sceneObjects = [[NSMutableArray alloc] init];	
 	
 	// our 'character' object
-//	TestCube * magicCube = [[TestCube alloc] init];
-//	magicCube.translation = MCPointMake(0.0, 0.0, 0.0);
-//	magicCube.scale = MCPointMake(30, 30, 30.0);
-//	[self addObjectToScene:magicCube];
-//	[magicCube release];	
+	TestCube * magicCube = [[TestCube alloc] init];
+	magicCube.translation = MCPointMake(30.0, 0.0, 0.0);
+	magicCube.scale = MCPointMake(30, 30, 30);
+    magicCube.rotation = MCPointMake(0, 0, 0);
+    magicCube.rotationalSpeed = MCPointMake(20, 20, 20);
+	[self addObjectToScene:magicCube];
+	[magicCube release];	
     
 	
 	// if we do not have a collision controller, then make one and link it to our
@@ -175,8 +177,8 @@
 	// cull the unseen faces
 	// we use 'front' culling because Cheetah3d exports our models to be compatible
 	// with this way
-	glEnable(GL_CULL_FACE);
-	glCullFace(GL_FRONT);
+	//glEnable(GL_CULL_FACE);
+	//glCullFace(GL_FRONT);
 	
     // Light features
     GLfloat light_ambient[]= { 0.2f, 0.2f, 0.2f, 1.0f };
@@ -196,7 +198,7 @@
     glShadeModel (GL_SMOOTH);
     
 	// Place the light up and to the right
-    GLfloat light0_position[] = { 50.0, 50.0, 50.0, 1.0 };
+    GLfloat light0_position[] = { 0.0, 0.0, 100.0, 1.0 };
     glLightfv(GL_LIGHT0, GL_POSITION, light0_position);
 	
 	

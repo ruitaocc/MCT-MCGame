@@ -30,6 +30,7 @@
 		A358750F161F146000998085 /* ButtonMerged.plist in Resources */ = {isa = PBXBuildFile; fileRef = A358750D161F146000998085 /* ButtonMerged.plist */; };
 		A3587515161F2C3000998085 /* ButtonMerged.png in Resources */ = {isa = PBXBuildFile; fileRef = A3587514161F2C3000998085 /* ButtonMerged.png */; };
 		A3587518161F355400998085 /* MainWindow-iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = A3587517161F355400998085 /* MainWindow-iPad.xib */; };
+		A358753A16207FA500998085 /* sixcolor.png in Resources */ = {isa = PBXBuildFile; fileRef = A358753916207FA500998085 /* sixcolor.png */; };
 		A3BF9205161D4C4600829D13 /* cubeTexture.png in Resources */ = {isa = PBXBuildFile; fileRef = A3BF9204161D4C4600829D13 /* cubeTexture.png */; };
 		A3D30BAA1619356200BA477E /* MCTexturedQuad.m in Sources */ = {isa = PBXBuildFile; fileRef = A3D30BA91619356200BA477E /* MCTexturedQuad.m */; };
 		A3D30BAE161937DF00BA477E /* MCAnimatedQuad.m in Sources */ = {isa = PBXBuildFile; fileRef = A3D30BAD161937DF00BA477E /* MCAnimatedQuad.m */; };
@@ -77,6 +78,8 @@
 		A358750D161F146000998085 /* ButtonMerged.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = ButtonMerged.plist; sourceTree = "<group>"; };
 		A3587514161F2C3000998085 /* ButtonMerged.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ButtonMerged.png; sourceTree = "<group>"; };
 		A3587517161F355400998085 /* MainWindow-iPad.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = "MainWindow-iPad.xib"; path = "iPad/MainWindow-iPad.xib"; sourceTree = "<group>"; };
+		A358752B161FF1C600998085 /* data.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = data.hpp; sourceTree = "<group>"; };
+		A358753916207FA500998085 /* sixcolor.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sixcolor.png; sourceTree = "<group>"; };
 		A3BF9204161D4C4600829D13 /* cubeTexture.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = cubeTexture.png; path = Classes/cubeTexture.png; sourceTree = "<group>"; };
 		A3CB360515FF55D600914E58 /* Quaternion.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Quaternion.hpp; sourceTree = "<group>"; };
 		A3CB360615FF55D600914E58 /* Matrix.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Matrix.hpp; sourceTree = "<group>"; };
@@ -212,6 +215,7 @@
 			isa = PBXGroup;
 			children = (
 				A30C47DA161C72CD0057C5E1 /* TestCubeData.h */,
+				A358752B161FF1C600998085 /* data.hpp */,
 			);
 			name = Config;
 			sourceTree = "<group>";
@@ -229,6 +233,7 @@
 			children = (
 				A358750D161F146000998085 /* ButtonMerged.plist */,
 				A3587514161F2C3000998085 /* ButtonMerged.png */,
+				A358753916207FA500998085 /* sixcolor.png */,
 				A30C47E3161C8A360057C5E1 /* particleAtlas.plist */,
 				A30C47E4161C8A370057C5E1 /* particleAtlas.png */,
 				A3BF9204161D4C4600829D13 /* cubeTexture.png */,
@@ -307,6 +312,7 @@
 				A358750F161F146000998085 /* ButtonMerged.plist in Resources */,
 				A3587515161F2C3000998085 /* ButtonMerged.png in Resources */,
 				A3587518161F355400998085 /* MainWindow-iPad.xib in Resources */,
+				A358753A16207FA500998085 /* sixcolor.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

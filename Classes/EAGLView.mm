@@ -68,13 +68,14 @@
 	glLoadIdentity();
 	glRotatef(-90.0f, 0.0f, 0.0f, 1.0f);
 	// set up the viewport so that it is analagous to the screen pixels
-	[self perspectiveFovY:60 aspect:480.0/320.0 zNear:0.01 zFar:1000.0];
+	[self perspectiveFovY:60 aspect:1024.0/768.0 zNear:0.01 zFar:1000.0];
     //	glOrthof(-backingHeight/2.0, backingHeight/2.0, -backingWidth/2.0, backingWidth/2.0, -100.0f, 100.0f);
-	glTranslatef(0.0, 0.0, -280.0);
+	//280
+    glTranslatef(0.0, 0.0, -180.0);
 	glMatrixMode(GL_MODELVIEW);
     
 	// Clears the view with black
-	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+	glClearColor(0.5f, 0.5f, 0.5f, 1.0f);
 }
 
 - (void)setupViewPortrait

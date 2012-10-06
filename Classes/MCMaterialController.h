@@ -10,9 +10,9 @@
 @class MCTexturedQuad;
 @class MCAnimatedQuad;
 @interface MCMaterialController : NSObject{
-    //材质库
+    //model meterial
     NSMutableDictionary * materialLibrary;
-	//方形材质
+	//button meterial
     NSMutableDictionary * quadLibrary;
 }
 

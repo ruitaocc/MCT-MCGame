@@ -34,7 +34,8 @@
 		//if (DEBUG_DRAW_COLLIDERS) [self loadTextureImage:@"" materialKey:@"testTexture"];
         
 		// preload all our textures and atlases
-		[self loadTextureImage:@"cubeTexture.png" materialKey:@"cubeTexture"];
+		//[self loadTextureImage:@"cubeTexture.png" materialKey:@"cubeTexture"];
+        [self loadTextureImage:@"sixcolor.png" materialKey:@"cubeTexture"];
         
 		[self loadAtlasData:@"particleAtlas"];
         
