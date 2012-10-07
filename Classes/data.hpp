@@ -116,11 +116,11 @@ const GLfloat colorss[]={
 float Cube_vertex_coordinates []={
     //Define the front face
     -1.0,1.0,1.0,//left top
-     1.0,1.0,1.0,//top right
+      1.0,1.0,1.0,//top right
     -1.0,-1.0,1.0,//left buttom
     -1.0,-1.0,1.0,//left buttom     
     1.0,1.0,1.0,//top right
-    1.0,-1.0,1.0,//right buttom
+     1.0,-1.0,1.0,//right buttom
    
 
     //top face
@@ -134,40 +134,36 @@ float Cube_vertex_coordinates []={
    
     //rear face
     1.0,1.0,-1.0,//right top(when viewed from front)
-    -1.0,1.0,-1.0,//left top
-     1.0,-1.0,-1.0,//rigtht buttom
+    
+    -1.0,1.0,-1.0,//rigtht buttom
+    1.0,-1.0,-1.0,//left top
     1.0,-1.0,-1.0,//rigtht buttom
-    -1.0,1.0,-1.0,//left top
-    -1.0,-1.0,-1.0,//left buttom
+        -1.0,1.0,-1.0,//left buttom
+    -1.0,-1.0,-1.0,//left top
+
 
 
     
     //buttom face
     -1.0,-1.0,1.0,//buttom left front
-   
-    -1.0,-1.0,-1.0,//left rear
      1.0,-1.0,1.0,//rigtht buttom
+    -1.0,-1.0,-1.0,//left rear
     1.0,-1.0,1.0,//rigtht buttom
-    
-     -1.0,-1.0,-1.0,//left rear
     1.0,-1.0,-1.0,//right rear
+    -1.0,-1.0,-1.0,//left rear
     //left face
     -1.0,1.0,-1.0,// top left
-    
     -1.0,1.0,1.0,// top right
     -1.0,-1.0,-1.0,//buttom left
     -1.0,-1.0,-1.0,//buttom left
-    
-     -1.0,1.0,1.0,// top right
+    -1.0,1.0,1.0,// top right
     -1.0,-1.0,1.0,//buttom right
     
     //right face
-    1.0,1.0,1.0,//top left
-    
+    1.0,1.0,1.0,//top left    
     1.0,1.0,-1.0,//top right
     1.0,-1.0,1.0,//left
     1.0,-1.0,1.0,//left
-    
     1.0,1.0,-1.0,//top right
     1.0,-1.0,-1.0//right
     
@@ -219,11 +215,9 @@ float Cube_normal_vectors [] = {
 };
 float Cube_texture_coordinates [] = {
     0.0117,0.2891,
-    
     0.2617,0.2891,
     0.0117,0.5391,
     0.0117,0.5391,
-     
     0.2617,0.2891,
     0.2617,0.5391,
    
@@ -237,31 +231,24 @@ float Cube_texture_coordinates [] = {
    
     
     0.2891,0.2891,
-    
     0.5391,0.2891,
     0.2891,0.5391,
     0.2891,0.5391,
-     
     0.5391,0.2891,
     0.5391,0.5391,
    
-    
     0.0117,0.5664,
-    
-    0.2617,0.5664,
     0.0117,0.8164,
-    0.0117,0.8164,
-    
     0.2617,0.5664,
+    0.0117,0.8164,    
      0.2617,0.8164,
+     0.2617,0.5664,
    
     
-    0.2891,0.0117,
-    
+    0.2891,0.0117,    
     0.5391,0.0117,
     0.2891,0.2617,
-    0.2891,0.2617,
-    
+    0.2891,0.2617,    
     0.5391,0.0117,
      0.5391,0.2617,
    
@@ -269,7 +256,6 @@ float Cube_texture_coordinates [] = {
     0.2891,0.5664,//00
         0.5391,0.5664,//11
     0.2891,0.8164,//01
-
     0.2891,0.8164,//01
         0.5391,0.5664,//11
     0.5391,0.8164//10

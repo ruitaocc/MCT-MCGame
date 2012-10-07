@@ -74,7 +74,7 @@
     glTranslatef(0.0, 0.0, -180.0);
 	glMatrixMode(GL_MODELVIEW);
     
-	// Clears the view with black
+	// Clears the view with gray
 	glClearColor(0.5f, 0.5f, 0.5f, 1.0f);
 }
 
@@ -137,6 +137,8 @@
         glBindRenderbufferOES(GL_RENDERBUFFER_OES, depthRenderbuffer);
         glRenderbufferStorageOES(GL_RENDERBUFFER_OES, GL_DEPTH_COMPONENT16_OES, backingWidth, backingHeight);
         glFramebufferRenderbufferOES(GL_FRAMEBUFFER_OES, GL_DEPTH_ATTACHMENT_OES, GL_RENDERBUFFER_OES, depthRenderbuffer);
+        glEnable(GL_DEPTH_TEST);
+
     }
     
     if(glCheckFramebufferStatusOES(GL_FRAMEBUFFER_OES) != GL_FRAMEBUFFER_COMPLETE_OES) {

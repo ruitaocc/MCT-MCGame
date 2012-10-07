@@ -177,8 +177,8 @@
 	// cull the unseen faces
 	// we use 'front' culling because Cheetah3d exports our models to be compatible
 	// with this way
-	//glEnable(GL_CULL_FACE);
-	//glCullFace(GL_FRONT);
+	glEnable(GL_CULL_FACE);
+	glCullFace(GL_FRONT);
 	
     // Light features
     GLfloat light_ambient[]= { 0.2f, 0.2f, 0.2f, 1.0f };
