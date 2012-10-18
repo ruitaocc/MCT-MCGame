@@ -7,7 +7,9 @@
 //
 
 #import "InputController.h"
-
+#import <OpenGLES/EAGL.h>
+#import <OpenGLES/ES1/gl.h>
+#import <OpenGLES/ES1/glext.h>
 
 @implementation InputController
 
@@ -96,7 +98,6 @@
 
 -(void)renderInterface
 {
-    
 	glMatrixMode(GL_PROJECTION);
 	glPushMatrix();
 	glLoadIdentity();

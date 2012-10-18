@@ -13,6 +13,18 @@
 @implementation CoordinatingController
 @synthesize mcSceneController,countingPlaySceneController;
 
+
+
++ (CoordinatingController*)sharedCoordinatingController{
+    static CoordinatingController *sharedCoordinatingController;
+    @synchronized(self)
+    {
+        if (!sharedCoordinatingController)
+            sharedCoordinatingController = [[CoordinatingController alloc] init];
+	}
+	return sharedCoordinatingController;
+}
+
 #pragma mark -
 #pragma mark a method for view transitions
 -(void)requestViewChangeByObject:(int)type{
