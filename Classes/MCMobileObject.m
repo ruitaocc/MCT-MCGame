@@ -28,13 +28,17 @@
 	[super update];
 }
 
+//it is a method used 。。。。！妈的！又不会说了  
+//用这个函数让可移动的对象能够，当它从屏幕下方（或左方）移出时，回从另外一方滚回来
 -(void)checkArenaBounds
 {
-	if (translation.x > (240.0 + CGRectGetWidth(self.meshBounds)/2.0)) translation.x -= 480.0 + CGRectGetWidth(self.meshBounds); 
-	if (translation.x < (-240.0 - CGRectGetWidth(self.meshBounds)/2.0)) translation.x += 480.0 + CGRectGetWidth(self.meshBounds); 
+    float width = 1024;
+    float height = 768;
+	if (translation.x > (width/2 + CGRectGetWidth(self.meshBounds)/2.0)) translation.x -= width + CGRectGetWidth(self.meshBounds); 
+	if (translation.x < (-width/2 - CGRectGetWidth(self.meshBounds)/2.0)) translation.x += width + CGRectGetWidth(self.meshBounds); 
     
-	if (translation.y > (160.0 + CGRectGetHeight(self.meshBounds)/2.0)) translation.y -= 320.0 + CGRectGetHeight(self.meshBounds); 
-	if (translation.y < (-160.0 - CGRectGetHeight(self.meshBounds)/2.0)) translation.y += 320.0 + CGRectGetHeight(self.meshBounds); 
+	if (translation.y > (height/2 + CGRectGetHeight(self.meshBounds)/2.0)) translation.y -= height + CGRectGetHeight(self.meshBounds); 
+	if (translation.y < (-height/2 - CGRectGetHeight(self.meshBounds)/2.0)) translation.y += height + CGRectGetHeight(self.meshBounds); 
 }
 
 @end

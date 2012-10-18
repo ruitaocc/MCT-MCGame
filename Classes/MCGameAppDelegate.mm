@@ -18,7 +18,15 @@
 
 @synthesize window;
 
-
++ (MCGameAppDelegate*)sharedMCGameAppDelegate{
+    static MCGameAppDelegate *sharedMCGameAppDelegate;
+    @synchronized(self)
+    {
+        if (!sharedMCGameAppDelegate)
+            sharedMCGameAppDelegate = [[MCGameAppDelegate alloc] init];
+	}
+	return sharedMCGameAppDelegate;
+}
 - (void)applicationDidFinishLaunching:(UIApplication *)application 
 {   
     //场景对象控制器

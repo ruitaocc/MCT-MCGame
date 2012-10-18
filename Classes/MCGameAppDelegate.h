@@ -14,6 +14,7 @@
 }
 
 @property (nonatomic, retain) IBOutlet UIWindow *window;
++ (MCGameAppDelegate*)sharedMCGameAppDelegate;
 
 @end
 

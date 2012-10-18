@@ -145,7 +145,8 @@
         NSLog(@"failed to make complete framebuffer object %x", glCheckFramebufferStatusOES(GL_FRAMEBUFFER_OES));
         return NO;
     }
-    
+    glEnable(GL_LINE_SMOOTH_HINT);
+    glHint(GL_LINE_SMOOTH,GL_NICEST);
     return YES;
 }
 

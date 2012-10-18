@@ -20,6 +20,10 @@
 		48A858E30FFAFC450060F0B8 /* MCSceneController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 48A858E20FFAFC450060F0B8 /* MCSceneController.mm */; };
 		48A858E60FFAFC4D0060F0B8 /* MCSceneObject.mm in Sources */ = {isa = PBXBuildFile; fileRef = 48A858E50FFAFC4D0060F0B8 /* MCSceneObject.mm */; };
 		48C2AB8A10032DE100F0CFA0 /* MCMesh.mm in Sources */ = {isa = PBXBuildFile; fileRef = 48C2AB8910032DE100F0CFA0 /* MCMesh.mm */; };
+		A303B51F1629407300BDA199 /* MCOBJLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = A303B51E1629407300BDA199 /* MCOBJLoader.m */; };
+		A3051EDD16302870006DFF96 /* MCCountingPlaySceneController__1.m in Sources */ = {isa = PBXBuildFile; fileRef = A3051EDC16302870006DFF96 /* MCCountingPlaySceneController__1.m */; };
+		A3051EE016303278006DFF96 /* MCCountingPlayInputViewController__1.m in Sources */ = {isa = PBXBuildFile; fileRef = A3051EDF16303278006DFF96 /* MCCountingPlayInputViewController__1.m */; };
+		A3051EE316303894006DFF96 /* InputController.mm in Sources */ = {isa = PBXBuildFile; fileRef = A3051EE216303894006DFF96 /* InputController.mm */; };
 		A30C47D1161C38E70057C5E1 /* MCButton.m in Sources */ = {isa = PBXBuildFile; fileRef = A30C47D0161C38E70057C5E1 /* MCButton.m */; };
 		A30C47D4161C694F0057C5E1 /* MCTexturedButton.m in Sources */ = {isa = PBXBuildFile; fileRef = A30C47D3161C694F0057C5E1 /* MCTexturedButton.m */; };
 		A30C47D8161C723F0057C5E1 /* MCTexturedMesh.m in Sources */ = {isa = PBXBuildFile; fileRef = A30C47D7161C723E0057C5E1 /* MCTexturedMesh.m */; };
@@ -34,6 +38,7 @@
 		A3BF9205161D4C4600829D13 /* cubeTexture.png in Resources */ = {isa = PBXBuildFile; fileRef = A3BF9204161D4C4600829D13 /* cubeTexture.png */; };
 		A3D30BAA1619356200BA477E /* MCTexturedQuad.m in Sources */ = {isa = PBXBuildFile; fileRef = A3D30BA91619356200BA477E /* MCTexturedQuad.m */; };
 		A3D30BAE161937DF00BA477E /* MCAnimatedQuad.m in Sources */ = {isa = PBXBuildFile; fileRef = A3D30BAD161937DF00BA477E /* MCAnimatedQuad.m */; };
+		A3DB2596162D993900AB9F00 /* CoordinatingController.m in Sources */ = {isa = PBXBuildFile; fileRef = A3DB2595162D993900AB9F00 /* CoordinatingController.m */; };
 		A3F2ACB61616CE6700D622B8 /* MCMaterialController.m in Sources */ = {isa = PBXBuildFile; fileRef = A3F2ACB51616CE6700D622B8 /* MCMaterialController.m */; };
 		A3F2ACBA1616CF9900D622B8 /* MCParticleSystem.m in Sources */ = {isa = PBXBuildFile; fileRef = A3F2ACB91616CF9900D622B8 /* MCParticleSystem.m */; };
 		A3F2ACC01616D9BB00D622B8 /* MCParticle.m in Sources */ = {isa = PBXBuildFile; fileRef = A3F2ACBF1616D9BB00D622B8 /* MCParticle.m */; };
@@ -62,6 +67,14 @@
 		48C2AB8810032DE100F0CFA0 /* MCMesh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCMesh.h; sourceTree = "<group>"; };
 		48C2AB8910032DE100F0CFA0 /* MCMesh.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MCMesh.mm; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* MCGame-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "MCGame-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
+		A303B51D1629407300BDA199 /* MCOBJLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCOBJLoader.h; sourceTree = "<group>"; };
+		A303B51E1629407300BDA199 /* MCOBJLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCOBJLoader.m; sourceTree = "<group>"; };
+		A3051EDB16302870006DFF96 /* MCCountingPlaySceneController__1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCCountingPlaySceneController__1.h; sourceTree = "<group>"; };
+		A3051EDC16302870006DFF96 /* MCCountingPlaySceneController__1.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCCountingPlaySceneController__1.m; sourceTree = "<group>"; };
+		A3051EDE16303278006DFF96 /* MCCountingPlayInputViewController__1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCCountingPlayInputViewController__1.h; sourceTree = "<group>"; };
+		A3051EDF16303278006DFF96 /* MCCountingPlayInputViewController__1.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCCountingPlayInputViewController__1.m; sourceTree = "<group>"; };
+		A3051EE116303894006DFF96 /* InputController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InputController.h; sourceTree = "<group>"; };
+		A3051EE216303894006DFF96 /* InputController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = InputController.mm; sourceTree = "<group>"; };
 		A30C47CF161C38E70057C5E1 /* MCButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCButton.h; sourceTree = "<group>"; };
 		A30C47D0161C38E70057C5E1 /* MCButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCButton.m; sourceTree = "<group>"; };
 		A30C47D2161C694F0057C5E1 /* MCTexturedButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCTexturedButton.h; sourceTree = "<group>"; };
@@ -88,6 +101,8 @@
 		A3D30BA91619356200BA477E /* MCTexturedQuad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCTexturedQuad.m; sourceTree = "<group>"; };
 		A3D30BAC161937DF00BA477E /* MCAnimatedQuad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCAnimatedQuad.h; sourceTree = "<group>"; };
 		A3D30BAD161937DF00BA477E /* MCAnimatedQuad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCAnimatedQuad.m; sourceTree = "<group>"; };
+		A3DB2594162D993900AB9F00 /* CoordinatingController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoordinatingController.h; sourceTree = "<group>"; };
+		A3DB2595162D993900AB9F00 /* CoordinatingController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoordinatingController.m; sourceTree = "<group>"; };
 		A3EFD13916024BA5008E109C /* MeshRenderEngine.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = MeshRenderEngine.hpp; sourceTree = "<group>"; };
 		A3F2ACB41616CE6700D622B8 /* MCMaterialController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCMaterialController.h; sourceTree = "<group>"; };
 		A3F2ACB51616CE6700D622B8 /* MCMaterialController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCMaterialController.m; sourceTree = "<group>"; };
@@ -127,14 +142,20 @@
 				48A858DB0FFAFB550060F0B8 /* EAGLView.mm */,
 				48A858DE0FFAFC3B0060F0B8 /* MCInputViewController.h */,
 				48A858DF0FFAFC3B0060F0B8 /* MCInputViewController.mm */,
-				A30C47D2161C694F0057C5E1 /* MCTexturedButton.h */,
-				A30C47D3161C694F0057C5E1 /* MCTexturedButton.m */,
+				A3051EE116303894006DFF96 /* InputController.h */,
+				A3051EE216303894006DFF96 /* InputController.mm */,
 				A3F2ACB41616CE6700D622B8 /* MCMaterialController.h */,
 				A3F2ACB51616CE6700D622B8 /* MCMaterialController.m */,
+				A303B51D1629407300BDA199 /* MCOBJLoader.h */,
+				A303B51E1629407300BDA199 /* MCOBJLoader.m */,
 				48A858E10FFAFC450060F0B8 /* MCSceneController.h */,
 				48A858E20FFAFC450060F0B8 /* MCSceneController.mm */,
-				48A858E40FFAFC4D0060F0B8 /* MCSceneObject.h */,
-				48A858E50FFAFC4D0060F0B8 /* MCSceneObject.mm */,
+				A3DB2594162D993900AB9F00 /* CoordinatingController.h */,
+				A3DB2595162D993900AB9F00 /* CoordinatingController.m */,
+				A3051EDE16303278006DFF96 /* MCCountingPlayInputViewController__1.h */,
+				A3051EDF16303278006DFF96 /* MCCountingPlayInputViewController__1.m */,
+				A3051EDB16302870006DFF96 /* MCCountingPlaySceneController__1.h */,
+				A3051EDC16302870006DFF96 /* MCCountingPlaySceneController__1.m */,
 				A30C47D6161C723E0057C5E1 /* MCTexturedMesh.h */,
 				A30C47D7161C723E0057C5E1 /* MCTexturedMesh.m */,
 				48C2AB8910032DE100F0CFA0 /* MCMesh.mm */,
@@ -255,6 +276,10 @@
 				A30C47CF161C38E70057C5E1 /* MCButton.h */,
 				A30C47D0161C38E70057C5E1 /* MCButton.m */,
 				A3F2ACC11616E1CE00D622B8 /* MCConfiguration.h */,
+				A30C47D2161C694F0057C5E1 /* MCTexturedButton.h */,
+				A30C47D3161C694F0057C5E1 /* MCTexturedButton.m */,
+				48A858E50FFAFC4D0060F0B8 /* MCSceneObject.mm */,
+				48A858E40FFAFC4D0060F0B8 /* MCSceneObject.h */,
 			);
 			name = SceneObjects;
 			sourceTree = "<group>";
@@ -340,6 +365,11 @@
 				A30C47D8161C723F0057C5E1 /* MCTexturedMesh.m in Sources */,
 				A30C47DF161C86F70057C5E1 /* TestCube.m in Sources */,
 				A30C47E2161C874F0057C5E1 /* MCMobileObject.m in Sources */,
+				A303B51F1629407300BDA199 /* MCOBJLoader.m in Sources */,
+				A3DB2596162D993900AB9F00 /* CoordinatingController.m in Sources */,
+				A3051EDD16302870006DFF96 /* MCCountingPlaySceneController__1.m in Sources */,
+				A3051EE016303278006DFF96 /* MCCountingPlayInputViewController__1.m in Sources */,
+				A3051EE316303894006DFF96 /* InputController.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

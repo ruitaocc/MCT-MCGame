@@ -8,7 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
-@class MCInputViewController;
+//@class MCInputViewController;
+@class InputController;
 @class EAGLView;
 @class MCSceneObject;
 @interface MCSceneController : NSObject {
@@ -20,7 +21,7 @@
 	NSMutableArray * objectsToAdd;
     
     //inputcontroller
-	MCInputViewController * inputController;
+	InputController * inputController;
 	EAGLView * openGLView;
 	
     //MCCollisionController * collisionController;
@@ -32,11 +33,11 @@
 	NSTimeInterval lastFrameStartTime;
 	NSTimeInterval thisFrameStartTime;
 	NSDate * levelStartDate;
-	//NSInteger UFOCountDown;
+	
 	BOOL needToLoadScene;
 }
 
-@property (retain) MCInputViewController * inputController;
+@property (retain) InputController * inputController;
 @property (retain) EAGLView * openGLView;
 @property (retain) NSDate *levelStartDate;
 @property NSTimeInterval deltaTime;

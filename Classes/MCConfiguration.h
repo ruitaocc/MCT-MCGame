@@ -34,3 +34,13 @@
 #define MC_MAX_PARTICLES 100
 
 #define MC_FPS 30.0
+
+// for view transition
+typedef enum {
+    kCountingPlay,
+    kNormalPlay,
+    kRandomSolve,
+    kSystemSetting,
+    kHeroBoard,
+    kMainMenu
+}ViewTransitionTag;

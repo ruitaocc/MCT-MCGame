@@ -7,30 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "InputController.h"
 
-
-@interface MCInputViewController : UIViewController {
-	NSMutableSet* touchEvents;
-  	
-	NSMutableArray * interfaceObjects;
-}
-
-@property (retain) NSMutableSet* touchEvents;
-//10
-- (CGRect)screenRectFromMeshRect:(CGRect)rect atPoint:(CGPoint)meshCenter;
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil ;
-- (void)clearEvents;
-- (void)dealloc ;
-- (void)didReceiveMemoryWarning ;
-- (void)loadView ;
-- (void)viewDidUnload ;
-- (void)loadInterface;
-- (void)renderInterface;
-- (void)updateInterface;
-//3
-- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event;
-- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event;
-- (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event;
+@interface MCInputViewController : InputController 
+//overload
+-(void)loadInterface;
 //selectors
 -(void)countingPlayBtnDown;
 -(void)countingPlayBtnUp;
