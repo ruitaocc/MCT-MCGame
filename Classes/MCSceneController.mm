@@ -253,7 +253,10 @@
 	
 	[super dealloc];
 }
-
+- (void)releaseSrc{
+    [self stopAnimation];
+    [self restartScene];
+}
 
 
 @end

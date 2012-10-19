@@ -12,6 +12,6 @@
 @interface MCCountingPlaySceneController : MCSceneController{
     
 }
-+ (MCSceneController*)sharedCountingPlaySceneController;
++ (MCCountingPlaySceneController*)sharedCountingPlaySceneController;
 -(void)loadScene;
 @end

@@ -62,5 +62,5 @@
 - (void)setupLighting;
 
 // 11 methods
-
+- (void)releaseSrc;
 @end

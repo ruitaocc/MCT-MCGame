@@ -32,7 +32,7 @@
     //the texture 还没设计出来
 	MCTexturedButton * mainMenuBtn = [[MCTexturedButton alloc] initWithUpKey:@"systemSettingBtnUp" downKey:@"systemSettingBtnDown"];
 	mainMenuBtn.scale = MCPointMake(btnWidth, btnHeight, 1.0);
-	mainMenuBtn.translation = MCPointMake(-270.0, 200.0, 0.0);
+	mainMenuBtn.translation = MCPointMake(-300.0, 300.0, 0.0);
 	mainMenuBtn.target = self;
 	mainMenuBtn.buttonDownAction = @selector(mainMenuBtnDown);
 	mainMenuBtn.buttonUpAction = @selector(mainMenuBtnDoUp);

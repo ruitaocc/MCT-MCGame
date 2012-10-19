@@ -120,7 +120,10 @@
     
 }
 
-
+//
+-(void)releaseSrc{
+    [interfaceObjects removeAllObjects];
+}
 
 
 
