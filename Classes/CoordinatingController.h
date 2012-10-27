@@ -9,14 +9,18 @@
 #import <UIKit/UIKit.h>
 #import "MCCountingPlaySceneController__1.h"
 #import "MCSceneController.h"
-#import "MCInputViewController.h"
+#import "inputController.h"
+#import "sceneController.h"
 @interface CoordinatingController : NSObject{
-    @private
-    MCSceneController * rootSceneController;
+    sceneController * currentController;
+@private
+    MCSceneController * mainSceneController;
     MCCountingPlaySceneController *countingPlaySceneController;
+    
 }
-@property (nonatomic ,readonly)MCSceneController *rootSceneController;
+@property (nonatomic ,readonly)MCSceneController *mainSceneController;
 @property (nonatomic, readonly )MCCountingPlaySceneController *countingPlaySceneController;
+@property (nonatomic, retain )sceneController *currentController;
 
 +(CoordinatingController *) sharedCoordinatingController;
 -(void)requestViewChangeByObject:(int)type;

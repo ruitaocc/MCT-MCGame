@@ -21,8 +21,8 @@
 		48A858E60FFAFC4D0060F0B8 /* MCSceneObject.mm in Sources */ = {isa = PBXBuildFile; fileRef = 48A858E50FFAFC4D0060F0B8 /* MCSceneObject.mm */; };
 		48C2AB8A10032DE100F0CFA0 /* MCMesh.mm in Sources */ = {isa = PBXBuildFile; fileRef = 48C2AB8910032DE100F0CFA0 /* MCMesh.mm */; };
 		A303B51F1629407300BDA199 /* MCOBJLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = A303B51E1629407300BDA199 /* MCOBJLoader.m */; };
-		A3051EDD16302870006DFF96 /* MCCountingPlaySceneController__1.m in Sources */ = {isa = PBXBuildFile; fileRef = A3051EDC16302870006DFF96 /* MCCountingPlaySceneController__1.m */; };
-		A3051EE016303278006DFF96 /* MCCountingPlayInputViewController__1.m in Sources */ = {isa = PBXBuildFile; fileRef = A3051EDF16303278006DFF96 /* MCCountingPlayInputViewController__1.m */; };
+		A3051EDD16302870006DFF96 /* MCCountingPlaySceneController__1.mm in Sources */ = {isa = PBXBuildFile; fileRef = A3051EDC16302870006DFF96 /* MCCountingPlaySceneController__1.mm */; };
+		A3051EE016303278006DFF96 /* MCCountingPlayInputViewController__1.mm in Sources */ = {isa = PBXBuildFile; fileRef = A3051EDF16303278006DFF96 /* MCCountingPlayInputViewController__1.mm */; };
 		A3051EE316303894006DFF96 /* InputController.mm in Sources */ = {isa = PBXBuildFile; fileRef = A3051EE216303894006DFF96 /* InputController.mm */; };
 		A30C47D1161C38E70057C5E1 /* MCButton.m in Sources */ = {isa = PBXBuildFile; fileRef = A30C47D0161C38E70057C5E1 /* MCButton.m */; };
 		A30C47D4161C694F0057C5E1 /* MCTexturedButton.m in Sources */ = {isa = PBXBuildFile; fileRef = A30C47D3161C694F0057C5E1 /* MCTexturedButton.m */; };
@@ -31,11 +31,14 @@
 		A30C47E2161C874F0057C5E1 /* MCMobileObject.m in Sources */ = {isa = PBXBuildFile; fileRef = A30C47E1161C874F0057C5E1 /* MCMobileObject.m */; };
 		A30C47E5161C8A370057C5E1 /* particleAtlas.plist in Resources */ = {isa = PBXBuildFile; fileRef = A30C47E3161C8A360057C5E1 /* particleAtlas.plist */; };
 		A30C47E6161C8A370057C5E1 /* particleAtlas.png in Resources */ = {isa = PBXBuildFile; fileRef = A30C47E4161C8A370057C5E1 /* particleAtlas.png */; };
+		A32A33BA163BA7C7007840CC /* ClassDiagrm.png in Resources */ = {isa = PBXBuildFile; fileRef = A32A33B8163BA7C7007840CC /* ClassDiagrm.png */; };
+		A32A33BB163BA7C7007840CC /* ClassDiagrm.uxf in Resources */ = {isa = PBXBuildFile; fileRef = A32A33B9163BA7C7007840CC /* ClassDiagrm.uxf */; };
 		A358750F161F146000998085 /* ButtonMerged.plist in Resources */ = {isa = PBXBuildFile; fileRef = A358750D161F146000998085 /* ButtonMerged.plist */; };
 		A3587515161F2C3000998085 /* ButtonMerged.png in Resources */ = {isa = PBXBuildFile; fileRef = A3587514161F2C3000998085 /* ButtonMerged.png */; };
 		A3587518161F355400998085 /* MainWindow-iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = A3587517161F355400998085 /* MainWindow-iPad.xib */; };
 		A358753A16207FA500998085 /* sixcolor.png in Resources */ = {isa = PBXBuildFile; fileRef = A358753916207FA500998085 /* sixcolor.png */; };
 		A3BF9205161D4C4600829D13 /* cubeTexture.png in Resources */ = {isa = PBXBuildFile; fileRef = A3BF9204161D4C4600829D13 /* cubeTexture.png */; };
+		A3D2FC801638D2FD00517CCF /* sceneController.m in Sources */ = {isa = PBXBuildFile; fileRef = A3D2FC7F1638D2FD00517CCF /* sceneController.m */; };
 		A3D30BAA1619356200BA477E /* MCTexturedQuad.m in Sources */ = {isa = PBXBuildFile; fileRef = A3D30BA91619356200BA477E /* MCTexturedQuad.m */; };
 		A3D30BAE161937DF00BA477E /* MCAnimatedQuad.m in Sources */ = {isa = PBXBuildFile; fileRef = A3D30BAD161937DF00BA477E /* MCAnimatedQuad.m */; };
 		A3DB2596162D993900AB9F00 /* CoordinatingController.m in Sources */ = {isa = PBXBuildFile; fileRef = A3DB2595162D993900AB9F00 /* CoordinatingController.m */; };
@@ -70,9 +73,9 @@
 		A303B51D1629407300BDA199 /* MCOBJLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCOBJLoader.h; sourceTree = "<group>"; };
 		A303B51E1629407300BDA199 /* MCOBJLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCOBJLoader.m; sourceTree = "<group>"; };
 		A3051EDB16302870006DFF96 /* MCCountingPlaySceneController__1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCCountingPlaySceneController__1.h; sourceTree = "<group>"; };
-		A3051EDC16302870006DFF96 /* MCCountingPlaySceneController__1.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCCountingPlaySceneController__1.m; sourceTree = "<group>"; };
+		A3051EDC16302870006DFF96 /* MCCountingPlaySceneController__1.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MCCountingPlaySceneController__1.mm; sourceTree = "<group>"; };
 		A3051EDE16303278006DFF96 /* MCCountingPlayInputViewController__1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCCountingPlayInputViewController__1.h; sourceTree = "<group>"; };
-		A3051EDF16303278006DFF96 /* MCCountingPlayInputViewController__1.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCCountingPlayInputViewController__1.m; sourceTree = "<group>"; };
+		A3051EDF16303278006DFF96 /* MCCountingPlayInputViewController__1.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MCCountingPlayInputViewController__1.mm; sourceTree = "<group>"; };
 		A3051EE116303894006DFF96 /* InputController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InputController.h; sourceTree = "<group>"; };
 		A3051EE216303894006DFF96 /* InputController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = InputController.mm; sourceTree = "<group>"; };
 		A30C47CF161C38E70057C5E1 /* MCButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCButton.h; sourceTree = "<group>"; };
@@ -88,6 +91,8 @@
 		A30C47E1161C874F0057C5E1 /* MCMobileObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCMobileObject.m; sourceTree = "<group>"; };
 		A30C47E3161C8A360057C5E1 /* particleAtlas.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = particleAtlas.plist; path = Classes/particleAtlas.plist; sourceTree = "<group>"; };
 		A30C47E4161C8A370057C5E1 /* particleAtlas.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = particleAtlas.png; path = Classes/particleAtlas.png; sourceTree = "<group>"; };
+		A32A33B8163BA7C7007840CC /* ClassDiagrm.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ClassDiagrm.png; sourceTree = "<group>"; };
+		A32A33B9163BA7C7007840CC /* ClassDiagrm.uxf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = ClassDiagrm.uxf; sourceTree = "<group>"; };
 		A358750D161F146000998085 /* ButtonMerged.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = ButtonMerged.plist; sourceTree = "<group>"; };
 		A3587514161F2C3000998085 /* ButtonMerged.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ButtonMerged.png; sourceTree = "<group>"; };
 		A3587517161F355400998085 /* MainWindow-iPad.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = "MainWindow-iPad.xib"; path = "iPad/MainWindow-iPad.xib"; sourceTree = "<group>"; };
@@ -97,6 +102,8 @@
 		A3CB360515FF55D600914E58 /* Quaternion.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Quaternion.hpp; sourceTree = "<group>"; };
 		A3CB360615FF55D600914E58 /* Matrix.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Matrix.hpp; sourceTree = "<group>"; };
 		A3CB360715FF55D600914E58 /* Vector.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Vector.hpp; sourceTree = "<group>"; };
+		A3D2FC7E1638D2FD00517CCF /* sceneController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sceneController.h; sourceTree = "<group>"; };
+		A3D2FC7F1638D2FD00517CCF /* sceneController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = sceneController.m; sourceTree = "<group>"; };
 		A3D30BA81619356200BA477E /* MCTexturedQuad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCTexturedQuad.h; sourceTree = "<group>"; };
 		A3D30BA91619356200BA477E /* MCTexturedQuad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCTexturedQuad.m; sourceTree = "<group>"; };
 		A3D30BAC161937DF00BA477E /* MCAnimatedQuad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCAnimatedQuad.h; sourceTree = "<group>"; };
@@ -133,38 +140,10 @@
 		080E96DDFE201D6D7F000001 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				A32A33B5163BA72C007840CC /* Architecture */,
 				A30C47D9161C72A70057C5E1 /* Config */,
 				A30C47D5161C6F1C0057C5E1 /* MathUtil */,
 				A3F2ACBD1616D97800D622B8 /* SceneObjects */,
-				1D3623240D0F684500981E51 /* MCGameAppDelegate.h */,
-				1D3623250D0F684500981E51 /* MCGameAppDelegate.mm */,
-				48A858DC0FFAFB550060F0B8 /* EAGLView.h */,
-				48A858DB0FFAFB550060F0B8 /* EAGLView.mm */,
-				48A858DE0FFAFC3B0060F0B8 /* MCInputViewController.h */,
-				48A858DF0FFAFC3B0060F0B8 /* MCInputViewController.mm */,
-				A3051EE116303894006DFF96 /* InputController.h */,
-				A3051EE216303894006DFF96 /* InputController.mm */,
-				A3F2ACB41616CE6700D622B8 /* MCMaterialController.h */,
-				A3F2ACB51616CE6700D622B8 /* MCMaterialController.m */,
-				A303B51D1629407300BDA199 /* MCOBJLoader.h */,
-				A303B51E1629407300BDA199 /* MCOBJLoader.m */,
-				48A858E20FFAFC450060F0B8 /* MCSceneController.mm */,
-				48A858E10FFAFC450060F0B8 /* MCSceneController.h */,
-				A3DB2594162D993900AB9F00 /* CoordinatingController.h */,
-				A3DB2595162D993900AB9F00 /* CoordinatingController.m */,
-				A3051EDE16303278006DFF96 /* MCCountingPlayInputViewController__1.h */,
-				A3051EDF16303278006DFF96 /* MCCountingPlayInputViewController__1.m */,
-				A3051EDB16302870006DFF96 /* MCCountingPlaySceneController__1.h */,
-				A3051EDC16302870006DFF96 /* MCCountingPlaySceneController__1.m */,
-				A30C47D6161C723E0057C5E1 /* MCTexturedMesh.h */,
-				A30C47D7161C723E0057C5E1 /* MCTexturedMesh.m */,
-				48C2AB8910032DE100F0CFA0 /* MCMesh.mm */,
-				48C2AB8810032DE100F0CFA0 /* MCMesh.h */,
-				A3EFD13916024BA5008E109C /* MeshRenderEngine.hpp */,
-				A3D30BAC161937DF00BA477E /* MCAnimatedQuad.h */,
-				A3D30BAD161937DF00BA477E /* MCAnimatedQuad.m */,
-				A3D30BA81619356200BA477E /* MCTexturedQuad.h */,
-				A3D30BA91619356200BA477E /* MCTexturedQuad.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -202,6 +181,7 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				A32A33B7163BA7AA007840CC /* Doc */,
 				A3587519161F3FFD00998085 /* imageResource */,
 				28AD733E0D9D9553002E5188 /* MainWindow.xib */,
 				8D1107310486CEB800E47090 /* MCGame-Info.plist */,
@@ -241,6 +221,45 @@
 			name = Config;
 			sourceTree = "<group>";
 		};
+		A32A33B5163BA72C007840CC /* Architecture */ = {
+			isa = PBXGroup;
+			children = (
+				A3EFD13916024BA5008E109C /* MeshRenderEngine.hpp */,
+				48A858DF0FFAFC3B0060F0B8 /* MCInputViewController.mm */,
+				1D3623240D0F684500981E51 /* MCGameAppDelegate.h */,
+				1D3623250D0F684500981E51 /* MCGameAppDelegate.mm */,
+				A303B51D1629407300BDA199 /* MCOBJLoader.h */,
+				A303B51E1629407300BDA199 /* MCOBJLoader.m */,
+				48A858DC0FFAFB550060F0B8 /* EAGLView.h */,
+				48A858DB0FFAFB550060F0B8 /* EAGLView.mm */,
+				A3F2ACB41616CE6700D622B8 /* MCMaterialController.h */,
+				A3F2ACB51616CE6700D622B8 /* MCMaterialController.m */,
+				A3DB2594162D993900AB9F00 /* CoordinatingController.h */,
+				A3DB2595162D993900AB9F00 /* CoordinatingController.m */,
+				A3051EE116303894006DFF96 /* InputController.h */,
+				A3051EE216303894006DFF96 /* InputController.mm */,
+				48A858DE0FFAFC3B0060F0B8 /* MCInputViewController.h */,
+				A3051EDE16303278006DFF96 /* MCCountingPlayInputViewController__1.h */,
+				A3051EDF16303278006DFF96 /* MCCountingPlayInputViewController__1.mm */,
+				A3D2FC7E1638D2FD00517CCF /* sceneController.h */,
+				A3D2FC7F1638D2FD00517CCF /* sceneController.m */,
+				48A858E20FFAFC450060F0B8 /* MCSceneController.mm */,
+				48A858E10FFAFC450060F0B8 /* MCSceneController.h */,
+				A3051EDB16302870006DFF96 /* MCCountingPlaySceneController__1.h */,
+				A3051EDC16302870006DFF96 /* MCCountingPlaySceneController__1.mm */,
+			);
+			name = Architecture;
+			sourceTree = "<group>";
+		};
+		A32A33B7163BA7AA007840CC /* Doc */ = {
+			isa = PBXGroup;
+			children = (
+				A32A33B8163BA7C7007840CC /* ClassDiagrm.png */,
+				A32A33B9163BA7C7007840CC /* ClassDiagrm.uxf */,
+			);
+			name = Doc;
+			sourceTree = "<group>";
+		};
 		A3587516161F355200998085 /* iPad */ = {
 			isa = PBXGroup;
 			children = (
@@ -265,6 +284,15 @@
 		A3F2ACBD1616D97800D622B8 /* SceneObjects */ = {
 			isa = PBXGroup;
 			children = (
+				48A858E40FFAFC4D0060F0B8 /* MCSceneObject.h */,
+				A30C47D6161C723E0057C5E1 /* MCTexturedMesh.h */,
+				A30C47D7161C723E0057C5E1 /* MCTexturedMesh.m */,
+				48C2AB8910032DE100F0CFA0 /* MCMesh.mm */,
+				48C2AB8810032DE100F0CFA0 /* MCMesh.h */,
+				A3D30BAC161937DF00BA477E /* MCAnimatedQuad.h */,
+				A3D30BAD161937DF00BA477E /* MCAnimatedQuad.m */,
+				A3D30BA81619356200BA477E /* MCTexturedQuad.h */,
+				A3D30BA91619356200BA477E /* MCTexturedQuad.m */,
 				A3F2ACB81616CF9900D622B8 /* MCParticleSystem.h */,
 				A3F2ACBE1616D9BB00D622B8 /* MCParticle.h */,
 				A3F2ACB91616CF9900D622B8 /* MCParticleSystem.m */,
@@ -279,7 +307,6 @@
 				A30C47D2161C694F0057C5E1 /* MCTexturedButton.h */,
 				A30C47D3161C694F0057C5E1 /* MCTexturedButton.m */,
 				48A858E50FFAFC4D0060F0B8 /* MCSceneObject.mm */,
-				48A858E40FFAFC4D0060F0B8 /* MCSceneObject.h */,
 			);
 			name = SceneObjects;
 			sourceTree = "<group>";
@@ -338,6 +365,8 @@
 				A3587515161F2C3000998085 /* ButtonMerged.png in Resources */,
 				A3587518161F355400998085 /* MainWindow-iPad.xib in Resources */,
 				A358753A16207FA500998085 /* sixcolor.png in Resources */,
+				A32A33BA163BA7C7007840CC /* ClassDiagrm.png in Resources */,
+				A32A33BB163BA7C7007840CC /* ClassDiagrm.uxf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -367,9 +396,10 @@
 				A30C47E2161C874F0057C5E1 /* MCMobileObject.m in Sources */,
 				A303B51F1629407300BDA199 /* MCOBJLoader.m in Sources */,
 				A3DB2596162D993900AB9F00 /* CoordinatingController.m in Sources */,
-				A3051EDD16302870006DFF96 /* MCCountingPlaySceneController__1.m in Sources */,
-				A3051EE016303278006DFF96 /* MCCountingPlayInputViewController__1.m in Sources */,
+				A3051EDD16302870006DFF96 /* MCCountingPlaySceneController__1.mm in Sources */,
+				A3051EE016303278006DFF96 /* MCCountingPlayInputViewController__1.mm in Sources */,
 				A3051EE316303894006DFF96 /* InputController.mm in Sources */,
+				A3D2FC801638D2FD00517CCF /* sceneController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

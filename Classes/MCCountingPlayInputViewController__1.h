@@ -8,7 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import "InputController.h"
-@interface MCCountingPlayInputViewController : InputController
+@interface MCCountingPlayInputViewController : InputController{
+}
 //overload
 -(void)loadInterface;
 //selectors

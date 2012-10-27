@@ -57,6 +57,7 @@
 {
 	// just store them all in the big set.
 	[touchEvents addObjectsFromArray:[touches allObjects]];
+    
 }
 
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event

@@ -10,8 +10,12 @@
 #import "MCConfiguration.h"
 #import "MCGameAppDelegate.h"
 #import "EAGLView.h"
+#import "MCMaterialController.h"
+#import "MCInputViewController.h"
+#import "MCCountingPlayInputViewController__1.h"
 @implementation CoordinatingController
-@synthesize rootSceneController,countingPlaySceneController;
+@synthesize mainSceneController,countingPlaySceneController;
+@synthesize  currentController;
 
 
 
@@ -32,55 +36,38 @@
         case kCountingPlay:
         {
             NSLog(@"requestViewChangeByObject:kCountingPlay");
-            //do something to view transition
-            //场景对象控制器
+            
+            //计时竞赛场景控制
             countingPlaySceneController = [MCCountingPlaySceneController sharedCountingPlaySceneController];
-            rootSceneController = [MCSceneController sharedSceneController];
-             InputController * rootInputController = [MCSceneController sharedSceneController].inputController ;
+            //当前场景控制
+            mainSceneController = (MCSceneController*)[[CoordinatingController sharedCoordinatingController] currentController];
+             InputController * mainInputController = mainSceneController.inputController ;
+            //将当前控制器置为计时场景控制器
+            [CoordinatingController sharedCoordinatingController].currentController = countingPlaySceneController;
             
-            //创建输入控制器，并绑定到场景控制器
-            // make a new input view controller, and save it as an instance variable
-            MCCountingPlayInputViewController * anInputController = [[MCCountingPlayInputViewController alloc] initWithNibName:nil bundle:nil];
-            countingPlaySceneController.inputController = anInputController;
-            [anInputController release];
+            [mainInputController presentModalViewController: countingPlaySceneController.inputController animated:YES];
             
-            //创建glview
-            // init our main EAGLView with the same bounds as the window
-            EAGLView * glView = [[EAGLView alloc] initWithFrame:[[MCGameAppDelegate sharedMCGameAppDelegate]window].bounds ];
-            countingPlaySceneController.inputController.view = glView;
-            countingPlaySceneController.openGLView = glView;
-            [glView release];
-            
-            [rootSceneController stopAnimation];
-            [rootSceneController restartScene];
-           
-           
+            [mainSceneController stopAnimation];
             
             
-            [rootInputController presentModalViewController: countingPlaySceneController.inputController animated:YES];
-            
-            // [[MCSceneController sharedSceneController] releaseSrc ];
-            // set our view as the first window view
-            
-         //   [[[MCGameAppDelegate sharedMCGameAppDelegate]window] addSubview:sceneController.inputController.view];
-          //  [[[MCGameAppDelegate sharedMCGameAppDelegate]window] makeKeyAndVisible];
-            
-            //开始游戏循环
-            // begin the game.
-            [[countingPlaySceneController inputController] becomeFirstResponder];
-            [[countingPlaySceneController.inputController view] becomeFirstResponder];
-           
-            [countingPlaySceneController loadScene];
             [countingPlaySceneController startScene];
+            [[countingPlaySceneController inputController ]becomeFirstResponder];
             
-            
+           
         }
         break;
         case kMainMenu:
         {
             NSLog(@"will return mainmenu");
-            InputController * rootInputController = [[MCSceneController sharedSceneController].inputController retain];
-            [rootInputController dismissModalViewControllerAnimated:YES];
+            InputController * mainInputController =  [[CoordinatingController sharedCoordinatingController]currentController ].inputController;
+            [mainInputController dismissModalViewControllerAnimated:YES];
+            
+            [CoordinatingController sharedCoordinatingController].currentController = [MCSceneController sharedSceneController];
+            
+            [[[CoordinatingController sharedCoordinatingController] currentController] startAnimation];
+            //[mainInputController resignFirstResponder];
+            
+            [[[[CoordinatingController sharedCoordinatingController]currentController ].inputController view ]becomeFirstResponder ];
        
         }
             break;

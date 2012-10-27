@@ -8,6 +8,7 @@
 
 #import "MCAnimatedQuad.h"
 #import "MCSceneController.h"
+#import "CoordinatingController.h"
 @implementation MCAnimatedQuad
 @synthesize speed,loops,didFinish;
 - (id) init{
@@ -34,7 +35,7 @@
 	self.materialKey = quad.materialKey;
 }
 - (void)updateAnimation{
-    elapsedTime += [MCSceneController sharedSceneController].deltaTime;
+    elapsedTime += [[CoordinatingController sharedCoordinatingController] currentController].deltaTime;
 	NSInteger frame = (int)(elapsedTime/(1.0/speed));
 	if (loops) frame = frame % [frameQuads count];
 	if (frame >= [frameQuads count]) {

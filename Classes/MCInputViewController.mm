@@ -89,10 +89,13 @@
 
 -(void)countingPlayBtnDown{
     NSLog(@"countingPlayBtnDown");
+    
+}
+-(void)countingPlayBtnUp{
+    NSLog(@"countingPlayBtnUp");
     CoordinatingController *coordinatingController_ = [CoordinatingController sharedCoordinatingController];
     [coordinatingController_ requestViewChangeByObject:kCountingPlay];
 }
--(void)countingPlayBtnUp{NSLog(@"countingPlayBtnUp");}
 
 -(void)normalPlayBtnDown{NSLog(@"normalPlayBtnDown");}
 -(void)normalPlayBtnUp{NSLog(@"normalPlayBtnUp");}

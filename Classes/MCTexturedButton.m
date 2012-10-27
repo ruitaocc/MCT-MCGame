@@ -9,7 +9,7 @@
 
 #import "MCTexturedButton.h"
 #import "MCSceneController.h"
-
+#import "CoordinatingController.h"
 @implementation MCTexturedButton
 
 - (id) initWithUpKey:(NSString*)upKey downKey:(NSString*)downKey
@@ -28,7 +28,7 @@
 -(void)awake
 {
 	[self setNotPressedVertexes];
-	screenRect = [[MCSceneController sharedSceneController].inputController 
+	screenRect = [[[CoordinatingController sharedCoordinatingController] currentController].inputController 
                   screenRectFromMeshRect:self.meshBounds 
                   atPoint:CGPointMake(translation.x, translation.y)];
 	// this is a bit rendundant, but allows for much simpler subclassing

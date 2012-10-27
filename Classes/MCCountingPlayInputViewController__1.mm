@@ -7,7 +7,6 @@
 //
 
 #import "MCCountingPlayInputViewController__1.h"
-#import "MCConfiguration.h"
 #import "MCTexturedButton.h"
 #import "CoordinatingController.h"
 
@@ -32,16 +31,16 @@
     //the texture 还没设计出来
 	MCTexturedButton * mainMenuBtn = [[MCTexturedButton alloc] initWithUpKey:@"systemSettingBtnUp" downKey:@"systemSettingBtnDown"];
 	mainMenuBtn.scale = MCPointMake(btnWidth, btnHeight, 1.0);
-	mainMenuBtn.translation = MCPointMake(-300.0, 300.0, 0.0);
+	mainMenuBtn.translation = MCPointMake(-380, 320.0, 0.0);
 	mainMenuBtn.target = self;
 	mainMenuBtn.buttonDownAction = @selector(mainMenuBtnDown);
-	mainMenuBtn.buttonUpAction = @selector(mainMenuBtnDoUp);
+	mainMenuBtn.buttonUpAction = @selector(mainMenuBtnUp);
 	mainMenuBtn.active = YES;
 	[mainMenuBtn awake];
 	[interfaceObjects addObject:mainMenuBtn];
 	[mainMenuBtn release];
-	
-	}
+    
+}
 
 
 -(void)mainMenuBtnDown{
@@ -49,7 +48,7 @@
     CoordinatingController *coordinatingController_ = [CoordinatingController sharedCoordinatingController];
     [coordinatingController_ requestViewChangeByObject:kMainMenu];
 }
--(void)mainMenuPlayBtnUp{NSLog(@"mainMenuPlayBtnUp");}
+-(void)mainMenuBtnUp{NSLog(@"mainMenuPlayBtnUp");}
 
 
 

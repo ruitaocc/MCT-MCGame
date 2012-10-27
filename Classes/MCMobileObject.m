@@ -7,7 +7,7 @@
 //
 
 #import "MCMobileObject.h"
-
+#import "CoordinatingController.h"
 @implementation MCMobileObject
 
 @synthesize speed,rotationalSpeed;
@@ -16,7 +16,7 @@
 // method via [super update]
 -(void)update
 {
-	CGFloat deltaTime = [[MCSceneController sharedSceneController] deltaTime];
+	CGFloat deltaTime = [[[CoordinatingController sharedCoordinatingController] currentController] deltaTime];
 	translation.x += speed.x * deltaTime;
 	translation.y += speed.y * deltaTime;
 	translation.z += speed.z * deltaTime;

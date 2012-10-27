@@ -13,6 +13,7 @@
 #import "data.hpp"
 //#import "TestCubeData.h"
 #import "MCParticleSystem.h"
+#import "CoordinatingController.h"
 @implementation TestCube
 
 - (id) init
@@ -134,8 +135,8 @@
 -(void)deadUpdate
 {
 	if ((particleEmitter.emitCounter <= 0) && (![particleEmitter activeParticles])) {
-		[[MCSceneController sharedSceneController] removeObjectFromScene:self];	
-		[[MCSceneController sharedSceneController] gameOver];
+		[[[CoordinatingController sharedCoordinatingController] currentController] removeObjectFromScene:self];	
+		[[[CoordinatingController sharedCoordinatingController] currentController] gameOver];
 	}
 }
 
@@ -143,7 +144,7 @@
 
 - (void) dealloc
 {
-    if (particleEmitter != nil) [[MCSceneController sharedSceneController] removeObjectFromScene:particleEmitter];
+    if (particleEmitter != nil) [[[CoordinatingController sharedCoordinatingController] currentController] removeObjectFromScene:particleEmitter];
 	[particleEmitter release];
 	[super dealloc];
 }

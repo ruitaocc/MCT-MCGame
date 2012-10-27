@@ -25,11 +25,4 @@
 -(void)heroBoardBtnUp;
 
 
-
-
-
-
-
-
-
 @end

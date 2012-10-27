@@ -7,11 +7,6 @@
 //
 
 #import "MCCountingPlaySceneController__1.h"
-#import "MCCountingPlayInputViewController__1.h"
-#import "EAGLView.h"
-#import "MCSceneObject.h"
-#import "MCConfiguration.h"
-#import "MCPoint.h"
 #import "TestCube.h"
 @implementation MCCountingPlaySceneController
 
@@ -35,13 +30,13 @@
 	if (sceneObjects == nil) sceneObjects = [[NSMutableArray alloc] init];	
 	
 	// our 'character' object
-	TestCube * magicCube = [[TestCube alloc] init];
-	magicCube.translation = MCPointMake(0.0, 0.0, 0.0);
-	magicCube.scale = MCPointMake(40, 40, 40);
-    magicCube.rotation = MCPointMake(0, 0, 0);
-    magicCube.rotationalSpeed = MCPointMake(20, 20, 20);
-	[self addObjectToScene:magicCube];
-	[magicCube release];	
+	TestCube * magicCube2 = [[TestCube alloc] init];
+	magicCube2.translation = MCPointMake(0.0, 0.0, 0.0);
+	magicCube2.scale = MCPointMake(35, 35, 35);
+    magicCube2.rotation = MCPointMake(0, 0, 0);
+    magicCube2.rotationalSpeed = MCPointMake(20, 20, 20);
+	[self addObjectToScene:magicCube2];
+	[magicCube2 release];		
     
 	
 	    

@@ -7,7 +7,7 @@
 //
 
 #import "MCButton.h"
-
+#import "CoordinatingController.h"
 
 
 #pragma mark square
@@ -34,7 +34,7 @@ static CGFloat MCSquareFillVertexes[8] = {-0.5,-0.5, 0.5,-0.5, -0.5,0.5, 0.5,0.5
 	mesh.colors = MCSquareOutlineColorValues;
 	mesh.colorSize = MCSquareColorSize;
     
-	screenRect = [[MCSceneController sharedSceneController].inputController 
+	screenRect = [[[CoordinatingController sharedCoordinatingController] currentController].inputController 
                   screenRectFromMeshRect:self.meshBounds 
                   atPoint:CGPointMake(translation.x, translation.y)];
 	// this is a bit rendundant, but allows for much simpler subclassing
@@ -67,7 +67,7 @@ static CGFloat MCSquareFillVertexes[8] = {-0.5,-0.5, 0.5,-0.5, -0.5,0.5, 0.5,0.5
 
 -(void)handleTouches
 {
-	NSSet * touches = [[MCSceneController sharedSceneController].inputController touchEvents];
+	NSSet * touches = [[[CoordinatingController sharedCoordinatingController] currentController].inputController touchEvents];
 	if ([touches count] == 0) return;
 	
 	BOOL pointInBounds = NO;

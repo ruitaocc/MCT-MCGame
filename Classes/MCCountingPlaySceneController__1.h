@@ -6,10 +6,10 @@
 //  Copyright (c) 2012年 __MyCompanyName__. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
-#import "MCSceneController.h"
-#import "MCCountingPlayInputViewController__1.h"
-@interface MCCountingPlaySceneController : MCSceneController{
+#import <Foundation/Foundation.h>
+#import "sceneController.h"
+
+@interface MCCountingPlaySceneController : sceneController{
     
 }
 + (MCCountingPlaySceneController*)sharedCountingPlaySceneController;
