@@ -16,6 +16,7 @@
 @implementation CoordinatingController
 @synthesize mainSceneController,countingPlaySceneController;
 @synthesize  currentController;
+@synthesize needToReload;
 
 
 
@@ -29,6 +30,12 @@
 	return sharedCoordinatingController;
 }
 
+-(id)init{
+    needToReload = true;
+    countingPlaySceneController = [MCCountingPlaySceneController sharedCountingPlaySceneController];
+    mainSceneController = [MCSceneController sharedSceneController];
+    [super init];
+}
 #pragma mark -
 #pragma mark a method for view transitions
 -(void)requestViewChangeByObject:(int)type{
@@ -36,43 +43,70 @@
         case kCountingPlay:
         {
             NSLog(@"requestViewChangeByObject:kCountingPlay");
+            [currentController stopAnimation];
             
-            //计时竞赛场景控制
-            countingPlaySceneController = [MCCountingPlaySceneController sharedCountingPlaySceneController];
-            //当前场景控制
-            mainSceneController = (MCSceneController*)[[CoordinatingController sharedCoordinatingController] currentController];
-             InputController * mainInputController = mainSceneController.inputController ;
+                        
+            [currentController.inputController presentModalViewController: countingPlaySceneController.inputController animated:YES];
+            
             //将当前控制器置为计时场景控制器
-            [CoordinatingController sharedCoordinatingController].currentController = countingPlaySceneController;
+            currentController = countingPlaySceneController;
+
+            //[countingPlaySceneController startAnimation];
+           
+           
+            [NSTimer scheduledTimerWithTimeInterval:1/4 target:self selector:@selector(reloadMeterial) userInfo:nil repeats:NO];
+                        
             
-            [mainInputController presentModalViewController: countingPlaySceneController.inputController animated:YES];
             
-            [mainSceneController stopAnimation];
-            
-            
-            [countingPlaySceneController startScene];
-            [[countingPlaySceneController inputController ]becomeFirstResponder];
             
            
         }
         break;
         case kMainMenu:
         {
-            NSLog(@"will return mainmenu");
-            InputController * mainInputController =  [[CoordinatingController sharedCoordinatingController]currentController ].inputController;
+            NSLog(@"requestViewChangeByObject:kMainMenu");
+            //[countingPlaySceneController stopAnimation];
+            
+            InputController * mainInputController =  mainSceneController.inputController;
             [mainInputController dismissModalViewControllerAnimated:YES];
             
-            [CoordinatingController sharedCoordinatingController].currentController = [MCSceneController sharedSceneController];
+            currentController =mainSceneController;
             
-            [[[CoordinatingController sharedCoordinatingController] currentController] startAnimation];
-            //[mainInputController resignFirstResponder];
+            [currentController startAnimation];
+            [NSTimer scheduledTimerWithTimeInterval:1/4 target:self selector:@selector(reloadMeterial) userInfo:nil repeats:NO];
             
-            [[[[CoordinatingController sharedCoordinatingController]currentController ].inputController view ]becomeFirstResponder ];
        
         }
-            break;
+        break;
+        case kNormalPlay:
+        {
+            
+            NSLog(@"requestViewChangeByObject:kNormalPlay");
+            [[[CoordinatingController sharedCoordinatingController]currentController]stopAnimation];
+        }
+        break;
+        case kRandomSolve:
+        {
+            NSLog(@"requestViewChangeByObject:kRandomSolve");
+            [[[CoordinatingController sharedCoordinatingController]currentController]startAnimation];
+        }
+        break;
         default:
             break;
     }
 }
+-(void)reloadMeterial{
+    if (needToReload == false) {
+        return;
+    }
+    NSLog(@"reloadMeterial");
+    //[[MCMaterialController sharedMaterialController]dealloc];
+    //[MCMaterialController sharedMaterialController];
+     [[MCMaterialController sharedMaterialController]reload];
+ 
+    [[CoordinatingController sharedCoordinatingController].currentController startScene];
+    needToReload = false;
+
+}
+
 @end

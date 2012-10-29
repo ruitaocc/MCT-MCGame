@@ -24,6 +24,7 @@
                                    materialKey:(NSString*)key;;
 - (CGSize)loadTextureImage:(NSString*)imageName materialKey:(NSString*)materialKey;
 - (id) init;
+- (void) reload;
 - (void) dealloc;
 - (void)bindMaterial:(NSString*)materialKey;
 - (void)loadAtlasData:(NSString*)atlasName;

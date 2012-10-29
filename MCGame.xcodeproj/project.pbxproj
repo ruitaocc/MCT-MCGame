@@ -225,7 +225,6 @@
 			isa = PBXGroup;
 			children = (
 				A3EFD13916024BA5008E109C /* MeshRenderEngine.hpp */,
-				48A858DF0FFAFC3B0060F0B8 /* MCInputViewController.mm */,
 				1D3623240D0F684500981E51 /* MCGameAppDelegate.h */,
 				1D3623250D0F684500981E51 /* MCGameAppDelegate.mm */,
 				A303B51D1629407300BDA199 /* MCOBJLoader.h */,
@@ -239,6 +238,7 @@
 				A3051EE116303894006DFF96 /* InputController.h */,
 				A3051EE216303894006DFF96 /* InputController.mm */,
 				48A858DE0FFAFC3B0060F0B8 /* MCInputViewController.h */,
+				48A858DF0FFAFC3B0060F0B8 /* MCInputViewController.mm */,
 				A3051EDE16303278006DFF96 /* MCCountingPlayInputViewController__1.h */,
 				A3051EDF16303278006DFF96 /* MCCountingPlayInputViewController__1.mm */,
 				A3D2FC7E1638D2FD00517CCF /* sceneController.h */,
@@ -447,6 +447,7 @@
 				GCC_INPUT_FILETYPE = sourcecode.cpp.objcpp;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				PREBINDING = NO;
 				SDKROOT = iphoneos5.1;
 			};
@@ -461,6 +462,7 @@
 				GCC_INPUT_FILETYPE = sourcecode.cpp.objcpp;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				PREBINDING = NO;
 				SDKROOT = iphoneos5.1;
 			};

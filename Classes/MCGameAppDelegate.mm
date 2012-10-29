@@ -75,7 +75,10 @@
     countingPlaySceneController.inputController.view = glView_counting;
     countingPlaySceneController.openGLView = glView_counting;
     [glView_counting release];
-    [countingPlaySceneController loadScene];
+   
+       [countingPlaySceneController loadScene];
+    
+
     
 }
 

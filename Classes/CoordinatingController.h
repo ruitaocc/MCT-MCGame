@@ -16,12 +16,15 @@
 @private
     MCSceneController * mainSceneController;
     MCCountingPlaySceneController *countingPlaySceneController;
+    BOOL needToReload;
     
 }
+@property (assign)BOOL needToReload;
 @property (nonatomic ,readonly)MCSceneController *mainSceneController;
 @property (nonatomic, readonly )MCCountingPlaySceneController *countingPlaySceneController;
 @property (nonatomic, retain )sceneController *currentController;
 
 +(CoordinatingController *) sharedCoordinatingController;
 -(void)requestViewChangeByObject:(int)type;
+-(void)reloadMeterial;
 @end

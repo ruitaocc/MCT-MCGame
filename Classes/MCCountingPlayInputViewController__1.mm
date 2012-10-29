@@ -45,10 +45,11 @@
 
 -(void)mainMenuBtnDown{
     NSLog(@"mainMenuPlayBtnDown");
+   }
+-(void)mainMenuBtnUp{NSLog(@"mainMenuPlayBtnUp");
     CoordinatingController *coordinatingController_ = [CoordinatingController sharedCoordinatingController];
     [coordinatingController_ requestViewChangeByObject:kMainMenu];
 }
--(void)mainMenuBtnUp{NSLog(@"mainMenuPlayBtnUp");}
 
 
 

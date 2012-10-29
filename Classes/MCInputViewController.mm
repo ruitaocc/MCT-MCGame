@@ -98,9 +98,15 @@
 }
 
 -(void)normalPlayBtnDown{NSLog(@"normalPlayBtnDown");}
--(void)normalPlayBtnUp{NSLog(@"normalPlayBtnUp");}
+-(void)normalPlayBtnUp{
+    NSLog(@"normalPlayBtnUp");  
+    
+}
 -(void)randomSolveBtnDown{NSLog(@"randomSolveBtnDown");}
--(void)randomSolveBtnUp{NSLog(@"randomSolveBtnUp");}
+-(void)randomSolveBtnUp{
+    NSLog(@"randomSolveBtnUp");
+    
+}
 -(void)systemSettingBtnDown{NSLog(@"systemSettingBtnDown");}
 -(void)systemSettingBtnUp{NSLog(@"systemSettingBtnUp");}
 -(void)heroBoardBtnDown{NSLog(@"heroBoardBtnDown");}

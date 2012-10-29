@@ -34,7 +34,7 @@
 		//if (DEBUG_DRAW_COLLIDERS) [self loadTextureImage:@"" materialKey:@"testTexture"];
         
 		// preload all our textures and atlases
-		//[self loadTextureImage:@"cubeTexture.png" materialKey:@"cubeTexture"];
+		[self loadTextureImage:@"cubeTexture.png" materialKey:@"cubeTexture2"];
         [self loadTextureImage:@"sixcolor.png" materialKey:@"cubeTexture"];
        
 		[self loadAtlasData:@"particleAtlas"];
@@ -42,6 +42,19 @@
         [self loadAtlasData:@"ButtonMerged"];
 	}
 	return self;
+}
+
+-(void)reload{
+    [materialLibrary release];
+    [quadLibrary release];
+    materialLibrary= nil;
+    quadLibrary = nil;
+    [self loadTextureImage:@"cubeTexture.png" materialKey:@"cubeTexture2"];
+    [self loadTextureImage:@"sixcolor.png" materialKey:@"cubeTexture"];
+    
+    [self loadAtlasData:@"particleAtlas"];
+    
+    [self loadAtlasData:@"ButtonMerged"];
 }
 
 
@@ -101,10 +114,10 @@
 	GLfloat yMin = yLocation/atlasSize.height;
 	GLfloat xMax = (xLocation + width)/atlasSize.width;
 	GLfloat yMax = (yLocation + height)/atlasSize.height;
-	NSLog(@"xMin: %f",xMin);
-    NSLog(@"yMin: %f",yMin);
-    NSLog(@"xMax: %f",xMax);
-    NSLog(@"yMax: %f",yMax);
+	//NSLog(@"xMin: %f",xMin);
+    //NSLog(@"yMin: %f",yMin);
+    //NSLog(@"xMax: %f",xMax);
+    //NSLog(@"yMax: %f",yMax);
 	// build my quad UVs
 	quad.uvCoordinates[0] = xMin;
 	quad.uvCoordinates[1] = yMax;
@@ -130,8 +143,7 @@
 {
 	NSNumber * numberObj = [materialLibrary objectForKey:materialKey];
 	if (numberObj == nil) return;
-	
-	GLuint textureID = [numberObj unsignedIntValue];
+    GLuint textureID = [numberObj unsignedIntValue];
     glEnable(GL_TEXTURE_2D); 	
 	glBindTexture(GL_TEXTURE_2D, textureID);
 }
@@ -224,6 +236,7 @@
 
 - (void) dealloc
 {
+    
 	[materialLibrary release];
 	[super dealloc];
 }
