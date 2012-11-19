@@ -16,7 +16,7 @@
 #import "MCCountingPlayInputViewController__1.h"
 #import "MCCountingPlaySceneController__1.h"
 #import "CoordinatingController.h"
-
+#import "MCOBJLoader.h"
 @implementation MCGameAppDelegate
 
 @synthesize window;
@@ -32,6 +32,12 @@
 }
 - (void)applicationDidFinishLaunching:(UIApplication *)application 
 {   
+    NSString *filename = [[NSBundle mainBundle] pathForResource:@"1234567" ofType:@"obj"];
+    MCOBJLoader *tmp = [MCOBJLoader sharedMCOBJLoader];
+    [tmp loadObjFromFile:filename objkey:nil];
+    
+    
+    
     //场景对象控制器
 	MCSceneController * sceneController = [MCSceneController sharedSceneController];
 	//MCCountingPlaySceneController * sceneController = [MCCountingPlaySceneController sharedCountingPlaySceneController];

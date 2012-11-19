@@ -9,6 +9,9 @@
 #import "MCInputViewController.h"
 #import "MCTexturedButton.h"
 #import "CoordinatingController.h"
+
+#import "MCOBJLoader.h"
+
 @implementation MCInputViewController
 
 
@@ -109,7 +112,16 @@
 }
 -(void)systemSettingBtnDown{NSLog(@"systemSettingBtnDown");}
 -(void)systemSettingBtnUp{NSLog(@"systemSettingBtnUp");}
--(void)heroBoardBtnDown{NSLog(@"heroBoardBtnDown");}
+
+
+
+-(void)heroBoardBtnDown{
+    NSLog(@"heroBoardBtnDown");
+    NSString *filename = [[NSBundle mainBundle] pathForResource:@"111" ofType:@"obj"];
+    MCOBJLoader *tmp = [MCOBJLoader sharedMCOBJLoader];
+    [tmp loadObjFromFile:filename objkey:nil];
+    
+}
 -(void)heroBoardBtnUp{NSLog(@"heroBoardBtnUp");}
 
 

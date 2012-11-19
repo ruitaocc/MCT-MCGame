@@ -13,6 +13,7 @@
 #import "MCConfiguration.h"
 #import "MCPoint.h"
 #import "TestCube.h"
+//#import "data.hpp"
 @implementation MCSceneController
 
 // Singleton accessor.  this is how you should ALWAYS get a reference
@@ -40,6 +41,7 @@
 	
 	// our 'character' object
 	TestCube * magicCube = [[TestCube alloc] init];
+    //[magicCube.mesh setColors:&colorss];
 	magicCube.translation = MCPointMake(30.0, 0.0, 0.0);
 	magicCube.scale = MCPointMake(30, 30, 30);
     magicCube.rotation = MCPointMake(0, 0, 0);

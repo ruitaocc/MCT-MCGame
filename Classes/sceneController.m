@@ -181,7 +181,7 @@
 -(void)setupLighting
 {
 	// cull the unseen faces
-	// we use 'front' culling because Cheetah3d exports our models to be compatible
+	// we use 'front' culling because  exports our models to be compatible
 	// with this way
 	glEnable(GL_CULL_FACE);
 	glCullFace(GL_FRONT);

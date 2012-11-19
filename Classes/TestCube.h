@@ -11,6 +11,11 @@
 @class MCParticleSystem;
 @interface TestCube :MCMobileObject{
    MCParticleSystem * particleEmitter;
+    BOOL m_spinning;
+    float m_trackballRadius;
+    ivec2 m_fingerStart;
+    Quaternion m_orientation;
+    Quaternion m_previousOrientation;
 }
 
 
@@ -19,6 +24,7 @@
 - (void) dealloc;
 - (void)awake;
 - (void)update;
-
+-(void)handleTouches;
+-(vec3)MapToSphere:(ivec2 )touchpoint;
 
 @end

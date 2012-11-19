@@ -7,14 +7,32 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <fstream>
+#include <vector>
+
+using namespace std;
+
+#define MaxLineSize 128
 
 @interface MCOBJLoader : NSObject{
-    NSMutableDictionary * objLibrary;
+    NSMutableDictionary * OBJLibrary;
+    
+    vector<float> Cube_vertex_coordinates;
+    vector<float> Cube_normal_vectors;
+    vector<float> Cube_texture_coordinates;
+    NSString * texture_key;
+    int Cube_vertex_array_size;
 }
+
+@property int m_vertexCount, m_vertexNormalCount, m_vertexTextureCount, m_faceCount;
+@property (assign) int Cube_vertex_array_size;
+@property (assign)vector<float> Cube_vertex_coordinates,Cube_normal_vectors,Cube_texture_coordinates;
+@property (nonatomic,retain)NSString * texture_key;
 +(MCOBJLoader*)sharedMCOBJLoader;
 -(void)loadObjFromFile:(NSString*)filename objkey:(NSString*)objkey;
 
--(int) getVertexCount;
+
+-(void) getAllCount:(NSString*)filename;
 -(int) getTriangleIndexCount;
 
 @end
