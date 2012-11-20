@@ -32,7 +32,7 @@
 }
 - (void)applicationDidFinishLaunching:(UIApplication *)application 
 {   
-    NSString *filename = [[NSBundle mainBundle] pathForResource:@"1234567" ofType:@"obj"];
+    NSString *filename = [[NSBundle mainBundle] pathForResource:@"111" ofType:@"obj"];
     MCOBJLoader *tmp = [MCOBJLoader sharedMCOBJLoader];
     [tmp loadObjFromFile:filename objkey:nil];
     

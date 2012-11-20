@@ -10,7 +10,7 @@
 
 #import "MCOBJLoader.h"
 
-#import "data.hpp"
+//#import "data.hpp"
 //#import "TestCubeData.h"
 #import "MCParticleSystem.h"
 #import "CoordinatingController.h"
@@ -28,17 +28,25 @@
 -(void)awake
 {
     
-    //MCOBJLoader *OBJ = [MCOBJLoader sharedMCOBJLoader];
-    //vector<float> Cube_vertex_coordinates = [OBJ Cube_vertex_coordinates];
-    //vector<float> Cube_texture_coordinates =[OBJ Cube_texture_coordinates];
-    //vector<float> Cube_normal_vectors = [OBJ Cube_normal_vectors];
-    //int size = [OBJ Cube_vertex_array_size];
-        
+    MCOBJLoader *OBJ = [MCOBJLoader sharedMCOBJLoader];
+   /* vector<float> Cube_vertex_coordinates_v( [OBJ Cube_vertex_coordinates]);
+    vector<float> Cube_texture_coordinates_v ([OBJ Cube_texture_coordinates]);
+    vector<float> Cube_normal_vectors_v ([OBJ Cube_normal_vectors]);
+    
+    GLfloat * Cube_vertex_coordinates = &Cube_vertex_coordinates_v[0];
+    GLfloat * Cube_texture_coordinates = &Cube_texture_coordinates_v[0];
+    GLfloat * Cube_normal_vectors = &Cube_normal_vectors_v[0];
+    */
+    GLfloat * Cube_vertex_coordinates = [OBJ Cube_vertex_coordinates];
+    GLfloat * Cube_texture_coordinates = [OBJ Cube_texture_coordinates];
+    GLfloat * Cube_normal_vectors = [OBJ Cube_normal_vectors];
+    int Cube_vertex_array_size = [OBJ Cube_vertex_array_size];
+    
 	mesh = [[MCTexturedMesh alloc] initWithVertexes:Cube_vertex_coordinates
                                         vertexCount:Cube_vertex_array_size
                                          vertexSize:3 
                                         renderStyle:GL_TRIANGLES];
-	[(MCTexturedMesh*)mesh setMaterialKey:@"cubeTexture"];
+	[(MCTexturedMesh*)mesh setMaterialKey:@"cubeTexture2"];
 	[(MCTexturedMesh*)mesh setUvCoordinates:Cube_texture_coordinates];
 	[(MCTexturedMesh*)mesh setNormals:Cube_normal_vectors];
 	

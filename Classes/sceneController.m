@@ -183,8 +183,9 @@
 	// cull the unseen faces
 	// we use 'front' culling because  exports our models to be compatible
 	// with this way
+    //glFrontFace(GL_CW);
 	glEnable(GL_CULL_FACE);
-	glCullFace(GL_FRONT);
+	glCullFace(GL_BACK);
 	
     // Light features
     GLfloat light_ambient[]= { 0.2f, 0.2f, 0.2f, 1.0f };
