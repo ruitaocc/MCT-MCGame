@@ -32,7 +32,7 @@
 	// our 'character' object
 	TestCube * magicCube2 = [[TestCube alloc] init];
     magicCube2.translation = MCPointMake(0.0, 0.0, 0.0);
-	magicCube2.scale = MCPointMake(35, 35, 35);
+	magicCube2.scale = MCPointMake(70, 70, 70);
     magicCube2.rotation = MCPointMake(0, 0, 0);
     magicCube2.rotationalSpeed = MCPointMake(20, 20, 20);
     

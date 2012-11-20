@@ -77,7 +77,7 @@
     }
     
     
-    
+    /*
     
     NSLog(@"%i \t %i \t %i \t %i", m_vertexCount, m_vertexNormalCount, m_vertexTextureCount,m_faceCount);
     NSLog(@"v");
@@ -96,7 +96,7 @@
         NSLog(@"%i/%i/%i %i/%i/%i %i/%i/%i", faces[i*9], faces[i*9 +1],faces[i*9 +2],faces[i*9 +3],faces[i*9 +4],
               faces[i*9 +5], faces[i*9+6], faces[i*9+7], faces[i*9+8]);
     }
-    
+    */
     Cube_vertex_array_size = m_faceCount*3;
     Cube_vertex_coordinates = new float[Cube_vertex_array_size * 3];
     Cube_normal_vectors = new float[Cube_vertex_array_size*3];
@@ -134,6 +134,8 @@
         Cube_normal_vectors[i*9+7] = vertexNormals[(faces[i*9+8]-1)*3+1];
         Cube_normal_vectors[i*9+8] = vertexNormals[(faces[i*9+8]-1)*3+2];
     }
+    
+    /*
     NSLog(@"%d 个三角",m_faceCount);
     NSLog(@"顶点数组");
     for (int i = 0 ;i < m_faceCount; i++) {
@@ -147,6 +149,7 @@
     for (int i = 0 ;i < m_faceCount; i++) {
         NSLog(@"%f \t %f \t \t \t %f \t %f \t \t \t %f \t %f \t \t \t",Cube_texture_coordinates[i*6],Cube_texture_coordinates[i*6+1],Cube_texture_coordinates[i*6+2],Cube_texture_coordinates[i*6+3],Cube_texture_coordinates[i*6+4],Cube_texture_coordinates[i*6+5]);
     }
+     */
 }
 
 -(void) getAllCount:(NSString*)filename
