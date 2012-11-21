@@ -36,6 +36,7 @@
     mainSceneController = [MCSceneController sharedSceneController];
     currentController = [MCSceneController sharedSceneController];
     [super init];
+    
 }
 #pragma mark -
 #pragma mark a method for view transitions

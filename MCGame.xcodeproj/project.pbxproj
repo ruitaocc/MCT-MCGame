@@ -107,10 +107,10 @@
 		A3935B3E165A296400B60A07 /* MCGL.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MCGL.h; sourceTree = "<group>"; };
 		A3935B3F165A296400B60A07 /* MCGL.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = MCGL.mm; sourceTree = "<group>"; };
 		A3BF9204161D4C4600829D13 /* cubeTexture.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = cubeTexture.png; path = Classes/cubeTexture.png; sourceTree = "<group>"; };
-		A3C722CE165A721F004C3BD9 /* cube.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = cube.obj; sourceTree = "<group>"; };
-		A3C722CF165A7220004C3BD9 /* 1234567.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 1234567.obj; sourceTree = "<group>"; };
-		A3CAEF9D16512A6900047923 /* 111.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = 111.obj; sourceTree = "<group>"; };
-		A3CAEFCE1659D1C100047923 /* oneCube1.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = oneCube1.obj; sourceTree = "<group>"; };
+		A3C722CE165A721F004C3BD9 /* cube.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = cube.obj; path = Classes/cube.obj; sourceTree = "<group>"; };
+		A3C722CF165A7220004C3BD9 /* 1234567.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = 1234567.obj; path = Classes/1234567.obj; sourceTree = "<group>"; };
+		A3CAEF9D16512A6900047923 /* 111.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = 111.obj; path = Classes/111.obj; sourceTree = "<group>"; };
+		A3CAEFCE1659D1C100047923 /* oneCube1.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = oneCube1.obj; path = Classes/oneCube1.obj; sourceTree = "<group>"; };
 		A3CB360515FF55D600914E58 /* Quaternion.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Quaternion.hpp; sourceTree = "<group>"; };
 		A3CB360615FF55D600914E58 /* Matrix.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Matrix.hpp; sourceTree = "<group>"; };
 		A3CB360715FF55D600914E58 /* Vector.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Vector.hpp; sourceTree = "<group>"; };
@@ -152,10 +152,9 @@
 		080E96DDFE201D6D7F000001 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				A32A33B5163BA72C007840CC /* Architecture */,
+				E06328C9165CCC6E00C28336 /* Utils */,
+				A32A33B5163BA72C007840CC /* Controllers */,
 				A30C47D9161C72A70057C5E1 /* Config */,
-				A30C47D5161C6F1C0057C5E1 /* MathUtil */,
-				A3935B41165A296900B60A07 /* RayDection */,
 				A3F2ACBD1616D97800D622B8 /* SceneObjects */,
 			);
 			path = Classes;
@@ -194,6 +193,7 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				E06328C8165CCAF900C28336 /* OBJ Files */,
 				A32A33B7163BA7AA007840CC /* Doc */,
 				A3587519161F3FFD00998085 /* imageResource */,
 				28AD733E0D9D9553002E5188 /* MainWindow.xib */,
@@ -234,13 +234,9 @@
 			name = Config;
 			sourceTree = "<group>";
 		};
-		A32A33B5163BA72C007840CC /* Architecture */ = {
+		A32A33B5163BA72C007840CC /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				A3CAEF9D16512A6900047923 /* 111.obj */,
-				A3CAEFCE1659D1C100047923 /* oneCube1.obj */,
-				A3C722CE165A721F004C3BD9 /* cube.obj */,
-				A3C722CF165A7220004C3BD9 /* 1234567.obj */,
 				A3EFD13916024BA5008E109C /* MeshRenderEngine.hpp */,
 				1D3623240D0F684500981E51 /* MCGameAppDelegate.h */,
 				1D3623250D0F684500981E51 /* MCGameAppDelegate.mm */,
@@ -265,7 +261,7 @@
 				A3051EDB16302870006DFF96 /* MCCountingPlaySceneController__1.h */,
 				A3051EDC16302870006DFF96 /* MCCountingPlaySceneController__1.mm */,
 			);
-			name = Architecture;
+			name = Controllers;
 			sourceTree = "<group>";
 		};
 		A32A33B7163BA7AA007840CC /* Doc */ = {
@@ -298,7 +294,7 @@
 			name = imageResource;
 			sourceTree = "<group>";
 		};
-		A3935B41165A296900B60A07 /* RayDection */ = {
+		A3935B41165A296900B60A07 /* RayDectionUtil */ = {
 			isa = PBXGroup;
 			children = (
 				A3935B3C165A296400B60A07 /* MCRay.h */,
@@ -306,7 +302,7 @@
 				A3935B3E165A296400B60A07 /* MCGL.h */,
 				A3935B3F165A296400B60A07 /* MCGL.mm */,
 			);
-			name = RayDection;
+			name = RayDectionUtil;
 			sourceTree = "<group>";
 		};
 		A3F2ACBD1616D97800D622B8 /* SceneObjects */ = {
@@ -337,6 +333,26 @@
 				A30C47D3161C694F0057C5E1 /* MCTexturedButton.m */,
 			);
 			name = SceneObjects;
+			sourceTree = "<group>";
+		};
+		E06328C8165CCAF900C28336 /* OBJ Files */ = {
+			isa = PBXGroup;
+			children = (
+				A3CAEF9D16512A6900047923 /* 111.obj */,
+				A3CAEFCE1659D1C100047923 /* oneCube1.obj */,
+				A3C722CE165A721F004C3BD9 /* cube.obj */,
+				A3C722CF165A7220004C3BD9 /* 1234567.obj */,
+			);
+			name = "OBJ Files";
+			sourceTree = "<group>";
+		};
+		E06328C9165CCC6E00C28336 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				A3935B41165A296900B60A07 /* RayDectionUtil */,
+				A30C47D5161C6F1C0057C5E1 /* MathUtil */,
+			);
+			name = Utils;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
