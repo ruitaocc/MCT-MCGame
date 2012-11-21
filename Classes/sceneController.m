@@ -153,7 +153,7 @@
 -(void)gameOver
 {
     //this selector would be the action take by interface when the puzzle is solved. but now it is not implement.
-	[inputController gameOver];
+	//[inputController gameOver];
 }
 
 - (void)updateModel

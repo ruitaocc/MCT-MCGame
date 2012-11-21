@@ -34,7 +34,7 @@
 		//if (DEBUG_DRAW_COLLIDERS) [self loadTextureImage:@"" materialKey:@"testTexture"];
         
 		// preload all our textures and atlases
-		[self loadTextureImage:@"cubeTexture.png" materialKey:@"cubeTexture2"];
+		[self loadTextureImage:@"cubeBlack2.png" materialKey:@"cubeTexture2"];
         [self loadTextureImage:@"sixcolor.png" materialKey:@"cubeTexture"];
        
 		[self loadAtlasData:@"particleAtlas"];
@@ -49,7 +49,7 @@
     [quadLibrary release];
     materialLibrary= nil;
     quadLibrary = nil;
-    [self loadTextureImage:@"cubeTexture.png" materialKey:@"cubeTexture2"];
+    [self loadTextureImage:@"cubeBlack2.png" materialKey:@"cubeTexture2"];
     [self loadTextureImage:@"sixcolor.png" materialKey:@"cubeTexture"];
     
     [self loadAtlasData:@"particleAtlas"];

@@ -40,6 +40,11 @@
 		A3BF9205161D4C4600829D13 /* cubeTexture.png in Resources */ = {isa = PBXBuildFile; fileRef = A3BF9204161D4C4600829D13 /* cubeTexture.png */; };
 		A3C722D0165A7220004C3BD9 /* cube.obj in Resources */ = {isa = PBXBuildFile; fileRef = A3C722CE165A721F004C3BD9 /* cube.obj */; };
 		A3C722D1165A7220004C3BD9 /* 1234567.obj in Resources */ = {isa = PBXBuildFile; fileRef = A3C722CF165A7220004C3BD9 /* 1234567.obj */; };
+		A3C8FE9B165D21AA007E0046 /* RadiusOneCubeWithPic.obj in Resources */ = {isa = PBXBuildFile; fileRef = A3C8FE9A165D21AA007E0046 /* RadiusOneCubeWithPic.obj */; };
+		A3C8FE9D165D22CA007E0046 /* cubeWithOnePic.obj in Resources */ = {isa = PBXBuildFile; fileRef = A3C8FE9C165D22CA007E0046 /* cubeWithOnePic.obj */; };
+		A3C8FEA1165D2822007E0046 /* cubeBlack2.png in Resources */ = {isa = PBXBuildFile; fileRef = A3C8FEA0165D2822007E0046 /* cubeBlack2.png */; };
+		A3C8FEA3165D2A53007E0046 /* cube.png in Resources */ = {isa = PBXBuildFile; fileRef = A3C8FEA2165D2A52007E0046 /* cube.png */; };
+		A3C8FEA6165D3D6A007E0046 /* MCMagicCubeUIModelController.m in Sources */ = {isa = PBXBuildFile; fileRef = A3C8FEA5165D3D69007E0046 /* MCMagicCubeUIModelController.m */; };
 		A3CAEF9E16512A6900047923 /* 111.obj in Resources */ = {isa = PBXBuildFile; fileRef = A3CAEF9D16512A6900047923 /* 111.obj */; };
 		A3CAEFCF1659D1C100047923 /* oneCube1.obj in Resources */ = {isa = PBXBuildFile; fileRef = A3CAEFCE1659D1C100047923 /* oneCube1.obj */; };
 		A3D2FC801638D2FD00517CCF /* sceneController.m in Sources */ = {isa = PBXBuildFile; fileRef = A3D2FC7F1638D2FD00517CCF /* sceneController.m */; };
@@ -109,6 +114,12 @@
 		A3BF9204161D4C4600829D13 /* cubeTexture.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = cubeTexture.png; path = Classes/cubeTexture.png; sourceTree = "<group>"; };
 		A3C722CE165A721F004C3BD9 /* cube.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = cube.obj; path = Classes/cube.obj; sourceTree = "<group>"; };
 		A3C722CF165A7220004C3BD9 /* 1234567.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = 1234567.obj; path = Classes/1234567.obj; sourceTree = "<group>"; };
+		A3C8FE9A165D21AA007E0046 /* RadiusOneCubeWithPic.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = RadiusOneCubeWithPic.obj; sourceTree = "<group>"; };
+		A3C8FE9C165D22CA007E0046 /* cubeWithOnePic.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = cubeWithOnePic.obj; sourceTree = "<group>"; };
+		A3C8FEA0165D2822007E0046 /* cubeBlack2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cubeBlack2.png; sourceTree = "<group>"; };
+		A3C8FEA2165D2A52007E0046 /* cube.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cube.png; sourceTree = "<group>"; };
+		A3C8FEA4165D3D69007E0046 /* MCMagicCubeUIModelController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCMagicCubeUIModelController.h; sourceTree = "<group>"; };
+		A3C8FEA5165D3D69007E0046 /* MCMagicCubeUIModelController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCMagicCubeUIModelController.m; sourceTree = "<group>"; };
 		A3CAEF9D16512A6900047923 /* 111.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = 111.obj; path = Classes/111.obj; sourceTree = "<group>"; };
 		A3CAEFCE1659D1C100047923 /* oneCube1.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = oneCube1.obj; path = Classes/oneCube1.obj; sourceTree = "<group>"; };
 		A3CB360515FF55D600914E58 /* Quaternion.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Quaternion.hpp; sourceTree = "<group>"; };
@@ -260,6 +271,8 @@
 				48A858E10FFAFC450060F0B8 /* MCSceneController.h */,
 				A3051EDB16302870006DFF96 /* MCCountingPlaySceneController__1.h */,
 				A3051EDC16302870006DFF96 /* MCCountingPlaySceneController__1.mm */,
+				A3C8FEA4165D3D69007E0046 /* MCMagicCubeUIModelController.h */,
+				A3C8FEA5165D3D69007E0046 /* MCMagicCubeUIModelController.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -284,6 +297,8 @@
 		A3587519161F3FFD00998085 /* imageResource */ = {
 			isa = PBXGroup;
 			children = (
+				A3C8FEA2165D2A52007E0046 /* cube.png */,
+				A3C8FEA0165D2822007E0046 /* cubeBlack2.png */,
 				A358750D161F146000998085 /* ButtonMerged.plist */,
 				A3587514161F2C3000998085 /* ButtonMerged.png */,
 				A358753916207FA500998085 /* sixcolor.png */,
@@ -338,6 +353,8 @@
 		E06328C8165CCAF900C28336 /* OBJ Files */ = {
 			isa = PBXGroup;
 			children = (
+				A3C8FE9C165D22CA007E0046 /* cubeWithOnePic.obj */,
+				A3C8FE9A165D21AA007E0046 /* RadiusOneCubeWithPic.obj */,
 				A3CAEF9D16512A6900047923 /* 111.obj */,
 				A3CAEFCE1659D1C100047923 /* oneCube1.obj */,
 				A3C722CE165A721F004C3BD9 /* cube.obj */,
@@ -416,6 +433,10 @@
 				A3CAEFCF1659D1C100047923 /* oneCube1.obj in Resources */,
 				A3C722D0165A7220004C3BD9 /* cube.obj in Resources */,
 				A3C722D1165A7220004C3BD9 /* 1234567.obj in Resources */,
+				A3C8FE9B165D21AA007E0046 /* RadiusOneCubeWithPic.obj in Resources */,
+				A3C8FE9D165D22CA007E0046 /* cubeWithOnePic.obj in Resources */,
+				A3C8FEA1165D2822007E0046 /* cubeBlack2.png in Resources */,
+				A3C8FEA3165D2A53007E0046 /* cube.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -465,6 +486,7 @@
 				A3051EE016303278006DFF96 /* MCCountingPlayInputViewController__1.mm in Sources */,
 				A3051EE316303894006DFF96 /* InputController.mm in Sources */,
 				A3D2FC801638D2FD00517CCF /* sceneController.m in Sources */,
+				A3C8FEA6165D3D6A007E0046 /* MCMagicCubeUIModelController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

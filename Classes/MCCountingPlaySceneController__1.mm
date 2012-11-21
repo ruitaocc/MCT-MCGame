@@ -29,15 +29,19 @@
 	// this is where we store all our objects
 	if (sceneObjects == nil) sceneObjects = [[NSMutableArray alloc] init];	
 	
-	// our 'character' object
-	TestCube * magicCube2 = [[TestCube alloc] init];
-    magicCube2.translation = MCPointMake(0.0, 0.0, 0.0);
-	magicCube2.scale = MCPointMake(70, 70, 70);
-    magicCube2.rotation = MCPointMake(0, 0, 0);
-    magicCube2.rotationalSpeed = MCPointMake(20, 20, 20);
+    float scale = 60.0;
     
-	[self addObjectToScene:magicCube2];
-	[magicCube2 release];		
+	// our 'character' object
+	TestCube * magicCube0 = [[TestCube alloc] init];
+    magicCube0.translation = MCPointMake(0.0, 0.0, 0.0);
+	magicCube0.scale = MCPointMake(scale, scale, scale);
+    magicCube0.rotation = MCPointMake(-90, 0, 0);
+    magicCube0.rotationalSpeed = MCPointMake(0, 0, 0);
+    
+    [self addObjectToScene:magicCube0];
+	[magicCube0 release];		
+    
+    
     
 	
 	    

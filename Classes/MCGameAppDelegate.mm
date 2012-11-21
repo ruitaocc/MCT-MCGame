@@ -32,7 +32,7 @@
 }
 - (void)applicationDidFinishLaunching:(UIApplication *)application 
 {   
-    NSString *filename = [[NSBundle mainBundle] pathForResource:@"oneCube1" ofType:@"obj"];
+    NSString *filename = [[NSBundle mainBundle] pathForResource:@"RadiusOneCubeWithPic" ofType:@"obj"];
     MCOBJLoader *tmp = [MCOBJLoader sharedMCOBJLoader];
     [tmp loadObjFromFile:filename objkey:nil];
     
