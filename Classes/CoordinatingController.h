@@ -22,7 +22,7 @@
 @property (assign)BOOL needToReload;
 @property (nonatomic ,readonly)MCSceneController *mainSceneController;
 @property (nonatomic, readonly )MCCountingPlaySceneController *countingPlaySceneController;
-@property (nonatomic, retain )sceneController *currentController;
+@property (nonatomic,assign)sceneController *currentController;
 
 +(CoordinatingController *) sharedCoordinatingController;
 -(void)requestViewChangeByObject:(int)type;

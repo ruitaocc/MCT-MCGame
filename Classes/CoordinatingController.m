@@ -34,6 +34,7 @@
     needToReload = true;
     countingPlaySceneController = [MCCountingPlaySceneController sharedCountingPlaySceneController];
     mainSceneController = [MCSceneController sharedSceneController];
+    currentController = [MCSceneController sharedSceneController];
     [super init];
 }
 #pragma mark -

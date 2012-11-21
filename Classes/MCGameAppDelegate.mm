@@ -41,8 +41,8 @@
     //场景对象控制器
 	MCSceneController * sceneController = [MCSceneController sharedSceneController];
 	//MCCountingPlaySceneController * sceneController = [MCCountingPlaySceneController sharedCountingPlaySceneController];
-    
-    [CoordinatingController sharedCoordinatingController].currentController= sceneController;
+    [CoordinatingController sharedCoordinatingController];
+    [[CoordinatingController sharedCoordinatingController] setCurrentController: sceneController];
     
     //创建输入控制器，并绑定到场景控制器
 	// make a new input view controller, and save it as an instance variable
