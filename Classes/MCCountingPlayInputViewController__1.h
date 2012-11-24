@@ -15,4 +15,6 @@
 //selectors
 -(void)mainMenuBtnDown;
 -(void)mainMenuPlayBtnUp; 
+-(void)rotateTestDown;
+-(void)rotateTestUp;
 @end

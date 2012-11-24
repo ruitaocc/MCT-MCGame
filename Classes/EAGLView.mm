@@ -75,7 +75,7 @@
 	glMatrixMode(GL_MODELVIEW);
     
 	// Clears the view with gray
-	glClearColor(0.5f, 0.5f, 0.5f, 1.0f);
+	glClearColor(0.7f, 0.7f, 0.7f, 1.0f);
 }
 
 - (void)setupViewPortrait

@@ -14,7 +14,7 @@
 @implementation InputController
 
 @synthesize touchEvents;
-
+@synthesize touchEventSate;
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)niMCundleOrNil {
 	if (self = [super initWithNibName:nibNameOrNil bundle:niMCundleOrNil]) {
 		// init our touch storage set
@@ -57,21 +57,23 @@
 {
 	// just store them all in the big set.
 	[touchEvents addObjectsFromArray:[touches allObjects]];
-    
+    touchEventSate = UITouchPhaseBegan;
+        
 }
 
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
 {
 	// just store them all in the big set.
 	[touchEvents addObjectsFromArray:[touches allObjects]];
+     touchEventSate = UITouchPhaseMoved;
 }
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
 	// just store them all in the big set.
 	[touchEvents addObjectsFromArray:[touches allObjects]];
+    touchEventSate = UITouchPhaseEnded;
 }
-
 
 #pragma mark unload, dealloc
 

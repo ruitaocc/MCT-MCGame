@@ -10,13 +10,20 @@
 
 @class MCParticleSystem;
 @interface TestCube :MCMobileObject{
-   MCParticleSystem * particleEmitter;
+    MCParticleSystem * particleEmitter;
+    
+    MCPoint lastTranslation;
+    MCPoint lastRotation;
+    
     BOOL m_spinning;
     float m_trackballRadius;
     ivec2 m_fingerStart;
     Quaternion m_orientation;
     Quaternion m_previousOrientation;
 }
+@property (assign)MCPoint lastTranslation;
+@property (assign)MCPoint lastRotation;
+
 
 
 

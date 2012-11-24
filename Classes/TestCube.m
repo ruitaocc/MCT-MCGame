@@ -15,7 +15,8 @@
 #import "MCParticleSystem.h"
 #import "CoordinatingController.h"
 @implementation TestCube
-
+@synthesize lastRotation;
+@synthesize lastTranslation;
 - (id) init
 {
 	self = [super init];
@@ -27,7 +28,7 @@
 
 -(void)awake
 {
-    
+    active = YES;
     MCOBJLoader *OBJ = [MCOBJLoader sharedMCOBJLoader];
    /* vector<float> Cube_vertex_coordinates_v( [OBJ Cube_vertex_coordinates]);
     vector<float> Cube_texture_coordinates_v ([OBJ Cube_texture_coordinates]);
@@ -61,9 +62,9 @@
 // called once every frame
 -(void)update
 {
-    
-    	[super update];
-    
+    [self handleTouches];
+       [super update];
+
 }
 
 -(void)deadUpdate
@@ -83,41 +84,43 @@
 	[super dealloc];
 }
 
+
 -(void)handleTouches
 {
 	NSSet * touches = [[[CoordinatingController sharedCoordinatingController] currentController].inputController touchEvents];
     UIView* view= [[[CoordinatingController sharedCoordinatingController] currentController].inputController view ];
-	if ([touches count] == 0) return;
+	UITouchPhase touchEventSate = [[[CoordinatingController sharedCoordinatingController] currentController].inputController touchEventSate];
+    if ([touches count] != 2) return;
     if ([touches count] == 2) {
         UITouch *touch = [[touches allObjects] objectAtIndex:0];
-        //for (UITouch * touch in [touches allObjects]) {
+        UITouch *touch1 = [[touches allObjects] objectAtIndex:1];
+        if (touchEventSate == UITouchPhaseMoved) {
+            NSLog(@"moved");
             
-            if ([touch phase]==UITouchPhaseMoved) {
-                CGPoint previous = [touch previousLocationInView:view];
-                CGPoint current = [touch locationInView:view];
-                ivec2 oldLocation = ivec2(previous.x,previous.y);
-                ivec2 newLocation = ivec2(current.x,current.y);
-                if (m_spinning) {
-                    vec3 start = [self MapToSphere: m_fingerStart];
-                    vec3 end =[self MapToSphere:newLocation];
-                    Quaternion delta = Quaternion::CreateFromVectors(start, end);
-                    m_orientation = delta.Rotated(m_previousOrientation);
-                }
-            }else if ([touch phase]==UITouchPhaseBegan) {
-                CGPoint location = [touch locationInView:view];
-                m_spinning = YES;
-                m_fingerStart.x =location.x;
-                m_fingerStart.y =location.y;
-
-                m_previousOrientation = m_orientation;
-                
-            }else if ([touch phase]==UITouchPhaseEnded) {
-                m_spinning = NO;
+            CGPoint previous = [touch previousLocationInView:view];
+            CGPoint current = [touch locationInView:view];
+            ivec2 oldLocation = ivec2(previous.x,previous.y);
+            ivec2 newLocation = ivec2(current.x,current.y);
+            if (m_spinning) {
+                vec3 start = [self MapToSphere: m_fingerStart];
+                vec3 end =[self MapToSphere:newLocation];
+                Quaternion delta = Quaternion::CreateFromVectors(start, end);
+                m_orientation = delta.Rotated(m_previousOrientation);
             }
-       // }
-        
+        }else if (touchEventSate==UITouchPhaseBegan) {
+            NSLog(@"begin");
+            //[self setSpeed:MCPointMake(1, 0, 0)]; 
+            CGPoint location = [touch locationInView:view];
+            m_spinning = YES;
+            m_fingerStart.x =location.x;
+            m_fingerStart.y =location.y;
+            m_previousOrientation = m_orientation;
+        }else if (touchEventSate==UITouchPhaseEnded) {
+            //[self setSpeed:MCPointMake(0, 0, 0)]; 
+            NSLog(@"ended");
+            m_spinning = NO;
+        }
     }
-	
 }
 
 -(vec3)MapToSphere:(ivec2 )touchpoint

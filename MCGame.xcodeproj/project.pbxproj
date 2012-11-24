@@ -24,6 +24,10 @@
 		A3051EDD16302870006DFF96 /* MCCountingPlaySceneController__1.mm in Sources */ = {isa = PBXBuildFile; fileRef = A3051EDC16302870006DFF96 /* MCCountingPlaySceneController__1.mm */; };
 		A3051EE016303278006DFF96 /* MCCountingPlayInputViewController__1.mm in Sources */ = {isa = PBXBuildFile; fileRef = A3051EDF16303278006DFF96 /* MCCountingPlayInputViewController__1.mm */; };
 		A3051EE316303894006DFF96 /* InputController.mm in Sources */ = {isa = PBXBuildFile; fileRef = A3051EE216303894006DFF96 /* InputController.mm */; };
+		A309D8E7165E0DA500CDA1DC /* cubeBlack2.png in Resources */ = {isa = PBXBuildFile; fileRef = A309D8E6165E0DA500CDA1DC /* cubeBlack2.png */; };
+		A309D8F2165E368700CDA1DC /* RadiusOneCubeWithPic.obj in Resources */ = {isa = PBXBuildFile; fileRef = A309D8F1165E368700CDA1DC /* RadiusOneCubeWithPic.obj */; };
+		A309D8FD165F883000CDA1DC /* RCCube.m in Sources */ = {isa = PBXBuildFile; fileRef = A309D8FA165F883000CDA1DC /* RCCube.m */; };
+		A309D8FE165F883000CDA1DC /* RCRubiksCube.m in Sources */ = {isa = PBXBuildFile; fileRef = A309D8FC165F883000CDA1DC /* RCRubiksCube.m */; };
 		A30C47D1161C38E70057C5E1 /* MCButton.m in Sources */ = {isa = PBXBuildFile; fileRef = A30C47D0161C38E70057C5E1 /* MCButton.m */; };
 		A30C47D4161C694F0057C5E1 /* MCTexturedButton.m in Sources */ = {isa = PBXBuildFile; fileRef = A30C47D3161C694F0057C5E1 /* MCTexturedButton.m */; };
 		A30C47D8161C723F0057C5E1 /* MCTexturedMesh.m in Sources */ = {isa = PBXBuildFile; fileRef = A30C47D7161C723E0057C5E1 /* MCTexturedMesh.m */; };
@@ -40,9 +44,7 @@
 		A3BF9205161D4C4600829D13 /* cubeTexture.png in Resources */ = {isa = PBXBuildFile; fileRef = A3BF9204161D4C4600829D13 /* cubeTexture.png */; };
 		A3C722D0165A7220004C3BD9 /* cube.obj in Resources */ = {isa = PBXBuildFile; fileRef = A3C722CE165A721F004C3BD9 /* cube.obj */; };
 		A3C722D1165A7220004C3BD9 /* 1234567.obj in Resources */ = {isa = PBXBuildFile; fileRef = A3C722CF165A7220004C3BD9 /* 1234567.obj */; };
-		A3C8FE9B165D21AA007E0046 /* RadiusOneCubeWithPic.obj in Resources */ = {isa = PBXBuildFile; fileRef = A3C8FE9A165D21AA007E0046 /* RadiusOneCubeWithPic.obj */; };
 		A3C8FE9D165D22CA007E0046 /* cubeWithOnePic.obj in Resources */ = {isa = PBXBuildFile; fileRef = A3C8FE9C165D22CA007E0046 /* cubeWithOnePic.obj */; };
-		A3C8FEA1165D2822007E0046 /* cubeBlack2.png in Resources */ = {isa = PBXBuildFile; fileRef = A3C8FEA0165D2822007E0046 /* cubeBlack2.png */; };
 		A3C8FEA3165D2A53007E0046 /* cube.png in Resources */ = {isa = PBXBuildFile; fileRef = A3C8FEA2165D2A52007E0046 /* cube.png */; };
 		A3C8FEA6165D3D6A007E0046 /* MCMagicCubeUIModelController.m in Sources */ = {isa = PBXBuildFile; fileRef = A3C8FEA5165D3D69007E0046 /* MCMagicCubeUIModelController.m */; };
 		A3CAEF9E16512A6900047923 /* 111.obj in Resources */ = {isa = PBXBuildFile; fileRef = A3CAEF9D16512A6900047923 /* 111.obj */; };
@@ -87,6 +89,13 @@
 		A3051EDF16303278006DFF96 /* MCCountingPlayInputViewController__1.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MCCountingPlayInputViewController__1.mm; sourceTree = "<group>"; };
 		A3051EE116303894006DFF96 /* InputController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InputController.h; sourceTree = "<group>"; };
 		A3051EE216303894006DFF96 /* InputController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = InputController.mm; sourceTree = "<group>"; };
+		A309D8E6165E0DA500CDA1DC /* cubeBlack2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cubeBlack2.png; sourceTree = "<group>"; };
+		A309D8F1165E368700CDA1DC /* RadiusOneCubeWithPic.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = RadiusOneCubeWithPic.obj; sourceTree = "<group>"; };
+		A309D8F8165F883000CDA1DC /* Global.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Global.h; sourceTree = "<group>"; };
+		A309D8F9165F883000CDA1DC /* RCCube.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCCube.h; sourceTree = "<group>"; };
+		A309D8FA165F883000CDA1DC /* RCCube.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RCCube.m; sourceTree = "<group>"; };
+		A309D8FB165F883000CDA1DC /* RCRubiksCube.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RCRubiksCube.h; sourceTree = "<group>"; };
+		A309D8FC165F883000CDA1DC /* RCRubiksCube.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RCRubiksCube.m; sourceTree = "<group>"; };
 		A30C47CF161C38E70057C5E1 /* MCButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCButton.h; sourceTree = "<group>"; };
 		A30C47D0161C38E70057C5E1 /* MCButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCButton.m; sourceTree = "<group>"; };
 		A30C47D2161C694F0057C5E1 /* MCTexturedButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCTexturedButton.h; sourceTree = "<group>"; };
@@ -114,9 +123,7 @@
 		A3BF9204161D4C4600829D13 /* cubeTexture.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = cubeTexture.png; path = Classes/cubeTexture.png; sourceTree = "<group>"; };
 		A3C722CE165A721F004C3BD9 /* cube.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = cube.obj; path = Classes/cube.obj; sourceTree = "<group>"; };
 		A3C722CF165A7220004C3BD9 /* 1234567.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = 1234567.obj; path = Classes/1234567.obj; sourceTree = "<group>"; };
-		A3C8FE9A165D21AA007E0046 /* RadiusOneCubeWithPic.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = RadiusOneCubeWithPic.obj; sourceTree = "<group>"; };
 		A3C8FE9C165D22CA007E0046 /* cubeWithOnePic.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = cubeWithOnePic.obj; sourceTree = "<group>"; };
-		A3C8FEA0165D2822007E0046 /* cubeBlack2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cubeBlack2.png; sourceTree = "<group>"; };
 		A3C8FEA2165D2A52007E0046 /* cube.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cube.png; sourceTree = "<group>"; };
 		A3C8FEA4165D3D69007E0046 /* MCMagicCubeUIModelController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCMagicCubeUIModelController.h; sourceTree = "<group>"; };
 		A3C8FEA5165D3D69007E0046 /* MCMagicCubeUIModelController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCMagicCubeUIModelController.m; sourceTree = "<group>"; };
@@ -163,6 +170,7 @@
 		080E96DDFE201D6D7F000001 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				A309D8F7165F867800CDA1DC /* DataModel */,
 				E06328C9165CCC6E00C28336 /* Utils */,
 				A32A33B5163BA72C007840CC /* Controllers */,
 				A30C47D9161C72A70057C5E1 /* Config */,
@@ -225,6 +233,18 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		A309D8F7165F867800CDA1DC /* DataModel */ = {
+			isa = PBXGroup;
+			children = (
+				A309D8F8165F883000CDA1DC /* Global.h */,
+				A309D8F9165F883000CDA1DC /* RCCube.h */,
+				A309D8FA165F883000CDA1DC /* RCCube.m */,
+				A309D8FB165F883000CDA1DC /* RCRubiksCube.h */,
+				A309D8FC165F883000CDA1DC /* RCRubiksCube.m */,
+			);
+			name = DataModel;
+			sourceTree = "<group>";
+		};
 		A30C47D5161C6F1C0057C5E1 /* MathUtil */ = {
 			isa = PBXGroup;
 			children = (
@@ -267,8 +287,8 @@
 				A3051EDF16303278006DFF96 /* MCCountingPlayInputViewController__1.mm */,
 				A3D2FC7E1638D2FD00517CCF /* sceneController.h */,
 				A3D2FC7F1638D2FD00517CCF /* sceneController.m */,
-				48A858E20FFAFC450060F0B8 /* MCSceneController.mm */,
 				48A858E10FFAFC450060F0B8 /* MCSceneController.h */,
+				48A858E20FFAFC450060F0B8 /* MCSceneController.mm */,
 				A3051EDB16302870006DFF96 /* MCCountingPlaySceneController__1.h */,
 				A3051EDC16302870006DFF96 /* MCCountingPlaySceneController__1.mm */,
 				A3C8FEA4165D3D69007E0046 /* MCMagicCubeUIModelController.h */,
@@ -297,8 +317,8 @@
 		A3587519161F3FFD00998085 /* imageResource */ = {
 			isa = PBXGroup;
 			children = (
+				A309D8E6165E0DA500CDA1DC /* cubeBlack2.png */,
 				A3C8FEA2165D2A52007E0046 /* cube.png */,
-				A3C8FEA0165D2822007E0046 /* cubeBlack2.png */,
 				A358750D161F146000998085 /* ButtonMerged.plist */,
 				A3587514161F2C3000998085 /* ButtonMerged.png */,
 				A358753916207FA500998085 /* sixcolor.png */,
@@ -325,6 +345,8 @@
 			children = (
 				48A858E40FFAFC4D0060F0B8 /* MCSceneObject.h */,
 				48A858E50FFAFC4D0060F0B8 /* MCSceneObject.mm */,
+				A30C47E0161C874F0057C5E1 /* MCMobileObject.h */,
+				A30C47E1161C874F0057C5E1 /* MCMobileObject.m */,
 				48C2AB8810032DE100F0CFA0 /* MCMesh.h */,
 				48C2AB8910032DE100F0CFA0 /* MCMesh.mm */,
 				A30C47D6161C723E0057C5E1 /* MCTexturedMesh.h */,
@@ -339,8 +361,6 @@
 				A3F2ACBF1616D9BB00D622B8 /* MCParticle.m */,
 				A30C47DD161C86F70057C5E1 /* TestCube.h */,
 				A30C47DE161C86F70057C5E1 /* TestCube.m */,
-				A30C47E0161C874F0057C5E1 /* MCMobileObject.h */,
-				A30C47E1161C874F0057C5E1 /* MCMobileObject.m */,
 				A30C47CF161C38E70057C5E1 /* MCButton.h */,
 				A30C47D0161C38E70057C5E1 /* MCButton.m */,
 				A3F2ACC11616E1CE00D622B8 /* MCConfiguration.h */,
@@ -353,8 +373,8 @@
 		E06328C8165CCAF900C28336 /* OBJ Files */ = {
 			isa = PBXGroup;
 			children = (
+				A309D8F1165E368700CDA1DC /* RadiusOneCubeWithPic.obj */,
 				A3C8FE9C165D22CA007E0046 /* cubeWithOnePic.obj */,
-				A3C8FE9A165D21AA007E0046 /* RadiusOneCubeWithPic.obj */,
 				A3CAEF9D16512A6900047923 /* 111.obj */,
 				A3CAEFCE1659D1C100047923 /* oneCube1.obj */,
 				A3C722CE165A721F004C3BD9 /* cube.obj */,
@@ -433,10 +453,10 @@
 				A3CAEFCF1659D1C100047923 /* oneCube1.obj in Resources */,
 				A3C722D0165A7220004C3BD9 /* cube.obj in Resources */,
 				A3C722D1165A7220004C3BD9 /* 1234567.obj in Resources */,
-				A3C8FE9B165D21AA007E0046 /* RadiusOneCubeWithPic.obj in Resources */,
 				A3C8FE9D165D22CA007E0046 /* cubeWithOnePic.obj in Resources */,
-				A3C8FEA1165D2822007E0046 /* cubeBlack2.png in Resources */,
 				A3C8FEA3165D2A53007E0046 /* cube.png in Resources */,
+				A309D8E7165E0DA500CDA1DC /* cubeBlack2.png in Resources */,
+				A309D8F2165E368700CDA1DC /* RadiusOneCubeWithPic.obj in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -487,6 +507,8 @@
 				A3051EE316303894006DFF96 /* InputController.mm in Sources */,
 				A3D2FC801638D2FD00517CCF /* sceneController.m in Sources */,
 				A3C8FEA6165D3D6A007E0046 /* MCMagicCubeUIModelController.m in Sources */,
+				A309D8FD165F883000CDA1DC /* RCCube.m in Sources */,
+				A309D8FE165F883000CDA1DC /* RCRubiksCube.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

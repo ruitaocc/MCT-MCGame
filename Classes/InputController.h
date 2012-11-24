@@ -10,11 +10,12 @@
 
 @interface InputController : UIViewController{
 	NSMutableSet* touchEvents;
-  	
+  	UITouchPhase touchEventSate;
 	NSMutableArray * interfaceObjects;
 }
 
 @property (retain) NSMutableSet* touchEvents;
+@property (assign) UITouchPhase touchEventSate;
 //10
 - (CGRect)screenRectFromMeshRect:(CGRect)rect atPoint:(CGPoint)meshCenter;
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil ;

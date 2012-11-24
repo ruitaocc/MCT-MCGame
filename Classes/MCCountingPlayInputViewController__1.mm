@@ -39,7 +39,19 @@
 	[mainMenuBtn awake];
 	[interfaceObjects addObject:mainMenuBtn];
 	[mainMenuBtn release];
+   
     
+    //the texture 还没设计出来
+	MCTexturedButton * rotateTest = [[MCTexturedButton alloc] initWithUpKey:@"systemSettingBtnUp" downKey:@"systemSettingBtnDown"];
+	rotateTest.scale = MCPointMake(btnWidth, btnHeight, 1.0);
+	rotateTest.translation = MCPointMake(380, 320.0, 0.0);
+	rotateTest.target = self;
+	rotateTest.buttonDownAction = @selector(rotateTestDown);
+	rotateTest.buttonUpAction = @selector(rotateTestUp);
+	rotateTest.active = YES;
+	[rotateTest awake];
+	[interfaceObjects addObject:rotateTest];
+	[rotateTest release];
 }
 
 
@@ -51,7 +63,13 @@
     [coordinatingController_ requestViewChangeByObject:kMainMenu];
 }
 
+-(void)rotateTestDown{
+    NSLog(@"rotateTestDown");
+    MCCountingPlaySceneController *c = [MCCountingPlaySceneController sharedCountingPlaySceneController];
+    [c rotateTest];
 
+};
+-(void)rotateTestUp{};
 
 
 

@@ -7,6 +7,7 @@
 //
 
 #import "MCCountingPlaySceneController__1.h"
+#import "MCMagicCubeUIModelController.h"
 #import "TestCube.h"
 @implementation MCCountingPlaySceneController
 
@@ -32,15 +33,19 @@
     float scale = 60.0;
     
 	// our 'character' object
-	TestCube * magicCube0 = [[TestCube alloc] init];
+	/*
+    TestCube * magicCube0 = [[TestCube alloc] init];
     magicCube0.translation = MCPointMake(0.0, 0.0, 0.0);
 	magicCube0.scale = MCPointMake(scale, scale, scale);
-    magicCube0.rotation = MCPointMake(-90, 0, 0);
+    magicCube0.rotation = MCPointMake(0, 0, 0);
     magicCube0.rotationalSpeed = MCPointMake(0, 0, 0);
     
     [self addObjectToScene:magicCube0];
 	[magicCube0 release];		
-    
+    */
+    MCMagicCubeUIModelController *magicCube = [[MCMagicCubeUIModelController alloc]initiate];
+    [self addObjectToScene:magicCube];
+    [magicCube release];
     
     
 	
@@ -48,4 +53,9 @@
 	// reload our interface
 	[inputController loadInterface];
 }
+
+-(void)rotateTest{
+    NSLog(@"mc rotate test");
+    [sceneObjects makeObjectsPerformSelector:@selector(rotateTest)];
+};
 @end

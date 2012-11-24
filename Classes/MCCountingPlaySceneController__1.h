@@ -14,4 +14,5 @@
 }
 + (MCCountingPlaySceneController*)sharedCountingPlaySceneController;
 -(void)loadScene;
+-(void)rotateTest;
 @end
