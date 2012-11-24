@@ -25,6 +25,7 @@
         for (int  i = 0; i<9; i++) {
             layerPtr[i] = nil;
         }
+        float gap = CUBE_CUBE_GAP;
         for (int z = 0; z < 3; z++) {
             for (int y = 0; y < 3; y++) {
                 for (int x = 0; x < 3; x++) {
@@ -33,7 +34,7 @@
                         int sign_y = y-1;
                         int sign_z = z-1;
                         TestCube * Cube = [[TestCube alloc] init];
-                        Cube.translation = MCPointMake(sub_scale.x*sign_x+translation.x, sub_scale.y*sign_y+translation.z, sub_scale.z*sign_z+translation.z);
+                        Cube.translation = MCPointMake((gap+sub_scale.x)*sign_x+translation.x, (gap+sub_scale.y)*sign_y+translation.z, (gap+sub_scale.z)*sign_z+translation.z);
                         Cube.scale = MCPointMake(sub_scale.x, sub_scale.y, sub_scale.z); 
                     
                         Cube.rotation = MCPointMake(0, 0, 0);
@@ -65,6 +66,7 @@
                 {
                     layerPtr[z+y*3] = [array27Cube objectAtIndex:y*9+z*3+layer];
                     [[array27Cube objectAtIndex:y*9+z*3+layer] setLastTranslation:[[array27Cube objectAtIndex:y*9+z*3+layer] translation]];
+                     [(TestCube *)[array27Cube objectAtIndex:y*9+z*3+layer] setLastRotation:[(TestCube *)[array27Cube objectAtIndex:y*9+z*3+layer] rotation]];
                 }
             }
             break;
@@ -76,6 +78,7 @@
                 {
                     layerPtr[z+x*3] = [array27Cube objectAtIndex:x*9+layer*3+z];
                     [[array27Cube objectAtIndex:x*9+layer*3+z] setLastTranslation:[[array27Cube objectAtIndex:x*9+layer*3+z] translation]];
+                    [(TestCube *)[array27Cube objectAtIndex:x*9+layer*3+z] setLastRotation:[(TestCube *)[array27Cube objectAtIndex:x*9+layer*3+z] rotation]];
                 }
             }
             break;
@@ -87,6 +90,7 @@
                 {
                     layerPtr[y+x*3] = [array27Cube objectAtIndex:layer*9+x*3+y];
                     [[array27Cube objectAtIndex:layer*9+x*3+y] setLastTranslation:[[array27Cube objectAtIndex:layer*9+x*3+y] translation]];
+                    [(TestCube *)[array27Cube objectAtIndex:layer*9+x*3+y] setLastRotation:[(TestCube *)[array27Cube objectAtIndex:layer*9+x*3+y] rotation]];
                 }
             }
             break;
@@ -145,6 +149,8 @@
                         break;
                     case Y:
                     {   
+                       
+                        
                         if (current_rotate_direction == CW) {
                             t_tranlation.z = (-t_last_translation.x);
                             t_tranlation.x = t_last_translation.z;
@@ -153,7 +159,9 @@
                             t_tranlation.z = (-t_last_translation.x);
                             t_tranlation.x = t_last_translation.z;
                             t_rotation.y = t_last_rotation.y - ROTATION_ANGLE;
-                        }                   }
+                        }
+                        
+                    }
                         break;
                     case Z:
                     {
@@ -225,7 +233,7 @@
 
 };
 -(void)rotateTest{
-    [self rotateOnAxis:Z onLayer:2 inDirection:CW];
+    [self rotateOnAxis:X onLayer:2 inDirection:CW];
 };
 
 

@@ -44,9 +44,9 @@
 
 @property (retain) MCMesh * mesh;
 @property (assign) MCPoint translation;
-@property (assign) CGFloat * matrix;
 @property (assign) MCPoint rotation;
 @property (assign) MCPoint scale;
+@property (assign) CGFloat * matrix;
 @property (assign) BOOL active;
 @property (assign) CGRect meshBounds;
 - (id) init;

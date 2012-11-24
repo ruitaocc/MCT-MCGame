@@ -12,14 +12,16 @@
 #import "TestCube.h"
 @class MCSceneObject;
 //旋转速度 帧率无关设计 2秒
-#define TIME_PER_ROTATION 2
+#define TIME_PER_ROTATION 1
 #define ROTATION_ANGLE 90
+#define CUBE_CUBE_GAP 0.3;
 @interface MCMagicCubeUIModelController : MCSceneObject{
     NSMutableArray* array27Cube;
 //    MCPoint translation;
 //	MCPoint rotation;
 //	MCPoint scale;
 //    MCPoint rotationalSpeed;
+    
     TestCube * layerPtr[9];
     BOOL isRotate;
     double rest_rotate_time;
