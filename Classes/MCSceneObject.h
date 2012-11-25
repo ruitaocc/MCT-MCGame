@@ -26,6 +26,7 @@
 	// transform values
 	MCPoint translation;
 	MCPoint rotation;
+    MCPoint translation_after_rotation;
 	MCPoint scale;
 	
 	MCMesh * mesh;
@@ -44,6 +45,7 @@
 
 @property (retain) MCMesh * mesh;
 @property (assign) MCPoint translation;
+@property (assign) MCPoint translation_after_rotation;
 @property (assign) MCPoint rotation;
 @property (assign) MCPoint scale;
 @property (assign) CGFloat * matrix;

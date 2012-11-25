@@ -15,8 +15,6 @@
 #import "MCParticleSystem.h"
 #import "CoordinatingController.h"
 @implementation TestCube
-@synthesize lastRotation;
-@synthesize lastTranslation;
 - (id) init
 {
 	self = [super init];

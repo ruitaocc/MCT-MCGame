@@ -34,7 +34,7 @@
                         int sign_y = y-1;
                         int sign_z = z-1;
                         TestCube * Cube = [[TestCube alloc] init];
-                        Cube.translation = MCPointMake((gap+sub_scale.x)*sign_x+translation.x, (gap+sub_scale.y)*sign_y+translation.z, (gap+sub_scale.z)*sign_z+translation.z);
+                        Cube.translation_after_rotation = MCPointMake((gap+sub_scale.x)*sign_x+translation.x, (gap+sub_scale.y)*sign_y+translation.z, (gap+sub_scale.z)*sign_z+translation.z);
                         Cube.scale = MCPointMake(sub_scale.x, sub_scale.y, sub_scale.z); 
                     
                         Cube.rotation = MCPointMake(0, 0, 0);
@@ -49,6 +49,7 @@
 };
 
 - (void) rotateOnAxis : (AxisType)axis onLayer: (int)layer inDirection: (LayerRotationDirectionType)direction{
+    if (isRotate) return;
     isRotate = YES;
     rest_rotate_time = TIME_PER_ROTATION;
     rest_rotate_angle = ROTATION_ANGLE;
@@ -65,8 +66,7 @@
                 for(int z = 0; z < 3; ++z)
                 {
                     layerPtr[z+y*3] = [array27Cube objectAtIndex:y*9+z*3+layer];
-                    [[array27Cube objectAtIndex:y*9+z*3+layer] setLastTranslation:[[array27Cube objectAtIndex:y*9+z*3+layer] translation]];
-                     [(TestCube *)[array27Cube objectAtIndex:y*9+z*3+layer] setLastRotation:[(TestCube *)[array27Cube objectAtIndex:y*9+z*3+layer] rotation]];
+                    
                 }
             }
             break;
@@ -77,8 +77,7 @@
                 for(int z = 0; z < 3; ++z)
                 {
                     layerPtr[z+x*3] = [array27Cube objectAtIndex:x*9+layer*3+z];
-                    [[array27Cube objectAtIndex:x*9+layer*3+z] setLastTranslation:[[array27Cube objectAtIndex:x*9+layer*3+z] translation]];
-                    [(TestCube *)[array27Cube objectAtIndex:x*9+layer*3+z] setLastRotation:[(TestCube *)[array27Cube objectAtIndex:x*9+layer*3+z] rotation]];
+                   
                 }
             }
             break;
@@ -89,8 +88,7 @@
                 for(int y = 0; y < 3; ++y)
                 {
                     layerPtr[y+x*3] = [array27Cube objectAtIndex:layer*9+x*3+y];
-                    [[array27Cube objectAtIndex:layer*9+x*3+y] setLastTranslation:[[array27Cube objectAtIndex:layer*9+x*3+y] translation]];
-                    [(TestCube *)[array27Cube objectAtIndex:layer*9+x*3+y] setLastRotation:[(TestCube *)[array27Cube objectAtIndex:layer*9+x*3+y] rotation]];
+                  
                 }
             }
             break;
@@ -126,54 +124,26 @@
             // 0 2  6 8 角块
             
             double final_alpha = rest_rotate_time/TIME_PER_ROTATION*ROTATION_ANGLE;
-            double final_alpha_pi = (final_alpha/180)*Pi;
             //(x*cosθ- y * sinθ, y*cosθ + x * sinθ)
             for (int i= 0 ; i<9; i++) {
-                MCPoint t_tranlation = layerPtr[i].translation;
                 MCPoint t_rotation = layerPtr[i].rotation;
-                MCPoint t_last_translation = layerPtr[i].lastTranslation;
-                MCPoint t_last_rotation = layerPtr[i].lastRotation;
                 switch (current_rotate_axis) {
                     case X:
                     {
-                        if (current_rotate_direction == CW) {
-                            t_tranlation.y = (-t_last_translation.z);
-                            t_tranlation.z = t_last_translation.y;
-                            t_rotation.x = t_last_rotation.x + ROTATION_ANGLE;
-                        }else {
-                            t_tranlation.y = (-t_last_translation.z);
-                            t_tranlation.z = t_last_translation.y;
-                            t_rotation.x = t_last_rotation.x - ROTATION_ANGLE;
-                        }
+                        t_rotation.x += final_alpha;
+                        [layerPtr[i] setRotation:t_rotation];
                     }
                         break;
                     case Y:
                     {   
-                       
-                        
-                        if (current_rotate_direction == CW) {
-                            t_tranlation.z = (-t_last_translation.x);
-                            t_tranlation.x = t_last_translation.z;
-                            t_rotation.y = t_last_rotation.y + ROTATION_ANGLE;
-                        }else {
-                            t_tranlation.z = (-t_last_translation.x);
-                            t_tranlation.x = t_last_translation.z;
-                            t_rotation.y = t_last_rotation.y - ROTATION_ANGLE;
-                        }
-                        
+                        t_rotation.y += final_alpha;
+                        [layerPtr[i] setRotation:t_rotation];                        
                     }
                         break;
                     case Z:
                     {
-                        if (current_rotate_direction == CW) {
-                            t_tranlation.x = (-t_last_translation.y);
-                            t_tranlation.y = t_last_translation.x;
-                            t_rotation.z = t_last_rotation.z + ROTATION_ANGLE;
-                        }else {
-                            t_tranlation.x = (-t_last_translation.y);
-                            t_tranlation.y = t_last_translation.x;
-                            t_rotation.z = t_last_rotation.z - ROTATION_ANGLE;
-                        }
+                        t_rotation.z += final_alpha;
+                        [layerPtr[i] setRotation:t_rotation];
                     }
                         break;
                     default:
@@ -181,7 +151,6 @@
                 }
                 //最后的调整
                 [layerPtr[i] setRotation:t_rotation];
-                [layerPtr[i] setTranslation:t_tranlation];
             }
              
             //归零
@@ -190,37 +159,26 @@
         else{
             // 0 2  6 8 角块
             double alpha = deltaTime/TIME_PER_ROTATION*ROTATION_ANGLE;
-            double alpha_pi = (alpha/180)*Pi;
             //(x*cosθ- y * sinθ, y*cosθ + x * sinθ)
             for (int i= 0 ; i<9; i++) {
-                MCPoint t_tranlation = layerPtr[i].translation;
                 MCPoint t_rotation = layerPtr[i].rotation;
                 switch (current_rotate_axis) {
                     case X:
                     {
-                        t_tranlation.y = t_tranlation.y* cos(alpha_pi) - t_tranlation.z*sin(alpha_pi);
-                        t_tranlation.z = t_tranlation.z* cos(alpha_pi) + t_tranlation.y*sin(alpha_pi);
                         t_rotation.x += alpha;
                         [layerPtr[i] setRotation:t_rotation];
-                        [layerPtr[i] setTranslation:t_tranlation];
                     }
                     break;
                     case Y:
                     {   
-                        t_tranlation.z = t_tranlation.z* cos(alpha_pi) - t_tranlation.x*sin(alpha_pi);
-                        t_tranlation.x = t_tranlation.x* cos(alpha_pi) + t_tranlation.z*sin(alpha_pi);
                         t_rotation.y += alpha;
                         [layerPtr[i] setRotation:t_rotation];
-                        [layerPtr[i] setTranslation:t_tranlation];
                     }
                         break;
                     case Z:
                     {
-                        t_tranlation.x =(t_tranlation.x* cos(alpha_pi)) - (t_tranlation.y*sin(alpha_pi));
-                        t_tranlation.y = (t_tranlation.y* cos(alpha_pi)) + (t_tranlation.x*sin(alpha_pi));
                         t_rotation.z += alpha;
                         [layerPtr[i] setRotation:t_rotation];
-                        [layerPtr[i] setTranslation:t_tranlation];
                     }
                         break;
                     default:
