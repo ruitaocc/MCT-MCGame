@@ -44,8 +44,8 @@
     //[magicCube.mesh setColors:&colorss];
 	magicCube.translation = MCPointMake(30.0, 0.0, 0.0);
 	magicCube.scale = MCPointMake(60, 60, 60);
-    magicCube.rotation = MCPointMake(0, 0, 0);
-    magicCube.rotationalSpeed = MCPointMake(20, 20, 20);
+    magicCube.rotation = MCPointMake(30, 30, 0);
+    magicCube.rotationalSpeed = MCPointMake(0, 0, 0);
 	[self addObjectToScene:magicCube];
 	[magicCube release];	
     
