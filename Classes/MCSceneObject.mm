@@ -16,8 +16,8 @@
 
 
 @implementation MCSceneObject
-
-@synthesize translation,rotation,scale,active,mesh,matrix,meshBounds,translation_after_rotation;
+@synthesize prerotation,pretranslation;
+@synthesize translation,rotation,scale,active,mesh,matrix,meshBounds;
 
 - (id) init
 {
@@ -25,7 +25,8 @@
 	if (self != nil) {
 		translation = MCPointMake(0.0, 0.0, 0.0);
 		rotation = MCPointMake(0.0, 0.0, 0.0);
-        translation_after_rotation = MCPointMake(0.0, 0.0, 0.0);
+        pretranslation = MCPointMake(0.0, 0.0, 0.0);
+        prerotation = MCPointMake(0.0, 0.0, 0.0);
 		scale = MCPointMake(1.0, 1.0, 1.0);
 		matrix = (CGFloat *) malloc(16 * sizeof(CGFloat));
 		active = NO;
@@ -54,15 +55,20 @@
 	glLoadIdentity();
 	
 	// move to my position
-	glTranslatef(translation.x, translation.y, translation.z);
+	glTranslatef(pretranslation.x, pretranslation.y, pretranslation.z);
 	
 	// rotate
+	glRotatef(prerotation.x, 1.0f, 0.0f, 0.0f);
+	glRotatef(prerotation.y, 0.0f, 1.0f, 0.0f);
+	glRotatef(prerotation.z, 0.0f, 0.0f, 1.0f);
+	
+    // rotate
 	glRotatef(rotation.x, 1.0f, 0.0f, 0.0f);
 	glRotatef(rotation.y, 0.0f, 1.0f, 0.0f);
 	glRotatef(rotation.z, 0.0f, 0.0f, 1.0f);
-	
     //tanslation_after_rotate
-    glTranslatef(translation_after_rotation.x, translation_after_rotation.y, translation_after_rotation.z);
+    glTranslatef(translation.x, translation.y, translation.z);
+    
     
 	//scale
 	glScalef(scale.x, scale.y, scale.z);

@@ -24,11 +24,12 @@
 
 @interface MCSceneObject : NSObject {
 	// transform values
-	MCPoint translation;
-	MCPoint rotation;
-    MCPoint translation_after_rotation;
+	MCPoint pretranslation;
+	MCPoint prerotation;
+    MCPoint translation;
 	MCPoint scale;
-	
+	MCPoint rotation;
+
 	MCMesh * mesh;
 	
 	BOOL active;
@@ -45,10 +46,11 @@
 
 @property (retain) MCMesh * mesh;
 @property (assign) MCPoint translation;
-@property (assign) MCPoint translation_after_rotation;
 @property (assign) MCPoint rotation;
 @property (assign) MCPoint scale;
 @property (assign) CGFloat * matrix;
+@property (assign) MCPoint pretranslation;
+@property (assign) MCPoint prerotation;
 @property (assign) BOOL active;
 @property (assign) CGRect meshBounds;
 - (id) init;

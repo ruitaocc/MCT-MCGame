@@ -39,6 +39,7 @@
 		A3587515161F2C3000998085 /* ButtonMerged.png in Resources */ = {isa = PBXBuildFile; fileRef = A3587514161F2C3000998085 /* ButtonMerged.png */; };
 		A3587518161F355400998085 /* MainWindow-iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = A3587517161F355400998085 /* MainWindow-iPad.xib */; };
 		A358753A16207FA500998085 /* sixcolor.png in Resources */ = {isa = PBXBuildFile; fileRef = A358753916207FA500998085 /* sixcolor.png */; };
+		A37F8812166B876C00B0A59F /* cubeBlack2.png in Resources */ = {isa = PBXBuildFile; fileRef = A37F8811166B876C00B0A59F /* cubeBlack2.png */; };
 		A3BF9205161D4C4600829D13 /* cubeTexture.png in Resources */ = {isa = PBXBuildFile; fileRef = A3BF9204161D4C4600829D13 /* cubeTexture.png */; };
 		A3C8FEA3165D2A53007E0046 /* cube.png in Resources */ = {isa = PBXBuildFile; fileRef = A3C8FEA2165D2A52007E0046 /* cube.png */; };
 		A3C8FEA6165D3D6A007E0046 /* MCMagicCubeUIModelController.m in Sources */ = {isa = PBXBuildFile; fileRef = A3C8FEA5165D3D69007E0046 /* MCMagicCubeUIModelController.m */; };
@@ -46,8 +47,9 @@
 		A3D30BAA1619356200BA477E /* MCTexturedQuad.m in Sources */ = {isa = PBXBuildFile; fileRef = A3D30BA91619356200BA477E /* MCTexturedQuad.m */; };
 		A3D30BAE161937DF00BA477E /* MCAnimatedQuad.m in Sources */ = {isa = PBXBuildFile; fileRef = A3D30BAD161937DF00BA477E /* MCAnimatedQuad.m */; };
 		A3DB2596162D993900AB9F00 /* CoordinatingController.m in Sources */ = {isa = PBXBuildFile; fileRef = A3DB2595162D993900AB9F00 /* CoordinatingController.m */; };
-		A3E8559E1661CAE000DE3ED9 /* RadiusOneCubeWithPic.obj in Resources */ = {isa = PBXBuildFile; fileRef = A3E8559D1661CAE000DE3ED9 /* RadiusOneCubeWithPic.obj */; };
-		A3E855A01661CAEE00DE3ED9 /* cubeBlack2.png in Resources */ = {isa = PBXBuildFile; fileRef = A3E8559F1661CAEE00DE3ED9 /* cubeBlack2.png */; };
+		A3E855AC1663A50F00DE3ED9 /* cube1126_2.obj in Resources */ = {isa = PBXBuildFile; fileRef = A3E855AA1663A50F00DE3ED9 /* cube1126_2.obj */; };
+		A3E855B01663A69100DE3ED9 /* RadiusOneCubeWithPic.obj in Resources */ = {isa = PBXBuildFile; fileRef = A3E855AF1663A69100DE3ED9 /* RadiusOneCubeWithPic.obj */; };
+		A3E855B21663A9C400DE3ED9 /* cube1126_original.obj in Resources */ = {isa = PBXBuildFile; fileRef = A3E855B11663A9C400DE3ED9 /* cube1126_original.obj */; };
 		A3F2ACB61616CE6700D622B8 /* MCMaterialController.m in Sources */ = {isa = PBXBuildFile; fileRef = A3F2ACB51616CE6700D622B8 /* MCMaterialController.m */; };
 		A3F2ACBA1616CF9900D622B8 /* MCParticleSystem.m in Sources */ = {isa = PBXBuildFile; fileRef = A3F2ACB91616CF9900D622B8 /* MCParticleSystem.m */; };
 		A3F2ACC01616D9BB00D622B8 /* MCParticle.m in Sources */ = {isa = PBXBuildFile; fileRef = A3F2ACBF1616D9BB00D622B8 /* MCParticle.m */; };
@@ -109,6 +111,7 @@
 		A3587517161F355400998085 /* MainWindow-iPad.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = "MainWindow-iPad.xib"; path = "iPad/MainWindow-iPad.xib"; sourceTree = "<group>"; };
 		A358752B161FF1C600998085 /* data.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = data.hpp; sourceTree = "<group>"; };
 		A358753916207FA500998085 /* sixcolor.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sixcolor.png; sourceTree = "<group>"; };
+		A37F8811166B876C00B0A59F /* cubeBlack2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cubeBlack2.png; sourceTree = "<group>"; };
 		A3935B3C165A296400B60A07 /* MCRay.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MCRay.h; sourceTree = "<group>"; };
 		A3935B3D165A296400B60A07 /* MCRay.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = MCRay.mm; sourceTree = "<group>"; };
 		A3935B3E165A296400B60A07 /* MCGL.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MCGL.h; sourceTree = "<group>"; };
@@ -128,8 +131,9 @@
 		A3D30BAD161937DF00BA477E /* MCAnimatedQuad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCAnimatedQuad.m; sourceTree = "<group>"; };
 		A3DB2594162D993900AB9F00 /* CoordinatingController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoordinatingController.h; sourceTree = "<group>"; };
 		A3DB2595162D993900AB9F00 /* CoordinatingController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoordinatingController.m; sourceTree = "<group>"; };
-		A3E8559D1661CAE000DE3ED9 /* RadiusOneCubeWithPic.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = RadiusOneCubeWithPic.obj; sourceTree = "<group>"; };
-		A3E8559F1661CAEE00DE3ED9 /* cubeBlack2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cubeBlack2.png; sourceTree = "<group>"; };
+		A3E855AA1663A50F00DE3ED9 /* cube1126_2.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = cube1126_2.obj; sourceTree = "<group>"; };
+		A3E855AF1663A69100DE3ED9 /* RadiusOneCubeWithPic.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = RadiusOneCubeWithPic.obj; sourceTree = "<group>"; };
+		A3E855B11663A9C400DE3ED9 /* cube1126_original.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = cube1126_original.obj; sourceTree = "<group>"; };
 		A3EFD13916024BA5008E109C /* MeshRenderEngine.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = MeshRenderEngine.hpp; sourceTree = "<group>"; };
 		A3F2ACB41616CE6700D622B8 /* MCMaterialController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCMaterialController.h; sourceTree = "<group>"; };
 		A3F2ACB51616CE6700D622B8 /* MCMaterialController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCMaterialController.m; sourceTree = "<group>"; };
@@ -307,7 +311,7 @@
 		A3587519161F3FFD00998085 /* imageResource */ = {
 			isa = PBXGroup;
 			children = (
-				A3E8559F1661CAEE00DE3ED9 /* cubeBlack2.png */,
+				A37F8811166B876C00B0A59F /* cubeBlack2.png */,
 				A3C8FEA2165D2A52007E0046 /* cube.png */,
 				A358750D161F146000998085 /* ButtonMerged.plist */,
 				A3587514161F2C3000998085 /* ButtonMerged.png */,
@@ -363,7 +367,9 @@
 		E06328C8165CCAF900C28336 /* OBJ Files */ = {
 			isa = PBXGroup;
 			children = (
-				A3E8559D1661CAE000DE3ED9 /* RadiusOneCubeWithPic.obj */,
+				A3E855B11663A9C400DE3ED9 /* cube1126_original.obj */,
+				A3E855AA1663A50F00DE3ED9 /* cube1126_2.obj */,
+				A3E855AF1663A69100DE3ED9 /* RadiusOneCubeWithPic.obj */,
 			);
 			name = "OBJ Files";
 			sourceTree = "<group>";
@@ -435,8 +441,10 @@
 				A32A33BA163BA7C7007840CC /* ClassDiagrm.png in Resources */,
 				A32A33BB163BA7C7007840CC /* ClassDiagrm.uxf in Resources */,
 				A3C8FEA3165D2A53007E0046 /* cube.png in Resources */,
-				A3E8559E1661CAE000DE3ED9 /* RadiusOneCubeWithPic.obj in Resources */,
-				A3E855A01661CAEE00DE3ED9 /* cubeBlack2.png in Resources */,
+				A3E855AC1663A50F00DE3ED9 /* cube1126_2.obj in Resources */,
+				A3E855B01663A69100DE3ED9 /* RadiusOneCubeWithPic.obj in Resources */,
+				A3E855B21663A9C400DE3ED9 /* cube1126_original.obj in Resources */,
+				A37F8812166B876C00B0A59F /* cubeBlack2.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

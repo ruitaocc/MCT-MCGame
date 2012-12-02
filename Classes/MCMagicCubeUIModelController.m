@@ -19,7 +19,7 @@
         //魔方整体三个参数
         scale = MCPointMake(90,90,90);
         translation = MCPointMake(30,0,0);
-        rotation = MCPointMake(30,40,0);
+        rotation = MCPointMake(0,0,0);
         
         MCPoint sub_scale  = MCPointMake(scale.x/3, scale.y/3, scale.z/3);
         for (int  i = 0; i<9; i++) {
@@ -34,12 +34,12 @@
                     int sign_y = y-1;
                     int sign_z = z-1;
                     TestCube * Cube = [[TestCube alloc] init];
-                    Cube.translation = MCPointMake(translation.x, translation.y, translation.z);
-                    
-                    Cube.translation_after_rotation = MCPointMake((gap+sub_scale.x)*sign_x, (gap+sub_scale.y)*sign_y, (gap+sub_scale.z)*sign_z);
+                    Cube.pretranslation = MCPointMake(translation.x, translation.y, translation.z);
+                    Cube.prerotation = MCPointMake(rotation.x, rotation.y, rotation.z);
+                    Cube.translation = MCPointMake((gap+sub_scale.x)*sign_x, (gap+sub_scale.y)*sign_y, (gap+sub_scale.z)*sign_z);
                     
                     Cube.scale = MCPointMake(sub_scale.x, sub_scale.y, sub_scale.z); 
-                    Cube.rotation = MCPointMake(rotation.x, rotation.y, rotation.z);
+                    //Cube.rotation = MCPointMake(rotation.x, rotation.y, rotation.z);
                     Cube.rotationalSpeed = MCPointMake(0, 0, 0);
                     [array27Cube addObject: Cube];
                     [Cube release];		
@@ -190,7 +190,9 @@
 
 };
 -(void)rotateTest{
-    [self rotateOnAxis:Y onLayer:2 inDirection:CW];
+    
+        [self rotateOnAxis:Y onLayer:2 inDirection:CW];
+    
 };
 
 
