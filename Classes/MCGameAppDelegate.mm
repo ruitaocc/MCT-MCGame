@@ -32,6 +32,7 @@
 }
 - (void)applicationDidFinishLaunching:(UIApplication *)application 
 {   
+    //laod external OBJ 3D model into appliaction
     NSString *filename = [[NSBundle mainBundle] pathForResource:@"RadiusOneCubeWithPic" ofType:@"obj"];
     MCOBJLoader *tmp = [MCOBJLoader sharedMCOBJLoader];
     [tmp loadObjFromFile:filename objkey:nil];
