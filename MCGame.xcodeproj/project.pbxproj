@@ -35,6 +35,14 @@
 		A30C47E6161C8A370057C5E1 /* particleAtlas.png in Resources */ = {isa = PBXBuildFile; fileRef = A30C47E4161C8A370057C5E1 /* particleAtlas.png */; };
 		A32A33BA163BA7C7007840CC /* ClassDiagrm.png in Resources */ = {isa = PBXBuildFile; fileRef = A32A33B8163BA7C7007840CC /* ClassDiagrm.png */; };
 		A32A33BB163BA7C7007840CC /* ClassDiagrm.uxf in Resources */ = {isa = PBXBuildFile; fileRef = A32A33B9163BA7C7007840CC /* ClassDiagrm.uxf */; };
+		A3359E57168E944D002F9459 /* SVProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = A3359E56168E944D002F9459 /* SVProgressHUD.m */; };
+		A3359E5E168E9764002F9459 /* error.png in Resources */ = {isa = PBXBuildFile; fileRef = A3359E58168E9764002F9459 /* error.png */; };
+		A3359E5F168E9764002F9459 /* error@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A3359E59168E9764002F9459 /* error@2x.png */; };
+		A3359E60168E9764002F9459 /* success.png in Resources */ = {isa = PBXBuildFile; fileRef = A3359E5A168E9764002F9459 /* success.png */; };
+		A3359E61168E9764002F9459 /* success@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A3359E5B168E9764002F9459 /* success@2x.png */; };
+		A3359E62168E9764002F9459 /* sr_refresh.png in Resources */ = {isa = PBXBuildFile; fileRef = A3359E5C168E9764002F9459 /* sr_refresh.png */; };
+		A3359E63168E9764002F9459 /* sr_refresh@2X.png in Resources */ = {isa = PBXBuildFile; fileRef = A3359E5D168E9764002F9459 /* sr_refresh@2X.png */; };
+		A3359E6B168EB6A7002F9459 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = A3359E6A168EB6A7002F9459 /* MBProgressHUD.m */; };
 		A358750F161F146000998085 /* ButtonMerged.plist in Resources */ = {isa = PBXBuildFile; fileRef = A358750D161F146000998085 /* ButtonMerged.plist */; };
 		A3587515161F2C3000998085 /* ButtonMerged.png in Resources */ = {isa = PBXBuildFile; fileRef = A3587514161F2C3000998085 /* ButtonMerged.png */; };
 		A3587518161F355400998085 /* MainWindow-iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = A3587517161F355400998085 /* MainWindow-iPad.xib */; };
@@ -106,6 +114,16 @@
 		A30C47E4161C8A370057C5E1 /* particleAtlas.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = particleAtlas.png; path = Classes/particleAtlas.png; sourceTree = "<group>"; };
 		A32A33B8163BA7C7007840CC /* ClassDiagrm.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ClassDiagrm.png; sourceTree = "<group>"; };
 		A32A33B9163BA7C7007840CC /* ClassDiagrm.uxf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = ClassDiagrm.uxf; sourceTree = "<group>"; };
+		A3359E55168E944D002F9459 /* SVProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVProgressHUD.h; sourceTree = "<group>"; };
+		A3359E56168E944D002F9459 /* SVProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVProgressHUD.m; sourceTree = "<group>"; };
+		A3359E58168E9764002F9459 /* error.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = error.png; path = Classes/error.png; sourceTree = "<group>"; };
+		A3359E59168E9764002F9459 /* error@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "error@2x.png"; path = "Classes/error@2x.png"; sourceTree = "<group>"; };
+		A3359E5A168E9764002F9459 /* success.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = success.png; path = Classes/success.png; sourceTree = "<group>"; };
+		A3359E5B168E9764002F9459 /* success@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "success@2x.png"; path = "Classes/success@2x.png"; sourceTree = "<group>"; };
+		A3359E5C168E9764002F9459 /* sr_refresh.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = sr_refresh.png; path = Classes/sr_refresh.png; sourceTree = "<group>"; };
+		A3359E5D168E9764002F9459 /* sr_refresh@2X.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "sr_refresh@2X.png"; path = "Classes/sr_refresh@2X.png"; sourceTree = "<group>"; };
+		A3359E69168EB6A7002F9459 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
+		A3359E6A168EB6A7002F9459 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
 		A358750D161F146000998085 /* ButtonMerged.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = ButtonMerged.plist; sourceTree = "<group>"; };
 		A3587514161F2C3000998085 /* ButtonMerged.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ButtonMerged.png; sourceTree = "<group>"; };
 		A3587517161F355400998085 /* MainWindow-iPad.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = "MainWindow-iPad.xib"; path = "iPad/MainWindow-iPad.xib"; sourceTree = "<group>"; };
@@ -300,6 +318,30 @@
 			name = Doc;
 			sourceTree = "<group>";
 		};
+		A3359E53168E9417002F9459 /* ProgressBar */ = {
+			isa = PBXGroup;
+			children = (
+				A3359E55168E944D002F9459 /* SVProgressHUD.h */,
+				A3359E56168E944D002F9459 /* SVProgressHUD.m */,
+				A3359E69168EB6A7002F9459 /* MBProgressHUD.h */,
+				A3359E6A168EB6A7002F9459 /* MBProgressHUD.m */,
+			);
+			name = ProgressBar;
+			sourceTree = "<group>";
+		};
+		A3359E64168E9777002F9459 /* progressbar */ = {
+			isa = PBXGroup;
+			children = (
+				A3359E58168E9764002F9459 /* error.png */,
+				A3359E59168E9764002F9459 /* error@2x.png */,
+				A3359E5A168E9764002F9459 /* success.png */,
+				A3359E5B168E9764002F9459 /* success@2x.png */,
+				A3359E5C168E9764002F9459 /* sr_refresh.png */,
+				A3359E5D168E9764002F9459 /* sr_refresh@2X.png */,
+			);
+			name = progressbar;
+			sourceTree = "<group>";
+		};
 		A3587516161F355200998085 /* iPad */ = {
 			isa = PBXGroup;
 			children = (
@@ -311,6 +353,7 @@
 		A3587519161F3FFD00998085 /* imageResource */ = {
 			isa = PBXGroup;
 			children = (
+				A3359E64168E9777002F9459 /* progressbar */,
 				A37F8811166B876C00B0A59F /* cubeBlack2.png */,
 				A3C8FEA2165D2A52007E0046 /* cube.png */,
 				A358750D161F146000998085 /* ButtonMerged.plist */,
@@ -377,6 +420,7 @@
 		E06328C9165CCC6E00C28336 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				A3359E53168E9417002F9459 /* ProgressBar */,
 				A3935B41165A296900B60A07 /* RayDectionUtil */,
 				A30C47D5161C6F1C0057C5E1 /* MathUtil */,
 			);
@@ -445,6 +489,12 @@
 				A3E855B01663A69100DE3ED9 /* RadiusOneCubeWithPic.obj in Resources */,
 				A3E855B21663A9C400DE3ED9 /* cube1126_original.obj in Resources */,
 				A37F8812166B876C00B0A59F /* cubeBlack2.png in Resources */,
+				A3359E5E168E9764002F9459 /* error.png in Resources */,
+				A3359E5F168E9764002F9459 /* error@2x.png in Resources */,
+				A3359E60168E9764002F9459 /* success.png in Resources */,
+				A3359E61168E9764002F9459 /* success@2x.png in Resources */,
+				A3359E62168E9764002F9459 /* sr_refresh.png in Resources */,
+				A3359E63168E9764002F9459 /* sr_refresh@2X.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -497,6 +547,8 @@
 				A3C8FEA6165D3D6A007E0046 /* MCMagicCubeUIModelController.m in Sources */,
 				A309D8FD165F883000CDA1DC /* RCCube.m in Sources */,
 				A309D8FE165F883000CDA1DC /* RCRubiksCube.m in Sources */,
+				A3359E57168E944D002F9459 /* SVProgressHUD.m in Sources */,
+				A3359E6B168EB6A7002F9459 /* MBProgressHUD.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

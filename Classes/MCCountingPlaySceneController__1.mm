@@ -43,6 +43,8 @@
     [self addObjectToScene:magicCube0];
 	[magicCube0 release];		
     */
+    
+    //大魔方
     MCMagicCubeUIModelController *magicCube = [[MCMagicCubeUIModelController alloc]initiate];
     [self addObjectToScene:magicCube];
     [magicCube release];

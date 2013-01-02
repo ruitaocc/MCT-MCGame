@@ -98,7 +98,11 @@
 	if (objectsToRemove == nil) objectsToRemove = [[NSMutableArray alloc] init];
 	[objectsToRemove addObject:sceneObject];
 }
-
+-(void)removeAllObjectFromScene{
+    if ([sceneObjects count] > 0) {
+        [sceneObjects removeAllObjects];
+    }
+}
 
 // makes everything go
 -(void) startScene

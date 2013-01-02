@@ -52,6 +52,7 @@
 - (void)gameLoop;
 - (void)gameOver;
 - (void)removeObjectFromScene:(MCSceneObject*)sceneObject;
+- (void)removeAllObjectFromScene;
 - (void)renderScene;
 - (void)restartScene;
 - (void)setAnimationInterval:(NSTimeInterval)interval ;

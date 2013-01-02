@@ -61,7 +61,7 @@
 -(void)update
 {
     [self handleTouches];
-       [super update];
+    [super update];
 
 }
 

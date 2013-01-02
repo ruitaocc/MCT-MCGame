@@ -66,6 +66,8 @@
 	glRotatef(rotation.x, 1.0f, 0.0f, 0.0f);
 	glRotatef(rotation.y, 0.0f, 1.0f, 0.0f);
 	glRotatef(rotation.z, 0.0f, 0.0f, 1.0f);
+    
+    
     //tanslation_after_rotate
     glTranslatef(translation.x, translation.y, translation.z);
     

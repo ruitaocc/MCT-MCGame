@@ -11,8 +11,10 @@
 #import "MCSceneController.h"
 #import "inputController.h"
 #import "sceneController.h"
-@interface CoordinatingController : NSObject{
+#import "MBProgressHUD.h"
+@interface CoordinatingController : NSObject <MBProgressHUDDelegate>{
     sceneController * currentController;
+    MBProgressHUD *HUD;
 @private
     MCSceneController * mainSceneController;
     MCCountingPlaySceneController *countingPlaySceneController;

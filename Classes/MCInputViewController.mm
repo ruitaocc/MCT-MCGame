@@ -116,11 +116,7 @@
 
 
 -(void)heroBoardBtnDown{
-    NSLog(@"heroBoardBtnDown");
-    NSString *filename = [[NSBundle mainBundle] pathForResource:@"111" ofType:@"obj"];
-    MCOBJLoader *tmp = [MCOBJLoader sharedMCOBJLoader];
-    [tmp loadObjFromFile:filename objkey:nil];
-    
+    NSLog(@"heroBoardBtnDown");    
 }
 -(void)heroBoardBtnUp{NSLog(@"heroBoardBtnUp");}
 
