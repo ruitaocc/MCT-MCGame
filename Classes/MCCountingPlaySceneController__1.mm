@@ -8,7 +8,7 @@
 
 #import "MCCountingPlaySceneController__1.h"
 #import "MCMagicCubeUIModelController.h"
-#import "TestCube.h"
+#import "Cube.h"
 @implementation MCCountingPlaySceneController
 
 +(MCCountingPlaySceneController*)sharedCountingPlaySceneController

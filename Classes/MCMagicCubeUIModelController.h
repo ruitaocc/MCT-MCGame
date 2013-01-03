@@ -9,20 +9,16 @@
 #import <Foundation/Foundation.h>
 #import "MCPoint.h"
 #import "Global.h"
-#import "TestCube.h"
+#import "Cube.h"
 @class MCSceneObject;
 //旋转速度 帧率无关设计 2秒
 #define TIME_PER_ROTATION 1
 #define ROTATION_ANGLE 90
 #define CUBE_CUBE_GAP 0.3;
 @interface MCMagicCubeUIModelController : MCSceneObject{
-    NSMutableArray* array27Cube;
-//    MCPoint translation;
-//	MCPoint rotation;
-//	MCPoint scale;
-//    MCPoint rotationalSpeed;
-    
-    TestCube * layerPtr[9];
+    NSMutableArray* array27Cube; 
+    Cube * layerPtr[9];
+
     BOOL isRotate;
     double rest_rotate_time;
     double rest_rotate_angle;
@@ -30,6 +26,10 @@
     LayerRotationDirectionType current_rotate_direction;
     int current_rotate_layer;
     
+    
+    BOOL m_spinning;
+    float m_trackballRadius;
+    ivec2 m_fingerStart;    
 }
 //@property (assign)MCPoint translation,rotation,scale,rotationalSpeed;
 
@@ -40,5 +40,6 @@
 -(void)update;
 
 -(void)rotateTest;
+-(vec3)MapToSphere:(ivec2 )touchpoint;
 
 @end

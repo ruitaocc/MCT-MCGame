@@ -16,7 +16,7 @@
 #import "MCSceneObject.h"
 #import "MCConfiguration.h"
 #import "MCPoint.h"
-#import "TestCube.h"
+#import "Cube.h"
 
 @implementation sceneController
 

@@ -18,7 +18,7 @@
 @implementation MCSceneObject
 @synthesize prerotation,pretranslation;
 @synthesize translation,rotation,scale,active,mesh,matrix,meshBounds;
-
+@synthesize m_orientation;
 - (id) init
 {
 	self = [super init];
@@ -61,6 +61,9 @@
 	glRotatef(prerotation.x, 1.0f, 0.0f, 0.0f);
 	glRotatef(prerotation.y, 0.0f, 1.0f, 0.0f);
 	glRotatef(prerotation.z, 0.0f, 0.0f, 1.0f);
+    
+    mat4 orientation = m_orientation.ToMatrix();
+    glMultMatrixf(orientation.Pointer());
 	
     // rotate
 	glRotatef(rotation.x, 1.0f, 0.0f, 0.0f);

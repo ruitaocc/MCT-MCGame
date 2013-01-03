@@ -12,7 +12,7 @@
 #import "MCSceneObject.h"
 #import "MCConfiguration.h"
 #import "MCPoint.h"
-#import "TestCube.h"
+#import "Cube.h"
 //#import "data.hpp"
 @implementation MCSceneController
 
@@ -40,7 +40,7 @@
 	if (sceneObjects == nil) sceneObjects = [[NSMutableArray alloc] init];	
 	
 	// our 'character' object
-	TestCube * magicCube = [[TestCube alloc] init];
+	Cube * magicCube = [[Cube alloc] init];
     //[magicCube.mesh setColors:&colorss];
 	magicCube.pretranslation = MCPointMake(30.0, 0.0, 0.0);
 	magicCube.scale = MCPointMake(60, 60, 60);

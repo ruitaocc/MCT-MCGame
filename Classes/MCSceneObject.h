@@ -26,6 +26,10 @@
 	// transform values
 	MCPoint pretranslation;
 	MCPoint prerotation;
+    
+    Quaternion m_orientation;
+    Quaternion m_previousOrientation;
+    
     MCPoint translation;
 	MCPoint scale;
 	MCPoint rotation;
@@ -51,6 +55,7 @@
 @property (assign) CGFloat * matrix;
 @property (assign) MCPoint pretranslation;
 @property (assign) MCPoint prerotation;
+@property (assign) Quaternion m_orientation;
 @property (assign) BOOL active;
 @property (assign) CGRect meshBounds;
 - (id) init;
