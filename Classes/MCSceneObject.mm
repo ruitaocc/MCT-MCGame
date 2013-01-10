@@ -10,7 +10,6 @@
 #import "MCSceneController.h"
 #import "MCInputViewController.h"
 #import "MCMesh.h"
-
 #pragma mark Spinny Square mesh
 
 
@@ -19,6 +18,8 @@
 @synthesize prerotation,pretranslation;
 @synthesize translation,rotation,scale,active,mesh,matrix,meshBounds;
 @synthesize m_orientation;
+@synthesize quaRotation;
+@synthesize collider;
 - (id) init
 {
 	self = [super init];
@@ -70,6 +71,9 @@
 	glRotatef(rotation.y, 0.0f, 1.0f, 0.0f);
 	glRotatef(rotation.z, 0.0f, 0.0f, 1.0f);
     
+    mat4 matRotation = quaRotation.ToMatrix();
+    glMultMatrixf(matRotation.Pointer());
+    
     
     //tanslation_after_rotate
     glTranslatef(translation.x, translation.y, translation.z);
@@ -81,7 +85,7 @@
 	glGetFloatv(GL_MODELVIEW_MATRIX, matrix);
 	//restore the matrix
 	glPopMatrix();
-	//if (collider != nil) [collider updateCollider:self];   
+	if (collider != nil) [collider updateCollider:self];   
 }
 
 // called once every frame
@@ -93,7 +97,8 @@
 	glLoadIdentity();
 	glMultMatrixf(matrix);
 	[mesh render];	
-	glPopMatrix();}
+	glPopMatrix();
+}
 
 - (void) dealloc
 {

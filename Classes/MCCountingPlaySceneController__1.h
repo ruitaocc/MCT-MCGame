@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "sceneController.h"
-
+#import "MCCollisionController.h"
 @interface MCCountingPlaySceneController : sceneController{
     
 }

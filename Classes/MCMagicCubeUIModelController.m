@@ -10,7 +10,7 @@
 #import <math.h>
 #import "CoordinatingController.h"
 @implementation MCMagicCubeUIModelController
-//@synthesize translation,rotation,scale,rotationalSpeed;
+
 
 -(id)initiate{
     if(self = [super init]){
@@ -20,7 +20,6 @@
         scale = MCPointMake(90,90,90);
         translation = MCPointMake(0,0,0);
         rotation = MCPointMake(30,30,0);
-        
         MCPoint sub_scale  = MCPointMake(scale.x/3, scale.y/3, scale.z/3);
         for (int  i = 0; i<9; i++) {
             layerPtr[i] = nil;
@@ -33,23 +32,25 @@
                     int sign_x = x-1;
                     int sign_y = y-1;
                     int sign_z = z-1;
-                    Cube * Cube = [[Cube alloc] init];
-                    Cube.pretranslation = MCPointMake(translation.x, translation.y, translation.z);
-                    Cube.prerotation = MCPointMake(rotation.x, rotation.y, rotation.z);
+                    Cube * tCube = [[Cube alloc] init];
+                    tCube.pretranslation = MCPointMake(translation.x, translation.y, translation.z);
+                    tCube.prerotation = MCPointMake(rotation.x, rotation.y, rotation.z);
                     
                     
-                    Cube.translation = MCPointMake((gap+sub_scale.x)*sign_x, (gap+sub_scale.y)*sign_y, (gap+sub_scale.z)*sign_z);
+                    tCube.translation = MCPointMake((gap+sub_scale.x)*sign_x, (gap+sub_scale.y)*sign_y, (gap+sub_scale.z)*sign_z);
                     
-                    Cube.scale = MCPointMake(sub_scale.x, sub_scale.y, sub_scale.z); 
+                    tCube.scale = MCPointMake(sub_scale.x, sub_scale.y, sub_scale.z); 
                     //Cube.rotation = MCPointMake(rotation.x, rotation.y, rotation.z);
-                    Cube.rotationalSpeed = MCPointMake(0, 0, 0);
-                    [array27Cube addObject: Cube];
-                    [Cube release];		
+                    //Cube.rotationalSpeed = MCPointMake(0, 0, 0);
+                    [array27Cube addObject: tCube];
+                    [tCube release];		
                 }
             }
         }
         m_trackballRadius = 260;
         m_spinning = NO;
+        self.collider = [MCCollider collider];
+        [self.collider setCheckForCollision:YES];
     }
     
     return self;
@@ -119,6 +120,7 @@
 
 -(void)update{
     [self handleTouches];
+    if (collider != nil) [collider updateCollider:self];
     if (isRotate){
         //
         CGFloat deltaTime = [[[CoordinatingController sharedCoordinatingController] currentController] deltaTime];
@@ -201,8 +203,8 @@
 	NSSet * touches = [[[CoordinatingController sharedCoordinatingController] currentController].inputController touchEvents];
     UIView* view= [[[CoordinatingController sharedCoordinatingController] currentController].inputController view ];
 	UITouchPhase touchEventSate = [[[CoordinatingController sharedCoordinatingController] currentController].inputController touchEventSate];
-    if ([touches count] != 2) return;
-    if ([touches count] == 2) {
+    //if ([touches count] != 2) return;
+    if ([touches count] == 1) {
         UITouch *touch = [[touches allObjects] objectAtIndex:0];
        // UITouch *touch1 = [[touches allObjects] objectAtIndex:1];
         if (touchEventSate == UITouchPhaseMoved) {

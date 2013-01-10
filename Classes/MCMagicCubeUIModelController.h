@@ -15,6 +15,8 @@
 #define TIME_PER_ROTATION 1
 #define ROTATION_ANGLE 90
 #define CUBE_CUBE_GAP 0.3;
+
+#include "MCCollider.h"
 @interface MCMagicCubeUIModelController : MCSceneObject{
     NSMutableArray* array27Cube; 
     Cube * layerPtr[9];
@@ -30,8 +32,10 @@
     BOOL m_spinning;
     float m_trackballRadius;
     ivec2 m_fingerStart;    
+    
+    
 }
-//@property (assign)MCPoint translation,rotation,scale,rotationalSpeed;
+
 
 -(id)initiate;
 - (void) rotateOnAxis : (AxisType)axis onLayer: (int)layer inDirection: (LayerRotationDirectionType)direction;

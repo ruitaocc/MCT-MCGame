@@ -68,7 +68,9 @@
 -(void)gameOver
 {
     //this selector would be the action take by interface when the puzzle is solved. but now it is not implement.
-	[inputController gameOver];
+	if([inputController respondsToSelector:@selector(gameOver)]){
+        [inputController gameOver];
+    }
 }
 #pragma mark dealloc
 

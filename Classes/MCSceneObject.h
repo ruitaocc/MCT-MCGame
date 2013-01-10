@@ -21,7 +21,7 @@
 #import "MCConfiguration.h"
 //#include "MeshRenderEngine.hpp"
 @class MCMesh;
-
+@class MCCollider;
 @interface MCSceneObject : NSObject {
 	// transform values
 	MCPoint pretranslation;
@@ -33,6 +33,9 @@
     MCPoint translation;
 	MCPoint scale;
 	MCPoint rotation;
+    
+    Quaternion quaRotation;
+    Quaternion quaPreviousRotation;
 
 	MCMesh * mesh;
 	
@@ -43,11 +46,11 @@
 	
 	CGRect meshBounds;
 	
-	//MCCollider * collider;
+	MCCollider *collider;//;
 
     
 }
-
+@property (retain) MCCollider *collider;
 @property (retain) MCMesh * mesh;
 @property (assign) MCPoint translation;
 @property (assign) MCPoint rotation;
@@ -56,6 +59,7 @@
 @property (assign) MCPoint pretranslation;
 @property (assign) MCPoint prerotation;
 @property (assign) Quaternion m_orientation;
+@property (assign) Quaternion quaRotation;
 @property (assign) BOOL active;
 @property (assign) CGRect meshBounds;
 - (id) init;

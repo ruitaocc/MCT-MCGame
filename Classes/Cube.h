@@ -9,10 +9,11 @@
 #import "MCMobileObject.h"
 
 @class MCParticleSystem;
+@class MCCollider;
 @interface Cube :MCMobileObject{
     MCParticleSystem * particleEmitter;
 
-   
+   // MCCollider * collider;
 }
 
 

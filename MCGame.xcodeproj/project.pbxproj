@@ -49,6 +49,8 @@
 		A358753A16207FA500998085 /* sixcolor.png in Resources */ = {isa = PBXBuildFile; fileRef = A358753916207FA500998085 /* sixcolor.png */; };
 		A37F8812166B876C00B0A59F /* cubeBlack2.png in Resources */ = {isa = PBXBuildFile; fileRef = A37F8811166B876C00B0A59F /* cubeBlack2.png */; };
 		A3BF9205161D4C4600829D13 /* cubeTexture.png in Resources */ = {isa = PBXBuildFile; fileRef = A3BF9204161D4C4600829D13 /* cubeTexture.png */; };
+		A3C1D18216957371004EB56C /* MCCollider.mm in Sources */ = {isa = PBXBuildFile; fileRef = A3C1D18116957371004EB56C /* MCCollider.mm */; };
+		A3C1D18A169596DE004EB56C /* MCCollisionController.mm in Sources */ = {isa = PBXBuildFile; fileRef = A3C1D189169596DD004EB56C /* MCCollisionController.mm */; };
 		A3C8FEA3165D2A53007E0046 /* cube.png in Resources */ = {isa = PBXBuildFile; fileRef = A3C8FEA2165D2A52007E0046 /* cube.png */; };
 		A3C8FEA6165D3D6A007E0046 /* MCMagicCubeUIModelController.m in Sources */ = {isa = PBXBuildFile; fileRef = A3C8FEA5165D3D69007E0046 /* MCMagicCubeUIModelController.m */; };
 		A3D2FC801638D2FD00517CCF /* sceneController.m in Sources */ = {isa = PBXBuildFile; fileRef = A3D2FC7F1638D2FD00517CCF /* sceneController.m */; };
@@ -106,7 +108,7 @@
 		A30C47D6161C723E0057C5E1 /* MCTexturedMesh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCTexturedMesh.h; sourceTree = "<group>"; };
 		A30C47D7161C723E0057C5E1 /* MCTexturedMesh.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCTexturedMesh.m; sourceTree = "<group>"; };
 		A30C47DA161C72CD0057C5E1 /* TestCubeData.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TestCubeData.h; sourceTree = "<group>"; };
-		A30C47DD161C86F70057C5E1 /* Cube.h */ = {isa = PBXFileReference; fileEncoding = 4; path = Cube.h; sourceTree = "<group>"; };
+		A30C47DD161C86F70057C5E1 /* Cube.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Cube.h; sourceTree = "<group>"; };
 		A30C47DE161C86F70057C5E1 /* Cube.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Cube.m; sourceTree = "<group>"; };
 		A30C47E0161C874F0057C5E1 /* MCMobileObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCMobileObject.h; sourceTree = "<group>"; };
 		A30C47E1161C874F0057C5E1 /* MCMobileObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCMobileObject.m; sourceTree = "<group>"; };
@@ -135,6 +137,10 @@
 		A3935B3E165A296400B60A07 /* MCGL.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MCGL.h; sourceTree = "<group>"; };
 		A3935B3F165A296400B60A07 /* MCGL.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = MCGL.mm; sourceTree = "<group>"; };
 		A3BF9204161D4C4600829D13 /* cubeTexture.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = cubeTexture.png; path = Classes/cubeTexture.png; sourceTree = "<group>"; };
+		A3C1D18016957371004EB56C /* MCCollider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCCollider.h; sourceTree = "<group>"; };
+		A3C1D18116957371004EB56C /* MCCollider.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MCCollider.mm; sourceTree = "<group>"; };
+		A3C1D188169596DD004EB56C /* MCCollisionController.h */ = {isa = PBXFileReference; fileEncoding = 4; path = MCCollisionController.h; sourceTree = "<group>"; };
+		A3C1D189169596DD004EB56C /* MCCollisionController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MCCollisionController.mm; sourceTree = "<group>"; };
 		A3C8FEA2165D2A52007E0046 /* cube.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cube.png; sourceTree = "<group>"; };
 		A3C8FEA4165D3D69007E0046 /* MCMagicCubeUIModelController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCMagicCubeUIModelController.h; sourceTree = "<group>"; };
 		A3C8FEA5165D3D69007E0046 /* MCMagicCubeUIModelController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCMagicCubeUIModelController.m; sourceTree = "<group>"; };
@@ -380,8 +386,12 @@
 		A3F2ACBD1616D97800D622B8 /* SceneObjects */ = {
 			isa = PBXGroup;
 			children = (
+				A3C1D188169596DD004EB56C /* MCCollisionController.h */,
+				A3C1D189169596DD004EB56C /* MCCollisionController.mm */,
 				48A858E40FFAFC4D0060F0B8 /* MCSceneObject.h */,
 				48A858E50FFAFC4D0060F0B8 /* MCSceneObject.mm */,
+				A3C1D18016957371004EB56C /* MCCollider.h */,
+				A3C1D18116957371004EB56C /* MCCollider.mm */,
 				A30C47E0161C874F0057C5E1 /* MCMobileObject.h */,
 				A30C47E1161C874F0057C5E1 /* MCMobileObject.m */,
 				48C2AB8810032DE100F0CFA0 /* MCMesh.h */,
@@ -549,6 +559,8 @@
 				A309D8FE165F883000CDA1DC /* RCRubiksCube.m in Sources */,
 				A3359E57168E944D002F9459 /* SVProgressHUD.m in Sources */,
 				A3359E6B168EB6A7002F9459 /* MBProgressHUD.m in Sources */,
+				A3C1D18216957371004EB56C /* MCCollider.mm in Sources */,
+				A3C1D18A169596DE004EB56C /* MCCollisionController.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

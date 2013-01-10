@@ -17,7 +17,7 @@
 #import "MCConfiguration.h"
 #import "MCPoint.h"
 #import "Cube.h"
-
+#import "MCCollisionController.h"
 @implementation sceneController
 
 @synthesize inputController, openGLView;
@@ -137,7 +137,7 @@
 	
     
     // deal with collisions
-    //	[collisionController handleCollisions];
+    [collisionController handleCollisions];
     
 	// send our objects to the renderer
 	[self renderScene];

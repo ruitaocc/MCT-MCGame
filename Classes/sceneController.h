@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 //@class MCInputViewController;
+@class MCCollisionController;
 @class InputController;
 @class EAGLView;
 @class MCSceneObject;
@@ -34,7 +35,7 @@
 	NSDate * levelStartDate;
 	
 	BOOL needToLoadScene;
-
+    MCCollisionController * collisionController;
 }
 
 @property (retain) InputController * inputController;

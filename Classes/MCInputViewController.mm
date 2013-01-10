@@ -22,7 +22,7 @@
 
     CGFloat xBased = -270.0;
     CGFloat yBased = 200.0;
-    CGFloat xGap = 0.0;
+    //CGFloat xGap = 0.0;
     CGFloat yGap = 10.0;
     
     CGFloat btnWidth = 220.0;

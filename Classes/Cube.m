@@ -14,12 +14,13 @@
 //#import "TestCubeData.h"
 #import "MCParticleSystem.h"
 #import "CoordinatingController.h"
+#import "MCCollider.h"
 @implementation Cube
 - (id) init
 {
 	self = [super init];
 	if (self != nil) {
-		
+	//	self.collider = nil;
 	}
 	return self;
 }
@@ -59,6 +60,7 @@
 // called once every frame
 -(void)update
 {
+    //if (collider != nil) [collider updateCollider:self];
     [super update];
 
 }

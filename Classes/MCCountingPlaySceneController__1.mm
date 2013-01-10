@@ -9,6 +9,7 @@
 #import "MCCountingPlaySceneController__1.h"
 #import "MCMagicCubeUIModelController.h"
 #import "Cube.h"
+
 @implementation MCCountingPlaySceneController
 
 +(MCCountingPlaySceneController*)sharedCountingPlaySceneController
@@ -49,7 +50,9 @@
     [self addObjectToScene:magicCube];
     [magicCube release];
     
-    
+    collisionController = [[MCCollisionController alloc] init];
+	collisionController.sceneObjects = sceneObjects;
+	if (DEBUG_DRAW_COLLIDERS)	[self addObjectToScene:collisionController];
 	
 	    
 	// reload our interface
@@ -58,6 +61,6 @@
 
 -(void)rotateTest{
     NSLog(@"mc rotate test");
-    [sceneObjects makeObjectsPerformSelector:@selector(rotateTest)];
+    [[sceneObjects objectAtIndex:0]performSelector:@selector(rotateTest)];
 };
 @end
