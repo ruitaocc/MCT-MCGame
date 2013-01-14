@@ -203,15 +203,19 @@
 	NSSet * touches = [[[CoordinatingController sharedCoordinatingController] currentController].inputController touchEvents];
     UIView* view= [[[CoordinatingController sharedCoordinatingController] currentController].inputController view ];
 	UITouchPhase touchEventSate = [[[CoordinatingController sharedCoordinatingController] currentController].inputController touchEventSate];
-    //if ([touches count] != 2) return;
-    if ([touches count] == 1) {
+    if ([touches count] != 2) return;
+    if ([touches count] == 2) {
         UITouch *touch = [[touches allObjects] objectAtIndex:0];
-       // UITouch *touch1 = [[touches allObjects] objectAtIndex:1];
+        UITouch *touch1 = [[touches allObjects] objectAtIndex:1];
         if (touchEventSate == UITouchPhaseMoved) {
             NSLog(@"moved");
             
             //CGPoint previous = [touch previousLocationInView:view];
-            CGPoint current = [touch locationInView:view];
+            CGPoint current0 = [touch locationInView:view];
+
+            CGPoint current1 = [touch1 locationInView:view];
+
+            CGPoint current = CGPointMake((current0.x+current1.x)/2,(current0.y+current1.y)/2);
             //ivec2 oldLocation = ivec2(previous.x,previous.y);
             ivec2 newLocation = ivec2(current.x,current.y);
             

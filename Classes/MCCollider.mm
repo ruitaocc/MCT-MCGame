@@ -73,6 +73,7 @@ static CGFloat MCCubreColorValues[144] =
 
 @implementation MCCollider
 @synthesize checkForCollision;
+
 +(MCCollider*)collider
 {
 	MCCollider * collider = [[MCCollider alloc] init];
