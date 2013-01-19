@@ -7,16 +7,15 @@
 //
 
 #import "MCMobileObject.h"
-
+#import "MCRay.h"
 @class MCParticleSystem;
 @class MCCollider;
 @interface Cube :MCMobileObject{
     MCParticleSystem * particleEmitter;
-
-   // MCCollider * collider;
+    int index;
 }
 
-
+@property (assign) int index;
 
 
 - (id) init;

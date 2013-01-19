@@ -85,6 +85,13 @@ struct Vector3 {
         y *= s;
         z *= s;
     }
+    void set(T cx, T cy, T cz)
+    {
+        x = cx;
+        y = cy;
+        z = cz;
+    }
+
     Vector3 Normalized() const 
     {
         Vector3 v = *this;

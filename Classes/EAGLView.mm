@@ -61,7 +61,7 @@
 
 
 - (void)setupViewLandscape
-{			
+{	/*		
 	// Sets up matrices and transforms for OpenGL ES
 	glViewport(0, 0, backingWidth, backingHeight);
 	glMatrixMode(GL_PROJECTION);
@@ -69,13 +69,27 @@
 	glRotatef(-90.0f, 0.0f, 0.0f, 1.0f);
 	// set up the viewport so that it is analagous to the screen pixels
 	[self perspectiveFovY:60 aspect:1024.0/768.0 zNear:0.01 zFar:1000.0];
-    //	glOrthof(-backingHeight/2.0, backingHeight/2.0, -backingWidth/2.0, backingWidth/2.0, -100.0f, 100.0f);
 	//280
     glTranslatef(0.0, 0.0, -180.0);
-	glMatrixMode(GL_MODELVIEW);
+     */
+	
+    glViewport(0, 0, backingWidth, backingHeight);
+    //You can see that instead of glMatrixMode(GL_PROJECTION) you use this function.
+    [MCGL matrixMode:GL_PROJECTION];
+    //You can see that instead of glLoadIdentity() you use this function.
+    [MCGL loadIdentity];
+    //Here, you can use this advanced function to set the projection matrix.
+    [MCGL perspectiveWithFovy:60.0
+                       aspect:1024.0/768.0
+                        zNear:0.01
+                         zFar:1000];
+    
+    glMatrixMode(GL_MODELVIEW);
     
 	// Clears the view with gray
 	glClearColor(0.7f, 0.7f, 0.7f, 1.0f);
+    
+    
 }
 
 - (void)setupViewPortrait

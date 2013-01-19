@@ -51,7 +51,7 @@
     [magicCube release];
     
     collisionController = [[MCCollisionController alloc] init];
-	collisionController.sceneObjects = sceneObjects;
+	collisionController.sceneObjects = magicCube.array27Cube;
 	if (DEBUG_DRAW_COLLIDERS)	[self addObjectToScene:collisionController];
 	
 	    

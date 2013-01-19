@@ -14,8 +14,8 @@
 //旋转速度 帧率无关设计 2秒
 #define TIME_PER_ROTATION 1
 #define ROTATION_ANGLE 90
-#define CUBE_CUBE_GAP 0.3;
-
+#define CUBE_CUBE_GAP 0;
+#import "MCRay.h"
 #include "MCCollider.h"
 @interface MCMagicCubeUIModelController : MCSceneObject{
     NSMutableArray* array27Cube; 
@@ -33,10 +33,13 @@
     float m_trackballRadius;
     ivec2 m_fingerStart;    
     
+    MCRay *ray;
+    
+
     
 }
 
-
+@property (retain) NSMutableArray* array27Cube;
 -(id)initiate;
 - (void) rotateOnAxis : (AxisType)axis onLayer: (int)layer inDirection: (LayerRotationDirectionType)direction;
 -(void)awake;

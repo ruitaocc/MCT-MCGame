@@ -19,6 +19,7 @@
 #import "MCTexturedMesh.h"
 #import "MCPoint.h"
 #import "MCConfiguration.h"
+#import "MCRay.h"
 //#include "MeshRenderEngine.hpp"
 @class MCMesh;
 @class MCCollider;

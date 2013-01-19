@@ -285,17 +285,17 @@ int glhInvertMatrixf2(const float *m, float *out){
 +(void)loadIdentity{
     switch (matrixMode) {
         case GL_PROJECTION:
-            projectionMatrix.loadIdentity();
+            projectionMatrix.Identity();
             glLoadMatrixf(projectionMatrix.Pointer());
             break;
         case GL_MODELVIEW:
             {
-                viewMatrix.loadIdentity();
+                viewMatrix.Identity();
                 for (int i = 0; i <modelMatrix.size(); i++) {
                     modelMatrix.pop();
                 }
                 mat4 initMatrix;
-                initMatrix.loadIdentity();
+                initMatrix.Identity();
                 modelMatrix.push(initMatrix);
                 glLoadMatrixf(viewMatrix.Pointer());
             }
@@ -310,7 +310,7 @@ int glhInvertMatrixf2(const float *m, float *out){
                      zNear:(float)zNear
                       zFar:(float)zFar{
     //avoid error
-    projectionMatrix.loadIdentity();
+    projectionMatrix.Identity();
     
     GLfloat halfWidth, halfHeight, deltaZ;
     deltaZ = zFar - zNear;
@@ -324,7 +324,15 @@ int glhInvertMatrixf2(const float *m, float *out){
     projectionMatrix.w.z = -2 * zNear * zFar / deltaZ;
     projectionMatrix.w.w = 0;
     //load the matrix
-    glLoadMatrixf(projectionMatrix.Pointer());
+    glRotatef(-90.0f, 0.0f, 0.0f, 1.0f);
+    glMultMatrixf(projectionMatrix.Pointer());
+    glTranslatef(0.0, 0.0, -180.0);
+    
+    GLfloat * projection;
+    glGetFloatv(GL_PROJECTION_MATRIX, projection);
+    mat4 pro = Matrix4<float>(projection);
+    projectionMatrix = pro;
+    //projectionMatrix = projectionMatrix.Rotate(-90);
 }
 
 +(void)translateWithX:(float)x
@@ -333,7 +341,7 @@ int glhInvertMatrixf2(const float *m, float *out){
     //avoid error
     if (modelMatrix.empty()) {
         mat4 initMatrix;
-        initMatrix.loadIdentity();
+        initMatrix.Identity();
         modelMatrix.push(initMatrix);
     }
     
@@ -341,10 +349,13 @@ int glhInvertMatrixf2(const float *m, float *out){
     glLoadMatrixf((modelMatrix.top()*viewMatrix).Pointer());
 }
 
+
+
+
 +(void)rotateWithQuaternion:(Quaternion)delta{
     if (modelMatrix.empty()) {
         mat4 initMatrix;
-        initMatrix.loadIdentity();
+        initMatrix.Identity();
         modelMatrix.push(initMatrix);
     }
     

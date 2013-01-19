@@ -15,47 +15,47 @@ static NSInteger MCCubreColorStride = 4;
 static NSInteger MCCubreOutlineVertexesCount = 36;
 static CGFloat MCCubreOutlineVertexes[108] = {    
     //Define the front face
-    -1.0,1.0,1.0,//left top
-    -1.0,-1.0,1.0,//left buttom
-    1.0,1.0,1.0,//top right
-    -1.0,-1.0,1.0,//left buttom     
-    1.0,-1.0,1.0,//right buttom
-    1.0,1.0,1.0,//top right
+    -0.5,0.5,0.5,//left top
+    -0.5,-0.5,0.5,//left buttom
+    0.5,0.5,0.5,//top right
+    -0.5,-0.5,0.5,//left buttom     
+    0.5,-0.5,0.5,//right buttom
+    0.5,0.5,0.5,//top right
     //top face
-    -1.0,1.0,-1.0,//left top(at rear)
-    -1.0,1.0,1.0,//left buttom(at front)
-    1.0,1.0,-1.0,//top right(at rear)
-    -1.0,1.0,1.0,//left buttom(at front)
-    1.0,1.0,1.0,//right buttom(at front)
-    1.0,1.0,-1.0,//top right(at rear)
+    -0.5,0.5,-0.5,//left top(at rear)
+    -0.5,0.5,0.5,//left buttom(at front)
+    0.5,0.5,-0.5,//top right(at rear)
+    -0.5,0.5,0.5,//left buttom(at front)
+    0.5,0.5,0.5,//right buttom(at front)
+    0.5,0.5,-0.5,//top right(at rear)
     //rear face
-    1.0,1.0,-1.0,//right top(when viewed from front)    
-    1.0,-1.0,-1.0,//left top
-    -1.0,1.0,-1.0,//rigtht buttom
-    1.0,-1.0,-1.0,//rigtht buttom
-    -1.0,-1.0,-1.0,//left top
-    -1.0,1.0,-1.0,//left buttom
+    0.5,0.5,-0.5,//right top(when viewed from front)    
+    0.5,-0.5,-0.5,//left top
+    -0.5,0.5,-0.5,//rigtht buttom
+    0.5,-0.5,-0.5,//rigtht buttom
+    -0.5,-0.5,-0.5,//left top
+    -0.5,0.5,-0.5,//left buttom
     //buttom face
-    -1.0,-1.0,1.0,//buttom left front
-    -1.0,-1.0,-1.0,//left rear
-    1.0,-1.0,1.0,//rigtht buttom
-    1.0,-1.0,1.0,//rigtht buttom
-    -1.0,-1.0,-1.0,//left rear
-    1.0,-1.0,-1.0,//right rear
+    -0.5,-0.5,0.5,//buttom left front
+    -0.5,-0.5,-0.5,//left rear
+    0.5,-0.5,0.5,//rigtht buttom
+    0.5,-0.5,0.5,//rigtht buttom
+    -0.5,-0.5,-0.5,//left rear
+    0.5,-0.5,-0.5,//right rear
     //left face
-    -1.0,1.0,-1.0,// top left
-    -1.0,-1.0,-1.0,//buttom left
-    -1.0,1.0,1.0,// top right
-    -1.0,-1.0,-1.0,//buttom left
-    -1.0,-1.0,1.0,//buttom right
-    -1.0,1.0,1.0,// top right
+    -0.5,0.5,-0.5,// top left
+    -0.5,-0.5,-0.5,//buttom left
+    -0.5,0.5,0.5,// top right
+    -0.5,-0.5,-0.5,//buttom left
+    -0.5,-0.5,0.5,//buttom right
+    -0.5,0.5,0.5,// top right
     //right face
-    1.0,1.0,1.0,//top left    
-    1.0,-1.0,1.0,//left
-    1.0,1.0,-1.0,//top right
-    1.0,-1.0,1.0,//left
-    1.0,-1.0,-1.0,//right
-    1.0,1.0,-1.0//top right
+    0.5,0.5,0.5,//top left    
+    0.5,-0.5,0.5,//left
+    0.5,0.5,-0.5,//top right
+    0.5,-0.5,0.5,//left
+    0.5,-0.5,-0.5,//right
+    0.5,0.5,-0.5//top right
 };
 
 static CGFloat MCCubreColorValues[144] = 
@@ -63,6 +63,102 @@ static CGFloat MCCubreColorValues[144] =
     1.0,0.0,0.0,1.0, 1.0,0.0,0.0,1.0, 1.0,0.0,0.0,1.0, 1.0,0.0,0.0,1.0, 
     1.0,0.0,0.0,1.0, 1.0,0.0,0.0,1.0, 1.0,0.0,0.0,1.0, 1.0,0.0,0.0,1.0, 
     1.0,0.0,0.0,1.0, 1.0,0.0,0.0,1.0, 1.0,0.0,0.0,1.0, 1.0,0.0,0.0,1.0, 
+    1.0,0.0,0.0,1.0, 1.0,0.0,0.0,1.0, 1.0,0.0,0.0,1.0, 1.0,0.0,0.0,1.0,
+    1.0,0.0,0.0,1.0, 1.0,0.0,0.0,1.0, 1.0,0.0,0.0,1.0, 1.0,0.0,0.0,1.0,
+    1.0,0.0,0.0,1.0, 1.0,0.0,0.0,1.0, 1.0,0.0,0.0,1.0, 1.0,0.0,0.0,1.0,
+    1.0,0.0,0.0,1.0, 1.0,0.0,0.0,1.0, 1.0,0.0,0.0,1.0, 1.0,0.0,0.0,1.0,
+    1.0,0.0,0.0,1.0, 1.0,0.0,0.0,1.0, 1.0,0.0,0.0,1.0, 1.0,0.0,0.0,1.0} ;
+
+
+static NSInteger MCCubreVertexStride_line = 3;
+static NSInteger MCCubreColorStride_line = 4;
+static NSInteger MCCubreOutlineVertexesCount_line = 48;
+static CGFloat MCCubreOutlineVertexes_line[144] = {    
+    //Define the front face
+    -0.5,0.5,0.5,//left top
+    -0.5,-0.5,0.5,//left buttom
+    
+    -0.5,0.5,0.5,//left top
+    0.5,0.5,0.5,//top right
+    
+    -0.5,-0.5,0.5,//left buttom     
+    0.5,-0.5,0.5,//right buttom
+    
+    0.5,0.5,0.5,//top right
+    0.5,-0.5,0.5,//right buttom
+    
+    //top face
+    
+    -0.5,0.5,-0.5,//left top(at rear)
+    -0.5,0.5,0.5,//left buttom(at front)
+    
+    -0.5,0.5,-0.5,//left top(at rear)
+    0.5,0.5,-0.5,//top right(at rear)
+    
+    -0.5,0.5,0.5,//left buttom(at front)
+    0.5,0.5,0.5,//right buttom(at front)
+    
+    0.5,0.5,0.5,//right buttom(at front)
+    0.5,0.5,-0.5,//top right(at rear)
+    
+    //rear face
+    0.5,0.5,-0.5,//right top(when viewed from front)    
+    0.5,-0.5,-0.5,//left top
+    
+    0.5,0.5,-0.5,//right top(when viewed from front) 
+    -0.5,0.5,-0.5,//rigtht buttom
+    
+    0.5,-0.5,-0.5,//rigtht buttom
+    -0.5,-0.5,-0.5,//left top
+    
+    -0.5,-0.5,-0.5,//left top
+    -0.5,0.5,-0.5,//left buttom
+    //buttom face
+    -0.5,-0.5,0.5,//buttom left front
+    -0.5,-0.5,-0.5,//left rear
+    
+    -0.5,-0.5,0.5,//buttom left front
+    0.5,-0.5,0.5,//rigtht buttom
+    
+    0.5,-0.5,0.5,//rigtht buttom
+    0.5,-0.5,-0.5,//left rear
+    
+    -0.5,-0.5,-0.5,//left rear
+    0.5,-0.5,-0.5,//right rear
+    //left face
+    -0.5,0.5,-0.5,// top left
+    -0.5,-0.5,-0.5,//buttom left
+    
+    -0.5,0.5,-0.5,// top left
+    -0.5,0.5,0.5,// top right
+    
+    -0.5,-0.5,-0.5,//buttom left
+    -0.5,-0.5,0.5,//buttom right
+    
+    -0.5,-0.5,0.5,//buttom right
+    -0.5,0.5,0.5,// top right
+    //right face
+    0.5,0.5,0.5,//top left    
+    0.5,-0.5,0.5,//left
+    
+    0.5,0.5,0.5,//top left    
+    0.5,0.5,-0.5,//top right
+    
+    0.5,-0.5,0.5,//left
+    0.5,-0.5,-0.5,//right
+    
+    0.5,-0.5,-0.5,//right
+    0.5,0.5,-0.5//top right
+};
+
+static CGFloat MCCubreColorValues_line[192] = 
+{   1.0,0.0,0.0,1.0, 1.0,0.0,0.0,1.0, 1.0,0.0,0.0,1.0, 1.0,0.0,0.0,1.0, 
+    1.0,0.0,0.0,1.0, 1.0,0.0,0.0,1.0, 1.0,0.0,0.0,1.0, 1.0,0.0,0.0,1.0, 
+    1.0,0.0,0.0,1.0, 1.0,0.0,0.0,1.0, 1.0,0.0,0.0,1.0, 1.0,0.0,0.0,1.0, 
+    1.0,0.0,0.0,1.0, 1.0,0.0,0.0,1.0, 1.0,0.0,0.0,1.0, 1.0,0.0,0.0,1.0, 
+    1.0,0.0,0.0,1.0, 1.0,0.0,0.0,1.0, 1.0,0.0,0.0,1.0, 1.0,0.0,0.0,1.0,
+    1.0,0.0,0.0,1.0, 1.0,0.0,0.0,1.0, 1.0,0.0,0.0,1.0, 1.0,0.0,0.0,1.0,
+    1.0,0.0,0.0,1.0, 1.0,0.0,0.0,1.0, 1.0,0.0,0.0,1.0, 1.0,0.0,0.0,1.0,
     1.0,0.0,0.0,1.0, 1.0,0.0,0.0,1.0, 1.0,0.0,0.0,1.0, 1.0,0.0,0.0,1.0,
     1.0,0.0,0.0,1.0, 1.0,0.0,0.0,1.0, 1.0,0.0,0.0,1.0, 1.0,0.0,0.0,1.0,
     1.0,0.0,0.0,1.0, 1.0,0.0,0.0,1.0, 1.0,0.0,0.0,1.0, 1.0,0.0,0.0,1.0,
@@ -88,9 +184,10 @@ static CGFloat MCCubreColorValues[144] =
 {
 	if (sceneObject == nil) return;
 	transformedCentroid = MCPointMatrixMultiply([sceneObject mesh].centroid , [sceneObject matrix]);
-	translation = transformedCentroid;
-    //scale = MCPointMake(sceneObject.scale.x, sceneObject.scale.y,sceneObject.scale.z);
-    scale = MCPointMake(0, 0,0);
+	self.matrix = [sceneObject matrix];
+    translation = transformedCentroid;
+    scale = MCPointMake(sceneObject.scale.x, sceneObject.scale.y,sceneObject.scale.z);
+   //scale = MCPointMake(17, 17,17);
 }
 -(BOOL)doesCollideWithCollider:(MCCollider*)aCollider
 {
@@ -110,11 +207,16 @@ static CGFloat MCCubreColorValues[144] =
 
 -(void)awake
 {
-    mesh = [[MCMesh alloc] initWithVertexes:MCCubreOutlineVertexes vertexCount:MCCubreOutlineVertexesCount vertexSize:MCCubreVertexStride renderStyle:GL_TRIANGLES];
-    
-	
-	mesh.colors = MCCubreColorValues;
-	mesh.colorSize = MCCubreColorStride;
+    bool line = YES;
+    if (line) {
+        mesh = [[MCMesh alloc] initWithVertexes:MCCubreOutlineVertexes_line vertexCount:MCCubreOutlineVertexesCount_line vertexSize:MCCubreVertexStride_line renderStyle:GL_LINES];
+        mesh.colors = MCCubreColorValues_line;
+        mesh.colorSize = MCCubreColorStride_line;
+    }else {
+        mesh = [[MCMesh alloc] initWithVertexes:MCCubreOutlineVertexes vertexCount:        MCCubreOutlineVertexesCount vertexSize:MCCubreVertexStride renderStyle:GL_TRIANGLES];
+        mesh.colors = MCCubreColorValues;
+        mesh.colorSize = MCCubreColorStride;
+    }
 }
 
 
@@ -124,8 +226,11 @@ static CGFloat MCCubreColorValues[144] =
 	// clear the matrix
 	glPushMatrix();
 	glLoadIdentity();
-	glTranslatef(translation.x, translation.y, translation.z);
-	glScalef(scale.x, scale.y, scale.z);
+	
+	glMultMatrixf(matrix);
+    //glTranslatef(translation.x, translation.y, translation.z);
+    //glScalef(scale.x, scale.y, scale.z);
+    //NSLog(@"%f",scale.x);
     
 	[mesh render];	
 	glPopMatrix();

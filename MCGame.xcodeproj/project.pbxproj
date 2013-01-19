@@ -53,6 +53,14 @@
 		A3C1D18A169596DE004EB56C /* MCCollisionController.mm in Sources */ = {isa = PBXBuildFile; fileRef = A3C1D189169596DD004EB56C /* MCCollisionController.mm */; };
 		A3C8FEA3165D2A53007E0046 /* cube.png in Resources */ = {isa = PBXBuildFile; fileRef = A3C8FEA2165D2A52007E0046 /* cube.png */; };
 		A3C8FEA6165D3D6A007E0046 /* MCMagicCubeUIModelController.m in Sources */ = {isa = PBXBuildFile; fileRef = A3C8FEA5165D3D69007E0046 /* MCMagicCubeUIModelController.m */; };
+		A3CB5F8A16A67A7D006F03D5 /* MCRay.h in Sources */ = {isa = PBXBuildFile; fileRef = A3935B3C165A296400B60A07 /* MCRay.h */; };
+		A3CB5F8B16A67A7D006F03D5 /* MCRay.mm in Sources */ = {isa = PBXBuildFile; fileRef = A3935B3D165A296400B60A07 /* MCRay.mm */; };
+		A3CB5F8C16A67A7D006F03D5 /* MCGL.h in Sources */ = {isa = PBXBuildFile; fileRef = A3935B3E165A296400B60A07 /* MCGL.h */; };
+		A3CB5F8D16A67A7D006F03D5 /* MCGL.mm in Sources */ = {isa = PBXBuildFile; fileRef = A3935B3F165A296400B60A07 /* MCGL.mm */; };
+		A3CB5F8E16A67ACB006F03D5 /* Quaternion.hpp in Sources */ = {isa = PBXBuildFile; fileRef = A3CB360515FF55D600914E58 /* Quaternion.hpp */; };
+		A3CB5F8F16A67ACB006F03D5 /* Matrix.hpp in Sources */ = {isa = PBXBuildFile; fileRef = A3CB360615FF55D600914E58 /* Matrix.hpp */; };
+		A3CB5F9016A67ACB006F03D5 /* Vector.hpp in Sources */ = {isa = PBXBuildFile; fileRef = A3CB360715FF55D600914E58 /* Vector.hpp */; };
+		A3CB5F9116A67ACB006F03D5 /* MCPoint.h in Sources */ = {isa = PBXBuildFile; fileRef = A3F2ACBB1616D23E00D622B8 /* MCPoint.h */; };
 		A3D2FC801638D2FD00517CCF /* sceneController.m in Sources */ = {isa = PBXBuildFile; fileRef = A3D2FC7F1638D2FD00517CCF /* sceneController.m */; };
 		A3D30BAA1619356200BA477E /* MCTexturedQuad.m in Sources */ = {isa = PBXBuildFile; fileRef = A3D30BA91619356200BA477E /* MCTexturedQuad.m */; };
 		A3D30BAE161937DF00BA477E /* MCAnimatedQuad.m in Sources */ = {isa = PBXBuildFile; fileRef = A3D30BAD161937DF00BA477E /* MCAnimatedQuad.m */; };
@@ -309,8 +317,8 @@
 		A32A33B5163BA72C007840CC /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				A3E1ADB616A3C1800050B52D /* MacgicCubeUIModel */,
 				A3E1ADB516A3B7D60050B52D /* ApplicationContext */,
+				A3E1ADB616A3C1800050B52D /* MacgicCubeUIModel */,
 				A3E1ADB016A3B6090050B52D /* MainMenu */,
 				A3E1ADAC16A3B5EF0050B52D /* Scene1 */,
 				A3E1ADAF16A3B6070050B52D /* Scene2 */,
@@ -645,6 +653,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A3CB5F8E16A67ACB006F03D5 /* Quaternion.hpp in Sources */,
+				A3CB5F8F16A67ACB006F03D5 /* Matrix.hpp in Sources */,
+				A3CB5F9016A67ACB006F03D5 /* Vector.hpp in Sources */,
+				A3CB5F9116A67ACB006F03D5 /* MCPoint.h in Sources */,
+				A3CB5F8A16A67A7D006F03D5 /* MCRay.h in Sources */,
+				A3CB5F8B16A67A7D006F03D5 /* MCRay.mm in Sources */,
+				A3CB5F8C16A67A7D006F03D5 /* MCGL.h in Sources */,
+				A3CB5F8D16A67A7D006F03D5 /* MCGL.mm in Sources */,
 				1D60589B0D05DD56006BFB54 /* main.m in Sources */,
 				1D3623260D0F684500981E51 /* MCGameAppDelegate.mm in Sources */,
 				48A858DD0FFAFB550060F0B8 /* EAGLView.mm in Sources */,

@@ -10,7 +10,7 @@
 #import <math.h>
 #import "CoordinatingController.h"
 @implementation MCMagicCubeUIModelController
-
+@synthesize array27Cube;
 
 -(id)initiate{
     if(self = [super init]){
@@ -18,8 +18,8 @@
         isRotate = NO;
         //魔方整体三个参数
         scale = MCPointMake(90,90,90);
-        translation = MCPointMake(0,0,0);
-        rotation = MCPointMake(30,30,0);
+        translation = MCPointMake(30,0,0);
+        rotation = MCPointMake(0,0,0);
         MCPoint sub_scale  = MCPointMake(scale.x/3, scale.y/3, scale.z/3);
         for (int  i = 0; i<9; i++) {
             layerPtr[i] = nil;
@@ -33,6 +33,7 @@
                     int sign_y = y-1;
                     int sign_z = z-1;
                     Cube * tCube = [[Cube alloc] init];
+                    tCube.index = z*9+y*3+x;
                     tCube.pretranslation = MCPointMake(translation.x, translation.y, translation.z);
                     tCube.prerotation = MCPointMake(rotation.x, rotation.y, rotation.z);
                     
@@ -42,6 +43,8 @@
                     tCube.scale = MCPointMake(sub_scale.x, sub_scale.y, sub_scale.z); 
                     //Cube.rotation = MCPointMake(rotation.x, rotation.y, rotation.z);
                     //Cube.rotationalSpeed = MCPointMake(0, 0, 0);
+                    tCube.collider = [MCCollider collider];
+                    [tCube.collider setCheckForCollision:YES];
                     [array27Cube addObject: tCube];
                     [tCube release];		
                 }
@@ -49,8 +52,10 @@
         }
         m_trackballRadius = 260;
         m_spinning = NO;
-        self.collider = [MCCollider collider];
-        [self.collider setCheckForCollision:YES];
+        //self.collider = [MCCollider collider];
+        //[self.collider setCheckForCollision:YES];
+        ray = [[MCRay alloc] init];
+
     }
     
     return self;
@@ -110,17 +115,17 @@
 };
 -(void)render{
     [array27Cube makeObjectsPerformSelector:@selector(render)];
+    [super render];
 };
 
 -(void)awake
 {
-   
     [array27Cube makeObjectsPerformSelector:@selector(awake)];
 }
 
 -(void)update{
     [self handleTouches];
-    if (collider != nil) [collider updateCollider:self];
+    //if (collider != nil) [collider updateCollider:self];
     if (isRotate){
         //
         CGFloat deltaTime = [[[CoordinatingController sharedCoordinatingController] currentController] deltaTime];
@@ -196,14 +201,64 @@
         }
     }
     [array27Cube makeObjectsPerformSelector:@selector(update)];
-
+    [super update];
 };
 -(void)handleTouches
 {
 	NSSet * touches = [[[CoordinatingController sharedCoordinatingController] currentController].inputController touchEvents];
     UIView* view= [[[CoordinatingController sharedCoordinatingController] currentController].inputController view ];
 	UITouchPhase touchEventSate = [[[CoordinatingController sharedCoordinatingController] currentController].inputController touchEventSate];
-    if ([touches count] != 2) return;
+    if ([touches count] == 0) return;
+    if ([touches count] == 1 && touchEventSate == UITouchPhaseBegan) {
+        UITouch *touch = [[touches allObjects] objectAtIndex:0];
+        CGPoint location = [touch locationInView:view];
+        
+        NSLog(@"x:%f",location.x);
+        NSLog(@"y:%f",location.y);
+        
+        //继续射线拾取
+        
+        float distance = -1;
+        float nearest_distance = -1;
+        int index = -1;
+        //for (Cube *tmp_cube in array27Cube) {
+        Cube *tmp_cube = [array27Cube objectAtIndex:24];
+        //if (tmp_cube.index == 24) {
+        //    tmp_cube.scale = MCPointMake(40, 40, 40);
+        //}
+        
+
+        //three vertexs of the triangle, just for test.
+        float V0[3] = {-0.5,0.5,0.5};
+        float V1[3] = {-0.5,-0.5,0.5};
+        float V2[3] = {0.5,-0.5,0.5};
+        MCPoint v0 = MCPointMatrixMultiply(MCPointMake(-0.5, 0.5, 0.5), tmp_cube.matrix);
+        MCPoint v1 = MCPointMatrixMultiply(MCPointMake(-0.5,-0.5,0.5), tmp_cube.matrix);
+        MCPoint v2 = MCPointMatrixMultiply(MCPointMake(0.5,-0.5,0.5), tmp_cube.matrix);
+        V0[0] = v0.x;V0[1] = v0.y;V0[2] = v0.z;
+        V1[0] = v1.x;V1[1] = v1.y;V1[2] = v1.z;
+        V2[0] = v2.x;V2[1] = v2.y;V2[2] = v2.z;
+        //Once function down, update the ray.
+        [ray updateWithScreenX:location.x
+                       screenY:location.y];
+        
+                   //Find the inverse of the model matrix
+        
+        mat4 tmp;
+        glhInvertMatrixf2(tmp_cube.matrix, &(tmp.x.x));
+            //Transform the ray by the inverse matrix.
+        //[ray transformWithMatrix:tmp];
+            
+        //OK, check the intersection and return the distance.
+        distance = [ray intersectWithTriangleMadeUpOfV0:V0
+                                                        V1:V1
+                                                        V2:V2];
+            
+        
+        NSLog(@"第%d个小块distance：%f",index,distance);
+        
+    }
+
     if ([touches count] == 2) {
         UITouch *touch = [[touches allObjects] objectAtIndex:0];
         UITouch *touch1 = [[touches allObjects] objectAtIndex:1];

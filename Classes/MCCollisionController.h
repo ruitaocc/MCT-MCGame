@@ -9,11 +9,11 @@
 #import "MCSceneObject.h"
 
 @interface MCCollisionController : MCSceneObject{
-    NSArray * sceneObjects;
+    NSMutableArray * sceneObjects;
 	NSMutableArray * allColliders;
 	NSMutableArray * collidersToCheck;
 }
-@property (retain) NSArray * sceneObjects;
+@property (retain) NSMutableArray * sceneObjects;
 
 - (void)awake;
 - (void)handleCollisions;

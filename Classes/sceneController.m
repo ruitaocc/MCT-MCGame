@@ -173,7 +173,7 @@
 {
 	// turn openGL 'on' for this frame
 	[openGLView beginDraw];
-	
+	//[self setupLookAt];
 	[self setupLighting];
 	// simply call 'render' on all our scene objects
 	[sceneObjects makeObjectsPerformSelector:@selector(render)];
@@ -181,6 +181,9 @@
 	[inputController renderInterface];
 	// finalize this frame
 	[openGLView finishDraw];
+}
+-(void)setupLookAt{
+    
 }
 -(void)setupLighting
 {

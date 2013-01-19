@@ -83,9 +83,10 @@
 	glScalef(scale.x, scale.y, scale.z);
 	// save the matrix transform
 	glGetFloatv(GL_MODELVIEW_MATRIX, matrix);
+    
 	//restore the matrix
 	glPopMatrix();
-	if (collider != nil) [collider updateCollider:self];   
+	//if (collider != nil) [collider updateCollider:self];   
 }
 
 // called once every frame

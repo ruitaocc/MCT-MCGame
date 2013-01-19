@@ -24,7 +24,7 @@
 	for (MCSceneObject * obj in sceneObjects) {
 		if (obj.collider != nil){
 			[allColliders addObject:obj];
-			//if (obj.collider.checkForCollision) [collidersToCheck addObject:obj];
+			if ([obj.collider checkForCollision]) [collidersToCheck addObject:obj];
 		}	
 	}
     

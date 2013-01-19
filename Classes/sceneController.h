@@ -62,7 +62,7 @@
 - (void)stopAnimation ;
 - (void)updateModel;
 - (void)setupLighting;
-
+- (void)setupLookAt;
 // 11 methods
 - (void)releaseSrc;
 
