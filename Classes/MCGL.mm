@@ -324,7 +324,7 @@ int glhInvertMatrixf2(const float *m, float *out){
     projectionMatrix.w.z = -2 * zNear * zFar / deltaZ;
     projectionMatrix.w.w = 0;
     //load the matrix
-    glRotatef(-90.0f, 0.0f, 0.0f, 1.0f);
+    //glRotatef(-90.0f, 0.0f, 0.0f, 1.0f);
     glMultMatrixf(projectionMatrix.Pointer());
     glTranslatef(0.0, 0.0, -180.0);
     

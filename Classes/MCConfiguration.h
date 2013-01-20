@@ -44,3 +44,162 @@ typedef enum {
     kHeroBoard,
     kMainMenu
 }ViewTransitionTag;
+
+
+#pragma mark cubre mesh
+static NSInteger MCCubreVertexStride = 3;
+static NSInteger MCCubreColorStride = 4;
+static NSInteger MCCubreOutlineVertexesCount = 36;
+static CGFloat MCCubreOutlineVertexes[108] = {    
+    //Define the front face
+    -0.5,0.5,0.5,//left top
+    -0.5,-0.5,0.5,//left buttom
+    0.5,0.5,0.5,//top right
+    -0.5,-0.5,0.5,//left buttom     
+    0.5,-0.5,0.5,//right buttom
+    0.5,0.5,0.5,//top right
+    //top face
+    -0.5,0.5,-0.5,//left top(at rear)
+    -0.5,0.5,0.5,//left buttom(at front)
+    0.5,0.5,-0.5,//top right(at rear)
+    -0.5,0.5,0.5,//left buttom(at front)
+    0.5,0.5,0.5,//right buttom(at front)
+    0.5,0.5,-0.5,//top right(at rear)
+    //rear face
+    0.5,0.5,-0.5,//right top(when viewed from front)    
+    0.5,-0.5,-0.5,//left top
+    -0.5,0.5,-0.5,//rigtht buttom
+    0.5,-0.5,-0.5,//rigtht buttom
+    -0.5,-0.5,-0.5,//left top
+    -0.5,0.5,-0.5,//left buttom
+    //buttom face
+    -0.5,-0.5,0.5,//buttom left front
+    -0.5,-0.5,-0.5,//left rear
+    0.5,-0.5,0.5,//rigtht buttom
+    0.5,-0.5,0.5,//rigtht buttom
+    -0.5,-0.5,-0.5,//left rear
+    0.5,-0.5,-0.5,//right rear
+    //left face
+    -0.5,0.5,-0.5,// top left
+    -0.5,-0.5,-0.5,//buttom left
+    -0.5,0.5,0.5,// top right
+    -0.5,-0.5,-0.5,//buttom left
+    -0.5,-0.5,0.5,//buttom right
+    -0.5,0.5,0.5,// top right
+    //right face
+    0.5,0.5,0.5,//top left    
+    0.5,-0.5,0.5,//left
+    0.5,0.5,-0.5,//top right
+    0.5,-0.5,0.5,//left
+    0.5,-0.5,-0.5,//right
+    0.5,0.5,-0.5//top right
+};
+
+static CGFloat MCCubreColorValues[144] = 
+{   1.0,0.0,0.0,1.0, 1.0,0.0,0.0,1.0, 1.0,0.0,0.0,1.0, 1.0,0.0,0.0,1.0, 
+    1.0,0.0,0.0,1.0, 1.0,0.0,0.0,1.0, 1.0,0.0,0.0,1.0, 1.0,0.0,0.0,1.0, 
+    1.0,0.0,0.0,1.0, 1.0,0.0,0.0,1.0, 1.0,0.0,0.0,1.0, 1.0,0.0,0.0,1.0, 
+    1.0,0.0,0.0,1.0, 1.0,0.0,0.0,1.0, 1.0,0.0,0.0,1.0, 1.0,0.0,0.0,1.0, 
+    1.0,0.0,0.0,1.0, 1.0,0.0,0.0,1.0, 1.0,0.0,0.0,1.0, 1.0,0.0,0.0,1.0,
+    1.0,0.0,0.0,1.0, 1.0,0.0,0.0,1.0, 1.0,0.0,0.0,1.0, 1.0,0.0,0.0,1.0,
+    1.0,0.0,0.0,1.0, 1.0,0.0,0.0,1.0, 1.0,0.0,0.0,1.0, 1.0,0.0,0.0,1.0,
+    1.0,0.0,0.0,1.0, 1.0,0.0,0.0,1.0, 1.0,0.0,0.0,1.0, 1.0,0.0,0.0,1.0,
+    1.0,0.0,0.0,1.0, 1.0,0.0,0.0,1.0, 1.0,0.0,0.0,1.0, 1.0,0.0,0.0,1.0} ;
+
+
+static NSInteger MCCubreVertexStride_line = 3;
+static NSInteger MCCubreColorStride_line = 4;
+static NSInteger MCCubreOutlineVertexesCount_line = 48;
+static CGFloat MCCubreOutlineVertexes_line[144] = {    
+    //Define the front face
+    -0.5,0.5,0.5,//left top
+    -0.5,-0.5,0.5,//left buttom
+    
+    -0.5,0.5,0.5,//left top
+    0.5,0.5,0.5,//top right
+    
+    -0.5,-0.5,0.5,//left buttom     
+    0.5,-0.5,0.5,//right buttom
+    
+    0.5,0.5,0.5,//top right
+    0.5,-0.5,0.5,//right buttom
+    
+    //top face
+    
+    -0.5,0.5,-0.5,//left top(at rear)
+    -0.5,0.5,0.5,//left buttom(at front)
+    
+    -0.5,0.5,-0.5,//left top(at rear)
+    0.5,0.5,-0.5,//top right(at rear)
+    
+    -0.5,0.5,0.5,//left buttom(at front)
+    0.5,0.5,0.5,//right buttom(at front)
+    
+    0.5,0.5,0.5,//right buttom(at front)
+    0.5,0.5,-0.5,//top right(at rear)
+    
+    //rear face
+    0.5,0.5,-0.5,//right top(when viewed from front)    
+    0.5,-0.5,-0.5,//left top
+    
+    0.5,0.5,-0.5,//right top(when viewed from front) 
+    -0.5,0.5,-0.5,//rigtht buttom
+    
+    0.5,-0.5,-0.5,//rigtht buttom
+    -0.5,-0.5,-0.5,//left top
+    
+    -0.5,-0.5,-0.5,//left top
+    -0.5,0.5,-0.5,//left buttom
+    //buttom face
+    -0.5,-0.5,0.5,//buttom left front
+    -0.5,-0.5,-0.5,//left rear
+    
+    -0.5,-0.5,0.5,//buttom left front
+    0.5,-0.5,0.5,//rigtht buttom
+    
+    0.5,-0.5,0.5,//rigtht buttom
+    0.5,-0.5,-0.5,//left rear
+    
+    -0.5,-0.5,-0.5,//left rear
+    0.5,-0.5,-0.5,//right rear
+    //left face
+    -0.5,0.5,-0.5,// top left
+    -0.5,-0.5,-0.5,//buttom left
+    
+    -0.5,0.5,-0.5,// top left
+    -0.5,0.5,0.5,// top right
+    
+    -0.5,-0.5,-0.5,//buttom left
+    -0.5,-0.5,0.5,//buttom right
+    
+    -0.5,-0.5,0.5,//buttom right
+    -0.5,0.5,0.5,// top right
+    //right face
+    0.5,0.5,0.5,//top left    
+    0.5,-0.5,0.5,//left
+    
+    0.5,0.5,0.5,//top left    
+    0.5,0.5,-0.5,//top right
+    
+    0.5,-0.5,0.5,//left
+    0.5,-0.5,-0.5,//right
+    
+    0.5,-0.5,-0.5,//right
+    0.5,0.5,-0.5//top right
+};
+
+static CGFloat MCCubreColorValues_line[192] = 
+{   1.0,0.0,0.0,1.0, 1.0,0.0,0.0,1.0, 1.0,0.0,0.0,1.0, 1.0,0.0,0.0,1.0, 
+    1.0,0.0,0.0,1.0, 1.0,0.0,0.0,1.0, 1.0,0.0,0.0,1.0, 1.0,0.0,0.0,1.0, 
+    1.0,0.0,0.0,1.0, 1.0,0.0,0.0,1.0, 1.0,0.0,0.0,1.0, 1.0,0.0,0.0,1.0, 
+    1.0,0.0,0.0,1.0, 1.0,0.0,0.0,1.0, 1.0,0.0,0.0,1.0, 1.0,0.0,0.0,1.0, 
+    1.0,0.0,0.0,1.0, 1.0,0.0,0.0,1.0, 1.0,0.0,0.0,1.0, 1.0,0.0,0.0,1.0,
+    1.0,0.0,0.0,1.0, 1.0,0.0,0.0,1.0, 1.0,0.0,0.0,1.0, 1.0,0.0,0.0,1.0,
+    1.0,0.0,0.0,1.0, 1.0,0.0,0.0,1.0, 1.0,0.0,0.0,1.0, 1.0,0.0,0.0,1.0,
+    1.0,0.0,0.0,1.0, 1.0,0.0,0.0,1.0, 1.0,0.0,0.0,1.0, 1.0,0.0,0.0,1.0,
+    1.0,0.0,0.0,1.0, 1.0,0.0,0.0,1.0, 1.0,0.0,0.0,1.0, 1.0,0.0,0.0,1.0,
+    1.0,0.0,0.0,1.0, 1.0,0.0,0.0,1.0, 1.0,0.0,0.0,1.0, 1.0,0.0,0.0,1.0,
+    1.0,0.0,0.0,1.0, 1.0,0.0,0.0,1.0, 1.0,0.0,0.0,1.0, 1.0,0.0,0.0,1.0,
+    1.0,0.0,0.0,1.0, 1.0,0.0,0.0,1.0, 1.0,0.0,0.0,1.0, 1.0,0.0,0.0,1.0} ;
+
+

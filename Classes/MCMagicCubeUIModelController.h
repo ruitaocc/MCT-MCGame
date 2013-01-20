@@ -14,7 +14,7 @@
 //旋转速度 帧率无关设计 2秒
 #define TIME_PER_ROTATION 1
 #define ROTATION_ANGLE 90
-#define CUBE_CUBE_GAP 0;
+#define CUBE_CUBE_GAP 0.3;
 #import "MCRay.h"
 #include "MCCollider.h"
 @interface MCMagicCubeUIModelController : MCSceneObject{

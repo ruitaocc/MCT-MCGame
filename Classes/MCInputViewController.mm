@@ -118,7 +118,11 @@
 -(void)heroBoardBtnDown{
     NSLog(@"heroBoardBtnDown");    
 }
--(void)heroBoardBtnUp{NSLog(@"heroBoardBtnUp");}
+-(void)heroBoardBtnUp{
+    NSLog(@"heroBoardBtnUp");
+    CoordinatingController *coordinatingController_ = [CoordinatingController sharedCoordinatingController];
+    [coordinatingController_ requestViewChangeByObject:kHeroBoard];
+}
 
 
 

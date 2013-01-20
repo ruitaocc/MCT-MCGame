@@ -37,6 +37,7 @@ static CGFloat MCSquareFillVertexes[8] = {-0.5,-0.5, 0.5,-0.5, -0.5,0.5, 0.5,0.5
 	screenRect = [[[CoordinatingController sharedCoordinatingController] currentController].inputController 
                   screenRectFromMeshRect:self.meshBounds 
                   atPoint:CGPointMake(translation.x, translation.y)];
+
 	// this is a bit rendundant, but allows for much simpler subclassing
 	[self setNotPressedVertexes];
 }

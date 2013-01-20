@@ -9,6 +9,8 @@
 #import "MCMagicCubeUIModelController.h"
 #import <math.h>
 #import "CoordinatingController.h"
+#import "MCConfiguration.h"
+
 @implementation MCMagicCubeUIModelController
 @synthesize array27Cube;
 
@@ -18,7 +20,7 @@
         isRotate = NO;
         //魔方整体三个参数
         scale = MCPointMake(90,90,90);
-        translation = MCPointMake(30,0,0);
+        translation = MCPointMake(0,0,0);
         rotation = MCPointMake(0,0,0);
         MCPoint sub_scale  = MCPointMake(scale.x/3, scale.y/3, scale.z/3);
         for (int  i = 0; i<9; i++) {
@@ -209,53 +211,63 @@
     UIView* view= [[[CoordinatingController sharedCoordinatingController] currentController].inputController view ];
 	UITouchPhase touchEventSate = [[[CoordinatingController sharedCoordinatingController] currentController].inputController touchEventSate];
     if ([touches count] == 0) return;
+    
     if ([touches count] == 1 && touchEventSate == UITouchPhaseBegan) {
         UITouch *touch = [[touches allObjects] objectAtIndex:0];
         CGPoint location = [touch locationInView:view];
         
-        NSLog(@"x:%f",location.x);
-        NSLog(@"y:%f",location.y);
-        
-        //继续射线拾取
-        
-        float distance = -1;
-        float nearest_distance = -1;
-        int index = -1;
-        //for (Cube *tmp_cube in array27Cube) {
-        Cube *tmp_cube = [array27Cube objectAtIndex:24];
-        //if (tmp_cube.index == 24) {
-        //    tmp_cube.scale = MCPointMake(40, 40, 40);
-        //}
-        
-
-        //three vertexs of the triangle, just for test.
-        float V0[3] = {-0.5,0.5,0.5};
-        float V1[3] = {-0.5,-0.5,0.5};
-        float V2[3] = {0.5,-0.5,0.5};
-        MCPoint v0 = MCPointMatrixMultiply(MCPointMake(-0.5, 0.5, 0.5), tmp_cube.matrix);
-        MCPoint v1 = MCPointMatrixMultiply(MCPointMake(-0.5,-0.5,0.5), tmp_cube.matrix);
-        MCPoint v2 = MCPointMatrixMultiply(MCPointMake(0.5,-0.5,0.5), tmp_cube.matrix);
-        V0[0] = v0.x;V0[1] = v0.y;V0[2] = v0.z;
-        V1[0] = v1.x;V1[1] = v1.y;V1[2] = v1.z;
-        V2[0] = v2.x;V2[1] = v2.y;V2[2] = v2.z;
         //Once function down, update the ray.
         [ray updateWithScreenX:location.x
                        screenY:location.y];
-        
-                   //Find the inverse of the model matrix
-        
-        mat4 tmp;
-        glhInvertMatrixf2(tmp_cube.matrix, &(tmp.x.x));
-            //Transform the ray by the inverse matrix.
-        //[ray transformWithMatrix:tmp];
+
+        //继续射线拾取
+        float V[108] = {-0.5,0.5,0.5,-0.5,-0.5,0.5,0.5,-0.5,0.5,
+            0.5,-0.5,0.5,0.5,0.5,0.5,-0.5,0.5,0.5,//前
             
-        //OK, check the intersection and return the distance.
-        distance = [ray intersectWithTriangleMadeUpOfV0:V0
-                                                        V1:V1
-                                                        V2:V2];
+            -0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,-0.5,
+            0.5,0.5,-0.5,-0.5,0.5,-0.5,-0.5,0.5,0.5,//上
             
+            -0.5,0.5,-0.5,-0.5,-0.5,-0.5,-0.5,-0.5,0.5,
+            -0.5,-0.5,0.5,-0.5,0.5,0.5,-0.5,0.5,-0.5,//左
+            
+            0.5,0.5,0.5,0.5,-0.5,0.5,0.5,-0.5,-0.5,
+            0.5,-0.5,-0.5,0.5,0.5,-0.5,0.5,0.5,0.5,//右
+            
+            0.5,0.5,-0.5,0.5,-0.5,-0.5,-0.5,-0.5,-0.5,
+            -0.5,-0.5,-0.5,-0.5,0.5,-0.5,0.5,0.5,-0.5,//后
+            
+            -0.5,-0.5,0.5,-0.5,-0.5,-0.5,0.5,-0.5,-0.5,
+            0.5,-0.5,-0.5,0.5,-0.5,0.5,-0.5,-0.5,0.5,//下
+            
+        };
+        float nearest_distance = 65535;
+        int index = -1;
+        for (Cube *tmp_cube in array27Cube) {
+            
+            
+            GLfloat * tmp_dection = VertexesArray_Matrix_Multiply(V, 3, 36, tmp_cube.matrix);
+            for (int i = 0; i < 12; i++) {
+            //OK, check the intersection and return the distance.
+            float distance = [ray intersectWithTriangleMadeUpOfV0:&tmp_dection[0 +i*9]
+                                                               V1:&tmp_dection[3 +i*9]
+                                                               V2:&tmp_dection[6 +i*9]];
+                if (distance < 0) continue;
+                if (distance < nearest_distance) {
+                    nearest_distance = distance;
+                    index = tmp_cube.index;
+                    //NSLog(@"第%d个小块第%d面： distance：%f",tmp_cube.index,i,distance);
+                }
+            
+            }
+        }
+        if (index != -1) {
+            NSLog(@"拾取第%d个小块： distance：%f",index,nearest_distance);
+            Cube * selected = [array27Cube objectAtIndex:index];
+            selected.scale = MCPointMake(20, 20, 20);
+        }
         
-        NSLog(@"第%d个小块distance：%f",index,distance);
+
+        
         
     }
 

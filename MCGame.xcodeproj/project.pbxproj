@@ -13,7 +13,7 @@
 		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
 		288765FD0DF74451002DB57D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765FC0DF74451002DB57D /* CoreGraphics.framework */; };
 		28AD733F0D9D9553002E5188 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 28AD733E0D9D9553002E5188 /* MainWindow.xib */; };
-		4841F4720FFAFE48001CC354 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4841F4710FFAFE48001CC354 /* QuartzCore.framework */; };
+		4841F4720FFAFE48001CC354 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4841F4710FFAFE48001CC354 /* QuartzCore.framework */; settings = {ATTRIBUTES = (Required, ); }; };
 		48A858CF0FFAFA2E0060F0B8 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48A858CE0FFAFA2E0060F0B8 /* OpenGLES.framework */; };
 		48A858DD0FFAFB550060F0B8 /* EAGLView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 48A858DB0FFAFB550060F0B8 /* EAGLView.mm */; };
 		48A858E00FFAFC3B0060F0B8 /* MCInputViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 48A858DF0FFAFC3B0060F0B8 /* MCInputViewController.mm */; };
@@ -61,6 +61,31 @@
 		A3CB5F8F16A67ACB006F03D5 /* Matrix.hpp in Sources */ = {isa = PBXBuildFile; fileRef = A3CB360615FF55D600914E58 /* Matrix.hpp */; };
 		A3CB5F9016A67ACB006F03D5 /* Vector.hpp in Sources */ = {isa = PBXBuildFile; fileRef = A3CB360715FF55D600914E58 /* Vector.hpp */; };
 		A3CB5F9116A67ACB006F03D5 /* MCPoint.h in Sources */ = {isa = PBXBuildFile; fileRef = A3F2ACBB1616D23E00D622B8 /* MCPoint.h */; };
+		A3CB5FF116ABD29C006F03D5 /* MCScore.m in Sources */ = {isa = PBXBuildFile; fileRef = A3CB5FEE16ABD29C006F03D5 /* MCScore.m */; };
+		A3CB5FF216ABD29C006F03D5 /* MCUser.m in Sources */ = {isa = PBXBuildFile; fileRef = A3CB5FF016ABD29C006F03D5 /* MCUser.m */; };
+		A3CB5FFC16ABD2AC006F03D5 /* MCUserCalculator.m in Sources */ = {isa = PBXBuildFile; fileRef = A3CB5FF616ABD2AC006F03D5 /* MCUserCalculator.m */; };
+		A3CB5FFD16ABD2AC006F03D5 /* MCUserManagerController.m in Sources */ = {isa = PBXBuildFile; fileRef = A3CB5FF816ABD2AC006F03D5 /* MCUserManagerController.m */; };
+		A3CB5FFE16ABD2AC006F03D5 /* MCUserManagerModel.m in Sources */ = {isa = PBXBuildFile; fileRef = A3CB5FFA16ABD2AC006F03D5 /* MCUserManagerModel.m */; };
+		A3CB600E16ABD55B006F03D5 /* UserManagerSystemViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A3CB600316ABD55B006F03D5 /* UserManagerSystemViewController.m */; };
+		A3CB600F16ABD55B006F03D5 /* UserManagerSystemViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A3CB600416ABD55B006F03D5 /* UserManagerSystemViewController.xib */; };
+		A3CB601016ABD55B006F03D5 /* PopChangeUserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A3CB600616ABD55B006F03D5 /* PopChangeUserViewController.m */; };
+		A3CB601116ABD55B006F03D5 /* PopChangeUserViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A3CB600716ABD55B006F03D5 /* PopChangeUserViewController.xib */; };
+		A3CB601216ABD55B006F03D5 /* PopCreateUserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A3CB600916ABD55B006F03D5 /* PopCreateUserViewController.m */; };
+		A3CB601316ABD55B006F03D5 /* PopCreateUserViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A3CB600A16ABD55B006F03D5 /* PopCreateUserViewController.xib */; };
+		A3CB601416ABD55B006F03D5 /* ScoreCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A3CB600C16ABD55B006F03D5 /* ScoreCell.m */; };
+		A3CB601516ABD55B006F03D5 /* ScoreCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A3CB600D16ABD55B006F03D5 /* ScoreCell.xib */; };
+		A3CB601616ABD62A006F03D5 /* UserManagerSystemViewController.h in Sources */ = {isa = PBXBuildFile; fileRef = A3CB600216ABD55B006F03D5 /* UserManagerSystemViewController.h */; };
+		A3CB601716ABD62A006F03D5 /* PopChangeUserViewController.h in Sources */ = {isa = PBXBuildFile; fileRef = A3CB600516ABD55B006F03D5 /* PopChangeUserViewController.h */; };
+		A3CB601816ABD62A006F03D5 /* PopCreateUserViewController.h in Sources */ = {isa = PBXBuildFile; fileRef = A3CB600816ABD55B006F03D5 /* PopCreateUserViewController.h */; };
+		A3CB601916ABD62A006F03D5 /* ScoreCell.h in Sources */ = {isa = PBXBuildFile; fileRef = A3CB600B16ABD55B006F03D5 /* ScoreCell.h */; };
+		A3CB601B16ABD62A006F03D5 /* MCUserCalculator.h in Sources */ = {isa = PBXBuildFile; fileRef = A3CB5FF516ABD2AC006F03D5 /* MCUserCalculator.h */; };
+		A3CB601C16ABD62A006F03D5 /* MCUserManagerController.h in Sources */ = {isa = PBXBuildFile; fileRef = A3CB5FF716ABD2AC006F03D5 /* MCUserManagerController.h */; };
+		A3CB601D16ABD62A006F03D5 /* MCUserManagerModel.h in Sources */ = {isa = PBXBuildFile; fileRef = A3CB5FF916ABD2AC006F03D5 /* MCUserManagerModel.h */; };
+		A3CB601E16ABD62A006F03D5 /* MCScore.h in Sources */ = {isa = PBXBuildFile; fileRef = A3CB5FED16ABD29C006F03D5 /* MCScore.h */; };
+		A3CB601F16ABD62A006F03D5 /* MCUser.h in Sources */ = {isa = PBXBuildFile; fileRef = A3CB5FEF16ABD29C006F03D5 /* MCUser.h */; };
+		A3CB602216ABD903006F03D5 /* MCDBController.h in Sources */ = {isa = PBXBuildFile; fileRef = A3CB5FF316ABD2AC006F03D5 /* MCDBController.h */; };
+		A3CB602316ABD903006F03D5 /* MCDBController.m in Sources */ = {isa = PBXBuildFile; fileRef = A3CB5FF416ABD2AC006F03D5 /* MCDBController.m */; };
+		A3CB602816ABD9BE006F03D5 /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A3CB602716ABD9BE006F03D5 /* libsqlite3.0.dylib */; };
 		A3D2FC801638D2FD00517CCF /* sceneController.m in Sources */ = {isa = PBXBuildFile; fileRef = A3D2FC7F1638D2FD00517CCF /* sceneController.m */; };
 		A3D30BAA1619356200BA477E /* MCTexturedQuad.m in Sources */ = {isa = PBXBuildFile; fileRef = A3D30BA91619356200BA477E /* MCTexturedQuad.m */; };
 		A3D30BAE161937DF00BA477E /* MCAnimatedQuad.m in Sources */ = {isa = PBXBuildFile; fileRef = A3D30BAD161937DF00BA477E /* MCAnimatedQuad.m */; };
@@ -166,6 +191,31 @@
 		A3CB360515FF55D600914E58 /* Quaternion.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Quaternion.hpp; sourceTree = "<group>"; };
 		A3CB360615FF55D600914E58 /* Matrix.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Matrix.hpp; sourceTree = "<group>"; };
 		A3CB360715FF55D600914E58 /* Vector.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Vector.hpp; sourceTree = "<group>"; };
+		A3CB5FED16ABD29C006F03D5 /* MCScore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCScore.h; sourceTree = "<group>"; };
+		A3CB5FEE16ABD29C006F03D5 /* MCScore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCScore.m; sourceTree = "<group>"; };
+		A3CB5FEF16ABD29C006F03D5 /* MCUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCUser.h; sourceTree = "<group>"; };
+		A3CB5FF016ABD29C006F03D5 /* MCUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCUser.m; sourceTree = "<group>"; };
+		A3CB5FF316ABD2AC006F03D5 /* MCDBController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCDBController.h; sourceTree = "<group>"; };
+		A3CB5FF416ABD2AC006F03D5 /* MCDBController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCDBController.m; sourceTree = "<group>"; };
+		A3CB5FF516ABD2AC006F03D5 /* MCUserCalculator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCUserCalculator.h; sourceTree = "<group>"; };
+		A3CB5FF616ABD2AC006F03D5 /* MCUserCalculator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCUserCalculator.m; sourceTree = "<group>"; };
+		A3CB5FF716ABD2AC006F03D5 /* MCUserManagerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCUserManagerController.h; sourceTree = "<group>"; };
+		A3CB5FF816ABD2AC006F03D5 /* MCUserManagerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCUserManagerController.m; sourceTree = "<group>"; };
+		A3CB5FF916ABD2AC006F03D5 /* MCUserManagerModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCUserManagerModel.h; sourceTree = "<group>"; };
+		A3CB5FFA16ABD2AC006F03D5 /* MCUserManagerModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCUserManagerModel.m; sourceTree = "<group>"; };
+		A3CB600216ABD55B006F03D5 /* UserManagerSystemViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserManagerSystemViewController.h; sourceTree = "<group>"; };
+		A3CB600316ABD55B006F03D5 /* UserManagerSystemViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserManagerSystemViewController.m; sourceTree = "<group>"; };
+		A3CB600416ABD55B006F03D5 /* UserManagerSystemViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserManagerSystemViewController.xib; sourceTree = "<group>"; };
+		A3CB600516ABD55B006F03D5 /* PopChangeUserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PopChangeUserViewController.h; sourceTree = "<group>"; };
+		A3CB600616ABD55B006F03D5 /* PopChangeUserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PopChangeUserViewController.m; sourceTree = "<group>"; };
+		A3CB600716ABD55B006F03D5 /* PopChangeUserViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PopChangeUserViewController.xib; sourceTree = "<group>"; };
+		A3CB600816ABD55B006F03D5 /* PopCreateUserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PopCreateUserViewController.h; sourceTree = "<group>"; };
+		A3CB600916ABD55B006F03D5 /* PopCreateUserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PopCreateUserViewController.m; sourceTree = "<group>"; };
+		A3CB600A16ABD55B006F03D5 /* PopCreateUserViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PopCreateUserViewController.xib; sourceTree = "<group>"; };
+		A3CB600B16ABD55B006F03D5 /* ScoreCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScoreCell.h; sourceTree = "<group>"; };
+		A3CB600C16ABD55B006F03D5 /* ScoreCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScoreCell.m; sourceTree = "<group>"; };
+		A3CB600D16ABD55B006F03D5 /* ScoreCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ScoreCell.xib; sourceTree = "<group>"; };
+		A3CB602716ABD9BE006F03D5 /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = usr/lib/libsqlite3.0.dylib; sourceTree = SDKROOT; };
 		A3D2FC7E1638D2FD00517CCF /* sceneController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = sceneController.h; sourceTree = "<group>"; };
 		A3D2FC7F1638D2FD00517CCF /* sceneController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = sceneController.m; sourceTree = "<group>"; };
 		A3D30BA81619356200BA477E /* MCTexturedQuad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCTexturedQuad.h; sourceTree = "<group>"; };
@@ -203,6 +253,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A3CB602816ABD9BE006F03D5 /* libsqlite3.0.dylib in Frameworks */,
 				1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */,
 				1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */,
 				288765FD0DF74451002DB57D /* CoreGraphics.framework in Frameworks */,
@@ -237,6 +288,7 @@
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
+				A3CB602716ABD9BE006F03D5 /* libsqlite3.0.dylib */,
 				080E96DDFE201D6D7F000001 /* Classes */,
 				29B97315FDCFA39411CA2CEA /* Other Sources */,
 				29B97317FDCFA39411CA2CEA /* Resources */,
@@ -317,6 +369,7 @@
 		A32A33B5163BA72C007840CC /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				A3CB5FEB16ABD240006F03D5 /* UserSystem */,
 				A3E1ADB516A3B7D60050B52D /* ApplicationContext */,
 				A3E1ADB616A3C1800050B52D /* MacgicCubeUIModel */,
 				A3E1ADB016A3B6090050B52D /* MainMenu */,
@@ -397,6 +450,53 @@
 				A3E1ADCB16A3D2EE0050B52D /* readme_raydectionUtil.rtf */,
 			);
 			name = RayDectionUtil;
+			sourceTree = "<group>";
+		};
+		A3CB5FEB16ABD240006F03D5 /* UserSystem */ = {
+			isa = PBXGroup;
+			children = (
+				A3CB600116ABD54C006F03D5 /* Views */,
+				A3CB5FEC16ABD284006F03D5 /* DataStructureClass */,
+			);
+			name = UserSystem;
+			sourceTree = "<group>";
+		};
+		A3CB5FEC16ABD284006F03D5 /* DataStructureClass */ = {
+			isa = PBXGroup;
+			children = (
+				A3CB5FF316ABD2AC006F03D5 /* MCDBController.h */,
+				A3CB5FF416ABD2AC006F03D5 /* MCDBController.m */,
+				A3CB5FF516ABD2AC006F03D5 /* MCUserCalculator.h */,
+				A3CB5FF616ABD2AC006F03D5 /* MCUserCalculator.m */,
+				A3CB5FF716ABD2AC006F03D5 /* MCUserManagerController.h */,
+				A3CB5FF816ABD2AC006F03D5 /* MCUserManagerController.m */,
+				A3CB5FF916ABD2AC006F03D5 /* MCUserManagerModel.h */,
+				A3CB5FFA16ABD2AC006F03D5 /* MCUserManagerModel.m */,
+				A3CB5FED16ABD29C006F03D5 /* MCScore.h */,
+				A3CB5FEE16ABD29C006F03D5 /* MCScore.m */,
+				A3CB5FEF16ABD29C006F03D5 /* MCUser.h */,
+				A3CB5FF016ABD29C006F03D5 /* MCUser.m */,
+			);
+			name = DataStructureClass;
+			sourceTree = "<group>";
+		};
+		A3CB600116ABD54C006F03D5 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				A3CB600216ABD55B006F03D5 /* UserManagerSystemViewController.h */,
+				A3CB600316ABD55B006F03D5 /* UserManagerSystemViewController.m */,
+				A3CB600416ABD55B006F03D5 /* UserManagerSystemViewController.xib */,
+				A3CB600516ABD55B006F03D5 /* PopChangeUserViewController.h */,
+				A3CB600616ABD55B006F03D5 /* PopChangeUserViewController.m */,
+				A3CB600716ABD55B006F03D5 /* PopChangeUserViewController.xib */,
+				A3CB600816ABD55B006F03D5 /* PopCreateUserViewController.h */,
+				A3CB600916ABD55B006F03D5 /* PopCreateUserViewController.m */,
+				A3CB600A16ABD55B006F03D5 /* PopCreateUserViewController.xib */,
+				A3CB600B16ABD55B006F03D5 /* ScoreCell.h */,
+				A3CB600C16ABD55B006F03D5 /* ScoreCell.m */,
+				A3CB600D16ABD55B006F03D5 /* ScoreCell.xib */,
+			);
+			name = Views;
 			sourceTree = "<group>";
 		};
 		A3E1ADAC16A3B5EF0050B52D /* Scene1 */ = {
@@ -516,8 +616,8 @@
 				A3F2ACBE1616D9BB00D622B8 /* MCParticle.h */,
 				A3F2ACB91616CF9900D622B8 /* MCParticleSystem.m */,
 				A3F2ACBF1616D9BB00D622B8 /* MCParticle.m */,
-				A30C47DD161C86F70057C5E1 /* Cube.h */,
 				A30C47DE161C86F70057C5E1 /* Cube.m */,
+				A30C47DD161C86F70057C5E1 /* Cube.h */,
 				A30C47CF161C38E70057C5E1 /* MCButton.h */,
 				A30C47D0161C38E70057C5E1 /* MCButton.m */,
 				A30C47D2161C694F0057C5E1 /* MCTexturedButton.h */,
@@ -627,6 +727,10 @@
 				A3E1ADCA16A3D2830050B52D /* readme_ProgressBar.rtf in Resources */,
 				A3E1ADCC16A3D2EE0050B52D /* readme_raydectionUtil.rtf in Resources */,
 				A3E1ADCF16A3D3210050B52D /* readme_MathUtil.rtf in Resources */,
+				A3CB600F16ABD55B006F03D5 /* UserManagerSystemViewController.xib in Resources */,
+				A3CB601116ABD55B006F03D5 /* PopChangeUserViewController.xib in Resources */,
+				A3CB601316ABD55B006F03D5 /* PopCreateUserViewController.xib in Resources */,
+				A3CB601516ABD55B006F03D5 /* ScoreCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -653,6 +757,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A3CB602216ABD903006F03D5 /* MCDBController.h in Sources */,
+				A3CB602316ABD903006F03D5 /* MCDBController.m in Sources */,
+				A3CB601616ABD62A006F03D5 /* UserManagerSystemViewController.h in Sources */,
+				A3CB601716ABD62A006F03D5 /* PopChangeUserViewController.h in Sources */,
+				A3CB601816ABD62A006F03D5 /* PopCreateUserViewController.h in Sources */,
+				A3CB601916ABD62A006F03D5 /* ScoreCell.h in Sources */,
+				A3CB601B16ABD62A006F03D5 /* MCUserCalculator.h in Sources */,
+				A3CB601C16ABD62A006F03D5 /* MCUserManagerController.h in Sources */,
+				A3CB601D16ABD62A006F03D5 /* MCUserManagerModel.h in Sources */,
+				A3CB601E16ABD62A006F03D5 /* MCScore.h in Sources */,
+				A3CB601F16ABD62A006F03D5 /* MCUser.h in Sources */,
 				A3CB5F8E16A67ACB006F03D5 /* Quaternion.hpp in Sources */,
 				A3CB5F8F16A67ACB006F03D5 /* Matrix.hpp in Sources */,
 				A3CB5F9016A67ACB006F03D5 /* Vector.hpp in Sources */,
@@ -691,6 +806,15 @@
 				A3359E6B168EB6A7002F9459 /* MBProgressHUD.m in Sources */,
 				A3C1D18216957371004EB56C /* MCCollider.mm in Sources */,
 				A3C1D18A169596DE004EB56C /* MCCollisionController.mm in Sources */,
+				A3CB5FF116ABD29C006F03D5 /* MCScore.m in Sources */,
+				A3CB5FF216ABD29C006F03D5 /* MCUser.m in Sources */,
+				A3CB5FFC16ABD2AC006F03D5 /* MCUserCalculator.m in Sources */,
+				A3CB5FFD16ABD2AC006F03D5 /* MCUserManagerController.m in Sources */,
+				A3CB5FFE16ABD2AC006F03D5 /* MCUserManagerModel.m in Sources */,
+				A3CB600E16ABD55B006F03D5 /* UserManagerSystemViewController.m in Sources */,
+				A3CB601016ABD55B006F03D5 /* PopChangeUserViewController.m in Sources */,
+				A3CB601216ABD55B006F03D5 /* PopCreateUserViewController.m in Sources */,
+				A3CB601416ABD55B006F03D5 /* ScoreCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -708,6 +832,10 @@
 				GCC_PREFIX_HEADER = MCGame_Prefix.pch;
 				INFOPLIST_FILE = "MCGame-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/Classes\"",
+				);
 				New_Setting = "";
 				PRODUCT_NAME = MCGame;
 				TARGETED_DEVICE_FAMILY = 2;
@@ -723,6 +851,10 @@
 				GCC_PREFIX_HEADER = MCGame_Prefix.pch;
 				INFOPLIST_FILE = "MCGame-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/Classes\"",
+				);
 				New_Setting = "";
 				PRODUCT_NAME = MCGame;
 				TARGETED_DEVICE_FAMILY = 2;

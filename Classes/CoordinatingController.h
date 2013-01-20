@@ -12,12 +12,15 @@
 #import "inputController.h"
 #import "sceneController.h"
 #import "MBProgressHUD.h"
+#import "UserManagerSystemViewController.h"
 @interface CoordinatingController : NSObject <MBProgressHUDDelegate>{
     sceneController * currentController;
     MBProgressHUD *HUD;
 @private
     MCSceneController * mainSceneController;
     MCCountingPlaySceneController *countingPlaySceneController;
+    
+    UserManagerSystemViewController *userManagerSystemViewController;
     BOOL needToReload;
     
 }
@@ -25,7 +28,7 @@
 @property (nonatomic ,readonly)MCSceneController *mainSceneController;
 @property (nonatomic, readonly )MCCountingPlaySceneController *countingPlaySceneController;
 @property (nonatomic,assign)sceneController *currentController;
-
+@property (nonatomic,retain)UserManagerSystemViewController *userManagerSystemViewController;
 +(CoordinatingController *) sharedCoordinatingController;
 -(void)requestViewChangeByObject:(int)type;
 -(void)reloadMeterial;

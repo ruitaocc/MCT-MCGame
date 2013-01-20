@@ -18,7 +18,7 @@
 @synthesize mainSceneController,countingPlaySceneController;
 @synthesize  currentController;
 @synthesize needToReload;
-
+@synthesize userManagerSystemViewController;
 
 
 + (CoordinatingController*)sharedCoordinatingController{
@@ -48,9 +48,6 @@
             //log
             NSLog(@"requestViewChangeByObject:kCountingPlay");
             [currentController stopAnimation];
-
-            
-            
 //            HUD = [[MBProgressHUD alloc] initWithView:currentController.openGLView];
 //            [currentController.openGLView addSubview:HUD];
 //            HUD.dimBackground = YES;
@@ -59,11 +56,7 @@
 //            // Show the HUD while the provided method executes in a new thread
 //            [HUD showWhileExecuting:@selector(loadCountingPlayScene) onTarget:self withObject:nil animated:YES];
 //
-            
-            
-            
-            
-            
+
             //Loading...
             //[SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeBlack];
             [SVProgressHUD show];
@@ -91,15 +84,24 @@
         {
             
             NSLog(@"requestViewChangeByObject:kNormalPlay");
-            [[[CoordinatingController sharedCoordinatingController]currentController]stopAnimation];
+            
         }
         break;
         case kRandomSolve:
         {
             NSLog(@"requestViewChangeByObject:kRandomSolve");
-            [[[CoordinatingController sharedCoordinatingController]currentController]startAnimation];
+            
         }
         break;
+        case kHeroBoard:
+        {
+            NSLog(@"requestViewChangeByObject:kHeroBoard");
+            userManagerSystemViewController = [[[UserManagerSystemViewController alloc] initWithNibName:@"UserManagerSystemViewController" bundle:nil] autorelease];
+            [[currentController inputController]presentModalViewController:userManagerSystemViewController animated:YES];
+            
+            
+        }
+            break;
         default:
             break;
     }

@@ -35,13 +35,12 @@
 	CGPoint screenCenter = CGPointZero;
 	CGPoint rectOrigin = CGPointZero;
 	// since our view is rotated, then our x and y are flipped
-	screenCenter.x = meshCenter.y + 384.0; // need to shift it over
-	screenCenter.y = meshCenter.x + 512.0; // need to shift it up
-	
-	rectOrigin.x = screenCenter.x - (CGRectGetHeight(rect)/2.0); // height and width 
-	rectOrigin.y = screenCenter.y - (CGRectGetWidth(rect)/2.0); // are flipped
-	
-	return CGRectMake(rectOrigin.x, rectOrigin.y, CGRectGetHeight(rect), CGRectGetWidth(rect));
+	screenCenter.x = meshCenter.x + 512.0; // need to shift it over
+	screenCenter.y = meshCenter.y - 384.0; // need to shift it up
+    screenCenter.y = -screenCenter.y;
+	rectOrigin.x = screenCenter.x - (CGRectGetWidth(rect)/2.0); // height and width 
+	rectOrigin.y = screenCenter.y - (CGRectGetHeight(rect)/2.0); // are flipped
+    return CGRectMake(rectOrigin.x, rectOrigin.y, CGRectGetWidth(rect), CGRectGetHeight(rect));
 }
 
 
@@ -58,7 +57,10 @@
 	// just store them all in the big set.
 	[touchEvents addObjectsFromArray:[touches allObjects]];
     touchEventSate = UITouchPhaseBegan;
-        
+    UITouch *touch = [[touchEvents allObjects] objectAtIndex:0];
+    CGPoint location = [touch locationInView:self.view];
+    NSLog(@"x:%f,y:%f",location.x,location.y);
+
 }
 
 - (void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
@@ -68,6 +70,10 @@
      touchEventSate = UITouchPhaseMoved;
 }
 
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+{
+    return (interfaceOrientation == UIDeviceOrientationLandscapeRight);
+}
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
 	// just store them all in the big set.
@@ -104,11 +110,10 @@
 	glMatrixMode(GL_PROJECTION);
 	glPushMatrix();
 	glLoadIdentity();
-	glRotatef(-90.0f, 0.0f, 0.0f, 1.0f);
+	//glRotatef(-90.0f, 0.0f, 0.0f, 1.0f);
 	
 	// set up the viewport so that it is analagous to the screen pixels
 	glOrthof(-512, 512, -384, 384, -1.0f, 50.0f);
-	
 	glMatrixMode(GL_MODELVIEW);
 	glDisable(GL_LIGHTING);
 	glDisable(GL_CULL_FACE);

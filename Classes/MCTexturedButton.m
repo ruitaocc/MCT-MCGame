@@ -31,6 +31,11 @@
 	screenRect = [[[CoordinatingController sharedCoordinatingController] currentController].inputController 
                   screenRectFromMeshRect:self.meshBounds 
                   atPoint:CGPointMake(translation.x, translation.y)];
+    //CGPoint orih =  screenRect.origin;
+    //CGSize size =  screenRect.size;
+   // NSLog(@"screenRect.x = %f,screenRect.y = %f",orih.x,orih.y);
+   // NSLog(@"screenRect.sizex = %f,screenRect.sizey = %f",size.width,size.height);
+   // NSLog(@"translation.x = %f,translation.y = %f",translation.x,translation.y);
 	// this is a bit rendundant, but allows for much simpler subclassing
 }
 

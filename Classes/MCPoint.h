@@ -65,6 +65,21 @@ static inline MCPoint MCPointMatrixMultiply(MCPoint p, CGFloat* m)
 	return (MCPoint) {x, y, z};
 }
 
+//顶点数组与矩阵成绩
+static inline GLfloat* VertexesArray_Matrix_Multiply(GLfloat *ptr, int vertexStride, int vertexesCount, CGFloat* m)
+{
+    GLfloat *tmp = new GLfloat[vertexStride*vertexesCount];
+	for (int i = 0; i < vertexesCount; i++) {
+        
+        tmp[0+vertexStride*i] = (ptr[0+vertexStride*i]*m[0]) + (ptr[1+vertexStride*i]*m[4]) + (ptr[2+vertexStride*i]*m[8]) + m[12];
+        tmp[1+vertexStride*i] = (ptr[0+vertexStride*i]*m[1]) + (ptr[1+vertexStride*i]*m[5]) + (ptr[2+vertexStride*i]*m[9]) + m[13];
+        tmp[2+vertexStride*i] = (ptr[0+vertexStride*i]*m[2]) + (ptr[1+vertexStride*i]*m[6]) + (ptr[2+vertexStride*i]*m[10]) + m[14];
+    }
+    	
+	return tmp;
+}
+
+
 static inline float MCPointDistance(MCPoint p1, MCPoint p2)
 {
 	return sqrt(((p1.x - p2.x) * (p1.x - p2.x)) + 
