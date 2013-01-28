@@ -328,7 +328,7 @@ int glhInvertMatrixf2(const float *m, float *out){
     glMultMatrixf(projectionMatrix.Pointer());
     glTranslatef(0.0, 0.0, -180.0);
     
-    GLfloat * projection;
+    GLfloat projection[16];
     glGetFloatv(GL_PROJECTION_MATRIX, projection);
     mat4 pro = Matrix4<float>(projection);
     projectionMatrix = pro;
