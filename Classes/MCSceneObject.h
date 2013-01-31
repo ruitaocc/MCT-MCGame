@@ -28,8 +28,8 @@
 	MCPoint pretranslation;
 	MCPoint prerotation;
     
-    Quaternion m_orientation;
-    Quaternion m_previousOrientation;
+//    Quaternion m_orientation;
+//    Quaternion m_previousOrientation;
     
     MCPoint translation;
 	MCPoint scale;
@@ -58,7 +58,7 @@
 @property (assign) CGFloat * matrix;
 @property (assign) MCPoint pretranslation;
 @property (assign) MCPoint prerotation;
-@property (assign) Quaternion m_orientation;
+//@property (assign) Quaternion m_orientation;
 @property (assign) Quaternion quaRotation;
 @property (assign) Quaternion quaPreviousRotation;
 @property (assign) BOOL active;

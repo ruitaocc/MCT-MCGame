@@ -21,14 +21,16 @@
     NSMutableArray* array27Cube; 
     Cube * layerPtr[9];
 
-    BOOL isRotate;
+    //auto rotate 
+    BOOL isAutoRotate;
     double rest_rotate_time;
     double rest_rotate_angle;
+    
     AxisType current_rotate_axis;
     LayerRotationDirectionType current_rotate_direction;
     int current_rotate_layer;
     
-    
+    //以下三个参数用于 视角变换
     BOOL m_spinning;
     float m_trackballRadius;
     ivec2 m_fingerStart;    
@@ -43,10 +45,14 @@
     int firstThreePointCount;
     //是否正在执行单层任务
     BOOL isLayerRotating;
+    
+    //自动调整机制
+    //手动转动点角度
+    double fingerRotate_angle;
+    double rest_fingerRotate_angle;
+    double rest_fingerRotate_time;
+    BOOL isNeededToAdjustment;
     //当前整个魔方索引的状态，存储索引值
-    
-    
-    
     Cube * MagicCubeIndexState[27];
     
     

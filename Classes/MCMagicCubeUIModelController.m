@@ -17,7 +17,7 @@
 -(id)initiate{
     if(self = [super init]){
         if (array27Cube == nil) array27Cube = [[NSMutableArray alloc] init];	
-        isRotate = NO;
+        isAutoRotate = NO;
         //魔方整体三个参数
         scale = MCPointMake(90,90,90);
         translation = MCPointMake(0,0,0);
@@ -67,6 +67,7 @@
             }
         }
         firstThreePointCount = 0;
+        fingerRotate_angle = 0;
         select_trackballRadius = 260;
         rrrr = 0;
     }
@@ -75,8 +76,8 @@
 };
 
 - (void) rotateOnAxis : (AxisType)axis onLayer: (int)layer inDirection: (LayerRotationDirectionType)direction{
-    if (isRotate) return;
-    isRotate = YES;
+    if (isAutoRotate) return;
+    isAutoRotate = YES;
     rest_rotate_time = TIME_PER_ROTATION;
     rest_rotate_angle = ROTATION_ANGLE;
     cuculated_angle = 0;
@@ -141,7 +142,7 @@
 -(void)update{
     [self handleTouches];
     //if (collider != nil) [collider updateCollider:self];
-    if (isRotate){
+    if (isAutoRotate){
         //
         CGFloat deltaTime = [[[CoordinatingController sharedCoordinatingController] currentController] deltaTime];
         
@@ -150,7 +151,7 @@
         if (rest_rotate_time < 0 ) {
             rest_rotate_time += deltaTime;
             
-            isRotate = NO;
+            isAutoRotate = NO;
             //做最后一次的调整 保证准确归位
             // 0 2  6 8 角块
             double final_alpha = rest_rotate_time/TIME_PER_ROTATION*ROTATION_ANGLE;
@@ -305,6 +306,166 @@
             }
         }
     }
+    if (isNeededToAdjustment) {
+        CGFloat deltaTime = [[[CoordinatingController sharedCoordinatingController] currentController] deltaTime];
+        rest_fingerRotate_time -= deltaTime;
+        
+        if (rest_fingerRotate_time < 0 ) {
+            rest_fingerRotate_time += deltaTime;
+            
+            isNeededToAdjustment = NO;
+            //做最后一次的调整 保证准确归位
+            // 0 2  6 8 角块
+            double final_alpha = rest_fingerRotate_time/TIME_PER_ROTATION*ROTATION_ANGLE;
+            double theta = final_alpha*Pi/360;
+            double sintheta = sin(theta);
+            double costheta = cos(theta);
+            //(x*cosθ- y * sinθ, y*cosθ + x * sinθ)
+            MCPoint ox = MCPointMake(1, 0, 0);
+            MCPoint oy = MCPointMake(0, 1, 0);
+            MCPoint oz = MCPointMake(0, 0, 1);
+            MCPoint current;
+            MCPoint start;
+            MCPoint end;
+            switch (current_rotate_axis) {
+                case X:
+                {
+                    if (current_rotate_direction == CW) {
+                        current = MCPointMake(0, sintheta, costheta);
+                        start = MCPointMake(oz.x,oz.y,oz.z);
+                        end = MCPointMake(current.x,current.y,current.z);
+                    }else {
+                        current = MCPointMake(0, costheta, sintheta);
+                        start = MCPointMake(oy.x,oy.y,oy.z);
+                        end = MCPointMake(current.x,current.y,current.z);
+                    }
+                    
+                }
+                    break;
+                case Y:
+                {   
+                    if (current_rotate_direction == CW) {
+                        current = MCPointMake(costheta,0 ,sintheta);
+                        start = MCPointMake(ox.x,ox.y,ox.z);
+                        end = MCPointMake(current.x,current.y,current.z);
+                    }else {
+                        current = MCPointMake(sintheta,0, costheta);
+                        start = MCPointMake(oz.x,oz.y,oz.z);
+                        end = MCPointMake(current.x,current.y,current.z);
+                    }
+                }
+                    break;
+                case Z:
+                {
+                    if (current_rotate_direction == CW) {
+                        current = MCPointMake(sintheta, costheta,0);
+                        start = MCPointMake(oy.x,oy.y,oy.z);
+                        end = MCPointMake(current.x,current.y,current.z);
+                    }else {
+                        current = MCPointMake(costheta, sintheta,0);
+                        start = MCPointMake(ox.x,ox.y,ox.z);
+                        end = MCPointMake(current.x,current.y,current.z);
+                    }
+                }
+                    break;
+                default:
+                    break;
+            }
+            Cube *center = [array27Cube objectAtIndex:13];
+            MCPoint tmpp = MCPointMatrixMultiply(start, center.matrix);
+            vec3 start_v = vec3(tmpp.x,tmpp.y,tmpp.z);
+            tmpp = MCPointMatrixMultiply(end, center.matrix);
+            vec3 end_v = vec3(tmpp.x,tmpp.y,tmpp.z);
+            
+            Quaternion delta = Quaternion::CreateFromVectors(start_v, end_v);
+            for (int i= 0 ; i<9; i++) {
+                [layerPtr[i] setQuaPreviousRotation:layerPtr[i].quaRotation]; 
+                if (current_rotate_layer!=1) {
+                    [layerPtr[i] setQuaRotation: delta.Rotated([layerPtr[i] quaPreviousRotation])];
+                }else if(i!=4){
+                    [layerPtr[i] setQuaRotation: delta.Rotated([layerPtr[i] quaPreviousRotation])];
+                }
+            }
+            
+            [self updateState];
+            //归零
+            rest_fingerRotate_time = 0;
+            
+        }
+        else{
+            // 0 2  6 8 角块
+            double alpha = deltaTime/TIME_PER_ROTATION*ROTATION_ANGLE;
+            double theta = alpha*Pi/360;
+            double sintheta = sin(theta);
+            double costheta = cos(theta);
+            //(x*cosθ- y * sinθ, y*cosθ + x * sinθ)
+            MCPoint ox = MCPointMake(1, 0, 0);
+            MCPoint oy = MCPointMake(0, 1, 0);
+            MCPoint oz = MCPointMake(0, 0, 1);
+            MCPoint current;
+            MCPoint start;
+            MCPoint end;
+            switch (current_rotate_axis) {
+                case X:
+                {
+                    if (current_rotate_direction == CW) {
+                        current = MCPointMake(0, sintheta, costheta);
+                        start = MCPointMake(oz.x,oz.y,oz.z);
+                        end = MCPointMake(current.x,current.y,current.z);
+                    }else {
+                        current = MCPointMake(0, costheta, sintheta);
+                        start = MCPointMake(oy.x,oy.y,oy.z);
+                        end = MCPointMake(current.x,current.y,current.z);
+                    }
+                    
+                }
+                    break;
+                case Y:
+                {   
+                    if (current_rotate_direction == CW) {
+                        current = MCPointMake(costheta,0 ,sintheta);
+                        start = MCPointMake(ox.x,ox.y,ox.z);
+                        end = MCPointMake(current.x,current.y,current.z);
+                    }else {
+                        current = MCPointMake(sintheta,0, costheta);
+                        start = MCPointMake(oz.x,oz.y,oz.z);
+                        end = MCPointMake(current.x,current.y,current.z);
+                    }
+                }
+                    break;
+                case Z:
+                {
+                    if (current_rotate_direction == CW) {
+                        current = MCPointMake(sintheta, costheta,0);
+                        start = MCPointMake(oy.x,oy.y,oy.z);
+                        end = MCPointMake(current.x,current.y,current.z);
+                    }else {
+                        current = MCPointMake(costheta, sintheta,0);
+                        start = MCPointMake(ox.x,ox.y,ox.z);
+                        end = MCPointMake(current.x,current.y,current.z);
+                    }
+                }
+                    break;
+                default:
+                    break;
+            }
+            Cube *center = [array27Cube objectAtIndex:13];
+            MCPoint tmpp = MCPointMatrixMultiply(start, center.matrix);
+            vec3 start_v = vec3(tmpp.x,tmpp.y,tmpp.z);
+            tmpp = MCPointMatrixMultiply(end, center.matrix);
+            vec3 end_v = vec3(tmpp.x,tmpp.y,tmpp.z);
+            
+            Quaternion delta = Quaternion::CreateFromVectors(start_v, end_v);
+            for (int i= 0 ; i<9; i++) {
+                [layerPtr[i] setQuaPreviousRotation:layerPtr[i].quaRotation]; 
+                if (current_rotate_layer!=1) {
+                    [layerPtr[i] setQuaRotation: delta.Rotated([layerPtr[i] quaPreviousRotation])];
+                }else if(i!=4){
+                    [layerPtr[i] setQuaRotation: delta.Rotated([layerPtr[i] quaPreviousRotation])];
+                }
+            }
+        }
+    }
     [array27Cube makeObjectsPerformSelector:@selector(update)];
     [super update];
 };
@@ -314,7 +475,7 @@
     UIView* view= [[[CoordinatingController sharedCoordinatingController] currentController].inputController view ];
 	UITouchPhase touchEventSate = [[[CoordinatingController sharedCoordinatingController] currentController].inputController touchEventSate];
     if ([touches count] == 0) return;
-    int index = -1;
+    //单手指单层划动
     if ([touches count]==1) {
         UITouch *touch = [[touches allObjects] objectAtIndex:0];
         //CGPoint location = [touch locationInView:view];
@@ -341,21 +502,22 @@
         };
         
         if (touchEventSate == UITouchPhaseMoved) {
-            if (selected == nil) {
+            if (isLayerRotating == NO) {
                 //没选中及时返回
                 firstThreePointCount = 0;
-                isLayerRotating = NO;
                 return;
             }
             if (firstThreePointCount > 3) {
-                //旋转
+                //开始旋转
                 CGPoint location = [touch locationInView:view];
                 ivec2 current = ivec2(location.x,location.y);
                 if (isLayerRotating) {
                     vec3 start = [self MapToLayerCenter:firstThreePoint[0]];
                     vec3 end =[self MapToLayerCenter:current];
-                    //NSLog(@"start.x:%f start.y:%f start.z:%f",start.x,start.y,start.z);
-                    //NSLog(@"end.x:%f end.y:%f end.z:%f",end.x,end.y,end.z);
+                    
+                    double alpha = ThetaBetweenV1andV2(start,end);
+                    fingerRotate_angle += alpha;
+                    
                     Quaternion delta = Quaternion::CreateFromVectors(start, end);
                     for (int i=0;i<9;i++) {
                         if (current_rotate_layer!=1) {
@@ -389,6 +551,7 @@
                 float xyz[9] = {1.0,0.0,0.0,0.0,1.0,0.0,0.0,0.0,1.0};
                 Cube * tmpcuble = [array27Cube objectAtIndex:13];
                 GLfloat * XYZ = VertexesArray_Matrix_Multiply(xyz, 3, 3, tmpcuble.matrix);
+               
                 vec3 ox = vec3(XYZ[0],XYZ[1],XYZ[2]);
                 vec3 oy = vec3(XYZ[3],XYZ[4],XYZ[5]);
                 vec3 oz = vec3(XYZ[6],XYZ[7],XYZ[8]);
@@ -396,6 +559,7 @@
                 float dx = [self AngleV0V1withV:ox V0:movedTo0_V0 V1:movedTo0_V1];
                 float dy = [self AngleV0V1withV:oy V0:movedTo0_V0 V1:movedTo0_V1];
                 float dz = [self AngleV0V1withV:oz V0:movedTo0_V0 V1:movedTo0_V1];
+                
                 //AxisType axis
                 current_rotate_axis = X;
                 float max = dx;
@@ -412,12 +576,14 @@
                     int index = [selected index];
                     int magiccubeStateIndex = -1;
                     for (int i = 0;i<27;i++) {
-                        Cube *tmpcube = [array27Cube objectAtIndex:i];
+                        //Cube *tmpcube = //[array27Cube objectAtIndex:i];
+                        Cube *tmpcube = MagicCubeIndexState[i];
                         if ([tmpcube index] == index) {
                             magiccubeStateIndex = i;
                         }
                     }
                     int x = -1,y = -1,z= -1;
+                    //NSLog(@"magiccubeStateIndex%d",magiccubeStateIndex);
                     z = magiccubeStateIndex/9;
                     int tmp = magiccubeStateIndex%9;
                     y = tmp/3;
@@ -475,13 +641,107 @@
             }
             if (index != -1) {
                 //dectected
-                NSLog(@" single 拾取第%d个小块： distance：%f",index,nearest_distance);
+                NSLog(@" single begin拾取第%d个小块： distance：%f",index,nearest_distance);
                 selected = [array27Cube objectAtIndex:index];
                 selected.scale = MCPointMake(20, 20, 20);
                 isLayerRotating = YES;
+                fingerRotate_angle = 0;
             }
            // m_previousOrientation = m_orientation;
         }else if (touchEventSate == UITouchPhaseEnded) {
+            //确定旋转方向
+            CGPoint location = [touch locationInView:view];
+            ivec2 lastPoint = ivec2(location.x,location.y);
+            ivec2 middle = ivec2((firstThreePoint[0].x+lastPoint.x)/2,
+                                 (firstThreePoint[0].y+lastPoint.y)/2);
+            
+            float xyz[9] = {1.0,0.0,0.0,0.0,1.0,0.0,0.0,0.0,1.0};
+            Cube * tmpcuble = [array27Cube objectAtIndex:13];
+            GLfloat * XYZ = VertexesArray_Matrix_Multiply(xyz, 3, 3, tmpcuble.matrix);
+            vec3 ox = vec3(XYZ[0],XYZ[1],XYZ[2]);
+            vec3 oy = vec3(XYZ[3],XYZ[4],XYZ[5]);
+            vec3 oz = vec3(XYZ[6],XYZ[7],XYZ[8]);
+            
+            vec3 firstv = [self MapToLayerCenter:firstThreePoint[0]];
+            vec3 middlev =[self MapToLayerCenter:middle];
+            vec3 lastv = [self MapToLayerCenter:lastPoint];
+            
+            double alpha2 = ThetaBetweenV1andV2(firstv,lastv);
+            rest_fingerRotate_angle = alpha2;
+
+            //标记启动自动调整
+            isNeededToAdjustment = YES;
+            double angle = fingerRotate_angle*360/Pi;
+            int tmpvar = int(angle)/90;
+            double last = angle - tmpvar*90.0;
+            if (last > 45.0) {
+                rest_fingerRotate_angle = 90.0-last;
+            }else {
+                rest_fingerRotate_angle = last;
+            }
+            NSLog(@"rest_fingerRotate_angle %f",rest_fingerRotate_angle);
+            rest_fingerRotate_time = (rest_fingerRotate_angle/ROTATION_ANGLE)*TIME_PER_ROTATION;
+            
+                        
+            vec3 V1 = firstv-middlev;
+            vec3 V2 = lastv -middlev;
+            vec3 corssv1v2 = V1.Cross(V2);
+            
+            if (current_rotate_axis == X) {
+                double cosa = corssv1v2.Dot(ox)/(corssv1v2.Module()*ox.Module());
+                if (cosa > 0) {
+                    if (last > 45) {
+                        current_rotate_direction = CW;
+                    }else {
+                        current_rotate_direction = CCW;
+                    }
+                }else {
+                    if (last > 45) {
+                        current_rotate_direction = CCW;
+                    }else {
+                        current_rotate_direction = CW;
+
+                    }
+                }
+            }
+            if (current_rotate_axis == Y) {
+                double cosa = corssv1v2.Dot(oy)/(corssv1v2.Module()*oy.Module());
+                if (cosa > 0) {
+                    if (last > 45) {
+                        current_rotate_direction = CW;
+                    }else {
+                        current_rotate_direction = CCW;
+                    }
+                }else {
+                    if (last > 45) {
+                        current_rotate_direction = CCW;
+                    }else {
+                        current_rotate_direction = CW;
+                        
+                    }
+                }
+            }
+            if (current_rotate_axis == Z) {
+                double cosa = corssv1v2.Dot(oz)/(corssv1v2.Module()*oz.Module());
+                if (cosa > 0) {
+                    if (last > 45) {
+                        current_rotate_direction = CW;
+                    }else {
+                        current_rotate_direction = CCW;
+                    }
+                }else {
+                    if (last > 45) {
+                        current_rotate_direction = CCW;
+                    }else {
+                        current_rotate_direction = CW;
+                        
+                    }
+                }
+            }
+
+            
+            NSLog(@"current_rotate_direction %d",current_rotate_direction);
+            //标记手动转动结束
             isLayerRotating = NO;
             firstThreePointCount = 0;
             NSLog(@"single finish");
@@ -510,9 +770,8 @@
                 vec3 start = [self MapToSphere: m_fingerStart];
                 vec3 end =[self MapToSphere:newLocation];
                 Quaternion delta = Quaternion::CreateFromVectors(start, end);
-                m_orientation = delta.Rotated(m_previousOrientation);
-                for (int i = 0; i < 27; i++) {
-                    [[array27Cube objectAtIndex:i]setM_orientation:m_orientation];
+                for (Cube *tmp in array27Cube) {
+                    [tmp setQuaRotation: delta.Rotated([tmp quaPreviousRotation])];
                 }
                 
                // NSLog(@"orientation %f %f %f ",m_orientation.x,m_orientation.y,m_orientation.z );
@@ -524,7 +783,10 @@
             m_spinning = YES;
             m_fingerStart.x =location.x;
             m_fingerStart.y =location.y;
-            m_previousOrientation = m_orientation;
+            for (Cube *tmp in array27Cube) {
+                [tmp setQuaPreviousRotation:[tmp quaRotation]];
+            }
+            //quaPreviousRotation = quaRotation;
             
         }else if (touchEventSate==UITouchPhaseEnded) {
             //[self setSpeed:MCPointMake(0, 0, 0)]; 
@@ -618,6 +880,13 @@
     float d = abs(v0Xv1.Dot(v))/v0Xv1.Module();
     return d;
 }
+
+double ThetaBetweenV1andV2(const vec3& v1,const vec3& v2)
+{
+    double cosa = v1.Dot(v2)/(v1.Module()*v2.Module());
+    return acos(cosa);
+}
+
 
 - (void) SelectLayer{
     //获取layer的对象指针
@@ -829,39 +1098,39 @@
 
 
 -(void)rotateTest{
-    if (isRotate) {
+    if (isAutoRotate) {
         return;
     }
     if (rrrr == 0) {
-        [self rotateOnAxis:Y onLayer:1 inDirection:CCW];
+        [self rotateOnAxis:Y onLayer:2 inDirection:CCW];
         rrrr++;
         return;
     }
     
     if (rrrr == 1) {
-        [self rotateOnAxis:Z onLayer:1 inDirection:CCW];
+        [self rotateOnAxis:Z onLayer:0 inDirection:CCW];
         rrrr++;
         return;
         
     }
     if (rrrr == 2) {
-        [self rotateOnAxis:Y onLayer:1 inDirection:CCW];
+        [self rotateOnAxis:Y onLayer:0 inDirection:CCW];
         rrrr++;
         return;
     }
     if (rrrr == 3) {
-        [self rotateOnAxis:Y onLayer:1 inDirection:CCW];
+        [self rotateOnAxis:Y onLayer:0 inDirection:CW];
         rrrr++;
         return;
         
     }
     if (rrrr == 4) {
-        [self rotateOnAxis:X onLayer:1 inDirection:CW];
+        [self rotateOnAxis:Z onLayer:0 inDirection:CW];
         rrrr++;
         return;
     }
     if (rrrr == 5) {
-        [self rotateOnAxis:Z onLayer:0 inDirection:CW];
+        [self rotateOnAxis:Y onLayer:2 inDirection:CW];
         rrrr=0;
         return;
         
