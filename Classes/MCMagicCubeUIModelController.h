@@ -52,6 +52,7 @@
     double rest_fingerRotate_angle;
     double rest_fingerRotate_time;
     BOOL isNeededToAdjustment;
+    BOOL isNeededToUpdateMagicCubeState;
     //当前整个魔方索引的状态，存储索引值
     Cube * MagicCubeIndexState[27];
     

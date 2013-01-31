@@ -74,7 +74,17 @@
     
     return self;
 };
+-(void)render{
+    [array27Cube makeObjectsPerformSelector:@selector(render)];
+    [super render];
+};
 
+-(void)awake
+{
+    // [array27Cube makeObjectsPerformSelector:@selector(awake)];
+    [[array27Cube objectAtIndex:26] performSelector:@selector(awake)];
+    
+}
 - (void) rotateOnAxis : (AxisType)axis onLayer: (int)layer inDirection: (LayerRotationDirectionType)direction{
     if (isAutoRotate) return;
     isAutoRotate = YES;
@@ -127,17 +137,7 @@
     //[MagicCube rotateOnAxis : axis onLayer: layer inDirection:direction];
 
 };
--(void)render{
-    [array27Cube makeObjectsPerformSelector:@selector(render)];
-    [super render];
-};
 
--(void)awake
-{
-   // [array27Cube makeObjectsPerformSelector:@selector(awake)];
-     [[array27Cube objectAtIndex:26] performSelector:@selector(awake)];
-    
-}
 
 -(void)update{
     [self handleTouches];
@@ -307,6 +307,7 @@
         }
     }
     if (isNeededToAdjustment) {
+        
         CGFloat deltaTime = [[[CoordinatingController sharedCoordinatingController] currentController] deltaTime];
         rest_fingerRotate_time -= deltaTime;
         
@@ -386,8 +387,10 @@
                     [layerPtr[i] setQuaRotation: delta.Rotated([layerPtr[i] quaPreviousRotation])];
                 }
             }
+            if(isNeededToUpdateMagicCubeState){
+                [self updateState];
+            }
             
-            [self updateState];
             //归零
             rest_fingerRotate_time = 0;
             
@@ -516,8 +519,8 @@
                     vec3 end =[self MapToLayerCenter:current];
                     
                     double alpha = ThetaBetweenV1andV2(start,end);
-                    fingerRotate_angle += alpha;
-                    
+                    fingerRotate_angle = alpha*180/Pi; //checked
+                    //NSLog(@"fingerRotate_angle2:%f",fingerRotate_angle);
                     Quaternion delta = Quaternion::CreateFromVectors(start, end);
                     for (int i=0;i<9;i++) {
                         if (current_rotate_layer!=1) {
@@ -650,6 +653,8 @@
            // m_previousOrientation = m_orientation;
         }else if (touchEventSate == UITouchPhaseEnded) {
             //确定旋转方向
+            //使用第一点 和 最后一个点 及他们点中间点 在轨迹圆上形成轨迹弧
+            //三点确定两个向量，他们进行差乘，再和法向量进行点乘 由正负确定转向
             CGPoint location = [touch locationInView:view];
             ivec2 lastPoint = ivec2(location.x,location.y);
             ivec2 middle = ivec2((firstThreePoint[0].x+lastPoint.x)/2,
@@ -666,14 +671,12 @@
             vec3 middlev =[self MapToLayerCenter:middle];
             vec3 lastv = [self MapToLayerCenter:lastPoint];
             
-            double alpha2 = ThetaBetweenV1andV2(firstv,lastv);
-            rest_fingerRotate_angle = alpha2;
-
             //标记启动自动调整
+            NSLog(@"fingerRotate_angle2:%f",fingerRotate_angle);
             isNeededToAdjustment = YES;
-            double angle = fingerRotate_angle*360/Pi;
-            int tmpvar = int(angle)/90;
-            double last = angle - tmpvar*90.0;
+            //double angle = fingerRotate_angle*360/Pi;
+            int tmpvar = int(fingerRotate_angle)/90;
+            double last = fingerRotate_angle - tmpvar*90.0;
             if (last > 45.0) {
                 rest_fingerRotate_angle = 90.0-last;
             }else {
@@ -682,64 +685,36 @@
             NSLog(@"rest_fingerRotate_angle %f",rest_fingerRotate_angle);
             rest_fingerRotate_time = (rest_fingerRotate_angle/ROTATION_ANGLE)*TIME_PER_ROTATION;
             
-                        
             vec3 V1 = firstv-middlev;
             vec3 V2 = lastv -middlev;
             vec3 corssv1v2 = V1.Cross(V2);
-            
+            double cosa = -1;
             if (current_rotate_axis == X) {
-                double cosa = corssv1v2.Dot(ox)/(corssv1v2.Module()*ox.Module());
-                if (cosa > 0) {
-                    if (last > 45) {
-                        current_rotate_direction = CW;
-                    }else {
-                        current_rotate_direction = CCW;
-                    }
-                }else {
-                    if (last > 45) {
-                        current_rotate_direction = CCW;
-                    }else {
-                        current_rotate_direction = CW;
-
-                    }
-                }
+                cosa = corssv1v2.Dot(ox)/(corssv1v2.Module()*ox.Module());
             }
             if (current_rotate_axis == Y) {
-                double cosa = corssv1v2.Dot(oy)/(corssv1v2.Module()*oy.Module());
-                if (cosa > 0) {
-                    if (last > 45) {
-                        current_rotate_direction = CW;
-                    }else {
-                        current_rotate_direction = CCW;
-                    }
+                cosa = corssv1v2.Dot(oy)/(corssv1v2.Module()*oy.Module());
+            }
+            if (current_rotate_axis ==Z) {
+                cosa = corssv1v2.Dot(oz)/(corssv1v2.Module()*oz.Module());
+            }
+            if (cosa > 0){
+                if (last > 45) {
+                    current_rotate_direction = CW;
+                    isNeededToUpdateMagicCubeState = YES;
                 }else {
-                    if (last > 45) {
-                        current_rotate_direction = CCW;
-                    }else {
-                        current_rotate_direction = CW;
-                        
-                    }
+                    current_rotate_direction = CCW;
+                    isNeededToUpdateMagicCubeState = NO;
+                }
+            }else {
+                if (last > 45) {
+                    current_rotate_direction = CCW;
+                    isNeededToUpdateMagicCubeState = YES;
+                }else {
+                    current_rotate_direction = CW;
+                    isNeededToUpdateMagicCubeState = NO;
                 }
             }
-            if (current_rotate_axis == Z) {
-                double cosa = corssv1v2.Dot(oz)/(corssv1v2.Module()*oz.Module());
-                if (cosa > 0) {
-                    if (last > 45) {
-                        current_rotate_direction = CW;
-                    }else {
-                        current_rotate_direction = CCW;
-                    }
-                }else {
-                    if (last > 45) {
-                        current_rotate_direction = CCW;
-                    }else {
-                        current_rotate_direction = CW;
-                        
-                    }
-                }
-            }
-
-            
             NSLog(@"current_rotate_direction %d",current_rotate_direction);
             //标记手动转动结束
             isLayerRotating = NO;
