@@ -388,9 +388,17 @@
                 }
             }
             if(isNeededToUpdateMagicCubeState){
+                if (fingerRotate_angle>90&&fingerRotate_angle_mod90<45) {
+                    if (current_rotate_direction == CW) {
+                        current_rotate_direction =CCW;
+                    }else {
+                        current_rotate_direction = CW;
+                    }
+                }
                 [self updateState];
             }
-            
+            fingerRotate_angle = 0;
+            isNeededToAdjustment = NO;
             //归零
             rest_fingerRotate_time = 0;
             
@@ -655,6 +663,7 @@
             //确定旋转方向
             //使用第一点 和 最后一个点 及他们点中间点 在轨迹圆上形成轨迹弧
             //三点确定两个向量，他们进行差乘，再和法向量进行点乘 由正负确定转向
+            if(isLayerRotating!=YES)return;
             CGPoint location = [touch locationInView:view];
             ivec2 lastPoint = ivec2(location.x,location.y);
             ivec2 middle = ivec2((firstThreePoint[0].x+lastPoint.x)/2,
@@ -676,13 +685,13 @@
             isNeededToAdjustment = YES;
             //double angle = fingerRotate_angle*360/Pi;
             int tmpvar = int(fingerRotate_angle)/90;
-            double last = fingerRotate_angle - tmpvar*90.0;
-            if (last > 45.0) {
-                rest_fingerRotate_angle = 90.0-last;
+            fingerRotate_angle_mod90 = fingerRotate_angle - tmpvar*90.0;
+            if (fingerRotate_angle_mod90 > 45.0) {
+                rest_fingerRotate_angle = 90.0-fingerRotate_angle_mod90;
             }else {
-                rest_fingerRotate_angle = last;
+                rest_fingerRotate_angle = fingerRotate_angle_mod90;
             }
-            NSLog(@"rest_fingerRotate_angle %f",rest_fingerRotate_angle);
+            
             rest_fingerRotate_time = (rest_fingerRotate_angle/ROTATION_ANGLE)*TIME_PER_ROTATION;
             
             vec3 V1 = firstv-middlev;
@@ -699,7 +708,7 @@
                 cosa = corssv1v2.Dot(oz)/(corssv1v2.Module()*oz.Module());
             }
             if (cosa > 0){
-                if (last > 45) {
+                if (fingerRotate_angle_mod90 > 45) {
                     current_rotate_direction = CW;
                     isNeededToUpdateMagicCubeState = YES;
                 }else {
@@ -707,7 +716,7 @@
                     isNeededToUpdateMagicCubeState = NO;
                 }
             }else {
-                if (last > 45) {
+                if (fingerRotate_angle_mod90 > 45) {
                     current_rotate_direction = CCW;
                     isNeededToUpdateMagicCubeState = YES;
                 }else {
@@ -715,6 +724,12 @@
                     isNeededToUpdateMagicCubeState = NO;
                 }
             }
+            if (fingerRotate_angle>90&&fingerRotate_angle_mod90<45) {
+                isNeededToUpdateMagicCubeState = YES;
+            }
+            NSLog(@"fingerRotate_angle %f",fingerRotate_angle);
+            NSLog(@"fingerRotate_angle_mod90 %f",fingerRotate_angle_mod90);
+            NSLog(@"rest_fingerRotate_angle %f",rest_fingerRotate_angle);
             NSLog(@"current_rotate_direction %d",current_rotate_direction);
             //标记手动转动结束
             isLayerRotating = NO;

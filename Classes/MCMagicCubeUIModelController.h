@@ -49,6 +49,7 @@
     //自动调整机制
     //手动转动点角度
     double fingerRotate_angle;
+    double fingerRotate_angle_mod90;
     double rest_fingerRotate_angle;
     double rest_fingerRotate_time;
     BOOL isNeededToAdjustment;
