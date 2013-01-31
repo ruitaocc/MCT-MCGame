@@ -17,12 +17,16 @@
 #import "MCCollider.h"
 @implementation Cube
 @synthesize index;
+@synthesize O_X,O_Y,O_Z;
 - (id) init
 {
 	self = [super init];
 	if (self != nil) {
 	//	self.collider = nil;
     	}
+    O_X = ZX;
+    O_Y = ZY;
+    O_Z = ZZ;
 	return self;
 }
 

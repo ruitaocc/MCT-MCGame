@@ -79,7 +79,6 @@ static inline GLfloat* VertexesArray_Matrix_Multiply(GLfloat *ptr, int vertexStr
 	return tmp;
 }
 
-
 static inline float MCPointDistance(MCPoint p1, MCPoint p2)
 {
 	return sqrt(((p1.x - p2.x) * (p1.x - p2.x)) + 

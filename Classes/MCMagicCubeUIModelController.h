@@ -35,7 +35,26 @@
     
     MCRay *ray;
     
-
+    double cuculated_angle;
+    
+    ivec2 firstThreePoint[3];
+    Cube *selected;
+    float select_trackballRadius;
+    int firstThreePointCount;
+    //是否正在执行单层任务
+    BOOL isLayerRotating;
+    //当前整个魔方索引的状态，存储索引值
+    
+    
+    
+    Cube * MagicCubeIndexState[27];
+    
+    
+    
+    
+    
+    
+    int rrrr;
     
 }
 

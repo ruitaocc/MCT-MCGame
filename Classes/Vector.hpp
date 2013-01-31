@@ -91,7 +91,10 @@ struct Vector3 {
         y = cy;
         z = cz;
     }
-
+    float Module()const
+    {
+        return std::sqrt(x * x + y * y + z * z);
+    }
     Vector3 Normalized() const 
     {
         Vector3 v = *this;

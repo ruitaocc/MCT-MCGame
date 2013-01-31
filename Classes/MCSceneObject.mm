@@ -18,7 +18,7 @@
 @synthesize prerotation,pretranslation;
 @synthesize translation,rotation,scale,active,mesh,matrix,meshBounds;
 @synthesize m_orientation;
-@synthesize quaRotation;
+@synthesize quaRotation,quaPreviousRotation;
 @synthesize collider;
 - (id) init
 {
@@ -58,21 +58,22 @@
 	// move to my position
 	glTranslatef(pretranslation.x, pretranslation.y, pretranslation.z);
 	
+    mat4 matRotation = quaRotation.ToMatrix();
+    glMultMatrixf(matRotation.Pointer());
+    
 	// rotate
 	glRotatef(prerotation.x, 1.0f, 0.0f, 0.0f);
 	glRotatef(prerotation.y, 0.0f, 1.0f, 0.0f);
 	glRotatef(prerotation.z, 0.0f, 0.0f, 1.0f);
-    
     mat4 orientation = m_orientation.ToMatrix();
     glMultMatrixf(orientation.Pointer());
-	
+   	
     // rotate
 	glRotatef(rotation.x, 1.0f, 0.0f, 0.0f);
 	glRotatef(rotation.y, 0.0f, 1.0f, 0.0f);
 	glRotatef(rotation.z, 0.0f, 0.0f, 1.0f);
     
-    mat4 matRotation = quaRotation.ToMatrix();
-    glMultMatrixf(matRotation.Pointer());
+    
     
     
     //tanslation_after_rotate

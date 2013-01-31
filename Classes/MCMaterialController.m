@@ -35,7 +35,7 @@
         
 		// preload all our textures and atlases
 		[self loadTextureImage:@"cubeBlack2.png" materialKey:@"cubeTexture2"];
-        [self loadTextureImage:@"sixcolor.png" materialKey:@"cubeTexture"];
+        //[self loadTextureImage:@"sixcolor.png" materialKey:@"cubeTexture"];
        
 		[self loadAtlasData:@"particleAtlas"];
         

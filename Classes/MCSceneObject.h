@@ -37,7 +37,6 @@
     
     Quaternion quaRotation;
     Quaternion quaPreviousRotation;
-
 	MCMesh * mesh;
 	
 	BOOL active;
@@ -61,6 +60,7 @@
 @property (assign) MCPoint prerotation;
 @property (assign) Quaternion m_orientation;
 @property (assign) Quaternion quaRotation;
+@property (assign) Quaternion quaPreviousRotation;
 @property (assign) BOOL active;
 @property (assign) CGRect meshBounds;
 - (id) init;
