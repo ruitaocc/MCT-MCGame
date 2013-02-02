@@ -41,6 +41,7 @@
     
     ivec2 firstThreePoint[3];
     Cube *selected;
+    float selected_triangle[9];
     float select_trackballRadius;
     int firstThreePointCount;
     //是否正在执行单层任务

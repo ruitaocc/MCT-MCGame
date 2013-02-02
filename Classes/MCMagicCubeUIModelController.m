@@ -498,24 +498,23 @@
         //CGPoint location = [touch locationInView:view];
 
         //继续射线拾取
-        float V[108] = {-0.5,0.5,0.5,-0.5,-0.5,0.5,0.5,-0.5,0.5,
-            0.5,-0.5,0.5,0.5,0.5,0.5,-0.5,0.5,0.5,//前
+        float V[108] = {-0.5,0.5,0.5,    -0.5,-0.5,0.5,   0.5,-0.5,0.5,
+                         0.5,-0.5,0.5,    0.5,0.5,0.5,    -0.5,0.5,0.5,//前
             
-            -0.5,0.5,0.5,0.5,0.5,0.5,0.5,0.5,-0.5,
-            0.5,0.5,-0.5,-0.5,0.5,-0.5,-0.5,0.5,0.5,//上
+                        -0.5,0.5,0.5,     0.5,0.5,0.5,     0.5,0.5,-0.5,
+                         0.5,0.5,-0.5,   -0.5,0.5,-0.5,   -0.5,0.5,0.5,//上
             
-            -0.5,0.5,-0.5,-0.5,-0.5,-0.5,-0.5,-0.5,0.5,
-            -0.5,-0.5,0.5,-0.5,0.5,0.5,-0.5,0.5,-0.5,//左
+                        -0.5,0.5,-0.5,   -0.5,-0.5,-0.5,  -0.5,-0.5,0.5,
+                        -0.5,-0.5,0.5,   -0.5,0.5,0.5,    -0.5,0.5,-0.5,//左
             
-            0.5,0.5,0.5,0.5,-0.5,0.5,0.5,-0.5,-0.5,
-            0.5,-0.5,-0.5,0.5,0.5,-0.5,0.5,0.5,0.5,//右
+                         0.5,0.5,0.5,     0.5,-0.5,0.5,    0.5,-0.5,-0.5,
+                         0.5,-0.5,-0.5,   0.5,0.5,-0.5,    0.5,0.5,0.5,//右
             
-            0.5,0.5,-0.5,0.5,-0.5,-0.5,-0.5,-0.5,-0.5,
-            -0.5,-0.5,-0.5,-0.5,0.5,-0.5,0.5,0.5,-0.5,//后
+                         0.5,0.5,-0.5,    0.5,-0.5,-0.5,  -0.5,-0.5,-0.5,
+                        -0.5,-0.5,-0.5,  -0.5,0.5,-0.5,    0.5,0.5,-0.5,//后
             
-            -0.5,-0.5,0.5,-0.5,-0.5,-0.5,0.5,-0.5,-0.5,
-            0.5,-0.5,-0.5,0.5,-0.5,0.5,-0.5,-0.5,0.5,//下
-            
+                        -0.5,-0.5,0.5,   -0.5,-0.5,-0.5,   0.5,-0.5,-0.5,
+                         0.5,-0.5,-0.5,   0.5,-0.5,0.5,    -0.5,-0.5,0.5,//下
         };
         
         if (touchEventSate == UITouchPhaseMoved) {
@@ -555,7 +554,8 @@
                 firstThreePoint[firstThreePointCount] = ivec2(location.x,location.y);
                 firstThreePointCount++;
             }else {
-                //计算选中层
+                /*
+                //计算选中层 方案1
                 NSLog(@"1.x:%d,1.y:%d",firstThreePoint[0].x,firstThreePoint[0].y);
                 NSLog(@"2.x:%d,2.y:%d",firstThreePoint[1].x,firstThreePoint[1].y);
                 NSLog(@"3.x:%d,3.y:%d",firstThreePoint[2].x,firstThreePoint[2].y);
@@ -627,6 +627,86 @@
                     
                 }
                 firstThreePointCount++;
+                 */
+                //计算选中层  方案2
+                vec3 figer_triangleV0 = vec3(firstThreePoint[0].x,firstThreePoint[0].y,10);
+                vec3 figer_triangleV1 = vec3(firstThreePoint[1].x,firstThreePoint[1].y,30);
+                vec3 figer_triangleV2 = vec3(firstThreePoint[2].x,firstThreePoint[2].y,10);
+                vec3 movedTo0_V0 = figer_triangleV0-figer_triangleV1;
+                vec3 movedTo0_V1 = figer_triangleV2-figer_triangleV1;
+                
+                vec3 select_triangleV0 = vec3(selected_triangle[0],selected_triangle[1],selected_triangle[2]);
+                vec3 select_triangleV1 = vec3(selected_triangle[3],selected_triangle[4],selected_triangle[5]);
+                vec3 select_triangleV2 = vec3(selected_triangle[6],selected_triangle[7],selected_triangle[8]);
+                vec3 select_movedTo0_V0 = select_triangleV0 - select_triangleV1;
+                vec3 select_movedTo0_V1 = select_triangleV2 - select_triangleV1;
+
+                float xyz[9] = {1.0,0.0,0.0,0.0,1.0,0.0,0.0,0.0,1.0};
+                Cube * tmpcuble = [array27Cube objectAtIndex:13];
+                GLfloat * XYZ = VertexesArray_Matrix_Multiply(xyz, 3, 3, tmpcuble.matrix);
+                vec3 ox = vec3(XYZ[0],XYZ[1],XYZ[2]);
+                vec3 oy = vec3(XYZ[3],XYZ[4],XYZ[5]);
+                vec3 oz = vec3(XYZ[6],XYZ[7],XYZ[8]);
+                
+                float ox_triangle = [self AngleV0V1withV:ox V0:select_movedTo0_V0 V1:select_movedTo0_V1];
+                float oy_triangle = [self AngleV0V1withV:oy V0:select_movedTo0_V0 V1:select_movedTo0_V1];
+                float oz_triangle = [self AngleV0V1withV:oz V0:select_movedTo0_V0 V1:select_movedTo0_V1];
+                AxisType vertical_axis = (ox_triangle>oy_triangle)? X:(oy_triangle>oz_triangle)?Y:Z;
+
+                
+                float dx = [self AngleV0V1withV:ox V0:movedTo0_V0 V1:movedTo0_V1];
+                float dy = [self AngleV0V1withV:oy V0:movedTo0_V0 V1:movedTo0_V1];
+                float dz = [self AngleV0V1withV:oz V0:movedTo0_V0 V1:movedTo0_V1];
+                
+                if (vertical_axis == X) {
+                    current_rotate_axis = (dy>dz)?Y:Z;
+                }
+                if (vertical_axis == Y) {
+                    current_rotate_axis = (dx >dz)?X:Z;
+                }
+                if (vertical_axis == Z) {
+                    current_rotate_axis = (dx>dy)?X:Y;
+                }
+                if (selected != nil) {
+                    //计算选中点层和轴
+                    int index = [selected index];
+                    int magiccubeStateIndex = -1;
+                    for (int i = 0;i<27;i++) {
+                        //Cube *tmpcube = //[array27Cube objectAtIndex:i];
+                        Cube *tmpcube = MagicCubeIndexState[i];
+                        if ([tmpcube index] == index) {
+                            magiccubeStateIndex = i;
+                        }
+                    }
+                    int x = -1,y = -1,z= -1;
+                    //NSLog(@"magiccubeStateIndex%d",magiccubeStateIndex);
+                    z = magiccubeStateIndex/9;
+                    int tmp = magiccubeStateIndex%9;
+                    y = tmp/3;
+                    x = tmp%3;
+                    if (current_rotate_axis == X) {
+                        current_rotate_layer = x;
+                        NSLog(@"X %d",current_rotate_layer);
+                    }else if(current_rotate_axis ==Y){
+                        current_rotate_layer = y;
+                        NSLog(@"Y %d",current_rotate_layer);
+                    }else {
+                        current_rotate_layer = z;
+                        NSLog(@"Z %d",current_rotate_layer);
+                    }
+                    //选中层
+                    [self SelectLayer];
+                    for (int i= 0; i<9; i++) {
+                        if (current_rotate_layer!=1) {
+                            [layerPtr[i] setQuaPreviousRotation:[layerPtr[i] quaRotation]];
+                        }else if(i != 4){
+                            [layerPtr[i] setQuaPreviousRotation:[layerPtr[i] quaRotation]];
+                        }
+                    }
+                    
+                }
+                firstThreePointCount++;
+
             }
             
             
@@ -658,6 +738,10 @@
                                                                        V2:&tmp_dection[6 +i*9]];
                     if (distance < 0) continue;
                     if (distance < nearest_distance) {
+                        //存储当前选中的三角形
+                        for (int k= 0; k <9 ; k++) {
+                            selected_triangle[k] = tmp_dection[i*9+k];
+                        }
                         nearest_distance = distance;
                         index = tmp_cube.index;
                     }
