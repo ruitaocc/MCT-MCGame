@@ -13,6 +13,8 @@
 
 @implementation MCMagicCubeUIModelController
 @synthesize array27Cube;
+@synthesize stepcounterAddAction,stepcounterMinusAction;
+@synthesize target;
 
 -(id)initiate{
     if(self = [super init]){
@@ -69,6 +71,7 @@
         firstThreePointCount = 0;
         fingerRotate_angle = 0;
         select_trackballRadius = 260;
+        isAddStepWhenUpdateState = YES;
         rrrr = 0;
     }
     
@@ -1011,10 +1014,20 @@ double ThetaBetweenV1andV2(const vec3& v1,const vec3& v2)
     }
 };
 
+-(void)stepCounterAdd{
+    [target performSelector:stepcounterAddAction];
+}
+-(void)stepCounterMinus{
+    [target performSelector:stepcounterMinusAction];
+}
 
 
 -(void)updateState{
-    //
+    if (isAddStepWhenUpdateState) {
+        [self stepCounterAdd];
+    }else {
+        [self stepCounterMinus];
+    }
     Cube *tmp;
     switch (current_rotate_axis) {
         case X:
@@ -1087,14 +1100,6 @@ double ThetaBetweenV1andV2(const vec3& v1,const vec3& v2)
                 MagicCubeIndexState[2*9+1+3*current_rotate_layer] = MagicCubeIndexState[1*9+2+3*current_rotate_layer];
                 //5=tmp
                 MagicCubeIndexState[1*9+2+3*current_rotate_layer] = tmp;
-//                for(int i = 0; i < 9; ++i)
-//                {
-//                    
-//                    direction tmp = layerPtr[i].O_Z;
-//                    layerPtr[i].O_Z = direction(-[layerPtr[i] O_X]);
-//                    layerPtr[i].O_X = tmp;
-//                    NSLog(@"O_X=%d,O_Y=%d,O_Z=%d",layerPtr[i].O_X,layerPtr[i].O_Y,layerPtr[i].O_Z);
-//                }
             }else {
                 //tmp = 0
                 tmp = MagicCubeIndexState[0*9+0+current_rotate_layer*3];
@@ -1117,14 +1122,6 @@ double ThetaBetweenV1andV2(const vec3& v1,const vec3& v2)
                 MagicCubeIndexState[2*9+1+current_rotate_layer*3] = MagicCubeIndexState[1*9+0+current_rotate_layer*3];
                 //3=tmp
                 MagicCubeIndexState[1*9+0+current_rotate_layer*3] = tmp;
-//                for(int i = 0; i < 9; ++i)
-//                {
-//                    
-//                    direction tmp = layerPtr[i].O_Z;
-//                    layerPtr[i].O_Z = [layerPtr[i] O_X];
-//                    layerPtr[i].O_X = direction(-tmp);
-//                    NSLog(@"O_X=%d,O_Y=%d,O_Z=%d",layerPtr[i].O_X,layerPtr[i].O_Y,layerPtr[i].O_Z);
-//                }
             }
             break;
         case Z:

@@ -9,7 +9,7 @@
 #import "MCCountingPlaySceneController__1.h"
 #import "MCMagicCubeUIModelController.h"
 #import "Cube.h"
-
+#import "MCStepCounter.h"
 @implementation MCCountingPlaySceneController
 
 +(MCCountingPlaySceneController*)sharedCountingPlaySceneController
@@ -47,6 +47,9 @@
     
     //大魔方
     MCMagicCubeUIModelController *magicCube = [[MCMagicCubeUIModelController alloc]initiate];
+    magicCube.target=self;
+    [magicCube setStepcounterAddAction:@selector(stepcounterAdd)];
+    [magicCube setStepcounterMinusAction:@selector(stepcounterMinus)];
     [self addObjectToScene:magicCube];
     [magicCube release];
     
@@ -58,6 +61,17 @@
 	// reload our interface
 	[inputController loadInterface];
 }
+
+-(void)stepcounterAdd{
+    MCStepCounter *tmp = [inputController onedigitCounter];
+    [tmp addStep];
+}
+-(void)stepcounterMinus{
+    MCStepCounter *tmp = [inputController onedigitCounter];
+    [tmp minusStep];
+}
+
+
 
 -(void)rotateTest{
     NSLog(@"mc rotate test");

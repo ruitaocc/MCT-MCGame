@@ -59,14 +59,16 @@
     Cube * MagicCubeIndexState[27];
     
     
-    
-    
-    
-    
+    id target;
+    BOOL isAddStepWhenUpdateState;
+	SEL stepcounterAddAction;
+    SEL stepcounterMinusAction;
     int rrrr;
-    
 }
 
+@property (assign) id target;
+@property (assign) SEL stepcounterAddAction;
+@property (assign) SEL stepcounterMinusAction;
 @property (retain) NSMutableArray* array27Cube;
 -(id)initiate;
 - (void) rotateOnAxis : (AxisType)axis onLayer: (int)layer inDirection: (LayerRotationDirectionType)direction;

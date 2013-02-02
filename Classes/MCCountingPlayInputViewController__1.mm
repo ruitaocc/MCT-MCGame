@@ -10,8 +10,9 @@
 #import "MCTexturedButton.h"
 #import "CoordinatingController.h"
 
-@implementation MCCountingPlayInputViewController
 
+@implementation MCCountingPlayInputViewController
+@synthesize onedigitCounter;
 
 
 -(void)loadInterface
@@ -20,12 +21,18 @@
 	[interfaceObjects removeAllObjects];
     
   
+    NSString *counterName[10] = {@"zero",@"one",@"two",@"three",@"four",@"five",@"six",@"seven",@"eight",@"nine"};
+    onedigitCounter = [[MCStepCounter alloc]initWithUpKeyS:counterName];
+    onedigitCounter.scale = MCPointMake(45, 72, 1.0);
+    onedigitCounter.translation = MCPointMake(380, -320, 0.0);
+    onedigitCounter.active = YES;
+    [onedigitCounter awake];
+    [interfaceObjects addObject:onedigitCounter];
+    //[onedigitCounter release];
+    
     
     CGFloat btnWidth = 220.0;
     CGFloat btnHeight = 88.0;
-    
-	
-	
 	
 	// mainMenuBtn
     //the texture 还没设计出来

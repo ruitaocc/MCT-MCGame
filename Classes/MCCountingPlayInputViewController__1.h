@@ -8,8 +8,11 @@
 
 #import <UIKit/UIKit.h>
 #import "InputController.h"
+#import "MCStepCounter.h"
 @interface MCCountingPlayInputViewController : InputController{
+    MCStepCounter *onedigitCounter;
 }
+@property (nonatomic,retain)MCStepCounter *onedigitCounter;
 //overload
 -(void)loadInterface;
 //selectors
