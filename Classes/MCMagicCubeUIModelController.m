@@ -86,7 +86,13 @@
     
 }
 - (void) rotateOnAxis : (AxisType)axis onLayer: (int)layer inDirection: (LayerRotationDirectionType)direction{
+    //当前如果有某一自动旋转正在进行，禁止再旋转，直到完成
     if (isAutoRotate) return;
+    //当前如果有某一手动旋转正在进行，禁止再旋转，直到完成
+    if (isLayerRotating) return;
+    //当前如果有某一旋转自动调整正在进行，禁止再旋转，直到完成
+    if (isNeededToAdjustment) return;
+    
     isAutoRotate = YES;
     rest_rotate_time = TIME_PER_ROTATION;
     rest_rotate_angle = ROTATION_ANGLE;
@@ -626,6 +632,13 @@
             
             
         }else if (touchEventSate == UITouchPhaseBegan) {
+            
+            //当前如果有某一自动旋转正在进行，禁止再旋转，直到完成
+            if (isAutoRotate) return;
+            //当前如果有某一旋转自动调整正在进行，禁止再旋转，直到完成
+            if (isNeededToAdjustment) return;
+            
+            
             //记录第一个点
             CGPoint location = [touch locationInView:view];
             firstThreePointCount++;
@@ -682,7 +695,6 @@
             
             //标记启动自动调整
             NSLog(@"fingerRotate_angle2:%f",fingerRotate_angle);
-            isNeededToAdjustment = YES;
             //double angle = fingerRotate_angle*360/Pi;
             int tmpvar = int(fingerRotate_angle)/90;
             fingerRotate_angle_mod90 = fingerRotate_angle - tmpvar*90.0;
@@ -727,11 +739,8 @@
             if (fingerRotate_angle>90&&fingerRotate_angle_mod90<45) {
                 isNeededToUpdateMagicCubeState = YES;
             }
-            NSLog(@"fingerRotate_angle %f",fingerRotate_angle);
-            NSLog(@"fingerRotate_angle_mod90 %f",fingerRotate_angle_mod90);
-            NSLog(@"rest_fingerRotate_angle %f",rest_fingerRotate_angle);
-            NSLog(@"current_rotate_direction %d",current_rotate_direction);
             //标记手动转动结束
+            isNeededToAdjustment = YES;
             isLayerRotating = NO;
             firstThreePointCount = 0;
             NSLog(@"single finish");
