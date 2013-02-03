@@ -107,6 +107,7 @@
 		A3E855AC1663A50F00DE3ED9 /* cube1126_2.obj in Resources */ = {isa = PBXBuildFile; fileRef = A3E855AA1663A50F00DE3ED9 /* cube1126_2.obj */; };
 		A3E855B01663A69100DE3ED9 /* RadiusOneCubeWithPic.obj in Resources */ = {isa = PBXBuildFile; fileRef = A3E855AF1663A69100DE3ED9 /* RadiusOneCubeWithPic.obj */; };
 		A3E855B21663A9C400DE3ED9 /* cube1126_original.obj in Resources */ = {isa = PBXBuildFile; fileRef = A3E855B11663A9C400DE3ED9 /* cube1126_original.obj */; };
+		A3EB454816BE358700DBB8B7 /* MCMultiDigitCounter.m in Sources */ = {isa = PBXBuildFile; fileRef = A3EB454716BE358700DBB8B7 /* MCMultiDigitCounter.m */; };
 		A3F2ACB61616CE6700D622B8 /* MCMaterialController.m in Sources */ = {isa = PBXBuildFile; fileRef = A3F2ACB51616CE6700D622B8 /* MCMaterialController.m */; };
 		A3F2ACBA1616CF9900D622B8 /* MCParticleSystem.m in Sources */ = {isa = PBXBuildFile; fileRef = A3F2ACB91616CF9900D622B8 /* MCParticleSystem.m */; };
 		A3F2ACC01616D9BB00D622B8 /* MCParticle.m in Sources */ = {isa = PBXBuildFile; fileRef = A3F2ACBF1616D9BB00D622B8 /* MCParticle.m */; };
@@ -183,7 +184,7 @@
 		A3935B3D165A296400B60A07 /* MCRay.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = MCRay.mm; sourceTree = "<group>"; };
 		A3935B3E165A296400B60A07 /* MCGL.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MCGL.h; sourceTree = "<group>"; };
 		A3935B3F165A296400B60A07 /* MCGL.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = MCGL.mm; sourceTree = "<group>"; };
-		A3BDFF5616BCF8FE00892504 /* MCStepCounter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCStepCounter.h; sourceTree = "<group>"; };
+		A3BDFF5616BCF8FE00892504 /* MCStepCounter.h */ = {isa = PBXFileReference; fileEncoding = 4; path = MCStepCounter.h; sourceTree = "<group>"; };
 		A3BDFF5716BCF8FE00892504 /* MCStepCounter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCStepCounter.m; sourceTree = "<group>"; };
 		A3BDFF6016BD4E9A00892504 /* countNumber.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = countNumber.png; sourceTree = "<group>"; };
 		A3BDFF6716BD519300892504 /* countNumber.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = countNumber.plist; sourceTree = "<group>"; };
@@ -245,6 +246,8 @@
 		A3E855AA1663A50F00DE3ED9 /* cube1126_2.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = cube1126_2.obj; sourceTree = "<group>"; };
 		A3E855AF1663A69100DE3ED9 /* RadiusOneCubeWithPic.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = RadiusOneCubeWithPic.obj; sourceTree = "<group>"; };
 		A3E855B11663A9C400DE3ED9 /* cube1126_original.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = cube1126_original.obj; sourceTree = "<group>"; };
+		A3EB454616BE358700DBB8B7 /* MCMultiDigitCounter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCMultiDigitCounter.h; sourceTree = "<group>"; };
+		A3EB454716BE358700DBB8B7 /* MCMultiDigitCounter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCMultiDigitCounter.m; sourceTree = "<group>"; };
 		A3F2ACB41616CE6700D622B8 /* MCMaterialController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCMaterialController.h; sourceTree = "<group>"; };
 		A3F2ACB51616CE6700D622B8 /* MCMaterialController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCMaterialController.m; sourceTree = "<group>"; };
 		A3F2ACB81616CF9900D622B8 /* MCParticleSystem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCParticleSystem.h; path = ../MCParticleSystem.h; sourceTree = "<group>"; };
@@ -633,6 +636,8 @@
 				A30C47D3161C694F0057C5E1 /* MCTexturedButton.m */,
 				A3BDFF5616BCF8FE00892504 /* MCStepCounter.h */,
 				A3BDFF5716BCF8FE00892504 /* MCStepCounter.m */,
+				A3EB454616BE358700DBB8B7 /* MCMultiDigitCounter.h */,
+				A3EB454716BE358700DBB8B7 /* MCMultiDigitCounter.m */,
 				A3E1ADC516A3CC020050B52D /* readme_SceneObjects.rtf */,
 			);
 			name = SceneObjects;
@@ -829,6 +834,7 @@
 				A3CB601216ABD55B006F03D5 /* PopCreateUserViewController.m in Sources */,
 				A3CB601416ABD55B006F03D5 /* ScoreCell.m in Sources */,
 				A3BDFF5816BCF8FE00892504 /* MCStepCounter.m in Sources */,
+				A3EB454816BE358700DBB8B7 /* MCMultiDigitCounter.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

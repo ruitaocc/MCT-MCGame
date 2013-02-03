@@ -9,7 +9,7 @@
 #import "MCCountingPlaySceneController__1.h"
 #import "MCMagicCubeUIModelController.h"
 #import "Cube.h"
-#import "MCStepCounter.h"
+#import "MCMultiDigitCounter.h"
 @implementation MCCountingPlaySceneController
 
 +(MCCountingPlaySceneController*)sharedCountingPlaySceneController
@@ -63,12 +63,14 @@
 }
 
 -(void)stepcounterAdd{
-    MCStepCounter *tmp = [inputController onedigitCounter];
-    [tmp addStep];
+    NSLog(@"step add start");
+    MCMultiDigitCounter *tmp = [inputController stepcounter];
+    [tmp addCounter];
+    NSLog(@"step add finish");
 }
 -(void)stepcounterMinus{
-    MCStepCounter *tmp = [inputController onedigitCounter];
-    [tmp minusStep];
+    MCMultiDigitCounter *tmp = [inputController stepcounter];
+    [tmp minusCounter];
 }
 
 

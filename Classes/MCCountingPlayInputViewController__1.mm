@@ -9,10 +9,10 @@
 #import "MCCountingPlayInputViewController__1.h"
 #import "MCTexturedButton.h"
 #import "CoordinatingController.h"
-
+#import "MCMultiDigitCounter.h"
 
 @implementation MCCountingPlayInputViewController
-@synthesize onedigitCounter;
+@synthesize stepcounter;
 
 
 -(void)loadInterface
@@ -22,13 +22,15 @@
     
   
     NSString *counterName[10] = {@"zero",@"one",@"two",@"three",@"four",@"five",@"six",@"seven",@"eight",@"nine"};
-    onedigitCounter = [[MCStepCounter alloc]initWithUpKeyS:counterName];
-    onedigitCounter.scale = MCPointMake(45, 72, 1.0);
-    onedigitCounter.translation = MCPointMake(380, -320, 0.0);
-    onedigitCounter.active = YES;
-    [onedigitCounter awake];
-    [interfaceObjects addObject:onedigitCounter];
-    //[onedigitCounter release];
+     stepcounter = [[MCMultiDigitCounter alloc]initWithNumberOfDigit:3 andKeys:counterName];
+    [stepcounter setScale : MCPointMake(135, 72, 1.0)];
+    [stepcounter setTranslation :MCPointMake(380, -320, 0.0)];
+    [stepcounter setActive:YES];
+    [stepcounter awake];
+    [interfaceObjects addObject:stepcounter];
+    //[counter release];
+    
+    
     
     
     CGFloat btnWidth = 220.0;

@@ -9,8 +9,7 @@
 #import "MCStepCounter.h"
 
 @implementation MCStepCounter
-@synthesize m_stepCounter;
-
+//@synthesize m_stepCounter;
 - (id) initWithUpKeyS:(NSString*[])Keys{
     self = [super init];
 	if (self != nil) {
@@ -18,13 +17,11 @@
             m_numberQuad[i] = [[MCMaterialController sharedMaterialController]quadFromAtlasKey:Keys[i]];
             [m_numberQuad[i] retain];
         }
-        m_numberQuad[0] = [[MCMaterialController sharedMaterialController]quadFromAtlasKey:@"zero"];
-        [m_numberQuad[0] retain];
-        m_stepCounter = 0;
+        //m_stepCounter = 0;
     }
 	return self;
 };
-
+/*
 - (void)addStep{
     m_stepCounter++;
     if (m_stepCounter > 9) {
@@ -32,12 +29,14 @@
     }
     [self setNumberQuad:m_stepCounter];
 };
+
 - (void)minusStep{
     m_stepCounter--;
     [self setNumberQuad:m_stepCounter];
 };
+ */
 - (void)awake{
-    [self setNumberQuad:m_stepCounter];
+    [self setNumberQuad:0];
 };
 
 - (void)update{
