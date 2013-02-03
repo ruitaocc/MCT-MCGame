@@ -63,10 +63,8 @@
 }
 
 -(void)stepcounterAdd{
-    NSLog(@"step add start");
     MCMultiDigitCounter *tmp = [inputController stepcounter];
     [tmp addCounter];
-    NSLog(@"step add finish");
 }
 -(void)stepcounterMinus{
     MCMultiDigitCounter *tmp = [inputController stepcounter];
