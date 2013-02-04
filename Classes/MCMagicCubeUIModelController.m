@@ -495,6 +495,7 @@
     UIView* view= [[[CoordinatingController sharedCoordinatingController] currentController].inputController view ];
 	UITouchPhase touchEventSate = [[[CoordinatingController sharedCoordinatingController] currentController].inputController touchEventSate];
     if ([touches count] == 0) return;
+    if ([touches count] >2) return;
     //单手指单层划动
     if ([touches count]==1) {
         UITouch *touch = [[touches allObjects] objectAtIndex:0];
