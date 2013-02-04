@@ -13,7 +13,7 @@
 
 @implementation MCCountingPlayInputViewController
 @synthesize stepcounter;
-
+@synthesize timer;
 
 -(void)loadInterface
 {
@@ -29,6 +29,14 @@
     [stepcounter awake];
     [interfaceObjects addObject:stepcounter];
     //[counter release];
+    timer = [[MCTimer alloc]initWithTextureKeys:counterName];
+    [timer setScale:MCPointMake(450/2, 72/2, 1.0)];
+    [timer setTranslation:MCPointMake(-360, -340, 0.0)];
+    [timer setActive:YES];
+    [timer awake];
+    [timer startTimer];
+    [interfaceObjects addObject:timer];
+    
     
     
     

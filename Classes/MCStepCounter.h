@@ -22,6 +22,7 @@
 - (id) initWithUpKeyS:(NSString*[])Keys;
 - (void)awake;
 - (void)update;
+- (void)reset;
 - (void)setNumberQuad:(NSInteger)index;
 - (void)dealloc;
 

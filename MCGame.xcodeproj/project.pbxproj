@@ -49,7 +49,6 @@
 		A358753A16207FA500998085 /* sixcolor.png in Resources */ = {isa = PBXBuildFile; fileRef = A358753916207FA500998085 /* sixcolor.png */; };
 		A37F8812166B876C00B0A59F /* cubeBlack2.png in Resources */ = {isa = PBXBuildFile; fileRef = A37F8811166B876C00B0A59F /* cubeBlack2.png */; };
 		A3BDFF5816BCF8FE00892504 /* MCStepCounter.m in Sources */ = {isa = PBXBuildFile; fileRef = A3BDFF5716BCF8FE00892504 /* MCStepCounter.m */; };
-		A3BDFF6116BD4E9B00892504 /* countNumber.png in Resources */ = {isa = PBXBuildFile; fileRef = A3BDFF6016BD4E9A00892504 /* countNumber.png */; };
 		A3BDFF6816BD519300892504 /* countNumber.plist in Resources */ = {isa = PBXBuildFile; fileRef = A3BDFF6716BD519300892504 /* countNumber.plist */; };
 		A3BF9205161D4C4600829D13 /* cubeTexture.png in Resources */ = {isa = PBXBuildFile; fileRef = A3BF9204161D4C4600829D13 /* cubeTexture.png */; };
 		A3C1D18216957371004EB56C /* MCCollider.mm in Sources */ = {isa = PBXBuildFile; fileRef = A3C1D18116957371004EB56C /* MCCollider.mm */; };
@@ -108,6 +107,9 @@
 		A3E855B01663A69100DE3ED9 /* RadiusOneCubeWithPic.obj in Resources */ = {isa = PBXBuildFile; fileRef = A3E855AF1663A69100DE3ED9 /* RadiusOneCubeWithPic.obj */; };
 		A3E855B21663A9C400DE3ED9 /* cube1126_original.obj in Resources */ = {isa = PBXBuildFile; fileRef = A3E855B11663A9C400DE3ED9 /* cube1126_original.obj */; };
 		A3EB454816BE358700DBB8B7 /* MCMultiDigitCounter.m in Sources */ = {isa = PBXBuildFile; fileRef = A3EB454716BE358700DBB8B7 /* MCMultiDigitCounter.m */; };
+		A3EB454F16BF51F800DBB8B7 /* MCTimer.m in Sources */ = {isa = PBXBuildFile; fileRef = A3EB454E16BF51F800DBB8B7 /* MCTimer.m */; };
+		A3EB455116BF5CF400DBB8B7 /* countNumber.png in Resources */ = {isa = PBXBuildFile; fileRef = A3EB455016BF5CF400DBB8B7 /* countNumber.png */; };
+		A3EB455416BF5E1600DBB8B7 /* MCDotSeparater.m in Sources */ = {isa = PBXBuildFile; fileRef = A3EB455316BF5E1600DBB8B7 /* MCDotSeparater.m */; };
 		A3F2ACB61616CE6700D622B8 /* MCMaterialController.m in Sources */ = {isa = PBXBuildFile; fileRef = A3F2ACB51616CE6700D622B8 /* MCMaterialController.m */; };
 		A3F2ACBA1616CF9900D622B8 /* MCParticleSystem.m in Sources */ = {isa = PBXBuildFile; fileRef = A3F2ACB91616CF9900D622B8 /* MCParticleSystem.m */; };
 		A3F2ACC01616D9BB00D622B8 /* MCParticle.m in Sources */ = {isa = PBXBuildFile; fileRef = A3F2ACBF1616D9BB00D622B8 /* MCParticle.m */; };
@@ -186,7 +188,6 @@
 		A3935B3F165A296400B60A07 /* MCGL.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = MCGL.mm; sourceTree = "<group>"; };
 		A3BDFF5616BCF8FE00892504 /* MCStepCounter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCStepCounter.h; sourceTree = "<group>"; };
 		A3BDFF5716BCF8FE00892504 /* MCStepCounter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCStepCounter.m; sourceTree = "<group>"; };
-		A3BDFF6016BD4E9A00892504 /* countNumber.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = countNumber.png; sourceTree = "<group>"; };
 		A3BDFF6716BD519300892504 /* countNumber.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = countNumber.plist; sourceTree = "<group>"; };
 		A3BF9204161D4C4600829D13 /* cubeTexture.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = cubeTexture.png; path = Classes/cubeTexture.png; sourceTree = "<group>"; };
 		A3C1D18016957371004EB56C /* MCCollider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCCollider.h; sourceTree = "<group>"; };
@@ -248,6 +249,11 @@
 		A3E855B11663A9C400DE3ED9 /* cube1126_original.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = cube1126_original.obj; sourceTree = "<group>"; };
 		A3EB454616BE358700DBB8B7 /* MCMultiDigitCounter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCMultiDigitCounter.h; sourceTree = "<group>"; };
 		A3EB454716BE358700DBB8B7 /* MCMultiDigitCounter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCMultiDigitCounter.m; sourceTree = "<group>"; };
+		A3EB454D16BF51F800DBB8B7 /* MCTimer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCTimer.h; sourceTree = "<group>"; };
+		A3EB454E16BF51F800DBB8B7 /* MCTimer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCTimer.m; sourceTree = "<group>"; };
+		A3EB455016BF5CF400DBB8B7 /* countNumber.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = countNumber.png; sourceTree = "<group>"; };
+		A3EB455216BF5E1600DBB8B7 /* MCDotSeparater.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCDotSeparater.h; sourceTree = "<group>"; };
+		A3EB455316BF5E1600DBB8B7 /* MCDotSeparater.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCDotSeparater.m; sourceTree = "<group>"; };
 		A3F2ACB41616CE6700D622B8 /* MCMaterialController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCMaterialController.h; sourceTree = "<group>"; };
 		A3F2ACB51616CE6700D622B8 /* MCMaterialController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCMaterialController.m; sourceTree = "<group>"; };
 		A3F2ACB81616CF9900D622B8 /* MCParticleSystem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCParticleSystem.h; path = ../MCParticleSystem.h; sourceTree = "<group>"; };
@@ -438,8 +444,8 @@
 			isa = PBXGroup;
 			children = (
 				A3359E64168E9777002F9459 /* progressbar */,
-				A3BDFF6016BD4E9A00892504 /* countNumber.png */,
 				A3BDFF6716BD519300892504 /* countNumber.plist */,
+				A3EB455016BF5CF400DBB8B7 /* countNumber.png */,
 				A37F8811166B876C00B0A59F /* cubeBlack2.png */,
 				A3C8FEA2165D2A52007E0046 /* cube.png */,
 				A358750D161F146000998085 /* ButtonMerged.plist */,
@@ -629,9 +635,23 @@
 			name = Button;
 			sourceTree = "<group>";
 		};
+		A3EB454C16BF515900DBB8B7 /* Timer */ = {
+			isa = PBXGroup;
+			children = (
+				A3EB455216BF5E1600DBB8B7 /* MCDotSeparater.h */,
+				A3EB455316BF5E1600DBB8B7 /* MCDotSeparater.m */,
+				A3EB454D16BF51F800DBB8B7 /* MCTimer.h */,
+				A3EB454E16BF51F800DBB8B7 /* MCTimer.m */,
+			);
+			name = Timer;
+			sourceTree = "<group>";
+		};
 		A3F2ACBD1616D97800D622B8 /* SceneObjects */ = {
 			isa = PBXGroup;
 			children = (
+				A3EB454B16BEB47200DBB8B7 /* Button */,
+				A3EB454A16BEB45600DBB8B7 /* StepCounter */,
+				A3EB454C16BF515900DBB8B7 /* Timer */,
 				48A858E40FFAFC4D0060F0B8 /* MCSceneObject.h */,
 				48A858E50FFAFC4D0060F0B8 /* MCSceneObject.mm */,
 				A3C1D18016957371004EB56C /* MCCollider.h */,
@@ -652,8 +672,6 @@
 				A3F2ACBF1616D9BB00D622B8 /* MCParticle.m */,
 				A30C47DE161C86F70057C5E1 /* Cube.m */,
 				A30C47DD161C86F70057C5E1 /* Cube.h */,
-				A3EB454B16BEB47200DBB8B7 /* Button */,
-				A3EB454A16BEB45600DBB8B7 /* StepCounter */,
 				A3E1ADC516A3CC020050B52D /* readme_SceneObjects.rtf */,
 			);
 			name = SceneObjects;
@@ -763,8 +781,8 @@
 				A3CB601116ABD55B006F03D5 /* PopChangeUserViewController.xib in Resources */,
 				A3CB601316ABD55B006F03D5 /* PopCreateUserViewController.xib in Resources */,
 				A3CB601516ABD55B006F03D5 /* ScoreCell.xib in Resources */,
-				A3BDFF6116BD4E9B00892504 /* countNumber.png in Resources */,
 				A3BDFF6816BD519300892504 /* countNumber.plist in Resources */,
+				A3EB455116BF5CF400DBB8B7 /* countNumber.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -851,6 +869,8 @@
 				A3CB601416ABD55B006F03D5 /* ScoreCell.m in Sources */,
 				A3BDFF5816BCF8FE00892504 /* MCStepCounter.m in Sources */,
 				A3EB454816BE358700DBB8B7 /* MCMultiDigitCounter.m in Sources */,
+				A3EB454F16BF51F800DBB8B7 /* MCTimer.m in Sources */,
+				A3EB455416BF5E1600DBB8B7 /* MCDotSeparater.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

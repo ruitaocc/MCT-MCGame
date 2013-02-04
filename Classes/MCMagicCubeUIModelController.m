@@ -655,7 +655,6 @@
                 float oy_triangle = [self AngleV0V1withV:oy V0:select_movedTo0_V0 V1:select_movedTo0_V1];
                 float oz_triangle = [self AngleV0V1withV:oz V0:select_movedTo0_V0 V1:select_movedTo0_V1];
                 AxisType vertical_axis = (ox_triangle>oy_triangle)? (ox_triangle>oz_triangle)?X:Z:(oy_triangle>oz_triangle)?Y:Z;    
-                NSLog(@"vertical_axis:%d",vertical_axis);
 
                 
                 float dx = [self AngleV0V1withV:ox V0:movedTo0_V0 V1:movedTo0_V1];
@@ -867,9 +866,10 @@
             NSLog(@"begin");
             //[self setSpeed:MCPointMake(1, 0, 0)]; 
             CGPoint location = [touch locationInView:view];
+            CGPoint location1 = [touch1 locationInView:view];
             m_spinning = YES;
-            m_fingerStart.x =location.x;
-            m_fingerStart.y =location.y;
+            m_fingerStart.x =(location.x+location1.x)/2;
+            m_fingerStart.y =(location.y+location1.y)/2;
             for (Cube *tmp in array27Cube) {
                 [tmp setQuaPreviousRotation:[tmp quaRotation]];
             }

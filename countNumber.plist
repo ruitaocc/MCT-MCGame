@@ -142,5 +142,33 @@
 		<key>yLocation</key>
 		<integer>0</integer>
 	</dict>
+    <dict>
+		<key>area</key>
+		<integer>1080</integer>
+		<key>height</key>
+		<integer>72</integer>
+		<key>name</key>
+		<string>dotdot</string>
+		<key>width</key>
+		<integer>15</integer>
+		<key>xLocation</key>
+		<integer>728</integer>
+		<key>yLocation</key>
+		<integer>0</integer>
+	</dict>
+    <dict>
+		<key>area</key>
+		<integer>1080</integer>
+		<key>height</key>
+		<integer>72</integer>
+		<key>name</key>
+		<string>dot</string>
+		<key>width</key>
+		<integer>15</integer>
+		<key>xLocation</key>
+		<integer>773</integer>
+		<key>yLocation</key>
+		<integer>0</integer>
+	</dict>
 </array>
 </plist>

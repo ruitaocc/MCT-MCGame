@@ -9,10 +9,13 @@
 #import <UIKit/UIKit.h>
 #import "InputController.h"
 #import "MCMultiDigitCounter.h"
+#import "MCTimer.h"
 @interface MCCountingPlayInputViewController : InputController{
     MCMultiDigitCounter *stepcounter;
+    MCTimer * timer;
 }
 @property (nonatomic,retain) MCMultiDigitCounter *stepcounter;
+@property (nonatomic,retain) MCTimer * timer;
 //overload
 -(void)loadInterface;
 //selectors

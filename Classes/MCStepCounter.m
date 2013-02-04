@@ -21,6 +21,9 @@
     }
 	return self;
 };
+- (void)reset{
+    [self setNumberQuad:0];
+};
 /*
 - (void)addStep{
     m_stepCounter++;

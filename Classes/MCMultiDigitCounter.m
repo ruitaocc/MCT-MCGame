@@ -44,6 +44,10 @@
         num = num/10;
     }
 }
+-(void)reset{
+    m_counterValue = 0;
+    [self carryLogic];
+};
 //add
 -(void)addCounter{
     m_counterValue++;

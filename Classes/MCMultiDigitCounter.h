@@ -22,7 +22,7 @@
 - (void)awake;
 - (void)update;
 -(void)render;
-
+-(void)reset;
 //进位逻辑
 -(void)carryLogic;
 //add
