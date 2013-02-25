@@ -84,8 +84,8 @@
 
 -(void)awake
 {
-    // [array27Cube makeObjectsPerformSelector:@selector(awake)];
-    [[array27Cube objectAtIndex:26] performSelector:@selector(awake)];
+     [array27Cube makeObjectsPerformSelector:@selector(awake)];
+    //[[array27Cube objectAtIndex:26] performSelector:@selector(awake)];
     
 }
 - (void) rotateOnAxis : (AxisType)axis onLayer: (int)layer inDirection: (LayerRotationDirectionType)direction{
@@ -558,80 +558,6 @@
                 firstThreePoint[firstThreePointCount] = ivec2(location.x,location.y);
                 firstThreePointCount++;
             }else {
-                /*
-                //计算选中层 方案1
-                NSLog(@"1.x:%d,1.y:%d",firstThreePoint[0].x,firstThreePoint[0].y);
-                NSLog(@"2.x:%d,2.y:%d",firstThreePoint[1].x,firstThreePoint[1].y);
-                NSLog(@"3.x:%d,3.y:%d",firstThreePoint[2].x,firstThreePoint[2].y);
-                vec3 triangle0 = vec3(firstThreePoint[0].x,firstThreePoint[0].y,10);
-                vec3 triangle1 = vec3(firstThreePoint[1].x,firstThreePoint[1].y,30);
-                vec3 triangle2 = vec3(firstThreePoint[2].x,firstThreePoint[2].y,10);
-                vec3 movedTo0_V0 = triangle0-triangle1;
-                vec3 movedTo0_V1 = triangle2-triangle1;
-                
-                float xyz[9] = {1.0,0.0,0.0,0.0,1.0,0.0,0.0,0.0,1.0};
-                Cube * tmpcuble = [array27Cube objectAtIndex:13];
-                GLfloat * XYZ = VertexesArray_Matrix_Multiply(xyz, 3, 3, tmpcuble.matrix);
-               
-                vec3 ox = vec3(XYZ[0],XYZ[1],XYZ[2]);
-                vec3 oy = vec3(XYZ[3],XYZ[4],XYZ[5]);
-                vec3 oz = vec3(XYZ[6],XYZ[7],XYZ[8]);
-                
-                float dx = [self AngleV0V1withV:ox V0:movedTo0_V0 V1:movedTo0_V1];
-                float dy = [self AngleV0V1withV:oy V0:movedTo0_V0 V1:movedTo0_V1];
-                float dz = [self AngleV0V1withV:oz V0:movedTo0_V0 V1:movedTo0_V1];
-                
-                //AxisType axis
-                current_rotate_axis = X;
-                float max = dx;
-                if (max <dy) {
-                    current_rotate_axis = Y;
-                    max =dy;
-                }
-                if (max <dz) {
-                    max = dz;
-                    current_rotate_axis = Z;
-                }
-                if (selected != nil) {
-                    //计算选中点层和轴
-                    int index = [selected index];
-                    int magiccubeStateIndex = -1;
-                    for (int i = 0;i<27;i++) {
-                        //Cube *tmpcube = //[array27Cube objectAtIndex:i];
-                        Cube *tmpcube = MagicCubeIndexState[i];
-                        if ([tmpcube index] == index) {
-                            magiccubeStateIndex = i;
-                        }
-                    }
-                    int x = -1,y = -1,z= -1;
-                    //NSLog(@"magiccubeStateIndex%d",magiccubeStateIndex);
-                    z = magiccubeStateIndex/9;
-                    int tmp = magiccubeStateIndex%9;
-                    y = tmp/3;
-                    x = tmp%3;
-                    if (current_rotate_axis == X) {
-                        current_rotate_layer = x;
-                        NSLog(@"X %d",current_rotate_layer);
-                    }else if(current_rotate_axis ==Y){
-                        current_rotate_layer = y;
-                        NSLog(@"Y %d",current_rotate_layer);
-                    }else {
-                        current_rotate_layer = z;
-                        NSLog(@"Z %d",current_rotate_layer);
-                    }
-                    //选中层
-                    [self SelectLayer];
-                    for (int i= 0; i<9; i++) {
-                        if (current_rotate_layer!=1) {
-                            [layerPtr[i] setQuaPreviousRotation:[layerPtr[i] quaRotation]];
-                        }else if(i != 4){
-                            [layerPtr[i] setQuaPreviousRotation:[layerPtr[i] quaRotation]];
-                        }
-                    }
-                    
-                }
-                firstThreePointCount++;
-                 */
                 //计算选中层  方案2
                 vec3 figer_triangleV0 = vec3(firstThreePoint[0].x,firstThreePoint[0].y,10);
                 vec3 figer_triangleV1 = vec3(firstThreePoint[1].x,firstThreePoint[1].y,30);
@@ -848,11 +774,9 @@
             NSLog(@"moved");
             CGPoint current0 = [touch locationInView:view];
             CGPoint current1 = [touch1 locationInView:view];
-
             CGPoint current = CGPointMake((current0.x+current1.x)/2,(current0.y+current1.y)/2);
             //ivec2 oldLocation = ivec2(previous.x,previous.y);
             ivec2 newLocation = ivec2(current.x,current.y);
-            
             if (m_spinning) {
                 vec3 start = [self MapToSphere: m_fingerStart];
                 vec3 end =[self MapToSphere:newLocation];
@@ -860,12 +784,9 @@
                 for (Cube *tmp in array27Cube) {
                     [tmp setQuaRotation: delta.Rotated([tmp quaPreviousRotation])];
                 }
-                
-               // NSLog(@"orientation %f %f %f ",m_orientation.x,m_orientation.y,m_orientation.z );
             }
         }else if (touchEventSate==UITouchPhaseBegan) {
             NSLog(@"begin");
-            //[self setSpeed:MCPointMake(1, 0, 0)]; 
             CGPoint location = [touch locationInView:view];
             CGPoint location1 = [touch1 locationInView:view];
             m_spinning = YES;
@@ -874,10 +795,7 @@
             for (Cube *tmp in array27Cube) {
                 [tmp setQuaPreviousRotation:[tmp quaRotation]];
             }
-            //quaPreviousRotation = quaRotation;
-            
         }else if (touchEventSate==UITouchPhaseEnded) {
-            //[self setSpeed:MCPointMake(0, 0, 0)]; 
             NSLog(@"ended");
             m_spinning = NO;
             
