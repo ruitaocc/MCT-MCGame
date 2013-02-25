@@ -74,6 +74,7 @@
 {
     return (interfaceOrientation == UIDeviceOrientationLandscapeRight);
 }
+
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
 	// just store them all in the big set.
