@@ -16,6 +16,7 @@
 @interface CoordinatingController : NSObject <MBProgressHUDDelegate>{
     sceneController * currentController;
     MBProgressHUD *HUD;
+    UIWindow *window;
 @private
     MCSceneController * mainSceneController;
     MCCountingPlaySceneController *countingPlaySceneController;
@@ -24,6 +25,8 @@
     BOOL needToReload;
     
 }
+
+@property (nonatomic, retain) IBOutlet UIWindow *window;
 @property (assign)BOOL needToReload;
 @property (nonatomic ,readonly)MCSceneController *mainSceneController;
 @property (nonatomic, readonly )MCCountingPlaySceneController *countingPlaySceneController;

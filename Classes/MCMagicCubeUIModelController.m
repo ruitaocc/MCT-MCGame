@@ -610,20 +610,17 @@
                         }
                     }
                     int x = -1,y = -1,z= -1;
-                    //NSLog(@"magiccubeStateIndex%d",magiccubeStateIndex);
+                    
                     z = magiccubeStateIndex/9;
                     int tmp = magiccubeStateIndex%9;
                     y = tmp/3;
                     x = tmp%3;
                     if (current_rotate_axis == X) {
                         current_rotate_layer = x;
-                        NSLog(@"X %d",current_rotate_layer);
                     }else if(current_rotate_axis ==Y){
                         current_rotate_layer = y;
-                        NSLog(@"Y %d",current_rotate_layer);
                     }else {
                         current_rotate_layer = z;
-                        NSLog(@"Z %d",current_rotate_layer);
                     }
                     //选中层
                     [self SelectLayer];
@@ -679,10 +676,8 @@
                 }
             }
             if (index != -1) {
-                //dectected
-                NSLog(@" single begin拾取第%d个小块： distance：%f",index,nearest_distance);
                 selected = [array27Cube objectAtIndex:index];
-                selected.scale = MCPointMake(20, 20, 20);
+                //selected.scale = MCPointMake(20, 20, 20);
                 isLayerRotating = YES;
                 fingerRotate_angle = 0;
             }
@@ -709,7 +704,6 @@
             vec3 lastv = [self MapToLayerCenter:lastPoint];
             
             //标记启动自动调整
-            NSLog(@"fingerRotate_angle2:%f",fingerRotate_angle);
             //double angle = fingerRotate_angle*360/Pi;
             int tmpvar = int(fingerRotate_angle)/90;
             fingerRotate_angle_mod90 = fingerRotate_angle - tmpvar*90.0;
@@ -772,9 +766,8 @@
             isNeededToAdjustment = YES;
             isLayerRotating = NO;
             firstThreePointCount = 0;
-            NSLog(@"single finish");
             if (selected != nil) {
-                selected.scale = MCPointMake(30, 30, 30);
+                //selected.scale = MCPointMake(30, 30, 30);
                 selected = nil;
             }
         }
@@ -787,7 +780,6 @@
         UITouch *touch = [[touches allObjects] objectAtIndex:0];
         UITouch *touch1 = [[touches allObjects] objectAtIndex:1];
         if (touchEventSate == UITouchPhaseMoved) {
-            NSLog(@"moved");
             CGPoint current0 = [touch locationInView:view];
             CGPoint current1 = [touch1 locationInView:view];
             CGPoint current = CGPointMake((current0.x+current1.x)/2,(current0.y+current1.y)/2);
@@ -802,7 +794,6 @@
                 }
             }
         }else if (touchEventSate==UITouchPhaseBegan) {
-            NSLog(@"begin");
             CGPoint location = [touch locationInView:view];
             CGPoint location1 = [touch1 locationInView:view];
             m_spinning = YES;
@@ -812,7 +803,6 @@
                 [tmp setQuaPreviousRotation:[tmp quaRotation]];
             }
         }else if (touchEventSate==UITouchPhaseEnded) {
-            NSLog(@"ended");
             m_spinning = NO;
             
         }

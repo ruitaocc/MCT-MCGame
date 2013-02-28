@@ -15,7 +15,7 @@
 
 // will draw the circles around the collision radius
 // for debugging
-#define DEBUG_DRAW_COLLIDERS 1
+#define DEBUG_DRAW_COLLIDERS 0
 
 // the explosive force applied to the smaller rocks after a big rock has been smashed
 #define SMASH_SPEED_FACTOR 40
@@ -33,7 +33,7 @@
 // for particles
 #define MC_MAX_PARTICLES 100
 
-#define MC_FPS 30.0
+#define MC_FPS 60.0
 
 // for view transition
 typedef enum {
