@@ -75,6 +75,7 @@
    m_nstimer = [NSTimer scheduledTimerWithTimeInterval:Interval target:self selector:@selector(addTimer) userInfo:nil repeats:YES];
 }
 -(void)stopTimer{
+    [m_nstimer invalidate];
     m_nstimer = nil;
 }
 

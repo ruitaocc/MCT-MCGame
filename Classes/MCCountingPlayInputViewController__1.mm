@@ -46,9 +46,9 @@
 	
 	// mainMenuBtn
     //the texture 还没设计出来
-	MCTexturedButton * mainMenuBtn = [[MCTexturedButton alloc] initWithUpKey:@"systemSettingBtnUp" downKey:@"systemSettingBtnDown"];
-	mainMenuBtn.scale = MCPointMake(btnWidth, btnHeight, 1.0);
-	mainMenuBtn.translation = MCPointMake(-380, 320.0, 0.0);
+	MCTexturedButton * mainMenuBtn = [[MCTexturedButton alloc] initWithUpKey:@"mainMenuBtnUp" downKey:@"mainMenuBtnUp"];
+	mainMenuBtn.scale = MCPointMake(75, 35, 1.0);
+	mainMenuBtn.translation = MCPointMake(-450, 350.0, 0.0);
 	mainMenuBtn.target = self;
 	mainMenuBtn.buttonDownAction = @selector(mainMenuBtnDown);
 	mainMenuBtn.buttonUpAction = @selector(mainMenuBtnUp);
@@ -58,19 +58,65 @@
 	[mainMenuBtn release];
    
     
-    //the texture 还没设计出来
-	MCTexturedButton * rotateTest = [[MCTexturedButton alloc] initWithUpKey:@"systemSettingBtnUp" downKey:@"systemSettingBtnDown"];
-	rotateTest.scale = MCPointMake(btnWidth, btnHeight, 1.0);
-	rotateTest.translation = MCPointMake(380, 320.0, 0.0);
-	rotateTest.target = self;
-	rotateTest.buttonDownAction = @selector(rotateTestDown);
-	rotateTest.buttonUpAction = @selector(rotateTestUp);
-	rotateTest.active = YES;
-	[rotateTest awake];
-	[interfaceObjects addObject:rotateTest];
-	[rotateTest release];
-}
+        
+    //上一步/撤销
+	MCTexturedButton * undoCommand = [[MCTexturedButton alloc] initWithUpKey:@"previousSolutionBtnUp" downKey:@"previousSolutionBtnUp"];
+	undoCommand.scale = MCPointMake(40, 40, 1.0);
+	undoCommand.translation = MCPointMake(-60, -320.0, 0.0);
+	undoCommand.target = self;
+	undoCommand.buttonDownAction = @selector(previousSolutionBtnDown);
+	undoCommand.buttonUpAction = @selector(previousSolutionBtnUp);
+	undoCommand.active = YES;
+	[undoCommand awake];
+	[interfaceObjects addObject:undoCommand];
+	[undoCommand release];
+    
+    //暂停
+	MCTexturedButton * pause = [[MCTexturedButton alloc] initWithUpKey:@"pauseSolutionBtnUp" downKey:@"pauseSolutionBtnUp"];
+	pause.scale = MCPointMake(40, 40, 1.0);
+	pause.translation = MCPointMake(0, -320.0, 0.0);
+	pause.target = self;
+	pause.buttonDownAction = @selector(pauseSolutionBtnDown);
+	pause.buttonUpAction = @selector(pauseSolutionBtnUp);
+	pause.active = YES;
+	[pause awake];
+	[interfaceObjects addObject:pause];
+	[pause release];
 
+    
+    //下一步/恢复
+	MCTexturedButton * redoCommand = [[MCTexturedButton alloc] initWithUpKey:@"nextSolutionBtnUp" downKey:@"nextSolutionBtnUp"];
+	redoCommand.scale = MCPointMake(40, 40, 1.0);
+	redoCommand.translation = MCPointMake(60, -320.0, 0.0);
+	redoCommand.target = self;
+	redoCommand.buttonDownAction = @selector(nextSolutionBtnDown);
+	redoCommand.buttonUpAction = @selector(nextSolutionBtnUp);
+	redoCommand.active = YES;
+	[redoCommand awake];
+	[interfaceObjects addObject:redoCommand];
+	[redoCommand release];
+    
+}
+//撤销
+-(void)previousSolutionBtnUp{
+    NSLog(@"previousSolutionBtnUp");
+    MCCountingPlaySceneController *c = [MCCountingPlaySceneController sharedCountingPlaySceneController];
+    [c previousSolution];
+}
+-(void)previousSolutionBtnDown{}
+//暂停
+-(void)pauseSolutionBtnUp{
+    NSLog(@"pauseSolutionBtnUp");
+    [timer stopTimer];
+}
+-(void)pauseSolutionBtnDown{}
+//恢复
+-(void)nextSolutionBtnUp{
+    NSLog(@"nextSolutionBtnUp");
+    MCCountingPlaySceneController *c = [MCCountingPlaySceneController sharedCountingPlaySceneController];
+    [c nextSolution];
+}
+-(void)nextSolutionBtnDown{}
 
 -(void)mainMenuBtnDown{
     NSLog(@"mainMenuPlayBtnDown");
@@ -80,13 +126,7 @@
     [coordinatingController_ requestViewChangeByObject:kMainMenu];
 }
 
--(void)rotateTestDown{
-    NSLog(@"rotateTestDown");
-    MCCountingPlaySceneController *c = [MCCountingPlaySceneController sharedCountingPlaySceneController];
-    [c rotateTest];
 
-};
--(void)rotateTestUp{};
 
 
 

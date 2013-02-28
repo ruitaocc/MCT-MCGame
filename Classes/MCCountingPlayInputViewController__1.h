@@ -18,9 +18,19 @@
 @property (nonatomic,retain) MCTimer * timer;
 //overload
 -(void)loadInterface;
-//selectors
+
+//interface action selectors
+//撤销
+-(void)previousSolutionBtnUp;
+-(void)previousSolutionBtnDown;
+//暂停
+-(void)pauseSolutionBtnUp;
+-(void)pauseSolutionBtnDown;
+//恢复
+-(void)nextSolutionBtnUp;
+-(void)nextSolutionBtnDown;
+
 -(void)mainMenuBtnDown;
 -(void)mainMenuPlayBtnUp; 
--(void)rotateTestDown;
--(void)rotateTestUp;
+
 @end

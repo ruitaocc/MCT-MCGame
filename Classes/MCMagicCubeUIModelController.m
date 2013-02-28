@@ -15,7 +15,7 @@
 @synthesize array27Cube;
 @synthesize stepcounterAddAction,stepcounterMinusAction;
 @synthesize target;
-
+@synthesize undoManger;
 -(id)initiate{
     if(self = [super init]){
         if (array27Cube == nil) array27Cube = [[NSMutableArray alloc] init];	
@@ -73,6 +73,7 @@
         select_trackballRadius = 260;
         isAddStepWhenUpdateState = YES;
         rrrr = 0;
+        undoManger = [[NSUndoManager alloc]init];
     }
     
     return self;
@@ -753,6 +754,20 @@
             if (fingerRotate_angle>90&&fingerRotate_angle_mod90<45) {
                 isNeededToUpdateMagicCubeState = YES;
             }
+            if (isNeededToUpdateMagicCubeState) {
+            //加入命令队列
+            //添加command到NSUndoManger
+            LayerRotationDirectionType commandaxis = current_rotate_direction;
+            NSInvocation *doinvocation = [self createInvocationOnAxis:current_rotate_axis onLayer:current_rotate_layer inDirection:commandaxis];
+            if(commandaxis==CCW){
+                commandaxis=CW;
+            }else {
+                commandaxis=CCW;
+            }
+            NSInvocation *undoinvocation = [self createInvocationOnAxis:current_rotate_axis onLayer:current_rotate_layer inDirection:commandaxis];
+            
+            [self addInvocation:doinvocation withUndoInvocation:undoinvocation];
+            }
             //标记手动转动结束
             isNeededToAdjustment = YES;
             isLayerRotating = NO;
@@ -765,6 +780,7 @@
         }
     }
 
+    
     
     //双手变换视角
     if ([touches count] == 2) {
@@ -947,6 +963,7 @@ double ThetaBetweenV1andV2(const vec3& v1,const vec3& v2)
         [self stepCounterAdd];
     }else {
         [self stepCounterMinus];
+        isAddStepWhenUpdateState = true;
     }
     Cube *tmp;
     switch (current_rotate_axis) {
@@ -1094,46 +1111,61 @@ double ThetaBetweenV1andV2(const vec3& v1,const vec3& v2)
         default:
             break;
     }
-}
-
-
--(void)rotateTest{
-    if (isAutoRotate) {
-        return;
-    }
-    if (rrrr == 0) {
-        [self rotateOnAxis:Y onLayer:2 inDirection:CCW];
-        rrrr++;
-        return;
-    }
     
-    if (rrrr == 1) {
-        [self rotateOnAxis:Z onLayer:0 inDirection:CCW];
-        rrrr++;
-        return;
-        
-    }
-    if (rrrr == 2) {
-        [self rotateOnAxis:Y onLayer:0 inDirection:CCW];
-        rrrr++;
-        return;
-    }
-    if (rrrr == 3) {
-        [self rotateOnAxis:Y onLayer:0 inDirection:CW];
-        rrrr++;
-        return;
-        
-    }
-    if (rrrr == 4) {
-        [self rotateOnAxis:Z onLayer:0 inDirection:CW];
-        rrrr++;
-        return;
-    }
-    if (rrrr == 5) {
-        [self rotateOnAxis:Y onLayer:2 inDirection:CW];
-        rrrr=0;
-        return;
-        
-    }
 }
+#pragma mark undo and redo
+
+//创建撤销操作点NSInvocation对象
+-(NSInvocation *)createInvocationOnAxis : (AxisType)axis onLayer: (int)layer inDirection: (LayerRotationDirectionType)direction{
+    NSMethodSignature *executeMethodSinature = [self methodSignatureForSelector:@selector(rotateOnAxis:onLayer:inDirection:)];
+    NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:executeMethodSinature];
+    [invocation setTarget:self];
+    [invocation setSelector:@selector(rotateOnAxis:onLayer:inDirection:)];
+    [invocation setArgument: &axis atIndex:2];
+    [invocation setArgument:&layer atIndex:3];
+    [invocation setArgument:&direction atIndex:4];
+    return invocation;
+}
+
+
+//手动转动时 添加但是不执行
+-(void)addInvocation:(NSInvocation *)invocation
+      withUndoInvocation:(NSInvocation *)undoInvocation{
+    [invocation retainArguments];
+    [[self.undoManger prepareWithInvocationTarget:self] unexecuteInvocation:undoInvocation withRedoInvocation:invocation];
+}
+//正常撤销
+-(void)executeInvocation:(NSInvocation *)invocation
+      withUndoInvocation:(NSInvocation *)undoInvocation{
+    [invocation retainArguments];
+    [[self.undoManger prepareWithInvocationTarget:self] unexecuteInvocation:undoInvocation withRedoInvocation:invocation];
+    [invocation invoke];
+}
+//正常恢复
+-(void)unexecuteInvocation:(NSInvocation *)invocation
+      withRedoInvocation:(NSInvocation *)redoInvocation{
+    [[self.undoManger prepareWithInvocationTarget:self] executeInvocation:redoInvocation withUndoInvocation:invocation];
+    [invocation invoke];
+}
+
+
+#pragma mark undo redo
+
+-(void)previousSolution{
+    if(isAutoRotate)return;
+    if (isLayerRotating) return;
+    if (isAddStepWhenUpdateState) {
+        isAddStepWhenUpdateState = false;
+    }
+    [[self undoManger] undo];
+}
+-(void)nextSolution{
+    if(isAutoRotate)return;
+    if (isLayerRotating) return;
+    if (!isAddStepWhenUpdateState) {
+        isAddStepWhenUpdateState = true;
+    }
+    [[self undoManger] redo];
+}
+
 @end

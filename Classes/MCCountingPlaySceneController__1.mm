@@ -73,8 +73,15 @@
 
 
 
--(void)rotateTest{
-    NSLog(@"mc rotate test");
-    [[sceneObjects objectAtIndex:0]performSelector:@selector(rotateTest)];
-};
+
+
+-(void)previousSolution{
+    NSLog(@"mc previousSolution");
+    [[sceneObjects objectAtIndex:0]performSelector:@selector(previousSolution)];
+}
+-(void)nextSolution{
+    NSLog(@"mc nextSolution");
+    [[sceneObjects objectAtIndex:0]performSelector:@selector(nextSolution)];
+}
+
 @end

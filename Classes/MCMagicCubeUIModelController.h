@@ -58,11 +58,14 @@
     //当前整个魔方索引的状态，存储索引值
     Cube * MagicCubeIndexState[27];
     
-    
+    //计步器
     id target;
     BOOL isAddStepWhenUpdateState;
 	SEL stepcounterAddAction;
     SEL stepcounterMinusAction;
+    //撤销恢复管理栈
+    NSUndoManager *undoManger;
+    
     int rrrr;
 }
 
@@ -70,13 +73,22 @@
 @property (assign) SEL stepcounterAddAction;
 @property (assign) SEL stepcounterMinusAction;
 @property (retain) NSMutableArray* array27Cube;
+@property (retain) NSUndoManager* undoManger;
 -(id)initiate;
 - (void) rotateOnAxis : (AxisType)axis onLayer: (int)layer inDirection: (LayerRotationDirectionType)direction;
 -(void)awake;
 -(void)render;
 -(void)update;
+//撤销栈管理
+-(void)executeInvocation:(NSInvocation *)invocation
+      withUndoInvocation:(NSInvocation *)undoInvocation;
+//恢复栈管理
+-(void)unexecuteInvocation:(NSInvocation *)invocation
+        withRedoInvocation:(NSInvocation *)redoInvocation;
 
--(void)rotateTest;
+-(void)previousSolution;
+-(void)nextSolution;
+
 -(vec3)MapToSphere:(ivec2 )touchpoint;
 
 @end
