@@ -42,7 +42,7 @@
 	// our 'character' object
 	Cube * magicCube = [[Cube alloc] init];
     //[magicCube.mesh setColors:&colorss];
-	magicCube.pretranslation = MCPointMake(30.0, 0.0, 0.0);
+	magicCube.pretranslation = MCPointMake(0.0, 30.0, 0.0);
 	magicCube.scale = MCPointMake(60, 60, 60);
     magicCube.prerotation = MCPointMake(30, 30, 0);
     magicCube.rotationalSpeed = MCPointMake(20, 20, 20);

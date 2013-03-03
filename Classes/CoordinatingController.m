@@ -15,7 +15,7 @@
 #import "MCCountingPlayInputViewController__1.h"
 #import "SVProgressHUD.h"
 @implementation CoordinatingController
-@synthesize mainSceneController,countingPlaySceneController;
+@synthesize _mainSceneController,_countingPlaySceneController;
 @synthesize  currentController;
 @synthesize needToReload;
 @synthesize userManagerSystemViewController;
@@ -33,8 +33,8 @@
 
 -(id)init{
     needToReload = true;
-    countingPlaySceneController = [MCCountingPlaySceneController sharedCountingPlaySceneController];
-    mainSceneController = [MCSceneController sharedSceneController];
+    _countingPlaySceneController = [MCCountingPlaySceneController sharedCountingPlaySceneController];
+    _mainSceneController = [MCSceneController sharedSceneController];
     currentController = [MCSceneController sharedSceneController];
     [super init];
     
@@ -79,6 +79,14 @@
             
        
         }
+        case kScoreBoard2MainMenu:
+        {
+            NSLog(@"requestViewChangeByObject:kScoreBoard2MainMenu");
+            //[userManagerSystemViewController pushViewController:userManagerSystemViewController];
+            //[currentController presentModalViewController:[currentController inputController] animated:NO];
+            [currentController.inputController dismissModalViewControllerAnimated:YES];
+            
+        }
         break;
         case kNormalPlay:
         {
@@ -98,7 +106,7 @@
             NSLog(@"requestViewChangeByObject:kHeroBoard");
             userManagerSystemViewController = [[[UserManagerSystemViewController alloc] initWithNibName:@"UserManagerSystemViewController" bundle:nil] autorelease];
             [[currentController inputController]presentModalViewController:userManagerSystemViewController animated:YES];
-            
+            //[currentController.inputController resignFirstResponder];
             
         }
             break;
@@ -111,19 +119,20 @@
     [SVProgressHUD dismiss];
     //[SVProgressHUD dismiss];
     [currentController stopAnimation];
-    MCCountingPlaySceneController * countingPlaySceneController = [MCCountingPlaySceneController sharedCountingPlaySceneController];
+    _countingPlaySceneController = [MCCountingPlaySceneController sharedCountingPlaySceneController];
     MCCountingPlayInputViewController * countingInputController = [[MCCountingPlayInputViewController alloc] initWithNibName:nil bundle:nil];
     
     [currentController.inputController setView:nil];
-    countingPlaySceneController.inputController = countingInputController;
+    _countingPlaySceneController.inputController = countingInputController;
     [countingInputController release];
     
-    countingPlaySceneController.inputController.view = [currentController openGLView] ;
-    countingPlaySceneController.openGLView = [currentController openGLView];
-    [countingPlaySceneController.inputController resignFirstResponder];
+    _countingPlaySceneController.inputController.view = [currentController openGLView] ;
+    _countingPlaySceneController.openGLView = [currentController openGLView];
     
-    [window setRootViewController:countingPlaySceneController.inputController];
-    currentController = countingPlaySceneController;
+    [_countingPlaySceneController.inputController resignFirstResponder];
+    
+    [window setRootViewController:_countingPlaySceneController.inputController];
+    currentController = _countingPlaySceneController;
     [currentController removeAllObjectFromScene];
     [currentController loadScene];
     [currentController startScene];
@@ -135,20 +144,20 @@
     [SVProgressHUD dismiss];
     [currentController stopAnimation];
     
-    MCSceneController * mainSceneController = [MCSceneController sharedSceneController];
+    _mainSceneController = [MCSceneController sharedSceneController];
     MCInputViewController * anInputController = [[MCInputViewController alloc] initWithNibName:nil bundle:nil];
 	
     [currentController.inputController setView:nil];
-    mainSceneController.inputController = anInputController;
+    _mainSceneController.inputController = anInputController;
 	[anInputController release];
-	mainSceneController.inputController.view = [currentController openGLView];
-	mainSceneController.openGLView = [currentController openGLView];
+	_mainSceneController.inputController.view = [currentController openGLView];
+	_mainSceneController.openGLView = [currentController openGLView];
     
-    [mainSceneController.inputController resignFirstResponder];
+    [_mainSceneController.inputController resignFirstResponder];
     
-     [window setRootViewController:countingPlaySceneController.inputController];
+     [window setRootViewController:_mainSceneController.inputController];
     
-    currentController = mainSceneController;
+    currentController = _mainSceneController;
     [currentController removeAllObjectFromScene];;
     [currentController loadScene];
     [currentController startScene];

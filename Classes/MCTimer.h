@@ -9,7 +9,7 @@
 #import "MCSceneObject.h"
 #import "MCMultiDigitCounter.h"
 #import "MCDotSeparater.h"
-#define Interval 0.001
+#define Interval 0.0005
 @interface MCTimer : MCSceneObject{
     long  totalTime;//毫秒值
     NSTimer * m_nstimer;

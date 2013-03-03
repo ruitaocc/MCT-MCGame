@@ -18,8 +18,8 @@
     MBProgressHUD *HUD;
     UIWindow *window;
 @private
-    MCSceneController * mainSceneController;
-    MCCountingPlaySceneController *countingPlaySceneController;
+    MCSceneController * _mainSceneController;
+    MCCountingPlaySceneController *_countingPlaySceneController;
     
     UserManagerSystemViewController *userManagerSystemViewController;
     BOOL needToReload;
@@ -28,8 +28,8 @@
 
 @property (nonatomic, retain) IBOutlet UIWindow *window;
 @property (assign)BOOL needToReload;
-@property (nonatomic ,readonly)MCSceneController *mainSceneController;
-@property (nonatomic, readonly )MCCountingPlaySceneController *countingPlaySceneController;
+@property (nonatomic ,readonly)MCSceneController *_mainSceneController;
+@property (nonatomic, readonly )MCCountingPlaySceneController *_countingPlaySceneController;
 @property (nonatomic,assign)sceneController *currentController;
 @property (nonatomic,retain)UserManagerSystemViewController *userManagerSystemViewController;
 +(CoordinatingController *) sharedCoordinatingController;

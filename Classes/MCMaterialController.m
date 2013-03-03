@@ -39,7 +39,7 @@
        
 		[self loadAtlasData:@"particleAtlas"];
         
-        [self loadAtlasData:@"ButtonMerged"];
+        //[self loadAtlasData:@"ButtonMerged"];
 	}
 	return self;
 }
@@ -54,7 +54,7 @@
     
     [self loadAtlasData:@"particleAtlas"];
     
-    [self loadAtlasData:@"ButtonMerged"];
+    //[self loadAtlasData:@"ButtonMerged"];
 }
 
 

@@ -10,9 +10,12 @@
 #import "InputController.h"
 #import "MCMultiDigitCounter.h"
 #import "MCTimer.h"
-@interface MCCountingPlayInputViewController : InputController{
+#import "UAModalPanel.h"
+#import "PauseMenu.h"
+@interface MCCountingPlayInputViewController : InputController<UAModalPanelDelegate>{
     MCMultiDigitCounter *stepcounter;
     MCTimer * timer;
+    PauseMenu* puseMenu;
 }
 @property (nonatomic,retain) MCMultiDigitCounter *stepcounter;
 @property (nonatomic,retain) MCTimer * timer;

@@ -17,7 +17,7 @@
 {
     MCUserManagerController *userManagerController;
 }
-
+@property (retain, nonatomic) IBOutlet UIButton *backBtn;
 @property (retain, nonatomic) IBOutlet UITableView *scoreTable;
 
 @property (retain, nonatomic) IBOutlet UITextField *insertScoreTimeField;
@@ -31,7 +31,6 @@
 
 @property (retain, nonatomic) UIPopoverController *createUserPopover;
 @property (retain, nonatomic) UIPopoverController *changeUserPopover;
-
 @property (retain, nonatomic) IBOutlet UISegmentedControl *tableSegment;
 
 - (IBAction)createUserPress:(id)sender;
@@ -40,4 +39,5 @@
 - (void)updateUserInformation;
 - (void)updateScoreInformation;
 - (IBAction)segmentChange:(id)sender;
+-(IBAction)goBackMainMenu:(id)sender;
 @end

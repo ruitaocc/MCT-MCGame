@@ -7,13 +7,13 @@
 //
 
 #import "UserManagerSystemViewController.h"
-
+#import "CoordinatingController.h"
 @interface UserManagerSystemViewController ()
 
 @end
 
 @implementation UserManagerSystemViewController
-
+@synthesize backBtn;
 @synthesize scoreTable;
 @synthesize insertScoreTimeField;
 @synthesize insertScoreMoveField;
@@ -70,7 +70,9 @@
     [super viewDidUnload];
     // Release any retained subviews of the main view.
 }
-
+-(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
+    
+}
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     return (interfaceOrientation == UIDeviceOrientationLandscapeRight);
@@ -176,6 +178,11 @@
     if (popoverController == changeUserPopover) {
         
     }
+}
+#pragma mark goback
+-(IBAction)goBackMainMenu:(id)sender{
+    CoordinatingController *tmp = [CoordinatingController sharedCoordinatingController];
+    [tmp requestViewChangeByObject:kScoreBoard2MainMenu];
 }
 
 #pragma mark -

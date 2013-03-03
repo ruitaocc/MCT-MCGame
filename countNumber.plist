@@ -176,7 +176,7 @@
 		<key>height</key>
 		<integer>70</integer>
 		<key>name</key>
-		<string>countingPlayBtnUp2</string>
+		<string>countingPlayBtnUp</string>
 		<key>width</key>
 		<integer>175</integer>
 		<key>xLocation</key>
@@ -190,7 +190,7 @@
 		<key>height</key>
 		<integer>70</integer>
 		<key>name</key>
-		<string>normalPlayBtnUp2</string>
+		<string>normalPlayBtnUp</string>
 		<key>width</key>
 		<integer>170</integer>
 		<key>xLocation</key>
@@ -204,7 +204,7 @@
 		<key>height</key>
 		<integer>70</integer>
 		<key>name</key>
-		<string>randomSolveBtnUp2</string>
+		<string>randomSolveBtnUp</string>
 		<key>width</key>
 		<integer>170</integer>
 		<key>xLocation</key>

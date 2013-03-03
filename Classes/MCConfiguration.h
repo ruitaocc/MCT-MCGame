@@ -42,7 +42,8 @@ typedef enum {
     kRandomSolve,
     kSystemSetting,
     kHeroBoard,
-    kMainMenu
+    kMainMenu,
+    kScoreBoard2MainMenu
 }ViewTransitionTag;
 
 
