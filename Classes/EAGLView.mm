@@ -55,6 +55,7 @@
             return nil;
         }
         self.multipleTouchEnabled = YES;
+        isNeedToLayView = YES;
     }
     return self;
 }
@@ -127,10 +128,13 @@
 
 - (void)layoutSubviews 
 {
-	[EAGLContext setCurrentContext:context];
-	[self destroyFramebuffer];
-	[self createFramebuffer];
-	[self setupViewLandscape];
+    if (isNeedToLayView) {
+        [EAGLContext setCurrentContext:context];
+        [self destroyFramebuffer];
+        [self createFramebuffer];
+        [self setupViewLandscape];
+        isNeedToLayView = NO;
+    }
 }
 
 - (BOOL)createFramebuffer {    

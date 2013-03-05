@@ -33,10 +33,10 @@
         self.borderColor = [UIColor colorWithRed:0.5 green:0.5 blue:0.5 alpha:1.0];
         
         // Border width of the panel. Default = 1.5f;
-        self.borderWidth = 4.0f;
+        self.borderWidth = 8.0f;
         
         // Corner radius of the panel. Default = 4.0f
-        self.cornerRadius = 10;
+        self.cornerRadius = 16;
         
         // Color of the panel itself. Default = [UIColor colorWithWhite:0.0 alpha:0.8]
         self.contentColor = [UIColor colorWithRed:1 green:1 blue:1 alpha:1.0];

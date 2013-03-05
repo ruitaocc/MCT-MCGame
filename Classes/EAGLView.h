@@ -31,6 +31,8 @@ Note that setting the view non-opaque will only work if the EAGL surface has an 
     
     /* OpenGL name for the depth buffer that is attached to viewFramebuffer, if it exists (0 if it does not exist) */
     GLuint depthRenderbuffer;
+    
+    BOOL isNeedToLayView;
 }
 
 - (void)beginDraw;

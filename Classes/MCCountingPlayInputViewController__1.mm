@@ -105,19 +105,22 @@
     [c previousSolution];
 }
 -(void)previousSolutionBtnDown{}
+
 //暂停
 -(void)pauseSolutionBtnUp{
     NSLog(@"pauseSolutionBtnUp");
     //停止计时器
     [timer stopTimer];
+    //[[[CoordinatingController sharedCoordinatingController]currentController]stopAnimation];
     //弹出对话框
     puseMenu = [[[PauseMenu alloc] initWithFrame:self.view.bounds title:@"暂停"] autorelease];
+    puseMenu.isShowColseBtn = NO;
     puseMenu.delegate = self;
     ///////////////////////////////////
 	// Add the panel to our view
-    
 	[self.view  addSubview:puseMenu];
 	///////////////////////////////////
+
 	// Show the panel from the center of the button that was pressed
 	[puseMenu showFromPoint:CGPointMake(512,384)];
 }
@@ -173,10 +176,19 @@
 //   Only used if delegate is set.
 - (void)didCloseModalPanel:(UAModalPanel *)modalPanel {
 	UADebugLog(@"didCloseModalPanel called with modalPanel: %@", modalPanel);
-    if (puseMenu&&[puseMenu pauseSelectType]==kGoBack) {
-          [self mainMenuBtnUp];
+    
+    if (!puseMenu) {
+        return;
     }
-  
+    if ([puseMenu pauseSelectType]==kGoBack) {
+          [self mainMenuBtnUp];
+    }else if([puseMenu pauseSelectType]==kGoOn){
+        //停止计时器
+        
+        [[[CoordinatingController sharedCoordinatingController]currentController]startAnimation];
+        [timer startTimer];
+    }
+
 }
 
 

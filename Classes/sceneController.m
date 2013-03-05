@@ -177,7 +177,7 @@
 	[self setupLighting];
 	// simply call 'render' on all our scene objects
 	[sceneObjects makeObjectsPerformSelector:@selector(render)];
-	// draw the interface on top of everything
+    // draw the interface on top of everything
 	[inputController renderInterface];
 	// finalize this frame
 	[openGLView finishDraw];
