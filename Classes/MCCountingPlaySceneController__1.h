@@ -9,13 +9,16 @@
 #import <Foundation/Foundation.h>
 #import "sceneController.h"
 #import "MCCollisionController.h"
+#import "MCMagicCube.h"
+#import "RotateType.h"
 @interface MCCountingPlaySceneController : sceneController{
     
 }
+@property (nonatomic,retain)MCMagicCube * magicCube;
 + (MCCountingPlaySceneController*)sharedCountingPlaySceneController;
+
 -(void)loadScene;
-
-
+-(void)rotate:(RotateType*)rotateType;
 -(void)previousSolution;
 -(void)nextSolution;
 

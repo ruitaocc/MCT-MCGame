@@ -32,7 +32,8 @@
             result = Left;
             break;
         default:
-            return -1;
+            break;
+            //return -1;
     }
     return result;
 }

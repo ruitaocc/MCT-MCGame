@@ -87,6 +87,7 @@ static CGFloat MCSquareFillVertexes[8] = {-0.5,-0.5, 0.5,-0.5, -0.5,0.5, 0.5,0.5
 	if (!pressed) return; // we were already up
 	pressed = NO;
 	[self setNotPressedVertexes];
+    
 	[target performSelector:buttonUpAction];
 }
 

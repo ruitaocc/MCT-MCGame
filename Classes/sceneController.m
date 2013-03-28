@@ -19,7 +19,7 @@
 #import "Cube.h"
 #import "MCCollisionController.h"
 @implementation sceneController
-
+@synthesize sceneObjects;
 @synthesize inputController, openGLView;
 @synthesize animationInterval, animationTimer;
 @synthesize levelStartDate;
@@ -195,30 +195,32 @@
 	glCullFace(GL_BACK);
 	
     // Light features
-    GLfloat light_ambient[]= { 0.2f, 0.2f, 0.2f, 1.0f };
-    GLfloat light_diffuse[]= { 80.0f, 80.0f, 80.0f, 0.0f };
-    GLfloat light_specular[]= { 80.0f, 80.0f, 80.0f, 0.0f };
+    GLfloat light_ambient[]= { 2.0f, 2.0f, 2.0f, 1.0f };
+    GLfloat light_diffuse[]= { 80.0f, 80.0f, 80.0f, 1.0f };
+    GLfloat light_specular[]= { 10.0f, 10.0f, 10.0f, 1.0f };
     // Set up light 0
     glLightfv (GL_LIGHT0, GL_AMBIENT, light_ambient);
     glLightfv (GL_LIGHT0, GL_DIFFUSE, light_diffuse);
     glLightfv (GL_LIGHT0, GL_SPECULAR, light_specular);
-    
-    // // // Material features
-    //  GLfloat mat_specular[] = { 0.5, 0.5, 0.5, 1.0 };
-    //  GLfloat mat_shininess[] = { 120.0 };
-    //  glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, mat_specular);
-    //  glMaterialfv(GL_FRONT_AND_BACK, GL_SHININESS, mat_shininess);
+        // // // Material features
+    //GLfloat mat_specular[] = { 0.5, 0.5, 0.5, 1.0 };
+    //GLfloat mat_shininess[] = { 120.0 };
+      //  glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, mat_specular);
+      // glMaterialfv(GL_FRONT_AND_BACK, GL_SHININESS, mat_shininess);
     
     glShadeModel (GL_SMOOTH);
     
 	// Place the light up and to the right
     GLfloat light0_position[] = { 0.0, 0.0, 100.0, 1.0 };
+    
     glLightfv(GL_LIGHT0, GL_POSITION, light0_position);
+    
 	
 	
     // Enable lighting and lights
     glEnable(GL_LIGHTING);
     glEnable(GL_LIGHT0);
+    
     
 }
 

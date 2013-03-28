@@ -37,7 +37,7 @@
 	BOOL needToLoadScene;
     MCCollisionController * collisionController;
 }
-
+@property (retain) NSMutableArray * sceneObjects;
 @property (retain) InputController * inputController;
 @property (retain) EAGLView * openGLView;
 @property (retain) NSDate *levelStartDate;

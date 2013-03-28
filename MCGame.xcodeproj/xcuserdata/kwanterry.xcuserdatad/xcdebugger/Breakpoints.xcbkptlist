@@ -60,7 +60,20 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Classes/sceneController.m"
-         timestampString = "384088914.943309"
+         timestampString = "385380230.983357"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "262"
+         endingLineNumber = "262"
+         landmarkName = "-dealloc"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Classes/sceneController.m"
+         timestampString = "385380230.983357"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "260"
@@ -73,25 +86,25 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Classes/sceneController.m"
-         timestampString = "384088914.943309"
+         timestampString = "385380230.983357"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "258"
-         endingLineNumber = "258"
+         startingLineNumber = "265"
+         endingLineNumber = "265"
          landmarkName = "-dealloc"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
-         shouldBeEnabled = "Yes"
+         shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
-         filePath = "Classes/sceneController.m"
-         timestampString = "384088914.943309"
+         filePath = "Classes/MCMagicCubeUIModelController.m"
+         timestampString = "385381158.9271"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "263"
-         endingLineNumber = "263"
-         landmarkName = "-dealloc"
+         startingLineNumber = "1072"
+         endingLineNumber = "1072"
+         landmarkName = "-updateState"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

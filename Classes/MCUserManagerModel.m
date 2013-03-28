@@ -48,11 +48,6 @@ static MCUserManagerModel* sharedSingleton_ = nil;
     return NSIntegerMax;
 }
 
-- (void)release
-{
-    //do nothing
-}
-
 
 - (id)init
 {

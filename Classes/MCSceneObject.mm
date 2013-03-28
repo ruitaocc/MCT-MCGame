@@ -58,28 +58,28 @@
 	// move to my position
 	glTranslatef(pretranslation.x, pretranslation.y, pretranslation.z);
 	
-    mat4 matRotation = quaRotation.ToMatrix();
+   //    mat4 orientation = m_orientation.ToMatrix();
+//    glMultMatrixf(orientation.Pointer());
+   	mat4 matRotation = quaRotation.ToMatrix();
     glMultMatrixf(matRotation.Pointer());
     
-	// rotate
+
+        
+    // rotate
 	glRotatef(prerotation.x, 1.0f, 0.0f, 0.0f);
 	glRotatef(prerotation.y, 0.0f, 1.0f, 0.0f);
 	glRotatef(prerotation.z, 0.0f, 0.0f, 1.0f);
-//    mat4 orientation = m_orientation.ToMatrix();
-//    glMultMatrixf(orientation.Pointer());
-   	
-    // rotate
-	glRotatef(rotation.x, 1.0f, 0.0f, 0.0f);
-	glRotatef(rotation.y, 0.0f, 1.0f, 0.0f);
-	glRotatef(rotation.z, 0.0f, 0.0f, 1.0f);
-    
-    
     
     
     //tanslation_after_rotate
     glTranslatef(translation.x, translation.y, translation.z);
+    // rotate
+	glRotatef(rotation.x, 1.0f, 0.0f, 0.0f);
+	glRotatef(rotation.y, 0.0f, 1.0f, 0.0f);
+	glRotatef(rotation.z, 0.0f, 0.0f, 1.0f);
+
     
-    
+
 	//scale
 	glScalef(scale.x, scale.y, scale.z);
 	// save the matrix transform

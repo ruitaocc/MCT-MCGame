@@ -17,6 +17,7 @@
 #define CUBE_CUBE_GAP 0.3;
 #import "MCRay.h"
 #include "MCCollider.h"
+#import "MCMagicCube.h"
 @interface MCMagicCubeUIModelController : MCSceneObject{
     NSMutableArray* array27Cube; 
     Cube * layerPtr[9];
@@ -39,7 +40,7 @@
     
     double cuculated_angle;
     
-    ivec2 firstThreePoint[3];
+    vec2 firstThreePoint[3];
     Cube *selected;
     float selected_triangle[9];
     float select_trackballRadius;
@@ -65,16 +66,18 @@
     SEL stepcounterMinusAction;
     //撤销恢复管理栈
     NSUndoManager *undoManger;
-    
+    //MCMagicCube *magicCube;
+    UITouch *touch;
     int rrrr;
 }
-
+//@property (retain, nonatomic) MCMagicCube *magicCube;
 @property (assign) id target;
 @property (assign) SEL stepcounterAddAction;
 @property (assign) SEL stepcounterMinusAction;
 @property (retain) NSMutableArray* array27Cube;
 @property (retain) NSUndoManager* undoManger;
 -(id)initiate;
+-(id)initiateWithState:(NSArray *)stateList;
 - (void) rotateOnAxis : (AxisType)axis onLayer: (int)layer inDirection: (LayerRotationDirectionType)direction;
 -(void)awake;
 -(void)render;
@@ -89,6 +92,6 @@
 -(void)previousSolution;
 -(void)nextSolution;
 
--(vec3)MapToSphere:(ivec2 )touchpoint;
+-(vec3)MapToSphere:(vec2 )touchpoint;
 
 @end

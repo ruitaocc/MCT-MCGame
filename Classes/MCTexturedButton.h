@@ -7,13 +7,15 @@
 //
 
 #import "MCButton.h"
-
+#import "MCParticleSystem.h"
 
 @interface MCTexturedButton : MCButton {
 	MCTexturedQuad * upQuad;
 	MCTexturedQuad * downQuad;
+    BOOL isNeedToAddParticle;
+    MCParticleSystem *particleEmitter;
 }
-
+@property (nonatomic,assign) BOOL isNeedToAddParticle;
 - (id) initWithUpKey:(NSString*)upKey downKey:(NSString*)downKey;
 - (void) dealloc;
 - (void)awake;

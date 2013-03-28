@@ -69,7 +69,7 @@
 {
     //this selector would be the action take by interface when the puzzle is solved. but now it is not implement.
 	if([inputController respondsToSelector:@selector(gameOver)]){
-        [inputController gameOver];
+      //  [inputController gameOver];
     }
 }
 #pragma mark dealloc

@@ -7,7 +7,14 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "MCSceneObject.h"
+@interface ActionArrow : MCSceneObject{
+    MCTexturedQuad *arrowQuad;
+}
+-(id)initWithNstring:(NSString*)string;
 
-@interface ActionArrow : NSObject
+-(void)awake;
+- (void)update;
+-(void)dealloc;
 
 @end

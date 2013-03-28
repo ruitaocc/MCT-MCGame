@@ -102,7 +102,7 @@
                 break;
         }
         //assign the identity
-        identity = coordinateValue.x + coordinateValue.y*3 + coordinateValue.z*9 + 13;
+        identity = (ColorCombinationType)(coordinateValue.x + coordinateValue.y*3 + coordinateValue.z*9 + 13);
     }
     return self;
 }   //initial the cube's data by coordinate value
@@ -131,27 +131,39 @@
         self.faceColors = (FaceColorType*)malloc(skinNum * sizeof(FaceColorType));
         self.orientations = (FaceOrientationType*)malloc(skinNum * sizeof(FaceOrientationType));
         for (int i = 0; i < self.skinNum; i++) {
-            self.faceColors[i] = [[colors objectAtIndex:i] integerValue];
-            self.orientations[i] = [[ors objectAtIndex:i] integerValue];
+            self.faceColors[i] = (FaceColorType)[[colors objectAtIndex:i] integerValue];
+            self.orientations[i] = (FaceOrientationType)[[ors objectAtIndex:i] integerValue];
             switch (self.faceColors[i]) {
-                case UpColor:
-                    identity += 3;
-                    break;
-                case DownColor:
-                    identity -= 3;
-                    break;
-                case FrontColor:
-                    identity += 9;
-                    break;
-                case BackColor:
-                    identity -= 9;
-                    break;
-                case LeftColor:
-                    identity -= 1;
-                    break;
-                case RightColor:
-                    identity += 1;
-                    break;
+                case UpColor:{
+                    int i2 = (int)identity;
+                    i2+=3;
+                    identity = (ColorCombinationType)i2;
+                    break;}
+                case DownColor:{
+                    int i3 = (int)identity;
+                    i3-=3;
+                    identity = (ColorCombinationType)i3;
+                    break;}
+                case FrontColor:{
+                    int i4 = (int)identity;
+                    i4+=9;
+                    identity = (ColorCombinationType)i4;
+                    break;}
+                case BackColor:{
+                    int i5 = (int)identity;
+                    i5-=9;
+                    identity = (ColorCombinationType)i5;
+                    break;}
+                case LeftColor:{
+                    int i6 = (int)identity;
+                    i6-=1;
+                    identity = (ColorCombinationType)i6;
+                    break;}
+                case RightColor:{
+                    int i7 = (int)identity;
+                    i7+=1;
+                    identity = (ColorCombinationType)i7;
+                    break;}
                 default:
                     break;
             }
@@ -399,14 +411,14 @@
         coordinateValue.y = [aDecoder decodeIntegerForKey:kCoordinateYKey];
         coordinateValue.z = [aDecoder decodeIntegerForKey:kCoordinateZKey];
         self.skinNum = [aDecoder decodeIntegerForKey:kSkinNumKey];
-        self.type = [aDecoder decodeIntegerForKey:kTypeKey];
-        self.identity = [aDecoder decodeIntegerForKey:kIdentityKey];
+        self.type = (CubieType)[aDecoder decodeIntegerForKey:kTypeKey];
+        self.identity = (ColorCombinationType)[aDecoder decodeIntegerForKey:kIdentityKey];
         //alloc memory
         faceColors = (FaceColorType*)malloc(skinNum * sizeof(FaceColorType));
         orientations = (FaceOrientationType*)malloc(skinNum * sizeof(FaceOrientationType));
         for (int i = 0; i < skinNum; i++) {
-            self.faceColors[i] = [aDecoder decodeIntegerForKey:[NSString stringWithFormat:kSingleColorKeyFormat, i]];
-            self.orientations[i] = [aDecoder decodeIntegerForKey:[NSString stringWithFormat:kSingleOrientationKeyFormat, i]];
+            self.faceColors[i] = (FaceColorType)[aDecoder decodeIntegerForKey:[NSString stringWithFormat:kSingleColorKeyFormat, i]];
+            self.orientations[i] = (FaceOrientationType)[aDecoder decodeIntegerForKey:[NSString stringWithFormat:kSingleOrientationKeyFormat, i]];
         }
     }
     return self;

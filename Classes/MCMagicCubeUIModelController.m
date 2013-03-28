@@ -10,11 +10,13 @@
 #import <math.h>
 #import "CoordinatingController.h"
 #import "MCConfiguration.h"
-
+#import "Global.h"
+#import "RotateType.h"
 @implementation MCMagicCubeUIModelController
 @synthesize array27Cube;
 @synthesize stepcounterAddAction,stepcounterMinusAction;
 @synthesize target;
+//@synthesize magicCube;
 @synthesize undoManger;
 -(id)initiate{
     if(self = [super init]){
@@ -40,11 +42,8 @@
                     tCube.index = z*9+y*3+x;
                     tCube.pretranslation = MCPointMake(translation.x, translation.y, translation.z);
                     tCube.prerotation = MCPointMake(rotation.x, rotation.y, rotation.z);
-                    
-                    
                     tCube.translation = MCPointMake((gap+sub_scale.x)*sign_x, (gap+sub_scale.y)*sign_y, (gap+sub_scale.z)*sign_z);
-                    
-                    tCube.scale = MCPointMake(sub_scale.x, sub_scale.y, sub_scale.z); 
+                    tCube.scale = MCPointMake(sub_scale.x, sub_scale.y, sub_scale.z);
                     //Cube.rotation = MCPointMake(rotation.x, rotation.y, rotation.z);
                     //Cube.rotationalSpeed = MCPointMake(0, 0, 0);
                     tCube.collider = [MCCollider collider];
@@ -74,10 +73,84 @@
         isAddStepWhenUpdateState = YES;
         rrrr = 0;
         undoManger = [[NSUndoManager alloc]init];
+        //magicCube = [MCMagicCube getSharedMagicCube];
     }
     
     return self;
 };
+
+-(id)initiateWithState:(NSArray *)stateList{
+    if(self = [super init]){
+        if (array27Cube == nil) array27Cube = [[NSMutableArray alloc] init];
+        //magicCube = [MCMagicCube getSharedMagicCube];
+        isAutoRotate = NO;
+        //魔方整体三个参数
+        scale = MCPointMake(90,90,90);
+        translation = MCPointMake(0,0,0);
+        rotation = MCPointMake(0,0,0);
+        MCPoint sub_scale  = MCPointMake(scale.x/3, scale.y/3, scale.z/3);
+        for (int  i = 0; i<9; i++) {
+            layerPtr[i] = nil;
+        }
+        float gap = CUBE_CUBE_GAP;
+        for (int z = 0; z < 3; z++) {
+            for (int y = 0; y < 3; y++) {
+                for (int x = 0; x < 3; x++) {
+                    //符号
+                    int sign_x = x-1;
+                    int sign_y = y-1;
+                    int sign_z = z-1;
+                    int index_tmp =  z*9+y*3+x;
+                    Cube * tCube = nil;
+                    if (x != 1 || y != 1 || z != 1){
+                    NSDictionary *cubestate = [stateList objectAtIndex:index_tmp];
+                        tCube = [[Cube alloc] initWithState:cubestate];}
+                    else{
+                        tCube =[[Cube alloc]init];
+                    }
+                    tCube.index = index_tmp;
+                    
+                    tCube.pretranslation = MCPointMake(translation.x, translation.y, translation.z);
+                    tCube.prerotation = MCPointMake(rotation.x, rotation.y, rotation.z);
+                    
+                    
+                    tCube.translation = MCPointMake((gap+sub_scale.x)*sign_x, (gap+sub_scale.y)*sign_y, (gap+sub_scale.z)*sign_z);
+                    
+                    tCube.scale = MCPointMake(sub_scale.x, sub_scale.y, sub_scale.z);
+                    //Cube.rotation = MCPointMake(rotation.x, rotation.y, rotation.z);
+                    //Cube.rotationalSpeed = MCPointMake(0, 0, 0);
+                    tCube.collider = [MCCollider collider];
+                    [tCube.collider setCheckForCollision:YES];
+                    [array27Cube addObject: tCube];
+                    [tCube release];
+                }
+            }
+        }
+        
+        
+        m_trackballRadius = 260;
+        m_spinning = NO;
+        //self.collider = [MCCollider collider];
+        //[self.collider setCheckForCollision:YES];
+        ray = [[MCRay alloc] init];
+        for (int z = 0; z < 3; z++) {
+            for (int y = 0; y < 3; y++) {
+                for (int x = 0; x < 3; x++) {
+                    MagicCubeIndexState[x+y*3+z*9] = [array27Cube objectAtIndex:x+y*3+z*9];
+                }
+            }
+        }
+        firstThreePointCount = 0;
+        fingerRotate_angle = 0;
+        select_trackballRadius = 260;
+        isAddStepWhenUpdateState = YES;
+        rrrr = 0;
+        undoManger = [[NSUndoManager alloc]init];
+    }
+    
+    return self;
+}
+
 -(void)render{
     [array27Cube makeObjectsPerformSelector:@selector(render)];
     [super render];
@@ -494,35 +567,80 @@
 {
 	NSSet * touches = [[[CoordinatingController sharedCoordinatingController] currentController].inputController touchEvents];
     UIView* view= [[[CoordinatingController sharedCoordinatingController] currentController].inputController view ];
-	UITouchPhase touchEventSate = [[[CoordinatingController sharedCoordinatingController] currentController].inputController touchEventSate];
+	FSM_Interaction_State fsm_Current_State = [[[CoordinatingController sharedCoordinatingController] currentController].inputController fsm_Current_State];
+    FSM_Interaction_State fsm_Previous_State = [[[CoordinatingController sharedCoordinatingController] currentController].inputController fsm_Previous_State];
     if ([touches count] == 0) return;
-    if ([touches count] >2) return;
-    //单手指单层划动
-    if ([touches count]==1) {
-        UITouch *touch = [[touches allObjects] objectAtIndex:0];
-        //CGPoint location = [touch locationInView:view];
-
-        //继续射线拾取
-        float V[108] = {-0.5,0.5,0.5,    -0.5,-0.5,0.5,   0.5,-0.5,0.5,
-                         0.5,-0.5,0.5,    0.5,0.5,0.5,    -0.5,0.5,0.5,//前
-            
-                        -0.5,0.5,0.5,     0.5,0.5,0.5,     0.5,0.5,-0.5,
-                         0.5,0.5,-0.5,   -0.5,0.5,-0.5,   -0.5,0.5,0.5,//上
-            
-                        -0.5,0.5,-0.5,   -0.5,-0.5,-0.5,  -0.5,-0.5,0.5,
-                        -0.5,-0.5,0.5,   -0.5,0.5,0.5,    -0.5,0.5,-0.5,//左
-            
-                         0.5,0.5,0.5,     0.5,-0.5,0.5,    0.5,-0.5,-0.5,
-                         0.5,-0.5,-0.5,   0.5,0.5,-0.5,    0.5,0.5,0.5,//右
-            
-                         0.5,0.5,-0.5,    0.5,-0.5,-0.5,  -0.5,-0.5,-0.5,
-                        -0.5,-0.5,-0.5,  -0.5,0.5,-0.5,    0.5,0.5,-0.5,//后
-            
-                        -0.5,-0.5,0.5,   -0.5,-0.5,-0.5,   0.5,-0.5,-0.5,
-                         0.5,-0.5,-0.5,   0.5,-0.5,0.5,    -0.5,-0.5,0.5,//下
-        };
         
-        if (touchEventSate == UITouchPhaseMoved) {
+    
+    //继续射线拾取
+    float V[108] = {-0.5,0.5,0.5,    -0.5,-0.5,0.5,   0.5,-0.5,0.5,
+        0.5,-0.5,0.5,    0.5,0.5,0.5,    -0.5,0.5,0.5,//前
+        
+        -0.5,0.5,0.5,     0.5,0.5,0.5,     0.5,0.5,-0.5,
+        0.5,0.5,-0.5,   -0.5,0.5,-0.5,   -0.5,0.5,0.5,//上
+        
+        -0.5,0.5,-0.5,   -0.5,-0.5,-0.5,  -0.5,-0.5,0.5,
+        -0.5,-0.5,0.5,   -0.5,0.5,0.5,    -0.5,0.5,-0.5,//左
+        
+        0.5,0.5,0.5,     0.5,-0.5,0.5,    0.5,-0.5,-0.5,
+        0.5,-0.5,-0.5,   0.5,0.5,-0.5,    0.5,0.5,0.5,//右
+        
+        0.5,0.5,-0.5,    0.5,-0.5,-0.5,  -0.5,-0.5,-0.5,
+        -0.5,-0.5,-0.5,  -0.5,0.5,-0.5,    0.5,0.5,-0.5,//后
+        
+        -0.5,-0.5,0.5,   -0.5,-0.5,-0.5,   0.5,-0.5,-0.5,
+        0.5,-0.5,-0.5,   0.5,-0.5,0.5,    -0.5,-0.5,0.5,//下
+    };
+
+    switch (fsm_Current_State) {
+        case kState_S1:{
+            touch = [[touches allObjects] objectAtIndex:0];
+            //当前如果有某一自动旋转正在进行，禁止再旋转，直到完成
+            if (isAutoRotate) return;
+            //当前如果有某一旋转自动调整正在进行，禁止再旋转，直到完成
+            if (isNeededToAdjustment) return;
+            //记录第一个点
+            //CGPoint location = [touch locationInView:view];
+            CGPoint location = [touch previousLocationInView:view];
+            firstThreePointCount++;
+            firstThreePoint[0].x =location.x;
+            firstThreePoint[0].y =location.y;
+            //Once function down, update the ray.
+            [ray updateWithScreenX:location.x
+                           screenY:location.y];
+            float nearest_distance = 65535;
+            int index = -1;
+            for (Cube *tmp_cube in array27Cube) {
+                GLfloat * tmp_dection = VertexesArray_Matrix_Multiply(V, 3, 36, tmp_cube.matrix);
+                for (int i = 0; i < 12; i++) {
+                    //OK, check the intersection and return the distance.
+                    float distance = [ray intersectWithTriangleMadeUpOfV0:&tmp_dection[0 +i*9]
+                                                                       V1:&tmp_dection[3 +i*9]
+                                                                       V2:&tmp_dection[6 +i*9]];
+                    if (distance < 0) continue;
+                    if (distance < nearest_distance) {
+                        //存储当前选中的三角形
+                        for (int k= 0; k <9 ; k++) {
+                            selected_triangle[k] = tmp_dection[i*9+k];
+                        }
+                        nearest_distance = distance;
+                        index = tmp_cube.index;
+                    }
+                }
+            }
+            if (index != -1) {
+                selected = [array27Cube objectAtIndex:index];
+                //selected.scale = MCPointMake(20, 20, 20);
+                isLayerRotating = YES;
+                fingerRotate_angle = 0;
+            }
+            // m_previousOrientation = m_orientation;
+            break;
+        }
+            
+            
+        case kState_M1:{
+                touch = [[touches allObjects] objectAtIndex:0];
             if (isLayerRotating == NO) {
                 //没选中及时返回
                 firstThreePointCount = 0;
@@ -530,8 +648,10 @@
             }
             if (firstThreePointCount > 3) {
                 //开始旋转
-                CGPoint location = [touch locationInView:view];
-                ivec2 current = ivec2(location.x,location.y);
+                //CGPoint location = [touch locationInView:view];
+                CGPoint location = [touch previousLocationInView:view];
+
+                vec2 current = vec2(location.x,location.y);
                 if (isLayerRotating) {
                     vec3 start = [self MapToLayerCenter:firstThreePoint[0]];
                     vec3 end =[self MapToLayerCenter:current];
@@ -542,7 +662,7 @@
                     Quaternion delta = Quaternion::CreateFromVectors(start, end);
                     for (int i=0;i<9;i++) {
                         if (current_rotate_layer!=1) {
-                             [layerPtr[i] setQuaRotation: delta.Rotated([layerPtr[i] quaPreviousRotation])];
+                            [layerPtr[i] setQuaRotation: delta.Rotated([layerPtr[i] quaPreviousRotation])];
                         }else if(i!=4){
                             [layerPtr[i] setQuaRotation: delta.Rotated([layerPtr[i] quaPreviousRotation])];
                         }
@@ -555,8 +675,9 @@
                 
             }else if (firstThreePointCount < 3){
                 //选择三角型切面
-                CGPoint location = [touch locationInView:view];
-                firstThreePoint[firstThreePointCount] = ivec2(location.x,location.y);
+                //CGPoint location = [touch locationInView:view];
+                CGPoint location = [touch previousLocationInView:view];
+                firstThreePoint[firstThreePointCount] = vec2(location.x,location.y);
                 firstThreePointCount++;
             }else {
                 //计算选中层  方案2
@@ -571,7 +692,7 @@
                 vec3 select_triangleV2 = vec3(selected_triangle[6],selected_triangle[7],selected_triangle[8]);
                 vec3 select_movedTo0_V0 = select_triangleV0 - select_triangleV1;
                 vec3 select_movedTo0_V1 = select_triangleV2 - select_triangleV1;
-
+                
                 float xyz[9] = {1.0,0.0,0.0,0.0,1.0,0.0,0.0,0.0,1.0};
                 Cube * tmpcuble = [array27Cube objectAtIndex:13];
                 GLfloat * XYZ = VertexesArray_Matrix_Multiply(xyz, 3, 3, tmpcuble.matrix);
@@ -582,8 +703,8 @@
                 float ox_triangle = [self AngleV0V1withV:ox V0:select_movedTo0_V0 V1:select_movedTo0_V1];
                 float oy_triangle = [self AngleV0V1withV:oy V0:select_movedTo0_V0 V1:select_movedTo0_V1];
                 float oz_triangle = [self AngleV0V1withV:oz V0:select_movedTo0_V0 V1:select_movedTo0_V1];
-                AxisType vertical_axis = (ox_triangle>oy_triangle)? (ox_triangle>oz_triangle)?X:Z:(oy_triangle>oz_triangle)?Y:Z;    
-
+                AxisType vertical_axis = (ox_triangle>oy_triangle)? (ox_triangle>oz_triangle)?X:Z:(oy_triangle>oz_triangle)?Y:Z;
+                
                 
                 float dx = [self AngleV0V1withV:ox V0:movedTo0_V0 V1:movedTo0_V1];
                 float dy = [self AngleV0V1withV:oy V0:movedTo0_V0 V1:movedTo0_V1];
@@ -634,62 +755,24 @@
                     
                 }
                 firstThreePointCount++;
+                
+            }
+            
 
-            }
+            break;
+        }
+        case kState_F1:{
+            //使用上一个数据，可以避免最后最后状态时有两个touch
+            //touch = [[touches allObjects] objectAtIndex:0];
             
-            
-            
-        }else if (touchEventSate == UITouchPhaseBegan) {
-            
-            //当前如果有某一自动旋转正在进行，禁止再旋转，直到完成
-            if (isAutoRotate) return;
-            //当前如果有某一旋转自动调整正在进行，禁止再旋转，直到完成
-            if (isNeededToAdjustment) return;
-            
-            
-            //记录第一个点
-            CGPoint location = [touch locationInView:view];
-            firstThreePointCount++;
-            firstThreePoint[0].x =location.x;
-            firstThreePoint[0].y =location.y;
-            //Once function down, update the ray.
-            [ray updateWithScreenX:location.x
-                           screenY:location.y];
-            float nearest_distance = 65535;
-            int index = -1;
-            for (Cube *tmp_cube in array27Cube) {
-                GLfloat * tmp_dection = VertexesArray_Matrix_Multiply(V, 3, 36, tmp_cube.matrix);
-                for (int i = 0; i < 12; i++) {
-                    //OK, check the intersection and return the distance.
-                    float distance = [ray intersectWithTriangleMadeUpOfV0:&tmp_dection[0 +i*9]
-                                                                       V1:&tmp_dection[3 +i*9]
-                                                                       V2:&tmp_dection[6 +i*9]];
-                    if (distance < 0) continue;
-                    if (distance < nearest_distance) {
-                        //存储当前选中的三角形
-                        for (int k= 0; k <9 ; k++) {
-                            selected_triangle[k] = tmp_dection[i*9+k];
-                        }
-                        nearest_distance = distance;
-                        index = tmp_cube.index;
-                    }
-                }
-            }
-            if (index != -1) {
-                selected = [array27Cube objectAtIndex:index];
-                //selected.scale = MCPointMake(20, 20, 20);
-                isLayerRotating = YES;
-                fingerRotate_angle = 0;
-            }
-           // m_previousOrientation = m_orientation;
-        }else if (touchEventSate == UITouchPhaseEnded) {
             //确定旋转方向
             //使用第一点 和 最后一个点 及他们点中间点 在轨迹圆上形成轨迹弧
             //三点确定两个向量，他们进行差乘，再和法向量进行点乘 由正负确定转向
             if(isLayerRotating!=YES)return;
-            CGPoint location = [touch locationInView:view];
-            ivec2 lastPoint = ivec2(location.x,location.y);
-            ivec2 middle = ivec2((firstThreePoint[0].x+lastPoint.x)/2,
+            //CGPoint location = [touch locationInView:view];
+            CGPoint location = [touch previousLocationInView:view];
+            vec2 lastPoint = vec2(location.x,location.y);
+            vec2 middle = vec2((firstThreePoint[0].x+lastPoint.x)/2,
                                  (firstThreePoint[0].y+lastPoint.y)/2);
             
             float xyz[9] = {1.0,0.0,0.0,0.0,1.0,0.0,0.0,0.0,1.0};
@@ -749,18 +832,30 @@
                 isNeededToUpdateMagicCubeState = YES;
             }
             if (isNeededToUpdateMagicCubeState) {
-            //加入命令队列
-            //添加command到NSUndoManger
-            LayerRotationDirectionType commandaxis = current_rotate_direction;
-            NSInvocation *doinvocation = [self createInvocationOnAxis:current_rotate_axis onLayer:current_rotate_layer inDirection:commandaxis];
-            if(commandaxis==CCW){
-                commandaxis=CW;
-            }else {
-                commandaxis=CCW;
-            }
-            NSInvocation *undoinvocation = [self createInvocationOnAxis:current_rotate_axis onLayer:current_rotate_layer inDirection:commandaxis];
-            
-            [self addInvocation:doinvocation withUndoInvocation:undoinvocation];
+                //加入命令队列
+                //添加command到NSUndoManger
+                LayerRotationDirectionType commandaxis = current_rotate_direction;
+                if (fingerRotate_angle>90&&fingerRotate_angle_mod90<45) {
+                    if(commandaxis==CCW){
+                        commandaxis=CW;
+                    }else {
+                        commandaxis=CCW;
+                    }
+                }
+                
+                NSInvocation *doinvocation = [self createInvocationOnAxis:current_rotate_axis onLayer:current_rotate_layer inDirection:commandaxis];
+                
+                if(commandaxis==CCW){
+                    commandaxis=CW;
+                }else {
+                    commandaxis=CCW;
+                }
+                
+
+                
+                NSInvocation *undoinvocation = [self createInvocationOnAxis:current_rotate_axis onLayer:current_rotate_layer inDirection:commandaxis];
+                
+                [self addInvocation:doinvocation withUndoInvocation:undoinvocation];
             }
             //标记手动转动结束
             isNeededToAdjustment = YES;
@@ -770,21 +865,48 @@
                 //selected.scale = MCPointMake(30, 30, 30);
                 selected = nil;
             }
+            
+            break;
         }
-    }
-
-    
-    
-    //双手变换视角
-    if ([touches count] == 2) {
-        UITouch *touch = [[touches allObjects] objectAtIndex:0];
-        UITouch *touch1 = [[touches allObjects] objectAtIndex:1];
-        if (touchEventSate == UITouchPhaseMoved) {
-            CGPoint current0 = [touch locationInView:view];
-            CGPoint current1 = [touch1 locationInView:view];
-            CGPoint current = CGPointMake((current0.x+current1.x)/2,(current0.y+current1.y)/2);
+        case kState_S2:{
+            isLayerRotating = NO;
+            firstThreePointCount = 0;
+            if ([touches count]==2) {
+                UITouch *touch0 = [[touches allObjects] objectAtIndex:0];
+                UITouch *touch1 = [[touches allObjects] objectAtIndex:1];
+                CGPoint location = [touch0 previousLocationInView:view];
+                CGPoint location1 = [touch1 previousLocationInView:view];
+                m_spinning = YES;
+                m_fingerStart.x =(location.x+location1.x)/2;
+                m_fingerStart.y =(location.y+location1.y)/2;
+            }else{
+                UITouch *touch0 = [[touches allObjects] objectAtIndex:0];
+                UITouch *touch1 = [[touches allObjects] objectAtIndex:0];
+                CGPoint location = [touch0 previousLocationInView:view];
+                CGPoint location1 = [touch1 previousLocationInView:view];
+                m_spinning = YES;
+                m_fingerStart.x =(location.x+location1.x)/2;
+                m_fingerStart.y =(location.y+location1.y)/2;
+            }
+                        
+            for (Cube *tmp in array27Cube) {
+                [tmp setQuaPreviousRotation:[tmp quaRotation]];
+            }
+            break;
+        }
+        case kState_M2:{
+            CGPoint current;
+            if ([touches count]==2) {
+                UITouch *touch0 = [[touches allObjects] objectAtIndex:0];
+                UITouch *touch1 = [[touches allObjects] objectAtIndex:1];
+                CGPoint current0 = [touch0 locationInView:view];
+                CGPoint current1 = [touch1 locationInView:view];
+                current = CGPointMake((current0.x+current1.x)/2,(current0.y+current1.y)/2);
+            }
+            
+           
             //ivec2 oldLocation = ivec2(previous.x,previous.y);
-            ivec2 newLocation = ivec2(current.x,current.y);
+            vec2 newLocation = vec2(current.x,current.y);
             if (m_spinning) {
                 vec3 start = [self MapToSphere: m_fingerStart];
                 vec3 end =[self MapToSphere:newLocation];
@@ -793,27 +915,25 @@
                     [tmp setQuaRotation: delta.Rotated([tmp quaPreviousRotation])];
                 }
             }
-        }else if (touchEventSate==UITouchPhaseBegan) {
-            CGPoint location = [touch locationInView:view];
-            CGPoint location1 = [touch1 locationInView:view];
-            m_spinning = YES;
-            m_fingerStart.x =(location.x+location1.x)/2;
-            m_fingerStart.y =(location.y+location1.y)/2;
-            for (Cube *tmp in array27Cube) {
-                [tmp setQuaPreviousRotation:[tmp quaRotation]];
-            }
-        }else if (touchEventSate==UITouchPhaseEnded) {
-            m_spinning = NO;
             
+
+            break;
         }
+        case kState_F2:{
+            firstThreePointCount = 0;
+             m_spinning = NO;
+            break;
+        }
+        default:
+            break;
     }
 }
 
--(vec3)MapToSphere:(ivec2 )touchpoint
+-(vec3)MapToSphere:(vec2 )touchpoint
 {
     
     //ivec2 m_centerPoint = ivec2(384+translation.y,512+translation.x);
-    ivec2 m_centerPoint = ivec2(512+translation.x,384+translation.y);
+    vec2 m_centerPoint = vec2(512+translation.x,384+translation.y);
     //NSLog(@"center:%i %i",m_centerPoint.x,m_centerPoint.y);
     
     vec2 p = touchpoint - m_centerPoint;
@@ -834,7 +954,7 @@
     return mapped / radius;
 }
 
--(vec3)MapToLayerCenter:(ivec2 )touchpoint
+-(vec3)MapToLayerCenter:(vec2 )touchpoint
 {
     //ivec2 magiccube_centerPoint = ivec2(512+translation.x,384+translation.y);
     vec3 layer_center;
@@ -851,7 +971,7 @@
     MCPoint layercenter_original = MCPointMatrixMultiply(original, [[array27Cube objectAtIndex:layer_center_index] matrix]);
     //vec3 layer_direction_N = vec3(layercenter_original.x,layercenter_original.y,layercenter_original.z);
     layer_center = vec3(512+translation.x+layercenter_original.x,384+translation.y+layercenter_original.y,layercenter_original.z);
-    ivec2 layer_center_2D = ivec2(layer_center.x,layer_center.y);
+    vec2 layer_center_2D = vec2(layer_center.x,layer_center.y);
     vec2 p = touchpoint - layer_center_2D;
    // vec2 p = touchpoint - magiccube_centerPoint;
     p.y = -p.y;
@@ -945,6 +1065,7 @@ double ThetaBetweenV1andV2(const vec3& v1,const vec3& v2)
 }
 -(void)stepCounterMinus{
     [target performSelector:stepcounterMinusAction];
+    //target performSelector:<#(SEL)#> withObject:<#(id)#>
 }
 
 
@@ -955,6 +1076,16 @@ double ThetaBetweenV1andV2(const vec3& v1,const vec3& v2)
         [self stepCounterMinus];
         isAddStepWhenUpdateState = true;
     }
+    RotateType * rotateType = [[RotateType alloc]init];
+    [rotateType setRotate_axis:current_rotate_axis];
+    [rotateType setRotate_direction:current_rotate_direction];
+    [rotateType setRotate_layer:current_rotate_layer];
+    if ([target respondsToSelector:@selector(rotate:)]) {
+        [target performSelector:@selector(rotate:) withObject:rotateType];
+    }
+    
+    
+    
     Cube *tmp;
     switch (current_rotate_axis) {
         case X:

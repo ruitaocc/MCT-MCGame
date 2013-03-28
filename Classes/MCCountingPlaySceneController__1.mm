@@ -11,7 +11,7 @@
 #import "Cube.h"
 #import "MCMultiDigitCounter.h"
 @implementation MCCountingPlaySceneController
-
+@synthesize magicCube;
 +(MCCountingPlaySceneController*)sharedCountingPlaySceneController
 {
     static MCCountingPlaySceneController *sharedCountingPlaySceneController;
@@ -23,6 +23,9 @@
 	return sharedCountingPlaySceneController;
 }
 
+-(void)rotate:(RotateType *)rotateType{
+    [magicCube rotateOnAxis:[rotateType rotate_axis] onLayer:[rotateType rotate_layer] inDirection:[rotateType rotate_direction]];
+}
 
 
 -(void)loadScene{
@@ -30,8 +33,8 @@
 	RANDOM_SEED();
 	// this is where we store all our objects
 	if (sceneObjects == nil) sceneObjects = [[NSMutableArray alloc] init];	
-	
-    float scale = 60.0;
+	magicCube = [MCMagicCube getSharedMagicCube];
+    
     
 	// our 'character' object
 	/*
@@ -46,15 +49,15 @@
     */
     
     //大魔方
-    MCMagicCubeUIModelController *magicCube = [[MCMagicCubeUIModelController alloc]initiate];
-    magicCube.target=self;
-    [magicCube setStepcounterAddAction:@selector(stepcounterAdd)];
-    [magicCube setStepcounterMinusAction:@selector(stepcounterMinus)];
-    [self addObjectToScene:magicCube];
-    [magicCube release];
+    MCMagicCubeUIModelController* magicCubeUI = [[MCMagicCubeUIModelController alloc]initiateWithState:[ magicCube getAxisStates]];
+    magicCubeUI.target=self;
+    [magicCubeUI setStepcounterAddAction:@selector(stepcounterAdd)];
+    [magicCubeUI setStepcounterMinusAction:@selector(stepcounterMinus)];
+    [self addObjectToScene:magicCubeUI];
+    [magicCubeUI release];
     
     collisionController = [[MCCollisionController alloc] init];
-	collisionController.sceneObjects = magicCube.array27Cube;
+	collisionController.sceneObjects = magicCubeUI.array27Cube;
 	if (DEBUG_DRAW_COLLIDERS)	[self addObjectToScene:collisionController];
 	
 	    

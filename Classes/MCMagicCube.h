@@ -40,6 +40,6 @@
 //get the state of cubies
 //every state in the "format" axis-orientation
 - (NSArray *)getAxisStatesOfAllCubie;
-
+- (NSArray *)getAxisStates;
 
 @end

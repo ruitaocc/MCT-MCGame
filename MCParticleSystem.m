@@ -32,7 +32,7 @@
 	self.emissionRange = MCRangeMake(1.0, 2.0);
 	self.sizeRange = MCRangeMake(4.0, 8.0);
 	self.growRange = MCRangeMake(-0.5, -0.1);
-	self.xVelocityRange = MCRangeMake(-8.0, -5.0);
+	self.xVelocityRange = MCRangeMake(-3.0, 3.0);
 	self.yVelocityRange = MCRangeMake(-3.0, 3.0);
 	self.lifeRange = MCRangeMake(0.0, 2.0);
 	self.decayRange = MCRangeMake(0.05, 0.2);
@@ -164,14 +164,23 @@
 -(void)render
 {
 	if (!active) return; 
-    
-	// clear the matrix
+    glMatrixMode(GL_PROJECTION);
 	glPushMatrix();
 	glLoadIdentity();
-    
+	//glRotatef(-90.0f, 0.0f, 0.0f, 1.0f);
+	
+	// set up the viewport so that it is analagous to the screen pixels
+	glOrthof(-512, 512, -384, 384, -1.0f, 50.0f);
+	// clear the matrix
+	//glPushMatrix();
+	//glLoadIdentity();
+    glMatrixMode(GL_MODELVIEW);
+    //glMultMatrixf(matrix);
 	// bind our texture
 	[[MCMaterialController sharedMaterialController] bindMaterial:materialKey];
-	
+	glDisable(GL_LIGHTING);
+	glDisable(GL_CULL_FACE);
+    
 	glEnableClientState(GL_VERTEX_ARRAY);
 	glEnableClientState(GL_TEXTURE_COORD_ARRAY);
 	glDisableClientState(GL_NORMAL_ARRAY);
@@ -181,8 +190,11 @@
     glTexCoordPointer(2, GL_FLOAT, 0, uvCoordinates);
 	//draw
     glDrawArrays(GL_TRIANGLES, 0, vertexIndex);
-    
+    glMatrixMode(GL_PROJECTION);
 	glPopMatrix();
+
+    glMatrixMode(GL_MODELVIEW);
+
 }
 
 
@@ -205,11 +217,11 @@
 		} 
 		// grab a premade particle and set it up with some new random nubmers
 		MCParticle * p = [particlePool lastObject];
-		p.position = self.translation;
+        self.translation = MCPointMake(self.translation.x, self.translation.y, self.translation.z-0.001);
+		p.position =self.translation;
 		veloX = MCRandomFloat(xVelocityRange);
 		veloY = MCRandomFloat(yVelocityRange);
-		p.velocity = MCPointMake(veloX, veloY, 0.0);
-		
+		p.velocity = MCPointMake(veloX, veloY, -0.001);
 		p.life = MCRandomFloat(lifeRange);
 		p.size = MCRandomFloat(sizeRange);
 		p.grow = MCRandomFloat(growRange);

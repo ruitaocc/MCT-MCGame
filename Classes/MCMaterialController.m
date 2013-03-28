@@ -35,8 +35,11 @@
         
 		// preload all our textures and atlases
 		[self loadTextureImage:@"cubeBlack2.png" materialKey:@"cubeTexture2"];
+        [self loadTextureImage:@"sixcolor.png" materialKey:@"sixcolor"];
+        [self loadTextureImage:@"cubeBlack3.png" materialKey:@"cubeTexture3"];
+
         [self loadAtlasData:@"countNumber"];
-       
+       [self loadAtlasData:@"cubeAction"];
 		[self loadAtlasData:@"particleAtlas"];
         
         //[self loadAtlasData:@"ButtonMerged"];

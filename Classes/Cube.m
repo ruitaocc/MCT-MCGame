@@ -15,48 +15,102 @@
 #import "MCParticleSystem.h"
 #import "CoordinatingController.h"
 #import "MCCollider.h"
+#import "Global.h"
+#import "data.hpp"
 @implementation Cube
-@synthesize index;
+@synthesize index,cube6faces;
 @synthesize O_X,O_Y,O_Z;
-- (id) init
+- (id) initWithState:(NSDictionary *)states
 {
 	self = [super init];
 	if (self != nil) {
-	//	self.collider = nil;
-    	}
+        MCOBJLoader *OBJ = [MCOBJLoader sharedMCOBJLoader];
+        
+        GLfloat * Cube_vertex_coordinates = [OBJ Cube_vertex_coordinates];
+        GLfloat * Cube_texture_coordinates = [OBJ Cube_texture_coordinates];
+        GLfloat * Cube_normal_vectors = [OBJ Cube_normal_vectors];
+        
+        int Cube_vertex_array_size = [OBJ Cube_vertex_array_size];
+        
+        mesh = [[MCTexturedMesh alloc] initWithVertexes:Cube_vertex_coordinates
+                                            vertexCount:Cube_vertex_array_size
+                                             vertexSize:3
+                                            renderStyle:GL_TRIANGLES];
+        [(MCTexturedMesh*)mesh setMaterialKey:@"cubeTexture3"];
+        [(MCTexturedMesh*)mesh setUvCoordinates:Cube_texture_coordinates];
+        [(MCTexturedMesh*)mesh setNormals:Cube_normal_vectors];
+        
+        if (cube6faces==nil) {
+            cube6faces = [[NSMutableArray alloc]init];
+        }
+        for (int i=0; i<6; i++) {
+            NSNumber *state = [states objectForKey:[NSNumber numberWithInteger:i ]];
+            CubeFace* faces = [[CubeFace alloc]initWithVertexes:&Cube_vertex_coordinates_f[i*6*3] vertexCount:6 vertexSize:3 renderStyle:GL_TRIANGLES];
+            [(CubeFace*)faces setMaterialKey:@"sixcolor"];
+            [(CubeFace*)faces setUvCoordinates:&Cube_texture_coordinates_f[[state integerValue]*6*2]];
+            [(CubeFace*)faces setNormals:&Cube_normal_vectors_f[i*6*3]];
+            [cube6faces addObject:faces];
+            [faces release];
+        }
+    }
     O_X = ZX;
     O_Y = ZY;
     O_Z = ZZ;
 	return self;
 }
+-(id)init{
+    self = [super init];
+	if (self != nil) {
+        MCOBJLoader *OBJ = [MCOBJLoader sharedMCOBJLoader];
+        GLfloat * Cube_vertex_coordinates = [OBJ Cube_vertex_coordinates];
+        GLfloat * Cube_texture_coordinates = [OBJ Cube_texture_coordinates];
+        GLfloat * Cube_normal_vectors = [OBJ Cube_normal_vectors];
+        
+        int Cube_vertex_array_size = [OBJ Cube_vertex_array_size];
+        
+        mesh = [[MCTexturedMesh alloc] initWithVertexes:Cube_vertex_coordinates
+                                            vertexCount:Cube_vertex_array_size
+                                             vertexSize:3
+                                            renderStyle:GL_TRIANGLES];
+        [(MCTexturedMesh*)mesh setMaterialKey:@"cubeTexture3"];
+        [(MCTexturedMesh*)mesh setUvCoordinates:Cube_texture_coordinates];
+        [(MCTexturedMesh*)mesh setNormals:Cube_normal_vectors];
+        
+        if (cube6faces==nil) {
+            cube6faces = [[NSMutableArray alloc]init];
+        }
+        for (int i=0; i<6; i++) {
+            //NSNumber *state = [states objectForKey:[NSNumber numberWithInteger:i ]];
+            CubeFace* faces = [[CubeFace alloc]initWithVertexes:&Cube_vertex_coordinates_f[i*6*3] vertexCount:6 vertexSize:3 renderStyle:GL_TRIANGLES];
+            [(CubeFace*)faces setMaterialKey:@"sixcolor"];
+            [(CubeFace*)faces setUvCoordinates:&Cube_texture_coordinates_f[i*6*2]];
+            [(CubeFace*)faces setNormals:&Cube_normal_vectors_f[i*6*3]];
+            [cube6faces addObject:faces];
+            [faces release];
+        }
+        
+    }
+    O_X = ZX;
+    O_Y = ZY;
+    O_Z = ZZ;
+	return self;
 
+}
+// called once every frame
+-(void)render
+{
+    if (!mesh || !active) return; // if we do not have a mesh, no need to render
+	// clear the matrix
+	glPushMatrix();
+	glLoadIdentity();
+	glMultMatrixf(matrix);
+	[mesh render];
+    [cube6faces makeObjectsPerformSelector:@selector(render)];
+	glPopMatrix();
+}
 -(void)awake
 {
     active = YES;
-    MCOBJLoader *OBJ = [MCOBJLoader sharedMCOBJLoader];
-   /* vector<float> Cube_vertex_coordinates_v( [OBJ Cube_vertex_coordinates]);
-    vector<float> Cube_texture_coordinates_v ([OBJ Cube_texture_coordinates]);
-    vector<float> Cube_normal_vectors_v ([OBJ Cube_normal_vectors]);
-    
-    GLfloat * Cube_vertex_coordinates = &Cube_vertex_coordinates_v[0];
-    GLfloat * Cube_texture_coordinates = &Cube_texture_coordinates_v[0];
-    GLfloat * Cube_normal_vectors = &Cube_normal_vectors_v[0];
-    */
-    GLfloat * Cube_vertex_coordinates = [OBJ Cube_vertex_coordinates];
-    GLfloat * Cube_texture_coordinates = [OBJ Cube_texture_coordinates];
-    GLfloat * Cube_normal_vectors = [OBJ Cube_normal_vectors];
-    int Cube_vertex_array_size = [OBJ Cube_vertex_array_size];
-    
-	mesh = [[MCTexturedMesh alloc] initWithVertexes:Cube_vertex_coordinates
-                                        vertexCount:Cube_vertex_array_size
-                                         vertexSize:3 
-                                        renderStyle:GL_TRIANGLES];
-	[(MCTexturedMesh*)mesh setMaterialKey:@"cubeTexture2"];
-	[(MCTexturedMesh*)mesh setUvCoordinates:Cube_texture_coordinates];
-	[(MCTexturedMesh*)mesh setNormals:Cube_normal_vectors];
-	
-    
-	
 }
 
 

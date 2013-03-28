@@ -13,12 +13,14 @@
 #import "MCMaterialController.h"
 #import "MCInputViewController.h"
 #import "MCCountingPlayInputViewController__1.h"
+#import "MCNormalPlayInputViewController.h"
 #import "SVProgressHUD.h"
 @implementation CoordinatingController
 @synthesize _mainSceneController,_countingPlaySceneController;
 @synthesize  currentController;
 @synthesize needToReload;
 @synthesize userManagerSystemViewController;
+@synthesize _normalPlaySceneController;
 @synthesize window;
 
 + (CoordinatingController*)sharedCoordinatingController{
@@ -36,6 +38,7 @@
     _countingPlaySceneController = [MCCountingPlaySceneController sharedCountingPlaySceneController];
     _mainSceneController = [MCSceneController sharedSceneController];
     currentController = [MCSceneController sharedSceneController];
+    _normalPlaySceneController = [MCNormalPlaySceneController sharedNormalPlaySceneController];
     [super init];
     
 }
@@ -48,23 +51,10 @@
             //log
             NSLog(@"requestViewChangeByObject:kCountingPlay");
             [currentController stopAnimation];
-//            HUD = [[MBProgressHUD alloc] initWithView:currentController.openGLView];
-//            [currentController.openGLView addSubview:HUD];
-//            HUD.dimBackground = YES;
-//            // Regiser for HUD callbacks so we can remove it from the window at the right time
-//            HUD.delegate = self;
-//            // Show the HUD while the provided method executes in a new thread
-//            [HUD showWhileExecuting:@selector(loadCountingPlayScene) onTarget:self withObject:nil animated:YES];
-//
-
-            //Loading...
-            //[SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeBlack];
             [SVProgressHUD show];
             //load the new scene            
             [NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(loadCountingPlayScene) userInfo:nil repeats:NO];
-            
-
-           
+    
         }
         break;
         case kMainMenu:
@@ -92,7 +82,12 @@
         {
             
             NSLog(@"requestViewChangeByObject:kNormalPlay");
+            [currentController stopAnimation];
+            [SVProgressHUD show];
+            //load the new scene
+            [NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(loadNormalPlayScene) userInfo:nil repeats:NO];
             
+
         }
         break;
         case kRandomSolve:
@@ -133,6 +128,31 @@
     
     [window setRootViewController:_countingPlaySceneController.inputController];
     currentController = _countingPlaySceneController;
+    [currentController removeAllObjectFromScene];
+    [currentController loadScene];
+    [currentController startScene];
+    [currentController startAnimation];
+    //sleep(1);
+    
+}
+-(void)loadNormalPlayScene{
+    [SVProgressHUD dismiss];
+    //[SVProgressHUD dismiss];
+    [currentController stopAnimation];
+    _normalPlaySceneController = [MCNormalPlaySceneController sharedNormalPlaySceneController];
+    MCNormalPlayInputViewController * normalInputController = [[MCNormalPlayInputViewController alloc] initWithNibName:nil bundle:nil];
+    
+    [currentController.inputController setView:nil];
+    _normalPlaySceneController.inputController = normalInputController;
+    [normalInputController release];
+    
+    _normalPlaySceneController.inputController.view = [currentController openGLView] ;
+    _normalPlaySceneController.openGLView = [currentController openGLView];
+    
+    [_normalPlaySceneController.inputController resignFirstResponder];
+    
+    [window setRootViewController:_normalPlaySceneController.inputController];
+    currentController = _normalPlaySceneController;
     [currentController removeAllObjectFromScene];
     [currentController loadScene];
     [currentController startScene];

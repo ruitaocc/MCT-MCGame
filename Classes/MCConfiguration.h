@@ -31,11 +31,11 @@
 
 
 // for particles
-#define MC_MAX_PARTICLES 100
+#define MC_MAX_PARTICLES 500
 
 #define MC_FPS 60.0
 
-// for view transition
+// for view transition 视图变换的key
 typedef enum {
     kCountingPlay,
     kNormalPlay,
@@ -45,6 +45,21 @@ typedef enum {
     kMainMenu,
     kScoreBoard2MainMenu
 }ViewTransitionTag;
+
+// for 魔方模型交互算法key
+typedef enum {
+    kState_None,
+    kState_S1,
+    kState_M1,
+    kState_F1,
+    kState_A1,
+    kState_S2,
+    kState_M2,
+    kState_F2
+}FSM_Interaction_State;
+
+
+
 
 
 #pragma mark cubre mesh

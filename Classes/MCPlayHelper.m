@@ -145,7 +145,7 @@
                 {
                     ColorCombinationType value;
                     for (MCTreeNode *child in root.children) {
-                        value = [self treeNodesApply:child];
+                        value = (ColorCombinationType)[self treeNodesApply:child];
                         if (value == NO_LOCKED_CUBIE) {
                             return NO;
                         }
@@ -163,8 +163,8 @@
                             case At:
                             {
                                 targetCubie = [self treeNodesApply:[subPattern.children objectAtIndex:0]];
-                                ColorCombinationType targetPosition = [self treeNodesApply:[subPattern.children objectAtIndex:1]];
-                                struct Point3i coorValue = [magicCube coordinateValueOfCubieWithColorCombination:targetCubie];
+                                ColorCombinationType targetPosition = (ColorCombinationType)[self treeNodesApply:[subPattern.children objectAtIndex:1]];
+                                struct Point3i coorValue = [magicCube coordinateValueOfCubieWithColorCombination:(ColorCombinationType)targetCubie];
                                 if (coorValue.x + coorValue.y*3 + coorValue.z * 9 + 13 != targetPosition) {
                                     return NO;
                                 }
@@ -173,21 +173,21 @@
                             case ColorBindOrientation:
                             {
                                 MCCubie *cubie = nil;
-                                FaceOrientationType targetOrientation = [self treeNodesApply:[subPattern.children objectAtIndex:0]];
-                                FaceColorType targetColor = [self treeNodesApply:[subPattern.children objectAtIndex:1]];
+                                FaceOrientationType targetOrientation = (FaceOrientationType)[self treeNodesApply:[subPattern.children objectAtIndex:0]];
+                                FaceColorType targetColor = (FaceColorType)[self treeNodesApply:[subPattern.children objectAtIndex:1]];
                                 if ([subPattern.children count] > 2) {
                                     NSInteger position = [(MCTreeNode *)[subPattern.children objectAtIndex:2] value];
                                     cubie = [magicCube cubieAtCoordinateX:(position%3-1) Y:(position%9/3-1) Z:(position/9-1)];
                                 } else {
-                                    cubie = [magicCube cubieWithColorCombination:targetCubie];
+                                    cubie = [magicCube cubieWithColorCombination:(ColorCombinationType)targetCubie];
                                 }
                                 return [cubie isFaceColor:targetColor inOrientation:targetOrientation];
                             }
                             case NotAt:
                             {
                                 targetCubie = [self treeNodesApply:[subPattern.children objectAtIndex:0]];
-                                ColorCombinationType targetPosition = [self treeNodesApply:[subPattern.children objectAtIndex:1]];
-                                struct Point3i coorValue = [magicCube coordinateValueOfCubieWithColorCombination:targetCubie];
+                                ColorCombinationType targetPosition = (ColorCombinationType)[self treeNodesApply:[subPattern.children objectAtIndex:1]];
+                                struct Point3i coorValue = [magicCube coordinateValueOfCubieWithColorCombination:(ColorCombinationType)targetCubie];
                                 if (coorValue.x + coorValue.y*3 + coorValue.z * 9 + 13 == targetPosition) {
                                     return NO;
                                 }
@@ -224,10 +224,10 @@
                 {
                     MCTreeNode *elementNode;
                     elementNode = [root.children objectAtIndex:0];
-                    ColorCombinationType targetCombination = elementNode.value;
+                    ColorCombinationType targetCombination = (ColorCombinationType)elementNode.value;
                     struct Point3i targetCoor = [magicCube coordinateValueOfCubieWithColorCombination:targetCombination];
                     elementNode = [root.children objectAtIndex:1];
-                    FaceOrientationType targetOrientation = elementNode.value;
+                    FaceOrientationType targetOrientation =(FaceOrientationType) elementNode.value;
                     [magicCube rotateWithSingmasterNotation:[self getPathToMakeCenterCubieAtPosition:targetCoor inOrientation:targetOrientation]];
                 }
                     break;
@@ -243,7 +243,7 @@
                         lockedCubies[index] = nil;
                     }
                     else{
-                        lockedCubies[index] = [magicCube cubieWithColorCombination:identity];
+                        lockedCubies[index] = [magicCube cubieWithColorCombination:(ColorCombinationType)identity];
                     }
                 }
                     break;
@@ -267,7 +267,7 @@
                 {
                     int x=1, y=1, z=1;
                     for (MCTreeNode *child in root.children) {
-                        switch ([magicCube magicCubeFaceInOrientation:child.value]) {
+                        switch ([magicCube magicCubeFaceInOrientation:(FaceOrientationType)child.value]) {
                             case Up:
                                 y = 2;
                                 break;
@@ -324,7 +324,7 @@
                 case getFaceColorFromOrientation:
                 {
                     FaceColorType color;
-                    FaceOrientationType orientation = [(MCTreeNode *)[root.children objectAtIndex:0] value];
+                    FaceOrientationType orientation = (FaceOrientationType)[(MCTreeNode *)[root.children objectAtIndex:0] value];
                     if ([root.children count] == 1) {
                         switch ([magicCube magicCubeFaceInOrientation:orientation]) {
                             case Up:
@@ -464,12 +464,12 @@
 }
 
 - (SingmasterNotation)getPathToMakeCenterCubieAtPosition:(struct Point3i)coordinate inOrientation:(FaceOrientationType)orientation{
-    SingmasterNotation result = SingmasterNotation_DoNothing;
+    SingmasterNotation result = (SingmasterNotation)SingmasterNotation_DoNothing;
     switch (orientation) {
         case Up:
             switch (coordinate.y) {
                 case 1:
-                    result = SingmasterNotation_DoNothing;
+                    result = (SingmasterNotation)SingmasterNotation_DoNothing;
                     break;
                 case 0:
                     switch (coordinate.x*2+coordinate.z) {
@@ -499,7 +499,7 @@
         case Down:
             switch (coordinate.y) {
                 case -1:
-                    result = SingmasterNotation_DoNothing;
+                    result = (SingmasterNotation)SingmasterNotation_DoNothing;
                     break;
                 case 0:
                     switch (coordinate.x*2+coordinate.z) {
@@ -529,7 +529,7 @@
         case Left:
             switch (coordinate.x) {
                 case -1:
-                    result = SingmasterNotation_DoNothing;
+                    result = (SingmasterNotation)SingmasterNotation_DoNothing;
                     break;
                 case 0:
                     switch (coordinate.y*2+coordinate.z) {
@@ -559,7 +559,7 @@
         case Right:
             switch (coordinate.x) {
                 case 1:
-                    result = SingmasterNotation_DoNothing;
+                    result = (SingmasterNotation)SingmasterNotation_DoNothing;
                     break;
                 case 0:
                     switch (coordinate.y*2+coordinate.z) {
@@ -589,7 +589,7 @@
         case Front:
             switch (coordinate.z) {
                 case 1:
-                    result = SingmasterNotation_DoNothing;
+                    result = (SingmasterNotation)SingmasterNotation_DoNothing;
                     break;
                 case 0:
                     switch (coordinate.x*2+coordinate.y) {
@@ -619,7 +619,7 @@
         case Back:
             switch (coordinate.z) {
                 case -1:
-                    result = SingmasterNotation_DoNothing;
+                    result = (SingmasterNotation)SingmasterNotation_DoNothing;
                     break;
                 case 0:
                     switch (coordinate.x*2+coordinate.y) {
@@ -647,7 +647,7 @@
             }
             break;
         default:
-            result = SingmasterNotation_DoNothing;
+            result = (SingmasterNotation)SingmasterNotation_DoNothing;
             break;
     }
     return result;

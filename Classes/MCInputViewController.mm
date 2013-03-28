@@ -58,7 +58,7 @@
 	// randomSolveBtn
 	MCTexturedButton * randomSolveBtn = [[MCTexturedButton alloc] initWithUpKey:@"randomSolveBtnUp" downKey:@"randomSolveBtnUp"];
 	randomSolveBtn.scale = MCPointMake(btnWidth, btnHeight, 1.0);
-	randomSolveBtn.translation = MCPointMake(xBased+(btnWidth+xGap) , yBased, 0.0);
+	randomSolveBtn.translation = MCPointMake(xBased+(btnWidth+xGap), yBased, 0.0);
 	randomSolveBtn.target = self;
 	randomSolveBtn.buttonDownAction = @selector(randomSolveBtnDown);
     randomSolveBtn.buttonUpAction = @selector(randomSolveBtnUp);	
@@ -90,8 +90,32 @@
 	[heroBoardBtn awake];
 	[interfaceObjects addObject:heroBoardBtn];
 	[heroBoardBtn release];
+    
+    particleEmitter = [[MCParticleSystem alloc]init];
+    particleEmitter.emissionRange = MCRangeMake(300.0, 50.0);
+    particleEmitter.sizeRange = MCRangeMake(8.0, 1.0);
+    particleEmitter.growRange = MCRangeMake(-0.8, 0.5);
+    particleEmitter.xVelocityRange = MCRangeMake(-0.5, 1.0);
+    particleEmitter.yVelocityRange = MCRangeMake(-0.5, 1.0);
+    particleEmitter.lifeRange = MCRangeMake(0.0, 5.5);
+    particleEmitter.decayRange = MCRangeMake(0.03, 0.05);
+    [particleEmitter setParticle:@"lightBlur"];
+    particleEmitter.translation = MCPointMake(300,10,0);
+    particleEmitter.active = YES;
+    particleEmitter.emit = YES;
+    [interfaceObjects addObject:particleEmitter];
+    [particleEmitter release];
+    
 }
 
+
+
+-(void)normalPlayBtnDown{NSLog(@"normalPlayBtnDown");}
+-(void)normalPlayBtnUp{
+    NSLog(@"normalPlayBtnUp");  
+    CoordinatingController *coordinatingController_ = [CoordinatingController sharedCoordinatingController];
+    [coordinatingController_ requestViewChangeByObject:kNormalPlay];
+}
 -(void)countingPlayBtnDown{
     NSLog(@"countingPlayBtnDown");
     
@@ -100,12 +124,6 @@
     NSLog(@"countingPlayBtnUp");
     CoordinatingController *coordinatingController_ = [CoordinatingController sharedCoordinatingController];
     [coordinatingController_ requestViewChangeByObject:kCountingPlay];
-}
-
--(void)normalPlayBtnDown{NSLog(@"normalPlayBtnDown");}
--(void)normalPlayBtnUp{
-    NSLog(@"normalPlayBtnUp");  
-    
 }
 -(void)randomSolveBtnDown{NSLog(@"randomSolveBtnDown");}
 -(void)randomSolveBtnUp{

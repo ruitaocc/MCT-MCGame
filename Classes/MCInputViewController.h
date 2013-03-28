@@ -8,8 +8,10 @@
 
 #import <UIKit/UIKit.h>
 #import "InputController.h"
-
-@interface MCInputViewController : InputController 
+#import "MCParticleSystem.h"
+@interface MCInputViewController : InputController{
+    MCParticleSystem *particleEmitter;
+}
 //overload
 -(void)loadInterface;
 //selectors

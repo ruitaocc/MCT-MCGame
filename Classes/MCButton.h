@@ -14,6 +14,7 @@
 	SEL buttonDownAction;
 	SEL buttonUpAction;
 	CGRect screenRect;
+    MCPoint originScale;
 }
 
 @property (assign) id target;

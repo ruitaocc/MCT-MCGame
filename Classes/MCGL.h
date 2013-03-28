@@ -62,7 +62,7 @@ using namespace std;
 +(void)popMatrix;
 
 //Because of some differences on multiple operation between normal mathmatic operation and opengl, I retain it.
-void multiplyMatrices4by4OpenGL_FLOAT(float *result, const const float *matrix1, const float *matrix2);
+void multiplyMatrices4by4OpenGL_FLOAT(float *result, const  float *matrix1, const float *matrix2);
 
 //Because of some differences on multiple operation between normal mathmatic operation and opengl, I retain it.
 void multiplyMatrixByVector4by4OpenGL_FLOAT(float *resultvector, const float *matrix, const float *pvector);

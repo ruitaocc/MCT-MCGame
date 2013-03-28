@@ -8,6 +8,7 @@
 
 #import "MCMobileObject.h"
 #import "MCRay.h"
+#import "CubeFace.h"
 @class MCParticleSystem;
 @class MCCollider;
 enum direction {
@@ -20,6 +21,8 @@ enum direction {
     };
 @interface Cube :MCMobileObject{
     MCParticleSystem * particleEmitter;
+    NSMutableArray *cube6faces;
+    //CubeFace *faces[6];
     int index;
     direction O_X;
     direction O_Y;
@@ -28,11 +31,12 @@ enum direction {
 
 @property (assign) int index;
 @property (assign) direction O_X,O_Y,O_Z;
-
-- (id) init;
+@property (nonatomic,retain)NSMutableArray *cube6faces;
+-(id)init;
+- (id) initWithState:(NSDictionary*)states;
 - (void) dealloc;
 - (void)awake;
 - (void)update;
-
+-(void)render;
 
 @end

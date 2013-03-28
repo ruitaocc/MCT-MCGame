@@ -7,7 +7,15 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "MCSceneObject.h"
+@interface ActionQuad : MCSceneObject{
+    MCTexturedQuad *aQuad;
+    NSString * name;
+}
+@property (nonatomic,retain)NSString * name;
+-(id)initWithNstring:(NSString*)string;
 
-@interface ActionQuad : NSObject
-
+-(void)awake;
+- (void)update;
+-(void)dealloc;
 @end

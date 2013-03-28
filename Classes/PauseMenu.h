@@ -12,9 +12,10 @@
 #import "InputController.h"
 #import "CoordinatingController.h"
 typedef enum _PauseSelectType {
-    kGoOn  = 0,
-    kGoBack,
-    kRestart
+    kPauseSelect_GoOn  = 0,
+    kPauseSelect_GoBack,
+    kPauseSelect_Restart,
+    kPauseSelect_default
 } PauseSelectType;
 @interface PauseMenu : UATitledModalPanel{
     PauseSelectType pauseSelectType;

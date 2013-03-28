@@ -7,15 +7,18 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "MCConfiguration.h"
 @interface InputController : UIViewController{
 	NSMutableSet* touchEvents;
-  	UITouchPhase touchEventSate;
+  	FSM_Interaction_State fsm_Previous_State;
+    FSM_Interaction_State fsm_Current_State;
 	NSMutableArray * interfaceObjects;
+    int tapCount;
 }
-
+@property (assign) int tapCount;
 @property (retain) NSMutableSet* touchEvents;
-@property (assign) UITouchPhase touchEventSate;
+@property (assign) FSM_Interaction_State fsm_Previous_State;
+@property (assign) FSM_Interaction_State fsm_Current_State;
 //10
 - (CGRect)screenRectFromMeshRect:(CGRect)rect atPoint:(CGPoint)meshCenter;
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil ;

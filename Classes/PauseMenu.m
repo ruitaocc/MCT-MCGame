@@ -47,7 +47,7 @@
         // Height of the title view. Default = 40.0f
         [self setTitleBarHeight:40.0f];
        
-        pauseSelectType = kGoOn;
+        pauseSelectType = kPauseSelect_default;
         
         // The gradient style (Linear, linear reversed, radial, radial reversed, center highlight). Default = UAGradientBackgroundStyleLinear
         [[self titleBar] setGradientStyle:UAGradientBackgroundStyleLinear];
@@ -79,14 +79,14 @@
 	
 	[viewLoadedFromXib setFrame:self.contentView.bounds];
 }
-- (IBAction)goOnBtnPressed:(id)sender{pauseSelectType = kGoOn;
+- (IBAction)goOnBtnPressed:(id)sender{pauseSelectType = kPauseSelect_GoOn;
     if ([delegate respondsToSelector:@selector(shouldCloseModalPanel:)]) {
 		if ([delegate shouldCloseModalPanel:self]) {
 			UADebugLog(@"Closing using delegates for modalPanel: %@", self);
 			[self hide];
 		}
     }};
-- (IBAction)restartBtnPressed:(id)sender{pauseSelectType = kRestart;
+- (IBAction)restartBtnPressed:(id)sender{pauseSelectType = kPauseSelect_Restart;
     if ([delegate respondsToSelector:@selector(shouldCloseModalPanel:)]) {
 		if ([delegate shouldCloseModalPanel:self]) {
 			UADebugLog(@"Closing using delegates for modalPanel: %@", self);
@@ -101,7 +101,7 @@
 //    if ([inputCol respondsToSelector:@selector(mainMenuPlayBtnUp)]) {
 //        [inputCol performSelector:@selector(mainMenuPlayBtnUp)];
 //    }
-    pauseSelectType = kGoBack;
+    pauseSelectType = kPauseSelect_GoBack;
     // Using Delegates
 	if ([delegate respondsToSelector:@selector(shouldCloseModalPanel:)]) {
 		if ([delegate shouldCloseModalPanel:self]) {

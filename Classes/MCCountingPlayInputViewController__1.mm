@@ -39,10 +39,6 @@
     
     
     
-    
-    
-    CGFloat btnWidth = 220.0;
-    CGFloat btnHeight = 88.0;
 	
 	// mainMenuBtn
     //the texture 还没设计出来
@@ -180,9 +176,9 @@
     if (!puseMenu) {
         return;
     }
-    if ([puseMenu pauseSelectType]==kGoBack) {
+    if ([puseMenu pauseSelectType]==kPauseSelect_GoBack) {
           [self mainMenuBtnUp];
-    }else if([puseMenu pauseSelectType]==kGoOn){
+    }else if([puseMenu pauseSelectType]==kPauseSelect_GoOn){
         //停止计时器
         
         [[[CoordinatingController sharedCoordinatingController]currentController]startAnimation];

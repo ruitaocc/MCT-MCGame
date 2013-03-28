@@ -25,13 +25,14 @@ static MCMagicCube *magicCube;
     {
         if (!magicCube)
             magicCube = [[MCMagicCube alloc] init];
-        return magicCube;
     }
+    return magicCube;
+
 }
 
 + (void)setSharedMagicCube:(MCMagicCube *)mc{
     [mc retain];
-    [magicCube release];
+    //[magicCube release];
     magicCube = mc;
 }
 
@@ -123,14 +124,14 @@ static MCMagicCube *magicCube;
         switch (axis) {
             case X:
                 if (direction == CW) {
-                    FaceOrientationType tmp = orientationToMagicCubeFace[Front];
+                    FaceOrientationType tmp = (FaceOrientationType)orientationToMagicCubeFace[Front];
                     orientationToMagicCubeFace[Front] = orientationToMagicCubeFace[Down];
                     orientationToMagicCubeFace[Down] = orientationToMagicCubeFace[Back];
                     orientationToMagicCubeFace[Back] = orientationToMagicCubeFace[Up];
                     orientationToMagicCubeFace[Up] = tmp;
                 }
                 else{
-                    FaceOrientationType tmp = orientationToMagicCubeFace[Front];
+                    FaceOrientationType tmp = (FaceOrientationType)orientationToMagicCubeFace[Front];
                     orientationToMagicCubeFace[Front] = orientationToMagicCubeFace[Up];
                     orientationToMagicCubeFace[Up] = orientationToMagicCubeFace[Back];
                     orientationToMagicCubeFace[Back] = orientationToMagicCubeFace[Down];
@@ -139,13 +140,13 @@ static MCMagicCube *magicCube;
                 break;
             case Y:
                 if (direction == CW) {
-                    FaceOrientationType tmp = orientationToMagicCubeFace[Front];
+                    FaceOrientationType tmp = (FaceOrientationType)orientationToMagicCubeFace[Front];
                     orientationToMagicCubeFace[Front] = orientationToMagicCubeFace[Right];
                     orientationToMagicCubeFace[Right] = orientationToMagicCubeFace[Back];
                     orientationToMagicCubeFace[Back] = orientationToMagicCubeFace[Left];
                     orientationToMagicCubeFace[Left] = tmp;
                 } else {
-                    FaceOrientationType tmp = orientationToMagicCubeFace[Front];
+                    FaceOrientationType tmp = (FaceOrientationType)orientationToMagicCubeFace[Front];
                     orientationToMagicCubeFace[Front] = orientationToMagicCubeFace[Left];
                     orientationToMagicCubeFace[Left] = orientationToMagicCubeFace[Back];
                     orientationToMagicCubeFace[Back] = orientationToMagicCubeFace[Right];
@@ -154,13 +155,13 @@ static MCMagicCube *magicCube;
                 break;
             case Z:
                 if (direction == CW) {
-                    FaceOrientationType tmp = orientationToMagicCubeFace[Up];
+                    FaceOrientationType tmp = (FaceOrientationType)orientationToMagicCubeFace[Up];
                     orientationToMagicCubeFace[Up] = orientationToMagicCubeFace[Left];
                     orientationToMagicCubeFace[Left] = orientationToMagicCubeFace[Down];
                     orientationToMagicCubeFace[Down] = orientationToMagicCubeFace[Right];
                     orientationToMagicCubeFace[Right] = tmp;
                 } else {
-                    FaceOrientationType tmp = orientationToMagicCubeFace[Up];
+                    FaceOrientationType tmp = (FaceOrientationType)orientationToMagicCubeFace[Up];
                     orientationToMagicCubeFace[Up] = orientationToMagicCubeFace[Right];
                     orientationToMagicCubeFace[Right] = orientationToMagicCubeFace[Down];
                     orientationToMagicCubeFace[Down] = orientationToMagicCubeFace[Left];
@@ -395,7 +396,7 @@ static MCMagicCube *magicCube;
 }
 
 - (FaceOrientationType)magicCubeFaceInOrientation:(FaceOrientationType)orientation{
-    return orientationToMagicCubeFace[orientation];
+    return (FaceOrientationType)orientationToMagicCubeFace[orientation];
 }
 
 //encode the object
@@ -453,5 +454,22 @@ static MCMagicCube *magicCube;
     }
     return states;
 }
+- (NSArray *)getAxisStates{
+    NSMutableArray *states = [NSMutableArray arrayWithCapacity:26];
+    for (int z = 0; z < 3; z++) {
+        for (int y = 0; y < 3; y++) {
+            for (int x = 0; x < 3; x++) {
+                if (x != 1 || y != 1 || z != 1) {
+                    [states addObject:[magicCubies3D[x][y][z] getCubieColorOfEveryOrientation]];
+                }
+                else{
+                    [states addObject:[NSDictionary dictionary]];
+                }
+            }
+        }
+    }
+    return states;
+}
+
 
 @end
