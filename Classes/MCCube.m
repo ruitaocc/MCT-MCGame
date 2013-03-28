@@ -6,20 +6,32 @@
 //  Copyright (c) 2012年 Aha. All rights reserved.
 //
 
-#import "RCCube.h"
+#import "MCCubie.h"
 #import <math.h>
+#import "MCTransformUtil.h"
 
+#define kCoordinateXKey @"CoordinateX"
+#define kCoordinateYKey @"CoordinateY"
+#define kCoordinateZKey @"CoordinateZ"
+#define kSkinNumKey @"SkinNum"
+#define kTypeKey @"Type"
+#define kIdentityKey @"Identity"
+#define kSingleColorKeyFormat @"Color%d"
+#define kSingleOrientationKeyFormat @"Orientation%d"
 
-@implementation RCCube
+@implementation MCCubie
 
 @synthesize coordinateValue;
 @synthesize skinNum;
 @synthesize type;
+@synthesize identity;
 @synthesize faceColors;
 @synthesize orientations;
 
-- (id) initWithCoordinateValue : (struct Point3i)value{
+- (id)initRightCubeWithCoordinate:(struct Point3i)value{
     if(self = [self init]){
+        //before initiating, clear data
+        [self clearData];
         //detect the skin number and the cube type
         coordinateValue = value;
         skinNum = abs(coordinateValue.x) + abs(coordinateValue.y) + abs(coordinateValue.z);
@@ -89,9 +101,64 @@
             default:
                 break;
         }
+        //assign the identity
+        identity = coordinateValue.x + coordinateValue.y*3 + coordinateValue.z*9 + 13;
     }
     return self;
 }   //initial the cube's data by coordinate value
+
+- (id)redefinedWithCoordinate:(struct Point3i)value orderedColors:(NSArray *)colors orderedOrientations:(NSArray *)ors{
+    if(self = [self init]){
+        //before initiating, clear data
+        [self clearData];
+        //detect the skin number and the cube type
+        self.coordinateValue = value;
+        self.skinNum = [colors count];
+        switch (skinNum) {
+            case 1:
+                type = CentralCubie;
+                break;
+            case 2:
+                type = EdgeCubie;
+                break;
+            case 3:
+                type = CornerCubie;
+                break;
+            default:
+                break;
+        }
+        //allocate memory for the skin
+        self.faceColors = (FaceColorType*)malloc(skinNum * sizeof(FaceColorType));
+        self.orientations = (FaceOrientationType*)malloc(skinNum * sizeof(FaceOrientationType));
+        for (int i = 0; i < self.skinNum; i++) {
+            self.faceColors[i] = [[colors objectAtIndex:i] integerValue];
+            self.orientations[i] = [[ors objectAtIndex:i] integerValue];
+            switch (self.faceColors[i]) {
+                case UpColor:
+                    identity += 3;
+                    break;
+                case DownColor:
+                    identity -= 3;
+                    break;
+                case FrontColor:
+                    identity += 9;
+                    break;
+                case BackColor:
+                    identity -= 9;
+                    break;
+                case LeftColor:
+                    identity -= 1;
+                    break;
+                case RightColor:
+                    identity += 1;
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
+    return self;
+}
 
 - (void) dealloc{
     free(faceColors);
@@ -278,7 +345,7 @@
     }
 }   //shift the cube‘s data
 
-- (FaceColorType) faceColorOnDirection: (FaceOrientationType)orientation{
+- (FaceColorType) faceColorInOrientation: (FaceOrientationType)orientation{
     int i;
     for (i = 0; i < skinNum; i++) {
         if (orientation == orientations[i]) {
@@ -287,5 +354,107 @@
     }
     return NoColor;
 }   //get the faceColor in specified orientation
+
+//return wheather the face color on the specified orientation is the specified color
+- (BOOL)isFaceColor:(FaceColorType)color inOrientation:(FaceOrientationType)orientation{
+    int i;
+    for (i = 0; i < skinNum; i++) {
+        if (orientation == orientations[i]) {
+            return faceColors[i] == color;
+        }
+    }
+    return NO;
+}
+
+//clear all data, ready for re-initiate
+- (void)clearData{
+    coordinateValue.x = 0;
+    coordinateValue.y = 0;
+    coordinateValue.z = 0;
+    [self setSkinNum:0];
+    [self setType:NoType];
+    [self setIdentity:CenterBlank];
+    free(faceColors);
+    free(orientations);
+}
+
+//encode the object
+- (void)encodeWithCoder:(NSCoder *)aCoder{
+    [aCoder encodeInteger:coordinateValue.x forKey:kCoordinateXKey];
+    [aCoder encodeInteger:coordinateValue.y forKey:kCoordinateYKey];
+    [aCoder encodeInteger:coordinateValue.z forKey:kCoordinateZKey];
+    [aCoder encodeInteger:skinNum forKey:kSkinNumKey];
+    [aCoder encodeInteger:type forKey:kTypeKey];
+    [aCoder encodeInteger:identity forKey:kIdentityKey];
+    for (int i = 0; i < skinNum; i++) {
+        [aCoder encodeInteger:faceColors[i] forKey:[NSString stringWithFormat:kSingleColorKeyFormat, i]];
+        [aCoder encodeInteger:orientations[i] forKey:[NSString stringWithFormat:kSingleOrientationKeyFormat, i]];
+    }
+}
+
+//decode the object
+- (id)initWithCoder:(NSCoder *)aDecoder{
+    if (self = [super init]) {
+        coordinateValue.x = [aDecoder decodeIntegerForKey:kCoordinateXKey];
+        coordinateValue.y = [aDecoder decodeIntegerForKey:kCoordinateYKey];
+        coordinateValue.z = [aDecoder decodeIntegerForKey:kCoordinateZKey];
+        self.skinNum = [aDecoder decodeIntegerForKey:kSkinNumKey];
+        self.type = [aDecoder decodeIntegerForKey:kTypeKey];
+        self.identity = [aDecoder decodeIntegerForKey:kIdentityKey];
+        //alloc memory
+        faceColors = (FaceColorType*)malloc(skinNum * sizeof(FaceColorType));
+        orientations = (FaceOrientationType*)malloc(skinNum * sizeof(FaceOrientationType));
+        for (int i = 0; i < skinNum; i++) {
+            self.faceColors[i] = [aDecoder decodeIntegerForKey:[NSString stringWithFormat:kSingleColorKeyFormat, i]];
+            self.orientations[i] = [aDecoder decodeIntegerForKey:[NSString stringWithFormat:kSingleOrientationKeyFormat, i]];
+        }
+    }
+    return self;
+}
+
+
+- (NSDictionary *)getCubieColorOfEveryOrientation{
+    NSMutableDictionary *state = [NSMutableDictionary dictionaryWithCapacity:6];
+    for (int i = 0; i < 6; i++) {
+        [state setObject:[NSNumber numberWithInteger:NoColor] forKey:[NSNumber numberWithInteger:i]];
+    }
+    for (int i = 0; i < skinNum; i++) {
+        [state setObject:[NSNumber numberWithInteger:faceColors[i]] forKey:[NSNumber numberWithInteger:orientations[i]]];
+    }
+    return [NSDictionary dictionaryWithDictionary:state];
+}
+
+- (NSDictionary *)getCubieOrientationOfAxis{
+    NSMutableDictionary *state = [NSMutableDictionary dictionaryWithCapacity:3];
+    for (int i = 0; i < skinNum; i++) {
+        switch (faceColors[i]) {
+            case UpColor:
+                [state setObject:[NSNumber numberWithInteger:orientations[i]] forKey:[NSNumber numberWithInteger:Y]];
+                break;
+            case DownColor:
+                [state setObject:[NSNumber numberWithInteger:[MCTransformUtil getContraryOrientation:orientations[i]]] forKey:[NSNumber numberWithInteger:Y]];
+                break;
+            case FrontColor:
+                [state setObject:[NSNumber numberWithInteger:orientations[i]] forKey:[NSNumber numberWithInteger:Z]];
+                break;
+            case BackColor:
+                [state setObject:[NSNumber numberWithInteger:[MCTransformUtil getContraryOrientation:orientations[i]]] forKey:[NSNumber numberWithInteger:Z]];
+                break;
+            case LeftColor:
+                [state setObject:[NSNumber numberWithInteger:[MCTransformUtil getContraryOrientation:orientations[i]]] forKey:[NSNumber numberWithInteger:X]];
+                break;
+            case RightColor:
+                [state setObject:[NSNumber numberWithInteger:orientations[i]] forKey:[NSNumber numberWithInteger:X]];
+                break;
+            default:
+                break;
+        }
+        
+    }
+    return [NSDictionary dictionaryWithDictionary:state];
+}
+
+
+
 
 @end
