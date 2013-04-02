@@ -10,7 +10,7 @@
 #import "InputController.h"
 #import "MCParticleSystem.h"
 @interface MCInputViewController : InputController{
-    MCParticleSystem *particleEmitter;
+    //MCParticleSystem *particleEmitter;
 }
 //overload
 -(void)loadInterface;

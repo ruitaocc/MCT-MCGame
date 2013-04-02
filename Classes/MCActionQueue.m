@@ -36,7 +36,7 @@ NSString *actionname[45]={@"frontCW",@"frontCCW",@"front2CW",@"backCW",@"backCCW
     }
 }
 -(void)shiftRight{
-    if (currentActionIndex<[actionQuads count]) {
+    if (currentActionIndex<[actionQuads count]-1) {
         currentActionIndex++;
         [self setTranslation:self.translation];
     }

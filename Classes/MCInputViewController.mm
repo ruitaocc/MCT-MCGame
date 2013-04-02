@@ -90,7 +90,7 @@
 	[heroBoardBtn awake];
 	[interfaceObjects addObject:heroBoardBtn];
 	[heroBoardBtn release];
-    
+    /*
     particleEmitter = [[MCParticleSystem alloc]init];
     particleEmitter.emissionRange = MCRangeMake(300.0, 50.0);
     particleEmitter.sizeRange = MCRangeMake(8.0, 1.0);
@@ -105,7 +105,8 @@
     particleEmitter.emit = YES;
     [interfaceObjects addObject:particleEmitter];
     [particleEmitter release];
-    
+    */
+    [super loadInterface];
 }
 
 

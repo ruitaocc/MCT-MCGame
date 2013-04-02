@@ -12,7 +12,7 @@
 #import "RotateType.h"
 @interface MCNormalPlaySceneController : sceneController{
     //MCMagicCubeUIModelController* magicCubeUI;
-    //MCMagicCube * magicCube;
+    MCMagicCube * magicCube;
 }
 //@property (nonatomic,retain)MCMagicCubeUIModelController* magicCubeUI;
 @property (nonatomic,retain)MCMagicCube * magicCube;

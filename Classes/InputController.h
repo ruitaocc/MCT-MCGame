@@ -8,13 +8,17 @@
 
 #import <UIKit/UIKit.h>
 #import "MCConfiguration.h"
+#import "MCParticleSystem.h"
 @interface InputController : UIViewController{
 	NSMutableSet* touchEvents;
   	FSM_Interaction_State fsm_Previous_State;
     FSM_Interaction_State fsm_Current_State;
 	NSMutableArray * interfaceObjects;
+    MCParticleSystem *particleEmitter;
     int tapCount;
+   // BOOL isNeededReload;
 }
+//@property (nonatomic,assign) BOOL isNeededReload;
 @property (assign) int tapCount;
 @property (retain) NSMutableSet* touchEvents;
 @property (assign) FSM_Interaction_State fsm_Previous_State;

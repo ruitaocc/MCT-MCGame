@@ -515,6 +515,7 @@
 				A3E1ADB016A3B6090050B52D /* MainMenu */,
 				A3E1ADAC16A3B5EF0050B52D /* Scene1 */,
 				A3E1ADAF16A3B6070050B52D /* Scene2 */,
+				A3E1ADB116A3B62F0050B52D /* Scene3 */,
 				A3E1ADB216A3B6410050B52D /* scene4 */,
 				A3E1ADB316A3B64A0050B52D /* scene5 */,
 			);
@@ -731,7 +732,6 @@
 		A3E1ADAC16A3B5EF0050B52D /* Scene1 */ = {
 			isa = PBXGroup;
 			children = (
-				A3E1ADB116A3B62F0050B52D /* Scene3 */,
 				A3F828CB16EAC91500AC5EAF /* MCNormalPlaySceneController.h */,
 				A3F828CC16EAC91500AC5EAF /* MCNormalPlaySceneController.m */,
 				A3F828CE16EAC93300AC5EAF /* MCNormalPlayInputViewController.h */,

@@ -56,6 +56,8 @@
     double rest_fingerRotate_time;
     BOOL isNeededToAdjustment;
     BOOL isNeededToUpdateMagicCubeState;
+    //但转过的角度时180时，需要更新魔方数据模型两次
+    BOOL isNeededToUpadteTwice;
     //当前整个魔方索引的状态，存储索引值
     Cube * MagicCubeIndexState[27];
     

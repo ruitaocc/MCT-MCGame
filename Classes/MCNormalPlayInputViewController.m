@@ -20,8 +20,6 @@
 {
 	if (interfaceObjects == nil) interfaceObjects = [[NSMutableArray alloc] init];
 	[interfaceObjects removeAllObjects];
-    
-    
     NSString *counterName[10] = {@"zero",@"one",@"two",@"three",@"four",@"five",@"six",@"seven",@"eight",@"nine"};
     stepcounter = [[MCMultiDigitCounter alloc]initWithNumberOfDigit:3 andKeys:counterName];
     [stepcounter setScale : MCPointMake(135, 72, 1.0)];
@@ -43,8 +41,8 @@
     
     //add action queue
     NSMutableArray *actionname = [[NSMutableArray alloc]init];
-    NSString *names[6] = {@"frontCW",@"frontCCW",@"front2CW",@"frontCW",@"frontCCW",@"front2CW"};
-    for (int i=0; i<5; i++) {
+    NSString *names[45]={@"frontCW",@"frontCCW",@"front2CW",@"backCW",@"backCCW",@"back2CW",@"rightCW",@"rightCCW",@"right2CW",@"leftCW",@"leftCCW",@"left2CW",@"upCW",@"upCCW",@"up2CW",@"downCW",@"downCCW",@"down2CW",@"xCW",@"xCCW",@"x2CW",@"yCW",@"yCCW",@"y2CW",@"zCW",@"zCCW",@"z2CW",@"frontTwoCW",@"frontTwoCCW",@"frontTwo2CW",@"backTwoCW",@"backTwoCCW",@"backTwo2CW",@"rightTwoCW",@"rightTwoCCW",@"rightTwo2CW",@"leftTwoCW",@"leftTwoCCW",@"leftTwo2CW",@"upTwoCW",@"upTwoCCW",@"upTwo2CW",@"downTwoCW",@"downTwoCCW",@"downTwo2CW"};
+    for (int i=5; i<17; i++) {
         [actionname addObject:names[i]];
     }
     actionQueue = [[MCActionQueue alloc]initWithActionList:actionname];
@@ -130,8 +128,13 @@
 	[interfaceObjects addObject:redoCommand];
 	[redoCommand release];
     
+    [super loadInterface];
     //基本界面加载完后，弹出是否加载上次未完成的任务
-    [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(askReload) userInfo:nil repeats:NO];
+    //if (!isNeededReload) {
+        [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(askReload) userInfo:nil repeats:NO];
+    //}
+    
+    
     
 }
 #pragma mark - queue shift

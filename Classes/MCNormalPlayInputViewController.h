@@ -20,11 +20,11 @@
     PauseMenu *pauseMenuView;
     MCActionQueue *actionQueue;
 }
+
 @property (nonatomic,retain) MCMultiDigitCounter *stepcounter;
 @property (nonatomic,retain) MCTimer * timer;
 //overload
 -(void)loadInterface;
-
 //interface action selectors
 //撤销
 -(void)previousSolutionBtnUp;

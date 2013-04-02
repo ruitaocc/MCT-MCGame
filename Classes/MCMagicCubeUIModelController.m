@@ -72,6 +72,7 @@
         select_trackballRadius = 260;
         isAddStepWhenUpdateState = YES;
         rrrr = 0;
+        isNeededToUpadteTwice = NO;
         undoManger = [[NSUndoManager alloc]init];
         //magicCube = [MCMagicCube getSharedMagicCube];
     }
@@ -310,6 +311,11 @@
             }
 
             [self updateState];
+            //当转过的角度为180时，需要更新模型两次
+            if(isNeededToUpadteTwice){
+                [self updateState];
+                isNeededToUpadteTwice = NO;
+            }
             //归零
             rest_rotate_time = 0;
             
@@ -479,6 +485,11 @@
                     }
                 }
                 [self updateState];
+                //当转过的角度为180时，需要更新模型两次
+                if(isNeededToUpadteTwice){
+                    [self updateState];
+                    isNeededToUpadteTwice = NO;
+                }
             }
             fingerRotate_angle = 0;
             isNeededToAdjustment = NO;
@@ -658,7 +669,8 @@
                     
                     double alpha = ThetaBetweenV1andV2(start,end);
                     fingerRotate_angle = alpha*180/Pi; //checked
-                    //NSLog(@"fingerRotate_angle2:%f",fingerRotate_angle);
+                    //NSLog("fingerRotate_angle%f",fingerRotate_angle);
+                    NSLog(@"fingerRotate_angle:%f",fingerRotate_angle);
                     Quaternion delta = Quaternion::CreateFromVectors(start, end);
                     for (int i=0;i<9;i++) {
                         if (current_rotate_layer!=1) {
@@ -772,9 +784,11 @@
             //CGPoint location = [touch locationInView:view];
             CGPoint location = [touch previousLocationInView:view];
             vec2 lastPoint = vec2(location.x,location.y);
-            vec2 middle = vec2((firstThreePoint[0].x+lastPoint.x)/2,
-                                 (firstThreePoint[0].y+lastPoint.y)/2);
-            
+            //vec2 middle = vec2((firstThreePoint[0].x+lastPoint.x)/2,
+             //                    (firstThreePoint[0].y+lastPoint.y)/2);
+            //NSLog(@"Point22[0]%f %f ",firstThreePoint[0].x,firstThreePoint[0].y);
+            //NSLog(@"Point22[1]%f %f ",middle.x,middle.y);
+            //NSLog(@"Point22[2]%f %f ",lastPoint.x,lastPoint.y);
             float xyz[9] = {1.0,0.0,0.0,0.0,1.0,0.0,0.0,0.0,1.0};
             Cube * tmpcuble = [array27Cube objectAtIndex:13];
             GLfloat * XYZ = VertexesArray_Matrix_Multiply(xyz, 3, 3, tmpcuble.matrix);
@@ -783,11 +797,18 @@
             vec3 oz = vec3(XYZ[6],XYZ[7],XYZ[8]);
             
             vec3 firstv = [self MapToLayerCenter:firstThreePoint[0]];
-            vec3 middlev =[self MapToLayerCenter:middle];
+            //vec3 middlev =[self MapToLayerCenter:middle];
             vec3 lastv = [self MapToLayerCenter:lastPoint];
+            vec3 middlev = [self middleOfV1:firstv V2:lastv];
             
+            //NSLog(@"Point33[0]%f %f %f ",firstv.x,firstv.y,firstv.z);
+            //NSLog(@"Point33[1]%f %f %f ",middlev.x,middlev.y,middlev.z);
+            //NSLog(@"Point33[2]%f %f %f ",lastv.x,lastv.y,lastv.z);
             //标记启动自动调整
             //double angle = fingerRotate_angle*360/Pi;
+            if (fingerRotate_angle>135) {
+                isNeededToUpadteTwice = YES;
+            }
             int tmpvar = int(fingerRotate_angle)/90;
             fingerRotate_angle_mod90 = fingerRotate_angle - tmpvar*90.0;
             if (fingerRotate_angle_mod90 > 45.0) {
@@ -807,6 +828,7 @@
             }
             if (current_rotate_axis == Y) {
                 cosa = corssv1v2.Dot(oy)/(corssv1v2.Module()*oy.Module());
+                //NSLog(@"cosay:%f",cosa);
             }
             if (current_rotate_axis ==Z) {
                 cosa = corssv1v2.Dot(oz)/(corssv1v2.Module()*oz.Module());
@@ -842,20 +864,20 @@
                         commandaxis=CCW;
                     }
                 }
-                
                 NSInvocation *doinvocation = [self createInvocationOnAxis:current_rotate_axis onLayer:current_rotate_layer inDirection:commandaxis];
-                
+                                
                 if(commandaxis==CCW){
                     commandaxis=CW;
                 }else {
                     commandaxis=CCW;
                 }
-                
-
-                
                 NSInvocation *undoinvocation = [self createInvocationOnAxis:current_rotate_axis onLayer:current_rotate_layer inDirection:commandaxis];
-                
-                [self addInvocation:doinvocation withUndoInvocation:undoinvocation];
+               [self addInvocation:doinvocation withUndoInvocation:undoinvocation];
+                //当旋转180度
+                if (isNeededToUpadteTwice) {
+                    [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(updatetweice) userInfo:self repeats:NO];
+                }
+
             }
             //标记手动转动结束
             isNeededToAdjustment = YES;
@@ -928,6 +950,25 @@
             break;
     }
 }
+-(void)updatetweice{
+    LayerRotationDirectionType commandaxis = current_rotate_direction;
+    if (fingerRotate_angle>90&&fingerRotate_angle_mod90<45) {
+        if(commandaxis==CCW){
+            commandaxis=CW;
+        }else {
+            commandaxis=CCW;
+        }
+    }
+    NSInvocation *doinvocation = [self createInvocationOnAxis:current_rotate_axis onLayer:current_rotate_layer inDirection:commandaxis];
+    
+    if(commandaxis==CCW){
+        commandaxis=CW;
+    }else {
+        commandaxis=CCW;
+    }
+    NSInvocation *undoinvocation = [self createInvocationOnAxis:current_rotate_axis onLayer:current_rotate_layer inDirection:commandaxis];
+    [self addInvocation:doinvocation withUndoInvocation:undoinvocation];
+};
 
 -(vec3)MapToSphere:(vec2 )touchpoint
 {
@@ -1003,10 +1044,15 @@
     //NSLog(@"layer_center:  %f ,%f ,%f",layer_center.x,layer_center.y,layer_center.z);
     vec3 crossed = trackVecter.Cross(layer_direction_N);
     vec3 mapped = layer_direction_N.Cross(crossed);
-    float ratio = sqrt((mapped.x*mapped.x +mapped.y*mapped.y+mapped.z*mapped.z)/(radius*radius));
+    //vec3 mapped = vec3(map.x,map.y,fabs(map.z));
+    float ratio = sqrt((mapped.x*mapped.x +mapped.y*mapped.y+ mapped.z*mapped.z)/(radius*radius));
     return (mapped / ratio) / radius;
 }
-
+-(vec3)middleOfV1:(vec3)v1 V2:(vec3)v2{
+    vec3 add = v1+v2;
+    add.Normalize();
+    return add;
+}
 -(float)AngleV0V1withV: (vec3)v V0:(vec3) v0 V1:(vec3) v1{
     vec3 v0Xv1 = v0.Cross(v1);
     float d = abs(v0Xv1.Dot(v))/v0Xv1.Module();
@@ -1076,6 +1122,7 @@ double ThetaBetweenV1andV2(const vec3& v1,const vec3& v2)
         [self stepCounterMinus];
         isAddStepWhenUpdateState = true;
     }
+    //通知场景控制器，更新数据模型。
     RotateType * rotateType = [[RotateType alloc]init];
     [rotateType setRotate_axis:current_rotate_axis];
     [rotateType setRotate_direction:current_rotate_direction];

@@ -71,6 +71,8 @@
     [magicCubeUI setStepcounterAddAction:@selector(stepcounterAdd)];
     [magicCubeUI setStepcounterMinusAction:@selector(stepcounterMinus)];
     [self addObjectToScene:magicCubeUI];
+    //[inputController setIsNeededReload:YES];
+    //[(MCNormalPlayInputViewController*)inputController reloadInterface];
     //[magicCubeUI release];
 }
 
