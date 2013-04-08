@@ -1,8 +1,8 @@
 #pragma once
 #include <cmath>
 using namespace std;
-const float Pi = 4 * std::atan(1.0f);
-const float TwoPi = 2 * Pi;
+const double Pi = 4 * std::atan(1.0f);
+const double TwoPi = 2 * Pi;
 
 template <typename T>
 struct Vector2 {

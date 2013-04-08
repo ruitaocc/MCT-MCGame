@@ -23,9 +23,9 @@
         if (array27Cube == nil) array27Cube = [[NSMutableArray alloc] init];	
         isAutoRotate = NO;
         //魔方整体三个参数
-        scale = MCPointMake(90,90,90);
+        scale = MCPointMake(84,84,84);
         translation = MCPointMake(0,0,0);
-        rotation = MCPointMake(0,0,0);
+        rotation = MCPointMake(30,30,0);
         MCPoint sub_scale  = MCPointMake(scale.x/3, scale.y/3, scale.z/3);
         for (int  i = 0; i<9; i++) {
             layerPtr[i] = nil;
@@ -86,9 +86,9 @@
         //magicCube = [MCMagicCube getSharedMagicCube];
         isAutoRotate = NO;
         //魔方整体三个参数
-        scale = MCPointMake(90,90,90);
+        scale = MCPointMake(84,84,84);
         translation = MCPointMake(0,0,0);
-        rotation = MCPointMake(0,0,0);
+        rotation = MCPointMake(30,30,0);
         MCPoint sub_scale  = MCPointMake(scale.x/3, scale.y/3, scale.z/3);
         for (int  i = 0; i<9; i++) {
             layerPtr[i] = nil;
@@ -670,7 +670,7 @@
                     double alpha = ThetaBetweenV1andV2(start,end);
                     fingerRotate_angle = alpha*180/Pi; //checked
                     //NSLog("fingerRotate_angle%f",fingerRotate_angle);
-                    NSLog(@"fingerRotate_angle:%f",fingerRotate_angle);
+                    //NSLog(@"fingerRotate_angle:%f",fingerRotate_angle);
                     Quaternion delta = Quaternion::CreateFromVectors(start, end);
                     for (int i=0;i<9;i++) {
                         if (current_rotate_layer!=1) {

@@ -37,6 +37,9 @@
     
     Quaternion quaRotation;
     Quaternion quaPreviousRotation;
+    //用来进行校验的四元数
+    Quaternion start_quaRotation;
+    Quaternion finish_quaRotation;
 	MCMesh * mesh;
 	
 	BOOL active;
@@ -61,6 +64,8 @@
 //@property (assign) Quaternion m_orientation;
 @property (assign) Quaternion quaRotation;
 @property (assign) Quaternion quaPreviousRotation;
+@property (assign) Quaternion start_quaRotation;
+@property (assign) Quaternion finish_quaRotation;
 @property (assign) BOOL active;
 @property (assign) CGRect meshBounds;
 - (id) init;
