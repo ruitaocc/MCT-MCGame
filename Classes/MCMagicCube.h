@@ -13,11 +13,11 @@
 
 @property (retain, nonatomic) NSDictionary *tagsMappingToColors;
 
-//get the shared magic cube object
-+ (MCMagicCube *)getSharedMagicCube;
+//get a new magic cube
++ (MCMagicCube *)magicCube;
 
-//set the shared magic cube object
-+ (void)setSharedMagicCube:(MCMagicCube *)mc;
+//get a saved magic cube from an archived file
++ (MCMagicCube *)unarchiveMagicCubeWithFile:(NSString *)path;
 
 //rotate operation with axis, layer, direction
 - (void)rotateOnAxis:(AxisType)axis onLayer:(int)layer inDirection:(LayerRotationDirectionType)direction;
@@ -40,6 +40,9 @@
 //get the state of cubies
 //every state in the "format" axis-orientation
 - (NSArray *)getAxisStatesOfAllCubie;
-- (NSArray *)getAxisStates;
+
+//get the state of cubies
+//every state in the "format" orientation-face color
+- (NSArray *)getColorInOrientationsOfAllCubie;
 
 @end

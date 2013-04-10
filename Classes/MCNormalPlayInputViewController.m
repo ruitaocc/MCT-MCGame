@@ -15,11 +15,13 @@
 @implementation MCNormalPlayInputViewController
 @synthesize stepcounter;
 @synthesize timer;
-
+@synthesize actionQueue;
 -(void)loadInterface
 {
 	if (interfaceObjects == nil) interfaceObjects = [[NSMutableArray alloc] init];
 	[interfaceObjects removeAllObjects];
+    
+    isShowQueue = NO;
     NSString *counterName[10] = {@"zero",@"one",@"two",@"three",@"four",@"five",@"six",@"seven",@"eight",@"nine"};
     stepcounter = [[MCMultiDigitCounter alloc]initWithNumberOfDigit:3 andKeys:counterName];
     [stepcounter setScale : MCPointMake(135, 72, 1.0)];
@@ -41,14 +43,17 @@
     
     //add action queue
     NSMutableArray *actionname = [[NSMutableArray alloc]init];
-    NSString *names[45]={@"frontCW",@"frontCCW",@"front2CW",@"backCW",@"backCCW",@"back2CW",@"rightCW",@"rightCCW",@"right2CW",@"leftCW",@"leftCCW",@"left2CW",@"upCW",@"upCCW",@"up2CW",@"downCW",@"downCCW",@"down2CW",@"xCW",@"xCCW",@"x2CW",@"yCW",@"yCCW",@"y2CW",@"zCW",@"zCCW",@"z2CW",@"frontTwoCW",@"frontTwoCCW",@"frontTwo2CW",@"backTwoCW",@"backTwoCCW",@"backTwo2CW",@"rightTwoCW",@"rightTwoCCW",@"rightTwo2CW",@"leftTwoCW",@"leftTwoCCW",@"leftTwo2CW",@"upTwoCW",@"upTwoCCW",@"upTwo2CW",@"downTwoCW",@"downTwoCCW",@"downTwo2CW"};
+    NSString *names[45]={@"",@"frontCCW",@"front2CW",@"backCW",@"backCCW",@"back2CW",@"rightCW",@"rightCCW",@"right2CW",@"leftCW",@"leftCCW",@"left2CW",@"upCW",@"upCCW",@"up2CW",@"downCW",@"downCCW",@"down2CW",@"xCW",@"xCCW",@"x2CW",@"yCW",@"yCCW",@"y2CW",@"zCW",@"zCCW",@"z2CW",@"frontTwoCW",@"frontTwoCCW",@"frontTwo2CW",@"backTwoCW",@"backTwoCCW",@"backTwo2CW",@"rightTwoCW",@"rightTwoCCW",@"rightTwo2CW",@"leftTwoCW",@"leftTwoCCW",@"leftTwo2CW",@"upTwoCW",@"upTwoCCW",@"upTwo2CW",@"downTwoCW",@"downTwoCCW",@"downTwo2CW"};
+    /*
     for (int i=5; i<17; i++) {
         [actionname addObject:names[i]];
-    }
+    }*/
+    [actionname addObject:names[1]];
+
     actionQueue = [[MCActionQueue alloc]initWithActionList:actionname];
     [actionQueue setScale : MCPointMake(32, 32, 1.0)];
     [actionQueue setTranslation :MCPointMake(0, 320, 0.0)];
-    [actionQueue setActive:YES];
+    [actionQueue setActive:NO];
     [actionQueue awake];
     [interfaceObjects addObject:actionQueue];
 
@@ -102,7 +107,22 @@
 	[undoCommand awake];
 	[interfaceObjects addObject:undoCommand];
 	[undoCommand release];
+    
+    
+    //提示按钮
+    MCTexturedButton * tips = [[MCTexturedButton alloc] initWithUpKey:@"tipsBtnUp" downKey:@"tipBtnUp"];
+	tips.scale = MCPointMake(110, 55, 1.0);
+	tips.translation = MCPointMake(450, 320.0, 0.0);
+	tips.target = self;
+	tips.buttonDownAction = @selector(tipsBtnDown);
+	tips.buttonUpAction = @selector(tipsBtnUp);
+	tips.active = YES;
+	[tips awake];
+	[interfaceObjects addObject:tips];
+	[tips release];
 
+    
+    
     //暂停
 	MCTexturedButton * pause = [[MCTexturedButton alloc] initWithUpKey:@"pauseSolutionBtnUp" downKey:@"pauseSolutionBtnUp"];
 	pause.scale = MCPointMake(40, 40, 1.0);
@@ -137,6 +157,17 @@
     
     
 }
+-(void)tipsBtnUp{
+    if (!isShowQueue) {
+        isShowQueue = YES;
+        self.actionQueue.active = YES;
+    }else{
+        isShowQueue = NO;
+        self.actionQueue.active = NO;
+    }
+};
+-(void)tipsBtnDown{};
+
 #pragma mark - queue shift
 -(void)shiftLeftBtnDown{}
 -(void)shiftLeftBtnUp{[actionQueue shiftLeft];}
@@ -237,21 +268,19 @@
             //重新加载上一次；
             //更新数据模型
             NSString *path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
-            NSString *fileName = [path stringByAppendingPathComponent:TmpMagicCubeData];
             
-            //[[MCPlayHelper getSharedPlayHelper] setMagicCube:nil];
-            
-            [MCMagicCube setSharedMagicCube:[NSKeyedUnarchiver unarchiveObjectWithFile:fileName]];
+            NSString *filePath = [path stringByAppendingPathComponent:TmpMagicCubeData];
             
             MCNormalPlaySceneController *c = [MCNormalPlaySceneController sharedNormalPlaySceneController ];
-            [c setMagicCube:[MCMagicCube getSharedMagicCube]];
-            //
-            [[MCPlayHelper getSharedPlayHelper] refreshMagicCube];
-            [[MCPlayHelper getSharedPlayHelper] setCheckStateFromInit:YES];
-            [[MCPlayHelper getSharedPlayHelper] checkState];
-            [[MCPlayHelper getSharedPlayHelper] setCheckStateFromInit:NO];
+            c.magicCube=[MCMagicCube unarchiveMagicCubeWithFile:filePath];
+            c.playHelper=[MCPlayHelper playerHelperWithMagicCube:[c magicCube]];
+
+            //[c.playHelper setMagicCube:c.magicCube];
+            
+
             //更新UI模型
             [c reloadLastTime];
+            NSLog(@"dd");
         }else if([askReloadView askReloadType]==kAskReloadView_Reload){
             //Default
             [timer startTimer];

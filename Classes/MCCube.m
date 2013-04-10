@@ -108,7 +108,8 @@
 }   //initial the cube's data by coordinate value
 
 - (id)redefinedWithCoordinate:(struct Point3i)value orderedColors:(NSArray *)colors orderedOrientations:(NSArray *)ors{
-    if(self = [self init]){
+    
+    if([self init]){
         //before initiating, clear data
         [self clearData];
         //detect the skin number and the cube type
@@ -130,44 +131,34 @@
         //allocate memory for the skin
         self.faceColors = (FaceColorType*)malloc(skinNum * sizeof(FaceColorType));
         self.orientations = (FaceOrientationType*)malloc(skinNum * sizeof(FaceOrientationType));
+        int tmpIdentity = identity;
         for (int i = 0; i < self.skinNum; i++) {
             self.faceColors[i] = (FaceColorType)[[colors objectAtIndex:i] integerValue];
             self.orientations[i] = (FaceOrientationType)[[ors objectAtIndex:i] integerValue];
             switch (self.faceColors[i]) {
-                case UpColor:{
-                    int i2 = (int)identity;
-                    i2+=3;
-                    identity = (ColorCombinationType)i2;
-                    break;}
-                case DownColor:{
-                    int i3 = (int)identity;
-                    i3-=3;
-                    identity = (ColorCombinationType)i3;
-                    break;}
-                case FrontColor:{
-                    int i4 = (int)identity;
-                    i4+=9;
-                    identity = (ColorCombinationType)i4;
-                    break;}
-                case BackColor:{
-                    int i5 = (int)identity;
-                    i5-=9;
-                    identity = (ColorCombinationType)i5;
-                    break;}
-                case LeftColor:{
-                    int i6 = (int)identity;
-                    i6-=1;
-                    identity = (ColorCombinationType)i6;
-                    break;}
-                case RightColor:{
-                    int i7 = (int)identity;
-                    i7+=1;
-                    identity = (ColorCombinationType)i7;
-                    break;}
+                case UpColor:
+                    tmpIdentity += 3;
+                    break;
+                case DownColor:
+                    tmpIdentity -= 3;
+                    break;
+                case FrontColor:
+                    tmpIdentity += 9;
+                    break;
+                case BackColor:
+                    tmpIdentity -= 9;
+                    break;
+                case LeftColor:
+                    tmpIdentity -= 1;
+                    break;
+                case RightColor:
+                    tmpIdentity += 1;
+                    break;
                 default:
                     break;
             }
         }
+        identity = (ColorCombinationType)tmpIdentity;
     }
     return self;
 }
@@ -425,7 +416,7 @@
 }
 
 
-- (NSDictionary *)getCubieColorOfEveryOrientation{
+- (NSDictionary *)getCubieColorInOrientations{
     NSMutableDictionary *state = [NSMutableDictionary dictionaryWithCapacity:6];
     for (int i = 0; i < 6; i++) {
         [state setObject:[NSNumber numberWithInteger:NoColor] forKey:[NSNumber numberWithInteger:i]];

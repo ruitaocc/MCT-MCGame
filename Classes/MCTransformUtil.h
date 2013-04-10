@@ -13,4 +13,16 @@
 
 + (FaceOrientationType)getContraryOrientation:(FaceOrientationType)orientation;
 
++ (NSString *)getRotationTagFromSingmasterNotation:(SingmasterNotation)notation;
+
++ (SingmasterNotation)getSingmasterNotationFromAxis:(AxisType)axis layer:(int)layer direction:(LayerRotationDirectionType)direction;
+
++ (SingmasterNotation)getContrarySingmasterNotation:(SingmasterNotation)notation;
+
+//all situations but not Bw+Bw=Bw2...
++ (BOOL)isSingmasterNotation:(SingmasterNotation)first andSingmasterNotation:(SingmasterNotation)second equalTo:(SingmasterNotation)target;
+
+//all situations but not Bw+Bw=Bw2...
++ (BOOL)isSingmasterNotation:(SingmasterNotation)part PossiblePartOfSingmasterNotation:(SingmasterNotation)target;
+
 @end

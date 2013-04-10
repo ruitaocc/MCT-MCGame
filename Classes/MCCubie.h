@@ -37,6 +37,6 @@
 - (NSDictionary *)getCubieOrientationOfAxis;
 
 //return state in the "format" orientation-facecolor
-- (NSDictionary *)getCubieColorOfEveryOrientation;
+- (NSDictionary *)getCubieColorInOrientations;
 
 @end

@@ -75,7 +75,6 @@
         //release tmp object
         [self tokenRelease];
         [mutableElements release];
-        
     }
     return self;
 }
@@ -195,6 +194,7 @@
     MCTreeNode * node = nil;
 	switch (token) {
         case Home:
+        {
             node = [[MCTreeNode alloc] initNodeWithType:PatternNode];
             node.value = Home;
             [self getToken];
@@ -235,8 +235,10 @@
                 break;
             }
             [self getToken];
+        }
             break;
         case Check:
+        {
             node = [[MCTreeNode alloc] initNodeWithType:PatternNode];
             node.value = Check;
             [self getToken];
@@ -329,8 +331,10 @@
                 [child release];
             }
             [self getToken];
+        }
             break;
         case CubiedBeLocked:
+        {
             node = [[MCTreeNode alloc] initNodeWithType:PatternNode];
             node.value = CubiedBeLocked;
             [self getToken];
@@ -354,8 +358,10 @@
                 return [node autorelease];
             }
             [self getToken];
+        }
             break;
         case Token_LeftParentheses:
+        {
             [self getToken];
             node = [self parseBoolExp];
             //test if ')' has been lost
@@ -364,12 +370,15 @@
                 return [node autorelease];
             }
             [self getToken];
+        }
             return node;
         case Token_Not:
+        {
             node = [[MCTreeNode alloc] initNodeWithType:ExpNode];
             node.value = Not;
             [self getToken];
             [node addChild:[self parseBfactor]];
+        }
             break;
         default:
             [self errorOccur:@"unexpected token."];
@@ -472,9 +481,9 @@
             [self getToken];
         }
             break;
-        case LockedCubie:
+        case lockedCubie:
             node = [[MCTreeNode alloc] initNodeWithType:InformationNode];
-            node.value = LockedCubie;
+            node.value = lockedCubie;
             [self getToken];
             //test if '(' has been lost
             if (token != Token_LeftParentheses) {
@@ -622,6 +631,7 @@
     MCTreeNode * node = nil;
 	switch (token) {
         case Rotate:
+        {
             node = [[MCTreeNode alloc] initNodeWithType:ActionNode];
             node.value = Rotate;
             [self getToken];
@@ -632,8 +642,10 @@
                 [tmp release];
             }
             [self getToken];
+        }
             break;
         case FaceToOrientation:
+        {
             node = [[MCTreeNode alloc] initNodeWithType:ActionNode];
             node.value = token;
             [self getToken];        //delete "FaceTo"|"MoveTo"
@@ -651,8 +663,10 @@
             [childElement release];
             [self getToken];        //delete second element
             [self getToken];        //delete ")"
+        }
             break;
         case LockCubie:
+        {
             node = [[MCTreeNode alloc] initNodeWithType:ActionNode];
             node.value = LockCubie;
             [self getToken];
@@ -678,8 +692,10 @@
                 [self getToken];
             }
             [self getToken];
+        }
             break;
         case UnlockCubie:
+        {
             node = [[MCTreeNode alloc] initNodeWithType:ActionNode];
             node.value = UnlockCubie;
             [self getToken];
@@ -692,12 +708,15 @@
                 [self getToken];
             }
             [self getToken];
+        }
             break;
         case Token_LeftParentheses :
+        {
             [self getToken];
             node = [self parseItem];
             [self getToken];
             return node;
+        }
             break;
         case END_TOKEN:
             return nil;
@@ -803,9 +822,9 @@
             [self getToken];
         }
             break;
-        case LockedCubie:
+        case lockedCubie:
             node = [[MCTreeNode alloc] initNodeWithType:InformationNode];
-            node.value = LockedCubie;
+            node.value = lockedCubie;
             [self getToken];
             //test if '(' has been lost
             if (token != Token_LeftParentheses) {

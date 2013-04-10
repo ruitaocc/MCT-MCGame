@@ -100,7 +100,20 @@ NSString *actionname[45]={@"frontCW",@"frontCCW",@"front2CW",@"backCW",@"backCCW
     [quad release];
 
 }
-
+-(void)insertQueueCurrentIndexWithNmaeList:(NSArray*)insertlist{
+    for (int i =0; i<[insertlist count]; i++) {
+        NSString *quadname = [insertlist objectAtIndex:i];
+        ActionQuad * actionQ = [[ActionQuad alloc]initWithNstring:quadname];
+        [actionQ setScale:MCPointMake(10, 0, 0)];
+        [actionQ setTranslation:MCPointMake(10, 0, 0)];
+        [self insertQueueIndex:currentActionIndex withQuad:actionQ];
+        [actionQ release];
+    }
+}
+-(void)removeAllActions{
+    [actionQuads removeAllObjects];
+    currentActionIndex =0;
+}
 - (void)awake{
     [currentArrow awake];
     for (ActionQuad* object in actionQuads) {
@@ -130,7 +143,9 @@ NSString *actionname[45]={@"frontCW",@"frontCCW",@"front2CW",@"backCW",@"backCCW
     [super update];
 }
 -(void)render{
-    [currentArrow render];
+    if ([actionQuads count]!=0) {
+        [currentArrow render];
+    }
     [actionQuads makeObjectsPerformSelector:@selector(render)];
     [super render];
 };

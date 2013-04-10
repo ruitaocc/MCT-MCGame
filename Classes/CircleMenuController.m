@@ -138,7 +138,7 @@ centerButtonBackgroundImageName:kKYICircleMenuCenterButtonBackground];
 
     // Add buttons to |ballMenu_|, set it's origin frame to center
     NSString * imageName = nil;
-    for (int i = 0; i < buttonCount_; ++i) {
+    for (int i = 1; i <= buttonCount_; ++i) {
         UIButton * button = [[UIButton alloc] initWithFrame:buttonOriginFrame_];
         [button setOpaque:NO];
         [button setTag:i];

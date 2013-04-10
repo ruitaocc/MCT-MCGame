@@ -20,6 +20,9 @@
 -(void)enQueue:(ActionQuad*)quad;
 -(void)deQueue:(ActionQuad*)quad;
 -(void)insertQueueIndex:(NSInteger)index withQuad:(ActionQuad*)quad;
+-(void)insertQueueCurrentIndexWithNmaeList:(NSArray*)insertlist;
+
+-(void)removeAllActions;
 
 -(void)shiftLeft;
 -(void)shiftRight;

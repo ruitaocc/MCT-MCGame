@@ -14,26 +14,15 @@
 @implementation MCMagicCube{
     MCCubie *magicCubies3D[3][3][3];
     MCCubie *magicCubiesList[27];
-    NSInteger orientationToMagicCubeFace[6];
+    FaceOrientationType orientationToMagicCubeFace[6];
 }
 
-static MCMagicCube *magicCube;
-
-+ (MCMagicCube *)getSharedMagicCube{
-    
-    @synchronized(self)
-    {
-        if (!magicCube)
-            magicCube = [[MCMagicCube alloc] init];
-    }
-    return magicCube;
-
++ (MCMagicCube *)magicCube{
+    return [[[MCMagicCube alloc] init] autorelease];
 }
 
-+ (void)setSharedMagicCube:(MCMagicCube *)mc{
-    [mc retain];
-    //[magicCube release];
-    magicCube = mc;
++ (MCMagicCube *)unarchiveMagicCubeWithFile:(NSString *)path{
+    return [NSKeyedUnarchiver unarchiveObjectWithFile:path];
 }
 
 - (id)init{
@@ -57,7 +46,7 @@ static MCMagicCube *magicCube;
         }
         for (int i  = 0; i < 6; i++) {
             //At the begining, the orientation and the magic cube face orientation is same
-            orientationToMagicCubeFace[i] = i;
+            orientationToMagicCubeFace[i] = (FaceOrientationType)i;
         }
     }
     return self;
@@ -124,14 +113,14 @@ static MCMagicCube *magicCube;
         switch (axis) {
             case X:
                 if (direction == CW) {
-                    FaceOrientationType tmp = (FaceOrientationType)orientationToMagicCubeFace[Front];
+                    FaceOrientationType tmp = orientationToMagicCubeFace[Front];
                     orientationToMagicCubeFace[Front] = orientationToMagicCubeFace[Down];
                     orientationToMagicCubeFace[Down] = orientationToMagicCubeFace[Back];
                     orientationToMagicCubeFace[Back] = orientationToMagicCubeFace[Up];
                     orientationToMagicCubeFace[Up] = tmp;
                 }
                 else{
-                    FaceOrientationType tmp = (FaceOrientationType)orientationToMagicCubeFace[Front];
+                    FaceOrientationType tmp = orientationToMagicCubeFace[Front];
                     orientationToMagicCubeFace[Front] = orientationToMagicCubeFace[Up];
                     orientationToMagicCubeFace[Up] = orientationToMagicCubeFace[Back];
                     orientationToMagicCubeFace[Back] = orientationToMagicCubeFace[Down];
@@ -140,13 +129,13 @@ static MCMagicCube *magicCube;
                 break;
             case Y:
                 if (direction == CW) {
-                    FaceOrientationType tmp = (FaceOrientationType)orientationToMagicCubeFace[Front];
+                    FaceOrientationType tmp = orientationToMagicCubeFace[Front];
                     orientationToMagicCubeFace[Front] = orientationToMagicCubeFace[Right];
                     orientationToMagicCubeFace[Right] = orientationToMagicCubeFace[Back];
                     orientationToMagicCubeFace[Back] = orientationToMagicCubeFace[Left];
                     orientationToMagicCubeFace[Left] = tmp;
                 } else {
-                    FaceOrientationType tmp = (FaceOrientationType)orientationToMagicCubeFace[Front];
+                    FaceOrientationType tmp = orientationToMagicCubeFace[Front];
                     orientationToMagicCubeFace[Front] = orientationToMagicCubeFace[Left];
                     orientationToMagicCubeFace[Left] = orientationToMagicCubeFace[Back];
                     orientationToMagicCubeFace[Back] = orientationToMagicCubeFace[Right];
@@ -155,13 +144,13 @@ static MCMagicCube *magicCube;
                 break;
             case Z:
                 if (direction == CW) {
-                    FaceOrientationType tmp = (FaceOrientationType)orientationToMagicCubeFace[Up];
+                    FaceOrientationType tmp = orientationToMagicCubeFace[Up];
                     orientationToMagicCubeFace[Up] = orientationToMagicCubeFace[Left];
                     orientationToMagicCubeFace[Left] = orientationToMagicCubeFace[Down];
                     orientationToMagicCubeFace[Down] = orientationToMagicCubeFace[Right];
                     orientationToMagicCubeFace[Right] = tmp;
                 } else {
-                    FaceOrientationType tmp = (FaceOrientationType)orientationToMagicCubeFace[Up];
+                    FaceOrientationType tmp = orientationToMagicCubeFace[Up];
                     orientationToMagicCubeFace[Up] = orientationToMagicCubeFace[Right];
                     orientationToMagicCubeFace[Right] = orientationToMagicCubeFace[Down];
                     orientationToMagicCubeFace[Down] = orientationToMagicCubeFace[Left];
@@ -290,89 +279,119 @@ static MCMagicCube *magicCube;
             [self rotateOnAxis:Z onLayer:1 inDirection:CW];
             [self rotateOnAxis:Z onLayer:2 inDirection:CW];
             break;
-        case f:
+        case Fw:
             [self rotateOnAxis:Z onLayer:2 inDirection:CW];
             [self rotateOnAxis:Z onLayer:1 inDirection:CW];
             break;
-        case fi:
+        case Fwi:
             [self rotateOnAxis:Z onLayer:2 inDirection:CCW];
             [self rotateOnAxis:Z onLayer:1 inDirection:CCW];
             break;
-        case f2:
+        case Fw2:
             [self rotateOnAxis:Z onLayer:2 inDirection:CW];
             [self rotateOnAxis:Z onLayer:2 inDirection:CW];
             [self rotateOnAxis:Z onLayer:1 inDirection:CW];
             [self rotateOnAxis:Z onLayer:1 inDirection:CW];
             break;
-        case b:
+        case Bw:
             [self rotateOnAxis:Z onLayer:0 inDirection:CCW];
             [self rotateOnAxis:Z onLayer:1 inDirection:CCW];
             break;
-        case bi:
+        case Bwi:
             [self rotateOnAxis:Z onLayer:0 inDirection:CW];
             [self rotateOnAxis:Z onLayer:1 inDirection:CW];
             break;
-        case b2:
+        case Bw2:
             [self rotateOnAxis:Z onLayer:0 inDirection:CCW];
             [self rotateOnAxis:Z onLayer:0 inDirection:CCW];
             [self rotateOnAxis:Z onLayer:1 inDirection:CCW];
             [self rotateOnAxis:Z onLayer:1 inDirection:CCW];
             break;
-        case r:
+        case Rw:
             [self rotateOnAxis:X onLayer:2 inDirection:CW];
             [self rotateOnAxis:X onLayer:1 inDirection:CW];
             break;
-        case ri:
+        case Rwi:
             [self rotateOnAxis:X onLayer:2 inDirection:CCW];
             [self rotateOnAxis:X onLayer:1 inDirection:CCW];
             break;
-        case r2:
+        case Rw2:
             [self rotateOnAxis:X onLayer:2 inDirection:CW];
             [self rotateOnAxis:X onLayer:2 inDirection:CW];
             [self rotateOnAxis:X onLayer:1 inDirection:CW];
             [self rotateOnAxis:X onLayer:1 inDirection:CW];
             break;
-        case l:
+        case Lw:
             [self rotateOnAxis:X onLayer:0 inDirection:CCW];
             [self rotateOnAxis:X onLayer:1 inDirection:CCW];
             break;
-        case li:
+        case Lwi:
             [self rotateOnAxis:X onLayer:0 inDirection:CW];
             [self rotateOnAxis:X onLayer:1 inDirection:CW];
             break;
-        case l2:
+        case Lw2:
             [self rotateOnAxis:X onLayer:0 inDirection:CCW];
             [self rotateOnAxis:X onLayer:0 inDirection:CCW];
             [self rotateOnAxis:X onLayer:1 inDirection:CCW];
             [self rotateOnAxis:X onLayer:1 inDirection:CCW];
             break;
-        case u:
+        case Uw:
             [self rotateOnAxis:Y onLayer:2 inDirection:CW];
             [self rotateOnAxis:Y onLayer:1 inDirection:CW];
             break;
-        case ui:
+        case Uwi:
             [self rotateOnAxis:Y onLayer:2 inDirection:CCW];
             [self rotateOnAxis:Y onLayer:1 inDirection:CCW];
             break;
-        case u2:
+        case Uw2:
             [self rotateOnAxis:Y onLayer:2 inDirection:CW];
             [self rotateOnAxis:Y onLayer:2 inDirection:CW];
             [self rotateOnAxis:Y onLayer:1 inDirection:CW];
             [self rotateOnAxis:Y onLayer:1 inDirection:CW];
             break;
-        case d:
+        case Dw:
             [self rotateOnAxis:Y onLayer:0 inDirection:CCW];
             [self rotateOnAxis:Y onLayer:1 inDirection:CCW];
             break;
-        case di:
+        case Dwi:
             [self rotateOnAxis:Y onLayer:0 inDirection:CW];
             [self rotateOnAxis:Y onLayer:1 inDirection:CCW];
             break;
-        case d2:
+        case Dw2:
             [self rotateOnAxis:Y onLayer:0 inDirection:CCW];
             [self rotateOnAxis:Y onLayer:0 inDirection:CCW];
             [self rotateOnAxis:Y onLayer:1 inDirection:CCW];
             [self rotateOnAxis:Y onLayer:1 inDirection:CCW];
+            break;
+        case M:
+            [self rotateOnAxis:X onLayer:1 inDirection:CCW];
+            break;
+        case Mi:
+            [self rotateOnAxis:X onLayer:1 inDirection:CW];
+            break;
+        case M2:
+            [self rotateOnAxis:X onLayer:1 inDirection:CCW];
+            [self rotateOnAxis:X onLayer:1 inDirection:CCW];
+            break;
+        case E:
+            [self rotateOnAxis:Y onLayer:1 inDirection:CCW];
+            break;
+        case Ei:
+            [self rotateOnAxis:Y onLayer:1 inDirection:CW];
+            break;
+        case E2:
+            [self rotateOnAxis:Y onLayer:1 inDirection:CCW];
+            [self rotateOnAxis:Y onLayer:1 inDirection:CCW];
+            break;
+        case S:
+            [self rotateOnAxis:Z onLayer:1 inDirection:CW];
+            break;
+        case Si:
+            [self rotateOnAxis:Z onLayer:1 inDirection:CCW];
+            break;
+        case S2:
+            [self rotateOnAxis:Z onLayer:1 inDirection:CW];
+            [self rotateOnAxis:Z onLayer:1 inDirection:CW];
             break;
         default:
             break;
@@ -396,7 +415,7 @@ static MCMagicCube *magicCube;
 }
 
 - (FaceOrientationType)magicCubeFaceInOrientation:(FaceOrientationType)orientation{
-    return (FaceOrientationType)orientationToMagicCubeFace[orientation];
+    return orientationToMagicCubeFace[orientation];
 }
 
 //encode the object
@@ -434,7 +453,7 @@ static MCMagicCube *magicCube;
             }
         }
         for (int i  = 0; i < 6; i++) {
-            orientationToMagicCubeFace[i] = [aDecoder decodeIntegerForKey:[NSString stringWithFormat:kSingleOrientationToMagicCubeFaceKeyFormat, i]];
+            orientationToMagicCubeFace[i] = (FaceOrientationType)[aDecoder decodeIntegerForKey:[NSString stringWithFormat:kSingleOrientationToMagicCubeFaceKeyFormat, i]];
         }
     }
     return self;
@@ -449,18 +468,22 @@ static MCMagicCube *magicCube;
                 if (x != 1 || y != 1 || z != 1) {
                     [states addObject:[magicCubies3D[x][y][z] getCubieOrientationOfAxis]];
                 }
+                else{
+                    [states addObject:[NSDictionary dictionary]];
+                }
             }
         }
     }
-    return states;
+    return  [NSArray arrayWithArray:states];
 }
-- (NSArray *)getAxisStates{
+
+- (NSArray *)getColorInOrientationsOfAllCubie{
     NSMutableArray *states = [NSMutableArray arrayWithCapacity:26];
     for (int z = 0; z < 3; z++) {
         for (int y = 0; y < 3; y++) {
             for (int x = 0; x < 3; x++) {
                 if (x != 1 || y != 1 || z != 1) {
-                    [states addObject:[magicCubies3D[x][y][z] getCubieColorOfEveryOrientation]];
+                    [states addObject:[magicCubies3D[x][y][z] getCubieColorInOrientations]];
                 }
                 else{
                     [states addObject:[NSDictionary dictionary]];
@@ -468,8 +491,7 @@ static MCMagicCube *magicCube;
             }
         }
     }
-    return states;
+    return [NSArray arrayWithArray:states];
 }
-
 
 @end

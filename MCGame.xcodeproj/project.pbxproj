@@ -122,6 +122,13 @@
 		A3E855AC1663A50F00DE3ED9 /* cube1126_2.obj in Resources */ = {isa = PBXBuildFile; fileRef = A3E855AA1663A50F00DE3ED9 /* cube1126_2.obj */; };
 		A3E855B01663A69100DE3ED9 /* RadiusOneCubeWithPic.obj in Resources */ = {isa = PBXBuildFile; fileRef = A3E855AF1663A69100DE3ED9 /* RadiusOneCubeWithPic.obj */; };
 		A3E855B21663A9C400DE3ED9 /* cube1126_original.obj in Resources */ = {isa = PBXBuildFile; fileRef = A3E855B11663A9C400DE3ED9 /* cube1126_original.obj */; };
+		A3EAD3D91713C18A00A95ADA /* MCCube.m in Sources */ = {isa = PBXBuildFile; fileRef = A3EAD3D61713C18A00A95ADA /* MCCube.m */; };
+		A3EAD3DA1713C18A00A95ADA /* MCMagicCube.m in Sources */ = {isa = PBXBuildFile; fileRef = A3EAD3D81713C18A00A95ADA /* MCMagicCube.m */; };
+		A3EAD3DD1713C19D00A95ADA /* MCTransformUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = A3EAD3DC1713C19D00A95ADA /* MCTransformUtil.m */; };
+		A3EAD3E41713C1AF00A95ADA /* MCKnowledgeBase.m in Sources */ = {isa = PBXBuildFile; fileRef = A3EAD3DF1713C1AF00A95ADA /* MCKnowledgeBase.m */; };
+		A3EAD3E51713C1AF00A95ADA /* MCPlayHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = A3EAD3E11713C1AF00A95ADA /* MCPlayHelper.m */; };
+		A3EAD3E61713C1AF00A95ADA /* MCBasicElement.m in Sources */ = {isa = PBXBuildFile; fileRef = A3EAD3E31713C1AF00A95ADA /* MCBasicElement.m */; };
+		A3EAD3EA1713C1CE00A95ADA /* CircleMenuController.m in Sources */ = {isa = PBXBuildFile; fileRef = A3EAD3E91713C1CE00A95ADA /* CircleMenuController.m */; };
 		A3EB454816BE358700DBB8B7 /* MCMultiDigitCounter.m in Sources */ = {isa = PBXBuildFile; fileRef = A3EB454716BE358700DBB8B7 /* MCMultiDigitCounter.m */; };
 		A3EB454F16BF51F800DBB8B7 /* MCTimer.m in Sources */ = {isa = PBXBuildFile; fileRef = A3EB454E16BF51F800DBB8B7 /* MCTimer.m */; };
 		A3EB455416BF5E1600DBB8B7 /* MCDotSeparater.m in Sources */ = {isa = PBXBuildFile; fileRef = A3EB455316BF5E1600DBB8B7 /* MCDotSeparater.m */; };
@@ -134,7 +141,6 @@
 		A3F828D516EACB1C00AC5EAF /* myaskreloadview.xib in Resources */ = {isa = PBXBuildFile; fileRef = A3F828D416EACB1C00AC5EAF /* myaskreloadview.xib */; };
 		A3F828D716EADF8400AC5EAF /* cubeBlack3.png in Resources */ = {isa = PBXBuildFile; fileRef = A3F828D616EADF8400AC5EAF /* cubeBlack3.png */; };
 		A3F828DA16EF4C0800AC5EAF /* CubeFace.m in Sources */ = {isa = PBXBuildFile; fileRef = A3F828D916EF4C0700AC5EAF /* CubeFace.m */; };
-		A3F828E116EF789500AC5EAF /* CircleMenuController.m in Sources */ = {isa = PBXBuildFile; fileRef = A3F828E016EF789500AC5EAF /* CircleMenuController.m */; };
 		A3F828EB16EF78B700AC5EAF /* Down_CrossToEInETFF规则(20130202更新).docx in Resources */ = {isa = PBXBuildFile; fileRef = A3F828E316EF78B700AC5EAF /* Down_CrossToEInETFF规则(20130202更新).docx */; };
 		A3F828EC16EF78B700AC5EAF /* EInETFFToTInETFF规则(20130212更新).docx in Resources */ = {isa = PBXBuildFile; fileRef = A3F828E416EF78B700AC5EAF /* EInETFFToTInETFF规则(20130212更新).docx */; };
 		A3F828ED16EF78B700AC5EAF /* FirstFInETFFToSecondFInETFF规则.docx in Resources */ = {isa = PBXBuildFile; fileRef = A3F828E516EF78B700AC5EAF /* FirstFInETFFToSecondFInETFF规则.docx */; };
@@ -154,12 +160,6 @@
 		A3F8290816EF790D00AC5EAF /* Color03.png in Resources */ = {isa = PBXBuildFile; fileRef = A3F8290016EF790D00AC5EAF /* Color03.png */; };
 		A3F8290916EF790D00AC5EAF /* DefaultButton.png in Resources */ = {isa = PBXBuildFile; fileRef = A3F8290116EF790D00AC5EAF /* DefaultButton.png */; };
 		A3F8290A16EF790D00AC5EAF /* DefaultButtonBg.png in Resources */ = {isa = PBXBuildFile; fileRef = A3F8290216EF790D00AC5EAF /* DefaultButtonBg.png */; };
-		A3F8291216EF797500AC5EAF /* MCKnowledgeBase.m in Sources */ = {isa = PBXBuildFile; fileRef = A3F8290D16EF797400AC5EAF /* MCKnowledgeBase.m */; };
-		A3F8291316EF797500AC5EAF /* MCPlayHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = A3F8290F16EF797500AC5EAF /* MCPlayHelper.m */; };
-		A3F8291416EF797500AC5EAF /* MCBasicElement.m in Sources */ = {isa = PBXBuildFile; fileRef = A3F8291116EF797500AC5EAF /* MCBasicElement.m */; };
-		A3F8291816EF799800AC5EAF /* MCTransformUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = A3F8291716EF799800AC5EAF /* MCTransformUtil.m */; };
-		A3F8291E16EF7B6D00AC5EAF /* MCCube.m in Sources */ = {isa = PBXBuildFile; fileRef = A3F8291B16EF7B6D00AC5EAF /* MCCube.m */; };
-		A3F8291F16EF7B6D00AC5EAF /* MCMagicCube.m in Sources */ = {isa = PBXBuildFile; fileRef = A3F8291D16EF7B6D00AC5EAF /* MCMagicCube.m */; };
 		A3F8292216F181BD00AC5EAF /* RotateType.m in Sources */ = {isa = PBXBuildFile; fileRef = A3F8292116F181BC00AC5EAF /* RotateType.m */; };
 /* End PBXBuildFile section */
 
@@ -318,6 +318,22 @@
 		A3E855AA1663A50F00DE3ED9 /* cube1126_2.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = cube1126_2.obj; sourceTree = "<group>"; };
 		A3E855AF1663A69100DE3ED9 /* RadiusOneCubeWithPic.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = RadiusOneCubeWithPic.obj; sourceTree = "<group>"; };
 		A3E855B11663A9C400DE3ED9 /* cube1126_original.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = cube1126_original.obj; sourceTree = "<group>"; };
+		A3EAD3D41713C18A00A95ADA /* Global.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Global.h; sourceTree = "<group>"; };
+		A3EAD3D51713C18A00A95ADA /* MCCubie.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCCubie.h; sourceTree = "<group>"; };
+		A3EAD3D61713C18A00A95ADA /* MCCube.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCCube.m; sourceTree = "<group>"; };
+		A3EAD3D71713C18A00A95ADA /* MCMagicCube.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCMagicCube.h; sourceTree = "<group>"; };
+		A3EAD3D81713C18A00A95ADA /* MCMagicCube.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCMagicCube.m; sourceTree = "<group>"; };
+		A3EAD3DB1713C19D00A95ADA /* MCTransformUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCTransformUtil.h; sourceTree = "<group>"; };
+		A3EAD3DC1713C19D00A95ADA /* MCTransformUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCTransformUtil.m; sourceTree = "<group>"; };
+		A3EAD3DE1713C1AF00A95ADA /* MCKnowledgeBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCKnowledgeBase.h; sourceTree = "<group>"; };
+		A3EAD3DF1713C1AF00A95ADA /* MCKnowledgeBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCKnowledgeBase.m; sourceTree = "<group>"; };
+		A3EAD3E01713C1AF00A95ADA /* MCPlayHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCPlayHelper.h; sourceTree = "<group>"; };
+		A3EAD3E11713C1AF00A95ADA /* MCPlayHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCPlayHelper.m; sourceTree = "<group>"; };
+		A3EAD3E21713C1AF00A95ADA /* MCBasicElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCBasicElement.h; sourceTree = "<group>"; };
+		A3EAD3E31713C1AF00A95ADA /* MCBasicElement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCBasicElement.m; sourceTree = "<group>"; };
+		A3EAD3E71713C1CE00A95ADA /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
+		A3EAD3E81713C1CE00A95ADA /* CircleMenuController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CircleMenuController.h; sourceTree = "<group>"; };
+		A3EAD3E91713C1CE00A95ADA /* CircleMenuController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CircleMenuController.m; sourceTree = "<group>"; };
 		A3EB454616BE358700DBB8B7 /* MCMultiDigitCounter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCMultiDigitCounter.h; sourceTree = "<group>"; };
 		A3EB454716BE358700DBB8B7 /* MCMultiDigitCounter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCMultiDigitCounter.m; sourceTree = "<group>"; };
 		A3EB454D16BF51F800DBB8B7 /* MCTimer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCTimer.h; sourceTree = "<group>"; };
@@ -342,9 +358,6 @@
 		A3F828D616EADF8400AC5EAF /* cubeBlack3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cubeBlack3.png; sourceTree = "<group>"; };
 		A3F828D816EF4C0700AC5EAF /* CubeFace.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CubeFace.h; sourceTree = "<group>"; };
 		A3F828D916EF4C0700AC5EAF /* CubeFace.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CubeFace.m; sourceTree = "<group>"; };
-		A3F828DE16EF789500AC5EAF /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
-		A3F828DF16EF789500AC5EAF /* CircleMenuController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CircleMenuController.h; sourceTree = "<group>"; };
-		A3F828E016EF789500AC5EAF /* CircleMenuController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CircleMenuController.m; sourceTree = "<group>"; };
 		A3F828E316EF78B700AC5EAF /* Down_CrossToEInETFF规则(20130202更新).docx */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Down_CrossToEInETFF规则(20130202更新).docx"; sourceTree = "<group>"; };
 		A3F828E416EF78B700AC5EAF /* EInETFFToTInETFF规则(20130212更新).docx */ = {isa = PBXFileReference; lastKnownFileType = file; path = "EInETFFToTInETFF规则(20130212更新).docx"; sourceTree = "<group>"; };
 		A3F828E516EF78B700AC5EAF /* FirstFInETFFToSecondFInETFF规则.docx */ = {isa = PBXFileReference; lastKnownFileType = file; path = "FirstFInETFFToSecondFInETFF规则.docx"; sourceTree = "<group>"; };
@@ -364,19 +377,6 @@
 		A3F8290016EF790D00AC5EAF /* Color03.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Color03.png; sourceTree = "<group>"; };
 		A3F8290116EF790D00AC5EAF /* DefaultButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DefaultButton.png; sourceTree = "<group>"; };
 		A3F8290216EF790D00AC5EAF /* DefaultButtonBg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DefaultButtonBg.png; sourceTree = "<group>"; };
-		A3F8290C16EF797400AC5EAF /* MCKnowledgeBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCKnowledgeBase.h; sourceTree = "<group>"; };
-		A3F8290D16EF797400AC5EAF /* MCKnowledgeBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCKnowledgeBase.m; sourceTree = "<group>"; };
-		A3F8290E16EF797500AC5EAF /* MCPlayHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCPlayHelper.h; sourceTree = "<group>"; };
-		A3F8290F16EF797500AC5EAF /* MCPlayHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCPlayHelper.m; sourceTree = "<group>"; };
-		A3F8291016EF797500AC5EAF /* MCBasicElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCBasicElement.h; sourceTree = "<group>"; };
-		A3F8291116EF797500AC5EAF /* MCBasicElement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCBasicElement.m; sourceTree = "<group>"; };
-		A3F8291616EF799800AC5EAF /* MCTransformUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCTransformUtil.h; sourceTree = "<group>"; };
-		A3F8291716EF799800AC5EAF /* MCTransformUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCTransformUtil.m; sourceTree = "<group>"; };
-		A3F8291916EF7B6D00AC5EAF /* Global.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Global.h; sourceTree = "<group>"; };
-		A3F8291A16EF7B6D00AC5EAF /* MCCubie.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCCubie.h; sourceTree = "<group>"; };
-		A3F8291B16EF7B6D00AC5EAF /* MCCube.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCCube.m; sourceTree = "<group>"; };
-		A3F8291C16EF7B6D00AC5EAF /* MCMagicCube.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCMagicCube.h; sourceTree = "<group>"; };
-		A3F8291D16EF7B6D00AC5EAF /* MCMagicCube.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCMagicCube.m; sourceTree = "<group>"; };
 		A3F8292016F181BC00AC5EAF /* RotateType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RotateType.h; sourceTree = "<group>"; };
 		A3F8292116F181BC00AC5EAF /* RotateType.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RotateType.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -469,11 +469,11 @@
 		A309D8F7165F867800CDA1DC /* DataModel */ = {
 			isa = PBXGroup;
 			children = (
-				A3F8291916EF7B6D00AC5EAF /* Global.h */,
-				A3F8291A16EF7B6D00AC5EAF /* MCCubie.h */,
-				A3F8291B16EF7B6D00AC5EAF /* MCCube.m */,
-				A3F8291C16EF7B6D00AC5EAF /* MCMagicCube.h */,
-				A3F8291D16EF7B6D00AC5EAF /* MCMagicCube.m */,
+				A3EAD3D41713C18A00A95ADA /* Global.h */,
+				A3EAD3D51713C18A00A95ADA /* MCCubie.h */,
+				A3EAD3D61713C18A00A95ADA /* MCCube.m */,
+				A3EAD3D71713C18A00A95ADA /* MCMagicCube.h */,
+				A3EAD3D81713C18A00A95ADA /* MCMagicCube.m */,
 				A3F8291516EF798C00AC5EAF /* Util */,
 				A3F8290B16EF796900AC5EAF /* MCPlayHelper */,
 				A3F828F316EF78E000AC5EAF /* Resource */,
@@ -904,9 +904,9 @@
 		A3F828DD16EF788200AC5EAF /* PopUpView */ = {
 			isa = PBXGroup;
 			children = (
-				A3F828DE16EF789500AC5EAF /* Constants.h */,
-				A3F828DF16EF789500AC5EAF /* CircleMenuController.h */,
-				A3F828E016EF789500AC5EAF /* CircleMenuController.m */,
+				A3EAD3E71713C1CE00A95ADA /* Constants.h */,
+				A3EAD3E81713C1CE00A95ADA /* CircleMenuController.h */,
+				A3EAD3E91713C1CE00A95ADA /* CircleMenuController.m */,
 			);
 			name = PopUpView;
 			sourceTree = "<group>";
@@ -955,12 +955,12 @@
 		A3F8290B16EF796900AC5EAF /* MCPlayHelper */ = {
 			isa = PBXGroup;
 			children = (
-				A3F8290C16EF797400AC5EAF /* MCKnowledgeBase.h */,
-				A3F8290D16EF797400AC5EAF /* MCKnowledgeBase.m */,
-				A3F8290E16EF797500AC5EAF /* MCPlayHelper.h */,
-				A3F8290F16EF797500AC5EAF /* MCPlayHelper.m */,
-				A3F8291016EF797500AC5EAF /* MCBasicElement.h */,
-				A3F8291116EF797500AC5EAF /* MCBasicElement.m */,
+				A3EAD3DE1713C1AF00A95ADA /* MCKnowledgeBase.h */,
+				A3EAD3DF1713C1AF00A95ADA /* MCKnowledgeBase.m */,
+				A3EAD3E01713C1AF00A95ADA /* MCPlayHelper.h */,
+				A3EAD3E11713C1AF00A95ADA /* MCPlayHelper.m */,
+				A3EAD3E21713C1AF00A95ADA /* MCBasicElement.h */,
+				A3EAD3E31713C1AF00A95ADA /* MCBasicElement.m */,
 			);
 			name = MCPlayHelper;
 			sourceTree = "<group>";
@@ -968,8 +968,8 @@
 		A3F8291516EF798C00AC5EAF /* Util */ = {
 			isa = PBXGroup;
 			children = (
-				A3F8291616EF799800AC5EAF /* MCTransformUtil.h */,
-				A3F8291716EF799800AC5EAF /* MCTransformUtil.m */,
+				A3EAD3DB1713C19D00A95ADA /* MCTransformUtil.h */,
+				A3EAD3DC1713C19D00A95ADA /* MCTransformUtil.m */,
 			);
 			name = Util;
 			sourceTree = "<group>";
@@ -1206,17 +1206,17 @@
 				A3F828D016EAC93300AC5EAF /* MCNormalPlayInputViewController.m in Sources */,
 				A3F828D316EACAF700AC5EAF /* AskReloadView.m in Sources */,
 				A3F828DA16EF4C0800AC5EAF /* CubeFace.m in Sources */,
-				A3F828E116EF789500AC5EAF /* CircleMenuController.m in Sources */,
-				A3F8291216EF797500AC5EAF /* MCKnowledgeBase.m in Sources */,
-				A3F8291316EF797500AC5EAF /* MCPlayHelper.m in Sources */,
-				A3F8291416EF797500AC5EAF /* MCBasicElement.m in Sources */,
-				A3F8291816EF799800AC5EAF /* MCTransformUtil.m in Sources */,
-				A3F8291E16EF7B6D00AC5EAF /* MCCube.m in Sources */,
-				A3F8291F16EF7B6D00AC5EAF /* MCMagicCube.m in Sources */,
 				A3F8292216F181BD00AC5EAF /* RotateType.m in Sources */,
 				A3C7AA9917019B560045D963 /* MCActionQueue.m in Sources */,
 				A3C7AA9C17019BD70045D963 /* ActionQuad.m in Sources */,
 				A3C1E397170442270033EFC1 /* ActionArrow.m in Sources */,
+				A3EAD3D91713C18A00A95ADA /* MCCube.m in Sources */,
+				A3EAD3DA1713C18A00A95ADA /* MCMagicCube.m in Sources */,
+				A3EAD3DD1713C19D00A95ADA /* MCTransformUtil.m in Sources */,
+				A3EAD3E41713C1AF00A95ADA /* MCKnowledgeBase.m in Sources */,
+				A3EAD3E51713C1AF00A95ADA /* MCPlayHelper.m in Sources */,
+				A3EAD3E61713C1AF00A95ADA /* MCBasicElement.m in Sources */,
+				A3EAD3EA1713C1CE00A95ADA /* CircleMenuController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

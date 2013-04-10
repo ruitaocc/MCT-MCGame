@@ -14,6 +14,13 @@
 
 #define CubieCouldBeLockMaxNum 26
 
+
+typedef enum _HelperStateMachine {
+    Normal,
+    ApplyingRotationQueue
+} HelperStateMachine;
+
+
 @interface MCPlayHelper : NSObject
 
 @property (nonatomic, retain)MCMagicCube *magicCube;
@@ -21,8 +28,13 @@
 @property (nonatomic, retain)NSDictionary *rules;
 @property (nonatomic, retain)NSDictionary *states;
 @property (nonatomic, retain)NSString *state;
+@property (nonatomic, strong)NSMutableArray *rotationQueue;
+@property (nonatomic, strong)NSMutableArray *extraRotations;
+@property (nonatomic)HelperStateMachine helperState;
 
-+ (MCPlayHelper *)getSharedPlayHelper;
++ (MCPlayHelper *)playerHelperWithMagicCube:(MCMagicCube *)mc;
+
+- (id)initWithMagicCube:(MCMagicCube *)mc;
 
 //see whether the target cubie is at home
 - (BOOL)isCubieAtHomeWithIdentity:(ColorCombinationType)identity;
@@ -30,13 +42,23 @@
 //apply the pattern and return result
 - (BOOL)applyPatternWihtName:(NSString *)name;
 
-- (void)refresh;
+//rotate operation with axis, layer, direction
+- (void)rotateOnAxis:(AxisType)axis onLayer:(int)layer inDirection:(LayerRotationDirectionType)direction;
 
-- (void)checkState;
+//get the result of the last rotation
+- (RotationResult)getResultOfTheLastRotation;
 
-- (void)applyRules;
+- (void)refreshRules;
 
-- (void)setCheckStateFromInit:(BOOL)is;
+//check the current state and return it
+- (NSString *)checkStateFromInit:(BOOL)isCheckStateFromInit;
 
-- (void)refreshMagicCube;
+//apply rules and return actions
+//the result is directory:
+//"RotationQueue"——the rotation queue in array
+//"LockingAt"——
+//"Tips"——the string showing tips
+- (NSDictionary *)applyRules;
+
+
 @end

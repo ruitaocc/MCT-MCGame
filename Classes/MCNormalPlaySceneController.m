@@ -11,9 +11,11 @@
 #import "Cube.h"
 #import "MCMultiDigitCounter.h"
 #import "MCCollisionController.h"
+#import "MCNormalPlayInputViewController.h"
 @implementation MCNormalPlaySceneController
 //@synthesize magicCubeUI;
 @synthesize magicCube;
+@synthesize playHelper;
 +(MCNormalPlaySceneController*)sharedNormalPlaySceneController
 {
     static MCNormalPlaySceneController *sharedNormalPlaySceneController;
@@ -26,7 +28,33 @@
 }
 
 -(void)rotate:(RotateType *)rotateType{
-    [magicCube rotateOnAxis:[rotateType rotate_axis] onLayer:[rotateType rotate_layer] inDirection:[rotateType rotate_direction]];
+    //流程1，通知数据模型UI已经旋转
+    [playHelper rotateOnAxis:[rotateType rotate_axis] onLayer:[rotateType rotate_layer] inDirection:[rotateType rotate_direction]];
+    //流程2，询问是否正确
+    RotationResult result = [playHelper getResultOfTheLastRotation];
+    if (result == Accord) {
+        //流程2.1，正确，队列右移动一位
+        [[(MCNormalPlayInputViewController*)inputController actionQueue]shiftRight];
+        
+    }else if(result == Disaccord){
+        //流程2.2，错误，
+        //流程2.2.1，获取应该插入队列extraRotations
+        NSArray *actionAry = [playHelper extraRotations];
+        [[(MCNormalPlayInputViewController*)inputController actionQueue] insertQueueCurrentIndexWithNmaeList:actionAry];
+         
+    }else if (result==StayForATime){
+        //do nothing
+    }else if (result ==Finished){
+        //结束，清空当前队列
+        [[(MCNormalPlayInputViewController*)inputController actionQueue]removeAllActions];
+        //重新加载队列，applyRules ,
+        NSDictionary *rules = [[playHelper applyRules] retain];
+        NSArray *actionqueue = [[rules objectForKey:RotationQueueKey] retain];
+        [[(MCNormalPlayInputViewController*)inputController actionQueue] insertQueueCurrentIndexWithNmaeList:actionqueue];
+    }else if (result ==NoneResult){
+        //do nothing
+    }
+    
 }
 
 -(void)loadScene{
@@ -37,7 +65,9 @@
 	
     float scale = 60.0;
     
-	magicCube = [MCMagicCube getSharedMagicCube];
+	magicCube = [[MCMagicCube magicCube]retain];
+    playHelper = [[MCPlayHelper playerHelperWithMagicCube:self.magicCube]retain];
+    //[playHelper applyRules];
     //大魔方
     MCMagicCubeUIModelController* magicCubeUI = [[MCMagicCubeUIModelController alloc]initiate];
     magicCubeUI.target=self;
@@ -64,16 +94,20 @@
 
 -(void)reloadLastTime{
     [super removeAllObjectFromScene];
-    
     //大魔方
-    MCMagicCubeUIModelController* magicCubeUI = [[MCMagicCubeUIModelController alloc]initiateWithState:[ magicCube getAxisStates]];
+    //magicCube = [MCMagicCube magicCube];
+    MCMagicCubeUIModelController* magicCubeUI = [[MCMagicCubeUIModelController alloc]initiateWithState:[ magicCube getColorInOrientationsOfAllCubie]];
+    
+    /*magicCubeUI = [[MCMagicCubeUIModelController alloc]initiate];*/
     magicCubeUI.target=self;
     [magicCubeUI setStepcounterAddAction:@selector(stepcounterAdd)];
     [magicCubeUI setStepcounterMinusAction:@selector(stepcounterMinus)];
     [self addObjectToScene:magicCubeUI];
-    //[inputController setIsNeededReload:YES];
+    
+     //[inputController setIsNeededReload:YES];
     //[(MCNormalPlayInputViewController*)inputController reloadInterface];
     //[magicCubeUI release];
+     
 }
 
 

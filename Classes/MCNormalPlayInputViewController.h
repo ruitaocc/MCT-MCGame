@@ -19,8 +19,9 @@
     AskReloadView* askReloadView;
     PauseMenu *pauseMenuView;
     MCActionQueue *actionQueue;
+    BOOL isShowQueue;
 }
-
+@property (nonatomic,retain) MCActionQueue *actionQueue;
 @property (nonatomic,retain) MCMultiDigitCounter *stepcounter;
 @property (nonatomic,retain) MCTimer * timer;
 //overload
@@ -38,5 +39,11 @@
 //回到主菜单
 -(void)mainMenuBtnDown;
 -(void)mainMenuPlayBtnUp;
+//队列
+-(void)shiftLeftBtnDown;
+-(void)shiftLeftBtnUp;
+-(void)shiftRightBtnDown;
+-(void)shiftRightBtnUp;
+
 
 @end

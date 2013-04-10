@@ -54,8 +54,7 @@
 }
 
 - (NSString *)knowledgeBaseFilePath{
-    NSString *documentsDirectory  = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents"];
-    return [documentsDirectory stringByAppendingPathComponent:KNOWLEDGE_DB_FILE_NAME];
+    return [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:KNOWLEDGE_DB_FILE_NAME];
 }
 
 - (BOOL)insertPattern:(NSString *)pattern withKey:(NSString *)key withPreState:(NSString *)state{
@@ -66,7 +65,7 @@
         return NO;
     }
     else{
-        char *insertPattern = "INSERT OR REPLACE INTO PATTERNS (PRE_STATE, KEY, PATTERN) VALUES (?, ?, ?);";
+        char *insertPattern = (char *)"INSERT OR REPLACE INTO PATTERNS (PRE_STATE, KEY, PATTERN) VALUES (?, ?, ?);";
         sqlite3_stmt *stmt;
         if(sqlite3_prepare_v2(database, insertPattern, -1, &stmt, nil) == SQLITE_OK){
             sqlite3_bind_text(stmt, 1, [state UTF8String], -1, NULL);
@@ -96,7 +95,7 @@
         return NO;
     }
     else{
-        char *insertRule = "INSERT OR REPLACE INTO RULES (MEHOD, PRE_STATE, RULE_IF, RULE_THEN) VALUES (?, ?, ?, ?);";
+        char *insertRule = (char *)"INSERT OR REPLACE INTO RULES (MEHOD, PRE_STATE, RULE_IF, RULE_THEN) VALUES (?, ?, ?, ?);";
         sqlite3_stmt *stmt;
         if(sqlite3_prepare_v2(database, insertRule, -1, &stmt, nil) == SQLITE_OK){
             sqlite3_bind_int(stmt, 1, method);
@@ -127,7 +126,7 @@
         return NO;
     }
     else{
-        char *insertState = "INSERT OR REPLACE INTO STATES (MEHOD, PRE_STATE, PATTERN, AFTER_STATE) VALUES (?, ?, ?, ?);";
+        char *insertState = (char *)"INSERT OR REPLACE INTO STATES (MEHOD, PRE_STATE, PATTERN, AFTER_STATE) VALUES (?, ?, ?, ?);";
         sqlite3_stmt *stmt;
         if(sqlite3_prepare_v2(database, insertState, -1, &stmt, nil) == SQLITE_OK){
             sqlite3_bind_int(stmt, 1, method);
