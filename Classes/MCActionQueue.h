@@ -23,7 +23,7 @@
 -(void)insertQueueCurrentIndexWithNmaeList:(NSArray*)insertlist;
 
 -(void)removeAllActions;
-
+-(BOOL)isQueueEmpty;
 -(void)shiftLeft;
 -(void)shiftRight;
 -(void)render;

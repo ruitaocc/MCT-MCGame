@@ -58,8 +58,6 @@
 	// move to my position
 	glTranslatef(pretranslation.x, pretranslation.y, pretranslation.z);
 	
-   //    mat4 orientation = m_orientation.ToMatrix();
-//    glMultMatrixf(orientation.Pointer());
    	mat4 matRotation = quaRotation.ToMatrix();
     glMultMatrixf(matRotation.Pointer());
     

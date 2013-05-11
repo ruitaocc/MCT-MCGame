@@ -23,13 +23,13 @@
 - (BOOL) createFramebuffer;
 - (void) destroyFramebuffer;
 
+
 @end
 
 
 @implementation EAGLView
 
 @synthesize context;
-
 
 // You must implement this method
 + (Class)layerClass {

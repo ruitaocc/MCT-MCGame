@@ -12,9 +12,6 @@
 
 @implementation MCPlayHelper{
     MCCubie* lockedCubies[CubieCouldBeLockMaxNum];
-    SingmasterNotation previousRotation;
-    RotationResult previousResult;
-    int currentRotationQueuePosition;
 }
 
 @synthesize magicCube;
@@ -23,8 +20,9 @@
 @synthesize states;
 @synthesize state;
 @synthesize helperState;
-@synthesize rotationQueue;
-@synthesize extraRotations;
+@synthesize applyQueue;
+@synthesize rotationResult;
+
 
 + (MCPlayHelper *)playerHelperWithMagicCube:(MCMagicCube *)mc{
     return [[[MCPlayHelper alloc] initWithMagicCube:mc] autorelease];
@@ -32,12 +30,10 @@
 
 - (id)initWithMagicCube:(MCMagicCube *)mc{
     if (self = [super init]) {
+        //alloc tht array residual actions
+        self.residualActions = [NSMutableArray arrayWithCapacity:3];
         //normal helper state
         self.helperState = Normal;
-        //clearing rotation queue
-        self.rotationQueue = nil;
-        //init extra queue
-        self.extraRotations = [NSMutableArray array];
         //locked cubie list
         for (int i = 0; i < CubieCouldBeLockMaxNum; i++) {
             lockedCubies[0] = nil;
@@ -69,10 +65,11 @@
 }
 
 - (void)dealloc{
-    [patterns release];
-    [rules release];
-    [states release];
-    [state release];
+    self.patterns = nil;
+    self.rules = nil;
+    self.states = nil;
+    self.state = nil;
+    self.applyQueue = nil;
     [self setMagicCube:nil];
     [super dealloc];
 }
@@ -250,7 +247,7 @@
                     struct Point3i targetCoor = [magicCube coordinateValueOfCubieWithColorCombination:targetCombination];
                     elementNode = [root.children objectAtIndex:1];
                     FaceOrientationType targetOrientation = (FaceOrientationType)elementNode.value;
-                    [magicCube rotateWithSingmasterNotation:[self getPathToMakeCenterCubieAtPosition:targetCoor inOrientation:targetOrientation]];
+                    [magicCube rotateWithSingmasterNotation:[MCTransformUtil getPathToMakeCenterCubieAtPosition:targetCoor inOrientation:targetOrientation]];
                 }
                     break;
                 case LockCubie:
@@ -438,6 +435,11 @@
         NSLog(@"Set the magic cube before apply rules.");
         return nil;
     }
+#ifndef ONLY_TEST
+    [self.residualActions removeAllObjects];
+    [self checkStateFromInit:NO];
+#endif
+    
     NSString *key;
     NSArray *keys = [rules allKeys];
     int count = [rules count];
@@ -455,6 +457,8 @@
             break;
         }
     }
+    
+#ifdef ONLY_TEST
     //error occurs, we can not find the rules to apply and there isn't the finished state.
     if ([[self checkStateFromInit:NO] compare:END_STATE] != NSOrderedSame && action == nil) {
         NSLog(@"%@", @"There must be something wrong, I don't apply any rules.");
@@ -465,75 +469,62 @@
         [NSKeyedArchiver archiveRootObject:magicCube toFile:fileName];
         return nil;
     }
+#else
+    //error occurs, we can not find the rules to apply and there isn't the finished state.
+    if ([self.state compare:END_STATE] != NSOrderedSame && action == nil) {
+        NSLog(@"%@", @"There must be something wrong, I don't apply any rules.");
+        //save state for debug
+        NSString *savedPath = [NSString stringWithFormat:@"ErrorStateForDebug_%f", [[NSDate date] timeInterval]];
+        NSString *path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+        NSString *fileName = [path stringByAppendingPathComponent:savedPath];
+        [NSKeyedArchiver archiveRootObject:magicCube toFile:fileName];
+        return nil;
+    }
+#endif
+    
     NSLog(@"%@", state);
     
 #ifndef ONLY_TEST
     //analyse the action and return the result
-    NSMutableArray *returnedRotationQueue = nil;
-    currentRotationQueuePosition = 0;
-    previousResult = NoneResult;
-    previousRotation = NoneNotation;
-    for (MCTreeNode *node in action.children) {
-        switch (node.value) {
-            case Rotate:
-            {
-                returnedRotationQueue = [NSMutableArray arrayWithCapacity:10];
-                self.rotationQueue = [NSMutableArray arrayWithCapacity:10];
-                for (MCTreeNode *child in node.children) {
-                    if (child.value == Fw2 || child.value == Bw2 || child.value == Rw2 || child.value == Lw2 ||
-                        child.value == Uw2 || child.value == Dw2 ) {
-                        [returnedRotationQueue addObject:[MCTransformUtil getRotationTagFromSingmasterNotation:(SingmasterNotation)(child.value-2)]];
-                        [returnedRotationQueue addObject:[MCTransformUtil getRotationTagFromSingmasterNotation:(SingmasterNotation)(child.value-2)]];
-                        [rotationQueue addObject:[NSNumber numberWithInteger:(child.value-2)]];
-                        [rotationQueue addObject:[NSNumber numberWithInteger:(child.value-2)]];
+    switch (action.type) {
+        case ExpNode:
+        {
+            BOOL flag = YES;
+            for (MCTreeNode *node in action.children) {
+                if (flag) {
+                    if (node.type == ActionNode && (node.value == Rotate|| node.value == FaceToOrientation)) {
+                        self.applyQueue = [MCApplyQueue applyQueueWithRotationAction:node withMagicCube:self.magicCube];
+                        flag = NO;
                     }
                     else{
-                        [returnedRotationQueue addObject:[MCTransformUtil getRotationTagFromSingmasterNotation:(SingmasterNotation)child.value]];
-                        [rotationQueue addObject:[NSNumber numberWithInteger:child.value]];
+                        [self treeNodesApply:node];
                     }
+                } else {
+                    [self.residualActions addObject:node];
                 }
             }
-                break;
-            case FaceToOrientation:
-            {
-                MCTreeNode *elementNode;
-                elementNode = [node.children objectAtIndex:0];
-                ColorCombinationType targetCombination = (ColorCombinationType)elementNode.value;
-                struct Point3i targetCoor = [magicCube coordinateValueOfCubieWithColorCombination:targetCombination];
-                elementNode = [node.children objectAtIndex:1];
-                FaceOrientationType targetOrientation = (FaceOrientationType)elementNode.value;
-                returnedRotationQueue = [NSArray arrayWithObject:
-                                         [MCTransformUtil getRotationTagFromSingmasterNotation:
-                                          [self getPathToMakeCenterCubieAtPosition:targetCoor inOrientation:targetOrientation]]];
-            }
-                break;
-            case LockCubie:
-            {
-                MCTreeNode *elementNode = [node.children objectAtIndex:0];
-                int index = 0;
-                if ([node.children count] != 1) {
-                    index = [(MCTreeNode *)[node.children objectAtIndex:1] value];
-                }
-                int identity = [self treeNodesApply:elementNode];
-                if (identity == -1) {
-                    lockedCubies[index] = nil;
-                }
-                else{
-                    lockedCubies[index] = [magicCube cubieWithColorCombination:(ColorCombinationType)identity];
-                }
-            }
-                break;
-            case UnlockCubie:
-            {
-                int index = 0;
-                if ([node.children count] != 0) {
-                    index = [(MCTreeNode *)[node.children objectAtIndex:0] value];
-                }
-                lockedCubies[index] = nil;
-            }
-                break;
         }
+            break;
+        case ActionNode:
+            switch (action.value) {
+                case Rotate:
+                case FaceToOrientation:
+                    self.applyQueue = [MCApplyQueue applyQueueWithRotationAction:action withMagicCube:self.magicCube];
+                    break;
+                default:
+                    [self treeNodesApply:action];
+                    break;
+            }
+            break;
+        default:
+            break;
     }
+    
+    NSArray *returnedRotationQueue = nil;
+    if (self.applyQueue != nil) {
+        returnedRotationQueue = [self.applyQueue getQueueWithStringFormat];
+    }
+    
     NSDictionary *resultDirectory = nil;
     if (returnedRotationQueue != nil) {
         resultDirectory = [NSDictionary dictionaryWithObject:[NSArray arrayWithArray:returnedRotationQueue] forKey:RotationQueueKey];
@@ -579,257 +570,52 @@
     return self.state;
 }
 
-- (SingmasterNotation)getPathToMakeCenterCubieAtPosition:(struct Point3i)coordinate inOrientation:(FaceOrientationType)orientation{
-    SingmasterNotation result = NoneNotation;
-    switch (orientation) {
-        case Up:
-            switch (coordinate.y) {
-                case 1:
-                    result = NoneNotation;
-                    break;
-                case 0:
-                    switch (coordinate.x*2+coordinate.z) {
-                        case 1:
-                            result = x;
-                            break;
-                        case -1:
-                            result = xi;
-                            break;
-                        case 2:
-                            result = zi;
-                            break;
-                        case -2:
-                            result = z;
-                            break;
-                        default:
-                            break;
-                    }
-                    break;
-                case -1:
-                    result = x2;
-                    break;
-                default:
-                    break;
-            }
-            break;
-        case Down:
-            switch (coordinate.y) {
-                case -1:
-                    result = NoneNotation;
-                    break;
-                case 0:
-                    switch (coordinate.x*2+coordinate.z) {
-                        case 1:
-                            result = xi;
-                            break;
-                        case -1:
-                            result = x;
-                            break;
-                        case 2:
-                            result = z;
-                            break;
-                        case -2:
-                            result = zi;
-                            break;
-                        default:
-                            break;
-                    }
-                    break;
-                case 1:
-                    result = x2;
-                    break;
-                default:
-                    break;
-            }
-            break;
-        case Left:
-            switch (coordinate.x) {
-                case -1:
-                    result = NoneNotation;
-                    break;
-                case 0:
-                    switch (coordinate.y*2+coordinate.z) {
-                        case 1:
-                            result = y;
-                            break;
-                        case -1:
-                            result = yi;
-                            break;
-                        case 2:
-                            result = zi;
-                            break;
-                        case -2:
-                            result = z;
-                            break;
-                        default:
-                            break;
-                    }
-                    break;
-                case 1:
-                    result = y2;
-                    break;
-                default:
-                    break;
-            }
-            break;
-        case Right:
-            switch (coordinate.x) {
-                case 1:
-                    result = NoneNotation;
-                    break;
-                case 0:
-                    switch (coordinate.y*2+coordinate.z) {
-                        case 1:
-                            result = yi;
-                            break;
-                        case -1:
-                            result = y;
-                            break;
-                        case 2:
-                            result = z;
-                            break;
-                        case -2:
-                            result = zi;
-                            break;
-                        default:
-                            break;
-                    }
-                    break;
-                case -1:
-                    result = y2;
-                    break;
-                default:
-                    break;
-            }
-            break;
-        case Front:
-            switch (coordinate.z) {
-                case 1:
-                    result = NoneNotation;
-                    break;
-                case 0:
-                    switch (coordinate.x*2+coordinate.y) {
-                        case 1:
-                            result = xi;
-                            break;
-                        case -1:
-                            result = x;
-                            break;
-                        case 2:
-                            result = y;
-                            break;
-                        case -2:
-                            result = yi;
-                            break;
-                        default:
-                            break;
-                    }
-                    break;
-                case -1:
-                    result = y2;
-                    break;
-                default:
-                    break;
-            }
-            break;
-        case Back:
-            switch (coordinate.z) {
-                case -1:
-                    result = NoneNotation;
-                    break;
-                case 0:
-                    switch (coordinate.x*2+coordinate.y) {
-                        case 1:
-                            result = x;
-                            break;
-                        case -1:
-                            result = xi;
-                            break;
-                        case 2:
-                            result = yi;
-                            break;
-                        case -2:
-                            result = y;
-                            break;
-                        default:
-                            break;
-                    }
-                    break;
-                case 1:
-                    result = y2;
-                    break;
-                default:
-                    break;
-            }
-            break;
-        default:
-            result = NoneNotation;
-            break;
-    }
-    return result;
-}
 
 - (void)rotateOnAxis:(AxisType)axis onLayer:(int)layer inDirection:(LayerRotationDirectionType)direction{
     if (self.magicCube != nil) {
         [self.magicCube rotateOnAxis:axis onLayer:layer inDirection:direction];
         SingmasterNotation currentRotation = [MCTransformUtil getSingmasterNotationFromAxis:axis layer:layer direction:direction];
-        //detect the rotation result
-        //if the queue is exist, continue
-        //else, return finished
-        if (self.rotationQueue == nil) {
-            previousResult = Finished;
+        //apply rotation and get result
+        if (self.applyQueue != nil && self.helperState == ApplyingRotationQueue) {
+            self.rotationResult = [self.applyQueue applyRotation:currentRotation];
         }
-        else{
-            //if they are same, accord
-            SingmasterNotation targetRotation = (SingmasterNotation)[[self.rotationQueue objectAtIndex:currentRotationQueuePosition] integerValue];
-            if (targetRotation == currentRotation) {
-                previousResult = Accord;
-                currentRotationQueuePosition++;
-            }
-            else{
-                if (previousResult == StayForATime) {
-                    if ([MCTransformUtil isSingmasterNotation:previousRotation andSingmasterNotation:currentRotation equalTo:targetRotation]) {
-                        previousResult = Accord;
-                        currentRotationQueuePosition++;
-                    }
-                    else{
-                        previousResult = Disaccord;
-                        //extra queue
-                        [self.extraRotations removeAllObjects];
-                        [self.extraRotations addObject:[MCTransformUtil getRotationTagFromSingmasterNotation:previousRotation]];
-                        [self.extraRotations addObject:[MCTransformUtil getRotationTagFromSingmasterNotation:currentRotation]];
-                        //self queue
-                        [self.rotationQueue insertObject:[NSNumber numberWithInteger:previousRotation] atIndex:currentRotationQueuePosition];
-                        [self.rotationQueue insertObject:[NSNumber numberWithInteger:currentRotation] atIndex:currentRotationQueuePosition];
-                    }
-                } else {
-                    if ([MCTransformUtil isSingmasterNotation:currentRotation PossiblePartOfSingmasterNotation:targetRotation]) {
-                        previousResult = StayForATime;
-                    }
-                    else{
-                        previousResult = Disaccord;
-                        //extra queue
-                        [self.extraRotations removeAllObjects];
-                        [self.extraRotations addObject:[MCTransformUtil getRotationTagFromSingmasterNotation:currentRotation]];
-                        //self queue
-                        [self.rotationQueue insertObject:[NSNumber numberWithInteger:currentRotation] atIndex:currentRotationQueuePosition];
-                    }
-                }
-            }
-            
-            if (currentRotationQueuePosition == [self.rotationQueue count]) {
-                self.rotationQueue = nil;
-                previousResult = Finished;
-            }
+    }
+}
+
+- (void)rotateWithSingmasterNotation:(SingmasterNotation)notation{
+    if (self.magicCube != nil) {
+        [self.magicCube rotateWithSingmasterNotation:notation];
+        //apply rotation and get result
+        if (self.applyQueue != nil && self.helperState == ApplyingRotationQueue) {
+            self.rotationResult = [self.applyQueue applyRotation:notation];
         }
-        previousRotation = currentRotation;
     }
 }
 
 
 - (RotationResult)getResultOfTheLastRotation{
-    return previousResult;
+    return self.rotationResult;
 }
+
+- (void)setHelperState:(HelperStateMachine)hs{
+    helperState = hs;
+    switch (hs) {
+        case Normal:
+            self.applyQueue = nil;
+            self.rotationResult = NoneResult;
+            break;
+        case ApplyingRotationQueue:
+            break;
+        default:
+            break;
+    }
+}
+
+- (void)clearResidualActions{
+    for (MCTreeNode *node in self.residualActions) {
+        [self treeNodesApply:node];
+    }
+}   //do the clear thing for next rotation queue
 
 @end
 

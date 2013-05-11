@@ -11,6 +11,7 @@
 #import "MCKnowledgeBase.h"
 #import "Global.h"
 #import "MCBasicElement.h"
+#import "MCApplyQueue.h"
 
 #define CubieCouldBeLockMaxNum 26
 
@@ -28,9 +29,11 @@ typedef enum _HelperStateMachine {
 @property (nonatomic, retain)NSDictionary *rules;
 @property (nonatomic, retain)NSDictionary *states;
 @property (nonatomic, retain)NSString *state;
-@property (nonatomic, strong)NSMutableArray *rotationQueue;
-@property (nonatomic, strong)NSMutableArray *extraRotations;
 @property (nonatomic)HelperStateMachine helperState;
+@property (nonatomic, retain)MCApplyQueue *applyQueue;
+@property (nonatomic)RotationResult rotationResult;
+@property (nonatomic, retain)NSMutableArray *residualActions;
+
 
 + (MCPlayHelper *)playerHelperWithMagicCube:(MCMagicCube *)mc;
 
@@ -44,6 +47,9 @@ typedef enum _HelperStateMachine {
 
 //rotate operation with axis, layer, direction
 - (void)rotateOnAxis:(AxisType)axis onLayer:(int)layer inDirection:(LayerRotationDirectionType)direction;
+
+//rotate operation with parameter SingmasterNotation
+- (void)rotateWithSingmasterNotation:(SingmasterNotation)notation;
 
 //get the result of the last rotation
 - (RotationResult)getResultOfTheLastRotation;
@@ -60,5 +66,7 @@ typedef enum _HelperStateMachine {
 //"Tips"——the string showing tips
 - (NSDictionary *)applyRules;
 
+//do the clear thing for next rotation queue
+- (void)clearResidualActions;
 
 @end

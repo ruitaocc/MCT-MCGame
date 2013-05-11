@@ -14,10 +14,16 @@
 //旋转速度 帧率无关设计 2秒
 #define TIME_PER_ROTATION 0.5
 #define ROTATION_ANGLE 90
-#define CUBE_CUBE_GAP 0.3;
+#define CUBE_CUBE_GAP 0;
 #import "MCRay.h"
 #include "MCCollider.h"
 #import "MCMagicCube.h"
+
+typedef enum _MagicCubeUIUsingMode {
+    PLAY_MODE = 0,
+    TECH_MODE =1
+} MagicCubeUIUsingMode;
+
 @interface MCMagicCubeUIModelController : MCSceneObject{
     NSMutableArray* array27Cube; 
     Cube * layerPtr[9];
@@ -40,6 +46,7 @@
     
     double cuculated_angle;
     
+    vec3 directionVector[2];
     vec2 firstThreePoint[3];
     Cube *selected;
     float selected_triangle[9];
@@ -71,6 +78,10 @@
     //MCMagicCube *magicCube;
     UITouch *touch;
     int rrrr;
+    
+    MagicCubeUIUsingMode _usingMode;
+   
+    
 }
 //@property (retain, nonatomic) MCMagicCube *magicCube;
 @property (assign) id target;
@@ -78,12 +89,15 @@
 @property (assign) SEL stepcounterMinusAction;
 @property (retain) NSMutableArray* array27Cube;
 @property (retain) NSUndoManager* undoManger;
+//是否使用教学模式下的操作模式
+@property (assign) MagicCubeUIUsingMode usingMode;
 -(id)initiate;
 -(id)initiateWithState:(NSArray *)stateList;
 - (void) rotateOnAxis : (AxisType)axis onLayer: (int)layer inDirection: (LayerRotationDirectionType)direction;
 -(void)awake;
 -(void)render;
 -(void)update;
+-(void)adjustWithCenter;
 //撤销栈管理
 -(void)executeInvocation:(NSInvocation *)invocation
       withUndoInvocation:(NSInvocation *)undoInvocation;

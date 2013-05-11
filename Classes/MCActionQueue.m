@@ -96,7 +96,6 @@ NSString *actionname[45]={@"frontCW",@"frontCCW",@"front2CW",@"backCW",@"backCCW
 -(void)insertQueueIndex:(NSInteger)index withQuad:(ActionQuad*)quad{
     [quad retain];
     [actionQuads insertObject:quad atIndex:index];
-    [self setTranslation:self.translation];
     [quad release];
 
 }
@@ -104,10 +103,18 @@ NSString *actionname[45]={@"frontCW",@"frontCCW",@"front2CW",@"backCW",@"backCCW
     for (int i =0; i<[insertlist count]; i++) {
         NSString *quadname = [insertlist objectAtIndex:i];
         ActionQuad * actionQ = [[ActionQuad alloc]initWithNstring:quadname];
-        [actionQ setScale:MCPointMake(10, 0, 0)];
+        [actionQ setScale:MCPointMake(10, 10, 0)];
         [actionQ setTranslation:MCPointMake(10, 0, 0)];
+        [actionQ setActive : YES];
+        [actionQ awake];
         [self insertQueueIndex:currentActionIndex withQuad:actionQ];
         [actionQ release];
+    }
+    [self setTranslation:self.translation];
+    [self setScale:self.scale];
+    //test code
+    for (int i = 0; i  < [actionQuads count]; i++) {
+        NSLog(@"%@",[[actionQuads objectAtIndex:i]name]);
     }
 }
 -(void)removeAllActions{
@@ -149,10 +156,14 @@ NSString *actionname[45]={@"frontCW",@"frontCCW",@"front2CW",@"backCW",@"backCCW
     [actionQuads makeObjectsPerformSelector:@selector(render)];
     [super render];
 };
+
 - (void)reset{}
 - (void)dealloc{
     [currentArrow release];
     [actionQuads release];
     [super dealloc];
 }
+-(BOOL)isQueueEmpty{
+    return ![actionQuads count];
+};
 @end

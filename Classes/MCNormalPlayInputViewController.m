@@ -16,12 +16,14 @@
 @synthesize stepcounter;
 @synthesize timer;
 @synthesize actionQueue;
+
+
 -(void)loadInterface
 {
 	if (interfaceObjects == nil) interfaceObjects = [[NSMutableArray alloc] init];
 	[interfaceObjects removeAllObjects];
     
-    isShowQueue = NO;
+    
     NSString *counterName[10] = {@"zero",@"one",@"two",@"three",@"four",@"five",@"six",@"seven",@"eight",@"nine"};
     stepcounter = [[MCMultiDigitCounter alloc]initWithNumberOfDigit:3 andKeys:counterName];
     [stepcounter setScale : MCPointMake(135, 72, 1.0)];
@@ -48,12 +50,12 @@
     for (int i=5; i<17; i++) {
         [actionname addObject:names[i]];
     }*/
-    [actionname addObject:names[1]];
+    //[actionname addObject:names[1]];
 
     actionQueue = [[MCActionQueue alloc]initWithActionList:actionname];
     [actionQueue setScale : MCPointMake(32, 32, 1.0)];
     [actionQueue setTranslation :MCPointMake(0, 320, 0.0)];
-    [actionQueue setActive:NO];
+    [actionQueue setActive:YES];
     [actionQueue awake];
     [interfaceObjects addObject:actionQueue];
 
@@ -158,12 +160,12 @@
     
 }
 -(void)tipsBtnUp{
-    if (!isShowQueue) {
-        isShowQueue = YES;
-        self.actionQueue.active = YES;
-    }else{
-        isShowQueue = NO;
-        self.actionQueue.active = NO;
+    MCNormalPlaySceneController *c = [MCNormalPlaySceneController sharedNormalPlaySceneController ];
+    c.isShowQueue = !c.isShowQueue;
+    //[self.actionQueue setActive : !self.actionQueue.active ];
+    [[c tipsLabel] setHidden:![[c tipsLabel] isHidden]];
+    if (self.actionQueue.active) {
+        [c showQueue];
     }
 };
 -(void)tipsBtnDown{};
@@ -216,10 +218,14 @@
     NSLog(@"mainMenuPlayBtnDown");
 }
 -(void)mainMenuBtnUp{NSLog(@"mainMenuPlayBtnUp");
+    
     //保存魔方状态
     NSString *path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
     NSString *fileName = [path stringByAppendingPathComponent:TmpMagicCubeData];
     MCNormalPlaySceneController *c = [MCNormalPlaySceneController sharedNormalPlaySceneController ];
+    if (![[c tipsLabel]isHidden]) {
+        [[c tipsLabel]setHidden:YES];
+    }
     [NSKeyedArchiver archiveRootObject:[c magicCube] toFile:fileName];
     
     //发送消息到界面迁移协调控制器

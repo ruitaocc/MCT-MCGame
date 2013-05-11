@@ -19,7 +19,7 @@
 #import "data.hpp"
 @implementation Cube
 @synthesize index,cube6faces;
-@synthesize O_X,O_Y,O_Z;
+
 - (id) initWithState:(NSDictionary *)states
 {
 	self = [super init];
@@ -53,9 +53,7 @@
             [faces release];
         }
     }
-    O_X = ZX;
-    O_Y = ZY;
-    O_Z = ZZ;
+    
 	return self;
 }
 -(id)init{
@@ -90,9 +88,7 @@
         }
         
     }
-    O_X = ZX;
-    O_Y = ZY;
-    O_Z = ZZ;
+    
 	return self;
 
 }

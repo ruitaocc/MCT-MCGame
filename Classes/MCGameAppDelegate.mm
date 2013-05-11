@@ -57,7 +57,6 @@
     
     
     
-    
 	sceneController.inputController.view = glView;
 	sceneController.openGLView = glView;
 	

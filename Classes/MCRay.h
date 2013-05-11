@@ -30,7 +30,10 @@
 -(GLfloat)intersectWithTriangleMadeUpOfV0:(float *)V0
                                     V1:(float *)V1
                                     V2:(float *)V2;
-
+//return the intetatived point
+-(vec3)pointIntersectWithTriangleMadeUpOfV0:(float *)V0
+                                       V1:(float *)V1
+                                       V2:(float *)V2;
 //You can transform the ray from world coordinate into model world coordinate by use the inverse of the current modelview.
 //If you want to check intersection many times, don't forget that before what is transformed should be the copy object.
 -(void)transformWithMatrix:(mat4) matrix;

@@ -35,6 +35,9 @@
 		A327DC4E16DF7D2A001907DE /* countNumber.plist in Resources */ = {isa = PBXBuildFile; fileRef = A327DC4C16DF7D2A001907DE /* countNumber.plist */; };
 		A32A33BA163BA7C7007840CC /* ClassDiagrm.png in Resources */ = {isa = PBXBuildFile; fileRef = A32A33B8163BA7C7007840CC /* ClassDiagrm.png */; };
 		A32A33BB163BA7C7007840CC /* ClassDiagrm.uxf in Resources */ = {isa = PBXBuildFile; fileRef = A32A33B9163BA7C7007840CC /* ClassDiagrm.uxf */; };
+		A33032CC1726B19F00BAD2DE /* MCApplyQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = A33032CB1726B19F00BAD2DE /* MCApplyQueue.m */; };
+		A33032CF1726B1C400BAD2DE /* MCPlayHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = A33032CE1726B1C400BAD2DE /* MCPlayHelper.m */; };
+		A33032D21726B1E500BAD2DE /* MCTransformUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = A33032D11726B1E500BAD2DE /* MCTransformUtil.m */; };
 		A3359E57168E944D002F9459 /* SVProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = A3359E56168E944D002F9459 /* SVProgressHUD.m */; };
 		A3359E5E168E9764002F9459 /* error.png in Resources */ = {isa = PBXBuildFile; fileRef = A3359E58168E9764002F9459 /* error.png */; };
 		A3359E5F168E9764002F9459 /* error@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A3359E59168E9764002F9459 /* error@2x.png */; };
@@ -124,9 +127,7 @@
 		A3E855B21663A9C400DE3ED9 /* cube1126_original.obj in Resources */ = {isa = PBXBuildFile; fileRef = A3E855B11663A9C400DE3ED9 /* cube1126_original.obj */; };
 		A3EAD3D91713C18A00A95ADA /* MCCube.m in Sources */ = {isa = PBXBuildFile; fileRef = A3EAD3D61713C18A00A95ADA /* MCCube.m */; };
 		A3EAD3DA1713C18A00A95ADA /* MCMagicCube.m in Sources */ = {isa = PBXBuildFile; fileRef = A3EAD3D81713C18A00A95ADA /* MCMagicCube.m */; };
-		A3EAD3DD1713C19D00A95ADA /* MCTransformUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = A3EAD3DC1713C19D00A95ADA /* MCTransformUtil.m */; };
 		A3EAD3E41713C1AF00A95ADA /* MCKnowledgeBase.m in Sources */ = {isa = PBXBuildFile; fileRef = A3EAD3DF1713C1AF00A95ADA /* MCKnowledgeBase.m */; };
-		A3EAD3E51713C1AF00A95ADA /* MCPlayHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = A3EAD3E11713C1AF00A95ADA /* MCPlayHelper.m */; };
 		A3EAD3E61713C1AF00A95ADA /* MCBasicElement.m in Sources */ = {isa = PBXBuildFile; fileRef = A3EAD3E31713C1AF00A95ADA /* MCBasicElement.m */; };
 		A3EAD3EA1713C1CE00A95ADA /* CircleMenuController.m in Sources */ = {isa = PBXBuildFile; fileRef = A3EAD3E91713C1CE00A95ADA /* CircleMenuController.m */; };
 		A3EB454816BE358700DBB8B7 /* MCMultiDigitCounter.m in Sources */ = {isa = PBXBuildFile; fileRef = A3EB454716BE358700DBB8B7 /* MCMultiDigitCounter.m */; };
@@ -211,6 +212,12 @@
 		A327DC4C16DF7D2A001907DE /* countNumber.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = countNumber.plist; sourceTree = "<group>"; };
 		A32A33B8163BA7C7007840CC /* ClassDiagrm.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ClassDiagrm.png; sourceTree = "<group>"; };
 		A32A33B9163BA7C7007840CC /* ClassDiagrm.uxf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = ClassDiagrm.uxf; sourceTree = "<group>"; };
+		A33032CA1726B19F00BAD2DE /* MCApplyQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCApplyQueue.h; sourceTree = "<group>"; };
+		A33032CB1726B19F00BAD2DE /* MCApplyQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCApplyQueue.m; sourceTree = "<group>"; };
+		A33032CD1726B1C400BAD2DE /* MCPlayHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCPlayHelper.h; sourceTree = "<group>"; };
+		A33032CE1726B1C400BAD2DE /* MCPlayHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCPlayHelper.m; sourceTree = "<group>"; };
+		A33032D01726B1E400BAD2DE /* MCTransformUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCTransformUtil.h; sourceTree = "<group>"; };
+		A33032D11726B1E500BAD2DE /* MCTransformUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCTransformUtil.m; sourceTree = "<group>"; };
 		A3359E55168E944D002F9459 /* SVProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVProgressHUD.h; sourceTree = "<group>"; };
 		A3359E56168E944D002F9459 /* SVProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVProgressHUD.m; sourceTree = "<group>"; };
 		A3359E58168E9764002F9459 /* error.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = error.png; path = Classes/error.png; sourceTree = "<group>"; };
@@ -323,12 +330,8 @@
 		A3EAD3D61713C18A00A95ADA /* MCCube.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCCube.m; sourceTree = "<group>"; };
 		A3EAD3D71713C18A00A95ADA /* MCMagicCube.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCMagicCube.h; sourceTree = "<group>"; };
 		A3EAD3D81713C18A00A95ADA /* MCMagicCube.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCMagicCube.m; sourceTree = "<group>"; };
-		A3EAD3DB1713C19D00A95ADA /* MCTransformUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCTransformUtil.h; sourceTree = "<group>"; };
-		A3EAD3DC1713C19D00A95ADA /* MCTransformUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCTransformUtil.m; sourceTree = "<group>"; };
 		A3EAD3DE1713C1AF00A95ADA /* MCKnowledgeBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCKnowledgeBase.h; sourceTree = "<group>"; };
 		A3EAD3DF1713C1AF00A95ADA /* MCKnowledgeBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCKnowledgeBase.m; sourceTree = "<group>"; };
-		A3EAD3E01713C1AF00A95ADA /* MCPlayHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCPlayHelper.h; sourceTree = "<group>"; };
-		A3EAD3E11713C1AF00A95ADA /* MCPlayHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCPlayHelper.m; sourceTree = "<group>"; };
 		A3EAD3E21713C1AF00A95ADA /* MCBasicElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCBasicElement.h; sourceTree = "<group>"; };
 		A3EAD3E31713C1AF00A95ADA /* MCBasicElement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCBasicElement.m; sourceTree = "<group>"; };
 		A3EAD3E71713C1CE00A95ADA /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
@@ -957,10 +960,12 @@
 			children = (
 				A3EAD3DE1713C1AF00A95ADA /* MCKnowledgeBase.h */,
 				A3EAD3DF1713C1AF00A95ADA /* MCKnowledgeBase.m */,
-				A3EAD3E01713C1AF00A95ADA /* MCPlayHelper.h */,
-				A3EAD3E11713C1AF00A95ADA /* MCPlayHelper.m */,
+				A33032CD1726B1C400BAD2DE /* MCPlayHelper.h */,
+				A33032CE1726B1C400BAD2DE /* MCPlayHelper.m */,
 				A3EAD3E21713C1AF00A95ADA /* MCBasicElement.h */,
 				A3EAD3E31713C1AF00A95ADA /* MCBasicElement.m */,
+				A33032CA1726B19F00BAD2DE /* MCApplyQueue.h */,
+				A33032CB1726B19F00BAD2DE /* MCApplyQueue.m */,
 			);
 			name = MCPlayHelper;
 			sourceTree = "<group>";
@@ -968,8 +973,8 @@
 		A3F8291516EF798C00AC5EAF /* Util */ = {
 			isa = PBXGroup;
 			children = (
-				A3EAD3DB1713C19D00A95ADA /* MCTransformUtil.h */,
-				A3EAD3DC1713C19D00A95ADA /* MCTransformUtil.m */,
+				A33032D01726B1E400BAD2DE /* MCTransformUtil.h */,
+				A33032D11726B1E500BAD2DE /* MCTransformUtil.m */,
 			);
 			name = Util;
 			sourceTree = "<group>";
@@ -1212,11 +1217,12 @@
 				A3C1E397170442270033EFC1 /* ActionArrow.m in Sources */,
 				A3EAD3D91713C18A00A95ADA /* MCCube.m in Sources */,
 				A3EAD3DA1713C18A00A95ADA /* MCMagicCube.m in Sources */,
-				A3EAD3DD1713C19D00A95ADA /* MCTransformUtil.m in Sources */,
 				A3EAD3E41713C1AF00A95ADA /* MCKnowledgeBase.m in Sources */,
-				A3EAD3E51713C1AF00A95ADA /* MCPlayHelper.m in Sources */,
 				A3EAD3E61713C1AF00A95ADA /* MCBasicElement.m in Sources */,
 				A3EAD3EA1713C1CE00A95ADA /* CircleMenuController.m in Sources */,
+				A33032CC1726B19F00BAD2DE /* MCApplyQueue.m in Sources */,
+				A33032CF1726B1C400BAD2DE /* MCPlayHelper.m in Sources */,
+				A33032D21726B1E500BAD2DE /* MCTransformUtil.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

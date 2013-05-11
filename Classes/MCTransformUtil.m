@@ -270,4 +270,194 @@
     return result;
 }
 
++ (SingmasterNotation)getPathToMakeCenterCubieAtPosition:(struct Point3i)coordinate inOrientation:(FaceOrientationType)orientation{
+    SingmasterNotation result = NoneNotation;
+    switch (orientation) {
+        case Up:
+            switch (coordinate.y) {
+                case 1:
+                    result = NoneNotation;
+                    break;
+                case 0:
+                    switch (coordinate.x*2+coordinate.z) {
+                        case 1:
+                            result = x;
+                            break;
+                        case -1:
+                            result = xi;
+                            break;
+                        case 2:
+                            result = zi;
+                            break;
+                        case -2:
+                            result = z;
+                            break;
+                        default:
+                            break;
+                    }
+                    break;
+                case -1:
+                    result = x2;
+                    break;
+                default:
+                    break;
+            }
+            break;
+        case Down:
+            switch (coordinate.y) {
+                case -1:
+                    result = NoneNotation;
+                    break;
+                case 0:
+                    switch (coordinate.x*2+coordinate.z) {
+                        case 1:
+                            result = xi;
+                            break;
+                        case -1:
+                            result = x;
+                            break;
+                        case 2:
+                            result = z;
+                            break;
+                        case -2:
+                            result = zi;
+                            break;
+                        default:
+                            break;
+                    }
+                    break;
+                case 1:
+                    result = x2;
+                    break;
+                default:
+                    break;
+            }
+            break;
+        case Left:
+            switch (coordinate.x) {
+                case -1:
+                    result = NoneNotation;
+                    break;
+                case 0:
+                    switch (coordinate.y*2+coordinate.z) {
+                        case 1:
+                            result = y;
+                            break;
+                        case -1:
+                            result = yi;
+                            break;
+                        case 2:
+                            result = zi;
+                            break;
+                        case -2:
+                            result = z;
+                            break;
+                        default:
+                            break;
+                    }
+                    break;
+                case 1:
+                    result = y2;
+                    break;
+                default:
+                    break;
+            }
+            break;
+        case Right:
+            switch (coordinate.x) {
+                case 1:
+                    result = NoneNotation;
+                    break;
+                case 0:
+                    switch (coordinate.y*2+coordinate.z) {
+                        case 1:
+                            result = yi;
+                            break;
+                        case -1:
+                            result = y;
+                            break;
+                        case 2:
+                            result = z;
+                            break;
+                        case -2:
+                            result = zi;
+                            break;
+                        default:
+                            break;
+                    }
+                    break;
+                case -1:
+                    result = y2;
+                    break;
+                default:
+                    break;
+            }
+            break;
+        case Front:
+            switch (coordinate.z) {
+                case 1:
+                    result = NoneNotation;
+                    break;
+                case 0:
+                    switch (coordinate.x*2+coordinate.y) {
+                        case 1:
+                            result = xi;
+                            break;
+                        case -1:
+                            result = x;
+                            break;
+                        case 2:
+                            result = y;
+                            break;
+                        case -2:
+                            result = yi;
+                            break;
+                        default:
+                            break;
+                    }
+                    break;
+                case -1:
+                    result = y2;
+                    break;
+                default:
+                    break;
+            }
+            break;
+        case Back:
+            switch (coordinate.z) {
+                case -1:
+                    result = NoneNotation;
+                    break;
+                case 0:
+                    switch (coordinate.x*2+coordinate.y) {
+                        case 1:
+                            result = x;
+                            break;
+                        case -1:
+                            result = xi;
+                            break;
+                        case 2:
+                            result = yi;
+                            break;
+                        case -2:
+                            result = y;
+                            break;
+                        default:
+                            break;
+                    }
+                    break;
+                case 1:
+                    result = y2;
+                    break;
+                default:
+                    break;
+            }
+            break;
+        default:
+            result = NoneNotation;
+            break;
+    }
+    return result;
+}
+
 @end

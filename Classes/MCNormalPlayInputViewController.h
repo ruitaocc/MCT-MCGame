@@ -19,8 +19,9 @@
     AskReloadView* askReloadView;
     PauseMenu *pauseMenuView;
     MCActionQueue *actionQueue;
-    BOOL isShowQueue;
+    
 }
+
 @property (nonatomic,retain) MCActionQueue *actionQueue;
 @property (nonatomic,retain) MCMultiDigitCounter *stepcounter;
 @property (nonatomic,retain) MCTimer * timer;
