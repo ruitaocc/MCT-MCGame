@@ -76,6 +76,8 @@
         isAddStepWhenUpdateState = YES;
         rrrr = 0;
         isNeededToUpadteTwice = NO;
+        isTribleAutoRotateIn_TECH_MODE = NO;
+        is_TECH_MODE_Rotate = NO;
         undoManger = [[NSUndoManager alloc]init];
         //default mode play mode;
         [self setUsingMode:PLAY_MODE];
@@ -149,6 +151,8 @@
         firstThreePointCount = 0;
         fingerRotate_angle = 0;
         select_trackballRadius = 260;
+        is_TECH_MODE_Rotate = NO;
+        isTribleAutoRotateIn_TECH_MODE = NO;
         isAddStepWhenUpdateState = YES;
         rrrr = 0;
         //default mode play mode;
@@ -172,14 +176,14 @@
     //[[array27Cube objectAtIndex:26] performSelector:@selector(awake)];
     
 }
-- (void) rotateOnAxis : (AxisType)axis onLayer: (int)layer inDirection: (LayerRotationDirectionType)direction{
+- (void) rotateOnAxis : (AxisType)axis onLayer: (int)layer inDirection: (LayerRotationDirectionType)direction isTribleRotate:(BOOL)is_trible_roate{
     //当前如果有某一自动旋转正在进行，禁止再旋转，直到完成
     if (isAutoRotate) return;
     //当前如果有某一手动旋转正在进行，禁止再旋转，直到完成
     if (isLayerRotating) return;
     //当前如果有某一旋转自动调整正在进行，禁止再旋转，直到完成
     if (isNeededToAdjustment) return;
-    
+    isTribleAutoRotateIn_TECH_MODE = is_trible_roate;
     isAutoRotate = YES;
     rest_rotate_time = TIME_PER_ROTATION;
     rest_rotate_angle = ROTATION_ANGLE;
@@ -310,21 +314,38 @@
             vec3 end_v = vec3(tmpp.x,tmpp.y,tmpp.z);
             
             Quaternion delta = Quaternion::CreateFromVectors(start_v, end_v);
-            for (int i= 0 ; i<9; i++) {
-                [layerPtr[i] setQuaPreviousRotation:layerPtr[i].quaRotation]; 
-                if (current_rotate_layer!=1) {
-                    [layerPtr[i] setQuaRotation: delta.Rotated([layerPtr[i] quaPreviousRotation])];
-                }else if(i!=4){
-                    [layerPtr[i] setQuaRotation: delta.Rotated([layerPtr[i] quaPreviousRotation])];
+            if (isTribleAutoRotateIn_TECH_MODE) {
+                for (int i =0; i<27; i++) {
+                    [MagicCubeIndexState[i] setQuaPreviousRotation:[MagicCubeIndexState[i] quaRotation]];
+                    if (i!=13) {
+                        
+                        [MagicCubeIndexState[i] setQuaRotation:delta.Rotated([MagicCubeIndexState[i] quaPreviousRotation])];
+                    }
                 }
-            }
-
-            [self updateState];
-            //当转过的角度为180时，需要更新模型两次
-            if(isNeededToUpadteTwice){
+                current_rotate_layer = 0;
                 [self updateState];
-                isNeededToUpadteTwice = NO;
+                current_rotate_layer = 1;
+                [self updateState];
+                current_rotate_layer = 2;
+                [self updateState];
+            }else{
+                for (int i= 0 ; i<9; i++) {
+                    [layerPtr[i] setQuaPreviousRotation:layerPtr[i].quaRotation];
+                    if (current_rotate_layer!=1) {
+                        [layerPtr[i] setQuaRotation: delta.Rotated([layerPtr[i] quaPreviousRotation])];
+                    }else if(i!=4){
+                        [layerPtr[i] setQuaRotation: delta.Rotated([layerPtr[i] quaPreviousRotation])];
+                    }
+                }
+                [self updateState];
+                //当转过的角度为180时，需要更新模型两次
+                if(isNeededToUpadteTwice){
+                    [self updateState];
+                    isNeededToUpadteTwice = NO;
+                }
+
             }
+            if (isTribleAutoRotateIn_TECH_MODE)isTribleAutoRotateIn_TECH_MODE = NO;
             //归零
             rest_rotate_time = 0;
             
@@ -394,12 +415,21 @@
             vec3 end_v = vec3(tmpp.x,tmpp.y,tmpp.z);
 
             Quaternion delta = Quaternion::CreateFromVectors(start_v, end_v);
-            for (int i= 0 ; i<9; i++) {
-                [layerPtr[i] setQuaPreviousRotation:layerPtr[i].quaRotation]; 
-                if (current_rotate_layer!=1) {
-                    [layerPtr[i] setQuaRotation: delta.Rotated([layerPtr[i] quaPreviousRotation])];
-                }else if(i!=4){
-                    [layerPtr[i] setQuaRotation: delta.Rotated([layerPtr[i] quaPreviousRotation])];
+            if (isTribleAutoRotateIn_TECH_MODE) {
+                for (int i =0; i<27; i++) {
+                    [MagicCubeIndexState[i] setQuaPreviousRotation:[MagicCubeIndexState[i] quaRotation]];
+                    if (i!=13) {
+                        [MagicCubeIndexState[i] setQuaRotation:delta.Rotated([MagicCubeIndexState[i] quaPreviousRotation])];
+                    }
+                }
+            }else{
+                for (int i= 0 ; i<9; i++) {
+                    [layerPtr[i] setQuaPreviousRotation:layerPtr[i].quaRotation];
+                    if (current_rotate_layer!=1) {
+                        [layerPtr[i] setQuaRotation: delta.Rotated([layerPtr[i] quaPreviousRotation])];
+                    }else if(i!=4){
+                        [layerPtr[i] setQuaRotation: delta.Rotated([layerPtr[i] quaPreviousRotation])];
+                    }
                 }
             }
         }
@@ -612,6 +642,26 @@
         
         -0.5,-0.5,0.5,   -0.5,-0.5,-0.5,   0.5,-0.5,-0.5,
         0.5,-0.5,-0.5,   0.5,-0.5,0.5,    -0.5,-0.5,0.5,//下
+    };
+    
+    //继续射线拾取
+    float V2[108] = {-1.5,1.5,1.5,    -1.5,-1.5,1.5,   1.5,-1.5,1.5,
+        1.5,-1.5,1.5,    1.5,1.5,1.5,    -1.5,1.5,1.5,//前
+        
+        -1.5,1.5,1.5,     1.5,1.5,1.5,     1.5,1.5,-1.5,
+        1.5,1.5,-1.5,   -1.5,1.5,-1.5,   -1.5,1.5,1.5,//上
+        
+        -1.5,1.5,-1.5,   -1.5,-1.5,-1.5,  -1.5,-1.5,1.5,
+        -1.5,-1.5,1.5,   -1.5,1.5,1.5,    -1.5,1.5,-1.5,//左
+        
+        1.5,1.5,1.5,     1.5,-1.5,1.5,    1.5,-1.5,-1.5,
+        1.5,-1.5,-1.5,   1.5,1.5,-1.5,    1.5,1.5,1.5,//右
+        
+        1.5,1.5,-1.5,    1.5,-1.5,-1.5,  -1.5,-1.5,-1.5,
+        -1.5,-1.5,-1.5,  -1.5,1.5,-1.5,    1.5,1.5,-1.5,//后
+        
+        -1.5,-1.5,1.5,   -1.5,-1.5,-1.5,   1.5,-1.5,-1.5,
+        1.5,-1.5,-1.5,   1.5,-1.5,1.5,    -1.5,-1.5,1.5,//下
     };
 
     switch (fsm_Current_State) {
@@ -907,14 +957,14 @@
                         commandaxis=CCW;
                     }
                 }
-                NSInvocation *doinvocation = [self createInvocationOnAxis:current_rotate_axis onLayer:current_rotate_layer inDirection:commandaxis];
+                NSInvocation *doinvocation = [self createInvocationOnAxis:current_rotate_axis onLayer:current_rotate_layer inDirection:commandaxis isTribleRotate:NO];
                                 
                 if(commandaxis==CCW){
                     commandaxis=CW;
                 }else {
                     commandaxis=CCW;
                 }
-                NSInvocation *undoinvocation = [self createInvocationOnAxis:current_rotate_axis onLayer:current_rotate_layer inDirection:commandaxis];
+                NSInvocation *undoinvocation = [self createInvocationOnAxis:current_rotate_axis onLayer:current_rotate_layer inDirection:commandaxis isTribleRotate:NO];
                [self addInvocation:doinvocation withUndoInvocation:undoinvocation];
                 //当旋转180度
                 if (isNeededToUpadteTwice) {
@@ -958,15 +1008,20 @@
                     [tmp setQuaPreviousRotation:[tmp quaRotation]];
                 }
                 
-            }else if([self usingMode] == TECH_MODE){
+            }
+            else if([self usingMode] == TECH_MODE){
+                is_TECH_MODE_Rotate = YES;
                 //教学模式下，进行严格限制
                 //记录第一个点
                 //CGPoint location = [touch locationInView:view];
-                touch = [[touches allObjects] objectAtIndex:0];
-                CGPoint location = [touch previousLocationInView:view];
+                //m_spinning = YES;
+                if ([touches count]!=2) return;
+                UITouch *touch0 = [[touches allObjects] objectAtIndex:0];
+                CGPoint location = [touch0 previousLocationInView:view];
+                firstThreePoint[firstThreePointCount].x =location.x;
+                firstThreePoint[firstThreePointCount].y =location.y;
                 firstThreePointCount++;
-                firstThreePoint[0].x =location.x;
-                firstThreePoint[0].y =location.y;
+
                 //Once function down, update the ray.
                 [ray updateWithScreenX:location.x
                                screenY:location.y];
@@ -997,7 +1052,7 @@
                 if (index != -1) {
                     selected = [array27Cube objectAtIndex:index];
                     //可能得修改
-                    isLayerRotating = YES;
+                    //isLayerRotating = YES;
                     fingerRotate_angle = 0;
                 }
 
@@ -1025,53 +1080,29 @@
                         [tmp setQuaRotation: delta.Rotated([tmp quaPreviousRotation])];
                     }
                 }
-            }else if([self usingMode] == TECH_MODE ){
+            }
+            else if([self usingMode] == TECH_MODE ){
                 //教学模式下，进行严格限制
-                touch = [[touches allObjects] objectAtIndex:0];
-                if (isLayerRotating == NO) {
+                if ([touches count]!=2) return;
+                UITouch *touch0 = [[touches allObjects] objectAtIndex:0];
+                if (is_TECH_MODE_Rotate == NO) {
                     //没选中及时返回
                     firstThreePointCount = 0;
                     return;
                 }
                 if (firstThreePointCount > 3) {
-                    //开始旋转
-                    //CGPoint location = [touch locationInView:view];
-                    CGPoint location = [touch previousLocationInView:view];
-                    
-                    vec2 current = vec2(location.x,location.y);
-                    if (isLayerRotating) {
-                        vec3 start = [self MapToLayerCenter:firstThreePoint[0]];
-                        vec3 end =[self MapToLayerCenter:current];
-                        
-                        double alpha = ThetaBetweenV1andV2(start,end);
-                        fingerRotate_angle = alpha*180/Pi; //checked
-                        //NSLog("fingerRotate_angle%f",fingerRotate_angle);
-                        //NSLog(@"fingerRotate_angle:%f",fingerRotate_angle);
-                        Quaternion delta = Quaternion::CreateFromVectors(start, end);
-                        for (int i=0;i<9;i++) {
-                            if (current_rotate_layer!=1) {
-                                [layerPtr[i] setQuaRotation: delta.Rotated([layerPtr[i] quaPreviousRotation])];
-                            }else if(i!=4){
-                                [layerPtr[i] setQuaRotation: delta.Rotated([layerPtr[i] quaPreviousRotation])];
-                            }
-                            
-                        }
-                    }
-                    
-                    
-                    
                     
                 }else if (firstThreePointCount < 3){
                     //选择三角型切面
                     //CGPoint location = [touch locationInView:view];
-                    CGPoint location = [touch previousLocationInView:view];
+                    CGPoint location = [touch0 previousLocationInView:view];
                     firstThreePoint[firstThreePointCount] = vec2(location.x,location.y);
                     
                     if (firstThreePointCount==2) {
                         //Once function down, update the ray.
-                        CGPoint location = [touch locationInView:view];
-                        [ray updateWithScreenX:location.x
-                                       screenY:location.y];
+                        //CGPoint location = [touch0 prlocationInView:view];
+                        [ray updateWithScreenX:firstThreePoint[firstThreePointCount].x
+                                       screenY:firstThreePoint[firstThreePointCount].y];
                         float nearest_distance = 65535;
                         int index = -1;
                         for (Cube *tmp_cube in array27Cube) {
@@ -1157,12 +1188,8 @@
                         }else {
                             current_rotate_layer = z;
                         }
-                        //选中层
-                        //[self SelectLayer];
-                        for (int i= 0; i<27; i++) {
-                            //潜在分析，没有分析是否要转动13号块
-                                [layerPtr[i] setQuaPreviousRotation:[layerPtr[i] quaRotation]];
-                        }
+                        
+                        
                         
                     }
                     firstThreePointCount++;
@@ -1183,15 +1210,13 @@
                 //确定旋转方向
                 //使用第一点 和 最后一个点 及他们点中间点 在轨迹圆上形成轨迹弧
                 //三点确定两个向量，他们进行差乘，再和法向量进行点乘 由正负确定转向
-                if(isLayerRotating!=YES)return;
+                if(is_TECH_MODE_Rotate!=YES)return;
                 //CGPoint location = [touch locationInView:view];
-                CGPoint location = [touch previousLocationInView:view];
+                if ([touches count]!=2)return;
+                UITouch *touch0 = [[touches allObjects] objectAtIndex:0];
+                CGPoint location = [touch0 previousLocationInView:view];
                 vec2 lastPoint = vec2(location.x,location.y);
-                //vec2 middle = vec2((firstThreePoint[0].x+lastPoint.x)/2,
-                //                    (firstThreePoint[0].y+lastPoint.y)/2);
-                //NSLog(@"Point22[0]%f %f ",firstThreePoint[0].x,firstThreePoint[0].y);
-                //NSLog(@"Point22[1]%f %f ",middle.x,middle.y);
-                //NSLog(@"Point22[2]%f %f ",lastPoint.x,lastPoint.y);
+                
                 float xyz[9] = {1.0,0.0,0.0,0.0,1.0,0.0,0.0,0.0,1.0};
                 Cube * tmpcuble = [array27Cube objectAtIndex:13];
                 GLfloat * XYZ = VertexesArray_Matrix_Multiply(xyz, 3, 3, tmpcuble.matrix);
@@ -1200,13 +1225,9 @@
                 vec3 oz = vec3(XYZ[6],XYZ[7],XYZ[8]);
                 
                 vec3 firstv = [self MapToLayerCenter:firstThreePoint[0]];
-                //vec3 middlev =[self MapToLayerCenter:middle];
                 vec3 lastv = [self MapToLayerCenter:lastPoint];
                 vec3 middlev = [self middleOfV1:firstv V2:lastv];
                 
-                //NSLog(@"Point33[0]%f %f %f ",firstv.x,firstv.y,firstv.z);
-                //NSLog(@"Point33[1]%f %f %f ",middlev.x,middlev.y,middlev.z);
-                //NSLog(@"Point33[2]%f %f %f ",lastv.x,lastv.y,lastv.z);
                 //标记启动自动调整
                 //double angle = fingerRotate_angle*360/Pi;
                 if (fingerRotate_angle>135) {
@@ -1214,14 +1235,6 @@
                 }
                 int tmpvar = int(fingerRotate_angle)/90;
                 fingerRotate_angle_mod90 = fingerRotate_angle - tmpvar*90.0;
-                if (fingerRotate_angle_mod90 > 45.0) {
-                    rest_fingerRotate_angle = 90.0-fingerRotate_angle_mod90;
-                }else {
-                    rest_fingerRotate_angle = fingerRotate_angle_mod90;
-                }
-                
-                rest_fingerRotate_time = (rest_fingerRotate_angle/ROTATION_ANGLE)*TIME_PER_ROTATION;
-                
                 vec3 V1 = firstv-middlev;
                 vec3 V2 = lastv -middlev;
                 vec3 corssv1v2 = V1.Cross(V2);
@@ -1231,31 +1244,21 @@
                 }
                 if (current_rotate_axis == Y) {
                     cosa = corssv1v2.Dot(oy)/(corssv1v2.Module()*oy.Module());
-                    //NSLog(@"cosay:%f",cosa);
                 }
                 if (current_rotate_axis ==Z) {
                     cosa = corssv1v2.Dot(oz)/(corssv1v2.Module()*oz.Module());
                 }
                 if (cosa > 0){
-                    if (fingerRotate_angle_mod90 > 45) {
                         current_rotate_direction = CW;
-                  //      isNeededToUpdateMagicCubeState = YES;
-                    }else {
-                        current_rotate_direction = CCW;
-                  //     isNeededToUpdateMagicCubeState = NO;
-                    }
+                        isNeededToUpdateMagicCubeState = YES;
                 }else {
-                    if (fingerRotate_angle_mod90 > 45) {
                         current_rotate_direction = CCW;
-                  //      isNeededToUpdateMagicCubeState = YES;
-                    }else {
-                        current_rotate_direction = CW;
-                  //      isNeededToUpdateMagicCubeState = NO;
-                    }
+                        isNeededToUpdateMagicCubeState = YES;
                 }
                 if (fingerRotate_angle>90&&fingerRotate_angle_mod90<45) {
-                  //  isNeededToUpdateMagicCubeState = YES;
-                }/*
+                    isNeededToUpdateMagicCubeState = YES;
+                }
+                [self rotateOnAxis:current_rotate_axis onLayer:current_rotate_layer inDirection:current_rotate_direction isTribleRotate:YES];
                 if (isNeededToUpdateMagicCubeState) {
                     //加入命令队列
                     //添加command到NSUndoManger
@@ -1267,24 +1270,22 @@
                             commandaxis=CCW;
                         }
                     }
-                    NSInvocation *doinvocation = [self createInvocationOnAxis:current_rotate_axis onLayer:current_rotate_layer inDirection:commandaxis];
+                    NSInvocation *doinvocation = [self createInvocationOnAxis:current_rotate_axis onLayer:current_rotate_layer inDirection:commandaxis isTribleRotate:YES];
                     
                     if(commandaxis==CCW){
                         commandaxis=CW;
                     }else {
                         commandaxis=CCW;
                     }
-                    NSInvocation *undoinvocation = [self createInvocationOnAxis:current_rotate_axis onLayer:current_rotate_layer inDirection:commandaxis];
+                    NSInvocation *undoinvocation = [self createInvocationOnAxis:current_rotate_axis onLayer:current_rotate_layer inDirection:commandaxis isTribleRotate:YES];
                     [self addInvocation:doinvocation withUndoInvocation:undoinvocation];
                     //当旋转180度
                     if (isNeededToUpadteTwice) {
                         [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(updatetweice) userInfo:self repeats:NO];
                     }
                     
-                }*/
-                //标记手动转动结束
-                isNeededToAdjustment = YES;
-                isLayerRotating = NO;
+                }
+                //自由模式下，无限制操作
                 firstThreePointCount = 0;
                 if (selected != nil) {
                     //selected.scale = MCPointMake(30, 30, 30);
@@ -1307,14 +1308,14 @@
             commandaxis=CCW;
         }
     }
-    NSInvocation *doinvocation = [self createInvocationOnAxis:current_rotate_axis onLayer:current_rotate_layer inDirection:commandaxis];
+    NSInvocation *doinvocation = [self createInvocationOnAxis:current_rotate_axis onLayer:current_rotate_layer inDirection:commandaxis isTribleRotate:NO];
     
     if(commandaxis==CCW){
         commandaxis=CW;
     }else {
         commandaxis=CCW;
     }
-    NSInvocation *undoinvocation = [self createInvocationOnAxis:current_rotate_axis onLayer:current_rotate_layer inDirection:commandaxis];
+    NSInvocation *undoinvocation = [self createInvocationOnAxis:current_rotate_axis onLayer:current_rotate_layer inDirection:commandaxis isTribleRotate:NO];
     [self addInvocation:doinvocation withUndoInvocation:undoinvocation];
 };
 
@@ -1446,11 +1447,15 @@
 
 
 -(void)updateState{
-    if (isAddStepWhenUpdateState) {
-        [self stepCounterAdd];
-    }else {
-        [self stepCounterMinus];
-        isAddStepWhenUpdateState = true;
+    if (isTribleAutoRotateIn_TECH_MODE) {
+        
+    }else{
+        if (isAddStepWhenUpdateState) {
+            [self stepCounterAdd];
+        }else {
+            [self stepCounterMinus];
+            isAddStepWhenUpdateState = true;
+        }
     }
     //通知场景控制器，更新数据模型。
     RotateType * rotateType = [[RotateType alloc]init];
@@ -1614,14 +1619,15 @@
 #pragma mark undo and redo
 
 //创建撤销操作点NSInvocation对象
--(NSInvocation *)createInvocationOnAxis : (AxisType)axis onLayer: (int)layer inDirection: (LayerRotationDirectionType)direction{
-    NSMethodSignature *executeMethodSinature = [self methodSignatureForSelector:@selector(rotateOnAxis:onLayer:inDirection:)];
+-(NSInvocation *)createInvocationOnAxis : (AxisType)axis onLayer: (int)layer inDirection: (LayerRotationDirectionType)direction isTribleRotate:(BOOL)is_trible_roate{
+    NSMethodSignature *executeMethodSinature = [self methodSignatureForSelector:@selector(rotateOnAxis:onLayer:inDirection:isTribleRotate:)];
     NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:executeMethodSinature];
     [invocation setTarget:self];
-    [invocation setSelector:@selector(rotateOnAxis:onLayer:inDirection:)];
+    [invocation setSelector:@selector(rotateOnAxis:onLayer:inDirection:isTribleRotate:)];
     [invocation setArgument: &axis atIndex:2];
     [invocation setArgument:&layer atIndex:3];
     [invocation setArgument:&direction atIndex:4];
+    [invocation setArgument:&is_trible_roate atIndex:5];
     return invocation;
 }
 

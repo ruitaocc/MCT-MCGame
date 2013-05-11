@@ -33,6 +33,11 @@ typedef enum _MagicCubeUIUsingMode {
     double rest_rotate_time;
     double rest_rotate_angle;
     
+    //教学模式下魔方整体旋转update
+    BOOL isTribleAutoRotateIn_TECH_MODE;
+    //教学模式下魔方整体旋转 输入处理
+    BOOL is_TECH_MODE_Rotate;
+    
     AxisType current_rotate_axis;
     LayerRotationDirectionType current_rotate_direction;
     int current_rotate_layer;
@@ -93,7 +98,7 @@ typedef enum _MagicCubeUIUsingMode {
 @property (assign) MagicCubeUIUsingMode usingMode;
 -(id)initiate;
 -(id)initiateWithState:(NSArray *)stateList;
-- (void) rotateOnAxis : (AxisType)axis onLayer: (int)layer inDirection: (LayerRotationDirectionType)direction;
+- (void) rotateOnAxis : (AxisType)axis onLayer: (int)layer inDirection: (LayerRotationDirectionType)direction isTribleRotate:(BOOL)is_trible_roate;
 -(void)awake;
 -(void)render;
 -(void)update;

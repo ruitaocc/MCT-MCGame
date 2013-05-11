@@ -39,10 +39,11 @@
 	magicCube = [[MCMagicCube magicCube]retain];
     playHelper = [[MCPlayHelper playerHelperWithMagicCube:self.magicCube]retain];
     //[playHelper applyRules];
-    [magicCubeUI setUsingMode:TECH_MODE];
+    
     //大魔方
     magicCubeUI = [[MCMagicCubeUIModelController alloc]initiate];
     magicCubeUI.target=self;
+    [magicCubeUI setUsingMode:TECH_MODE];
     [magicCubeUI setStepcounterAddAction:@selector(stepcounterAdd)];
     [magicCubeUI setStepcounterMinusAction:@selector(stepcounterMinus)];
     [self addObjectToScene:magicCubeUI];
