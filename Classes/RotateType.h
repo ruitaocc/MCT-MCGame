@@ -8,8 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "Global.h"
+#import "MCTransformUtil.h"
 @interface RotateType : NSObject
-@property (assign ,nonatomic)  AxisType rotate_axis;
-@property (assign ,nonatomic)  LayerRotationDirectionType rotate_direction;
-@property (assign ,nonatomic)  int rotate_layer;
+@property (assign ,nonatomic)  SingmasterNotation notation;
 @end

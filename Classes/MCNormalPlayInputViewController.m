@@ -55,7 +55,7 @@
     actionQueue = [[MCActionQueue alloc]initWithActionList:actionname];
     [actionQueue setScale : MCPointMake(32, 32, 1.0)];
     [actionQueue setTranslation :MCPointMake(0, 320, 0.0)];
-    [actionQueue setActive:YES];
+    [actionQueue setActive:NO];
     [actionQueue awake];
     [interfaceObjects addObject:actionQueue];
 
@@ -161,11 +161,18 @@
 }
 -(void)tipsBtnUp{
     MCNormalPlaySceneController *c = [MCNormalPlaySceneController sharedNormalPlaySceneController ];
-    c.isShowQueue = !c.isShowQueue;
-    //[self.actionQueue setActive : !self.actionQueue.active ];
+    //hiden the action queue
+    [self.actionQueue setActive : !self.actionQueue.active ];
+    //hiden the tips
     [[c tipsLabel] setHidden:![[c tipsLabel] isHidden]];
+    //switch the isShowQueue flag in scenecontroller
+    c.isShowQueue = !c.isShowQueue;
     if (self.actionQueue.active) {
+        [[c playHelper] checkStateFromInit:YES];
         [c showQueue];
+    }else{
+        [self.actionQueue removeAllActions];
+        [[c tipsLabel]setText:@""];
     }
 };
 -(void)tipsBtnDown{};

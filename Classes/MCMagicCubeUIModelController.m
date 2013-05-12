@@ -12,6 +12,7 @@
 #import "MCConfiguration.h"
 #import "Global.h"
 #import "RotateType.h"
+#import "MCTransformUtil.h"
 @implementation MCMagicCubeUIModelController
 @synthesize array27Cube;
 @synthesize stepcounterAddAction,stepcounterMinusAction;
@@ -77,6 +78,7 @@
         rrrr = 0;
         isNeededToUpadteTwice = NO;
         isTribleAutoRotateIn_TECH_MODE = NO;
+        
         is_TECH_MODE_Rotate = NO;
         undoManger = [[NSUndoManager alloc]init];
         //default mode play mode;
@@ -153,6 +155,7 @@
         select_trackballRadius = 260;
         is_TECH_MODE_Rotate = NO;
         isTribleAutoRotateIn_TECH_MODE = NO;
+        
         isAddStepWhenUpdateState = YES;
         rrrr = 0;
         //default mode play mode;
@@ -322,11 +325,8 @@
                         [MagicCubeIndexState[i] setQuaRotation:delta.Rotated([MagicCubeIndexState[i] quaPreviousRotation])];
                     }
                 }
-                current_rotate_layer = 0;
-                [self updateState];
-                current_rotate_layer = 1;
-                [self updateState];
-                current_rotate_layer = 2;
+                //
+                current_rotate_layer = NO_SELECTED_LAYER;
                 [self updateState];
             }else{
                 for (int i= 0 ; i<9; i++) {
@@ -1010,12 +1010,12 @@
                 
             }
             else if([self usingMode] == TECH_MODE){
-                is_TECH_MODE_Rotate = YES;
+                 if(is_TECH_MODE_Rotate) return;
                 //教学模式下，进行严格限制
                 //记录第一个点
                 //CGPoint location = [touch locationInView:view];
                 //m_spinning = YES;
-                if ([touches count]!=2) return;
+                //if ([touches count]!=2) return;
                 UITouch *touch0 = [[touches allObjects] objectAtIndex:0];
                 CGPoint location = [touch0 previousLocationInView:view];
                 firstThreePoint[firstThreePointCount].x =location.x;
@@ -1027,8 +1027,14 @@
                                screenY:location.y];
                 float nearest_distance = 65535;
                 int index = -1;
-                for (Cube *tmp_cube in array27Cube) {
-                    GLfloat * tmp_dection = VertexesArray_Matrix_Multiply(V, 3, 36, tmp_cube.matrix);
+                //for (Cube *tmp_cube in array27Cube) {
+                
+                
+                Cube *tmp_cube_center = [array27Cube objectAtIndex:13];
+                  GLfloat *   tmp_dection = VertexesArray_Matrix_Multiply(V2, 3, 36, tmp_cube_center.matrix);
+                
+                
+                
                     for (int i = 0; i < 12; i++) {
                         //OK, check the intersection and return the distance.
                         float distance = [ray intersectWithTriangleMadeUpOfV0:&tmp_dection[0 +i*9]
@@ -1045,12 +1051,13 @@
                                                                                         V1:&tmp_dection[3 +i*9]
                                                                                         V2:&tmp_dection[6 +i*9]];
                             nearest_distance = distance;
-                            index = tmp_cube.index;
+                            index = tmp_cube_center.index;
                         }
-                    }
+                   // }
                 }
                 if (index != -1) {
-                    selected = [array27Cube objectAtIndex:index];
+                    is_TECH_MODE_Rotate = YES;
+                    //selected = [array27Cube objectAtIndex:index];
                     //可能得修改
                     //isLayerRotating = YES;
                     fingerRotate_angle = 0;
@@ -1083,7 +1090,7 @@
             }
             else if([self usingMode] == TECH_MODE ){
                 //教学模式下，进行严格限制
-                if ([touches count]!=2) return;
+                //if ([touches count]!=2) return;
                 UITouch *touch0 = [[touches allObjects] objectAtIndex:0];
                 if (is_TECH_MODE_Rotate == NO) {
                     //没选中及时返回
@@ -1105,8 +1112,9 @@
                                        screenY:firstThreePoint[firstThreePointCount].y];
                         float nearest_distance = 65535;
                         int index = -1;
-                        for (Cube *tmp_cube in array27Cube) {
-                            GLfloat * tmp_dection = VertexesArray_Matrix_Multiply(V, 3, 36, tmp_cube.matrix);
+                      //  for (Cube *tmp_cube in array27Cube) {
+                        Cube *tmp_cube_center = [array27Cube objectAtIndex:13];
+                            GLfloat * tmp_dection = VertexesArray_Matrix_Multiply(V2, 3, 36, tmp_cube_center.matrix);
                             for (int i = 0; i < 12; i++) {
                                 //OK, check the intersection and return the distance.
                                 float distance = [ray intersectWithTriangleMadeUpOfV0:&tmp_dection[0 +i*9]
@@ -1120,9 +1128,9 @@
                                                                                                 V1:&tmp_dection[3 +i*9]
                                                                                                 V2:&tmp_dection[6 +i*9]];
                                     nearest_distance = distance;
-                                    index = tmp_cube.index;
+                                    index = tmp_cube_center.index;
                                 }
-                            }
+                          //  }
                         }
                         if (index != -1) {
                             
@@ -1164,6 +1172,8 @@
                     if (vertical_axis == Z) {
                         current_rotate_axis = (dx>dy)?X:Y;
                     }
+                    firstThreePointCount++;
+                    
                     if (selected != nil) {
                         //计算选中点层和轴
                         int index = [selected index];
@@ -1189,10 +1199,10 @@
                             current_rotate_layer = z;
                         }
                         
-                        
+                     
                         
                     }
-                    firstThreePointCount++;
+                    
                 }
 
             }
@@ -1212,7 +1222,7 @@
                 //三点确定两个向量，他们进行差乘，再和法向量进行点乘 由正负确定转向
                 if(is_TECH_MODE_Rotate!=YES)return;
                 //CGPoint location = [touch locationInView:view];
-                if ([touches count]!=2)return;
+                //if ([touches count]!=2)return;
                 UITouch *touch0 = [[touches allObjects] objectAtIndex:0];
                 CGPoint location = [touch0 previousLocationInView:view];
                 vec2 lastPoint = vec2(location.x,location.y);
@@ -1230,9 +1240,6 @@
                 
                 //标记启动自动调整
                 //double angle = fingerRotate_angle*360/Pi;
-                if (fingerRotate_angle>135) {
-                //    isNeededToUpadteTwice = YES;
-                }
                 int tmpvar = int(fingerRotate_angle)/90;
                 fingerRotate_angle_mod90 = fingerRotate_angle - tmpvar*90.0;
                 vec3 V1 = firstv-middlev;
@@ -1285,6 +1292,7 @@
                     }
                     
                 }
+                is_TECH_MODE_Rotate = NO;
                 //自由模式下，无限制操作
                 firstThreePointCount = 0;
                 if (selected != nil) {
@@ -1458,42 +1466,59 @@
         }
     }
     //通知场景控制器，更新数据模型。
+    SingmasterNotation notation;
+    if (isTribleAutoRotateIn_TECH_MODE) {
+        notation =[MCTransformUtil getSingmasterNotationFromAxis:current_rotate_axis layer:NO_SELECTED_LAYER direction:current_rotate_direction];
+    }else{
+        notation =[MCTransformUtil getSingmasterNotationFromAxis:current_rotate_axis layer:current_rotate_layer direction:current_rotate_direction];
+    }
     RotateType * rotateType = [[RotateType alloc]init];
-    [rotateType setRotate_axis:current_rotate_axis];
-    [rotateType setRotate_direction:current_rotate_direction];
-    [rotateType setRotate_layer:current_rotate_layer];
+    [rotateType setNotation:notation];
+
     if ([target respondsToSelector:@selector(rotate:)]) {
         [target performSelector:@selector(rotate:) withObject:rotateType];
     }
     
-    
-    
+    if (current_rotate_layer == NO_SELECTED_LAYER) {
+        //三次更新状态缩影index
+        current_rotate_layer = 0;
+        [self updateMagicCubeIndexState];
+        current_rotate_layer = 1;
+        [self updateMagicCubeIndexState];
+        current_rotate_layer = 2;
+        [self updateMagicCubeIndexState];
+        //通知更新数据模型
+    }else{
+        [self updateMagicCubeIndexState];
+    }
+}
+-(void)updateMagicCubeIndexState{
     Cube *tmp;
     switch (current_rotate_axis) {
         case X:
             if (current_rotate_direction == CW) {
-                    //tmp = 0
-                    tmp = MagicCubeIndexState[0*9+0*3+current_rotate_layer];
-                    //0=2
-                    MagicCubeIndexState[0*9+0*3+current_rotate_layer] = MagicCubeIndexState[0*9+2*3+current_rotate_layer];
-                    //2=8
-                    MagicCubeIndexState[0*9+2*3+current_rotate_layer] = MagicCubeIndexState[2*9+2*3+current_rotate_layer];
-                    //8=6
-                    MagicCubeIndexState[2*9+2*3+current_rotate_layer] = MagicCubeIndexState[2*9+0*3+current_rotate_layer];
-                    //6=0
-                    MagicCubeIndexState[2*9+0*3+current_rotate_layer] = tmp;
-                    //tmp=1
-                    tmp = MagicCubeIndexState[0*9+1*3+current_rotate_layer];
-                    // 1=5 
-                    MagicCubeIndexState[0*9+1*3+current_rotate_layer] = MagicCubeIndexState[1*9+2*3+current_rotate_layer];
-                    //5=7
-                    MagicCubeIndexState[1*9+2*3+current_rotate_layer] =  MagicCubeIndexState[2*9+1*3+current_rotate_layer];
-                    //4=4
-                    //7=3
-                    MagicCubeIndexState[2*9+1*3+current_rotate_layer] = MagicCubeIndexState[1*9+0*3+current_rotate_layer];
-                    //3=tmp
-                    MagicCubeIndexState[1*9+0*3+current_rotate_layer] = tmp;
-                }else {
+                //tmp = 0
+                tmp = MagicCubeIndexState[0*9+0*3+current_rotate_layer];
+                //0=2
+                MagicCubeIndexState[0*9+0*3+current_rotate_layer] = MagicCubeIndexState[0*9+2*3+current_rotate_layer];
+                //2=8
+                MagicCubeIndexState[0*9+2*3+current_rotate_layer] = MagicCubeIndexState[2*9+2*3+current_rotate_layer];
+                //8=6
+                MagicCubeIndexState[2*9+2*3+current_rotate_layer] = MagicCubeIndexState[2*9+0*3+current_rotate_layer];
+                //6=0
+                MagicCubeIndexState[2*9+0*3+current_rotate_layer] = tmp;
+                //tmp=1
+                tmp = MagicCubeIndexState[0*9+1*3+current_rotate_layer];
+                // 1=5
+                MagicCubeIndexState[0*9+1*3+current_rotate_layer] = MagicCubeIndexState[1*9+2*3+current_rotate_layer];
+                //5=7
+                MagicCubeIndexState[1*9+2*3+current_rotate_layer] =  MagicCubeIndexState[2*9+1*3+current_rotate_layer];
+                //4=4
+                //7=3
+                MagicCubeIndexState[2*9+1*3+current_rotate_layer] = MagicCubeIndexState[1*9+0*3+current_rotate_layer];
+                //3=tmp
+                MagicCubeIndexState[1*9+0*3+current_rotate_layer] = tmp;
+            }else {
                 //tmp = 0
                 tmp = MagicCubeIndexState[0*9+0*3+current_rotate_layer];
                 //0=6
@@ -1506,7 +1531,7 @@
                 MagicCubeIndexState[0*9+2*3+current_rotate_layer] = tmp;
                 //tmp=1
                 tmp = MagicCubeIndexState[0*9+1*3+current_rotate_layer];
-                // 1=3 
+                // 1=3
                 MagicCubeIndexState[0*9+1*3+current_rotate_layer] = MagicCubeIndexState[1*9+0*3+current_rotate_layer];
                 //3=7
                 MagicCubeIndexState[1*9+0*3+current_rotate_layer] =  MagicCubeIndexState[2*9+1*3+current_rotate_layer];
@@ -1531,7 +1556,7 @@
                 MagicCubeIndexState[0*9+2+3*current_rotate_layer] = tmp;
                 //tmp=1
                 tmp = MagicCubeIndexState[0*9+1+3*current_rotate_layer];
-                // 1=3 
+                // 1=3
                 MagicCubeIndexState[0*9+1+3*current_rotate_layer] = MagicCubeIndexState[1*9+0+3*current_rotate_layer];
                 //3=7
                 MagicCubeIndexState[1*9+0+3*current_rotate_layer] =  MagicCubeIndexState[2*9+1+3*current_rotate_layer];
@@ -1553,7 +1578,7 @@
                 MagicCubeIndexState[2*9+0+current_rotate_layer*3] = tmp;
                 //tmp=1
                 tmp = MagicCubeIndexState[0*9+1+current_rotate_layer*3];
-                // 1=5 
+                // 1=5
                 MagicCubeIndexState[0*9+1+current_rotate_layer*3] = MagicCubeIndexState[1*9+2+current_rotate_layer*3];
                 //5=7
                 MagicCubeIndexState[1*9+2+current_rotate_layer*3] =  MagicCubeIndexState[2*9+1+current_rotate_layer*3];
@@ -1578,7 +1603,7 @@
                 MagicCubeIndexState[2*3+0+current_rotate_layer*9] = tmp;
                 //tmp=1
                 tmp = MagicCubeIndexState[0*3+1+current_rotate_layer*9];
-                // 1=5 
+                // 1=5
                 MagicCubeIndexState[0*3+1+current_rotate_layer*9] = MagicCubeIndexState[1*3+2+current_rotate_layer*9];
                 //5=7
                 MagicCubeIndexState[1*3+2+current_rotate_layer*9] =  MagicCubeIndexState[2*3+1+current_rotate_layer*9];
@@ -1600,7 +1625,7 @@
                 MagicCubeIndexState[0*3+2+current_rotate_layer*9] = tmp;
                 //tmp=1
                 tmp = MagicCubeIndexState[0*3+1+current_rotate_layer*9];
-                // 1=3 
+                // 1=3
                 MagicCubeIndexState[0*3+1+current_rotate_layer*9] = MagicCubeIndexState[1*3+0+current_rotate_layer*9];
                 //3=7
                 MagicCubeIndexState[1*3+0+current_rotate_layer*9] =  MagicCubeIndexState[2*3+1+current_rotate_layer*9];
@@ -1609,12 +1634,11 @@
                 MagicCubeIndexState[2*3+1+current_rotate_layer*9] = MagicCubeIndexState[1*3+2+current_rotate_layer*9];
                 //5=tmp
                 MagicCubeIndexState[1*3+2+current_rotate_layer*9] = tmp;
-            }          
+            }
             break;
         default:
             break;
     }
-    
 }
 #pragma mark undo and redo
 

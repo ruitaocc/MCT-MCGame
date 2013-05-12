@@ -25,7 +25,8 @@
 }
 
 -(void)rotate:(RotateType *)rotateType{
-    [self.playHelper rotateOnAxis:[rotateType rotate_axis] onLayer:[rotateType rotate_layer] inDirection:[rotateType rotate_direction]];
+    //[self.playHelper rotateOnAxis:[rotateType rotate_axis] onLayer:[rotateType rotate_layer] inDirection:[rotateType rotate_direction]];
+    [playHelper rotateWithSingmasterNotation:[rotateType notation]];
 }
 
 

@@ -82,6 +82,15 @@
                     } else {
                         return Ri;
                     }
+                case NO_SELECTED_LAYER:{
+                    if (direction == CW) {
+                        return x;
+                    }
+                    else{
+                        return xi;
+                    }
+                }
+                    break;
                 default:
                     break;
             }
@@ -109,6 +118,14 @@
                     } else {
                         return Ui;
                     }
+                case NO_SELECTED_LAYER:{
+                    if (direction == CW) {
+                        return y;
+                    }
+                    else{
+                        return yi;
+                    }
+                }
                 default:
                     break;
             }
@@ -136,6 +153,14 @@
                     } else {
                         return Fi;
                     }
+                case NO_SELECTED_LAYER:{
+                    if (direction == CW) {
+                        return z;
+                    }
+                    else{
+                        return zi;
+                    }
+                }
                 default:
                     break;
             }

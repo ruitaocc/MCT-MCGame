@@ -450,17 +450,14 @@
         key = [keys objectAtIndex:i];
         if ([self applyPatternWihtName:key]) {
             action = [[rules objectForKey:key] root];
-#ifdef ONLY_TEST
-            [self treeNodesApply:action];
-            NSLog(@"%@", key);
-#endif
             break;
         }
     }
     
 #ifdef ONLY_TEST
+    NSLog(@"%@", key);
     //error occurs, we can not find the rules to apply and there isn't the finished state.
-    if ([[self checkStateFromInit:NO] compare:END_STATE] != NSOrderedSame && action == nil) {
+    if ([self.state compare:END_STATE] != NSOrderedSame && action == nil) {
         NSLog(@"%@", @"There must be something wrong, I don't apply any rules.");
         //save state for debug
         NSString *savedPath = [NSString stringWithFormat:@"ErrorStateForDebug_%f", [[NSDate date] timeInterval]];
@@ -469,6 +466,8 @@
         [NSKeyedArchiver archiveRootObject:magicCube toFile:fileName];
         return nil;
     }
+    [self treeNodesApply:action];
+    [self checkStateFromInit:NO];
 #else
     //error occurs, we can not find the rules to apply and there isn't the finished state.
     if ([self.state compare:END_STATE] != NSOrderedSame && action == nil) {

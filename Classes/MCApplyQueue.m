@@ -30,7 +30,7 @@
         previousResult = NoneResult;
         previousRotation = NoneNotation;
         self.rotationQueue = [NSMutableArray arrayWithCapacity:10];
-        self.rotationQueue = [NSMutableArray arrayWithCapacity:3];
+        self.extraRotations = [NSMutableArray arrayWithCapacity:3];
         self.magicCube = mc;
         switch (action.value) {
             case Rotate:
@@ -89,28 +89,28 @@
     else{
         //if they are same, accord
         SingmasterNotation targetRotation = (SingmasterNotation)[[self.rotationQueue objectAtIndex:currentRotationQueuePosition] integerValue];
-        if (targetRotation == currentRotation) {
-            previousResult = Accord;
-            currentRotationQueuePosition++;
-            if ([self isFinished]) previousResult = Finished;
-        }
-        else{
-            if (previousResult == StayForATime) {
-                if ([MCTransformUtil isSingmasterNotation:previousRotation andSingmasterNotation:currentRotation equalTo:targetRotation]) {
-                    previousResult = Accord;
-                    currentRotationQueuePosition++;
-                }
-                else{
-                    previousResult = Disaccord;
-                    //extra queue
-                    [self.extraRotations removeAllObjects];
-                    [self.extraRotations addObject:[NSNumber numberWithInteger:[MCTransformUtil getContrarySingmasterNotation:previousRotation]]];
-                    [self.extraRotations addObject:[NSNumber numberWithInteger:[MCTransformUtil getContrarySingmasterNotation:currentRotation]]];
-                    //self queue
-                    [self.rotationQueue insertObject:[NSNumber numberWithInteger:[MCTransformUtil getContrarySingmasterNotation:previousRotation]] atIndex:currentRotationQueuePosition];
-                    [self.rotationQueue insertObject:[NSNumber numberWithInteger:[MCTransformUtil getContrarySingmasterNotation:currentRotation]] atIndex:currentRotationQueuePosition];
-                }
-            } else {
+        if (previousResult == StayForATime) {
+            if ([MCTransformUtil isSingmasterNotation:previousRotation andSingmasterNotation:currentRotation equalTo:targetRotation]) {
+                previousResult = Accord;
+                currentRotationQueuePosition++;
+            }
+            else{
+                previousResult = Disaccord;
+                //extra queue
+                [self.extraRotations removeAllObjects];
+                [self.extraRotations addObject:[NSNumber numberWithInteger:[MCTransformUtil getContrarySingmasterNotation:currentRotation]]];
+                [self.extraRotations addObject:[NSNumber numberWithInteger:[MCTransformUtil getContrarySingmasterNotation:previousRotation]]];
+                //self queue
+                [self.rotationQueue insertObject:[NSNumber numberWithInteger:[MCTransformUtil getContrarySingmasterNotation:currentRotation]] atIndex:currentRotationQueuePosition];
+                [self.rotationQueue insertObject:[NSNumber numberWithInteger:[MCTransformUtil getContrarySingmasterNotation:previousRotation]] atIndex:currentRotationQueuePosition];
+            }
+        } else {
+            if (targetRotation == currentRotation) {
+                previousResult = Accord;
+                currentRotationQueuePosition++;
+                if ([self isFinished]) previousResult = Finished;
+            }
+            else{
                 if ([MCTransformUtil isSingmasterNotation:currentRotation PossiblePartOfSingmasterNotation:targetRotation]) {
                     previousResult = StayForATime;
                 }
@@ -140,7 +140,7 @@
 }
 
 - (NSArray *)getQueueWithStringFormat{
-    NSMutableArray *mArray = [[NSMutableArray alloc]init];
+    NSMutableArray *mArray = [NSMutableArray arrayWithCapacity:[self count]];
     for (NSNumber *rotation in self.rotationQueue) {
         [mArray addObject:[MCTransformUtil getRotationTagFromSingmasterNotation:(SingmasterNotation)[rotation integerValue]]];
     }
@@ -149,7 +149,7 @@
 
 
 - (NSArray *)getExtraQueueWithStringFormat{
-    NSMutableArray *mArray = [[NSMutableArray alloc]init];
+    NSMutableArray *mArray = [NSMutableArray arrayWithCapacity:[self.extraRotations count]];
     for (NSNumber *rotation in self.extraRotations) {
         [mArray addObject:[MCTransformUtil getRotationTagFromSingmasterNotation:(SingmasterNotation)[rotation integerValue]]];
     }

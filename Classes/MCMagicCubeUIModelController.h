@@ -38,6 +38,7 @@ typedef enum _MagicCubeUIUsingMode {
     //教学模式下魔方整体旋转 输入处理
     BOOL is_TECH_MODE_Rotate;
     
+    
     AxisType current_rotate_axis;
     LayerRotationDirectionType current_rotate_direction;
     int current_rotate_layer;

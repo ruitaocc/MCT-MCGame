@@ -119,6 +119,9 @@ typedef enum _PatternType {
 #define Token_Not -5
 #define PLACEHOLDER -10000
 
+//It indicates that no layer was selected.
+#define NO_SELECTED_LAYER -999
+
 //the rull action type
 typedef enum _SingmasterNotation {
     F, Fi, F2,

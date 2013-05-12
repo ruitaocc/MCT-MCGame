@@ -93,12 +93,16 @@
 
 -(void)rotate:(RotateType *)rotateType{
     //流程1，通知数据模型UI已经旋转
-    [playHelper rotateOnAxis:[rotateType rotate_axis] onLayer:[rotateType rotate_layer] inDirection:[rotateType rotate_direction]];
+   // [playHelper rotateOnAxis:[rotateType rotate_axis] onLayer:[rotateType rotate_layer] inDirection:[rotateType rotate_direction]];
+    [playHelper rotateWithSingmasterNotation:[rotateType notation]];
+    //NSLog(@"tell playHelper rotate:%@",[rotateType notation]);
     //the first you apply rules
     //you need to verify the current state
     //checking state from 'init' will clear all locked cubies
-    [playHelper checkStateFromInit:YES];
-    [self showQueue];
+    if (isShowQueue) {
+        [self showQueue];
+    }
+    
     [magicCubeUI adjustWithCenter];
 }
 
@@ -110,6 +114,10 @@
         [playHelper applyRules];
         NSArray *actionqueue= [playHelper.applyQueue getQueueWithStringFormat];
         NSLog(@"applyRuleRotation:%@", [actionqueue description]);
+        while([[playHelper state]isEqual:START_STATE]&&[actionqueue count]==0){
+            [playHelper applyRules];
+            actionqueue= [playHelper.applyQueue getQueueWithStringFormat];
+        };
         [[input_C actionQueue] insertQueueCurrentIndexWithNmaeList:actionqueue];
     }else{
         //流程2，询问是否正确
@@ -142,9 +150,19 @@
             //结束，清空当前队列
             [[input_C actionQueue]removeAllActions];
             //重新加载队列，applyRules ,
-            //NSDictionary *rules = [[playHelper applyRules] retain];
-            //NSArray *actionqueue = [[rules objectForKey:RotationQueueKey] retain];
-            //[[input_C actionQueue] insertQueueCurrentIndexWithNmaeList:actionqueue];
+            [playHelper applyRules];
+            NSArray *actionqueue= [playHelper.applyQueue getQueueWithStringFormat];
+            NSLog(@"applyRuleRotation:%@", [actionqueue description]);
+            while([[playHelper state]isEqual:START_STATE]&&[actionqueue count]==0){
+                 [playHelper applyRules];
+                    actionqueue= [playHelper.applyQueue getQueueWithStringFormat];
+            };
+            [[input_C actionQueue] insertQueueCurrentIndexWithNmaeList:actionqueue];
+            if([[playHelper state]isEqual:END_STATE]){
+                //弹出结束对话框
+                NSLog(@"END form Scene");
+                
+            };
         }else if (result ==NoneResult){
             
             //do nothing

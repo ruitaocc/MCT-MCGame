@@ -61,6 +61,7 @@
    	mat4 matRotation = quaRotation.ToMatrix();
     glMultMatrixf(matRotation.Pointer());
     
+    //----------------
 
         
     // rotate
