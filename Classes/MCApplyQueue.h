@@ -11,6 +11,7 @@
 #import "Global.h"
 #import "MCMagicCube.h"
 #import "MCTransformUtil.h"
+#import "MCCompositeRotationUtil.h"
 
 
 @interface MCApplyQueue : NSObject

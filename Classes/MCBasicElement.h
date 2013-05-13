@@ -26,10 +26,16 @@
 //pattern
 @interface MCPattern : NSObject
 
+//This node tree is the content of the pattern.
+//Every node will store the information indicating the relationship between children nodes,
+//judging criteria to check the state of rubik's cube.
 @property(retain, nonatomic)MCTreeNode *root;
+
 @property(nonatomic)BOOL errorFlag;
 @property(nonatomic)NSInteger errorPosition;
 
+
+//init this
 - (id)initWithString:(NSString *)patternStr;
 
 @end
