@@ -22,6 +22,7 @@
 @synthesize helperState;
 @synthesize applyQueue;
 @synthesize rotationResult;
+@synthesize accordanceMsgs;
 
 
 + (MCPlayHelper *)playerHelperWithMagicCube:(MCMagicCube *)mc{
@@ -30,10 +31,16 @@
 
 - (id)initWithMagicCube:(MCMagicCube *)mc{
     if (self = [super init]) {
-        //alloc tht array residual actions
-        self.residualActions = [NSMutableArray arrayWithCapacity:3];
+        //Here allocate the array which store residual actions.
+        //The residual actions contains all actions of the applied rule except rotation actions.
+        self.residualActions = [NSMutableArray arrayWithCapacity:DEFAULT_RESIDUAL_ACTION_NUM];
+        
+        //Allocate accordance messages of the pattern of the applied rule
+        self.accordanceMsgs = [NSMutableArray arrayWithCapacity:DEFAULT_PATTERN_ACCORDANCE_MESSAGE_NUM];
+        
         //normal helper state
         self.helperState = Normal;
+        
         //locked cubie list
         for (int i = 0; i < CubieCouldBeLockMaxNum; i++) {
             lockedCubies[0] = nil;
@@ -126,19 +133,34 @@
     }
 }
 
-- (BOOL)applyPatternWihtName:(NSString *)name{
+//Apply the pattern and return result
+- (BOOL)applyPatternWihtPatternName:(NSString *)name{
+    //Before apply pattern, clear accrodance messages firstly.
+    [self.accordanceMsgs removeAllObjects];
+    
+    //Get the pattern named 'name'
     MCPattern *pattern = [patterns objectForKey:name];
     if (pattern != nil) {
         return [self treeNodesApply:pattern.root];
     }
     else{
-        NSLog(@"the pattern name is wrong");
+        NSLog(@"Can't find the pattern, the pattern name is wrong");
         return NO;
     }
 }
 
+//Apply the pattern and return result
+- (BOOL)applyActionWithPatternName:(NSString *)name{
+    MCRule *rule = [rules objectForKey:name] ;
+    if (rule != nil) {
+        return [self treeNodesApply:rule.root];
+    }
+    else{
+        NSLog(@"Can't find the action, the pattern name is wrong");
+        return NO;
+    }
+}
 
-#define NO_LOCKED_CUBIE -1
 - (NSInteger)treeNodesApply:(MCTreeNode *)root{
     switch (root.type) {
         case ExpNode:
@@ -403,9 +425,39 @@
 
 - (BOOL)andNodeApply:(MCTreeNode *)root{
     for (MCTreeNode *node in root.children) {
+        
+        //Being a 'and' node,
+        //it will be failed whever one of its child is failed.
         if (![self treeNodesApply:node]) {
             return NO;
         }
+        //-----------------------------------
+//        //While this node is true, we store some accordance messages
+//        //for several occasions.
+//        switch (node.type) {
+//            case ExpNode:
+//                if (node.value == Not) {
+//                    //Notice that the node is 'Not' node.
+//                    //You
+//                    [self.accordanceMsgs addObject:[MCTransformUtil getContenFromPatternNode:
+//                                                    [node.children objectAtIndex:0]]];
+//                }
+//                break;
+//            case PatternNode:
+//            {
+//                switch (node.value) {
+//                    case <#constant#>:
+//                        <#statements#>
+//                        break;
+//                        
+//                    default:
+//                        break;
+//                }
+//            }
+//                break;
+//            default:
+//                break;
+//        }
     }
     return YES;
 }
@@ -435,21 +487,20 @@
         NSLog(@"Set the magic cube before apply rules.");
         return nil;
     }
+    
 #ifndef ONLY_TEST
     [self.residualActions removeAllObjects];
     [self checkStateFromInit:NO];
 #endif
     
-    NSString *key;
+    NSString *key = nil;
     NSArray *keys = [rules allKeys];
     int count = [rules count];
-    MCTreeNode *action = nil;
-    int i;
-    for (i = 0; i < count; i++)
+    int i = 0;
+    for (; i < count; i++)
     {
         key = [keys objectAtIndex:i];
-        if ([self applyPatternWihtName:key]) {
-            action = [[rules objectForKey:key] root];
+        if ([self applyPatternWihtPatternName:key]) {
             break;
         }
     }
@@ -457,7 +508,7 @@
 #ifdef ONLY_TEST
     NSLog(@"%@", key);
     //error occurs, we can not find the rules to apply and there isn't the finished state.
-    if ([self.state compare:END_STATE] != NSOrderedSame && action == nil) {
+    if ([self.state compare:END_STATE] != NSOrderedSame && i == count) {
         NSLog(@"%@", @"There must be something wrong, I don't apply any rules.");
         //save state for debug
         NSString *savedPath = [NSString stringWithFormat:@"ErrorStateForDebug_%f", [[NSDate date] timeInterval]];
@@ -466,11 +517,11 @@
         [NSKeyedArchiver archiveRootObject:magicCube toFile:fileName];
         return nil;
     }
-    [self treeNodesApply:action];
+    [self applyActionWithPatternName:key];
     [self checkStateFromInit:NO];
 #else
     //error occurs, we can not find the rules to apply and there isn't the finished state.
-    if ([self.state compare:END_STATE] != NSOrderedSame && action == nil) {
+    if ([self.state compare:END_STATE] != NSOrderedSame && i == count) {
         NSLog(@"%@", @"There must be something wrong, I don't apply any rules.");
         //save state for debug
         NSString *savedPath = [NSString stringWithFormat:@"ErrorStateForDebug_%f", [[NSDate date] timeInterval]];
@@ -484,12 +535,15 @@
     NSLog(@"%@", state);
     
 #ifndef ONLY_TEST
+    //get the tree of the action according to the pattern name
+    MCTreeNode *actionTree = [[rules objectForKey:key] root];
+    
     //analyse the action and return the result
-    switch (action.type) {
+    switch (actionTree.type) {
         case ExpNode:
         {
             BOOL flag = YES;
-            for (MCTreeNode *node in action.children) {
+            for (MCTreeNode *node in actionTree.children) {
                 if (flag) {
                     if (node.type == ActionNode && (node.value == Rotate|| node.value == FaceToOrientation)) {
                         self.applyQueue = [MCApplyQueue applyQueueWithRotationAction:node withMagicCube:self.magicCube];
@@ -505,13 +559,13 @@
         }
             break;
         case ActionNode:
-            switch (action.value) {
+            switch (actionTree.value) {
                 case Rotate:
                 case FaceToOrientation:
-                    self.applyQueue = [MCApplyQueue applyQueueWithRotationAction:action withMagicCube:self.magicCube];
+                    self.applyQueue = [MCApplyQueue applyQueueWithRotationAction:actionTree withMagicCube:self.magicCube];
                     break;
                 default:
-                    [self treeNodesApply:action];
+                    [self treeNodesApply:actionTree];
                     break;
             }
             break;
@@ -535,11 +589,15 @@
     return resultDirectory;
 }
 
-- (void)refreshRules{
+//Avoiding to loading all rules into memory,
+//every time we just load rules that can be applied at current state.
+//Thereby we should reload rules whenever the state of rubik's cube changes.
+- (void)reloadRulesAccordingToCurrentStateOfRubiksCube{
     self.states = [NSDictionary dictionaryWithDictionary:[[MCKnowledgeBase getSharedKnowledgeBase] getStatesOfMethod:ETFF]];
     self.patterns = [NSDictionary dictionaryWithDictionary:[[MCKnowledgeBase getSharedKnowledgeBase] getPatternsWithPreState:state]];
     self.rules = [NSDictionary dictionaryWithDictionary:[[MCKnowledgeBase getSharedKnowledgeBase] getRulesOfMethod:ETFF withState:state]];
 }
+
 
 - (NSString *)checkStateFromInit:(BOOL)isCheckStateFromInit;{
     NSString *goStr;
@@ -563,7 +621,7 @@
         for (int i = 4; i < CubieCouldBeLockMaxNum; i++) {
             lockedCubies[i] = nil;
         }
-        [self refreshRules];
+        [self reloadRulesAccordingToCurrentStateOfRubiksCube];
     }
     
     return self.state;

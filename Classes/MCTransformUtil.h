@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "Global.h"
+#import "MCBasicElement.h"
 
 @interface MCTransformUtil : NSObject
 
@@ -19,11 +20,15 @@
 
 + (SingmasterNotation)getContrarySingmasterNotation:(SingmasterNotation)notation;
 
-//all situations but not Bw+Bw=Bw2...
-+ (BOOL)isSingmasterNotation:(SingmasterNotation)first andSingmasterNotation:(SingmasterNotation)second equalTo:(SingmasterNotation)target;
-
-//all situations but not Bw+Bw=Bw2...
-+ (BOOL)isSingmasterNotation:(SingmasterNotation)part PossiblePartOfSingmasterNotation:(SingmasterNotation)target;
-
 + (SingmasterNotation)getPathToMakeCenterCubieAtPosition:(struct Point3i)coordinate inOrientation:(FaceOrientationType)orientation;
+
+//By delivering pattern node to this function,
+//we can get the node content.
+//Notice! The type of this node must be 'PatternNode'.
++ (NSString *)getContenFromPatternNode:(MCTreeNode *)node;
+
+//Return the negative sentence of the string returned by
+//"+ (NSString *)getContenFromPatternNode:(MCTreeNode *)node"
++ (NSString *)getNegativeSentenceOfContentFromPatternNode:(MCTreeNode *)node;
+
 @end

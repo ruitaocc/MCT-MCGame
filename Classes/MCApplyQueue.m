@@ -90,7 +90,7 @@
         //if they are same, accord
         SingmasterNotation targetRotation = (SingmasterNotation)[[self.rotationQueue objectAtIndex:currentRotationQueuePosition] integerValue];
         if (previousResult == StayForATime) {
-            if ([MCTransformUtil isSingmasterNotation:previousRotation andSingmasterNotation:currentRotation equalTo:targetRotation]) {
+            if ([MCCompositeRotationUtil isSingmasterNotation:previousRotation andSingmasterNotation:currentRotation equalTo:targetRotation]) {
                 previousResult = Accord;
                 currentRotationQueuePosition++;
             }
@@ -111,7 +111,7 @@
                 if ([self isFinished]) previousResult = Finished;
             }
             else{
-                if ([MCTransformUtil isSingmasterNotation:currentRotation PossiblePartOfSingmasterNotation:targetRotation]) {
+                if ([MCCompositeRotationUtil isSingmasterNotation:currentRotation PossiblePartOfSingmasterNotation:targetRotation]) {
                     previousResult = StayForATime;
                 }
                 else{

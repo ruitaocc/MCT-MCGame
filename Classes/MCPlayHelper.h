@@ -13,7 +13,10 @@
 #import "MCBasicElement.h"
 #import "MCApplyQueue.h"
 
+#define NO_LOCKED_CUBIE -1
 #define CubieCouldBeLockMaxNum 26
+#define DEFAULT_RESIDUAL_ACTION_NUM 3
+#define DEFAULT_PATTERN_ACCORDANCE_MESSAGE_NUM 5
 
 
 typedef enum _HelperStateMachine {
@@ -34,6 +37,12 @@ typedef enum _HelperStateMachine {
 @property (nonatomic)RotationResult rotationResult;
 @property (nonatomic, retain)NSMutableArray *residualActions;
 
+//After applying this pattern,
+//intermediate informations will be stored here.
+//However, these informations are those accordant condictions beacuse
+//this pattern maybe not completely corresponding to current state of the rubik's cube.
+@property(nonatomic, retain)NSMutableArray *accordanceMsgs;
+
 
 + (MCPlayHelper *)playerHelperWithMagicCube:(MCMagicCube *)mc;
 
@@ -41,9 +50,6 @@ typedef enum _HelperStateMachine {
 
 //see whether the target cubie is at home
 - (BOOL)isCubieAtHomeWithIdentity:(ColorCombinationType)identity;
-
-//apply the pattern and return result
-- (BOOL)applyPatternWihtName:(NSString *)name;
 
 //rotate operation with axis, layer, direction
 - (void)rotateOnAxis:(AxisType)axis onLayer:(int)layer inDirection:(LayerRotationDirectionType)direction;
@@ -54,7 +60,7 @@ typedef enum _HelperStateMachine {
 //get the result of the last rotation
 - (RotationResult)getResultOfTheLastRotation;
 
-- (void)refreshRules;
+- (void)reloadRulesAccordingToCurrentStateOfRubiksCube;
 
 //check the current state and return it
 - (NSString *)checkStateFromInit:(BOOL)isCheckStateFromInit;
