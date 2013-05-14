@@ -18,6 +18,8 @@
 #define DEFAULT_RESIDUAL_ACTION_NUM 3
 #define DEFAULT_PATTERN_ACCORDANCE_MESSAGE_NUM 5
 
+//rotation queue, locked cubies, tips
+#define DEFAULT_ACTION_INFOMATION_NUM 3
 
 typedef enum _HelperStateMachine {
     Normal,
@@ -69,7 +71,8 @@ typedef enum _HelperStateMachine {
 //the result is directory:
 //"RotationQueue"——the rotation queue in array
 //"LockingAt"——
-//"Tips"——the string showing tips
+//"Tips"——the strings showing tips
+//      ——the NSArray with several NSString objects
 - (NSDictionary *)applyRules;
 
 //do the clear thing for next rotation queue
