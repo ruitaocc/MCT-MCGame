@@ -7,7 +7,6 @@
 //
 
 #import "MCKnowledgeBase.h"
-#import "MCTransformUtil.h"
 
 
 @implementation MCKnowledgeBase
@@ -169,7 +168,6 @@
                 NSString *patternName = [[NSString alloc] initWithUTF8String:key];
                 NSString *patternStr = [[NSString alloc] initWithUTF8String:pattern];
                 MCPattern *mcPattern = [[MCPattern alloc] initWithString:patternStr];
-                [MCTransformUtil convertToTreeByExpandingNotSentence:mcPattern.root];
                 [patterns setObject:mcPattern forKey:patternName];
                 [patternName release];
                 [patternStr release];

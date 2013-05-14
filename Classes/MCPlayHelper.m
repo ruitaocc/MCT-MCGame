@@ -431,7 +431,6 @@
         if (![self treeNodesApply:node]) {
             return NO;
         }
-<<<<<<< HEAD
         //-----------------------------------
 //        //While this node is true, we store some accordance messages
 //        //for several occasions.
@@ -459,45 +458,6 @@
 //            default:
 //                break;
 //        }
-=======
-        
-        //While this node is true, we store some accordance messages
-        //for several occasions.
-        switch (node.type) {
-            case ExpNode:
-                if (node.value == Not) {
-                    //Notice that the node is 'Not' node.
-                    //You should get the negative sentence by invoking
-                    //'getNegativeSentenceOfContentFromPatternNode'
-                    [self.accordanceMsgs addObject:[MCTransformUtil getNegativeSentenceOfContentFromPatternNode:
-                                                    [node.children objectAtIndex:0]]];
-                }
-                break;
-            case PatternNode:
-            {
-                switch (node.value) {
-                    case Home | Check:
-                        [self.accordanceMsgs addObject:[MCTransformUtil getContenFromPatternNode:
-                                                        [node.children objectAtIndex:0]]];
-                        break;
-                    case CubiedBeLocked:
-                    {
-                        if ([node.children count] == 0 ||
-                            [(MCTreeNode *)[node.children objectAtIndex:0] value] == 0) {
-                            [self.accordanceMsgs addObject:[MCTransformUtil getContenFromPatternNode:
-                                                            [node.children objectAtIndex:0]]];
-                        }
-                    }
-                        break;
-                    default:
-                        break;
-                }
-            }
-                break;
-            default:
-                break;
-        }
->>>>>>> Model-Branch
     }
     return YES;
 }
@@ -505,43 +465,6 @@
 - (BOOL)orNodeApply:(MCTreeNode *)root{
     for (MCTreeNode *node in root.children) {
         if ([self treeNodesApply:node]) {
-            //While this node is true, we store some accordance messages
-            //for several occasions.
-            switch (node.type) {
-                case ExpNode:
-                    if (node.value == Not) {
-                        //Notice that the node is 'Not' node.
-                        //You should get the negative sentence by invoking
-                        //'getNegativeSentenceOfContentFromPatternNode'
-                        [self.accordanceMsgs addObject:[MCTransformUtil getNegativeSentenceOfContentFromPatternNode:
-                                                        [node.children objectAtIndex:0]]];
-                    }
-                    break;
-                case PatternNode:
-                {
-                    switch (node.value) {
-                        case Home | Check:
-                            [self.accordanceMsgs addObject:[MCTransformUtil getContenFromPatternNode:
-                                                            [node.children objectAtIndex:0]]];
-                            break;
-                        case CubiedBeLocked:
-                        {
-                            if ([node.children count] == 0 ||
-                                [(MCTreeNode *)[node.children objectAtIndex:0] value] == 0) {
-                                [self.accordanceMsgs addObject:[MCTransformUtil getContenFromPatternNode:
-                                                                [node.children objectAtIndex:0]]];
-                            }
-                        }
-                            break;
-                        default:
-                            break;
-                    }
-                }
-                    break;
-                default:
-                    break;
-            }
-            
             return YES;
         }
     }
@@ -650,19 +573,16 @@
             break;
     }
     
-    NSMutableDictionary *resultDirectory = [NSMutableDictionary dictionaryWithCapacity:DEFAULT_ACTION_INFOMATION_NUM];
-    
-    //While the apply queue isn't nil, attach it to the result directory.
+    NSArray *returnedRotationQueue = nil;
     if (self.applyQueue != nil) {
-        [resultDirectory setObject:[self.applyQueue getQueueWithStringFormat] forKey:KEY_ROTATION_QUEUE];
+        returnedRotationQueue = [self.applyQueue getQueueWithStringFormat];
+    }
+    
+    NSDictionary *resultDirectory = nil;
+    if (returnedRotationQueue != nil) {
+        resultDirectory = [NSDictionary dictionaryWithObject:[NSArray arrayWithArray:returnedRotationQueue] forKey:RotationQueueKey];
         self.helperState = ApplyingRotationQueue;
     }
-    
-    //While the apply queue isn't nil, attach it to the result directory.
-    if ([self.accordanceMsgs count] != 0) {
-        [resultDirectory setObject:[NSArray arrayWithArray:self.accordanceMsgs] forKey:KEY_ROTATION_QUEUE];
-    }
-    
 #else
     NSDictionary *resultDirectory = [NSDictionary dictionary];
 #endif
