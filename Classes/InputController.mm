@@ -186,6 +186,11 @@
         tapCount=0;
         [self clearEvents];
     }
+    if ((fsm_Current_State == kState_S2)&&(fsm_Previous_State==kState_None)) {
+        fsm_Previous_State = kState_None;
+        fsm_Current_State = kState_F2;
+        tapCount =0;
+    }
     if (tapCount>0) {
         tapCount--;
     }

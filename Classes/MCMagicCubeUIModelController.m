@@ -1759,6 +1759,7 @@
 }
 #pragma mark final adjust
 -(void)adjustWithCenter_2{
+    return;
     float xyz[9] = {1.0,0.0,0.0,
         0.0,1.0,0.0,
         0.0,0.0,1.0};
