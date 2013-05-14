@@ -396,10 +396,10 @@
     //Generate the content of pattern node
     switch ([node value]) {
         case Home:
-            
+            result = @"Home Message";
             break;
         case Check:
-            
+            result = @"Check Message";
             break;
         case ColorBindOrientation:
             
@@ -411,7 +411,7 @@
             
             break;
         case CubiedBeLocked:
-            
+            result = @"CubieBeLocked Message";
             break;
         default:
             result = @"Unrecongized pattern node!!!";
@@ -423,5 +423,90 @@
 + (NSString *)getNegativeSentenceOfContentFromPatternNode:(MCTreeNode *)node{
     return [NSString stringWithFormat:@"%@ 不符合", [MCTransformUtil getContenFromPatternNode:node]];
 }
+
+
+
++ (void)convertToTreeByExpandingNotSentence:(MCTreeNode *)node{
+    //Just expand 'ExpNode' node
+    if (node.type != ExpNode) return;
+    
+    switch (node.value) {
+        //Expand 'And' or 'Or' node's children.
+        case And | Or:
+            for (MCTreeNode *child in node.children) {
+                [MCTransformUtil convertToTreeByExpandingNotSentence:child];
+            }
+            break;
+        //Expand 'Not' Node
+        case Not:
+        {
+            //Get its child(only one)
+            MCTreeNode *child = [node.children objectAtIndex:0];
+            [child retain];
+            
+            //Before expanding, avoid unexpected node type.
+            if (child.type != ExpNode){
+                [child release];
+                return;
+            }
+            
+            //Process three occasions
+            switch (child.value) {
+                //Occasion @1 and @2
+                case And | Or:
+                {
+                    //Ancestor node transfer to 'Or' or 'And' node
+                    [node setValue:(child.value == And ? Or : And)];
+                    
+                    //break the relationship not-and or not-or
+                    [node.children removeAllObjects];
+                    
+                    //add new ancestor node's children
+                    for (MCTreeNode *andsChild in child.children) {
+                        //Construct new 'Not' node.
+                        MCTreeNode *newChild = [[MCTreeNode alloc] initNodeWithType:ExpNode];
+                        [newChild setValue:Not];
+                        
+                        [newChild.children addObject:andsChild];
+                        //Attach the new node to ancestor node.
+                        [node.children addObject:newChild];
+                        
+                        //count--
+                        [newChild release];
+                    }
+                    break;
+                }
+                //Occasion @3
+                case Not:
+                {
+                    //Get the node's grandchild
+                    MCTreeNode *grandChild = [child.children objectAtIndex:0];
+                    [grandChild retain];
+                    
+                    //Eliminate not-not
+                    [node setType:grandChild.type];
+                    [node setValue:grandChild.value];
+                    [node setChildren:grandChild.children];
+                    
+                    //Release the hold of grandchild object
+                    [grandChild release];
+                    
+                }
+                    break;
+                default:
+                    break;
+            }
+            
+            //Release the hold of child object
+            [child release];
+            
+            //Deeper Expanding
+            [MCTransformUtil convertToTreeByExpandingNotSentence:node];
+        }
+        default:
+            break;
+    }
+}
+
 
 @end

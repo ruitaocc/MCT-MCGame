@@ -162,8 +162,8 @@ typedef enum _RotationResult{
 //the temprorary file store the unfinished magic cube's status
 #define TmpMagicCubeData @"tmpMagicCube"
 //the keys that get actions
-#define RotationQueueKey @"RotationQueue"
-
+#define KEY_ROTATION_QUEUE @"RotationQueue"
+#define KEY_TIPS @"TipsMessage"
 
 //--------------------------------------------------------------------------------------------
 //tmp variables
