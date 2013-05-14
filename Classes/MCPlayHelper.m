@@ -431,35 +431,6 @@
         if (![self treeNodesApply:node]) {
             return NO;
         }
-<<<<<<< HEAD
-        //-----------------------------------
-//        //While this node is true, we store some accordance messages
-//        //for several occasions.
-//        switch (node.type) {
-//            case ExpNode:
-//                if (node.value == Not) {
-//                    //Notice that the node is 'Not' node.
-//                    //You
-//                    [self.accordanceMsgs addObject:[MCTransformUtil getContenFromPatternNode:
-//                                                    [node.children objectAtIndex:0]]];
-//                }
-//                break;
-//            case PatternNode:
-//            {
-//                switch (node.value) {
-//                    case <#constant#>:
-//                        <#statements#>
-//                        break;
-//                        
-//                    default:
-//                        break;
-//                }
-//            }
-//                break;
-//            default:
-//                break;
-//        }
-=======
         
         //While this node is true, we store some accordance messages
         //for several occasions.
@@ -497,7 +468,6 @@
             default:
                 break;
         }
->>>>>>> Model-Branch
     }
     return YES;
 }

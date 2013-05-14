@@ -30,8 +30,6 @@
 //Return the negative sentence of the string returned by
 //"+ (NSString *)getContenFromPatternNode:(MCTreeNode *)node"
 + (NSString *)getNegativeSentenceOfContentFromPatternNode:(MCTreeNode *)node;
-<<<<<<< HEAD
-=======
 
 //Expand the tree node at three occasions:
 //@1     not                    or
@@ -48,6 +46,5 @@
 //-----------------------------------------
 //@3 not-not-child  ->  child
 + (void)convertToTreeByExpandingNotSentence:(MCTreeNode *)node;
->>>>>>> Model-Branch
 
 @end

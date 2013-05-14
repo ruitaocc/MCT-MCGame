@@ -400,17 +400,10 @@
     //Generate the content of pattern node
     switch ([node value]) {
         case Home:
-<<<<<<< HEAD
-            
-            break;
-        case Check:
-            
-=======
             result = @"Home Message";
             break;
         case Check:
             result = @"Check Message";
->>>>>>> Model-Branch
             break;
         case ColorBindOrientation:
             
@@ -422,11 +415,7 @@
             
             break;
         case CubiedBeLocked:
-<<<<<<< HEAD
-            
-=======
             result = @"CubieBeLocked Message";
->>>>>>> Model-Branch
             break;
         default:
             result = @"Unrecongized pattern node!!!";
@@ -438,9 +427,6 @@
 + (NSString *)getNegativeSentenceOfContentFromPatternNode:(MCTreeNode *)node{
     return [NSString stringWithFormat:@"%@ 不符合", [MCTransformUtil getContenFromPatternNode:node]];
 }
-
-<<<<<<< HEAD
-=======
 
 
 + (void)convertToTreeByExpandingNotSentence:(MCTreeNode *)node{
@@ -525,6 +511,4 @@
     }
 }
 
-
->>>>>>> Model-Branch
 @end
