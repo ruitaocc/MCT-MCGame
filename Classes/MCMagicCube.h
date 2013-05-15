@@ -11,7 +11,10 @@
 
 @interface MCMagicCube : NSObject <NSCoding>
 
-@property (retain, nonatomic) NSDictionary *tagsMappingToColors;
+
+//FaceColorKey-RealColor
+@property (retain, nonatomic) NSDictionary *faceColorKeyMappingToRealColor;
+
 
 //get a new magic cube
 + (MCMagicCube *)magicCube;
@@ -44,5 +47,13 @@
 //get the state of cubies
 //every state in the "format" orientation-face color
 - (NSArray *)getColorInOrientationsOfAllCubie;
+
+//After change the color setting,
+//you can applying it in the data model by invoking this method.
+- (void)reloadColorMappingDictionary;
+
+//Using color mapping dictionary,
+//you can get the real color corresponding to face color type.
+- (NSString *)getRealColor:(FaceColorType)color;
 
 @end
