@@ -46,7 +46,7 @@
             lockedCubies[0] = nil;
         }
         
-        self.magicCube = mc;
+        [self setMagicCube:mc];
         //refresh state and rules
         self.state = START_STATE;
         self.patterns = [NSDictionary dictionaryWithDictionary:[[MCKnowledgeBase getSharedKnowledgeBase] getPatternsWithPreState:state]];
@@ -449,14 +449,14 @@
                 switch (node.value) {
                     case Home | Check:
                         [self.accordanceMsgs addObject:[MCTransformUtil getContenFromPatternNode:
-                                                        [node.children objectAtIndex:0]]];
+                                                        node]];
                         break;
                     case CubiedBeLocked:
                     {
                         if ([node.children count] == 0 ||
                             [(MCTreeNode *)[node.children objectAtIndex:0] value] == 0) {
                             [self.accordanceMsgs addObject:[MCTransformUtil getContenFromPatternNode:
-                                                            [node.children objectAtIndex:0]]];
+                                                            node]];
                         }
                     }
                         break;
@@ -631,6 +631,7 @@
     //While the apply queue isn't nil, attach it to the result directory.
     if ([self.accordanceMsgs count] != 0) {
         [resultDirectory setObject:[NSArray arrayWithArray:self.accordanceMsgs] forKey:KEY_ROTATION_QUEUE];
+        NSLog([self.accordanceMsgs description]);
     }
     
 #else
@@ -662,7 +663,8 @@
         goStr = state;
     }
     //check state
-    for (MCState *tmpState = [states objectForKey:goStr]; tmpState != nil && [self treeNodesApply:[tmpState root]]; tmpState = [states objectForKey:goStr]) {
+    MCState *tmpState = [states objectForKey:goStr];
+    for (; tmpState != nil && [self treeNodesApply:[tmpState root]]; tmpState = [states objectForKey:goStr]) {
         goStr = tmpState.afterState;
     }
     if ([goStr compare:state] != NSOrderedSame) {
