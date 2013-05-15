@@ -19,6 +19,8 @@ struct Point3i{
     int z;
 };
 
+
+
 //define the face color type to apart color data from model
 typedef enum _FaceColorType {
     UpColor     = 0,
@@ -29,6 +31,18 @@ typedef enum _FaceColorType {
     RightColor  = 5,
     NoColor     = 6
 } FaceColorType;
+
+//The color mapping file name
+#define FACE_COLOR_MAPPING_FILE_NAME @"FaceColorMapping"
+
+//Keys for getting real color
+#define KEY_UP_FACE_COLOR      @"UpColor"
+#define KEY_DOWN_FACE_COLOR    @"DownColor"
+#define KEY_FRONT_FACE_COLOR   @"FrontColor"
+#define KEY_BACK_FACE_COLOR    @"BackColor"
+#define KEY_LEFT_FACE_COLOR    @"LeftColor"
+#define KEY_RIGHT_FACE_COLOR   @"RightColor"
+
 
 //define the orientation of face
 typedef enum _FaceOrientationType {
@@ -165,17 +179,6 @@ typedef enum _RotationResult{
 #define KEY_ROTATION_QUEUE @"RotationQueue"
 #define KEY_TIPS @"TipsMessage"
 
-//--------------------------------------------------------------------------------------------
-//tmp variables
-typedef enum _FaceColor{
-    Yellow,
-    White,
-    Red,
-    Orange,
-    Blue,
-    Green
-} FaceColor;
-//--------------------------------------------------------------------------------------------
 
 //#define ONLY_TEST
 

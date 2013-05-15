@@ -17,6 +17,8 @@
     FaceOrientationType orientationToMagicCubeFace[6];
 }
 
+@synthesize faceColorKeyMappingToRealColor;
+
 + (MCMagicCube *)magicCube{
     return [[[MCMagicCube alloc] init] autorelease];
 }
@@ -48,6 +50,9 @@
             //At the begining, the orientation and the magic cube face orientation is same
             orientationToMagicCubeFace[i] = (FaceOrientationType)i;
         }
+        
+        //Load colors mapping dictionary
+        [self reloadColorMappingDictionary];
     }
     return self;
 }   //initial the rubik's cube
@@ -492,6 +497,36 @@
         }
     }
     return [NSArray arrayWithArray:states];
+}
+
+- (void)reloadColorMappingDictionary{
+    NSString *plistPath = [[NSBundle mainBundle] pathForResource:FACE_COLOR_MAPPING_FILE_NAME ofType:@"plist"];
+    self.faceColorKeyMappingToRealColor = [NSDictionary dictionaryWithContentsOfFile:plistPath];
+}
+
+- (NSString *)getRealColor:(FaceColorType)color{
+    switch (color) {
+        case UpColor:
+            return [self.faceColorKeyMappingToRealColor objectForKey:KEY_UP_FACE_COLOR];
+            break;
+        case DownColor:
+            return [self.faceColorKeyMappingToRealColor objectForKey:KEY_DOWN_FACE_COLOR];
+            break;
+        case FrontColor:
+            return [self.faceColorKeyMappingToRealColor objectForKey:KEY_FRONT_FACE_COLOR];
+            break;
+        case BackColor:
+            return [self.faceColorKeyMappingToRealColor objectForKey:KEY_BACK_FACE_COLOR];
+            break;
+        case LeftColor:
+            return [self.faceColorKeyMappingToRealColor objectForKey:KEY_LEFT_FACE_COLOR];
+            break;
+        case RightColor:
+            return [self.faceColorKeyMappingToRealColor objectForKey:KEY_RIGHT_FACE_COLOR];
+            break;
+        default:
+            return nil;
+    }
 }
 
 @end
