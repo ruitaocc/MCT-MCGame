@@ -8,8 +8,9 @@
 
 #import <Foundation/Foundation.h>
 #import "Global.h"
+#import "MCCubieDelegate.h"
 
-@interface MCCubie : NSObject<NSCoding>
+@interface MCCubie : NSObject<NSCoding, MCCubieDelegate>
 
 @property(nonatomic)struct Point3i coordinateValue;
 @property(nonatomic)int skinNum;
@@ -24,19 +25,11 @@
 //re-initiate the cube
 - (id)redefinedWithCoordinate:(struct Point3i)value orderedColors:(NSArray *)colors orderedOrientations:(NSArray *)orientations;
 
-//shift the cube‘s data
-- (void) shiftOnAxis: (AxisType)axis  inDirection: (LayerRotationDirectionType)direction;
-
-//get the faceColor in specified orientation
-- (FaceColorType) faceColorInOrientation: (FaceOrientationType)orientation;
-
-//return wheather the face color on the specified orientation is the specified color
-- (BOOL)isFaceColor:(FaceColorType)color inOrientation:(FaceOrientationType)orientation;
-
 //return state in the "format" axis-orientation
 - (NSDictionary *)getCubieOrientationOfAxis;
 
 //return state in the "format" orientation-facecolor
+//All 6 faces will be returned.
 - (NSDictionary *)getCubieColorInOrientations;
 
 @end

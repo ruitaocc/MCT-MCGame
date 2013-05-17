@@ -20,11 +20,11 @@
 @synthesize magicCube;
 
 
-+ (id)applyQueueWithRotationAction:(MCTreeNode *)action withMagicCube:(MCMagicCube *)mc{
++ (id)applyQueueWithRotationAction:(MCTreeNode *)action withMagicCube:(NSObject<MCMagicCubeDelegate> *)mc{
     return [[[MCApplyQueue alloc] initWithRotationAction:action withMagicCube:mc] autorelease];
 }
 
-- (id)initWithRotationAction:(MCTreeNode *)action withMagicCube:(MCMagicCube *)mc{
+- (id)initWithRotationAction:(MCTreeNode *)action withMagicCube:(NSObject<MCMagicCubeDelegate> *)mc{
     if (self = [super init]) {
         currentRotationQueuePosition = 0;
         previousResult = NoneResult;

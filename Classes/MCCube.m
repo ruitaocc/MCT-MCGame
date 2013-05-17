@@ -458,6 +458,13 @@
 }
 
 
+- (NSDictionary *)getCubieColorInOrientationsWithoutNoColor{
+    NSMutableDictionary *state = [NSMutableDictionary dictionaryWithCapacity:self.skinNum];
+    for (int i = 0; i < self.skinNum; i++) {
+        [state setObject:[NSNumber numberWithInteger:self.faceColors[i]] forKey:[NSNumber numberWithInteger:self.orientations[i]]];
+    }
+    return [NSDictionary dictionaryWithDictionary:state];
+}
 
 
 @end

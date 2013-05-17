@@ -7,14 +7,14 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "MCMagicCube.h"
+#import "MCMagicCubeDelegate.h"
 #import "MCKnowledgeBase.h"
 #import "Global.h"
 #import "MCBasicElement.h"
 #import "MCApplyQueue.h"
 
+
 #define NO_LOCKED_CUBIE -1
-#define CubieCouldBeLockMaxNum 26
 #define DEFAULT_RESIDUAL_ACTION_NUM 3
 #define DEFAULT_PATTERN_ACCORDANCE_MESSAGE_NUM 5
 
@@ -29,7 +29,7 @@ typedef enum _HelperStateMachine {
 
 @interface MCPlayHelper : NSObject
 
-@property (nonatomic, retain)MCMagicCube *magicCube;
+@property (nonatomic, retain)NSObject<MCMagicCubeDelegate> *magicCube;
 @property (nonatomic, retain)NSDictionary *patterns;
 @property (nonatomic, retain)NSDictionary *rules;
 @property (nonatomic, retain)NSDictionary *states;

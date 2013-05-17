@@ -163,6 +163,7 @@
 		A3F8290A16EF790D00AC5EAF /* DefaultButtonBg.png in Resources */ = {isa = PBXBuildFile; fileRef = A3F8290216EF790D00AC5EAF /* DefaultButtonBg.png */; };
 		A3F8292216F181BD00AC5EAF /* RotateType.m in Sources */ = {isa = PBXBuildFile; fileRef = A3F8292116F181BC00AC5EAF /* RotateType.m */; };
 		E04E7E8717410E8E00403E92 /* MCCompositeRotationUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = E04E7E8617410E8E00403E92 /* MCCompositeRotationUtil.m */; };
+		E0533BFE17463E3A000E0C0B /* FaceColorMapping.plist in Resources */ = {isa = PBXBuildFile; fileRef = E0533BFD17463E3A000E0C0B /* FaceColorMapping.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -383,8 +384,11 @@
 		A3F8290216EF790D00AC5EAF /* DefaultButtonBg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DefaultButtonBg.png; sourceTree = "<group>"; };
 		A3F8292016F181BC00AC5EAF /* RotateType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RotateType.h; sourceTree = "<group>"; };
 		A3F8292116F181BC00AC5EAF /* RotateType.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RotateType.m; sourceTree = "<group>"; };
+		E0440E631745223A008A4FC6 /* MCMagicCubeDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MCMagicCubeDelegate.h; sourceTree = "<group>"; };
+		E0440E6417452656008A4FC6 /* MCCubieDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MCCubieDelegate.h; sourceTree = "<group>"; };
 		E04E7E8517410E8E00403E92 /* MCCompositeRotationUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCCompositeRotationUtil.h; sourceTree = "<group>"; };
 		E04E7E8617410E8E00403E92 /* MCCompositeRotationUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCCompositeRotationUtil.m; sourceTree = "<group>"; };
+		E0533BFD17463E3A000E0C0B /* FaceColorMapping.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = FaceColorMapping.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -480,6 +484,8 @@
 				A3EAD3D61713C18A00A95ADA /* MCCube.m */,
 				A3EAD3D71713C18A00A95ADA /* MCMagicCube.h */,
 				A3EAD3D81713C18A00A95ADA /* MCMagicCube.m */,
+				E0440E6417452656008A4FC6 /* MCCubieDelegate.h */,
+				E0440E631745223A008A4FC6 /* MCMagicCubeDelegate.h */,
 				A3F8291516EF798C00AC5EAF /* Util */,
 				A3F8290B16EF796900AC5EAF /* MCPlayHelper */,
 				A3F828F316EF78E000AC5EAF /* Resource */,
@@ -936,6 +942,7 @@
 			isa = PBXGroup;
 			children = (
 				A3F828FA16EF78FC00AC5EAF /* Image */,
+				E0533BFD17463E3A000E0C0B /* FaceColorMapping.plist */,
 				A3F828F416EF78F800AC5EAF /* Icon_max.png */,
 				A3F828F516EF78F800AC5EAF /* Icon_min.png */,
 				A3F828F616EF78F800AC5EAF /* KnowledgeBase.sqlite3 */,
@@ -1122,6 +1129,7 @@
 				A3D0704616F87F0300AA3BFF /* sixcolor.png in Resources */,
 				A3C1E393170440ED0033EFC1 /* cubeAction.plist in Resources */,
 				A3C1E394170440ED0033EFC1 /* cubeAction.png in Resources */,
+				E0533BFE17463E3A000E0C0B /* FaceColorMapping.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

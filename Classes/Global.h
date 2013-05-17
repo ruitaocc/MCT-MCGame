@@ -126,15 +126,13 @@ typedef enum _PatternType {
     CubiedBeLocked,
 } PatternTyp;
 
+//Token tag
 #define Token_And -1
 #define Token_Or -2
 #define Token_LeftParentheses -3
 #define Token_RightParentheses -4
 #define Token_Not -5
 #define PLACEHOLDER -10000
-
-//It indicates that no layer was selected.
-#define NO_SELECTED_LAYER -999
 
 //the rull action type
 typedef enum _SingmasterNotation {
@@ -169,18 +167,32 @@ typedef enum _RotationResult{
 } RotationResult;
 
 
+//-------------------------------------------------------------------------------------------
+
+//It indicates that no layer was selected.
+#define NO_SELECTED_LAYER -999
+
+
+//-------------------------------------------------------------------------------------------
+
 #define ETFF 0  //method 0, 8355
 //every method's first and last state name
 #define START_STATE @"Init"
 #define END_STATE @"End"
+
+//-------------------------------------------------------------------------------------------
+
 //the temprorary file store the unfinished magic cube's status
 #define TmpMagicCubeData @"tmpMagicCube"
+
+//-------------------------------------------------------------------------------------------
+
 //the keys that get actions
 #define KEY_ROTATION_QUEUE @"RotationQueue"
 #define KEY_TIPS @"TipsMessage"
 
 
-//#define ONLY_TEST
+//-------------------------------------------------------------------------------------------
 
 //an encapsulation
 struct RotationStruct {
@@ -189,5 +201,14 @@ struct RotationStruct {
     LayerRotationDirectionType direction;
 };
 
+//-------------------------------------------------------------------------------------------
+
+//#define ONLY_TEST
+
+//-------------------------------------------------------------------------------------------
+
+#define CubieCouldBeLockMaxNum 26
+
+//-------------------------------------------------------------------------------------------
 
 #endif

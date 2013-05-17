@@ -407,19 +407,19 @@
     return magicCubiesList[combination].coordinateValue;
 }   //get coordinate of cube having the color combination
 
-- (MCCubie *)cubieWithColorCombination:(ColorCombinationType)combination{
+- (NSObject<MCCubieDelegate> *)cubieWithColorCombination:(ColorCombinationType)combination{
     return magicCubiesList[combination];
 }
 
-- (MCCubie *)cubieAtCoordinateX:(NSInteger)x Y:(NSInteger)y Z:(NSInteger)z{
+- (NSObject<MCCubieDelegate> *)cubieAtCoordinateX:(NSInteger)x Y:(NSInteger)y Z:(NSInteger)z{
     return magicCubies3D[x+1][y+1][z+1];
 }
 
-- (MCCubie *)cubieAtCoordinatePoint3i:(struct Point3i)point{
+- (NSObject<MCCubieDelegate> *)cubieAtCoordinatePoint3i:(struct Point3i)point{
     return magicCubies3D[point.x+1][point.y+1][point.z+1];
 }
 
-- (FaceOrientationType)magicCubeFaceInOrientation:(FaceOrientationType)orientation{
+- (FaceOrientationType)centerMagicCubeFaceInOrientation:(FaceOrientationType)orientation{
     return orientationToMagicCubeFace[orientation];
 }
 

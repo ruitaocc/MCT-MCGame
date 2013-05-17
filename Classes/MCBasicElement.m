@@ -17,6 +17,7 @@
 @synthesize children;
 @synthesize type;
 @synthesize value;
+@synthesize result;
 
 -(id)init{
     if (self = [super init]) {

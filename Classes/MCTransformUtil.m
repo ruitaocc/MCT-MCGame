@@ -385,7 +385,9 @@
     return result;
 }
 
-+ (NSString *)getContenFromPatternNode:(MCTreeNode *)node{
++ (NSString *)getContenFromPatternNode:(MCTreeNode *)node
+                  accordingToMagicCube:(NSObject<MCMagicCubeDelegate> *)mc
+                       andLockedCubies:(NSObject<MCCubieDelegate> **)lockedCubies{
     NSString *result = nil;
     //Before generate the content,
     //detect the wrong type.
@@ -396,22 +398,36 @@
     //Generate the content of pattern node
     switch ([node value]) {
         case Home:
+        {
             result = @"Home Message";
+        }
             break;
         case Check:
+        {
             result = @"Check Message";
-            break;
-        case ColorBindOrientation:
-            
-            break;
-        case At:
-            
-            break;
-        case NotAt:
-            
+        }
             break;
         case CubiedBeLocked:
-            result = @"CubieBeLocked Message";
+        {
+            
+            if ([node.children count] == 0 ||
+                [(MCTreeNode *)[node.children objectAtIndex:0] value] == 0) {
+                
+                //Avoid no cubie locked
+                if (lockedCubies[0] == nil) return nil;
+                
+                //Get the description of target cubie
+                NSString *targetCubie = [MCTransformUtil getConcreteDescriptionOfCubie:[lockedCubies[0] identity] fromMgaicCube:mc];
+                
+                //If no nil, return message
+                if (targetCubie != nil) {
+                    result = [NSString stringWithFormat:@"锁定目标小块:%@", targetCubie];
+                }
+            }
+            else{
+                return nil;
+            }
+        }
             break;
         default:
             result = @"Unrecongized pattern node!!!";
@@ -420,10 +436,14 @@
     return result;
 }
 
-+ (NSString *)getNegativeSentenceOfContentFromPatternNode:(MCTreeNode *)node{
-    return [NSString stringWithFormat:@"%@ 不符合", [MCTransformUtil getContenFromPatternNode:node]];
++ (NSString *)getNegativeSentenceOfContentFromPatternNode:(MCTreeNode *)node
+                                     accordingToMagicCube:(NSObject<MCMagicCubeDelegate> *)mc
+                                          andLockedCubies:(NSObject<MCCubieDelegate> **)lockedCubies{
+    NSString *positiveSentence = [MCTransformUtil getContenFromPatternNode:node
+                                                      accordingToMagicCube:mc
+                                                           andLockedCubies:lockedCubies];
+    return positiveSentence == nil ? nil : [NSString stringWithFormat:@"%@ 不符合", positiveSentence];
 }
-
 
 
 + (void)convertToTreeByExpandingNotSentence:(MCTreeNode *)node{
@@ -508,5 +528,206 @@
     }
 }
 
+
++ (NSString *)getConcreteDescriptionOfCubie:(ColorCombinationType)identity fromMgaicCube:(NSObject<MCMagicCubeDelegate> *)mc{
+    //Cubie description length
+    const NSInteger cubieDescriptionLength = 12;
+    
+    //Description result
+    NSMutableString *result = [NSMutableString stringWithCapacity:cubieDescriptionLength];
+    
+    //Get the target cubie by identity(retain once) and skin colors
+    NSArray *faceColors = [[[[mc cubieWithColorCombination:identity] getCubieColorInOrientationsWithoutNoColor] allValues] retain];
+    
+    //Transfer face color type to real color
+    for (NSNumber *faceColor in faceColors) {
+        NSString *realColor = [mc getRealColor:(FaceColorType)[faceColor integerValue]];
+        if ([realColor compare:@"Yellow"] == NSOrderedSame) {
+            [result appendString:@"黄"];
+        }
+        else if ([realColor compare:@"White"] == NSOrderedSame){
+            [result appendString:@"白"];
+        }
+        else if ([realColor compare:@"Red"] == NSOrderedSame){
+            [result appendString:@"红"];
+        }
+        else if ([realColor compare:@"Orange"] == NSOrderedSame){
+            [result appendString:@"橙"];
+        }
+        else if ([realColor compare:@"Blue"] == NSOrderedSame){
+            [result appendString:@"蓝"];
+        }
+        else if ([realColor compare:@"Green"] == NSOrderedSame){
+            [result appendString:@"绿"];
+        }
+    }
+    
+    //Append suffix
+    [result appendString:@"色小块"];
+    
+    //release once
+    [faceColors release];
+    
+    return result;
+}
+
++ (NSString *)getPositionDescription:(Point3i)position{
+    switch (position.z) {
+        case 1:
+            switch (position.y) {
+                case 1:
+                    switch (position.x) {
+                        case 1:
+                            return @"前右上角";
+                            break;
+                        case 0:
+                            return @"前上方";
+                            break;
+                        case -1:
+                            return @"前左上角";
+                            break;
+                        default:
+                            break;
+                    }
+                    break;
+                case 0:
+                    switch (position.x) {
+                        case 1:
+                            return @"前面右边";
+                            break;
+                        case 0:
+                            return @"前正中央";
+                            break;
+                        case -1:
+                            return @"前面左边";
+                            break;
+                        default:
+                            break;
+                    }
+                    break;
+                case -1:
+                    switch (position.x) {
+                        case 1:
+                            return @"前右下角";
+                            break;
+                        case 0:
+                            return @"前下方";
+                            break;
+                        case -1:
+                            return @"前左下角";
+                            break;
+                        default:
+                            break;
+                    }
+                    break;
+                default:
+                    break;
+            }
+            break;
+        case 0:
+            switch (position.y) {
+                case 1:
+                    switch (position.x) {
+                        case 1:
+                            return @"中间右上角";
+                            break;
+                        case 0:
+                            return @"顶面中心";
+                            break;
+                        case -1:
+                            return @"中间左上角";
+                            break;
+                        default:
+                            break;
+                    }
+                    break;
+                case 0:
+                    switch (position.x) {
+                        case 1:
+                            return @"右面中心";
+                            break;
+                        case -1:
+                            return @"左面中心";
+                            break;
+                        default:
+                            break;
+                    }
+                    break;
+                case -1:
+                    switch (position.x) {
+                        case 1:
+                            return @"中间右下角";
+                            break;
+                        case 0:
+                            return @"底面中心";
+                            break;
+                        case -1:
+                            return @"中间左下角";
+                            break;
+                        default:
+                            break;
+                    }
+                    break;
+                default:
+                    break;
+            }
+            break;
+        case -1:
+            switch (position.y) {
+                case 1:
+                    switch (position.x) {
+                        case 1:
+                            return @"背面右上角";
+                            break;
+                        case 0:
+                            return @"背面上方";
+                            break;
+                        case -1:
+                            return @"背面左上角";
+                            break;
+                        default:
+                            break;
+                    }
+                    break;
+                case 0:
+                    switch (position.x) {
+                        case 1:
+                            return @"背面右边";
+                            break;
+                        case 0:
+                            return @"背面中央";
+                            break;
+                        case -1:
+                            return @"背面左边";
+                            break;
+                        default:
+                            break;
+                    }
+                    break;
+                case -1:
+                    switch (position.x) {
+                        case 1:
+                            return @"背面右下角";
+                            break;
+                        case 0:
+                            return @"背面下方";
+                            break;
+                        case -1:
+                            return @"背面左下角";
+                            break;
+                        default:
+                            break;
+                    }
+                    break;
+                default:
+                    break;
+            }
+            break;
+            
+        default:
+            break;
+    }
+    return nil;
+}
 
 @end
