@@ -104,6 +104,7 @@ typedef enum _MagicCubeUIUsingMode {
 -(void)render;
 -(void)update;
 -(void)adjustWithCenter;
+-(void)adjustWithCenter_2;
 //撤销栈管理
 -(void)executeInvocation:(NSInvocation *)invocation
       withUndoInvocation:(NSInvocation *)undoInvocation;

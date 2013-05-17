@@ -38,7 +38,7 @@
 }
 
 + (NSString *)getRotationTagFromSingmasterNotation:(SingmasterNotation)notation{
-    NSString *names[45] = {
+    NSString *names[54] = {
         @"frontCW",     @"frontCCW",    @"front2CW",
         @"backCW",      @"backCCW",     @"back2CW",
         @"rightCW",     @"rightCCW",    @"right2CW",
@@ -53,7 +53,11 @@
         @"rightTwoCW",  @"rightTwoCCW", @"rightTwo2CW",
         @"leftTwoCW",   @"leftTwoCCW",  @"leftTwo2CW",
         @"upTwoCW",     @"upTwoCCW",    @"upTwo2CW",
-        @"downTwoCW",   @"downTwoCCW",  @"downTwo2CW"};
+        @"downTwoCW",   @"downTwoCCW",  @"downTwo2CW"
+        @"mxCW",        @"mxCCW",       @"mx2CW",
+        @"myCW",        @"myCCW",       @"my2CW",
+        @"mzCW",        @"mzCCW",       @"mz2CW"
+    };
     return names[notation];
 }
 
@@ -729,5 +733,6 @@
     }
     return nil;
 }
+
 
 @end

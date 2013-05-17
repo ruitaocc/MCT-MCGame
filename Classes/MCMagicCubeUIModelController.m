@@ -851,9 +851,9 @@
                  [self SelectLayer];
                  for (int i= 0; i<9; i++) {
                  if (current_rotate_layer!=1) {
-                 [layerPtr[i] setQuaPreviousRotation:[layerPtr[i] quaRotation]];
+                     [layerPtr[i] setQuaPreviousRotation:[layerPtr[i] quaRotation]];
                  }else if(i != 4){
-                 [layerPtr[i] setQuaPreviousRotation:[layerPtr[i] quaRotation]];
+                     [layerPtr[i] setQuaPreviousRotation:[layerPtr[i] quaRotation]];
                  }
                  }
                  
@@ -1757,6 +1757,61 @@
     }
     free(tmp_matrix);
 }
+#pragma mark final adjust
+-(void)adjustWithCenter_2{
+    return;
+    float xyz[9] = {1.0,0.0,0.0,
+        0.0,1.0,0.0,
+        0.0,0.0,1.0};
+    Cube * centerCube = [array27Cube objectAtIndex:13];
+    GLfloat * XYZ = VertexesArray_Matrix_Multiply(xyz, 3, 3, centerCube.matrix);
+    vec3 center_ox = vec3(XYZ[0],XYZ[1],XYZ[2]);
+    vec3 center_oy = vec3(XYZ[3],XYZ[4],XYZ[5]);
+    vec3 center_oz = vec3(XYZ[6],XYZ[7],XYZ[8]);
+    CGFloat * tmp_matrix = (CGFloat *) malloc(16 * sizeof(CGFloat));
+    for (int i = 0; i < 27; i++) {
+        if (i == 26 ) {
+            Cube *tmpCube = [array27Cube objectAtIndex:i];
+            
+            glMatrixMode(GL_MODELVIEW);
+            glPushMatrix();
+            glLoadIdentity();
+            mat4 matRotationt =tmpCube.quaRotation.ToMatrix();
+            glMultMatrixf(matRotationt.Pointer());
+            // rotate
+            //glRotatef(tmpCube.prerotation.x, 1.0f, 0.0f, 0.0f);
+            //glRotatef(tmpCube.prerotation.y, 0.0f, 1.0f, 0.0f);
+            //glRotatef(tmpCube.prerotation.z, 0.0f, 0.0f, 1.0f);
+            glGetFloatv(GL_MODELVIEW_MATRIX, tmp_matrix);
+            glPopMatrix();
+            for (int i = 0; i<4; i++) {
+                NSLog(@"|%f %f %f %f|",tmp_matrix[i*4+0],tmp_matrix[i*4+1],tmp_matrix[i*4+2],tmp_matrix[i*4+3]);
+            }
+            glMatrixMode(GL_MODELVIEW);
+            glPushMatrix();
+            glLoadIdentity();
+            vec3 start = vec3(1,0,0);
+            vec3 end = vec3(0,1,0);
+            Quaternion delta = Quaternion::CreateFromVectors(start, end);
+            mat4 mat44 = delta.ToMatrix();
+            glMultMatrixf(mat44.Pointer());
+            // rotate
+            //glRotatef(tmpCube.prerotation.x, 1.0f, 0.0f, 0.0f);
+            //glRotatef(tmpCube.prerotation.y, 0.0f, 1.0f, 0.0f);
+            //glRotatef(tmpCube.prerotation.z, 0.0f, 0.0f, 1.0f);
+            glGetFloatv(GL_MODELVIEW_MATRIX, tmp_matrix);
+            glPopMatrix();
+            NSLog(@"test");
+            for (int i = 0; i<4; i++) {
+                
+                NSLog(@"|%f %f %f %f|",tmp_matrix[i*4+0],tmp_matrix[i*4+1],tmp_matrix[i*4+2],tmp_matrix[i*4+3]);
+            }
+            
+        }
+    }
+    free(tmp_matrix);
+}
+
 #pragma mark math
 -(vec3)middleOfV1:(vec3)v1 V2:(vec3)v2{
     vec3 add = v1+v2;
