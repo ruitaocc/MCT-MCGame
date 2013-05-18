@@ -17,6 +17,8 @@
     FaceOrientationType orientationToMagicCubeFace[6];
 }
 
+@synthesize faceColorKeyMappingToRealColor;
+
 + (MCMagicCube *)magicCube{
     return [[[MCMagicCube alloc] init] autorelease];
 }
@@ -48,6 +50,9 @@
             //At the begining, the orientation and the magic cube face orientation is same
             orientationToMagicCubeFace[i] = (FaceOrientationType)i;
         }
+        
+        //Load colors mapping dictionary
+        [self reloadColorMappingDictionary];
     }
     return self;
 }   //initial the rubik's cube
@@ -402,19 +407,19 @@
     return magicCubiesList[combination].coordinateValue;
 }   //get coordinate of cube having the color combination
 
-- (MCCubie *)cubieWithColorCombination:(ColorCombinationType)combination{
+- (NSObject<MCCubieDelegate> *)cubieWithColorCombination:(ColorCombinationType)combination{
     return magicCubiesList[combination];
 }
 
-- (MCCubie *)cubieAtCoordinateX:(NSInteger)x Y:(NSInteger)y Z:(NSInteger)z{
+- (NSObject<MCCubieDelegate> *)cubieAtCoordinateX:(NSInteger)x Y:(NSInteger)y Z:(NSInteger)z{
     return magicCubies3D[x+1][y+1][z+1];
 }
 
-- (MCCubie *)cubieAtCoordinatePoint3i:(struct Point3i)point{
+- (NSObject<MCCubieDelegate> *)cubieAtCoordinatePoint3i:(struct Point3i)point{
     return magicCubies3D[point.x+1][point.y+1][point.z+1];
 }
 
-- (FaceOrientationType)magicCubeFaceInOrientation:(FaceOrientationType)orientation{
+- (FaceOrientationType)centerMagicCubeFaceInOrientation:(FaceOrientationType)orientation{
     return orientationToMagicCubeFace[orientation];
 }
 
@@ -492,6 +497,36 @@
         }
     }
     return [NSArray arrayWithArray:states];
+}
+
+- (void)reloadColorMappingDictionary{
+    NSString *plistPath = [[NSBundle mainBundle] pathForResource:FACE_COLOR_MAPPING_FILE_NAME ofType:@"plist"];
+    self.faceColorKeyMappingToRealColor = [NSDictionary dictionaryWithContentsOfFile:plistPath];
+}
+
+- (NSString *)getRealColor:(FaceColorType)color{
+    switch (color) {
+        case UpColor:
+            return [self.faceColorKeyMappingToRealColor objectForKey:KEY_UP_FACE_COLOR];
+            break;
+        case DownColor:
+            return [self.faceColorKeyMappingToRealColor objectForKey:KEY_DOWN_FACE_COLOR];
+            break;
+        case FrontColor:
+            return [self.faceColorKeyMappingToRealColor objectForKey:KEY_FRONT_FACE_COLOR];
+            break;
+        case BackColor:
+            return [self.faceColorKeyMappingToRealColor objectForKey:KEY_BACK_FACE_COLOR];
+            break;
+        case LeftColor:
+            return [self.faceColorKeyMappingToRealColor objectForKey:KEY_LEFT_FACE_COLOR];
+            break;
+        case RightColor:
+            return [self.faceColorKeyMappingToRealColor objectForKey:KEY_RIGHT_FACE_COLOR];
+            break;
+        default:
+            return nil;
+    }
 }
 
 @end

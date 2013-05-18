@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "Global.h"
 #import "MCBasicElement.h"
+#import "MCMagicCube.h"
 
 @interface MCTransformUtil : NSObject
 
@@ -25,10 +26,37 @@
 //By delivering pattern node to this function,
 //we can get the node content.
 //Notice! The type of this node must be 'PatternNode'.
-+ (NSString *)getContenFromPatternNode:(MCTreeNode *)node;
++ (NSString *)getContenFromPatternNode:(MCTreeNode *)node
+                  accordingToMagicCube:(NSObject<MCMagicCubeDelegate> *)mc
+                       andLockedCubies:(NSObject<MCCubieDelegate> **)lockedCubies;
 
 //Return the negative sentence of the string returned by
 //"+ (NSString *)getContenFromPatternNode:(MCTreeNode *)node"
-+ (NSString *)getNegativeSentenceOfContentFromPatternNode:(MCTreeNode *)node;
++ (NSString *)getNegativeSentenceOfContentFromPatternNode:(MCTreeNode *)node
+                                     accordingToMagicCube:(NSObject<MCMagicCubeDelegate> *)mc
+                                          andLockedCubies:(NSObject<MCCubieDelegate> **)lockedCubies;
+
+//Expand the tree node at three occasions:
+//@1     not                    or
+//        |                    /  \
+//       and        ->       not   not
+//      /   \                 |     |
+//  child  child            child  child
+//-----------------------------------------
+//@2     not                    and
+//        |                    /  \
+//       or        ->        not   not
+//      /   \                 |     |
+//  child  child            child  child
+//-----------------------------------------
+//@3 not-not-child  ->  child
++ (void)convertToTreeByExpandingNotSentence:(MCTreeNode *)node;
+
+
+//E.g BColor transfer to XXX(where)XXX colors cubie
++ (NSString *)getConcreteDescriptionOfCubie:(ColorCombinationType)identity fromMgaicCube:(NSObject<MCMagicCubeDelegate> *)mc;
+
+//E.g (0, 0, 1) transfers to front center
++ (NSString *)getPositionDescription:(Point3i)position;
 
 @end

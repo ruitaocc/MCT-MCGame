@@ -19,6 +19,8 @@ struct Point3i{
     int z;
 };
 
+
+
 //define the face color type to apart color data from model
 typedef enum _FaceColorType {
     UpColor     = 0,
@@ -29,6 +31,18 @@ typedef enum _FaceColorType {
     RightColor  = 5,
     NoColor     = 6
 } FaceColorType;
+
+//The color mapping file name
+#define FACE_COLOR_MAPPING_FILE_NAME @"FaceColorMapping"
+
+//Keys for getting real color
+#define KEY_UP_FACE_COLOR      @"UpColor"
+#define KEY_DOWN_FACE_COLOR    @"DownColor"
+#define KEY_FRONT_FACE_COLOR   @"FrontColor"
+#define KEY_BACK_FACE_COLOR    @"BackColor"
+#define KEY_LEFT_FACE_COLOR    @"LeftColor"
+#define KEY_RIGHT_FACE_COLOR   @"RightColor"
+
 
 //define the orientation of face
 typedef enum _FaceOrientationType {
@@ -112,15 +126,13 @@ typedef enum _PatternType {
     CubiedBeLocked,
 } PatternTyp;
 
+//Token tag
 #define Token_And -1
 #define Token_Or -2
 #define Token_LeftParentheses -3
 #define Token_RightParentheses -4
 #define Token_Not -5
 #define PLACEHOLDER -10000
-
-//It indicates that no layer was selected.
-#define NO_SELECTED_LAYER -999
 
 //the rull action type
 typedef enum _SingmasterNotation {
@@ -155,29 +167,32 @@ typedef enum _RotationResult{
 } RotationResult;
 
 
+//-------------------------------------------------------------------------------------------
+
+//It indicates that no layer was selected.
+#define NO_SELECTED_LAYER -999
+
+
+//-------------------------------------------------------------------------------------------
+
 #define ETFF 0  //method 0, 8355
 //every method's first and last state name
 #define START_STATE @"Init"
 #define END_STATE @"End"
+
+//-------------------------------------------------------------------------------------------
+
 //the temprorary file store the unfinished magic cube's status
 #define TmpMagicCubeData @"tmpMagicCube"
+
+//-------------------------------------------------------------------------------------------
+
 //the keys that get actions
-#define RotationQueueKey @"RotationQueue"
+#define KEY_ROTATION_QUEUE @"RotationQueue"
+#define KEY_TIPS @"TipsMessage"
 
 
-//--------------------------------------------------------------------------------------------
-//tmp variables
-typedef enum _FaceColor{
-    Yellow,
-    White,
-    Red,
-    Orange,
-    Blue,
-    Green
-} FaceColor;
-//--------------------------------------------------------------------------------------------
-
-//#define ONLY_TEST
+//-------------------------------------------------------------------------------------------
 
 //an encapsulation
 struct RotationStruct {
@@ -186,5 +201,14 @@ struct RotationStruct {
     LayerRotationDirectionType direction;
 };
 
+//-------------------------------------------------------------------------------------------
+
+//#define ONLY_TEST
+
+//-------------------------------------------------------------------------------------------
+
+#define CubieCouldBeLockMaxNum 26
+
+//-------------------------------------------------------------------------------------------
 
 #endif

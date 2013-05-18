@@ -11,7 +11,7 @@
 
 
 @implementation MCPlayHelper{
-    MCCubie* lockedCubies[CubieCouldBeLockMaxNum];
+    NSObject<MCCubieDelegate>* lockedCubies[CubieCouldBeLockMaxNum];
 }
 
 @synthesize magicCube;
@@ -46,7 +46,7 @@
             lockedCubies[0] = nil;
         }
         
-        self.magicCube = mc;
+        [self setMagicCube:mc];
         //refresh state and rules
         self.state = START_STATE;
         self.patterns = [NSDictionary dictionaryWithDictionary:[[MCKnowledgeBase getSharedKnowledgeBase] getPatternsWithPreState:state]];
@@ -87,37 +87,39 @@
         return NO;
     }
     else{
-        MCCubie *targetCubie = [magicCube cubieWithColorCombination:identity];
+        NSObject<MCCubieDelegate> *targetCubie = [magicCube cubieWithColorCombination:identity];
         BOOL isHome = YES;
-        for (int i = 0; i < targetCubie.skinNum; i++) {
-            switch ([magicCube magicCubeFaceInOrientation:targetCubie.orientations[i]]) {
+        NSDictionary *colorOrientationMapping = [targetCubie getCubieColorInOrientationsWithoutNoColor];
+        NSArray *orientations = [colorOrientationMapping allKeys];
+        for (NSNumber *orientation in orientations) {
+            switch ([magicCube centerMagicCubeFaceInOrientation:(FaceOrientationType)[orientation integerValue]]) {
                 case Up:
-                    if (targetCubie.faceColors[i] != UpColor) {
+                    if ([[colorOrientationMapping objectForKey:orientation] integerValue] != UpColor) {
                         isHome = NO;
                     }
                     break;
                 case Down:
-                    if (targetCubie.faceColors[i] != DownColor) {
+                    if ([[colorOrientationMapping objectForKey:orientation] integerValue] != DownColor) {
                         isHome = NO;
                     }
                     break;
                 case Left:
-                    if (targetCubie.faceColors[i] != LeftColor) {
+                    if ([[colorOrientationMapping objectForKey:orientation] integerValue] != LeftColor) {
                         isHome = NO;
                     }
                     break;
                 case Right:
-                    if (targetCubie.faceColors[i] != RightColor) {
+                    if ([[colorOrientationMapping objectForKey:orientation] integerValue] != RightColor) {
                         isHome = NO;
                     }
                     break;
                 case Front:
-                    if (targetCubie.faceColors[i] != FrontColor) {
+                    if ([[colorOrientationMapping objectForKey:orientation] integerValue] != FrontColor) {
                         isHome = NO;
                     }
                     break;
                 case Back:
-                    if (targetCubie.faceColors[i] != BackColor) {
+                    if ([[colorOrientationMapping objectForKey:orientation] integerValue] != BackColor) {
                         isHome = NO;
                     }
                     break;
@@ -213,7 +215,7 @@
                                 break;
                             case ColorBindOrientation:
                             {
-                                MCCubie *cubie = nil;
+                                NSObject<MCCubieDelegate> *cubie = nil;
                                 FaceOrientationType targetOrientation = (FaceOrientationType)[self treeNodesApply:[subPattern.children objectAtIndex:0]];
                                 FaceColorType targetColor = (FaceColorType)[self treeNodesApply:[subPattern.children objectAtIndex:1]];
                                 if ([subPattern.children count] > 2) {
@@ -308,7 +310,7 @@
                 {
                     int x=1, y=1, z=1;
                     for (MCTreeNode *child in root.children) {
-                        switch ([magicCube magicCubeFaceInOrientation:(FaceOrientationType)child.value]) {
+                        switch ([magicCube centerMagicCubeFaceInOrientation:(FaceOrientationType)child.value]) {
                             case Up:
                                 y = 2;
                                 break;
@@ -331,7 +333,10 @@
                                 break;
                         }
                     }
-                    return x+y*3+z*9;
+                    
+                    //Store the result at the node
+                    root.result = x+y*3+z*9;
+                    return root.result;
                 }
                 case getCombinationFromColor:
                 {
@@ -360,14 +365,17 @@
                                 break;
                         }
                     }
-                    return x+y*3+z*9;
+                    
+                    //Store the result at the node
+                    root.result = x+y*3+z*9;
+                    return root.result;
                 }
                 case getFaceColorFromOrientation:
                 {
                     FaceColorType color;
                     FaceOrientationType orientation = (FaceOrientationType)[(MCTreeNode *)[root.children objectAtIndex:0] value];
                     if ([root.children count] == 1) {
-                        switch ([magicCube magicCubeFaceInOrientation:orientation]) {
+                        switch ([magicCube centerMagicCubeFaceInOrientation:orientation]) {
                             case Up:
                                 color = UpColor;
                                 break;
@@ -396,7 +404,10 @@
                         struct Point3i coordinate = {value%3-1, value%9/3-1, value/9-1};
                         color = [[magicCube cubieAtCoordinatePoint3i:coordinate] faceColorInOrientation:orientation];
                     }
-                    return color;
+                    
+                    //Store the result at the node
+                    root.result = color;
+                    return root.result;
                 }
                 case lockedCubie:
                 {
@@ -405,11 +416,13 @@
                         index = [(MCTreeNode *)[root.children objectAtIndex:0] value];
                     }
                     if (lockedCubies[index] == nil) {
-                        return -1;
+                        root.result = -1;
                     }
                     else{
-                        return lockedCubies[index].identity;
+                        root.result = [lockedCubies[index] identity];
                     }
+                    
+                    return root.result;
                 }
                 default:
                     break;
@@ -431,33 +444,49 @@
         if (![self treeNodesApply:node]) {
             return NO;
         }
-        //-----------------------------------
-//        //While this node is true, we store some accordance messages
-//        //for several occasions.
-//        switch (node.type) {
-//            case ExpNode:
-//                if (node.value == Not) {
-//                    //Notice that the node is 'Not' node.
-//                    //You
-//                    [self.accordanceMsgs addObject:[MCTransformUtil getContenFromPatternNode:
-//                                                    [node.children objectAtIndex:0]]];
-//                }
-//                break;
-//            case PatternNode:
-//            {
-//                switch (node.value) {
-//                    case <#constant#>:
-//                        <#statements#>
-//                        break;
-//                        
-//                    default:
-//                        break;
-//                }
-//            }
-//                break;
-//            default:
-//                break;
-//        }
+        
+        //While this node is true, we store some accordance messages
+        //for several occasions.
+        switch (node.type) {
+            case ExpNode:
+                if (node.value == Not) {
+                    //Notice that the node is 'Not' node.
+                    //You should get the negative sentence by invoking
+                    //'getNegativeSentenceOfContentFromPatternNode'
+                    NSString *msg = [MCTransformUtil getNegativeSentenceOfContentFromPatternNode:[node.children objectAtIndex:0]
+                                                                            accordingToMagicCube:self.magicCube
+                                                                                 andLockedCubies:lockedCubies];
+                    if (msg != nil) {
+                        [self.accordanceMsgs addObject:msg];
+                    } 
+                }
+                break;
+            case PatternNode:
+            {
+                switch (node.value) {
+                    case Home | Check:
+                        [self.accordanceMsgs addObject:[MCTransformUtil getContenFromPatternNode:node
+                                                                            accordingToMagicCube:self.magicCube
+                                                                                 andLockedCubies:lockedCubies]];
+                        break;
+                    case CubiedBeLocked:
+                    {
+                        if ([node.children count] == 0 ||
+                            [(MCTreeNode *)[node.children objectAtIndex:0] value] == 0) {
+                            [self.accordanceMsgs addObject:[MCTransformUtil getContenFromPatternNode:node
+                                                                                accordingToMagicCube:self.magicCube
+                                                                                     andLockedCubies:lockedCubies]];
+                        }
+                    }
+                        break;
+                    default:
+                        break;
+                }
+            }
+                break;
+            default:
+                break;
+        }
     }
     return YES;
 }
@@ -465,6 +494,59 @@
 - (BOOL)orNodeApply:(MCTreeNode *)root{
     for (MCTreeNode *node in root.children) {
         if ([self treeNodesApply:node]) {
+            //While this node is true, we store some accordance messages
+            //for several occasions.
+            switch (node.type) {
+                case ExpNode:
+                    if (node.value == Not) {
+                        //Notice that the node is 'Not' node.
+                        //You should get the negative sentence by invoking
+                        //'getNegativeSentenceOfContentFromPatternNode'
+                        //The result maybe nil.
+                        NSString *msg = [MCTransformUtil getNegativeSentenceOfContentFromPatternNode:[node.children objectAtIndex:0]
+                                                                                accordingToMagicCube:self.magicCube
+                                                                                     andLockedCubies:lockedCubies];
+                        if (msg != nil) {
+                            [self.accordanceMsgs addObject:msg];
+                        }
+                        
+                    }
+                    break;
+                case PatternNode:
+                {
+                    switch (node.value) {
+                        case Home | Check:
+                        {
+                            NSString *msg = [MCTransformUtil getContenFromPatternNode:[node.children objectAtIndex:0]
+                                                                 accordingToMagicCube:self.magicCube
+                                                                      andLockedCubies:lockedCubies];
+                            if (msg != nil) {
+                                [self.accordanceMsgs addObject:nil];
+                            }
+                        }
+                            break;
+                        case CubiedBeLocked:
+                        {
+                            if ([node.children count] == 0 ||
+                                [(MCTreeNode *)[node.children objectAtIndex:0] value] == 0) {
+                                NSString *msg = [MCTransformUtil getContenFromPatternNode:[node.children objectAtIndex:0]
+                                                                     accordingToMagicCube:self.magicCube
+                                                                          andLockedCubies:lockedCubies];
+                                if (msg != nil) {
+                                    [self.accordanceMsgs addObject:nil];
+                                }
+                            }
+                        }
+                            break;
+                        default:
+                            break;
+                    }
+                }
+                    break;
+                default:
+                    break;
+            }
+            
             return YES;
         }
     }
@@ -532,7 +614,8 @@
     }
 #endif
     
-    NSLog(@"%@", state);
+    NSLog(@"State:%@", state);
+    NSLog(@"Rules:%@", key);
     
 #ifndef ONLY_TEST
     //get the tree of the action according to the pattern name
@@ -573,16 +656,24 @@
             break;
     }
     
-    NSArray *returnedRotationQueue = nil;
-    if (self.applyQueue != nil) {
-        returnedRotationQueue = [self.applyQueue getQueueWithStringFormat];
-    }
+    NSMutableDictionary *resultDirectory = [NSMutableDictionary dictionaryWithCapacity:DEFAULT_ACTION_INFOMATION_NUM];
     
-    NSDictionary *resultDirectory = nil;
-    if (returnedRotationQueue != nil) {
-        resultDirectory = [NSDictionary dictionaryWithObject:[NSArray arrayWithArray:returnedRotationQueue] forKey:RotationQueueKey];
+    //While the apply queue isn't nil, attach it to the result directory.
+    if (self.applyQueue != nil) {
+        [resultDirectory setObject:[self.applyQueue getQueueWithStringFormat] forKey:KEY_ROTATION_QUEUE];
         self.helperState = ApplyingRotationQueue;
     }
+    
+    //While the apply queue isn't nil, attach it to the result directory.
+    if ([self.accordanceMsgs count] != 0) {
+        [resultDirectory setObject:[NSArray arrayWithArray:self.accordanceMsgs] forKey:KEY_ROTATION_QUEUE];
+        //------------------------------------
+        NSLog(@"Tips---");
+        for (NSString *msg in self.accordanceMsgs) {
+            NSLog(@"%@", msg);
+        }
+    }
+    
 #else
     NSDictionary *resultDirectory = [NSDictionary dictionary];
 #endif
@@ -612,7 +703,8 @@
         goStr = state;
     }
     //check state
-    for (MCState *tmpState = [states objectForKey:goStr]; tmpState != nil && [self treeNodesApply:[tmpState root]]; tmpState = [states objectForKey:goStr]) {
+    MCState *tmpState = [states objectForKey:goStr];
+    for (; tmpState != nil && [self treeNodesApply:[tmpState root]]; tmpState = [states objectForKey:goStr]) {
         goStr = tmpState.afterState;
     }
     if ([goStr compare:state] != NSOrderedSame) {

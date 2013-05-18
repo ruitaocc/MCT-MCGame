@@ -15,6 +15,7 @@
 @property (retain, nonatomic)NSMutableArray *children;
 @property (nonatomic)NodeType type;
 @property (nonatomic)NSInteger value;
+@property (nonatomic)NSInteger result;
 
 -(id)initNodeWithType:(NodeType)type;
 
