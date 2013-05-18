@@ -270,6 +270,63 @@ float Cube_texture_coordinates_f [] = {
 
 };
 
+float Cube_LockSign_vertex_coordinates []={
+    //上
+    -0.15,0.53,-0.15,//left top(at rear)
+    -0.15,0.53,0.15,//left buttom(at front)
+    0.15,0.53,-0.15,//top right(at rear)
+    -0.15,0.53,0.15,//left buttom(at front)
+    0.15,0.53,0.15,//right buttom(at front)
+    0.15,0.53,-0.15,//top right(at rear)
+    
+    
+    //下
+    -0.15,-0.53,0.15,//buttom left front
+    -0.15,-0.53,-0.15,//left rear
+    0.15,-0.53,0.15,//rigtht buttom
+    0.15,-0.53,0.15,//rigtht buttom
+    -0.15,-0.53,-0.15,//left rear
+    0.15,-0.53,-0.15,//right rear
+    //前
+    -0.15,0.15,0.53,//left top
+    -0.15,-0.15,0.53,//left buttom
+    0.15,0.15,0.53,//top right
+    -0.15,-0.15,0.53,//left buttom
+    0.15,-0.15,0.53,//right buttom
+    0.15,0.15,0.53,//top right
+    
+    //后
+    0.15,0.15,-0.53,//right top(when viewed from front)
+    0.15,-0.15,-0.53,//left top
+    -0.15,0.15,-0.53,//rigtht buttom
+    0.15,-0.15,-0.53,//rigtht buttom
+    -0.15,-0.15,-0.53,//left top
+    -0.15,0.15,-0.53,//left buttom
+    //左
+    -0.53,0.15,-0.15,// top left
+    -0.53,-0.15,-0.15,//buttom left
+    -0.53,0.15,0.15,// top right
+    -0.53,-0.15,-0.15,//buttom left
+    -0.53,-0.15,0.15,//buttom right
+    -0.53,0.15,0.15,// top right
+    
+    //右
+    0.53,0.15,0.15,//top left
+    0.53,-0.15,0.15,//left
+    0.53,0.15,-0.15,//top right
+    0.53,-0.15,0.15,//left
+    0.53,-0.15,-0.15,//right
+    0.53,0.15,-0.15//top right
+};
+
+float Cube_LockSign_vertex_texture_coordinates []={
+    0,0,
+    1,1,
+    0,1,
+    0,1,
+    1,1,
+    1,0
+};
 
 
 #endif

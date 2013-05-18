@@ -17,8 +17,11 @@
 #import "MCCollider.h"
 #import "Global.h"
 #import "data.hpp"
+
 @implementation Cube
+
 @synthesize index,cube6faces;
+@synthesize cube6faces_locksign;
 @synthesize isLocked=_isLocked;
 - (id) initWithState:(NSDictionary *)states
 {
@@ -52,6 +55,17 @@
             [cube6faces addObject:faces];
             [faces release];
         }
+        if (cube6faces_locksign==nil) {
+            cube6faces_locksign = [[NSMutableArray alloc]init];
+        }
+        for (int i=0; i<6; i++) {
+            CubeFace* faces_locksign = [[CubeFace alloc]initWithVertexes:&Cube_LockSign_vertex_coordinates[i*6*3] vertexCount:6 vertexSize:3 renderStyle:GL_TRIANGLES];
+            [(CubeFace*)faces_locksign setMaterialKey:@"LockTexture"];
+            [(CubeFace*)faces_locksign setUvCoordinates:&Cube_LockSign_vertex_texture_coordinates[0]];
+            [(CubeFace*)faces_locksign setNormals:&Cube_normal_vectors_f[i*6*3]];
+            [cube6faces_locksign addObject:faces_locksign];
+            [faces_locksign release];
+        }
     }
     
 	return self;
@@ -73,7 +87,7 @@
         [(MCTexturedMesh*)mesh setMaterialKey:@"cubeTexture3"];
         [(MCTexturedMesh*)mesh setUvCoordinates:Cube_texture_coordinates];
         [(MCTexturedMesh*)mesh setNormals:Cube_normal_vectors];
-        
+        [self setIsLocked:NO];
         if (cube6faces==nil) {
             cube6faces = [[NSMutableArray alloc]init];
         }
@@ -85,6 +99,17 @@
             [(CubeFace*)faces setNormals:&Cube_normal_vectors_f[i*6*3]];
             [cube6faces addObject:faces];
             [faces release];
+        }
+        if (cube6faces_locksign==nil) {
+            cube6faces_locksign = [[NSMutableArray alloc]init];
+        }
+        for (int i=0; i<6; i++) {
+            CubeFace* faces_locksign = [[CubeFace alloc]initWithVertexes:&Cube_LockSign_vertex_coordinates[i*6*3] vertexCount:6 vertexSize:3 renderStyle:GL_TRIANGLES];
+            [(CubeFace*)faces_locksign setMaterialKey:@"LockTexture"];
+            [(CubeFace*)faces_locksign setUvCoordinates:&Cube_LockSign_vertex_texture_coordinates[0]];
+            [(CubeFace*)faces_locksign setNormals:&Cube_normal_vectors_f[i*6*3]];
+            [cube6faces_locksign addObject:faces_locksign];
+            [faces_locksign release];
         }
         
     }
@@ -102,6 +127,9 @@
 	glMultMatrixf(matrix);
 	[mesh render];
     [cube6faces makeObjectsPerformSelector:@selector(render)];
+    if ([self isLocked]) {
+        [cube6faces_locksign makeObjectsPerformSelector:@selector(render)];
+    }
 	glPopMatrix();
 }
 -(void)awake

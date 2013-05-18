@@ -15,6 +15,7 @@
 @interface Cube :MCMobileObject{
     MCParticleSystem * particleEmitter;
     NSMutableArray *cube6faces;
+    NSMutableArray *cube6faces_locksign;
     //CubeFace *faces[6];
     int index;
     BOOL _isLocked;
@@ -23,6 +24,7 @@
 @property (assign) int index;
 @property (assign) BOOL isLocked;
 @property (nonatomic,retain)NSMutableArray *cube6faces;
+@property (nonatomic,retain)NSMutableArray *cube6faces_locksign;
 -(id)init;
 - (id) initWithState:(NSDictionary*)states;
 - (void) dealloc;

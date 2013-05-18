@@ -177,6 +177,7 @@
             NSDictionary *applyResult = [playHelper applyRules];
             NSArray *actionqueue = [applyResult objectForKey:KEY_ROTATION_QUEUE];
             NSArray *tipStrArray = [applyResult objectForKey:KEY_TIPS];
+            //NSArray *lockArray = applyResult objectForKey:key_
             NSLog(@"applyRuleRotation:%@", [actionqueue description]);
             while([actionqueue count]==0){
                 NSLog(@"[actionqueue count]==0");
