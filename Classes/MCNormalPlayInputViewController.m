@@ -197,9 +197,11 @@
     randomRotateCount ++;
     MCNormalPlaySceneController *c = [MCNormalPlaySceneController sharedNormalPlaySceneController ];
     RANDOM_SEED();
+    
     AxisType axis = (AxisType)(RANDOM_INT(0, 2));
     LayerRotationDirectionType direction = (LayerRotationDirectionType)(RANDOM_INT(0, 1));
     int layer = RANDOM_INT(0, 2);
+    
     [c rotateOnAxis:axis onLayer:layer inDirection:direction isTribleRotate:NO];
     if (randomRotateCount == RandomRotateMaxCount) {
         [radomtimer invalidate];

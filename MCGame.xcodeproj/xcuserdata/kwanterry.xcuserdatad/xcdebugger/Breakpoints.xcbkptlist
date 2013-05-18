@@ -99,11 +99,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Classes/MCMagicCubeUIModelController.m"
-         timestampString = "390543879.997446"
+         timestampString = "390559513.860758"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1747"
-         endingLineNumber = "1747"
+         startingLineNumber = "1749"
+         endingLineNumber = "1749"
          landmarkName = "-adjustWithCenter"
          landmarkType = "5">
       </FileBreakpoint>
@@ -112,11 +112,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Classes/MCMagicCubeUIModelController.m"
-         timestampString = "390543879.997446"
+         timestampString = "390559513.860758"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1738"
-         endingLineNumber = "1738"
+         startingLineNumber = "1740"
+         endingLineNumber = "1740"
          landmarkName = "-adjustWithCenter"
          landmarkType = "5">
       </FileBreakpoint>
@@ -125,11 +125,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Classes/MCMagicCubeUIModelController.m"
-         timestampString = "390543879.997446"
+         timestampString = "390559513.860758"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1787"
-         endingLineNumber = "1787"
+         startingLineNumber = "1789"
+         endingLineNumber = "1789"
          landmarkName = "-adjustWithCenter"
          landmarkType = "5">
       </FileBreakpoint>
@@ -138,11 +138,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Classes/MCMagicCubeUIModelController.m"
-         timestampString = "390543879.997446"
+         timestampString = "390559513.860758"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1796"
-         endingLineNumber = "1796"
+         startingLineNumber = "1798"
+         endingLineNumber = "1798"
          landmarkName = "-adjustWithCenter"
          landmarkType = "5">
       </FileBreakpoint>

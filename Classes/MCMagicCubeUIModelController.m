@@ -1474,6 +1474,8 @@
         notation =[MCTransformUtil getSingmasterNotationFromAxis:current_rotate_axis layer:NO_SELECTED_LAYER direction:current_rotate_direction];
     }else{
         notation =[MCTransformUtil getSingmasterNotationFromAxis:current_rotate_axis layer:current_rotate_layer direction:current_rotate_direction];
+        //NSLog(@"c_notation:%@",[MCTransformUtil getRotationTagFromSingmasterNotation:notation]);
+        //NSLog(@"c_axis = %d,c_layer = %d,c_direction= %d",current_rotate_axis,current_rotate_layer,current_rotate_direction);
     }
     RotateType * rotateType = [[RotateType alloc]init];
     [rotateType setNotation:notation];

@@ -112,9 +112,14 @@
 }
 
 - (void) rotateOnAxis : (AxisType)axis onLayer: (int)layer inDirection: (LayerRotationDirectionType)direction isTribleRotate:(BOOL)is_trible_roate{
-    SingmasterNotation notation = [MCTransformUtil getSingmasterNotationFromAxis:axis layer:layer direction:direction];
-    [playHelper rotateWithSingmasterNotation:notation];
+    
+    //SingmasterNotation notation = [MCTransformUtil getSingmasterNotationFromAxis:axis layer:layer direction:direction];
+    
+    //[playHelper rotateWithSingmasterNotation:notation];
+    
     [magicCubeUI rotateOnAxis:axis onLayer:layer inDirection:direction isTribleRotate:NO];
+    //NSLog(@"notation:%@",[MCTransformUtil getRotationTagFromSingmasterNotation:notation]);
+    //NSLog(@"axis = %d,layer = %d,direction= %d",axis,layer,direction);
 }
 -(void)showQueue{
           
@@ -124,17 +129,25 @@
         NSDictionary *applyResult = [playHelper applyRules];
         NSArray *actionqueue = [applyResult objectForKey:KEY_ROTATION_QUEUE];
         NSArray *tipStrArray = [applyResult objectForKey:KEY_TIPS];
+        NSArray *lockArray = [applyResult objectForKey:KEY_LOCKED_CUBIES];
         NSLog(@"applyRuleRotation:%@", [actionqueue description]);
-        while([[playHelper state]isEqual:START_STATE]&&[actionqueue count]==0){
+        while([actionqueue count]==0){
             [playHelper clearResidualActions];
             applyResult = [playHelper applyRules];
             actionqueue = [applyResult objectForKey:KEY_ROTATION_QUEUE];
             tipStrArray = [applyResult objectForKey:KEY_TIPS];
+            lockArray = [applyResult objectForKey:KEY_LOCKED_CUBIES];
         };
         NSMutableString *tipstr = [[NSMutableString alloc]init];
         for (NSString *msg in tipStrArray) {
             [tipstr appendString:msg];
             [tipstr appendString:@"\n"];
+        }
+        for(int i = 0;i<27;i++) {
+            [[[magicCubeUI array27Cube]objectAtIndex:i]setIsLocked:NO];
+        }
+        for(NSNumber *index in lockArray) {
+            [[[magicCubeUI array27Cube]objectAtIndex:[index intValue]]setIsLocked:YES];
         }
         [[self tipsLabel]setText:tipstr];
         [[input_C actionQueue] insertQueueCurrentIndexWithNmaeList:actionqueue];
@@ -177,7 +190,7 @@
             NSDictionary *applyResult = [playHelper applyRules];
             NSArray *actionqueue = [applyResult objectForKey:KEY_ROTATION_QUEUE];
             NSArray *tipStrArray = [applyResult objectForKey:KEY_TIPS];
-            //NSArray *lockArray = applyResult objectForKey:key_
+            NSArray *lockArray = [applyResult objectForKey:KEY_LOCKED_CUBIES];
             NSLog(@"applyRuleRotation:%@", [actionqueue description]);
             while([actionqueue count]==0){
                 NSLog(@"[actionqueue count]==0");
@@ -185,7 +198,14 @@
                 applyResult = [playHelper applyRules];
                 actionqueue = [applyResult objectForKey:KEY_ROTATION_QUEUE];
                 tipStrArray = [applyResult objectForKey:KEY_TIPS];
+                lockArray = [applyResult objectForKey:KEY_LOCKED_CUBIES];
             };
+            for(int i = 0;i<27;i++) {
+                [[[magicCubeUI array27Cube]objectAtIndex:i]setIsLocked:NO];
+            }
+            for(NSNumber *index in lockArray) {
+                [[[magicCubeUI array27Cube]objectAtIndex:[index intValue]]setIsLocked:YES];
+            }
             NSMutableString *tipstr = [[NSMutableString alloc]init];
             for (NSString *msg in tipStrArray) {
                 [tipstr appendString:msg];
