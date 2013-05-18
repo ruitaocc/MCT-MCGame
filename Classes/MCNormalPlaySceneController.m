@@ -103,7 +103,7 @@
         [self showQueue];
     }
     
-    [magicCubeUI adjustWithCenter_2];
+    //[magicCubeUI adjustWithCenter];
 }
 
 -(void)showQueue{

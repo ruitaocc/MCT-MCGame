@@ -706,6 +706,7 @@
             }
             if (index != -1) {
                 selected = [array27Cube objectAtIndex:index];
+                //NSLog(@"selected_index:%d",index);
                 //NSLog(@"(0x:%f,0y:%f,0z:%f)",directionVector[0].x,directionVector[0].y,directionVector[0].z);
                 //selected.scale = MCPointMake(20, 20, 20);
                 isLayerRotating = YES;
@@ -1490,7 +1491,9 @@
         //通知更新数据模型
     }else{
         [self updateMagicCubeIndexState];
+        [self adjustWithCenter];
     }
+    
 }
 -(void)updateMagicCubeIndexState{
     Cube *tmp;
@@ -1677,7 +1680,7 @@
 }
 #pragma mark final adjust
 -(void)adjustWithCenter{
-    return;
+    
     float xyz[9] = {1.0,0.0,0.0,
                     0.0,1.0,0.0,
                     0.0,0.0,1.0};
@@ -1687,15 +1690,73 @@
     vec3 center_oy = vec3(XYZ[3],XYZ[4],XYZ[5]);
     vec3 center_oz = vec3(XYZ[6],XYZ[7],XYZ[8]);
     CGFloat * tmp_matrix = (CGFloat *) malloc(16 * sizeof(CGFloat));
-    for (int i = 0; i < 27; i++) {
-        if (i != 13 ) {
-            Cube *tmpCube = [array27Cube objectAtIndex:i];
+    for (int i = 0; i < 9; i++) {
+        if (true ) {
+            //Cube *tmpCube = [array27Cube objectAtIndex:i];
+            Cube *tmpCube = layerPtr[i];
+            GLfloat *tmpXYZ;
+            vec3 tmp_ox ;
+            vec3 tmp_oy ;
+            vec3 tmp_oz ;
+            if (current_rotate_axis==Y || current_rotate_axis ==Z) {
+            
+            glPushMatrix();
+            glLoadIdentity();
+            mat4 matRotation = tmpCube.quaRotation.ToMatrix();
+            glMultMatrixf(matRotation.Pointer());
+            glRotatef(tmpCube.prerotation.x, 1.0f, 0.0f, 0.0f);
+            glRotatef(tmpCube.prerotation.y, 0.0f, 1.0f, 0.0f);
+            glRotatef(tmpCube.prerotation.z, 0.0f, 0.0f, 1.0f);
+            glRotatef(tmpCube.rotation.x, 1.0f, 0.0f, 0.0f);
+            glRotatef(tmpCube.rotation.y, 0.0f, 1.0f, 0.0f);
+            glRotatef(tmpCube.rotation.z, 0.0f, 0.0f, 1.0f);
+            glScalef(tmpCube.scale.x, tmpCube.scale.y, tmpCube.scale.z);
+            glGetFloatv(GL_MODELVIEW_MATRIX, tmp_matrix);
+            glPopMatrix();
+            tmpXYZ = VertexesArray_Matrix_Multiply(xyz, 3, 3, tmp_matrix);
+             tmp_ox = vec3(tmpXYZ[0],tmpXYZ[1],tmpXYZ[2]);
+             tmp_oy = vec3(tmpXYZ[3],tmpXYZ[4],tmpXYZ[5]);
+             tmp_oz = vec3(tmpXYZ[6],tmpXYZ[7],tmpXYZ[8]);
+            //处理相对于中心x轴的模糊x轴
+            float angle_ox_centerOX = FabsThetaBetweenV1andV2(tmp_ox, center_ox);
+            float angle_oy_centerOX = FabsThetaBetweenV1andV2(tmp_oy, center_ox);
+            float angle_oz_centerOX = FabsThetaBetweenV1andV2(tmp_oz, center_ox);
+            //模糊x轴
+            vec3 fuzzy_ox = (angle_ox_centerOX < angle_oy_centerOX )? (angle_ox_centerOX<angle_oz_centerOX)?tmp_ox:tmp_oz : (angle_oy_centerOX < angle_oz_centerOX )? tmp_oy :tmp_oz ;
+            
+            float signOFfuzzyOXandcenterOX = fuzzy_ox.Dot(center_ox);
+            //NSLog(@"signOFfuzzyOXandcenterOX:%f",signOFfuzzyOXandcenterOX);
+            if (signOFfuzzyOXandcenterOX<0.0001) {
+                //负数代表两向量相反
+                //1 获取 fuzzy_ox 的 反向量
+                vec3 inverse_fuzzy_ox = (-fuzzy_ox);
+                //if (FabsThetaBetweenV1andV2(inverse_fuzzy_ox, center_ox)>0.01)
+                {
+                    //x1
+                Quaternion delta = Quaternion::CreateFromVectors(inverse_fuzzy_ox, center_ox);
+                [tmpCube setQuaPreviousRotation:[tmpCube quaRotation]];
+                [tmpCube setQuaRotation:delta.Rotated([tmpCube quaPreviousRotation])];
+                }
+            }else{
+                //同向，开始微调
+                //if (FabsThetaBetweenV1andV2(fuzzy_ox, center_ox)>0.01)
+                {
+                    //x2
+                Quaternion delta = Quaternion::CreateFromVectors(fuzzy_ox, center_ox);
+                [tmpCube setQuaPreviousRotation:[tmpCube quaRotation]];
+                [tmpCube setQuaRotation:delta.Rotated([tmpCube quaPreviousRotation])];
+                }
+            }
+            }
+            //continue;
+            if (current_rotate_axis==X) {
+        
             
             glPushMatrix();
             glLoadIdentity();
             //glTranslatef(pretranslation.x, pretranslation.y, pretranslation.z);
-            mat4 matRotation = tmpCube.quaRotation.ToMatrix();
-            glMultMatrixf(matRotation.Pointer());
+            mat4 matRotation2 = tmpCube.quaRotation.ToMatrix();
+            glMultMatrixf(matRotation2.Pointer());
             glRotatef(tmpCube.prerotation.x, 1.0f, 0.0f, 0.0f);
             glRotatef(tmpCube.prerotation.y, 0.0f, 1.0f, 0.0f);
             glRotatef(tmpCube.prerotation.z, 0.0f, 0.0f, 1.0f);
@@ -1706,54 +1767,38 @@
             glScalef(tmpCube.scale.x, tmpCube.scale.y, tmpCube.scale.z);
             glGetFloatv(GL_MODELVIEW_MATRIX, tmp_matrix);
             glPopMatrix();
-            
-            GLfloat *tmpXYZ = VertexesArray_Matrix_Multiply(xyz, 3, 3, tmp_matrix);
-            vec3 tmp_ox = vec3(tmpXYZ[0],tmpXYZ[1],tmpXYZ[2]);
-            vec3 tmp_oy = vec3(tmpXYZ[3],tmpXYZ[4],tmpXYZ[5]);
-            vec3 tmp_oz = vec3(tmpXYZ[6],tmpXYZ[7],tmpXYZ[8]);
-            //处理相对于中心x轴的模糊x轴
-            float angle_ox_centerOX = FabsThetaBetweenV1andV2(tmp_ox, center_ox);
+            tmpXYZ = VertexesArray_Matrix_Multiply(xyz, 3, 3, tmp_matrix);
+            tmp_ox = vec3(tmpXYZ[0],tmpXYZ[1],tmpXYZ[2]);
+            tmp_oy = vec3(tmpXYZ[3],tmpXYZ[4],tmpXYZ[5]);
+            tmp_oz = vec3(tmpXYZ[6],tmpXYZ[7],tmpXYZ[8]);
             float angle_ox_centerOY = FabsThetaBetweenV1andV2(tmp_ox, center_oy);
-            float angle_ox_centerOZ = FabsThetaBetweenV1andV2(tmp_ox, center_oz);
-            //模糊x轴
-            vec3 fuzzy_ox = (angle_ox_centerOX < angle_ox_centerOY )? tmp_ox : (angle_ox_centerOY < angle_ox_centerOZ )? tmp_oy :tmp_oz ;
-            NSLog(@"center_ox:(%f,%f,%f)",center_ox.x,center_ox.y,center_ox.z);
-            NSLog(@"%d-tmp_ox:(%f,%f,%f)",i,tmp_ox.x,tmp_ox.y,tmp_ox.z);
-            NSLog(@"%d-tmp_oy:(%f,%f,%f)",i,tmp_oy.x,tmp_oy.y,tmp_oy.z);
-            NSLog(@"%d-tmp_oz:(%f,%f,%f)",i,tmp_oz.x,tmp_oz.y,tmp_oz.z);
-            NSLog(@"%d-fuzzy_ox:(%f,%f,%f)",i,fuzzy_ox.x,fuzzy_ox.y,fuzzy_ox.z);
-            float signOFfuzzyOXandcenterOX = fuzzy_ox.Dot(center_ox);
-            if (signOFfuzzyOXandcenterOX<0.0001) {
-                //负数代表两向量相反
-                //1 获取 fuzzy_ox 的 反向量
-                vec3 inverse_fuzzy_ox = (-fuzzy_ox);
-                Quaternion delta = Quaternion::CreateFromVectors(inverse_fuzzy_ox, center_ox);
-                [tmpCube setQuaPreviousRotation:[tmpCube quaRotation]];
-                [tmpCube setQuaRotation:delta.Rotated([tmpCube quaPreviousRotation])];
-            }else{
-                //同向，开始微调
-                Quaternion delta = Quaternion::CreateFromVectors(fuzzy_ox, center_ox);
-                [tmpCube setQuaPreviousRotation:[tmpCube quaRotation]];
-                [tmpCube setQuaRotation:delta.Rotated([tmpCube quaPreviousRotation])];
-            }
             float angle_oy_centerOY = FabsThetaBetweenV1andV2(tmp_oy, center_oy);
-            float angle_oy_centerOZ = FabsThetaBetweenV1andV2(tmp_oy, center_oz);
-            //模糊y轴
-            vec3 fuzzy_oy = (angle_oy_centerOY < angle_oy_centerOZ )? tmp_oy :tmp_oz ;
+            float angle_oz_centerOY = FabsThetaBetweenV1andV2(tmp_oz, center_oy);
+            vec3 fuzzy_oy = (angle_ox_centerOY < angle_oy_centerOY )? (angle_ox_centerOY<angle_oz_centerOY)?tmp_ox:tmp_oz : (angle_oy_centerOY < angle_oz_centerOY )? tmp_oy :tmp_oz ;
             float signOFfuzzyOYandcenterOY = fuzzy_oy.Dot(center_oy);
             if (signOFfuzzyOYandcenterOY<0.0001) {
                 //负数代表两向量相反
                 vec3 inverse_fuzzy_oy = (-fuzzy_oy);
-                Quaternion delta = Quaternion::CreateFromVectors(inverse_fuzzy_oy, center_ox);
+               // if (FabsThetaBetweenV1andV2(inverse_fuzzy_oy, center_oy)>0.01)
+                {
+                    //y1
+                Quaternion delta = Quaternion::CreateFromVectors(inverse_fuzzy_oy, center_oy);
                 [tmpCube setQuaPreviousRotation:[tmpCube quaRotation]];
                 [tmpCube setQuaRotation:delta.Rotated([tmpCube quaPreviousRotation])];
+                }
             }else{
                 //同向，开始微调
+              //  if (FabsThetaBetweenV1andV2(fuzzy_oy, center_oy)>0.01)
+                {
+                    //y2
                 Quaternion delta = Quaternion::CreateFromVectors(fuzzy_oy, center_oy);
                 [tmpCube setQuaPreviousRotation:[tmpCube quaRotation]];
-                [tmpCube setQuaRotation:delta.Rotated([tmpCube quaPreviousRotation])];
+                    [tmpCube setQuaRotation:delta.Rotated([tmpCube quaPreviousRotation])];
+                }
+            }
             }
         }
+        
     }
     free(tmp_matrix);
 }
@@ -1832,6 +1877,11 @@ double ThetaBetweenV1andV2(const vec3& v1,const vec3& v2)
 double FabsThetaBetweenV1andV2(const vec3& v1,const vec3& v2)
 {
     double cosa = v1.Dot(v2)/(v1.Module()*v2.Module());
+    if (cosa>1) {
+        return acos(1);
+    }else if(cosa<-1){
+        return acos(1);
+    }else
     return acos(fabs(cosa));
 }
 

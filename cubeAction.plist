@@ -632,6 +632,133 @@
 		<key>yLocation</key>
 		<integer>994</integer>
 	</dict>
+    <dict>
+		<key>area</key>
+		<integer>5041</integer>
+		<key>height</key>
+		<integer>71</integer>
+		<key>name</key>
+		<string>mxCW</string>
+		<key>width</key>
+		<integer>71</integer>
+		<key>xLocation</key>
+		<integer>142</integer>
+		<key>yLocation</key>
+		<integer>1065</integer>
+	</dict>
+    <dict>
+		<key>area</key>
+		<integer>5041</integer>
+		<key>height</key>
+		<integer>71</integer>
+		<key>name</key>
+		<string>mxCCW</string>
+		<key>width</key>
+		<integer>71</integer>
+		<key>xLocation</key>
+		<integer>142</integer>
+		<key>yLocation</key>
+		<integer>1065</integer>
+	</dict>
+    <dict>
+		<key>area</key>
+		<integer>8094</integer>
+		<key>height</key>
+		<integer>71</integer>
+		<key>name</key>
+		<string>mx2CW</string>
+		<key>width</key>
+		<integer>114</integer>
+		<key>xLocation</key>
+		<integer>142</integer>
+		<key>yLocation</key>
+		<integer>1065</integer>
+	</dict>
+    <dict>
+		<key>area</key>
+		<integer>5041</integer>
+		<key>height</key>
+		<integer>71</integer>
+		<key>name</key>
+		<string>myCW</string>
+		<key>width</key>
+		<integer>71</integer>
+		<key>xLocation</key>
+		<integer>142</integer>
+		<key>yLocation</key>
+		<integer>1136</integer>
+	</dict>
+    <dict>
+		<key>area</key>
+		<integer>5041</integer>
+		<key>height</key>
+		<integer>71</integer>
+		<key>name</key>
+		<string>myCCW</string>
+		<key>width</key>
+		<integer>71</integer>
+		<key>xLocation</key>
+		<integer>142</integer>
+		<key>yLocation</key>
+		<integer>1136</integer>
+	</dict>
+    <dict>
+		<key>area</key>
+		<integer>8094</integer>
+		<key>height</key>
+		<integer>71</integer>
+		<key>name</key>
+		<string>my2CW</string>
+		<key>width</key>
+		<integer>114</integer>
+		<key>xLocation</key>
+		<integer>142</integer>
+		<key>yLocation</key>
+		<integer>1136</integer>
+	</dict>
+    <dict>
+		<key>area</key>
+		<integer>5041</integer>
+		<key>height</key>
+		<integer>71</integer>
+		<key>name</key>
+		<string>mzCW</string>
+		<key>width</key>
+		<integer>71</integer>
+		<key>xLocation</key>
+		<integer>142</integer>
+		<key>yLocation</key>
+		<integer>1207</integer>
+	</dict>
+    <dict>
+		<key>area</key>
+		<integer>5041</integer>
+		<key>height</key>
+		<integer>71</integer>
+		<key>name</key>
+		<string>mzCCW</string>
+		<key>width</key>
+		<integer>71</integer>
+		<key>xLocation</key>
+		<integer>142</integer>
+		<key>yLocation</key>
+		<integer>1207</integer>
+	</dict>
+    <dict>
+		<key>area</key>
+		<integer>8094</integer>
+		<key>height</key>
+		<integer>71</integer>
+		<key>name</key>
+		<string>mz2CW</string>
+		<key>width</key>
+		<integer>114</integer>
+		<key>xLocation</key>
+		<integer>142</integer>
+		<key>yLocation</key>
+		<integer>1207</integer>
+	</dict>
+
 	<dict>
 		<key>area</key>
 		<integer>9940</integer>
@@ -644,7 +771,7 @@
 		<key>xLocation</key>
 		<integer>0</integer>
 		<key>yLocation</key>
-		<integer>1065</integer>
+		<integer>1278</integer>
 	</dict>
 </array>
 </plist>
