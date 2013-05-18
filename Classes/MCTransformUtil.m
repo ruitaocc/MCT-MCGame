@@ -389,6 +389,7 @@
                   accordingToMagicCube:(NSObject<MCMagicCubeDelegate> *)mc
                        andLockedCubies:(NSObject<MCCubieDelegate> **)lockedCubies{
     NSString *result = nil;
+    
     //Before generate the content,
     //detect the wrong type.
     if ([node type] != PatternNode) {
@@ -399,12 +400,151 @@
     switch ([node value]) {
         case Home:
         {
-            result = @"Home Message";
+            NSMutableString *tmpResult = [NSMutableString stringWithCapacity:24];
+            ColorCombinationType identity;
+            MCTreeNode *child;
+            for (int i = 0; i < [node.children count]; i++) {
+                //Get the child
+                child = [node.children objectAtIndex:i];
+                
+                //The target value varies by type of child
+                if (child.type == ElementNode) {
+                    identity = (ColorCombinationType)[child value];
+                }
+                else if (child.type == InformationNode){
+                    identity = (ColorCombinationType)[child result];
+                }
+                
+                //Add target cubie description
+                [tmpResult appendString:[MCTransformUtil getConcreteDescriptionOfCubie:identity fromMgaicCube:mc]];
+                
+                if (i < [node.children count] - 1) {
+                    [tmpResult appendFormat:@","];
+                }
+            }
+            
+            //Add suffix
+            [tmpResult appendFormat:@"已经归位。"];
+            
+            result = [NSString stringWithString:tmpResult];
         }
             break;
         case Check:
         {
-            result = @"Check Message";
+            NSMutableString *tmpResult = [NSMutableString stringWithCapacity:24];
+            ColorCombinationType targetCubie;
+            for (MCTreeNode *subPattern in node.children) {
+                switch (subPattern.value) {
+                    case At:
+                    {
+                        Point3i targetPosition;
+                        
+                        //First child node - target cubie
+                        MCTreeNode *child = [subPattern.children objectAtIndex:0];
+                        //The target value varies by type of child
+                        if (child.type == ElementNode) {
+                            targetCubie = (ColorCombinationType)[child value];
+                        }
+                        else if (child.type == InformationNode){
+                            targetCubie = (ColorCombinationType)[child result];
+                        }
+                        
+                        //Second child node - target position
+                        child = [subPattern.children objectAtIndex:1];
+                        //The target value varies by type of child
+                        if (child.type == ElementNode) {
+                            targetPosition.x = [child value]%3-1;
+                            targetPosition.y = [child value]%9/3-1;
+                            targetPosition.z = [child value]/9-1;
+                        }
+                        else if (child.type == InformationNode){
+                            targetPosition.x = [child result]%3-1;
+                            targetPosition.y = [child result]%9/3-1;
+                            targetPosition.z = [child result]/9-1;
+                        }
+                        
+                        [tmpResult appendFormat:@"%@在%@",
+                                     [MCTransformUtil getConcreteDescriptionOfCubie:targetCubie fromMgaicCube:mc],
+                                     [MCTransformUtil getPositionDescription:targetPosition]];
+                        
+                        result = [NSString stringWithString:tmpResult];
+                    }
+                        break;
+                    case ColorBindOrientation:
+                    {
+                        FaceOrientationType targetOrientation;
+                        FaceColorType targetColor;
+                        
+                        //First child node - target cubie
+                        MCTreeNode *child = [subPattern.children objectAtIndex:0];
+                        if (child.type == ElementNode) {
+                            targetOrientation = (FaceOrientationType)[child value];
+                        }
+                        else if (child.type == InformationNode){
+                            targetOrientation = (FaceOrientationType)[child result];
+                        }
+                        
+                        //Second child node - target position
+                        child = [subPattern.children objectAtIndex:1];
+                        //The target value varies by type of child
+                        if (child.type == ElementNode) {
+                            targetColor = (FaceColorType)[child value];
+                        }
+                        else if (child.type == InformationNode){
+                            targetColor = (FaceColorType)[child result];
+                        }
+                        
+                        //If need, add conjunction
+                        if ([subPattern.children count] > 2) {
+                            ColorCombinationType targetCubieIdentity = (ColorCombinationType)[(MCTreeNode *)[subPattern.children objectAtIndex:2] value];
+                            [tmpResult appendFormat:@"%@%@色面朝%@",
+                             [MCTransformUtil getConcreteDescriptionOfCubie:targetCubieIdentity fromMgaicCube:mc],
+                             [MCTransformUtil getDescriptionOfFaceColorType:targetColor accordingToMagicCube:mc],
+                             [MCTransformUtil getDescriptionOfFaceOrientationType:targetOrientation]];
+                        }
+                        else{
+                            [tmpResult appendFormat:@"且%@色面朝%@",
+                                [MCTransformUtil getDescriptionOfFaceColorType:targetColor accordingToMagicCube:mc],
+                                [MCTransformUtil getDescriptionOfFaceOrientationType:targetOrientation]];
+                            
+                        }
+                        
+                        result = [NSString stringWithString:tmpResult];;
+                    }
+                        break;
+                    case NotAt:
+                    {
+                        Point3i targetPosition;
+                        
+                        //First child node - target cubie
+                        MCTreeNode *child = [subPattern.children objectAtIndex:0];
+                        //The target value varies by type of child
+                        if (child.type == ElementNode) {
+                            targetCubie = (ColorCombinationType)[child value];
+                        }
+                        else if (child.type == InformationNode){
+                            targetCubie = (ColorCombinationType)[child result];
+                        }
+                        
+                        //Second child node - target position
+                        child = [subPattern.children objectAtIndex:1];
+                        //The target value varies by type of child
+                        if (child.type == ElementNode) {
+                            targetPosition = [mc coordinateValueOfCubieWithColorCombination:(ColorCombinationType)[child value]];
+                        }
+                        else if (child.type == InformationNode){
+                            targetPosition = [mc coordinateValueOfCubieWithColorCombination:(ColorCombinationType)[child result]];
+                        }
+                        
+                        [tmpResult appendFormat:@"%@不在%@",
+                         [MCTransformUtil getConcreteDescriptionOfCubie:targetCubie fromMgaicCube:mc],
+                         [MCTransformUtil getPositionDescription:targetPosition]];
+                        
+                        result = [NSString stringWithString:tmpResult];
+                    }
+                        break;
+                }
+            }
         }
             break;
         case CubiedBeLocked:
@@ -530,6 +670,9 @@
 
 
 + (NSString *)getConcreteDescriptionOfCubie:(ColorCombinationType)identity fromMgaicCube:(NSObject<MCMagicCubeDelegate> *)mc{
+    //Check bounds
+    if (identity >= ColorCombinationTypeBound || identity < 0) return @"";
+    
     //Cubie description length
     const NSInteger cubieDescriptionLength = 12;
     
@@ -541,35 +684,30 @@
     
     //Transfer face color type to real color
     for (NSNumber *faceColor in faceColors) {
-        NSString *realColor = [mc getRealColor:(FaceColorType)[faceColor integerValue]];
-        if ([realColor compare:@"Yellow"] == NSOrderedSame) {
-            [result appendString:@"黄"];
-        }
-        else if ([realColor compare:@"White"] == NSOrderedSame){
-            [result appendString:@"白"];
-        }
-        else if ([realColor compare:@"Red"] == NSOrderedSame){
-            [result appendString:@"红"];
-        }
-        else if ([realColor compare:@"Orange"] == NSOrderedSame){
-            [result appendString:@"橙"];
-        }
-        else if ([realColor compare:@"Blue"] == NSOrderedSame){
-            [result appendString:@"蓝"];
-        }
-        else if ([realColor compare:@"Green"] == NSOrderedSame){
-            [result appendString:@"绿"];
-        }
+        [result appendString:[MCTransformUtil getDescriptionOfFaceColorType:(FaceColorType)[faceColor integerValue]
+                                                       accordingToMagicCube:mc]];
     }
     
     //Append suffix
-    [result appendString:@"色小块"];
+    switch ([faceColors count]) {
+        case 1:
+            [result appendString:@"色中心块"];
+            break;
+        case 2:
+            [result appendString:@"色棱块"];
+            break;
+        case 3:
+            [result appendString:@"色角块"];
+            break;
+    }
+    
     
     //release once
     [faceColors release];
     
     return result;
 }
+
 
 + (NSString *)getPositionDescription:(Point3i)position{
     switch (position.z) {
@@ -579,45 +717,30 @@
                     switch (position.x) {
                         case 1:
                             return @"前右上角";
-                            break;
                         case 0:
                             return @"前上方";
-                            break;
                         case -1:
                             return @"前左上角";
-                            break;
-                        default:
-                            break;
                     }
                     break;
                 case 0:
                     switch (position.x) {
                         case 1:
                             return @"前面右边";
-                            break;
                         case 0:
                             return @"前正中央";
-                            break;
                         case -1:
                             return @"前面左边";
-                            break;
-                        default:
-                            break;
                     }
                     break;
                 case -1:
                     switch (position.x) {
                         case 1:
                             return @"前右下角";
-                            break;
                         case 0:
                             return @"前下方";
-                            break;
                         case -1:
                             return @"前左下角";
-                            break;
-                        default:
-                            break;
                     }
                     break;
                 default:
@@ -630,45 +753,29 @@
                     switch (position.x) {
                         case 1:
                             return @"中间右上角";
-                            break;
                         case 0:
                             return @"顶面中心";
-                            break;
                         case -1:
                             return @"中间左上角";
-                            break;
-                        default:
-                            break;
                     }
                     break;
                 case 0:
                     switch (position.x) {
                         case 1:
                             return @"右面中心";
-                            break;
                         case -1:
                             return @"左面中心";
-                            break;
-                        default:
-                            break;
                     }
                     break;
                 case -1:
                     switch (position.x) {
                         case 1:
                             return @"中间右下角";
-                            break;
                         case 0:
                             return @"底面中心";
-                            break;
                         case -1:
                             return @"中间左下角";
-                            break;
-                        default:
-                            break;
                     }
-                    break;
-                default:
                     break;
             }
             break;
@@ -678,56 +785,83 @@
                     switch (position.x) {
                         case 1:
                             return @"背面右上角";
-                            break;
                         case 0:
                             return @"背面上方";
-                            break;
                         case -1:
                             return @"背面左上角";
-                            break;
-                        default:
-                            break;
                     }
                     break;
                 case 0:
                     switch (position.x) {
                         case 1:
                             return @"背面右边";
-                            break;
                         case 0:
                             return @"背面中央";
-                            break;
                         case -1:
                             return @"背面左边";
-                            break;
-                        default:
-                            break;
                     }
                     break;
                 case -1:
                     switch (position.x) {
                         case 1:
                             return @"背面右下角";
-                            break;
                         case 0:
                             return @"背面下方";
-                            break;
                         case -1:
                             return @"背面左下角";
-                            break;
-                        default:
-                            break;
                     }
-                    break;
-                default:
                     break;
             }
             break;
-            
-        default:
-            break;
     }
-    return nil;
+    return @"";
+}
+
+//Internal method
+//FaceColorType to real color string(Chinese)
++ (NSString *)getDescriptionOfFaceColorType:(FaceColorType)faceColor
+                       accordingToMagicCube:(NSObject<MCMagicCubeDelegate> *)mc{
+    NSString *realColor = [mc getRealColor:faceColor];
+    if ([realColor compare:@"Yellow"] == NSOrderedSame) {
+        return @"黄";
+    }
+    else if ([realColor compare:@"White"] == NSOrderedSame){
+        return @"白";
+    }
+    else if ([realColor compare:@"Red"] == NSOrderedSame){
+        return @"红";
+    }
+    else if ([realColor compare:@"Orange"] == NSOrderedSame){
+        return @"橙";
+    }
+    else if ([realColor compare:@"Blue"] == NSOrderedSame){
+        return @"蓝";
+    }
+    else if ([realColor compare:@"Green"] == NSOrderedSame){
+        return @"绿";
+    }
+    else{
+        return @"";
+    }
+}
+
++ (NSString *)getDescriptionOfFaceOrientationType:(FaceOrientationType)orientation{
+    switch (orientation) {
+        case Up:
+            return @"上";
+        case Down:
+            return @"下";
+        case Front:
+            return @"前";
+        case Back:
+            return @"后";
+        case Left:
+            return @"左";
+        case Right:
+            return @"右";
+        default:
+            return @"";
+    }
 }
 
 @end

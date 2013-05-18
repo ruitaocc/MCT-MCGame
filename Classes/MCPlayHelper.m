@@ -189,9 +189,6 @@
                     ColorCombinationType value;
                     for (MCTreeNode *child in root.children) {
                         value = (ColorCombinationType)[self treeNodesApply:child];
-                        if (value == NO_LOCKED_CUBIE) {
-                            return NO;
-                        }
                         if (![self isCubieAtHomeWithIdentity:value]) {
                             return NO;
                         }
@@ -666,7 +663,7 @@
     
     //While the apply queue isn't nil, attach it to the result directory.
     if ([self.accordanceMsgs count] != 0) {
-        [resultDirectory setObject:[NSArray arrayWithArray:self.accordanceMsgs] forKey:KEY_ROTATION_QUEUE];
+        [resultDirectory setObject:[NSArray arrayWithArray:self.accordanceMsgs] forKey:KEY_TIPS];
         //------------------------------------
         NSLog(@"Tips---");
         for (NSString *msg in self.accordanceMsgs) {
