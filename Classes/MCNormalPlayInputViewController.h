@@ -19,7 +19,8 @@
     AskReloadView* askReloadView;
     PauseMenu *pauseMenuView;
     MCActionQueue *actionQueue;
-    
+    int randomRotateCount;
+    NSTimer *radomtimer;
 }
 
 @property (nonatomic,retain) MCActionQueue *actionQueue;

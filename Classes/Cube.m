@@ -19,7 +19,7 @@
 #import "data.hpp"
 @implementation Cube
 @synthesize index,cube6faces;
-
+@synthesize isLocked=_isLocked;
 - (id) initWithState:(NSDictionary *)states
 {
 	self = [super init];
@@ -39,7 +39,7 @@
         [(MCTexturedMesh*)mesh setMaterialKey:@"cubeTexture3"];
         [(MCTexturedMesh*)mesh setUvCoordinates:Cube_texture_coordinates];
         [(MCTexturedMesh*)mesh setNormals:Cube_normal_vectors];
-        
+        [self setIsLocked:NO];
         if (cube6faces==nil) {
             cube6faces = [[NSMutableArray alloc]init];
         }
