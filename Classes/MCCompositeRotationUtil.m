@@ -63,7 +63,7 @@
 
 + (BOOL)isSingmasterNotation:(SingmasterNotation)part PossiblePartOfSingmasterNotation:(SingmasterNotation)target{
     //F / F' is part of F2...
-    if (part != target && target/3 == part/3) {
+    if (part != target  && (target+1)%3 == 0 && target/3 == part/3) {
         return YES;
     }
     //

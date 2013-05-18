@@ -81,7 +81,8 @@ typedef enum _AxisType {
 typedef enum _ColorCombinationType {
     BLDColors, BDColors, BRDColors, BLColors, BColor     , BRColors, BLUColors, BUColors, BRUColors,
     LDColors , DColor  , RDColors , LColor  , CenterBlank, RColor  , LUColors , UColor  , RUColors ,
-    FLDColors, FDColors, FRDColors, FLColors, FColor     , FRColors, FLUColors, FUColors, FRUColors
+    FLDColors, FDColors, FRDColors, FLColors, FColor     , FRColors, FLUColors, FUColors, FRUColors,
+    ColorCombinationTypeBound
 } ColorCombinationType;
 
 //the pattern type
