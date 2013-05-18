@@ -671,6 +671,11 @@
         }
     }
     
+    //While there is a cubie is locked at 0 position, add locked cubie info
+    if (lockedCubies[0] != nil) {
+        [resultDirectory setObject:[NSArray arrayWithObject:[NSNumber numberWithInteger:[lockedCubies[0] identity]]] forKey:KEY_LOCKED_CUBIES];
+    }
+    
 #else
     NSDictionary *resultDirectory = [NSDictionary dictionary];
 #endif

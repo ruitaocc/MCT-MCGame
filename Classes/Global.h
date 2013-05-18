@@ -191,7 +191,7 @@ typedef enum _RotationResult{
 //the keys that get actions
 #define KEY_ROTATION_QUEUE @"RotationQueue"
 #define KEY_TIPS @"TipsMessage"
-
+#define KEY_LOCKED_CUBIES @"LockedCubies"
 
 //-------------------------------------------------------------------------------------------
 

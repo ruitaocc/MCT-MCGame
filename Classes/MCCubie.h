@@ -19,7 +19,7 @@
 @property(nonatomic)FaceColorType *faceColors;
 @property(nonatomic)FaceOrientationType *orientations;
 
-//initial the cube's data by coordinate value
+//initial the cube's data by orignal coordinate value
 - (id) initRightCubeWithCoordinate : (struct Point3i)value;
 
 //re-initiate the cube

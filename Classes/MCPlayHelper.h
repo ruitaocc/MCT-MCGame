@@ -69,7 +69,7 @@ typedef enum _HelperStateMachine {
 //apply rules and return actions
 //the result is directory:
 //"RotationQueue"——the rotation queue in array
-//"LockingAt"——
+//"LockingAt"——an array contains identities(ColorCombinationType) of cubies
 //"Tips"——the strings showing tips
 //      ——the NSArray with several NSString objects
 - (NSDictionary *)applyRules;

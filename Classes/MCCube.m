@@ -28,6 +28,7 @@
 @synthesize faceColors;
 @synthesize orientations;
 
+//initial the cube's data by orignal coordinate value
 - (id)initRightCubeWithCoordinate:(struct Point3i)value{
     if(self = [self init]){
         //before initiating, clear data
@@ -105,7 +106,7 @@
         identity = (ColorCombinationType)(coordinateValue.x + coordinateValue.y*3 + coordinateValue.z*9 + 13);
     }
     return self;
-}   //initial the cube's data by coordinate value
+}   
 
 - (id)redefinedWithCoordinate:(struct Point3i)value orderedColors:(NSArray *)colors orderedOrientations:(NSArray *)ors{
     
