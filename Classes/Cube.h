@@ -17,10 +17,11 @@
     NSMutableArray *cube6faces;
     //CubeFace *faces[6];
     int index;
-    
+    BOOL _isLocked;
 }
 
 @property (assign) int index;
+@property (assign) BOOL isLocked;
 @property (nonatomic,retain)NSMutableArray *cube6faces;
 -(id)init;
 - (id) initWithState:(NSDictionary*)states;

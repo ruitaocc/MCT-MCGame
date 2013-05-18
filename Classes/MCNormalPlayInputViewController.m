@@ -22,7 +22,7 @@
 {
 	if (interfaceObjects == nil) interfaceObjects = [[NSMutableArray alloc] init];
 	[interfaceObjects removeAllObjects];
-    
+    randomRotateCount = 0;
     
     NSString *counterName[10] = {@"zero",@"one",@"two",@"three",@"four",@"five",@"six",@"seven",@"eight",@"nine"};
     stepcounter = [[MCMultiDigitCounter alloc]initWithNumberOfDigit:3 andKeys:counterName];
@@ -123,6 +123,18 @@
 	[interfaceObjects addObject:tips];
 	[tips release];
 
+    //置乱按钮
+    MCTexturedButton * randomBtn = [[MCTexturedButton alloc] initWithUpKey:@"tipsBtnUp" downKey:@"tipBtnUp"];
+	randomBtn.scale = MCPointMake(110, 55, 1.0);
+	randomBtn.translation = MCPointMake(-450, 120.0, 0.0);
+	randomBtn.target = self;
+	randomBtn.buttonDownAction = @selector(randomBtnDown);
+	randomBtn.buttonUpAction = @selector(randomBtnUp);
+	randomBtn.active = YES;
+	[randomBtn awake];
+	[interfaceObjects addObject:randomBtn];
+	[randomBtn release];
+
     
     
     //暂停
@@ -176,6 +188,29 @@
     }
 };
 -(void)tipsBtnDown{};
+-(void)randomBtnUp{
+    
+    radomtimer = [NSTimer scheduledTimerWithTimeInterval:TIME_PER_ROTATION+0.1 target:self selector:@selector(randomRotateHelp1) userInfo:nil repeats:YES];
+    [NSTimer scheduledTimerWithTimeInterval:(TIME_PER_ROTATION+0.1)*(RandomRotateMaxCount+1)+0.1 target:self selector:@selector(randomRotateHelp2) userInfo:nil repeats:NO];
+};
+-(void)randomRotateHelp1{
+    randomRotateCount ++;
+    MCNormalPlaySceneController *c = [MCNormalPlaySceneController sharedNormalPlaySceneController ];
+    RANDOM_SEED();
+    AxisType axis = (AxisType)(RANDOM_INT(0, 2));
+    LayerRotationDirectionType direction = (LayerRotationDirectionType)(RANDOM_INT(0, 1));
+    int layer = RANDOM_INT(0, 2);
+    [c rotateOnAxis:axis onLayer:layer inDirection:direction isTribleRotate:NO];
+    if (randomRotateCount == RandomRotateMaxCount) {
+        [radomtimer invalidate];
+    }
+}
+-(void)randomRotateHelp2{
+    randomRotateCount =0;
+    [[self stepcounter]reset];
+}
+
+-(void)randomBtnDown{};
 
 #pragma mark - queue shift
 -(void)shiftLeftBtnDown{}
@@ -299,6 +334,7 @@
             [timer startTimer];
         }else{
             //cancel
+            [self randomBtnUp];
             
         }
         askReloadView = nil;

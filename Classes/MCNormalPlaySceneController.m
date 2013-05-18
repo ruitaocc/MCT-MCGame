@@ -49,17 +49,22 @@
     [self addObjectToScene:magicCubeUI];
     //[magicCubeUI release];
     
+    //提示标签
+    [self setTipsLabel: [[[UILabel alloc]initWithFrame:CGRectMake(800,150,200,160)] autorelease]];
+    [[self tipsLabel] setText:@""];
+    [[self tipsLabel]setNumberOfLines:15];
+    [[self tipsLabel] setLineBreakMode:UILineBreakModeWordWrap|UILineBreakModeTailTruncation];
+    [[self tipsLabel] setOpaque:YES];
+    [openGLView addSubview:[self tipsLabel]];
+    [[self tipsLabel]setHidden:YES];
+    
     collisionController = [[MCCollisionController alloc] init];
 	collisionController.sceneObjects = magicCubeUI.array27Cube;
 	if (DEBUG_DRAW_COLLIDERS)	[self addObjectToScene:collisionController];
 	// reload our interface
 	[inputController loadInterface];
     
-    [self setTipsLabel: [[[UILabel alloc]initWithFrame:CGRectMake(800,150,160,60)] autorelease]];
-    [[self tipsLabel] setText:@"针对action给出提示"];
-    [[self tipsLabel] setOpaque:YES];
-    [openGLView addSubview:[self tipsLabel]];
-    [[self tipsLabel]setHidden:YES];
+    
     
 }
 
@@ -106,18 +111,32 @@
     //[magicCubeUI adjustWithCenter];
 }
 
+- (void) rotateOnAxis : (AxisType)axis onLayer: (int)layer inDirection: (LayerRotationDirectionType)direction isTribleRotate:(BOOL)is_trible_roate{
+    SingmasterNotation notation = [MCTransformUtil getSingmasterNotationFromAxis:axis layer:layer direction:direction];
+    [playHelper rotateWithSingmasterNotation:notation];
+    [magicCubeUI rotateOnAxis:axis onLayer:layer inDirection:direction isTribleRotate:NO];
+}
 -(void)showQueue{
           
     MCNormalPlayInputViewController* input_C = (MCNormalPlayInputViewController*)inputController;
     //如果队列为空 先applyRules
     if ([[input_C actionQueue] isQueueEmpty]) {
-        [playHelper applyRules];
-        NSArray *actionqueue= [playHelper.applyQueue getQueueWithStringFormat];
+        NSDictionary *applyResult = [playHelper applyRules];
+        NSArray *actionqueue = [applyResult objectForKey:KEY_ROTATION_QUEUE];
+        NSArray *tipStrArray = [applyResult objectForKey:KEY_TIPS];
         NSLog(@"applyRuleRotation:%@", [actionqueue description]);
         while([[playHelper state]isEqual:START_STATE]&&[actionqueue count]==0){
-            [playHelper applyRules];
-            actionqueue= [playHelper.applyQueue getQueueWithStringFormat];
+            [playHelper clearResidualActions];
+            applyResult = [playHelper applyRules];
+            actionqueue = [applyResult objectForKey:KEY_ROTATION_QUEUE];
+            tipStrArray = [applyResult objectForKey:KEY_TIPS];
         };
+        NSMutableString *tipstr = [[NSMutableString alloc]init];
+        for (NSString *msg in tipStrArray) {
+            [tipstr appendString:msg];
+            [tipstr appendString:@"\n"];
+        }
+        [[self tipsLabel]setText:tipstr];
         [[input_C actionQueue] insertQueueCurrentIndexWithNmaeList:actionqueue];
     }else{
         //流程2，询问是否正确
@@ -126,6 +145,7 @@
             NSLog(@"result : Accord");
             //流程2.1，正确，队列右移动一位
             [[input_C actionQueue]shiftRight];
+            [[self tipsLabel]setText:Accord_Msg];
             
         }else if(result == Disaccord){
             NSLog(@"result : Disaccord");
@@ -133,15 +153,19 @@
             //流程2.2.1，获取应该插入队列extraRotations
             //NSArray *actionAry = [playHelper.applyQueue getExtraQueueWithStringFormat];
             //NSLog(@"%@",  [actionAry description]);
+            
             NSMutableArray *actionAry = [[NSMutableArray alloc]init];
             for (NSNumber *rotation in playHelper.applyQueue.extraRotations) {
                 [actionAry addObject: [MCTransformUtil getRotationTagFromSingmasterNotation:(SingmasterNotation)[rotation integerValue]]];
             }
+            [[self tipsLabel]setText:Disaccord_Msg];
             NSLog(@"extraRotation:%@", [actionAry description]);
             [[input_C actionQueue] insertQueueCurrentIndexWithNmaeList:actionAry];
             
         }else if (result==StayForATime){
             NSLog(@"result : StayForATime");
+            [[self tipsLabel]setText:StayForATime_Msg];
+
             //do nothing
         }else if (result ==Finished){
             NSLog(@"result : Finished");
@@ -150,13 +174,23 @@
             //结束，清空当前队列
             [[input_C actionQueue]removeAllActions];
             //重新加载队列，applyRules ,
-            [playHelper applyRules];
-            NSArray *actionqueue= [playHelper.applyQueue getQueueWithStringFormat];
+            NSDictionary *applyResult = [playHelper applyRules];
+            NSArray *actionqueue = [applyResult objectForKey:KEY_ROTATION_QUEUE];
+            NSArray *tipStrArray = [applyResult objectForKey:KEY_TIPS];
             NSLog(@"applyRuleRotation:%@", [actionqueue description]);
-            while([[playHelper state]isEqual:START_STATE]&&[actionqueue count]==0){
-                 [playHelper applyRules];
-                    actionqueue= [playHelper.applyQueue getQueueWithStringFormat];
+            while([actionqueue count]==0){
+                NSLog(@"[actionqueue count]==0");
+                [playHelper clearResidualActions];
+                applyResult = [playHelper applyRules];
+                actionqueue = [applyResult objectForKey:KEY_ROTATION_QUEUE];
+                tipStrArray = [applyResult objectForKey:KEY_TIPS];
             };
+            NSMutableString *tipstr = [[NSMutableString alloc]init];
+            for (NSString *msg in tipStrArray) {
+                [tipstr appendString:msg];
+                [tipstr appendString:@"\n"];
+            }
+            [[self tipsLabel]setText:tipstr];
             [[input_C actionQueue] insertQueueCurrentIndexWithNmaeList:actionqueue];
             if([[playHelper state]isEqual:END_STATE]){
                 //弹出结束对话框

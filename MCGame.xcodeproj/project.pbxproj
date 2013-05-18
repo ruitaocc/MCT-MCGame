@@ -24,6 +24,7 @@
 		A3051EDD16302870006DFF96 /* MCCountingPlaySceneController__1.mm in Sources */ = {isa = PBXBuildFile; fileRef = A3051EDC16302870006DFF96 /* MCCountingPlaySceneController__1.mm */; };
 		A3051EE016303278006DFF96 /* MCCountingPlayInputViewController__1.mm in Sources */ = {isa = PBXBuildFile; fileRef = A3051EDF16303278006DFF96 /* MCCountingPlayInputViewController__1.mm */; };
 		A3051EE316303894006DFF96 /* InputController.mm in Sources */ = {isa = PBXBuildFile; fileRef = A3051EE216303894006DFF96 /* InputController.mm */; };
+		A306688F17471FA000F6004F /* FaceColorMapping.plist in Resources */ = {isa = PBXBuildFile; fileRef = A306688E17471FA000F6004F /* FaceColorMapping.plist */; };
 		A30C47D1161C38E70057C5E1 /* MCButton.m in Sources */ = {isa = PBXBuildFile; fileRef = A30C47D0161C38E70057C5E1 /* MCButton.m */; };
 		A30C47D4161C694F0057C5E1 /* MCTexturedButton.m in Sources */ = {isa = PBXBuildFile; fileRef = A30C47D3161C694F0057C5E1 /* MCTexturedButton.m */; };
 		A30C47D8161C723F0057C5E1 /* MCTexturedMesh.m in Sources */ = {isa = PBXBuildFile; fileRef = A30C47D7161C723E0057C5E1 /* MCTexturedMesh.m */; };
@@ -196,6 +197,9 @@
 		A3051EDF16303278006DFF96 /* MCCountingPlayInputViewController__1.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MCCountingPlayInputViewController__1.mm; sourceTree = "<group>"; };
 		A3051EE116303894006DFF96 /* InputController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InputController.h; sourceTree = "<group>"; };
 		A3051EE216303894006DFF96 /* InputController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = InputController.mm; sourceTree = "<group>"; };
+		A306688C17471F2D00F6004F /* MCCubieDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCCubieDelegate.h; sourceTree = "<group>"; };
+		A306688D17471F3A00F6004F /* MCMagicCubeDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCMagicCubeDelegate.h; sourceTree = "<group>"; };
+		A306688E17471FA000F6004F /* FaceColorMapping.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = FaceColorMapping.plist; path = Classes/FaceColorMapping.plist; sourceTree = "<group>"; };
 		A30C47CF161C38E70057C5E1 /* MCButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCButton.h; sourceTree = "<group>"; };
 		A30C47D0161C38E70057C5E1 /* MCButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCButton.m; sourceTree = "<group>"; };
 		A30C47D2161C694F0057C5E1 /* MCTexturedButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCTexturedButton.h; sourceTree = "<group>"; };
@@ -480,6 +484,8 @@
 				A3EAD3D61713C18A00A95ADA /* MCCube.m */,
 				A3EAD3D71713C18A00A95ADA /* MCMagicCube.h */,
 				A3EAD3D81713C18A00A95ADA /* MCMagicCube.m */,
+				A306688D17471F3A00F6004F /* MCMagicCubeDelegate.h */,
+				A306688C17471F2D00F6004F /* MCCubieDelegate.h */,
 				A3F8291516EF798C00AC5EAF /* Util */,
 				A3F8290B16EF796900AC5EAF /* MCPlayHelper */,
 				A3F828F316EF78E000AC5EAF /* Resource */,
@@ -582,6 +588,7 @@
 				A31B10F6174230840044DFFC /* cubeAction.png */,
 				A327DC4B16DF7D2A001907DE /* countNumber.png */,
 				A327DC4C16DF7D2A001907DE /* countNumber.plist */,
+				A306688E17471FA000F6004F /* FaceColorMapping.plist */,
 				A358750D161F146000998085 /* ButtonMerged.plist */,
 				A3587514161F2C3000998085 /* ButtonMerged.png */,
 				A30C47E3161C8A360057C5E1 /* particleAtlas.plist */,
@@ -1122,6 +1129,7 @@
 				A3D0704616F87F0300AA3BFF /* sixcolor.png in Resources */,
 				A3C1E393170440ED0033EFC1 /* cubeAction.plist in Resources */,
 				A31B10F7174230840044DFFC /* cubeAction.png in Resources */,
+				A306688F17471FA000F6004F /* FaceColorMapping.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

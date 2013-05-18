@@ -179,6 +179,8 @@
     //[[array27Cube objectAtIndex:26] performSelector:@selector(awake)];
     
 }
+
+
 - (void) rotateOnAxis : (AxisType)axis onLayer: (int)layer inDirection: (LayerRotationDirectionType)direction isTribleRotate:(BOOL)is_trible_roate{
     //当前如果有某一自动旋转正在进行，禁止再旋转，直到完成
     if (isAutoRotate) return;

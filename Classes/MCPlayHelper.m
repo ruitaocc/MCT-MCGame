@@ -666,7 +666,7 @@
     
     //While the apply queue isn't nil, attach it to the result directory.
     if ([self.accordanceMsgs count] != 0) {
-        [resultDirectory setObject:[NSArray arrayWithArray:self.accordanceMsgs] forKey:KEY_ROTATION_QUEUE];
+        [resultDirectory setObject:[NSArray arrayWithArray:self.accordanceMsgs] forKey:KEY_TIPS];
         //------------------------------------
         NSLog(@"Tips---");
         for (NSString *msg in self.accordanceMsgs) {
