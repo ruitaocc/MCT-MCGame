@@ -52,7 +52,6 @@
         self.patterns = [NSDictionary dictionaryWithDictionary:[[MCKnowledgeBase getSharedKnowledgeBase] getPatternsWithPreState:state]];
         self.rules = [NSDictionary dictionaryWithDictionary:[[MCKnowledgeBase getSharedKnowledgeBase] getRulesOfMethod:ETFF withState:state]];
         self.states = [NSDictionary dictionaryWithDictionary:[[MCKnowledgeBase getSharedKnowledgeBase] getStatesOfMethod:ETFF]];
-        [self checkStateFromInit:YES];
     }
     return self;
 }
@@ -68,7 +67,6 @@
     self.patterns = [NSDictionary dictionaryWithDictionary:[[MCKnowledgeBase getSharedKnowledgeBase] getPatternsWithPreState:state]];
     self.rules = [NSDictionary dictionaryWithDictionary:[[MCKnowledgeBase getSharedKnowledgeBase] getRulesOfMethod:ETFF withState:state]];
     self.states = [NSDictionary dictionaryWithDictionary:[[MCKnowledgeBase getSharedKnowledgeBase] getStatesOfMethod:ETFF]];
-    [self checkStateFromInit:YES];
 }
 
 - (void)dealloc{
@@ -143,7 +141,7 @@
     //Get the pattern named 'name'
     MCPattern *pattern = [patterns objectForKey:name];
     if (pattern != nil) {
-        return [self treeNodesApply:pattern.root];
+        return [self treeNodesApply:pattern.root withDeep:0];
     }
     else{
         NSLog(@"Can't find the pattern, the pattern name is wrong");
@@ -155,7 +153,7 @@
 - (BOOL)applyActionWithPatternName:(NSString *)name{
     MCRule *rule = [rules objectForKey:name] ;
     if (rule != nil) {
-        return [self treeNodesApply:rule.root];
+        return [self treeNodesApply:rule.root withDeep:0];
     }
     else{
         NSLog(@"Can't find the action, the pattern name is wrong");
@@ -163,19 +161,19 @@
     }
 }
 
-- (NSInteger)treeNodesApply:(MCTreeNode *)root{
+- (NSInteger)treeNodesApply:(MCTreeNode *)root withDeep:(NSInteger)deep{
     switch (root.type) {
         case ExpNode:
         {
             switch (root.value) {
                 case And:
-                    return [self andNodeApply:root];
+                    return [self andNodeApply:root withDeep:deep];
                 case Or:
-                    return [self orNodeApply:root];
+                    return [self orNodeApply:root withDeep:deep];
                 case Sequence:
-                    return [self sequenceNodeApply:root];
+                    return [self sequenceNodeApply:root withDeep:deep];
                 case Not:
-                    return [self notNodeApply:root];
+                    return [self notNodeApply:root withDeep:deep];
                 default:
                     break;
             }
@@ -188,9 +186,17 @@
                 {
                     ColorCombinationType value;
                     for (MCTreeNode *child in root.children) {
-                        value = (ColorCombinationType)[self treeNodesApply:child];
+                        value = (ColorCombinationType)[self treeNodesApply:child withDeep:deep+1];
                         if (![self isCubieAtHomeWithIdentity:value]) {
                             return NO;
+                        }
+                    }
+                    if (deep == 0) {
+                        NSString *msg = [MCTransformUtil getContenFromPatternNode:root
+                                                             accordingToMagicCube:self.magicCube
+                                                                  andLockedCubies:lockedCubies];
+                        if (msg != nil) {
+                            [self.accordanceMsgs addObject:msg];
                         }
                     }
                 }
@@ -202,8 +208,8 @@
                         switch (subPattern.value) {
                             case At:
                             {
-                                targetCubie = [self treeNodesApply:[subPattern.children objectAtIndex:0]];
-                                ColorCombinationType targetPosition = (ColorCombinationType)[self treeNodesApply:[subPattern.children objectAtIndex:1]];
+                                targetCubie = [self treeNodesApply:[subPattern.children objectAtIndex:0] withDeep:deep+1];
+                                ColorCombinationType targetPosition = (ColorCombinationType)[self treeNodesApply:[subPattern.children objectAtIndex:1] withDeep:deep+1];
                                 struct Point3i coorValue = [magicCube coordinateValueOfCubieWithColorCombination:(ColorCombinationType)targetCubie];
                                 if (coorValue.x + coorValue.y*3 + coorValue.z * 9 + 13 != targetPosition) {
                                     return NO;
@@ -213,8 +219,8 @@
                             case ColorBindOrientation:
                             {
                                 NSObject<MCCubieDelegate> *cubie = nil;
-                                FaceOrientationType targetOrientation = (FaceOrientationType)[self treeNodesApply:[subPattern.children objectAtIndex:0]];
-                                FaceColorType targetColor = (FaceColorType)[self treeNodesApply:[subPattern.children objectAtIndex:1]];
+                                FaceOrientationType targetOrientation = (FaceOrientationType)[self treeNodesApply:[subPattern.children objectAtIndex:0] withDeep:deep+1];
+                                FaceColorType targetColor = (FaceColorType)[self treeNodesApply:[subPattern.children objectAtIndex:1] withDeep:deep+1];
                                 if ([subPattern.children count] > 2) {
                                     NSInteger position = [(MCTreeNode *)[subPattern.children objectAtIndex:2] value];
                                     cubie = [magicCube cubieAtCoordinateX:(position%3-1) Y:(position%9/3-1) Z:(position/9-1)];
@@ -225,8 +231,8 @@
                             }
                             case NotAt:
                             {
-                                targetCubie = [self treeNodesApply:[subPattern.children objectAtIndex:0]];
-                                ColorCombinationType targetPosition = (ColorCombinationType)[self treeNodesApply:[subPattern.children objectAtIndex:1]];
+                                targetCubie = [self treeNodesApply:[subPattern.children objectAtIndex:0] withDeep:deep+1];
+                                ColorCombinationType targetPosition = (ColorCombinationType)[self treeNodesApply:[subPattern.children objectAtIndex:1] withDeep:deep+1];
                                 struct Point3i coorValue = [magicCube coordinateValueOfCubieWithColorCombination:(ColorCombinationType)targetCubie];
                                 if (coorValue.x + coorValue.y*3 + coorValue.z * 9 + 13 == targetPosition) {
                                     return NO;
@@ -237,6 +243,14 @@
                                 return NO;
                         }
                     }
+                    if (deep == 0) {
+                        NSString *msg = [MCTransformUtil getContenFromPatternNode:root
+                                                             accordingToMagicCube:self.magicCube
+                                                                  andLockedCubies:lockedCubies];
+                        if (msg != nil) {
+                            [self.accordanceMsgs addObject:msg];
+                        }
+                    }
                 }
                     break;
                 case CubiedBeLocked:
@@ -245,8 +259,19 @@
                     if ([root.children count] != 0) {
                         index = [(MCTreeNode *)[root.children objectAtIndex:0] value];
                     }
-                    return lockedCubies[index] != nil;
+                    
+                    if (lockedCubies[index] == nil) return NO;
+                    
+                    if (deep == 0) {
+                        NSString *msg = [MCTransformUtil getContenFromPatternNode:root
+                                                             accordingToMagicCube:self.magicCube
+                                                                  andLockedCubies:lockedCubies];
+                        if (msg != nil) {
+                            [self.accordanceMsgs addObject:msg];
+                        }
+                    }
                 }
+                    break;
                 default:
                     return NO;
             }
@@ -278,7 +303,7 @@
                     if ([root.children count] != 1) {
                         index = [(MCTreeNode *)[root.children objectAtIndex:1] value];
                     }
-                    int identity = [self treeNodesApply:elementNode];
+                    int identity = [self treeNodesApply:elementNode withDeep:deep+1];
                     if (identity == -1) {
                         lockedCubies[index] = nil;
                     }
@@ -339,7 +364,7 @@
                 {
                     int x=1, y=1, z=1;
                     for (MCTreeNode *child in root.children) {
-                        switch ((FaceColorType)[self treeNodesApply:child]) {
+                        switch ((FaceColorType)[self treeNodesApply:child withDeep:deep+1]) {
                             case UpColor:
                                 y = 2;
                                 break;
@@ -433,12 +458,12 @@
     return YES;
 }
 
-- (BOOL)andNodeApply:(MCTreeNode *)root{
+- (BOOL)andNodeApply:(MCTreeNode *)root withDeep:(NSInteger)deep{
     for (MCTreeNode *node in root.children) {
         
         //Being a 'and' node,
         //it will be failed whever one of its child is failed.
-        if (![self treeNodesApply:node]) {
+        if (![self treeNodesApply:node withDeep: deep+1]) {
             return NO;
         }
         
@@ -462,17 +487,25 @@
             {
                 switch (node.value) {
                     case Home | Check:
-                        [self.accordanceMsgs addObject:[MCTransformUtil getContenFromPatternNode:node
-                                                                            accordingToMagicCube:self.magicCube
-                                                                                 andLockedCubies:lockedCubies]];
+                    {
+                        NSString *msg = [MCTransformUtil getContenFromPatternNode:node
+                                                             accordingToMagicCube:self.magicCube
+                                                                  andLockedCubies:lockedCubies];
+                        if (msg != nil) {
+                            [self.accordanceMsgs addObject:msg];
+                        }
+                    }
                         break;
                     case CubiedBeLocked:
                     {
                         if ([node.children count] == 0 ||
                             [(MCTreeNode *)[node.children objectAtIndex:0] value] == 0) {
-                            [self.accordanceMsgs addObject:[MCTransformUtil getContenFromPatternNode:node
-                                                                                accordingToMagicCube:self.magicCube
-                                                                                     andLockedCubies:lockedCubies]];
+                            NSString *msg = [MCTransformUtil getContenFromPatternNode:node
+                                                                 accordingToMagicCube:self.magicCube
+                                                                      andLockedCubies:lockedCubies];
+                            if (msg != nil) {
+                                [self.accordanceMsgs addObject:msg];
+                            }
                         }
                     }
                         break;
@@ -488,9 +521,9 @@
     return YES;
 }
 
-- (BOOL)orNodeApply:(MCTreeNode *)root{
+- (BOOL)orNodeApply:(MCTreeNode *)root withDeep:(NSInteger)deep{
     for (MCTreeNode *node in root.children) {
-        if ([self treeNodesApply:node]) {
+        if ([self treeNodesApply:node withDeep:deep+1]) {
             //While this node is true, we store some accordance messages
             //for several occasions.
             switch (node.type) {
@@ -514,11 +547,11 @@
                     switch (node.value) {
                         case Home | Check:
                         {
-                            NSString *msg = [MCTransformUtil getContenFromPatternNode:[node.children objectAtIndex:0]
+                            NSString *msg = [MCTransformUtil getContenFromPatternNode:node
                                                                  accordingToMagicCube:self.magicCube
                                                                       andLockedCubies:lockedCubies];
                             if (msg != nil) {
-                                [self.accordanceMsgs addObject:nil];
+                                [self.accordanceMsgs addObject:msg];
                             }
                         }
                             break;
@@ -526,11 +559,11 @@
                         {
                             if ([node.children count] == 0 ||
                                 [(MCTreeNode *)[node.children objectAtIndex:0] value] == 0) {
-                                NSString *msg = [MCTransformUtil getContenFromPatternNode:[node.children objectAtIndex:0]
+                                NSString *msg = [MCTransformUtil getContenFromPatternNode:node
                                                                      accordingToMagicCube:self.magicCube
                                                                           andLockedCubies:lockedCubies];
                                 if (msg != nil) {
-                                    [self.accordanceMsgs addObject:nil];
+                                    [self.accordanceMsgs addObject:msg];
                                 }
                             }
                         }
@@ -550,15 +583,15 @@
     return NO;
 }
 
-- (BOOL)sequenceNodeApply:(MCTreeNode *)root{
+- (BOOL)sequenceNodeApply:(MCTreeNode *)root withDeep:(NSInteger)deep{
     for (MCTreeNode *node in root.children) {
-        [self treeNodesApply:node];
+        [self treeNodesApply:node withDeep:deep+1];
     }
     return YES;
 }
 
-- (BOOL)notNodeApply:(MCTreeNode *)root{
-    return ![self treeNodesApply:[root.children objectAtIndex:0]];
+- (BOOL)notNodeApply:(MCTreeNode *)root withDeep:(NSInteger)deep{
+    return ![self treeNodesApply:[root.children objectAtIndex:0] withDeep:deep+1];
 }
 
 - (NSDictionary *)applyRules{
@@ -567,10 +600,6 @@
         return nil;
     }
     
-#ifndef ONLY_TEST
-    [self.residualActions removeAllObjects];
-    [self checkStateFromInit:NO];
-#endif
     
     NSString *key = nil;
     NSArray *keys = [rules allKeys];
@@ -630,7 +659,7 @@
                         flag = NO;
                     }
                     else{
-                        [self treeNodesApply:node];
+                        [self treeNodesApply:node withDeep:1];
                     }
                 } else {
                     [self.residualActions addObject:node];
@@ -645,7 +674,7 @@
                     self.applyQueue = [MCApplyQueue applyQueueWithRotationAction:actionTree withMagicCube:self.magicCube];
                     break;
                 default:
-                    [self treeNodesApply:actionTree];
+                    [self treeNodesApply:actionTree withDeep:0];
                     break;
             }
             break;
@@ -706,7 +735,7 @@
     }
     //check state
     MCState *tmpState = [states objectForKey:goStr];
-    for (; tmpState != nil && [self treeNodesApply:[tmpState root]]; tmpState = [states objectForKey:goStr]) {
+    for (; tmpState != nil && [self treeNodesApply:[tmpState root] withDeep:0]; tmpState = [states objectForKey:goStr]) {
         goStr = tmpState.afterState;
     }
     if ([goStr compare:state] != NSOrderedSame) {
@@ -764,8 +793,10 @@
 
 - (void)clearResidualActions{
     for (MCTreeNode *node in self.residualActions) {
-        [self treeNodesApply:node];
+        [self treeNodesApply:node withDeep:0];
     }
+    [self.residualActions removeAllObjects];
+    [self checkStateFromInit:NO];
 }   //do the clear thing for next rotation queue
 
 @end

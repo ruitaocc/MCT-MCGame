@@ -24,7 +24,9 @@
 }
 
 + (MCMagicCube *)unarchiveMagicCubeWithFile:(NSString *)path{
-    return [NSKeyedUnarchiver unarchiveObjectWithFile:path];
+    MCMagicCube *newMagicCube = [NSKeyedUnarchiver unarchiveObjectWithFile:path];
+    [newMagicCube reloadColorMappingDictionary];
+    return newMagicCube;
 }
 
 - (id)init{

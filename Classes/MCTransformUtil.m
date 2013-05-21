@@ -534,10 +534,14 @@
                         child = [subPattern.children objectAtIndex:1];
                         //The target value varies by type of child
                         if (child.type == ElementNode) {
-                            targetPosition = [mc coordinateValueOfCubieWithColorCombination:(ColorCombinationType)[child value]];
+                            targetPosition.x = [child value]%3-1;
+                            targetPosition.y = [child value]%9/3-1;
+                            targetPosition.z = [child value]/9-1;
                         }
                         else if (child.type == InformationNode){
-                            targetPosition = [mc coordinateValueOfCubieWithColorCombination:(ColorCombinationType)[child result]];
+                            targetPosition.x = [child result]%3-1;
+                            targetPosition.y = [child result]%9/3-1;
+                            targetPosition.z = [child result]/9-1;
                         }
                         
                         [tmpResult appendFormat:@"%@不在%@",
@@ -867,4 +871,5 @@
             return @"";
     }
 }
+
 @end
