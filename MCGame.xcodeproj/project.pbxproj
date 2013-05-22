@@ -124,6 +124,9 @@
 		A3E1ADCC16A3D2EE0050B52D /* readme_raydectionUtil.rtf in Resources */ = {isa = PBXBuildFile; fileRef = A3E1ADCB16A3D2EE0050B52D /* readme_raydectionUtil.rtf */; };
 		A3E1ADCF16A3D3210050B52D /* readme_MathUtil.rtf in Resources */ = {isa = PBXBuildFile; fileRef = A3E1ADCE16A3D3210050B52D /* readme_MathUtil.rtf */; };
 		A3E469E3174C9B1B00A31586 /* MCLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = A3E469E2174C9B1B00A31586 /* MCLabel.m */; };
+		A3E469E5174CB0A100A31586 /* KnowledgeBase.sqlite3 in Resources */ = {isa = PBXBuildFile; fileRef = A3E469E4174CB0A100A31586 /* KnowledgeBase.sqlite3 */; };
+		A3E469E8174CB91A00A31586 /* FinishView.m in Sources */ = {isa = PBXBuildFile; fileRef = A3E469E7174CB91A00A31586 /* FinishView.m */; };
+		A3E469EA174CBC4100A31586 /* FinishView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A3E469E9174CBC4100A31586 /* FinishView.xib */; };
 		A3E855AC1663A50F00DE3ED9 /* cube1126_2.obj in Resources */ = {isa = PBXBuildFile; fileRef = A3E855AA1663A50F00DE3ED9 /* cube1126_2.obj */; };
 		A3E855B01663A69100DE3ED9 /* RadiusOneCubeWithPic.obj in Resources */ = {isa = PBXBuildFile; fileRef = A3E855AF1663A69100DE3ED9 /* RadiusOneCubeWithPic.obj */; };
 		A3E855B21663A9C400DE3ED9 /* cube1126_original.obj in Resources */ = {isa = PBXBuildFile; fileRef = A3E855B11663A9C400DE3ED9 /* cube1126_original.obj */; };
@@ -154,7 +157,6 @@
 		A3F828F216EF78B700AC5EAF /* 规则输入说明文档(20130210更新).docx in Resources */ = {isa = PBXBuildFile; fileRef = A3F828EA16EF78B700AC5EAF /* 规则输入说明文档(20130210更新).docx */; };
 		A3F828F716EF78F800AC5EAF /* Icon_max.png in Resources */ = {isa = PBXBuildFile; fileRef = A3F828F416EF78F800AC5EAF /* Icon_max.png */; };
 		A3F828F816EF78F800AC5EAF /* Icon_min.png in Resources */ = {isa = PBXBuildFile; fileRef = A3F828F516EF78F800AC5EAF /* Icon_min.png */; };
-		A3F828F916EF78F800AC5EAF /* KnowledgeBase.sqlite3 in Resources */ = {isa = PBXBuildFile; fileRef = A3F828F616EF78F800AC5EAF /* KnowledgeBase.sqlite3 */; };
 		A3F8290316EF790D00AC5EAF /* Color05.png in Resources */ = {isa = PBXBuildFile; fileRef = A3F828FB16EF790D00AC5EAF /* Color05.png */; };
 		A3F8290416EF790D00AC5EAF /* Color04.png in Resources */ = {isa = PBXBuildFile; fileRef = A3F828FC16EF790D00AC5EAF /* Color04.png */; };
 		A3F8290516EF790D00AC5EAF /* Color01.png in Resources */ = {isa = PBXBuildFile; fileRef = A3F828FD16EF790D00AC5EAF /* Color01.png */; };
@@ -330,6 +332,10 @@
 		A3E1ADCE16A3D3210050B52D /* readme_MathUtil.rtf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.rtf; path = readme_MathUtil.rtf; sourceTree = "<group>"; };
 		A3E469E1174C9B1B00A31586 /* MCLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCLabel.h; sourceTree = "<group>"; };
 		A3E469E2174C9B1B00A31586 /* MCLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCLabel.m; sourceTree = "<group>"; };
+		A3E469E4174CB0A100A31586 /* KnowledgeBase.sqlite3 */ = {isa = PBXFileReference; lastKnownFileType = file; path = KnowledgeBase.sqlite3; sourceTree = "<group>"; };
+		A3E469E6174CB91A00A31586 /* FinishView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FinishView.h; sourceTree = "<group>"; };
+		A3E469E7174CB91A00A31586 /* FinishView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FinishView.m; sourceTree = "<group>"; };
+		A3E469E9174CBC4100A31586 /* FinishView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FinishView.xib; sourceTree = "<group>"; };
 		A3E855AA1663A50F00DE3ED9 /* cube1126_2.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = cube1126_2.obj; sourceTree = "<group>"; };
 		A3E855AF1663A69100DE3ED9 /* RadiusOneCubeWithPic.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = RadiusOneCubeWithPic.obj; sourceTree = "<group>"; };
 		A3E855B11663A9C400DE3ED9 /* cube1126_original.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = cube1126_original.obj; sourceTree = "<group>"; };
@@ -379,7 +385,6 @@
 		A3F828EA16EF78B700AC5EAF /* 规则输入说明文档(20130210更新).docx */ = {isa = PBXFileReference; lastKnownFileType = file; path = "规则输入说明文档(20130210更新).docx"; sourceTree = "<group>"; };
 		A3F828F416EF78F800AC5EAF /* Icon_max.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon_max.png; sourceTree = "<group>"; };
 		A3F828F516EF78F800AC5EAF /* Icon_min.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon_min.png; sourceTree = "<group>"; };
-		A3F828F616EF78F800AC5EAF /* KnowledgeBase.sqlite3 */ = {isa = PBXFileReference; lastKnownFileType = file; path = KnowledgeBase.sqlite3; sourceTree = "<group>"; };
 		A3F828FB16EF790D00AC5EAF /* Color05.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Color05.png; sourceTree = "<group>"; };
 		A3F828FC16EF790D00AC5EAF /* Color04.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Color04.png; sourceTree = "<group>"; };
 		A3F828FD16EF790D00AC5EAF /* Color01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Color01.png; sourceTree = "<group>"; };
@@ -752,6 +757,9 @@
 				A3F828CC16EAC91500AC5EAF /* MCNormalPlaySceneController.m */,
 				A3F828CE16EAC93300AC5EAF /* MCNormalPlayInputViewController.h */,
 				A3F828CF16EAC93300AC5EAF /* MCNormalPlayInputViewController.m */,
+				A3E469E6174CB91A00A31586 /* FinishView.h */,
+				A3E469E7174CB91A00A31586 /* FinishView.m */,
+				A3E469E9174CBC4100A31586 /* FinishView.xib */,
 				A3F828D116EACAF700AC5EAF /* AskReloadView.h */,
 				A3F828D216EACAF700AC5EAF /* AskReloadView.m */,
 				A3F828D416EACB1C00AC5EAF /* myaskreloadview.xib */,
@@ -958,7 +966,7 @@
 				A3F828FA16EF78FC00AC5EAF /* Image */,
 				A3F828F416EF78F800AC5EAF /* Icon_max.png */,
 				A3F828F516EF78F800AC5EAF /* Icon_min.png */,
-				A3F828F616EF78F800AC5EAF /* KnowledgeBase.sqlite3 */,
+				A3E469E4174CB0A100A31586 /* KnowledgeBase.sqlite3 */,
 			);
 			name = Resource;
 			sourceTree = "<group>";
@@ -1130,7 +1138,6 @@
 				A3F828F216EF78B700AC5EAF /* 规则输入说明文档(20130210更新).docx in Resources */,
 				A3F828F716EF78F800AC5EAF /* Icon_max.png in Resources */,
 				A3F828F816EF78F800AC5EAF /* Icon_min.png in Resources */,
-				A3F828F916EF78F800AC5EAF /* KnowledgeBase.sqlite3 in Resources */,
 				A3F8290316EF790D00AC5EAF /* Color05.png in Resources */,
 				A3F8290416EF790D00AC5EAF /* Color04.png in Resources */,
 				A3F8290516EF790D00AC5EAF /* Color01.png in Resources */,
@@ -1143,6 +1150,8 @@
 				A3C1E393170440ED0033EFC1 /* cubeAction.plist in Resources */,
 				A31B10F7174230840044DFFC /* cubeAction.png in Resources */,
 				A306688F17471FA000F6004F /* FaceColorMapping.plist in Resources */,
+				A3E469E5174CB0A100A31586 /* KnowledgeBase.sqlite3 in Resources */,
+				A3E469EA174CBC4100A31586 /* FinishView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1254,6 +1263,7 @@
 				A33032D21726B1E500BAD2DE /* MCTransformUtil.m in Sources */,
 				E04E7E8717410E8E00403E92 /* MCCompositeRotationUtil.m in Sources */,
 				A3E469E3174C9B1B00A31586 /* MCLabel.m in Sources */,
+				A3E469E8174CB91A00A31586 /* FinishView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -18,6 +18,7 @@
     MCTimer * timer;
     AskReloadView* askReloadView;
     PauseMenu *pauseMenuView;
+    //FinishView *finishView;
     MCActionQueue *actionQueue;
     int randomRotateCount;
     NSTimer *radomtimer;
@@ -44,6 +45,7 @@
 //队列
 -(void)shiftLeftBtnDown;
 -(void)shiftLeftBtnUp;
+
 -(void)shiftRightBtnDown;
 -(void)shiftRightBtnUp;
 

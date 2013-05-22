@@ -43,7 +43,12 @@
 
 //教学模式下让模型旋转对最大预知
 #define MaxDistance 100
-
+typedef enum _AskReloadType {
+    kAskReloadView_LoadLastTime  = 0,
+    kAskReloadView_Reload,
+    kAskReloadView_Cancel,
+    kAskReloadView_Default
+} AskReloadType;
 // for view transition 视图变换的key
 typedef enum {
     kCountingPlay,

@@ -7,12 +7,7 @@
 //
 
 #import "UATitledModalPanel.h"
-typedef enum _AskReloadType {
-    kAskReloadView_LoadLastTime  = 0,
-    kAskReloadView_Reload,
-    kAskReloadView_Cancel,
-    kAskReloadView_Default
-} AskReloadType;
+#import "MCConfiguration.h"
 @interface AskReloadView : UATitledModalPanel{
     AskReloadType askReloadType;
     IBOutlet UIView	*viewLoadedFromXib;

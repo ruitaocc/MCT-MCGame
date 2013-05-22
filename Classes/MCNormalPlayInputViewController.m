@@ -370,8 +370,13 @@
             //停止计时器
     
             [timer startTimer];
-            NSLog(@"ddd");
+        }else if([pauseMenuView pauseSelectType]==kPauseSelect_Restart){
+            //更新UI模型
+            MCNormalPlaySceneController *c = [MCNormalPlaySceneController sharedNormalPlaySceneController ];
+            [c reloadScene];
+            
         }
+        
         pauseMenuView = nil;
     }
     

@@ -25,6 +25,7 @@
 @property(nonatomic,retain)UILabel *tipsLabel;
 + (MCNormalPlaySceneController*)sharedNormalPlaySceneController;
 -(void)loadScene;
+-(void)reloadScene;
 - (void) rotateOnAxis : (AxisType)axis onLayer: (int)layer inDirection: (LayerRotationDirectionType)direction isTribleRotate:(BOOL)is_trible_roate;
 -(void)rotate:(RotateType*)rotateType;
 -(void)auto_rotate:(RotateType*)rotateType;

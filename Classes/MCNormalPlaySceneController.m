@@ -65,11 +65,26 @@
 	if (DEBUG_DRAW_COLLIDERS)	[self addObjectToScene:collisionController];
 	// reload our interface
 	[inputController loadInterface];
+}
+
+-(void)reloadScene{
+    [super removeAllObjectFromScene];
     
-    
+    //大魔方
+    magicCubeUI = [[MCMagicCubeUIModelController alloc]initiate];
+    magicCubeUI.target=self;
+    [magicCubeUI setUsingMode:TECH_MODE];
+    [magicCubeUI setStepcounterAddAction:@selector(stepcounterAdd)];
+    [magicCubeUI setStepcounterMinusAction:@selector(stepcounterMinus)];
+    [self addObjectToScene:magicCubeUI];
+    [self stepcounterReset];
     
 }
 
+-(void)stepcounterReset{
+    MCMultiDigitCounter *tmp = [(MCNormalPlayInputViewController*)inputController stepcounter];
+    [tmp reset];
+}
 -(void)stepcounterAdd{
     MCMultiDigitCounter *tmp = [(MCNormalPlayInputViewController*)inputController stepcounter];
     [tmp addCounter];
@@ -139,6 +154,9 @@
             actionqueue = [applyResult objectForKey:KEY_ROTATION_QUEUE];
             tipStrArray = [applyResult objectForKey:KEY_TIPS];
             lockArray = [applyResult objectForKey:KEY_LOCKED_CUBIES];
+            if([[playHelper state]isEqual:END_STATE]){//alert
+                break;
+            }
         };
         NSMutableString *tipstr = [[NSMutableString alloc]init];
         for (NSString *msg in tipStrArray) {
@@ -197,12 +215,17 @@
             NSArray *lockArray = [applyResult objectForKey:KEY_LOCKED_CUBIES];
             NSLog(@"applyRuleRotation:%@", [actionqueue description]);
             while([actionqueue count]==0){
-                NSLog(@"[actionqueue count]==0");
                 [playHelper clearResidualActions];
                 applyResult = [playHelper applyRules];
                 actionqueue = [applyResult objectForKey:KEY_ROTATION_QUEUE];
                 tipStrArray = [applyResult objectForKey:KEY_TIPS];
                 lockArray = [applyResult objectForKey:KEY_LOCKED_CUBIES];
+                if([[playHelper state]isEqual:END_STATE]){
+                    //alert
+                    //弹出结束对话框
+                    NSLog(@"END form Scene");
+                    break;
+                }
             };
             for(int i = 0;i<27;i++) {
                 [[[magicCubeUI array27Cube]objectAtIndex:i]setIsLocked:NO];
@@ -217,11 +240,6 @@
             }
             [[self tipsLabel]setText:tipstr];
             [[input_C actionQueue] insertQueueCurrentIndexWithNmaeList:actionqueue];
-            if([[playHelper state]isEqual:END_STATE]){
-                //弹出结束对话框
-                NSLog(@"END form Scene");
-                
-            };
         }else if (result ==NoneResult){
             
             //do nothing
