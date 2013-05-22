@@ -123,6 +123,7 @@
 		A3E1ADCA16A3D2830050B52D /* readme_ProgressBar.rtf in Resources */ = {isa = PBXBuildFile; fileRef = A3E1ADC916A3D2830050B52D /* readme_ProgressBar.rtf */; };
 		A3E1ADCC16A3D2EE0050B52D /* readme_raydectionUtil.rtf in Resources */ = {isa = PBXBuildFile; fileRef = A3E1ADCB16A3D2EE0050B52D /* readme_raydectionUtil.rtf */; };
 		A3E1ADCF16A3D3210050B52D /* readme_MathUtil.rtf in Resources */ = {isa = PBXBuildFile; fileRef = A3E1ADCE16A3D3210050B52D /* readme_MathUtil.rtf */; };
+		A3E469E3174C9B1B00A31586 /* MCLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = A3E469E2174C9B1B00A31586 /* MCLabel.m */; };
 		A3E855AC1663A50F00DE3ED9 /* cube1126_2.obj in Resources */ = {isa = PBXBuildFile; fileRef = A3E855AA1663A50F00DE3ED9 /* cube1126_2.obj */; };
 		A3E855B01663A69100DE3ED9 /* RadiusOneCubeWithPic.obj in Resources */ = {isa = PBXBuildFile; fileRef = A3E855AF1663A69100DE3ED9 /* RadiusOneCubeWithPic.obj */; };
 		A3E855B21663A9C400DE3ED9 /* cube1126_original.obj in Resources */ = {isa = PBXBuildFile; fileRef = A3E855B11663A9C400DE3ED9 /* cube1126_original.obj */; };
@@ -327,6 +328,8 @@
 		A3E1ADC916A3D2830050B52D /* readme_ProgressBar.rtf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.rtf; path = readme_ProgressBar.rtf; sourceTree = "<group>"; };
 		A3E1ADCB16A3D2EE0050B52D /* readme_raydectionUtil.rtf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.rtf; path = readme_raydectionUtil.rtf; sourceTree = "<group>"; };
 		A3E1ADCE16A3D3210050B52D /* readme_MathUtil.rtf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.rtf; path = readme_MathUtil.rtf; sourceTree = "<group>"; };
+		A3E469E1174C9B1B00A31586 /* MCLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCLabel.h; sourceTree = "<group>"; };
+		A3E469E2174C9B1B00A31586 /* MCLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCLabel.m; sourceTree = "<group>"; };
 		A3E855AA1663A50F00DE3ED9 /* cube1126_2.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = cube1126_2.obj; sourceTree = "<group>"; };
 		A3E855AF1663A69100DE3ED9 /* RadiusOneCubeWithPic.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = RadiusOneCubeWithPic.obj; sourceTree = "<group>"; };
 		A3E855B11663A9C400DE3ED9 /* cube1126_original.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = cube1126_original.obj; sourceTree = "<group>"; };
@@ -850,6 +853,15 @@
 			name = MacgicCubeUIModel;
 			sourceTree = "<group>";
 		};
+		A3E469E0174C9AA600A31586 /* MyLabel */ = {
+			isa = PBXGroup;
+			children = (
+				A3E469E1174C9B1B00A31586 /* MCLabel.h */,
+				A3E469E2174C9B1B00A31586 /* MCLabel.m */,
+			);
+			name = MyLabel;
+			sourceTree = "<group>";
+		};
 		A3EB454A16BEB45600DBB8B7 /* StepCounter */ = {
 			isa = PBXGroup;
 			children = (
@@ -886,6 +898,7 @@
 		A3F2ACBD1616D97800D622B8 /* SceneObjects */ = {
 			isa = PBXGroup;
 			children = (
+				A3E469E0174C9AA600A31586 /* MyLabel */,
 				A3C7AA9617019B210045D963 /* ActionQueue */,
 				A3C7AA9116FDF8220045D963 /* ParticleSystem */,
 				A3EB454B16BEB47200DBB8B7 /* Button */,
@@ -1240,6 +1253,7 @@
 				A33032CF1726B1C400BAD2DE /* MCPlayHelper.m in Sources */,
 				A33032D21726B1E500BAD2DE /* MCTransformUtil.m in Sources */,
 				E04E7E8717410E8E00403E92 /* MCCompositeRotationUtil.m in Sources */,
+				A3E469E3174C9B1B00A31586 /* MCLabel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

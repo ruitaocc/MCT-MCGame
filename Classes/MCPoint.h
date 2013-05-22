@@ -11,6 +11,7 @@
 // this is the definition of that struct and a hand ful of inline functions for manipulating the point.
 
 // A 3D point
+#include "Vector.hpp"
 typedef struct {
 	CGFloat			x, y, z;
 } MCPoint;
@@ -85,7 +86,11 @@ static inline float MCPointDistance(MCPoint p1, MCPoint p2)
                 ((p1.y - p2.y)  * (p1.y - p2.y)) + 
                 ((p1.z - p2.z) * (p1.z - p2.z)));
 }
-
+static inline float VectorPointDistance(vec2 p1, vec2 p2)
+{
+	return sqrt(((p1.x - p2.x) * (p1.x - p2.x)) +
+                ((p1.y - p2.y)  * (p1.y - p2.y)));
+}
 
 
 

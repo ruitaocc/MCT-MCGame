@@ -55,6 +55,8 @@
     [[self tipsLabel]setNumberOfLines:15];
     [[self tipsLabel] setLineBreakMode:UILineBreakModeWordWrap|UILineBreakModeTailTruncation];
     [[self tipsLabel] setOpaque:YES];
+    [[self tipsLabel]setBackgroundColor:[UIColor colorWithRed:0.5 green:0.5 blue:0.5 alpha:0.5]];
+    //[[self tipsLabel]setAlpha:0.8];
     [openGLView addSubview:[self tipsLabel]];
     [[self tipsLabel]setHidden:YES];
     
@@ -159,6 +161,7 @@
             //流程2.1，正确，队列右移动一位
             [[input_C actionQueue]shiftRight];
             [[self tipsLabel]setText:Accord_Msg];
+            [[self tipsLabel]setTextColor:[UIColor blackColor]];
             
         }else if(result == Disaccord){
             NSLog(@"result : Disaccord");
@@ -172,6 +175,7 @@
                 [actionAry addObject: [MCTransformUtil getRotationTagFromSingmasterNotation:(SingmasterNotation)[rotation integerValue]]];
             }
             [[self tipsLabel]setText:Disaccord_Msg];
+             [[self tipsLabel]setTextColor:[UIColor redColor]];
             NSLog(@"extraRotation:%@", [actionAry description]);
             [[input_C actionQueue] insertQueueCurrentIndexWithNmaeList:actionAry];
             

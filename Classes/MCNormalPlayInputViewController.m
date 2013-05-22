@@ -10,7 +10,7 @@
 #import "MCTexturedButton.h"
 #import "MCNormalPlayInputViewController.h"
 #import "CoordinatingController.h"
-
+#import "MCLabel.h"
 #import "MCPlayHelper.h"
 @implementation MCNormalPlayInputViewController
 @synthesize stepcounter;
@@ -24,29 +24,45 @@
 	[interfaceObjects removeAllObjects];
     randomRotateCount = 0;
     
+    //UI step counter
     NSString *counterName[10] = {@"zero",@"one",@"two",@"three",@"four",@"five",@"six",@"seven",@"eight",@"nine"};
     stepcounter = [[MCMultiDigitCounter alloc]initWithNumberOfDigit:3 andKeys:counterName];
     [stepcounter setScale : MCPointMake(135, 72, 1.0)];
-    [stepcounter setTranslation :MCPointMake(380, -320, 0.0)];
+    [stepcounter setTranslation :MCPointMake(420, -340, 0.0)];
     [stepcounter setActive:YES];
     [stepcounter awake];
     [interfaceObjects addObject:stepcounter];
     
+    //UI UI step counter label
+    MCLabel *counterLabel= [[MCLabel alloc]initWithNstring:@"moveLabel"];
+    [counterLabel setScale : MCPointMake(140, 25, 1.0)];
+    [counterLabel setTranslation :MCPointMake(415, -285, 0.0)];
+    [counterLabel setActive:YES];
+    [counterLabel awake];
+    [interfaceObjects addObject:counterLabel];
+
     
-    
-    //[counter release];
+    //UI timer
+    MCLabel *timerLabel= [[MCLabel alloc]initWithNstring:@"timeLabel"];
+    [timerLabel setScale : MCPointMake(75, 30, 1.0)];
+    [timerLabel setTranslation :MCPointMake(-450, -305, 0.0)];
+    [timerLabel setActive:YES];
+    [timerLabel awake];
+    [interfaceObjects addObject:timerLabel];
+    //UI timer
     timer = [[MCTimer alloc]initWithTextureKeys:counterName];
     [timer setScale:MCPointMake(450/2, 72/2, 1.0)];
     [timer setTranslation:MCPointMake(-360, -340, 0.0)];
     [timer setActive:YES];
     [timer awake];
-    //[timer startTimer];
     [interfaceObjects addObject:timer];
     
     //add action queue
     NSMutableArray *actionname = [[NSMutableArray alloc]init];
-    NSString *names[45]={@"",@"frontCCW",@"front2CW",@"backCW",@"backCCW",@"back2CW",@"rightCW",@"rightCCW",@"right2CW",@"leftCW",@"leftCCW",@"left2CW",@"upCW",@"upCCW",@"up2CW",@"downCW",@"downCCW",@"down2CW",@"xCW",@"xCCW",@"x2CW",@"yCW",@"yCCW",@"y2CW",@"zCW",@"zCCW",@"z2CW",@"frontTwoCW",@"frontTwoCCW",@"frontTwo2CW",@"backTwoCW",@"backTwoCCW",@"backTwo2CW",@"rightTwoCW",@"rightTwoCCW",@"rightTwo2CW",@"leftTwoCW",@"leftTwoCCW",@"leftTwo2CW",@"upTwoCW",@"upTwoCCW",@"upTwo2CW",@"downTwoCW",@"downTwoCCW",@"downTwo2CW"};
     /*
+    NSString *names[45]={@"",@"frontCCW",@"front2CW",@"backCW",@"backCCW",@"back2CW",@"rightCW",@"rightCCW",@"right2CW",@"leftCW",@"leftCCW",@"left2CW",@"upCW",@"upCCW",@"up2CW",@"downCW",@"downCCW",@"down2CW",@"xCW",@"xCCW",@"x2CW",@"yCW",@"yCCW",@"y2CW",@"zCW",@"zCCW",@"z2CW",@"frontTwoCW",@"frontTwoCCW",@"frontTwo2CW",@"backTwoCW",@"backTwoCCW",@"backTwo2CW",@"rightTwoCW",@"rightTwoCCW",@"rightTwo2CW",@"leftTwoCW",@"leftTwoCCW",@"leftTwo2CW",@"upTwoCW",@"upTwoCCW",@"upTwo2CW",@"downTwoCW",@"downTwoCCW",@"downTwo2CW"};
+    */
+     /*
     for (int i=5; i<17; i++) {
         [actionname addObject:names[i]];
     }*/
@@ -75,7 +91,7 @@
 	[mainMenuBtn release];
     
     
-    
+    /*
     //队列的下一步
 	MCTexturedButton * shiftLeft = [[MCTexturedButton alloc] initWithUpKey:@"previousSolutionBtnUp" downKey:@"previousSolutionBtnUp"];
 	shiftLeft.scale = MCPointMake(40, 40, 1.0);
@@ -98,21 +114,10 @@
 	[shiftRight awake];
 	[interfaceObjects addObject:shiftRight];
 	[shiftRight release];
-    //上一步/撤销
-	MCTexturedButton * undoCommand = [[MCTexturedButton alloc] initWithUpKey:@"previousSolutionBtnUp" downKey:@"previousSolutionBtnUp"];
-	undoCommand.scale = MCPointMake(40, 40, 1.0);
-	undoCommand.translation = MCPointMake(-60, -320.0, 0.0);
-	undoCommand.target = self;
-	undoCommand.buttonDownAction = @selector(previousSolutionBtnDown);
-	undoCommand.buttonUpAction = @selector(previousSolutionBtnUp);
-	undoCommand.active = YES;
-	[undoCommand awake];
-	[interfaceObjects addObject:undoCommand];
-	[undoCommand release];
-    
-    
+     */
+       
     //提示按钮
-    MCTexturedButton * tips = [[MCTexturedButton alloc] initWithUpKey:@"tipsBtnUp" downKey:@"tipBtnUp"];
+    MCTexturedButton * tips = [[MCTexturedButton alloc] initWithUpKey:@"tipsBtnUp" downKey:@"tipsBtnUp"];
 	tips.scale = MCPointMake(110, 55, 1.0);
 	tips.translation = MCPointMake(450, 320.0, 0.0);
 	tips.target = self;
@@ -123,6 +128,8 @@
 	[interfaceObjects addObject:tips];
 	[tips release];
 
+    
+    /*
     //置乱按钮
     MCTexturedButton * randomBtn = [[MCTexturedButton alloc] initWithUpKey:@"tipsBtnUp" downKey:@"tipBtnUp"];
 	randomBtn.scale = MCPointMake(110, 55, 1.0);
@@ -134,13 +141,25 @@
 	[randomBtn awake];
 	[interfaceObjects addObject:randomBtn];
 	[randomBtn release];
-
+     */
+    //上一步/撤销
+	MCTexturedButton * undoCommand = [[MCTexturedButton alloc] initWithUpKey:@"previousSolutionBtnUp" downKey:@"previousSolutionBtnUp"];
+	undoCommand.scale = MCPointMake(40, 40, 1.0);
+	undoCommand.translation = MCPointMake(-70, -345.0, 0.0);
+	undoCommand.target = self;
+	undoCommand.buttonDownAction = @selector(previousSolutionBtnDown);
+	undoCommand.buttonUpAction = @selector(previousSolutionBtnUp);
+	undoCommand.active = YES;
+	[undoCommand awake];
+	[interfaceObjects addObject:undoCommand];
+	[undoCommand release];
     
+
     
     //暂停
 	MCTexturedButton * pause = [[MCTexturedButton alloc] initWithUpKey:@"pauseSolutionBtnUp" downKey:@"pauseSolutionBtnUp"];
 	pause.scale = MCPointMake(40, 40, 1.0);
-	pause.translation = MCPointMake(0, -320.0, 0.0);
+	pause.translation = MCPointMake(0, -345.0, 0.0);
 	pause.target = self;
 	pause.buttonDownAction = @selector(pauseSolutionBtnDown);
 	pause.buttonUpAction = @selector(pauseSolutionBtnUp);
@@ -153,7 +172,7 @@
     //下一步/恢复
 	MCTexturedButton * redoCommand = [[MCTexturedButton alloc] initWithUpKey:@"nextSolutionBtnUp" downKey:@"nextSolutionBtnUp"];
 	redoCommand.scale = MCPointMake(40, 40, 1.0);
-	redoCommand.translation = MCPointMake(60, -320.0, 0.0);
+	redoCommand.translation = MCPointMake(70, -345.0, 0.0);
 	redoCommand.target = self;
 	redoCommand.buttonDownAction = @selector(nextSolutionBtnDown);
 	redoCommand.buttonUpAction = @selector(nextSolutionBtnUp);

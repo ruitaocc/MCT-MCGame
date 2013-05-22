@@ -40,6 +40,10 @@
 #define Accord_Msg @"接着下一步吧"
 #define StayForATime_Msg @"再转一次"
 #define RandomRotateMaxCount 20
+
+//教学模式下让模型旋转对最大预知
+#define MaxDistance 100
+
 // for view transition 视图变换的key
 typedef enum {
     kCountingPlay,
