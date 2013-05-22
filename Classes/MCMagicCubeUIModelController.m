@@ -987,6 +987,9 @@
             break;
         }
         case kState_S2:{
+            if (isAutoRotate||is_TECH_MODE_Rotate) {
+                return;
+            }
             isLayerRotating = NO;
             firstThreePointCount = 0;
             if ([self usingMode] == PLAY_MODE) {
@@ -1013,7 +1016,7 @@
                 
             }
             else if([self usingMode] == TECH_MODE){
-                 if(is_TECH_MODE_Rotate) return;
+                 
                 //教学模式下，进行严格限制
                 //记录第一个点
                 //CGPoint location = [touch locationInView:view];
@@ -1021,55 +1024,18 @@
                 //if ([touches count]!=2) return;
                 UITouch *touch0 = [[touches allObjects] objectAtIndex:0];
                 CGPoint location = [touch0 previousLocationInView:view];
-                firstThreePoint[firstThreePointCount].x =location.x;
-                firstThreePoint[firstThreePointCount].y =location.y;
-                firstThreePointCount++;
+                firstThreePoint[0].x =location.x;
+                firstThreePoint[0].y =location.y;
+                //firstThreePointCount++;
 
-                //Once function down, update the ray.
-                [ray updateWithScreenX:location.x
-                               screenY:location.y];
-                float nearest_distance = 65535;
-                int index = -1;
-                //for (Cube *tmp_cube in array27Cube) {
                 
-                
-                Cube *tmp_cube_center = [array27Cube objectAtIndex:13];
-                  GLfloat *   tmp_dection = VertexesArray_Matrix_Multiply(V2, 3, 36, tmp_cube_center.matrix);
-                
-                
-                
-                    for (int i = 0; i < 12; i++) {
-                        //OK, check the intersection and return the distance.
-                        float distance = [ray intersectWithTriangleMadeUpOfV0:&tmp_dection[0 +i*9]
-                                                                           V1:&tmp_dection[3 +i*9]
-                                                                           V2:&tmp_dection[6 +i*9]];
-                        
-                        if (distance < 0) continue;
-                        if (distance < nearest_distance) {
-                            //存储当前选中的三角形
-                            for (int k= 0; k <9 ; k++) {
-                                selected_triangle[k] = tmp_dection[i*9+k];
-                            }
-                            directionVector[0] = [ray pointIntersectWithTriangleMadeUpOfV0:&tmp_dection[0 +i*9]
-                                                                                        V1:&tmp_dection[3 +i*9]
-                                                                                        V2:&tmp_dection[6 +i*9]];
-                            nearest_distance = distance;
-                            index = tmp_cube_center.index;
-                        }
-                   // }
-                }
-                if (index != -1) {
-                    is_TECH_MODE_Rotate = YES;
-                    //selected = [array27Cube objectAtIndex:index];
-                    //可能得修改
-                    //isLayerRotating = YES;
-                    fingerRotate_angle = 0;
-                }
-
             }
             break;
         }
         case kState_M2:{
+            if (isAutoRotate||is_TECH_MODE_Rotate) {
+                return;
+            }
             if ([self usingMode] == PLAY_MODE) {
                 //自由模式下，无限制操作
                 CGPoint current;
@@ -1094,125 +1060,15 @@
             else if([self usingMode] == TECH_MODE ){
                 //教学模式下，进行严格限制
                 //if ([touches count]!=2) return;
-                UITouch *touch0 = [[touches allObjects] objectAtIndex:0];
-                if (is_TECH_MODE_Rotate == NO) {
-                    //没选中及时返回
-                    firstThreePointCount = 0;
-                    return;
-                }
-                if (firstThreePointCount > 3) {
-                    
-                }else if (firstThreePointCount < 3){
-                    //选择三角型切面
-                    //CGPoint location = [touch locationInView:view];
-                    CGPoint location = [touch0 previousLocationInView:view];
-                    firstThreePoint[firstThreePointCount] = vec2(location.x,location.y);
-                    
-                    if (firstThreePointCount==2) {
-                        //Once function down, update the ray.
-                        //CGPoint location = [touch0 prlocationInView:view];
-                        [ray updateWithScreenX:firstThreePoint[firstThreePointCount].x
-                                       screenY:firstThreePoint[firstThreePointCount].y];
-                        float nearest_distance = 65535;
-                        int index = -1;
-                      //  for (Cube *tmp_cube in array27Cube) {
-                        Cube *tmp_cube_center = [array27Cube objectAtIndex:13];
-                            GLfloat * tmp_dection = VertexesArray_Matrix_Multiply(V2, 3, 36, tmp_cube_center.matrix);
-                            for (int i = 0; i < 12; i++) {
-                                //OK, check the intersection and return the distance.
-                                float distance = [ray intersectWithTriangleMadeUpOfV0:&tmp_dection[0 +i*9]
-                                                                                   V1:&tmp_dection[3 +i*9]
-                                                                                   V2:&tmp_dection[6 +i*9]];
-                                
-                                if (distance < 0) continue;
-                                if (distance < nearest_distance) {
-                                    
-                                    directionVector[1] = [ray pointIntersectWithTriangleMadeUpOfV0:&tmp_dection[0 +i*9]
-                                                                                                V1:&tmp_dection[3 +i*9]
-                                                                                                V2:&tmp_dection[6 +i*9]];
-                                    nearest_distance = distance;
-                                    index = tmp_cube_center.index;
-                                }
-                          //  }
-                        }
-                        if (index != -1) {
-                            
-                            //NSLog(@"(1x:%f,1y:%f,1z:%f)",directionVector[1].x,directionVector[1].y,directionVector[1].z);
-                        }
-                        
-                    }
-                    firstThreePointCount++;
-                }else {
-                    
-                    vec3 select_triangleV0 = vec3(selected_triangle[0],selected_triangle[1],selected_triangle[2]);
-                    vec3 select_triangleV1 = vec3(selected_triangle[3],selected_triangle[4],selected_triangle[5]);
-                    vec3 select_triangleV2 = vec3(selected_triangle[6],selected_triangle[7],selected_triangle[8]);
-                    vec3 select_movedTo0_V0 = select_triangleV0 - select_triangleV1;
-                    vec3 select_movedTo0_V1 = select_triangleV2 - select_triangleV1;
-                    
-                    float xyz[9] = {1.0,0.0,0.0,0.0,1.0,0.0,0.0,0.0,1.0};
-                    Cube * tmpcuble = [array27Cube objectAtIndex:13];
-                    GLfloat * XYZ = VertexesArray_Matrix_Multiply(xyz, 3, 3, tmpcuble.matrix);
-                    vec3 ox = vec3(XYZ[0],XYZ[1],XYZ[2]);
-                    vec3 oy = vec3(XYZ[3],XYZ[4],XYZ[5]);
-                    vec3 oz = vec3(XYZ[6],XYZ[7],XYZ[8]);
-                    
-                    float ox_triangle = [self AngleV0V1withV:ox V0:select_movedTo0_V0 V1:select_movedTo0_V1];
-                    float oy_triangle = [self AngleV0V1withV:oy V0:select_movedTo0_V0 V1:select_movedTo0_V1];
-                    float oz_triangle = [self AngleV0V1withV:oz V0:select_movedTo0_V0 V1:select_movedTo0_V1];
-                    AxisType vertical_axis = (ox_triangle>oy_triangle)? (ox_triangle>oz_triangle)?X:Z:(oy_triangle>oz_triangle)?Y:Z;
-                    
-                    vec3 dirtection = directionVector[1]-directionVector[0];
-                    float dx = FabsThetaBetweenV1andV2(ox,dirtection);
-                    float dy = FabsThetaBetweenV1andV2(oy,dirtection);
-                    float dz = FabsThetaBetweenV1andV2(oz,dirtection);
-                    if (vertical_axis == X) {
-                        current_rotate_axis = (dy>dz)?Y:Z;
-                    }
-                    if (vertical_axis == Y) {
-                        current_rotate_axis = (dx >dz)?X:Z;
-                    }
-                    if (vertical_axis == Z) {
-                        current_rotate_axis = (dx>dy)?X:Y;
-                    }
-                    firstThreePointCount++;
-                    
-                    if (selected != nil) {
-                        //计算选中点层和轴
-                        int index = [selected index];
-                        int magiccubeStateIndex = -1;
-                        for (int i = 0;i<27;i++) {
-                            //Cube *tmpcube = //[array27Cube objectAtIndex:i];
-                            Cube *tmpcube = MagicCubeIndexState[i];
-                            if ([tmpcube index] == index) {
-                                magiccubeStateIndex = i;
-                            }
-                        }
-                        int x = -1,y = -1,z= -1;
-                        
-                        z = magiccubeStateIndex/9;
-                        int tmp = magiccubeStateIndex%9;
-                        y = tmp/3;
-                        x = tmp%3;
-                        if (current_rotate_axis == X) {
-                            current_rotate_layer = x;
-                        }else if(current_rotate_axis ==Y){
-                            current_rotate_layer = y;
-                        }else {
-                            current_rotate_layer = z;
-                        }
-                        
-                     
-                        
-                    }
-                    
-                }
-
             }
-
-            break;
         }
+        break;
+    
+    
         case kState_F2:{
+            if (isAutoRotate||is_TECH_MODE_Rotate) {
+                return;
+            }
             if ([self usingMode] == PLAY_MODE) {
                 //自由模式下，无限制操作
                 firstThreePointCount = 0;
@@ -1223,63 +1079,165 @@
                 //确定旋转方向
                 //使用第一点 和 最后一个点 及他们点中间点 在轨迹圆上形成轨迹弧
                 //三点确定两个向量，他们进行差乘，再和法向量进行点乘 由正负确定转向
-                if(is_TECH_MODE_Rotate!=YES)return;
-                //CGPoint location = [touch locationInView:view];
-                //if ([touches count]!=2)return;
                 UITouch *touch0 = [[touches allObjects] objectAtIndex:0];
                 CGPoint location = [touch0 previousLocationInView:view];
-                vec2 lastPoint = vec2(location.x,location.y);
-                
-                float xyz[9] = {1.0,0.0,0.0,0.0,1.0,0.0,0.0,0.0,1.0};
-                Cube * tmpcuble = [array27Cube objectAtIndex:13];
-                GLfloat * XYZ = VertexesArray_Matrix_Multiply(xyz, 3, 3, tmpcuble.matrix);
-                vec3 ox = vec3(XYZ[0],XYZ[1],XYZ[2]);
-                vec3 oy = vec3(XYZ[3],XYZ[4],XYZ[5]);
-                vec3 oz = vec3(XYZ[6],XYZ[7],XYZ[8]);
-                
-                vec3 firstv = [self MapToLayerCenter:firstThreePoint[0]];
-                vec3 lastv = [self MapToLayerCenter:lastPoint];
-                vec3 middlev = [self middleOfV1:firstv V2:lastv];
-                
-                //标记启动自动调整
-                //double angle = fingerRotate_angle*360/Pi;
-                int tmpvar = int(fingerRotate_angle)/90;
-                fingerRotate_angle_mod90 = fingerRotate_angle - tmpvar*90.0;
-                vec3 V1 = firstv-middlev;
-                vec3 V2 = lastv -middlev;
-                vec3 corssv1v2 = V1.Cross(V2);
-                double cosa = -1;
-                if (current_rotate_axis == X) {
-                    cosa = corssv1v2.Dot(ox)/(corssv1v2.Module()*ox.Module());
-                }
-                if (current_rotate_axis == Y) {
-                    cosa = corssv1v2.Dot(oy)/(corssv1v2.Module()*oy.Module());
-                }
-                if (current_rotate_axis ==Z) {
-                    cosa = corssv1v2.Dot(oz)/(corssv1v2.Module()*oz.Module());
-                }
-                if (cosa > 0){
-                        current_rotate_direction = CW;
-                        isNeededToUpdateMagicCubeState = YES;
-                }else {
-                        current_rotate_direction = CCW;
-                        isNeededToUpdateMagicCubeState = YES;
-                }
-                if (fingerRotate_angle>90&&fingerRotate_angle_mod90<45) {
+                firstThreePoint[1] = vec2(location.x,location.y);
+                AxisType fuzzy_axis_x;
+                AxisType fuzzy_axis_y;
+                AxisType fuzzy_axis_z;
+                AxisType fuzzy_axis;
+                LayerRotationDirectionType fuzzy_direction;
+                if(MaxDistance<VectorPointDistance(firstThreePoint[0], firstThreePoint[1])){
+                    //移动超过预定值旋转！
                     isNeededToUpdateMagicCubeState = YES;
+                    
+                    vec3 fuzzy_vec3_x;
+                    vec3 fuzzy_vec3_y;
+                    vec3 fuzzy_vec3_z;
+                    //找到fuzzy——y
+                    float xyz[9] = {1.0,0.0,0.0,
+                        0.0,1.0,0.0,
+                        0.0,0.0,1.0};
+                    CGFloat * tmp_matrix = (CGFloat *) malloc(16 * sizeof(CGFloat));
+                    Cube * centerCube = [array27Cube objectAtIndex:13];
+                    GLfloat * XYZ = VertexesArray_Matrix_Multiply(xyz, 3, 3, centerCube.matrix);
+                    
+                    vec3 center_ox = vec3(XYZ[0],XYZ[1],XYZ[2]);
+                    vec3 center_oy = vec3(XYZ[3],XYZ[4],XYZ[5]);
+                    vec3 center_oz = vec3(XYZ[6],XYZ[7],XYZ[8]);
+                    
+                    GLfloat *tmpXYZ;
+                    vec3 tmp_ox ;
+                    vec3 tmp_oy ;
+                    vec3 tmp_oz ;
+                    glPushMatrix();
+                    glLoadIdentity();
+                    //mat4 matRotation = centerCube.quaRotation.ToMatrix();
+                    //glMultMatrixf(matRotation.Pointer());
+                    glRotatef(centerCube.prerotation.x, 1.0f, 0.0f, 0.0f);
+                    glRotatef(centerCube.prerotation.y, 0.0f, 1.0f, 0.0f);
+                    glRotatef(centerCube.prerotation.z, 0.0f, 0.0f, 1.0f);
+                    glRotatef(centerCube.rotation.x, 1.0f, 0.0f, 0.0f);
+                    glRotatef(centerCube.rotation.y, 0.0f, 1.0f, 0.0f);
+                    glRotatef(centerCube.rotation.z, 0.0f, 0.0f, 1.0f);
+                    glScalef(centerCube.scale.x, centerCube.scale.y, centerCube.scale.z);
+                    glGetFloatv(GL_MODELVIEW_MATRIX, tmp_matrix);
+                    glPopMatrix();
+                    tmpXYZ = VertexesArray_Matrix_Multiply(xyz, 3, 3, tmp_matrix);
+                    tmp_ox = vec3(tmpXYZ[0],tmpXYZ[1],tmpXYZ[2]);
+                    tmp_oy = vec3(tmpXYZ[3],tmpXYZ[4],tmpXYZ[5]);
+                    tmp_oz = vec3(tmpXYZ[6],tmpXYZ[7],tmpXYZ[8]);
+                    
+                    //处理相对于中心x轴的模糊Y轴
+                    float angle_centerox_OY = FabsThetaBetweenV1andV2(center_ox, tmp_oy);
+                    float angle_centeroy_OY = FabsThetaBetweenV1andV2(center_oy, tmp_oy);
+                    float angle_centeroz_OY = FabsThetaBetweenV1andV2(center_oz, tmp_oy);
+                    
+                    //处理相对于中心x轴的模糊x轴
+                    float angle_centerox_OX = FabsThetaBetweenV1andV2(center_ox, tmp_ox);
+                    float angle_centeroy_OX = FabsThetaBetweenV1andV2(center_oy, tmp_ox);
+                    float angle_centeroz_OX = FabsThetaBetweenV1andV2(center_oz, tmp_ox);
+                    
+                    //处理相对于中心x轴的模糊x轴
+                    float angle_centerox_OZ = FabsThetaBetweenV1andV2(center_ox, tmp_oz);
+                    float angle_centeroy_OZ = FabsThetaBetweenV1andV2(center_oy, tmp_oz);
+                    float angle_centeroz_OZ = FabsThetaBetweenV1andV2(center_oz, tmp_oz);
+                    
+                    //fuzzy_y
+                    if (angle_centerox_OY<angle_centeroy_OY) {
+                        if (angle_centerox_OY<angle_centeroz_OY) {
+                            fuzzy_vec3_y = center_ox;
+                            fuzzy_axis_y = X;
+                        }else{
+                            fuzzy_vec3_y = center_oz;
+                            fuzzy_axis_y = Z;
+                        }
+                    }else if(angle_centeroy_OY<angle_centeroz_OY){
+                        fuzzy_vec3_y = center_oy;
+                        fuzzy_axis_y = Y;
+                    }
+                    
+                    
+                    //fuzzy_x
+                    if (angle_centerox_OX<angle_centeroy_OX) {
+                        if (angle_centerox_OX<angle_centeroz_OX) {
+                            fuzzy_vec3_x = center_ox;
+                            fuzzy_axis_x = X;
+                        }else{
+                            fuzzy_vec3_x = center_oz;
+                            fuzzy_axis_x = Z;
+                        }
+                    }else if(angle_centeroy_OX<angle_centeroz_OX){
+                        fuzzy_vec3_x = center_oy;
+                        fuzzy_axis_x = Y;
+                    }
+                    
+                    //fuzzy_z
+                    if (angle_centerox_OZ<angle_centeroy_OZ) {
+                        if (angle_centerox_OZ<angle_centeroz_OZ) {
+                            fuzzy_vec3_z = center_ox;
+                            fuzzy_axis_z = X;
+                        }else{
+                            fuzzy_vec3_z = center_oz;
+                            fuzzy_axis_z = Z;
+                        }
+                    }else if(angle_centeroy_OZ<angle_centeroz_OZ){
+                        fuzzy_vec3_z = center_oy;
+                        fuzzy_axis_z = Y;
+                    }
+                    
+                    //确定旋转方向
+                    if (fabs((firstThreePoint[0].x-firstThreePoint[1].x))>fabs((firstThreePoint[0].y-firstThreePoint[1].y))) {
+                        //横向操作
+                        fuzzy_axis = fuzzy_axis_y;
+                        if ((firstThreePoint[1].x-firstThreePoint[0].x)>0) {
+                            //向右
+                            if(fuzzy_vec3_y.Dot(tmp_oy)>0)fuzzy_direction=CCW;
+                            else fuzzy_direction=CW;
+                        }else{
+                            if(fuzzy_vec3_y.Dot(tmp_oy)>0)fuzzy_direction=CW;
+                            else fuzzy_direction=CCW;
+                        }
+                    }else{
+                        //素直向操作
+                        if (firstThreePoint[1].x>512&&firstThreePoint[0].x>512) {
+                            //右边
+                            fuzzy_axis = fuzzy_axis_z;
+                            if ((firstThreePoint[1].y-firstThreePoint[0].y)>0) {
+                                //向下
+                                if(fuzzy_vec3_z.Dot(tmp_oz)>0)fuzzy_direction=CW;
+                                else fuzzy_direction=CCW;
+                            }else{
+                                //向上
+                                if(fuzzy_vec3_z.Dot(tmp_oz)>0)fuzzy_direction=CCW;
+                                else fuzzy_direction=CW;
+                            }
+                            
+                        }else if(firstThreePoint[1].x<512&&firstThreePoint[0].x<512){
+                            //左边
+                            fuzzy_axis = fuzzy_axis_x;
+                            if ((firstThreePoint[1].y-firstThreePoint[0].y)>0) {
+                                //向下
+                                if(fuzzy_vec3_x.Dot(tmp_ox)>0)fuzzy_direction=CCW;
+                                else fuzzy_direction=CW;
+                            }else{
+                                //向上
+                                if(fuzzy_vec3_z.Dot(tmp_oz)>0)fuzzy_direction=CW;
+                                else fuzzy_direction=CCW;
+                            }
+                        }
+                        
+                    }
                 }
+                current_rotate_axis = fuzzy_axis;
+                current_rotate_direction = fuzzy_direction;
+                //旋转模型
                 [self rotateOnAxis:current_rotate_axis onLayer:current_rotate_layer inDirection:current_rotate_direction isTribleRotate:YES];
                 if (isNeededToUpdateMagicCubeState) {
                     //加入命令队列
                     //添加command到NSUndoManger
                     LayerRotationDirectionType commandaxis = current_rotate_direction;
-                    if (fingerRotate_angle>90&&fingerRotate_angle_mod90<45) {
-                        if(commandaxis==CCW){
-                            commandaxis=CW;
-                        }else {
-                            commandaxis=CCW;
-                        }
-                    }
+                    
                     NSInvocation *doinvocation = [self createInvocationOnAxis:current_rotate_axis onLayer:current_rotate_layer inDirection:commandaxis isTribleRotate:YES];
                     
                     if(commandaxis==CCW){
@@ -1289,15 +1247,15 @@
                     }
                     NSInvocation *undoinvocation = [self createInvocationOnAxis:current_rotate_axis onLayer:current_rotate_layer inDirection:commandaxis isTribleRotate:YES];
                     [self addInvocation:doinvocation withUndoInvocation:undoinvocation];
-                    //当旋转180度
-                    if (isNeededToUpadteTwice) {
-                        [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(updatetweice) userInfo:self repeats:NO];
-                    }
                     
                 }
                 is_TECH_MODE_Rotate = NO;
                 //自由模式下，无限制操作
                 firstThreePointCount = 0;
+                firstThreePoint[0].x = 512;
+                firstThreePoint[1].x = 512;
+                firstThreePoint[0].y = 384;
+                firstThreePoint[1].y = 384;
                 if (selected != nil) {
                     //selected.scale = MCPointMake(30, 30, 30);
                     selected = nil;
