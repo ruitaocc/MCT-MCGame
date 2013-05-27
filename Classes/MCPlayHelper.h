@@ -28,15 +28,17 @@ typedef enum _HelperStateMachine {
 
 @interface MCPlayHelper : NSObject
 
-@property (nonatomic, retain)NSObject<MCMagicCubeDelegate> *magicCube;
-@property (nonatomic, retain)NSDictionary *patterns;
-@property (nonatomic, retain)NSDictionary *rules;
-@property (nonatomic, retain)NSDictionary *states;
-@property (nonatomic, retain)NSString *state;
-@property (nonatomic)HelperStateMachine helperState;
-@property (nonatomic, retain)MCApplyQueue *applyQueue;
-@property (nonatomic)RotationResult rotationResult;
-@property (nonatomic, retain)NSMutableArray *residualActions;
+@property(nonatomic, retain)NSObject<MCMagicCubeDelegate> *magicCube;
+@property(nonatomic, retain)NSDictionary *patterns;
+@property(nonatomic, retain)NSDictionary *rules;
+@property(nonatomic, retain)NSDictionary *specialPatterns;
+@property(nonatomic, retain)NSDictionary *specialRules;
+@property(nonatomic, retain)NSDictionary *states;
+@property(nonatomic, retain)NSString *state;
+@property(nonatomic)HelperStateMachine helperState;
+@property(nonatomic, retain)MCApplyQueue *applyQueue;
+@property(nonatomic)RotationResult rotationResult;
+@property(nonatomic, retain)NSMutableArray *residualActions;
 
 //After applying this pattern,
 //intermediate informations will be stored here.

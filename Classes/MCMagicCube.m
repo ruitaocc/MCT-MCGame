@@ -29,6 +29,73 @@
     return newMagicCube;
 }
 
++ (MCMagicCube *)magicCubeWithCubiesData:(NSArray *)dataArray{
+    return [[[MCMagicCube alloc] initWithCubiesData:dataArray] autorelease];
+}
+
+//Initiate the magic cube by appointed all face colors.
+//All face color is stored in 27 dictionaries contained in an array.
+//Every dictionary: key=FaceOrientationType and value=FaceColorType.
+//The dictionary of centre cubie whose identity is 9(coordinate[0, 0, 0]) has empty content.
+- (id)initWithCubiesData:(NSArray *)dataArray{
+    if (self = [super init]) {
+        for (int z = 0; z < 3; z++) {
+            for (int y = 0; y < 3; y++) {
+                for (int x = 0; x < 3; x++) {
+                    if (x != 1 || y != 1 || z != 1) {
+                        //Transfer coordinate to the identity of cubie
+                        NSInteger identity = x+y*3+z*9;
+                        
+                        //the coordinate of cubie
+                        struct Point3i coordinateValue = {.x = x-1, .y = y-1, .z = z-1};
+                        
+                        //Get the cubie's data dictionary
+                        NSDictionary *dataDict = [dataArray objectAtIndex:identity];
+                        
+                        //values of orientations
+                        NSArray *orderedOrientations = [dataDict allKeys];
+                        //values of face colors
+                        NSArray *orderedFaceColors = [dataDict allValues];
+                        
+                        //If this's the first time, allocate memory and key it
+                        BOOL isReatin = NO;
+                        if (magicCubies3D[x][y][z] == nil) {
+                            magicCubies3D[x][y][z] = [MCCubie alloc];
+                            isReatin = YES;
+                        }
+                        
+                        //redefine the cubie
+                        [magicCubies3D[x][y][z] redefinedWithCoordinate:coordinateValue orderedColors:orderedFaceColors orderedOrientations:orderedOrientations];
+                        
+                        magicCubiesList[identity] = magicCubies3D[x][y][z];
+                        if (isReatin) [magicCubiesList[identity] retain];
+                        
+                        //If the cubie is the centre cubie of face, get the info.
+                        //At the view point of the user, find which orientation of magic cube in specified orientation.
+                        if (z == 1 && x == 1) {
+                            if (y == 2) orientationToMagicCubeFace[Up] = (FaceOrientationType)[magicCubiesList[identity] faceColorInOrientation:Up];
+                            if (y == 0) orientationToMagicCubeFace[Down] = (FaceOrientationType)[magicCubiesList[identity] faceColorInOrientation:Down];
+                        }
+                        if (x == 1 && y == 1) {
+                            if (z == 2) orientationToMagicCubeFace[Front] = (FaceOrientationType)[magicCubiesList[identity] faceColorInOrientation:Front];
+                            if (z == 0) orientationToMagicCubeFace[Back] = (FaceOrientationType)[magicCubiesList[identity] faceColorInOrientation:Back];
+                        }
+                        if (y == 1 && z == 1) {
+                            if (x == 0) orientationToMagicCubeFace[Left] = (FaceOrientationType)[magicCubiesList[identity] faceColorInOrientation:Left];
+                            if (x == 2) orientationToMagicCubeFace[Right] = (FaceOrientationType)[magicCubiesList[identity] faceColorInOrientation:Right];
+                        }
+                    }
+                }
+            }
+        }
+        
+        //Load colors mapping dictionary
+        [self reloadColorMappingDictionary];
+    }
+    return self;
+}
+
+//initial the rubik's cube as a new state
 - (id)init{
     if (self = [super init]) {
         for (int z = 0; z < 3; z++) {
@@ -57,7 +124,7 @@
         [self reloadColorMappingDictionary];
     }
     return self;
-}   //initial the rubik's cube
+}
 
 - (void)dealloc{
     for (int i = 0; i < 27; i++) {
