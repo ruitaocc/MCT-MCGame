@@ -10,8 +10,7 @@
 #ifndef RubiksCube_Global_h
 #define RubiksCube_Global_h
 
-//the knowledge db name
-#define KNOWLEDGE_DB_FILE_NAME @"KnowledgeBase.sqlite3"
+
 
 struct Point3i{
     int x;
@@ -174,24 +173,57 @@ typedef enum _RotationResult{
 #define NO_SELECTED_LAYER -999
 
 
-//-------------------------------------------------------------------------------------------
+//----------------------------------Knowledge base part--------------------------------------
+
+//the knowledge db name
+#define KNOWLEDGE_DB_FILE_NAME @"KnowledgeBase.sqlite3"
 
 #define ETFF 0  //method 0, 8355
 //every method's first and last state name
 #define START_STATE @"Init"
 #define END_STATE @"End"
 
+// At most time, the general number of states of the specified method
+#define GENERAL_STATES_NUM 10
+
+// At most time, the general number of rules of specified state
+#define GENERAL_RULES_NUM 20
+
+// the pattern table name
+#define DB_PATTERN_TABLE_NAME @"PATTERNS"
+
+// the rule table name
+#define DB_RULE_TABLE_NAME @"RULES"
+
+// the special pattern table name
+#define DB_SPECIAL_PATTERN_TABLE_NAME @"SPECIAL_PATTERNS"
+
+// the special rule table name
+#define DB_SPECIAL_RULE_TABLE_NAME @"SPECIAL_RULES"
+
+// the state table name
+#define DB_STATE_TABLE_NAME @"STATES"
+
 //-------------------------------------------------------------------------------------------
 
 //the temprorary file store the unfinished magic cube's status
 #define TmpMagicCubeData @"tmpMagicCube"
 
-//-------------------------------------------------------------------------------------------
+//Helper------------------------------------------------------------------------------------
+
+// helper locker size
+#define CubieCouldBeLockMaxNum 26
 
 //the keys that get actions
 #define KEY_ROTATION_QUEUE @"RotationQueue"
 #define KEY_TIPS @"TipsMessage"
 #define KEY_LOCKED_CUBIES @"LockedCubies"
+
+// There is two types of rules to be applied.
+typedef enum _AppliedRuleType {
+    General,
+    Special
+} AppliedRuleType;
 
 //-------------------------------------------------------------------------------------------
 
@@ -202,13 +234,9 @@ struct RotationStruct {
     LayerRotationDirectionType direction;
 };
 
-//-------------------------------------------------------------------------------------------
+//Test switcher--------------------------------------------------------------------------------
 
 //#define ONLY_TEST
-
-//-------------------------------------------------------------------------------------------
-
-#define CubieCouldBeLockMaxNum 26
 
 //-------------------------------------------------------------------------------------------
 
