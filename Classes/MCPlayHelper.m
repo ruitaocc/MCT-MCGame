@@ -17,6 +17,8 @@
 @synthesize magicCube;
 @synthesize patterns;
 @synthesize rules;
+@synthesize specialPatterns;
+@synthesize specialRules;
 @synthesize states;
 @synthesize state;
 @synthesize helperState;
@@ -49,9 +51,7 @@
         [self setMagicCube:mc];
         //refresh state and rules
         self.state = START_STATE;
-        self.patterns = [NSDictionary dictionaryWithDictionary:[[MCKnowledgeBase getSharedKnowledgeBase] getPatternsWithPreState:state]];
-        self.rules = [NSDictionary dictionaryWithDictionary:[[MCKnowledgeBase getSharedKnowledgeBase] getRulesOfMethod:ETFF withState:state]];
-        self.states = [NSDictionary dictionaryWithDictionary:[[MCKnowledgeBase getSharedKnowledgeBase] getStatesOfMethod:ETFF]];
+        [self reloadRulesAccordingToCurrentStateOfRubiksCube];
     }
     return self;
 }
@@ -64,14 +64,14 @@
     magicCube = mc;
     //refresh state and rules
     self.state = START_STATE;
-    self.patterns = [NSDictionary dictionaryWithDictionary:[[MCKnowledgeBase getSharedKnowledgeBase] getPatternsWithPreState:state]];
-    self.rules = [NSDictionary dictionaryWithDictionary:[[MCKnowledgeBase getSharedKnowledgeBase] getRulesOfMethod:ETFF withState:state]];
-    self.states = [NSDictionary dictionaryWithDictionary:[[MCKnowledgeBase getSharedKnowledgeBase] getStatesOfMethod:ETFF]];
+    [self reloadRulesAccordingToCurrentStateOfRubiksCube];
 }
 
 - (void)dealloc{
     self.patterns = nil;
     self.rules = nil;
+    self.specialPatterns = nil;
+    self.specialRules = nil;
     self.states = nil;
     self.state = nil;
     self.applyQueue = nil;
@@ -134,12 +134,24 @@
 }
 
 //Apply the pattern and return result
-- (BOOL)applyPatternWihtPatternName:(NSString *)name{
+- (BOOL)applyPatternWihtPatternName:(NSString *)name ofType:(AppliedRuleType)type{
     //Before apply pattern, clear accrodance messages firstly.
     [self.accordanceMsgs removeAllObjects];
     
-    //Get the pattern named 'name'
-    MCPattern *pattern = [patterns objectForKey:name];
+    // Get the pattern named 'name'
+    MCPattern *pattern = nil;
+    switch (type) {
+        case Special:
+            pattern = [self.specialPatterns objectForKey:name];
+            break;
+        case General:
+            pattern = [self.patterns objectForKey:name];
+            break;
+        default:
+            break;
+    }
+    
+    // apply
     if (pattern != nil) {
         return [self treeNodesApply:pattern.root withDeep:0];
     }
@@ -149,9 +161,22 @@
     }
 }
 
-//Apply the pattern and return result
-- (BOOL)applyActionWithPatternName:(NSString *)name{
-    MCRule *rule = [rules objectForKey:name] ;
+//Apply the action and return result
+- (BOOL)applyActionWithPatternName:(NSString *)name ofType:(AppliedRuleType)type{
+    // Get the rule name 'name'.
+    MCRule *rule = nil;
+    switch (type) {
+        case Special:
+            rule = [self.specialRules objectForKey:name];
+            break;
+        case General:
+            rule = [self.rules objectForKey:name];
+            break;
+        default:
+            break;
+    }
+    
+    // apply
     if (rule != nil) {
         return [self treeNodesApply:rule.root withDeep:0];
     }
@@ -203,12 +228,12 @@
                     break;
                 case Check:
                 {
-                    NSInteger targetCubie;
+                    ColorCombinationType targetCubie = ColorCombinationTypeBound;
                     for (MCTreeNode *subPattern in root.children) {
                         switch (subPattern.value) {
                             case At:
                             {
-                                targetCubie = [self treeNodesApply:[subPattern.children objectAtIndex:0] withDeep:deep+1];
+                                targetCubie = (ColorCombinationType)[self treeNodesApply:[subPattern.children objectAtIndex:0] withDeep:deep+1];
                                 ColorCombinationType targetPosition = (ColorCombinationType)[self treeNodesApply:[subPattern.children objectAtIndex:1] withDeep:deep+1];
                                 struct Point3i coorValue = [magicCube coordinateValueOfCubieWithColorCombination:(ColorCombinationType)targetCubie];
                                 if (coorValue.x + coorValue.y*3 + coorValue.z * 9 + 13 != targetPosition) {
@@ -231,7 +256,7 @@
                             }
                             case NotAt:
                             {
-                                targetCubie = [self treeNodesApply:[subPattern.children objectAtIndex:0] withDeep:deep+1];
+                                targetCubie = (ColorCombinationType)[self treeNodesApply:[subPattern.children objectAtIndex:0] withDeep:deep+1];
                                 ColorCombinationType targetPosition = (ColorCombinationType)[self treeNodesApply:[subPattern.children objectAtIndex:1] withDeep:deep+1];
                                 struct Point3i coorValue = [magicCube coordinateValueOfCubieWithColorCombination:(ColorCombinationType)targetCubie];
                                 if (coorValue.x + coorValue.y*3 + coorValue.z * 9 + 13 == targetPosition) {
@@ -600,23 +625,35 @@
         return nil;
     }
     
+    AppliedRuleType appliedType = Special;
     
-    NSString *key = nil;
-    NSArray *keys = [rules allKeys];
-    int count = [rules count];
-    int i = 0;
-    for (; i < count; i++)
+    // Check special rules firstly.
+    NSString *targetKey = nil;
+    for (NSString *key in [self.specialRules allKeys])
     {
-        key = [keys objectAtIndex:i];
-        if ([self applyPatternWihtPatternName:key]) {
+        if ([self applyPatternWihtPatternName:key ofType:Special]) {
+            targetKey = key;
+            appliedType = Special;
             break;
         }
     }
     
+    // If no special rules match the state, check general rules.
+    if (targetKey == nil) {
+        for (NSString *key in [self.rules allKeys])
+        {
+            if ([self applyPatternWihtPatternName:key ofType:General]) {
+                targetKey = key;
+                appliedType = General;
+                break;
+            }
+        }
+    }
+    
 #ifdef ONLY_TEST
-    NSLog(@"%@", key);
+    NSLog(@"%@", targetKey);
     //error occurs, we can not find the rules to apply and there isn't the finished state.
-    if ([self.state compare:END_STATE] != NSOrderedSame && i == count) {
+    if ([self.state compare:END_STATE] != NSOrderedSame && targetKey == nil) {
         NSLog(@"%@", @"There must be something wrong, I don't apply any rules.");
         //save state for debug
         NSString *savedPath = [NSString stringWithFormat:@"ErrorStateForDebug_%f", [[NSDate date] timeInterval]];
@@ -625,11 +662,11 @@
         [NSKeyedArchiver archiveRootObject:magicCube toFile:fileName];
         return nil;
     }
-    [self applyActionWithPatternName:key];
+    [self applyActionWithPatternName:targetKey ofType:appliedType];
     [self checkStateFromInit:NO];
 #else
     //error occurs, we can not find the rules to apply and there isn't the finished state.
-    if ([self.state compare:END_STATE] != NSOrderedSame && i == count) {
+    if ([self.state compare:END_STATE] != NSOrderedSame && targetKey == nil) {
         NSLog(@"%@", @"There must be something wrong, I don't apply any rules.");
         //save state for debug
         NSString *savedPath = [NSString stringWithFormat:@"ErrorStateForDebug_%f", [[NSDate date] timeInterval]];
@@ -641,11 +678,20 @@
 #endif
     
     NSLog(@"State:%@", state);
-    NSLog(@"Rules:%@", key);
+    NSLog(@"Rules:%@", targetKey);
     
 #ifndef ONLY_TEST
     //get the tree of the action according to the pattern name
-    MCTreeNode *actionTree = [[rules objectForKey:key] root];
+    MCTreeNode *actionTree = nil;
+    switch (appliedType) {
+        case Special:
+            actionTree = [[self.specialRules objectForKey:targetKey] root];
+            break;
+        case General:
+            actionTree = [[self.rules objectForKey:targetKey] root];
+        default:
+            break;
+    }
     
     //analyse the action and return the result
     switch (actionTree.type) {
@@ -708,6 +754,10 @@
 #else
     NSDictionary *resultDirectory = [NSDictionary dictionary];
 #endif
+    
+    // At the end, release the pool.
+    
+    
     return resultDirectory;
 }
 
@@ -715,9 +765,25 @@
 //every time we just load rules that can be applied at current state.
 //Thereby we should reload rules whenever the state of rubik's cube changes.
 - (void)reloadRulesAccordingToCurrentStateOfRubiksCube{
+    // Every time apply rule, construct a pool for auto releasing.
+    NSAutoreleasePool *loopPool = [[NSAutoreleasePool alloc] init];
+    
     self.states = [NSDictionary dictionaryWithDictionary:[[MCKnowledgeBase getSharedKnowledgeBase] getStatesOfMethod:ETFF]];
-    self.patterns = [NSDictionary dictionaryWithDictionary:[[MCKnowledgeBase getSharedKnowledgeBase] getPatternsWithPreState:state]];
-    self.rules = [NSDictionary dictionaryWithDictionary:[[MCKnowledgeBase getSharedKnowledgeBase] getRulesOfMethod:ETFF withState:state]];
+    self.patterns = [NSDictionary dictionaryWithDictionary:
+                     [[MCKnowledgeBase getSharedKnowledgeBase] getPatternsWithPreState:state
+                                                                               inTable:DB_PATTERN_TABLE_NAME]];
+    self.rules = [NSDictionary dictionaryWithDictionary:
+                  [[MCKnowledgeBase getSharedKnowledgeBase] getRulesOfMethod:ETFF
+                                                                   withState:state
+                                                                     inTable:DB_RULE_TABLE_NAME]];
+    self.specialPatterns = [NSDictionary dictionaryWithDictionary:
+                            [[MCKnowledgeBase getSharedKnowledgeBase] getPatternsWithPreState:state
+                                                                                      inTable:DB_SPECIAL_PATTERN_TABLE_NAME]];
+    self.specialRules = [NSDictionary dictionaryWithDictionary:
+                         [[MCKnowledgeBase getSharedKnowledgeBase] getRulesOfMethod:ETFF
+                                                                          withState:state
+                                                                            inTable:DB_SPECIAL_RULE_TABLE_NAME]];
+    [loopPool release];
 }
 
 

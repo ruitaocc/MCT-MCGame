@@ -8,9 +8,9 @@
 
 #import <Foundation/Foundation.h>
 #import <sqlite3.h>
-#include "MCBasicElement.h"
+#import "MCBasicElement.h"
+#import "Global.h"
 
-#define PATTERN_NUM 30
 
 @interface MCKnowledgeBase : NSObject
 
@@ -20,21 +20,22 @@
 - (NSString *)knowledgeBaseFilePath;
 
 //insert the pattern
-- (BOOL)insertPattern:(NSString *)pattern withKey:(NSString *)key withPreState:(NSString *)state;
+- (BOOL)insertPattern:(NSString *)pattern withKey:(NSString *)key withPreState:(NSString *)state inTable:(NSString *)table;
 
 //insert the rule
-- (BOOL)insertRullOfMethod:(NSInteger)method withState:(NSString *)state ifContent:(NSString *)ifContent thenContent:(NSString *)thenContent;
+- (BOOL)insertRullOfMethod:(NSInteger)method withState:(NSString *)state ifContent:(NSString *)ifContent thenContent:(NSString *)thenContent inTable:(NSString *)table;
 
-//insert the state
+// Insert the state
 - (BOOL)insertStateOfMethod:(NSInteger)method withPattern:(NSString *)pattern preState:(NSString *)preState afterState:(NSString *)afterState;
 
-//get the pattern dictionary based on state
-- (NSMutableDictionary *)getPatternsWithPreState:(NSString *)state;
-
-//get the states based on method
+// Get the states based on method
 - (NSMutableDictionary *)getStatesOfMethod:(NSInteger)method;
 
-//get the rules based on method and state
-- (NSMutableDictionary *)getRulesOfMethod:(NSInteger)method withState:(NSString *)state;
+// Get the pattern dictionary based on state of specified table
+- (NSMutableDictionary *)getPatternsWithPreState:(NSString *)state inTable:(NSString *)tableName;
+
+// Get the rules based on method and state of specified table
+- (NSMutableDictionary *)getRulesOfMethod:(NSInteger)method withState:(NSString *)state inTable:(NSString *)tableName;
+
 
 @end
