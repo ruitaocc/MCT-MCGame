@@ -396,6 +396,7 @@
     finishView = [[[FinishView alloc] initWithFrame:self.view.bounds title:@"结束"] autorelease];
     finishView.isShowColseBtn = NO;
     finishView.delegate = self;
+    finishView.alpha = 0.2;
     ///////////////////////////////////
 	// Add the panel to our view
 	[self.view  addSubview:finishView];

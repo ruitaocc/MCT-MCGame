@@ -127,6 +127,8 @@
 		A3E469E5174CB0A100A31586 /* KnowledgeBase.sqlite3 in Resources */ = {isa = PBXBuildFile; fileRef = A3E469E4174CB0A100A31586 /* KnowledgeBase.sqlite3 */; };
 		A3E469E8174CB91A00A31586 /* FinishView.m in Sources */ = {isa = PBXBuildFile; fileRef = A3E469E7174CB91A00A31586 /* FinishView.m */; };
 		A3E469EA174CBC4100A31586 /* myFinishView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A3E469E9174CBC4100A31586 /* myFinishView.xib */; };
+		A3E469ED1754823A00A31586 /* MCRandomSolveViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A3E469EC1754823A00A31586 /* MCRandomSolveViewController.m */; };
+		A3E469F0175482AA00A31586 /* MCRandomSolveViewInputControllerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A3E469EF175482AA00A31586 /* MCRandomSolveViewInputControllerViewController.m */; };
 		A3E855AC1663A50F00DE3ED9 /* cube1126_2.obj in Resources */ = {isa = PBXBuildFile; fileRef = A3E855AA1663A50F00DE3ED9 /* cube1126_2.obj */; };
 		A3E855B01663A69100DE3ED9 /* RadiusOneCubeWithPic.obj in Resources */ = {isa = PBXBuildFile; fileRef = A3E855AF1663A69100DE3ED9 /* RadiusOneCubeWithPic.obj */; };
 		A3E855B21663A9C400DE3ED9 /* cube1126_original.obj in Resources */ = {isa = PBXBuildFile; fileRef = A3E855B11663A9C400DE3ED9 /* cube1126_original.obj */; };
@@ -336,6 +338,10 @@
 		A3E469E6174CB91A00A31586 /* FinishView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FinishView.h; sourceTree = "<group>"; };
 		A3E469E7174CB91A00A31586 /* FinishView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FinishView.m; sourceTree = "<group>"; };
 		A3E469E9174CBC4100A31586 /* myFinishView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = myFinishView.xib; sourceTree = "<group>"; };
+		A3E469EB1754823A00A31586 /* MCRandomSolveViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCRandomSolveViewController.h; sourceTree = "<group>"; };
+		A3E469EC1754823A00A31586 /* MCRandomSolveViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCRandomSolveViewController.m; sourceTree = "<group>"; };
+		A3E469EE175482AA00A31586 /* MCRandomSolveViewInputControllerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCRandomSolveViewInputControllerViewController.h; sourceTree = "<group>"; };
+		A3E469EF175482AA00A31586 /* MCRandomSolveViewInputControllerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCRandomSolveViewInputControllerViewController.m; sourceTree = "<group>"; };
 		A3E855AA1663A50F00DE3ED9 /* cube1126_2.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = cube1126_2.obj; sourceTree = "<group>"; };
 		A3E855AF1663A69100DE3ED9 /* RadiusOneCubeWithPic.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = RadiusOneCubeWithPic.obj; sourceTree = "<group>"; };
 		A3E855B11663A9C400DE3ED9 /* cube1126_original.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = cube1126_original.obj; sourceTree = "<group>"; };
@@ -797,6 +803,10 @@
 		A3E1ADB116A3B62F0050B52D /* Scene3 */ = {
 			isa = PBXGroup;
 			children = (
+				A3E469EB1754823A00A31586 /* MCRandomSolveViewController.h */,
+				A3E469EC1754823A00A31586 /* MCRandomSolveViewController.m */,
+				A3E469EE175482AA00A31586 /* MCRandomSolveViewInputControllerViewController.h */,
+				A3E469EF175482AA00A31586 /* MCRandomSolveViewInputControllerViewController.m */,
 			);
 			name = Scene3;
 			sourceTree = "<group>";
@@ -1169,7 +1179,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "export CODESIGN_ALLOCATE=/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/codesign_allocate\nif [ \"${PLATFORM_NAME}\" == \"iphoneos\" ] || [ \"${PLATFORM_NAME}\" == \"ipados\" ]; then\n/Applications/Xcode.app/Contents/Developer/iphoneentitlements/gen_entitlements.py \"my.company.${PROJECT_NAME}\" \"${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}/${PROJECT_NAME}.xcent\";\ncodesign -f -s \"iPhone Developer\" --entitlements \"${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}/${PROJECT_NAME}.xcent\" \"${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}/\"\nfi";
+			shellScript = "export CODESIGN_ALLOCATE=/Users/kwanterry/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/codesign_allocate\nif [ \"${PLATFORM_NAME}\" == \"iphoneos\" ] || [ \"${PLATFORM_NAME}\" == \"ipados\" ]; then\n/Applications/Xcode.app/Contents/Developer/iphoneentitlements/gen_entitlements.py \"my.company.${PROJECT_NAME}\" \"${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}/${PROJECT_NAME}.xcent\";\ncodesign -f -s \"iPhone Developer\" --entitlements \"${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}/${PROJECT_NAME}.xcent\" \"${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}/\"\nfi";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -1264,6 +1274,8 @@
 				E04E7E8717410E8E00403E92 /* MCCompositeRotationUtil.m in Sources */,
 				A3E469E3174C9B1B00A31586 /* MCLabel.m in Sources */,
 				A3E469E8174CB91A00A31586 /* FinishView.m in Sources */,
+				A3E469ED1754823A00A31586 /* MCRandomSolveViewController.m in Sources */,
+				A3E469F0175482AA00A31586 /* MCRandomSolveViewInputControllerViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
