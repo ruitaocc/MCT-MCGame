@@ -167,6 +167,8 @@
 		A3F8290A16EF790D00AC5EAF /* DefaultButtonBg.png in Resources */ = {isa = PBXBuildFile; fileRef = A3F8290216EF790D00AC5EAF /* DefaultButtonBg.png */; };
 		A3F8292216F181BD00AC5EAF /* RotateType.m in Sources */ = {isa = PBXBuildFile; fileRef = A3F8292116F181BC00AC5EAF /* RotateType.m */; };
 		E04E7E8717410E8E00403E92 /* MCCompositeRotationUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = E04E7E8617410E8E00403E92 /* MCCompositeRotationUtil.m */; };
+		E094C8CC17547F7B00303B12 /* PopUpInput.xib in Resources */ = {isa = PBXBuildFile; fileRef = E094C8CB17547F7B00303B12 /* PopUpInput.xib */; };
+		E094C8CF1754809900303B12 /* MCRestoreModelController.m in Sources */ = {isa = PBXBuildFile; fileRef = E094C8CE1754809900303B12 /* MCRestoreModelController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -397,6 +399,9 @@
 		A3F8292116F181BC00AC5EAF /* RotateType.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RotateType.m; sourceTree = "<group>"; };
 		E04E7E8517410E8E00403E92 /* MCCompositeRotationUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCCompositeRotationUtil.h; sourceTree = "<group>"; };
 		E04E7E8617410E8E00403E92 /* MCCompositeRotationUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCCompositeRotationUtil.m; sourceTree = "<group>"; };
+		E094C8CB17547F7B00303B12 /* PopUpInput.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PopUpInput.xib; sourceTree = "<group>"; };
+		E094C8CD1754809900303B12 /* MCRestoreModelController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCRestoreModelController.h; sourceTree = "<group>"; };
+		E094C8CE1754809900303B12 /* MCRestoreModelController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCRestoreModelController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -938,6 +943,9 @@
 		A3F828DD16EF788200AC5EAF /* PopUpView */ = {
 			isa = PBXGroup;
 			children = (
+				E094C8CD1754809900303B12 /* MCRestoreModelController.h */,
+				E094C8CE1754809900303B12 /* MCRestoreModelController.m */,
+				E094C8CB17547F7B00303B12 /* PopUpInput.xib */,
 				A3EAD3E71713C1CE00A95ADA /* Constants.h */,
 				A3EAD3E81713C1CE00A95ADA /* CircleMenuController.h */,
 				A3EAD3E91713C1CE00A95ADA /* CircleMenuController.m */,
@@ -1152,6 +1160,7 @@
 				A306688F17471FA000F6004F /* FaceColorMapping.plist in Resources */,
 				A3E469E5174CB0A100A31586 /* KnowledgeBase.sqlite3 in Resources */,
 				A3E469EA174CBC4100A31586 /* myFinishView.xib in Resources */,
+				E094C8CC17547F7B00303B12 /* PopUpInput.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1264,6 +1273,7 @@
 				E04E7E8717410E8E00403E92 /* MCCompositeRotationUtil.m in Sources */,
 				A3E469E3174C9B1B00A31586 /* MCLabel.m in Sources */,
 				A3E469E8174CB91A00A31586 /* FinishView.m in Sources */,
+				E094C8CF1754809900303B12 /* MCRestoreModelController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
