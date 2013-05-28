@@ -60,6 +60,16 @@ typedef enum {
     kScoreBoard2MainMenu
 }ViewTransitionTag;
 
+
+typedef enum _FinishViewType {
+    kFinishView_GoBack= 0,
+    kFinishView_ChangeName,
+    kFinishView_OneMore,
+    kFinishView_GoCountingPlay,
+    kFinishView_Share,
+    kFinishView_Default
+} FinishViewType;
+
 // for 魔方模型交互算法key
 typedef enum {
     kState_None,

@@ -13,12 +13,13 @@
 #import "AskReloadView.h"
 #import "PauseMenu.h"
 #import "MCActionQueue.h"
+#import "FinishView.h"
 @interface MCNormalPlayInputViewController : InputController<UAModalPanelDelegate>{
     MCMultiDigitCounter *stepcounter;
     MCTimer * timer;
     AskReloadView* askReloadView;
     PauseMenu *pauseMenuView;
-    //FinishView *finishView;
+    FinishView *finishView;
     MCActionQueue *actionQueue;
     int randomRotateCount;
     NSTimer *radomtimer;
@@ -49,5 +50,6 @@
 -(void)shiftRightBtnDown;
 -(void)shiftRightBtnUp;
 
+-(void)showFinishView;
 
 @end

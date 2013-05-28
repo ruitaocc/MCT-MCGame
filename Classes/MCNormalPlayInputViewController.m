@@ -379,9 +379,32 @@
         
         pauseMenuView = nil;
     }
+    if (finishView){
+        
+        if ([finishView finishViewType]==kFinishView_GoBack) {
+            [self mainMenuBtnUp];
+        }        
+        finishView = nil;
+    }
     
 }
+-(void)showFinishView{
+    //停止计时器
+    //[timer stopTimer];
+    
+    //弹出对话框
+    finishView = [[[FinishView alloc] initWithFrame:self.view.bounds title:@"结束"] autorelease];
+    finishView.isShowColseBtn = NO;
+    finishView.delegate = self;
+    ///////////////////////////////////
+	// Add the panel to our view
+	[self.view  addSubview:finishView];
+	///////////////////////////////////
+    
+	// Show the panel from the center of the button that was pressed
+	[finishView showFromPoint:CGPointMake(512,384)];
 
+}
 -(void)askReload{
     NSString *path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
     NSString *fileName = [path stringByAppendingPathComponent:TmpMagicCubeData];

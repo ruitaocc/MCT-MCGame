@@ -117,6 +117,9 @@
     //流程1，通知数据模型UI已经旋转
    // [playHelper rotateOnAxis:[rotateType rotate_axis] onLayer:[rotateType rotate_layer] inDirection:[rotateType rotate_direction]];
     [playHelper rotateWithSingmasterNotation:[rotateType notation]];
+    //if ([rotateType notation]==NoneNotation) {
+    //    int a= 1;
+    //}
     //NSLog(@"tell playHelper rotate:%@",[rotateType notation]);
     //the first you apply rules
     //you need to verify the current state
@@ -155,6 +158,7 @@
             tipStrArray = [applyResult objectForKey:KEY_TIPS];
             lockArray = [applyResult objectForKey:KEY_LOCKED_CUBIES];
             if([[playHelper state]isEqual:END_STATE]){//alert
+                [((MCNormalPlayInputViewController*)[self inputController])showFinishView];
                 break;
             }
         };
@@ -221,8 +225,8 @@
                 tipStrArray = [applyResult objectForKey:KEY_TIPS];
                 lockArray = [applyResult objectForKey:KEY_LOCKED_CUBIES];
                 if([[playHelper state]isEqual:END_STATE]){
-                    //alert
                     //弹出结束对话框
+                    [((MCNormalPlayInputViewController*)[self inputController])showFinishView];
                     NSLog(@"END form Scene");
                     break;
                 }

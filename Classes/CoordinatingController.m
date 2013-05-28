@@ -69,6 +69,7 @@
             
        
         }
+            break;
         case kScoreBoard2MainMenu:
         {
             NSLog(@"requestViewChangeByObject:kScoreBoard2MainMenu");
