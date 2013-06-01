@@ -99,12 +99,14 @@ typedef enum _MagicCubeUIUsingMode {
 @property (assign) MagicCubeUIUsingMode usingMode;
 -(id)initiate;
 -(id)initiateWithState:(NSArray *)stateList;
+-(void)flashWithState:(NSArray *)stateList;
 - (void) rotateOnAxis : (AxisType)axis onLayer: (int)layer inDirection: (LayerRotationDirectionType)direction isTribleRotate:(BOOL)is_trible_roate;
 -(void)awake;
 -(void)render;
 -(void)update;
 -(void)adjustWithCenter;
 -(void)adjustWithCenter_2;
+
 //撤销栈管理
 -(void)executeInvocation:(NSInvocation *)invocation
       withUndoInvocation:(NSInvocation *)undoInvocation;

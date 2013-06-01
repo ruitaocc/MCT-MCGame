@@ -70,6 +70,14 @@
     
 	return self;
 }
+- (void) flashWithState:(NSDictionary*)states{
+    for (int i=0; i<6; i++) {
+        NSNumber *state = [states objectForKey:[NSNumber numberWithInteger:i ]];
+        CubeFace* faces = [cube6faces objectAtIndex:i];
+        [(CubeFace*)faces setUvCoordinates:&Cube_texture_coordinates_f[[state integerValue]*6*2]];
+    }
+};
+
 -(id)init{
     self = [super init];
 	if (self != nil) {

@@ -27,6 +27,7 @@
 -(void)rotate:(RotateType *)rotateType{
     //[self.playHelper rotateOnAxis:[rotateType rotate_axis] onLayer:[rotateType rotate_layer] inDirection:[rotateType rotate_direction]];
     [playHelper rotateWithSingmasterNotation:[rotateType notation]];
+    [magicCubeUI flashWithState:[ magicCube getColorInOrientationsOfAllCubie]];
 }
 
 
@@ -50,7 +51,7 @@
 	[magicCube0 release];		
     */
     //大魔方
-    MCMagicCubeUIModelController* magicCubeUI = [[MCMagicCubeUIModelController alloc]initiateWithState:[ magicCube getColorInOrientationsOfAllCubie]];
+    magicCubeUI = [[MCMagicCubeUIModelController alloc]initiateWithState:[ magicCube getColorInOrientationsOfAllCubie]];
     magicCubeUI.target=self;
     [magicCubeUI setStepcounterAddAction:@selector(stepcounterAdd)];
     [magicCubeUI setStepcounterMinusAction:@selector(stepcounterMinus)];

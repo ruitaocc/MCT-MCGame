@@ -27,6 +27,7 @@
 @property (nonatomic,retain)NSMutableArray *cube6faces_locksign;
 -(id)init;
 - (id) initWithState:(NSDictionary*)states;
+- (void) flashWithState:(NSDictionary*)states;
 - (void) dealloc;
 - (void)awake;
 - (void)update;

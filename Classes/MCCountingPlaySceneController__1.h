@@ -12,7 +12,9 @@
 #import "MCMagicCube.h"
 #import "RotateType.h"
 #import "MCPlayHelper.h"
+#import "MCMagicCubeUIModelController.h"
 @interface MCCountingPlaySceneController : sceneController{
+    MCMagicCubeUIModelController* magicCubeUI;
     MCMagicCube * magicCube;
     MCPlayHelper * playHelper;
 }

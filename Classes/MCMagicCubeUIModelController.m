@@ -166,7 +166,25 @@
     return self;
 }
 
-
+-(void)flashWithState:(NSArray *)stateList{
+    Cube *centercube = [array27Cube objectAtIndex:13];
+    for (int z = 0; z < 3; z++) {
+        for (int y = 0; y < 3; y++) {
+            for (int x = 0; x < 3; x++) {
+                int index_tmp =  z*9+y*3+x;
+                Cube * tCube = nil;
+                if (x != 1 || y != 1 || z != 1){
+                    NSDictionary *cubestate = [stateList objectAtIndex:index_tmp];
+                    //tCube = [[Cube alloc] initWithState:cubestate];
+                    tCube = [array27Cube objectAtIndex:index_tmp];
+                    [tCube flashWithState:cubestate];
+                    [tCube setQuaRotation:[centercube quaRotation]];
+                }
+            }
+        }
+    }
+    
+};
 
 -(void)render{
     [array27Cube makeObjectsPerformSelector:@selector(render)];
@@ -1461,6 +1479,7 @@
     
 }
 -(void)updateMagicCubeIndexState{
+    return;
     Cube *tmp;
     switch (current_rotate_axis) {
         case X:
@@ -1939,7 +1958,6 @@
     }
     free(tmp_matrix);
 }
-
 #pragma mark math
 -(vec3)middleOfV1:(vec3)v1 V2:(vec3)v2{
     vec3 add = v1+v2;

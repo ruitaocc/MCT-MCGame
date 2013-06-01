@@ -129,7 +129,7 @@
         [self showQueue];
     }
     
-    //[magicCubeUI adjustWithCenter];
+    [magicCubeUI flashWithState:[ magicCube getColorInOrientationsOfAllCubie]];
 }
 
 - (void) rotateOnAxis : (AxisType)axis onLayer: (int)layer inDirection: (LayerRotationDirectionType)direction isTribleRotate:(BOOL)is_trible_roate{
