@@ -15,11 +15,11 @@
     FSM_Interaction_State fsm_Current_State;
 	NSMutableArray * interfaceObjects;
     MCParticleSystem *particleEmitter;
-    int tapCount;
+    int touchCount;
    // BOOL isNeededReload;
 }
 //@property (nonatomic,assign) BOOL isNeededReload;
-@property (assign) int tapCount;
+@property (assign) int touchCount;
 @property (retain) NSMutableSet* touchEvents;
 @property (assign) FSM_Interaction_State fsm_Previous_State;
 @property (assign) FSM_Interaction_State fsm_Current_State;

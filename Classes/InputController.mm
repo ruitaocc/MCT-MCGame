@@ -12,7 +12,7 @@
 #import <OpenGLES/ES1/glext.h>
 #import "CoordinatingController.h"
 @implementation InputController
-@synthesize tapCount;
+@synthesize touchCount;
 @synthesize touchEvents;
 @synthesize fsm_Current_State,fsm_Previous_State;
 //@synthesize isNeededReload;
@@ -22,7 +22,7 @@
 		touchEvents = [[NSMutableSet alloc] init];
 		fsm_Current_State = kState_None;
         fsm_Previous_State = kState_None;
-        tapCount = 0;
+        touchCount = 0;
   //      isNeededReload=NO;
 	}
 	return self;
@@ -58,7 +58,7 @@
 #pragma mark touches
 -(void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event{
     
-    tapCount = 0;
+    touchCount = 0;
 }
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
@@ -67,46 +67,47 @@
     CGPoint location = [touch previousLocationInView:self.view];
     particleEmitter.translation = MCPointMake(location.x-512, -(location.y-384),-1);
     particleEmitter.emit = YES;
-    //手势识别状态
-    if ([touches count]==1) {
-        tapCount++;
-    }else if([touches count]==2){
-        tapCount++;
-        tapCount++;
+    
+    
+    for (int i = 0; i<[touches count];i++) {
+        touchCount++;
     }
-    if ([touches count]>2) {
+    //正常
+    if (touchCount>2&&fsm_Previous_State==kState_None) {
+        
         return;
     }
     
     //正常1
-    if (tapCount==1&&fsm_Previous_State==kState_None) {
+    if (touchCount==1&&fsm_Previous_State==kState_None) {
         fsm_Previous_State = kState_None;
         fsm_Current_State = kState_S1;
-        // just store them all in the big set
-        
     }
-    //单手异常
-    if (tapCount==2&&(fsm_Current_State==kState_M1)) {
-        fsm_Current_State = kState_F1;
-        fsm_Previous_State = kState_None;
-        tapCount = 0 ;
-        
-    }
-   
+
     //双手
-    if (tapCount==2&&(fsm_Current_State==kState_S1)) {
+    if (touchCount==2&&(fsm_Current_State==kState_S1)) {
         fsm_Current_State = kState_S2;
         fsm_Previous_State = kState_None;
-        // just store them all in the big set.
-        //[touchEvents addObjectsFromArray:[touches allObjects]];
-       
     }else  //双手
-        if (tapCount==2&&(fsm_Previous_State==kState_None)) {
+        if (touchCount==2&&(fsm_Previous_State==kState_None)) {
             fsm_Current_State = kState_S2;
             fsm_Previous_State = kState_None;
             // just store them all in the big set.
             //[touchEvents addObjectsFromArray:[touches allObjects]];
         }
+        //单手异常
+    //正在进行单层转动，突然多了一个,或多个手指，结束单层转动。
+    if (touchCount>=2&&(fsm_Current_State==kState_M1)) {
+        fsm_Current_State = kState_F1;
+        fsm_Previous_State = kState_None;
+        //touchCount = 0 ;
+    }
+    //正在进行视角变换，突然多了一个,或多个手指，结束视角变换。
+    if (touchCount>=3&&(fsm_Current_State==kState_M2)) {
+        fsm_Current_State = kState_F2;
+        fsm_Previous_State = kState_None;
+        //touchCount = 0 ;
+    }
     [touchEvents addObjectsFromArray:[touches allObjects]];
     
 }
@@ -122,40 +123,33 @@
     CGPoint location = [touch previousLocationInView:self.view];
     particleEmitter.translation = MCPointMake(location.x-512, -(location.y-384),-1);
     
-    //单层正常
-    if (tapCount==1&&fsm_Current_State == kState_S1) {
+    //单层正常第一次move 发生单层状态切换
+    if (touchCount==1&&fsm_Current_State == kState_S1) {
         fsm_Previous_State = fsm_Current_State;
         fsm_Current_State = kState_M1;
         //[touchEvents addObjectsFromArray:[touches allObjects]];
     }
-    if (tapCount==1&&fsm_Current_State == kState_M1) {
+    //单手指正常Move
+    if (touchCount==1&&fsm_Current_State == kState_M1) {
+    
     }
     //
-    
-    if (tapCount==2&&[touches count]!=2) {
+    //有两个手指，当是只有一个移动touch=1
+    if (touchCount==2&&[touches count]!=2) {
         return;
     }
     
-    //视角变换
-    if (tapCount==2&&fsm_Current_State == kState_S2) {
-        fsm_Previous_State = fsm_Current_State;
-        fsm_Current_State = kState_M2;
-    }
-    if (tapCount==2&&fsm_Current_State == kState_M2) {
+    if (touchCount==2&&fsm_Current_State == kState_M2) {
+        fsm_Previous_State = kState_M2;
     }
 
-    /*
-    if ([touches count]==1&&fsm_Current_State == kState_M2) {
-        fsm_Previous_State = kState_None;
-        fsm_Current_State = kState_F2;
-        NSLog(@"8");
-    }*/
-    /*
-    if ([touches count]==1&&fsm_Current_State == kState_S2) {
+    //视角变换.第一次双手指移动 发生状态切换
+    if (touchCount==2&&fsm_Current_State == kState_S2) {
         fsm_Previous_State = fsm_Current_State;
         fsm_Current_State = kState_M2;
-        NSLog(@"7");
-    }*/
+    }
+    
+    
 
     // just store them all in the big set.
 	[touchEvents addObjectsFromArray:[touches allObjects]];
@@ -164,9 +158,9 @@
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
     
-    if ([touches count]>2) {
-        return;
-    }
+    //if ([touches count]>2) {
+    //    return;
+    //}
     //轨迹跟踪粒子
     UITouch* touch = [[touches allObjects] objectAtIndex:0];
     CGPoint location = [touch previousLocationInView:self.view];
@@ -174,25 +168,33 @@
     particleEmitter.emit = NO;
     //单层正常结束
     //NSLog(@"[touches count]=%d",[touches count]);
-    if (tapCount==1&&fsm_Current_State==kState_M1) {
+    if (touchCount==1&&fsm_Current_State==kState_M1) {
         fsm_Current_State = kState_F1;
         fsm_Previous_State = kState_None;
-        tapCount=0;
+        //touchCount=0;
     }
     
-    if (tapCount==2&&fsm_Current_State==kState_M2) {
+    if (touchCount==2&&fsm_Current_State==kState_M2) {
         fsm_Previous_State = kState_None;
         fsm_Current_State = kState_F2;
-        tapCount=0;
+        //touchCount=0;
         [self clearEvents];
     }
     if ((fsm_Current_State == kState_S2)&&(fsm_Previous_State==kState_None)) {
         fsm_Previous_State = kState_None;
         fsm_Current_State = kState_F2;
-        tapCount =0;
+        //touchCount =0;
     }
-    if (tapCount>0) {
-        tapCount--;
+    if ((fsm_Current_State == kState_S1)&&(fsm_Previous_State==kState_None)) {
+        fsm_Previous_State = kState_None;
+        fsm_Current_State = kState_F1;
+        //touchCount =0;
+    }
+    for (int i = 0; i<[touches count];i++) {
+        touchCount--;
+    }
+    if (touchCount<0) {
+        touchCount=0;
     }
     
 	// just store them all in the big set.

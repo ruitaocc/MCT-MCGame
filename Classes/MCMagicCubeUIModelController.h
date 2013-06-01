@@ -46,7 +46,8 @@ typedef enum _MagicCubeUIUsingMode {
     //以下三个参数用于 视角变换
     BOOL m_spinning;
     float m_trackballRadius;
-    ivec2 m_fingerStart;    
+    ivec2 m_fingerStart;
+   
     
     MCRay *ray;
     

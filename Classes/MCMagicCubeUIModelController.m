@@ -1058,6 +1058,7 @@
                 //自由模式下，无限制操作
                 CGPoint current;
                 if ([touches count]==2) {
+                    
                     UITouch *touch0 = [[touches allObjects] objectAtIndex:0];
                     UITouch *touch1 = [[touches allObjects] objectAtIndex:1];
                     CGPoint current0 = [touch0 locationInView:view];
@@ -1065,7 +1066,10 @@
                     current = CGPointMake((current0.x+current1.x)/2,(current0.y+current1.y)/2);
                 }
                 //ivec2 oldLocation = ivec2(previous.x,previous.y);
-                vec2 newLocation = vec2(current.x,current.y);
+                ivec2 newLocation = ivec2(current.x,current.y);
+                if (fsm_Previous_State == kState_S2) {
+                    m_fingerStart = newLocation;
+                }
                 if (m_spinning) {
                     vec3 start = [self MapToSphere: m_fingerStart];
                     vec3 end =[self MapToSphere:newLocation];
