@@ -129,6 +129,8 @@
 -(void)randomSolveBtnDown{NSLog(@"randomSolveBtnDown");}
 -(void)randomSolveBtnUp{
     NSLog(@"randomSolveBtnUp");
+    CoordinatingController *coordinatingController_ = [CoordinatingController sharedCoordinatingController];
+    [coordinatingController_ requestViewChangeByObject:kRandomSolve];
     
 }
 -(void)systemSettingBtnDown{NSLog(@"systemSettingBtnDown");}

@@ -52,6 +52,8 @@
 		A3587515161F2C3000998085 /* ButtonMerged.png in Resources */ = {isa = PBXBuildFile; fileRef = A3587514161F2C3000998085 /* ButtonMerged.png */; };
 		A3587518161F355400998085 /* MainWindow-iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = A3587517161F355400998085 /* MainWindow-iPad.xib */; };
 		A37F8812166B876C00B0A59F /* cubeBlack2.png in Resources */ = {isa = PBXBuildFile; fileRef = A37F8811166B876C00B0A59F /* cubeBlack2.png */; };
+		A392B237175484BF0091BFE9 /* MCRestoreModelController.m in Sources */ = {isa = PBXBuildFile; fileRef = A392B235175484BF0091BFE9 /* MCRestoreModelController.m */; };
+		A392B23D17549A5A0091BFE9 /* PopUpInput.xib in Resources */ = {isa = PBXBuildFile; fileRef = A392B23C17549A590091BFE9 /* PopUpInput.xib */; };
 		A3994A0316E3B36F0037DBD0 /* UIView+JMNoise.m in Sources */ = {isa = PBXBuildFile; fileRef = A3994A0216E3B36F0037DBD0 /* UIView+JMNoise.m */; };
 		A3994A0616E3B3890037DBD0 /* close.png in Resources */ = {isa = PBXBuildFile; fileRef = A3994A0416E3B3890037DBD0 /* close.png */; };
 		A3994A0716E3B3890037DBD0 /* close@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A3994A0516E3B3890037DBD0 /* close@2x.png */; };
@@ -111,6 +113,13 @@
 		A3D2FC801638D2FD00517CCF /* sceneController.m in Sources */ = {isa = PBXBuildFile; fileRef = A3D2FC7F1638D2FD00517CCF /* sceneController.m */; };
 		A3D30BAA1619356200BA477E /* MCTexturedQuad.m in Sources */ = {isa = PBXBuildFile; fileRef = A3D30BA91619356200BA477E /* MCTexturedQuad.m */; };
 		A3D30BAE161937DF00BA477E /* MCAnimatedQuad.m in Sources */ = {isa = PBXBuildFile; fileRef = A3D30BAD161937DF00BA477E /* MCAnimatedQuad.m */; };
+		A3D67F821759E1F1002501B2 /* yellowface.png in Resources */ = {isa = PBXBuildFile; fileRef = A3D67F7B1759E1F1002501B2 /* yellowface.png */; };
+		A3D67F831759E1F1002501B2 /* whiteface.png in Resources */ = {isa = PBXBuildFile; fileRef = A3D67F7C1759E1F1002501B2 /* whiteface.png */; };
+		A3D67F841759E1F1002501B2 /* blueface.png in Resources */ = {isa = PBXBuildFile; fileRef = A3D67F7D1759E1F1002501B2 /* blueface.png */; };
+		A3D67F851759E1F1002501B2 /* orangeface.png in Resources */ = {isa = PBXBuildFile; fileRef = A3D67F7E1759E1F1002501B2 /* orangeface.png */; };
+		A3D67F861759E1F1002501B2 /* redface.png in Resources */ = {isa = PBXBuildFile; fileRef = A3D67F7F1759E1F1002501B2 /* redface.png */; };
+		A3D67F871759E1F1002501B2 /* greenface.png in Resources */ = {isa = PBXBuildFile; fileRef = A3D67F801759E1F1002501B2 /* greenface.png */; };
+		A3D67F881759E1F1002501B2 /* blackface.png in Resources */ = {isa = PBXBuildFile; fileRef = A3D67F811759E1F1002501B2 /* blackface.png */; };
 		A3DB2596162D993900AB9F00 /* CoordinatingController.m in Sources */ = {isa = PBXBuildFile; fileRef = A3DB2595162D993900AB9F00 /* CoordinatingController.m */; };
 		A3E1ADBA16A3C3160050B52D /* readme_config.rtf in Resources */ = {isa = PBXBuildFile; fileRef = A3E1ADB916A3C3160050B52D /* readme_config.rtf */; };
 		A3E1ADBC16A3C40C0050B52D /* readme_scene5.rtf in Resources */ = {isa = PBXBuildFile; fileRef = A3E1ADBB16A3C40C0050B52D /* readme_scene5.rtf */; };
@@ -127,7 +136,7 @@
 		A3E469E5174CB0A100A31586 /* KnowledgeBase.sqlite3 in Resources */ = {isa = PBXBuildFile; fileRef = A3E469E4174CB0A100A31586 /* KnowledgeBase.sqlite3 */; };
 		A3E469E8174CB91A00A31586 /* FinishView.m in Sources */ = {isa = PBXBuildFile; fileRef = A3E469E7174CB91A00A31586 /* FinishView.m */; };
 		A3E469EA174CBC4100A31586 /* myFinishView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A3E469E9174CBC4100A31586 /* myFinishView.xib */; };
-		A3E469ED1754823A00A31586 /* MCRandomSolveViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A3E469EC1754823A00A31586 /* MCRandomSolveViewController.m */; };
+		A3E469ED1754823A00A31586 /* MCRandomSolveSceneController.m in Sources */ = {isa = PBXBuildFile; fileRef = A3E469EC1754823A00A31586 /* MCRandomSolveSceneController.m */; };
 		A3E469F0175482AA00A31586 /* MCRandomSolveViewInputControllerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A3E469EF175482AA00A31586 /* MCRandomSolveViewInputControllerViewController.m */; };
 		A3E855AC1663A50F00DE3ED9 /* cube1126_2.obj in Resources */ = {isa = PBXBuildFile; fileRef = A3E855AA1663A50F00DE3ED9 /* cube1126_2.obj */; };
 		A3E855B01663A69100DE3ED9 /* RadiusOneCubeWithPic.obj in Resources */ = {isa = PBXBuildFile; fileRef = A3E855AF1663A69100DE3ED9 /* RadiusOneCubeWithPic.obj */; };
@@ -244,6 +253,9 @@
 		A3587517161F355400998085 /* MainWindow-iPad.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = "MainWindow-iPad.xib"; path = "iPad/MainWindow-iPad.xib"; sourceTree = "<group>"; };
 		A358752B161FF1C600998085 /* data.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = data.hpp; sourceTree = "<group>"; };
 		A37F8811166B876C00B0A59F /* cubeBlack2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cubeBlack2.png; sourceTree = "<group>"; };
+		A392B234175484BF0091BFE9 /* MCRestoreModelController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCRestoreModelController.h; sourceTree = "<group>"; };
+		A392B235175484BF0091BFE9 /* MCRestoreModelController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCRestoreModelController.m; sourceTree = "<group>"; };
+		A392B23C17549A590091BFE9 /* PopUpInput.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PopUpInput.xib; sourceTree = "<group>"; };
 		A3935B3C165A296400B60A07 /* MCRay.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MCRay.h; sourceTree = "<group>"; };
 		A3935B3D165A296400B60A07 /* MCRay.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = MCRay.mm; sourceTree = "<group>"; };
 		A3935B3E165A296400B60A07 /* MCGL.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MCGL.h; sourceTree = "<group>"; };
@@ -319,6 +331,14 @@
 		A3D30BA91619356200BA477E /* MCTexturedQuad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCTexturedQuad.m; sourceTree = "<group>"; };
 		A3D30BAC161937DF00BA477E /* MCAnimatedQuad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCAnimatedQuad.h; sourceTree = "<group>"; };
 		A3D30BAD161937DF00BA477E /* MCAnimatedQuad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCAnimatedQuad.m; sourceTree = "<group>"; };
+		A3D67F7B1759E1F1002501B2 /* yellowface.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = yellowface.png; sourceTree = "<group>"; };
+		A3D67F7C1759E1F1002501B2 /* whiteface.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = whiteface.png; sourceTree = "<group>"; };
+		A3D67F7D1759E1F1002501B2 /* blueface.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blueface.png; sourceTree = "<group>"; };
+		A3D67F7E1759E1F1002501B2 /* orangeface.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = orangeface.png; sourceTree = "<group>"; };
+		A3D67F7F1759E1F1002501B2 /* redface.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = redface.png; sourceTree = "<group>"; };
+		A3D67F801759E1F1002501B2 /* greenface.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = greenface.png; sourceTree = "<group>"; };
+		A3D67F811759E1F1002501B2 /* blackface.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blackface.png; sourceTree = "<group>"; };
+		A3D67F8A1759E35E002501B2 /* MCStringDefine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MCStringDefine.h; sourceTree = "<group>"; };
 		A3DB2594162D993900AB9F00 /* CoordinatingController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoordinatingController.h; sourceTree = "<group>"; };
 		A3DB2595162D993900AB9F00 /* CoordinatingController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoordinatingController.m; sourceTree = "<group>"; };
 		A3E1ADB916A3C3160050B52D /* readme_config.rtf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.rtf; path = readme_config.rtf; sourceTree = "<group>"; };
@@ -338,8 +358,8 @@
 		A3E469E6174CB91A00A31586 /* FinishView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FinishView.h; sourceTree = "<group>"; };
 		A3E469E7174CB91A00A31586 /* FinishView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FinishView.m; sourceTree = "<group>"; };
 		A3E469E9174CBC4100A31586 /* myFinishView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = myFinishView.xib; sourceTree = "<group>"; };
-		A3E469EB1754823A00A31586 /* MCRandomSolveViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCRandomSolveViewController.h; sourceTree = "<group>"; };
-		A3E469EC1754823A00A31586 /* MCRandomSolveViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCRandomSolveViewController.m; sourceTree = "<group>"; };
+		A3E469EB1754823A00A31586 /* MCRandomSolveSceneController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCRandomSolveSceneController.h; sourceTree = "<group>"; };
+		A3E469EC1754823A00A31586 /* MCRandomSolveSceneController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCRandomSolveSceneController.m; sourceTree = "<group>"; };
 		A3E469EE175482AA00A31586 /* MCRandomSolveViewInputControllerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCRandomSolveViewInputControllerViewController.h; sourceTree = "<group>"; };
 		A3E469EF175482AA00A31586 /* MCRandomSolveViewInputControllerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCRandomSolveViewInputControllerViewController.m; sourceTree = "<group>"; };
 		A3E855AA1663A50F00DE3ED9 /* cube1126_2.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = cube1126_2.obj; sourceTree = "<group>"; };
@@ -504,7 +524,6 @@
 				A3F8290B16EF796900AC5EAF /* MCPlayHelper */,
 				A3F828F316EF78E000AC5EAF /* Resource */,
 				A3F828E216EF78A000AC5EAF /* Doc */,
-				A3F828DD16EF788200AC5EAF /* PopUpView */,
 			);
 			name = DataModel;
 			sourceTree = "<group>";
@@ -593,6 +612,7 @@
 		A3587519161F3FFD00998085 /* imageResource */ = {
 			isa = PBXGroup;
 			children = (
+				A3D67F891759E1F7002501B2 /* cubeface */,
 				A3359E64168E9777002F9459 /* progressbar */,
 				A37F8811166B876C00B0A59F /* cubeBlack2.png */,
 				A3D0704516F87F0300AA3BFF /* sixcolor.png */,
@@ -756,6 +776,20 @@
 			name = Views;
 			sourceTree = "<group>";
 		};
+		A3D67F891759E1F7002501B2 /* cubeface */ = {
+			isa = PBXGroup;
+			children = (
+				A3D67F7B1759E1F1002501B2 /* yellowface.png */,
+				A3D67F7C1759E1F1002501B2 /* whiteface.png */,
+				A3D67F7D1759E1F1002501B2 /* blueface.png */,
+				A3D67F7E1759E1F1002501B2 /* orangeface.png */,
+				A3D67F7F1759E1F1002501B2 /* redface.png */,
+				A3D67F801759E1F1002501B2 /* greenface.png */,
+				A3D67F811759E1F1002501B2 /* blackface.png */,
+			);
+			name = cubeface;
+			sourceTree = "<group>";
+		};
 		A3E1ADAC16A3B5EF0050B52D /* Scene1 */ = {
 			isa = PBXGroup;
 			children = (
@@ -803,10 +837,14 @@
 		A3E1ADB116A3B62F0050B52D /* Scene3 */ = {
 			isa = PBXGroup;
 			children = (
-				A3E469EB1754823A00A31586 /* MCRandomSolveViewController.h */,
-				A3E469EC1754823A00A31586 /* MCRandomSolveViewController.m */,
+				A3F828DD16EF788200AC5EAF /* PopUpView */,
+				A3E469EB1754823A00A31586 /* MCRandomSolveSceneController.h */,
+				A3E469EC1754823A00A31586 /* MCRandomSolveSceneController.m */,
 				A3E469EE175482AA00A31586 /* MCRandomSolveViewInputControllerViewController.h */,
 				A3E469EF175482AA00A31586 /* MCRandomSolveViewInputControllerViewController.m */,
+				A392B234175484BF0091BFE9 /* MCRestoreModelController.h */,
+				A392B235175484BF0091BFE9 /* MCRestoreModelController.m */,
+				A392B23C17549A590091BFE9 /* PopUpInput.xib */,
 			);
 			name = Scene3;
 			sourceTree = "<group>";
@@ -842,6 +880,7 @@
 			isa = PBXGroup;
 			children = (
 				A3F2ACC11616E1CE00D622B8 /* MCConfiguration.h */,
+				A3D67F8A1759E35E002501B2 /* MCStringDefine.h */,
 				A3C1D188169596DD004EB56C /* MCCollisionController.h */,
 				A3C1D189169596DD004EB56C /* MCCollisionController.mm */,
 				1D3623240D0F684500981E51 /* MCGameAppDelegate.h */,
@@ -1162,6 +1201,14 @@
 				A306688F17471FA000F6004F /* FaceColorMapping.plist in Resources */,
 				A3E469E5174CB0A100A31586 /* KnowledgeBase.sqlite3 in Resources */,
 				A3E469EA174CBC4100A31586 /* myFinishView.xib in Resources */,
+				A392B23D17549A5A0091BFE9 /* PopUpInput.xib in Resources */,
+				A3D67F821759E1F1002501B2 /* yellowface.png in Resources */,
+				A3D67F831759E1F1002501B2 /* whiteface.png in Resources */,
+				A3D67F841759E1F1002501B2 /* blueface.png in Resources */,
+				A3D67F851759E1F1002501B2 /* orangeface.png in Resources */,
+				A3D67F861759E1F1002501B2 /* redface.png in Resources */,
+				A3D67F871759E1F1002501B2 /* greenface.png in Resources */,
+				A3D67F881759E1F1002501B2 /* blackface.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1274,8 +1321,9 @@
 				E04E7E8717410E8E00403E92 /* MCCompositeRotationUtil.m in Sources */,
 				A3E469E3174C9B1B00A31586 /* MCLabel.m in Sources */,
 				A3E469E8174CB91A00A31586 /* FinishView.m in Sources */,
-				A3E469ED1754823A00A31586 /* MCRandomSolveViewController.m in Sources */,
+				A3E469ED1754823A00A31586 /* MCRandomSolveSceneController.m in Sources */,
 				A3E469F0175482AA00A31586 /* MCRandomSolveViewInputControllerViewController.m in Sources */,
+				A392B237175484BF0091BFE9 /* MCRestoreModelController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

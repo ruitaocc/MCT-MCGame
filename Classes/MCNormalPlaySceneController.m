@@ -12,6 +12,7 @@
 #import "MCMultiDigitCounter.h"
 #import "MCCollisionController.h"
 #import "MCNormalPlayInputViewController.h"
+#import "MCStringDefine.h"
 @implementation MCNormalPlaySceneController
 @synthesize magicCube;
 @synthesize playHelper;

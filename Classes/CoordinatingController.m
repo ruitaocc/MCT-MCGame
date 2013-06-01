@@ -14,6 +14,7 @@
 #import "MCInputViewController.h"
 #import "MCCountingPlayInputViewController__1.h"
 #import "MCNormalPlayInputViewController.h"
+#import "MCRandomSolveViewInputControllerViewController.h"
 #import "SVProgressHUD.h"
 @implementation CoordinatingController
 @synthesize _mainSceneController,_countingPlaySceneController;
@@ -22,7 +23,7 @@
 @synthesize userManagerSystemViewController;
 @synthesize _normalPlaySceneController;
 @synthesize window;
-
+@synthesize _randomSolveSceneController;
 + (CoordinatingController*)sharedCoordinatingController{
     static CoordinatingController *sharedCoordinatingController;
     @synchronized(self)
@@ -39,6 +40,7 @@
     _mainSceneController = [MCSceneController sharedSceneController];
     currentController = [MCSceneController sharedSceneController];
     _normalPlaySceneController = [MCNormalPlaySceneController sharedNormalPlaySceneController];
+    _randomSolveSceneController = [MCRandomSolveSceneController sharedRandomSolveSceneController];
     [super init];
     
 }
@@ -94,7 +96,10 @@
         case kRandomSolve:
         {
             NSLog(@"requestViewChangeByObject:kRandomSolve");
-            
+            [currentController stopAnimation];
+            [SVProgressHUD show];
+            //load the new scene
+            [NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(loadRandomSolveScene) userInfo:nil repeats:NO];
         }
         break;
         case kHeroBoard:
@@ -136,6 +141,32 @@
     //sleep(1);
     
 }
+-(void)loadRandomSolveScene{
+    [SVProgressHUD dismiss];
+    //[SVProgressHUD dismiss];
+    [currentController stopAnimation];
+    _randomSolveSceneController = [MCRandomSolveSceneController sharedRandomSolveSceneController];
+    MCRandomSolveViewInputControllerViewController * randomsolveInputController = [[MCRandomSolveViewInputControllerViewController alloc] initWithNibName:nil bundle:nil];
+    
+    [currentController.inputController setView:nil];
+    _randomSolveSceneController.inputController = randomsolveInputController;
+    [randomsolveInputController release];
+    
+    _randomSolveSceneController.inputController.view = [currentController openGLView] ;
+    _randomSolveSceneController.openGLView = [currentController openGLView];
+    
+    [_randomSolveSceneController.inputController resignFirstResponder];
+    
+    [window setRootViewController:_randomSolveSceneController.inputController];
+    currentController = _randomSolveSceneController;
+    [currentController removeAllObjectFromScene];
+    [currentController loadScene];
+    [currentController startScene];
+    [currentController startAnimation];
+    //sleep(1);
+    
+}
+
 -(void)loadNormalPlayScene{
     [SVProgressHUD dismiss];
     //[SVProgressHUD dismiss];

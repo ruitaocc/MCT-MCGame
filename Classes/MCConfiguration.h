@@ -36,9 +36,7 @@
 #define MC_FPS 60.0
 
 //
-#define Disaccord_Msg @"转错了哈,转回去吧^_^"
-#define Accord_Msg @"接着下一步吧"
-#define StayForATime_Msg @"再转一次"
+
 #define RandomRotateMaxCount 20
 
 //教学模式下让模型旋转对最大预知

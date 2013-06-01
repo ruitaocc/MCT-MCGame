@@ -10,7 +10,7 @@
 #import "MCTexturedQuad.h"
 #import "MCAnimatedQuad.h"
 #import "MCConfiguration.h"
-
+#import "MCStringDefine.h"
 @implementation MCMaterialController
 // Singleton accessor.  this is how you should ALWAYS get a reference
 // to the controller.  Never init your own. 
@@ -38,6 +38,15 @@
         [self loadTextureImage:@"sixcolor.png" materialKey:@"sixcolor"];
         [self loadTextureImage:@"cubeBlack3.png" materialKey:@"cubeTexture3"];
         [self loadTextureImage:@"cubeBlack3.png" materialKey:@"LockTexture"];
+        //cubeface
+        [self loadTextureImage:PNG_YellowFace materialKey:Face_YellowKEY];
+        [self loadTextureImage:PNG_WhiteFace materialKey:Face_WhiteKEY];
+        [self loadTextureImage:PNG_BlueFace materialKey:Face_BlueKEY];
+        [self loadTextureImage:PNG_OrangeFace materialKey:Face_OrangeKEY];
+        [self loadTextureImage:PNG_RedFace materialKey:Face_RedKEY];
+        [self loadTextureImage:PNG_GreenFace materialKey:Face_GreenKEY];
+        [self loadTextureImage:PNG_BlackFace materialKey:Face_BlackKEY];
+        
         [self loadAtlasData:@"countNumber"];
         [self loadAtlasData:@"cubeAction"];
 		[self loadAtlasData:@"particleAtlas"];

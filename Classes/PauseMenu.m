@@ -86,7 +86,8 @@
 			[self hide];
 		}
     }};
-- (IBAction)restartBtnPressed:(id)sender{pauseSelectType = kPauseSelect_Restart;
+- (IBAction)restartBtnPressed:(id)sender{
+    pauseSelectType = kPauseSelect_Restart;
     if ([delegate respondsToSelector:@selector(shouldCloseModalPanel:)]) {
 		if ([delegate shouldCloseModalPanel:self]) {
 			UADebugLog(@"Closing using delegates for modalPanel: %@", self);
