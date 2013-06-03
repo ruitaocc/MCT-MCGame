@@ -134,7 +134,11 @@
     
 }
 -(void)systemSettingBtnDown{NSLog(@"systemSettingBtnDown");}
--(void)systemSettingBtnUp{NSLog(@"systemSettingBtnUp");}
+-(void)systemSettingBtnUp{
+    NSLog(@"systemSettingBtnUp");
+    CoordinatingController *coordinatingController_ = [CoordinatingController sharedCoordinatingController];
+    [coordinatingController_ requestViewChangeByObject:kSystemSetting];
+}
 
 
 

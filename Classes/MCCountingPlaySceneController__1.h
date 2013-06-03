@@ -17,6 +17,7 @@
     MCMagicCube * magicCube;
 }
 @property (nonatomic,retain)MCMagicCube * magicCube;
+//@property (nonatomic,retain)MCPlayHelper * playHelper;
 + (MCCountingPlaySceneController*)sharedCountingPlaySceneController;
 
 -(void)loadScene;

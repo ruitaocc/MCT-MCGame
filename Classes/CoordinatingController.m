@@ -24,6 +24,7 @@
 @synthesize _normalPlaySceneController;
 @synthesize window;
 @synthesize _randomSolveSceneController;
+@synthesize _systemSettingViewController;
 + (CoordinatingController*)sharedCoordinatingController{
     static CoordinatingController *sharedCoordinatingController;
     @synchronized(self)
@@ -110,7 +111,14 @@
             //[currentController.inputController resignFirstResponder];
             
         }
-            break;
+        break;
+        case kSystemSetting:{
+            NSLog(@"requestViewChangeByObject:kSystemSetting");
+            _systemSettingViewController = [[[MCSystemSettingViewController alloc] initWithNibName:@"MCSystemSettingViewController" bundle:nil] autorelease];
+            [[currentController inputController]presentModalViewController:_systemSettingViewController animated:YES];
+
+        }
+        break;
         default:
             break;
     }

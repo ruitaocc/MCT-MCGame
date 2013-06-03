@@ -15,6 +15,7 @@
 #import "UserManagerSystemViewController.h"
 #import "MCNormalPlaySceneController.h"
 #import "MCRandomSolveSceneController.h"
+#import "MCSystemSettingViewController.h"
 @interface CoordinatingController : NSObject <MBProgressHUDDelegate>{
     sceneController * currentController;
     MBProgressHUD *HUD;
@@ -25,6 +26,7 @@
     MCNormalPlaySceneController *_normalPlaySceneController;
     MCRandomSolveSceneController *_randomSolveSceneController;
     UserManagerSystemViewController *userManagerSystemViewController;
+    MCSystemSettingViewController *_systemSettingViewController;
     BOOL needToReload;
     
 }
@@ -35,6 +37,7 @@
 @property (nonatomic, readonly )MCCountingPlaySceneController *_countingPlaySceneController;
 @property (nonatomic, readonly )MCNormalPlaySceneController *_normalPlaySceneController;
 @property (nonatomic, readonly ) MCRandomSolveSceneController *_randomSolveSceneController;
+@property (nonatomic, readonly ) MCSystemSettingViewController *_systemSettingViewController;
 
 @property (nonatomic,assign)sceneController *currentController;
 @property (nonatomic,retain)UserManagerSystemViewController *userManagerSystemViewController;

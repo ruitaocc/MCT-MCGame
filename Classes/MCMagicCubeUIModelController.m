@@ -546,6 +546,7 @@
                     }
                 }
                 [self updateState];
+                
                 //当转过的角度为180时，需要更新模型两次
                 if(isNeededToUpadteTwice){
                     [self updateState];
