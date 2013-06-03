@@ -28,9 +28,7 @@
 	MCPoint pretranslation;
 	MCPoint prerotation;
     
-//    Quaternion m_orientation;
-//    Quaternion m_previousOrientation;
-    
+
     MCPoint translation;
 	MCPoint scale;
 	MCPoint rotation;

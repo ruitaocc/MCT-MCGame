@@ -39,6 +39,5 @@ using namespace std;
 
 
 -(void) getAllCount:(NSString*)filename;
--(int) getTriangleIndexCount;
 
 @end

@@ -11,15 +11,12 @@
 #import "MCCollisionController.h"
 #import "MCMagicCube.h"
 #import "RotateType.h"
-#import "MCPlayHelper.h"
 #import "MCMagicCubeUIModelController.h"
 @interface MCCountingPlaySceneController : sceneController{
     MCMagicCubeUIModelController* magicCubeUI;
     MCMagicCube * magicCube;
-    MCPlayHelper * playHelper;
 }
 @property (nonatomic,retain)MCMagicCube * magicCube;
-@property (nonatomic,retain)MCPlayHelper * playHelper;
 + (MCCountingPlaySceneController*)sharedCountingPlaySceneController;
 
 -(void)loadScene;

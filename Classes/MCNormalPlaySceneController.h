@@ -18,7 +18,6 @@
     BOOL isShowQueue;
      UILabel *_tipsLabel;
 }
-//@property (nonatomic,retain)MCMagicCubeUIModelController* magicCubeUI;
 @property (nonatomic,retain)MCMagicCube * magicCube;
 @property (nonatomic,retain)MCPlayHelper * playHelper;
 @property (assign)BOOL isShowQueue;
@@ -28,7 +27,6 @@
 -(void)reloadScene;
 - (void) rotateOnAxis : (AxisType)axis onLayer: (int)layer inDirection: (LayerRotationDirectionType)direction isTribleRotate:(BOOL)is_trible_roate;
 -(void)rotate:(RotateType*)rotateType;
--(void)auto_rotate:(RotateType*)rotateType;
 -(void)previousSolution;
 -(void)nextSolution;
 -(void)reloadLastTime;

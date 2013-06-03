@@ -271,7 +271,7 @@
         if (rest_rotate_time < 0 ) {
             rest_rotate_time += deltaTime;
             
-            isAutoRotate = NO;
+            
             //做最后一次的调整 保证准确归位
             // 0 2  6 8 角块
             double final_alpha = rest_rotate_time/TIME_PER_ROTATION*ROTATION_ANGLE;
@@ -368,6 +368,7 @@
             if (isTribleAutoRotateIn_TECH_MODE)isTribleAutoRotateIn_TECH_MODE = NO;
             //归零
             rest_rotate_time = 0;
+            isAutoRotate = NO;
             
         }
         else{
@@ -462,7 +463,7 @@
         if (rest_fingerRotate_time < 0 ) {
             rest_fingerRotate_time += deltaTime;
             
-            isNeededToAdjustment = NO;
+            
             //做最后一次的调整 保证准确归位
             // 0 2  6 8 角块
             double final_alpha = rest_fingerRotate_time/TIME_PER_ROTATION*ROTATION_ANGLE;
@@ -551,6 +552,7 @@
                     isNeededToUpadteTwice = NO;
                 }
             }
+            isNeededToAdjustment = NO;
             fingerRotate_angle = 0;
             isNeededToAdjustment = NO;
             //归零
@@ -1247,7 +1249,7 @@
                                 if(fuzzy_vec3_z.Dot(tmp_oz)>0)fuzzy_direction=CW;
                                 else fuzzy_direction=CCW;
                             }
-                        }
+                        }else return;
                         
                     }
                 }
@@ -1454,8 +1456,6 @@
         notation =[MCTransformUtil getSingmasterNotationFromAxis:current_rotate_axis layer:NO_SELECTED_LAYER direction:current_rotate_direction];
     }else{
         notation =[MCTransformUtil getSingmasterNotationFromAxis:current_rotate_axis layer:current_rotate_layer direction:current_rotate_direction];
-        //NSLog(@"c_notation:%@",[MCTransformUtil getRotationTagFromSingmasterNotation:notation]);
-        //NSLog(@"c_axis = %d,c_layer = %d,c_direction= %d",current_rotate_axis,current_rotate_layer,current_rotate_direction);
     }
     RotateType * rotateType = [[RotateType alloc]init];
     [rotateType setNotation:notation];

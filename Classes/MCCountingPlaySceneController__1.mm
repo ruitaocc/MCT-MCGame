@@ -8,11 +8,12 @@
 
 #import "MCCountingPlaySceneController__1.h"
 #import "MCMagicCubeUIModelController.h"
+#import "MCCountingPlayInputViewController__1.h"
 #import "Cube.h"
 #import "MCMultiDigitCounter.h"
 @implementation MCCountingPlaySceneController
 @synthesize magicCube;
-@synthesize playHelper;
+//@synthesize playHelper;
 +(MCCountingPlaySceneController*)sharedCountingPlaySceneController
 {
     static MCCountingPlaySceneController *sharedCountingPlaySceneController;
@@ -25,8 +26,7 @@
 }
 
 -(void)rotate:(RotateType *)rotateType{
-    //[self.playHelper rotateOnAxis:[rotateType rotate_axis] onLayer:[rotateType rotate_layer] inDirection:[rotateType rotate_direction]];
-    [playHelper rotateWithSingmasterNotation:[rotateType notation]];
+    [magicCube rotateWithSingmasterNotation:[rotateType notation]];
     [magicCubeUI flashWithState:[ magicCube getColorInOrientationsOfAllCubie]];
 }
 
@@ -37,19 +37,7 @@
 	// this is where we store all our objects
 	if (sceneObjects == nil) sceneObjects = [[NSMutableArray alloc] init];	
 	magicCube = [[MCMagicCube magicCube]retain];
-    playHelper = [[MCPlayHelper playerHelperWithMagicCube:magicCube]retain];
     
-	// our 'character' object
-	/*
-    Cube * magicCube0 = [[Cube alloc] init];
-    magicCube0.translation = MCPointMake(300.0, 0.0, 0.0);
-	magicCube0.scale = MCPointMake(scale, scale, scale);
-    magicCube0.rotation = MCPointMake(0, 0, 0);
-    magicCube0.rotationalSpeed = MCPointMake(0, 0, 0);
-    
-    [self addObjectToScene:magicCube0];
-	[magicCube0 release];		
-    */
     //大魔方
     magicCubeUI = [[MCMagicCubeUIModelController alloc]initiateWithState:[ magicCube getColorInOrientationsOfAllCubie]];
     magicCubeUI.target=self;
@@ -64,15 +52,15 @@
 	
 	    
 	// reload our interface
-	[inputController loadInterface];
+	[(MCCountingPlayInputViewController*)inputController loadInterface];
 }
 
 -(void)stepcounterAdd{
-    MCMultiDigitCounter *tmp = [inputController stepcounter];
+    MCMultiDigitCounter *tmp = [(MCCountingPlayInputViewController*)inputController stepcounter];
     [tmp addCounter];
 }
 -(void)stepcounterMinus{
-    MCMultiDigitCounter *tmp = [inputController stepcounter];
+    MCMultiDigitCounter *tmp = [(MCCountingPlayInputViewController*)inputController stepcounter];
     [tmp minusCounter];
 }
 

@@ -42,7 +42,7 @@
     //[playHelper applyRules];
     
     //大魔方
-    magicCubeUI = [[MCMagicCubeUIModelController alloc]initiate];
+    magicCubeUI = [[MCMagicCubeUIModelController alloc]initiateWithState:[magicCube getColorInOrientationsOfAllCubie]];
     magicCubeUI.target=self;
     [magicCubeUI setUsingMode:TECH_MODE];
     [magicCubeUI setStepcounterAddAction:@selector(stepcounterAdd)];
@@ -72,7 +72,7 @@
     [super removeAllObjectFromScene];
     
     //大魔方
-    magicCubeUI = [[MCMagicCubeUIModelController alloc]initiate];
+    magicCubeUI = [[MCMagicCubeUIModelController alloc]initiateWithState:[magicCube getColorInOrientationsOfAllCubie]];
     magicCubeUI.target=self;
     [magicCubeUI setUsingMode:TECH_MODE];
     [magicCubeUI setStepcounterAddAction:@selector(stepcounterAdd)];
@@ -116,15 +116,11 @@
 
 -(void)rotate:(RotateType *)rotateType{
     //流程1，通知数据模型UI已经旋转
-   // [playHelper rotateOnAxis:[rotateType rotate_axis] onLayer:[rotateType rotate_layer] inDirection:[rotateType rotate_direction]];
+   
     [playHelper rotateWithSingmasterNotation:[rotateType notation]];
     //if ([rotateType notation]==NoneNotation) {
     //    int a= 1;
     //}
-    //NSLog(@"tell playHelper rotate:%@",[rotateType notation]);
-    //the first you apply rules
-    //you need to verify the current state
-    //checking state from 'init' will clear all locked cubies
     if (isShowQueue) {
         [self showQueue];
     }

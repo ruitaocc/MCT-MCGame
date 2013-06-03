@@ -256,7 +256,7 @@
     [timer stopTimer];
     
     //弹出对话框
-    pauseMenuView = [[[PauseMenu alloc] initWithFrame:self.view.bounds title:@"暂停"] autorelease];
+    pauseMenuView = [[PauseMenu alloc] initWithFrame:self.view.bounds title:@"暂停"]; /*autorelease*/
     pauseMenuView.isShowColseBtn = NO;
     pauseMenuView.delegate = self;
     ///////////////////////////////////
@@ -393,7 +393,7 @@
     //[timer stopTimer];
     
     //弹出对话框
-    finishView = [[[FinishView alloc] initWithFrame:self.view.bounds title:@"结束"] autorelease];
+    finishView = [[FinishView alloc] initWithFrame:self.view.bounds title:@"结束"]; /*autorelease*/
     finishView.isShowColseBtn = NO;
     finishView.delegate = self;
     finishView.alpha = 0.2;
@@ -423,7 +423,7 @@
         
     }
     //弹出对话框
-    askReloadView = [[[AskReloadView alloc] initWithFrame:self.view.bounds title:@"上次未完成"] autorelease];
+    askReloadView = [[AskReloadView alloc] initWithFrame:self.view.bounds title:@"上次未完成"]; /*autorelease*/
     askReloadView.isShowColseBtn = NO;
     askReloadView.delegate = self;
     ///////////////////////////////////

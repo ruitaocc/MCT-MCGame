@@ -42,7 +42,7 @@
     _normalPlaySceneController = [MCNormalPlaySceneController sharedNormalPlaySceneController];
     _randomSolveSceneController = [MCRandomSolveSceneController sharedRandomSolveSceneController];
     [super init];
-    
+    return self;
 }
 #pragma mark -
 #pragma mark a method for view transitions
