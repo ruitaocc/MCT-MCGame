@@ -39,6 +39,13 @@
 #define S_L_RotateEffectSwitch @"转动音效开关"
 #define S_L_BackGroundMusicSwitch @"背景音乐开关"
 
+//音效音乐配置
+#define Audio_RotateSound_Ding @"ding.wav"
+#define Audio_RotateSound_Ding_key @"ding"
+#define Audio_BackGroundSound_Loop @"loop.mp3"
+#define Audio_BackGroundSound_Loop_key @"loop"
+
+
 
 
 #endif

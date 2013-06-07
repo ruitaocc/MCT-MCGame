@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "SoundSettingController.h"
 @interface MCSystemSettingViewController : UIViewController<UITableViewDelegate,UITableViewDataSource>{
     IBOutlet UITableView * soundSettingTable;
     IBOutlet UITableView * magicCubeSettingTable;

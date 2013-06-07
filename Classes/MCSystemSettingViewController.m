@@ -9,6 +9,8 @@
 #import "MCSystemSettingViewController.h"
 #import "MCStringDefine.h"
 #import "CoordinatingController.h"
+#import <AVFoundation/AVFoundation.h>
+#import "MCSoundBoard.h"
 @interface MCSystemSettingViewController ()
 
 @end
@@ -93,11 +95,11 @@
 			
 			if(indexPath.section == 0)
 			{
-				[slider addTarget:self action:@selector(musicVolume:) forControlEvents:UIControlEventValueChanged];
+				[slider addTarget:self action:@selector(effectsVolume:) forControlEvents:UIControlEventValueChanged];
 			//	slider.enabled = !soundMgr.isiPodAudioPlaying; // disable the slider if the ipod is playing...
 			}
 			else
-				[slider addTarget:self action:@selector(effectsVolume:) forControlEvents:UIControlEventValueChanged];
+				[slider addTarget:self action:@selector(musicVolume:) forControlEvents:UIControlEventValueChanged];
 			
 			
 			[cell.contentView addSubview:slider];
@@ -109,12 +111,19 @@
 	if(indexPath.section ==0 &&indexPath.row==1)
 	{
 		cell.textLabel.text = S_L_RotateEffectSwitch;
-        cell.accessoryView = [[[UISwitch alloc]init] autorelease];
+        UISwitch * uiswitch =[[UISwitch alloc]init];
+        [uiswitch addTarget:self action:@selector(effectsSwitch:) forControlEvents:UIControlEventValueChanged];
+        cell.accessoryView = uiswitch;
+        //[uiswitch release];
 	}
 	else if(indexPath.section == 1&& indexPath.row == 1)
 	{
 		cell.textLabel.text = S_L_BackGroundMusicSwitch;
-        cell.accessoryView = [[[UISwitch alloc]init] autorelease];
+        UISwitch * uiswitch =[[UISwitch alloc]init];
+        [uiswitch setOn:YES];
+        [uiswitch addTarget:self action:@selector(musicSwitch:) forControlEvents:UIControlEventValueChanged];
+        cell.accessoryView = uiswitch;
+        //[uiswitch release];
 	}
     
     return cell;
@@ -124,10 +133,20 @@
 {
 	//soundMgr.backgroundMusicVolume = ((UISlider *)sender).value;
 }
+- (void) musicSwitch:(id)sender
+{
+	//soundMgr.backgroundMusicVolume = ((UISlider *)sender).value;
+    SoundSettingController * soundsetting = [SoundSettingController sharedsoundSettingController];
+    [soundsetting loopBackGroundAudioFlipSwitch];
+}
 
 - (void) effectsVolume:(id)sender
 {
 	//soundMgr.soundEffectsVolume = ((UISlider *)sender).value;
+}
+- (void) effectsSwitch:(id)sender
+{
+	
 }
 // Override to support row selection in the table view.
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {

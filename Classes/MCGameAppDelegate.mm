@@ -17,6 +17,7 @@
 #import "MCCountingPlaySceneController__1.h"
 #import "CoordinatingController.h"
 #import "MCOBJLoader.h"
+#import "SoundSettingController.h"
 @implementation MCGameAppDelegate
 
 @synthesize window;
@@ -36,6 +37,9 @@
     NSString *filename = [[NSBundle mainBundle] pathForResource:@"RadiusOneCubeWithPic" ofType:@"obj"];
     MCOBJLoader *tmp = [MCOBJLoader sharedMCOBJLoader];
     [tmp loadObjFromFile:filename objkey:nil];
+    
+    SoundSettingController * soundcontroller = [SoundSettingController sharedsoundSettingController];
+    [soundcontroller loadSounds];
     
     
     
