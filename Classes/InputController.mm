@@ -15,6 +15,7 @@
 @synthesize touchCount;
 @synthesize touchEvents;
 @synthesize fsm_Current_State,fsm_Previous_State;
+@synthesize particleEmitter;
 //@synthesize isNeededReload;
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)niMCundleOrNil {
 	if (self = [super initWithNibName:nibNameOrNil bundle:niMCundleOrNil]) {
@@ -148,8 +149,12 @@
         fsm_Previous_State = fsm_Current_State;
         fsm_Current_State = kState_M2;
     }
-    
-    
+
+    //视角变换.第一次双手指移动 发生状态切换
+    if (touchCount==1&&fsm_Current_State == kState_F2) {
+        fsm_Previous_State = kState_None;
+        fsm_Current_State = kState_None;
+    }
 
     // just store them all in the big set.
 	[touchEvents addObjectsFromArray:[touches allObjects]];
@@ -180,6 +185,7 @@
         //touchCount=0;
         [self clearEvents];
     }
+    
     if ((fsm_Current_State == kState_S2)&&(fsm_Previous_State==kState_None)) {
         fsm_Previous_State = kState_None;
         fsm_Current_State = kState_F2;
@@ -239,7 +245,7 @@
     
 	[particleEmitter setParticle:@"lightBlur"];
 	particleEmitter.emit = NO;
-    [[[CoordinatingController sharedCoordinatingController] currentController]addObjectToScene:particleEmitter];    
+    [[[CoordinatingController sharedCoordinatingController] currentController] addObjectToScene:particleEmitter];
 
 }
 

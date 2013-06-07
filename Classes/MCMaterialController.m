@@ -235,6 +235,7 @@
 		// Enable blending
 		glEnable(GL_BLEND);
 	} else {
+        [uiImage release];
 		return CGSizeZero;
 	}
 	[uiImage release];

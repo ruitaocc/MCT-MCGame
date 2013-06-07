@@ -174,9 +174,7 @@
             break;
     }
     
-    if (notation == NoneNotation) {
-        int a = 1;
-    }
+    
     return notation;
 }
 

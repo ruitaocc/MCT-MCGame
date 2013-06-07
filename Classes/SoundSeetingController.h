@@ -8,6 +8,6 @@
 
 #import <Foundation/Foundation.h>
 
-@interface SoundSeetingController : NSObject
-
+@interface SoundSeetingController : NSObject{
+}
 @end

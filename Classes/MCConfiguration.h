@@ -40,7 +40,7 @@
 #define RandomRotateMaxCount 20
 
 //教学模式下让模型旋转对最大预知
-#define MaxDistance 100
+#define MaxDistance 160
 typedef enum _AskReloadType {
     kAskReloadView_LoadLastTime  = 0,
     kAskReloadView_Reload,
@@ -55,7 +55,8 @@ typedef enum {
     kSystemSetting,
     kHeroBoard,
     kMainMenu,
-    kScoreBoard2MainMenu
+    kScoreBoard2MainMenu,
+    kSystemSetting2MainMenu
 }ViewTransitionTag;
 
 
@@ -85,6 +86,7 @@ typedef enum {
 
 
 #pragma mark cubre mesh
+
 static NSInteger MCCubreVertexStride = 3;
 static NSInteger MCCubreColorStride = 4;
 static NSInteger MCCubreOutlineVertexesCount = 36;

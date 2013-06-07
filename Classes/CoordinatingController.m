@@ -36,13 +36,14 @@
 }
 
 -(id)init{
-    needToReload = true;
-    _countingPlaySceneController = [MCCountingPlaySceneController sharedCountingPlaySceneController];
-    _mainSceneController = [MCSceneController sharedSceneController];
-    currentController = [MCSceneController sharedSceneController];
-    _normalPlaySceneController = [MCNormalPlaySceneController sharedNormalPlaySceneController];
-    _randomSolveSceneController = [MCRandomSolveSceneController sharedRandomSolveSceneController];
-    [super init];
+    if (self=[super init]) {
+        needToReload = true;
+        _countingPlaySceneController = [MCCountingPlaySceneController sharedCountingPlaySceneController];
+        _mainSceneController = [MCSceneController sharedSceneController];
+        currentController = [MCSceneController sharedSceneController];
+        _normalPlaySceneController = [MCNormalPlaySceneController sharedNormalPlaySceneController];
+        _randomSolveSceneController = [MCRandomSolveSceneController sharedRandomSolveSceneController];
+    }
     return self;
 }
 #pragma mark -
@@ -82,6 +83,15 @@
             
         }
         break;
+        case kSystemSetting2MainMenu:
+        {
+            NSLog(@"requestViewChangeByObject:kSystemSetting2MainMenu");
+            //[userManagerSystemViewController pushViewController:userManagerSystemViewController];
+            //[currentController presentModalViewController:[currentController inputController] animated:NO];
+            [currentController.inputController dismissModalViewControllerAnimated:YES];
+            
+        }
+            break;
         case kNormalPlay:
         {
             

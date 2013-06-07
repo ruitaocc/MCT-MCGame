@@ -9,6 +9,7 @@
 #import "MCRandomSolveSceneController.h"
 #import "MCConfiguration.h"
 #import "MCMagicCubeUIModelController.h"
+#import "MCRandomSolveViewInputControllerViewController.h"
 @implementation MCRandomSolveSceneController
 @synthesize magicCube,playHelper;
 +(MCRandomSolveSceneController*)sharedRandomSolveSceneController
@@ -27,7 +28,7 @@
 	// this is where we store all our objects
 	if (sceneObjects == nil) sceneObjects = [[NSMutableArray alloc] init];
 	
-    MCMagicCubeUIModelController* magicCubeUI = [[MCMagicCubeUIModelController alloc]initiateWithState:[ magicCube getColorInOrientationsOfAllCubie]];
+    MCMagicCubeUIModelController* magicCubeUI = [[MCMagicCubeUIModelController alloc]initiateWithState:[ magicCube getColorInOrientationsOfAllCubie]] ;
     magicCubeUI.target=self;
     [magicCubeUI setStepcounterAddAction:@selector(stepcounterAdd)];
     [magicCubeUI setStepcounterMinusAction:@selector(stepcounterMinus)];
@@ -40,7 +41,7 @@
 	
     
 	// reload our interface
-	[inputController loadInterface];
+	[(MCRandomSolveViewInputControllerViewController*)inputController loadInterface];
 }
 
 @end

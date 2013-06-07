@@ -64,8 +64,8 @@
     
     
     [[NSBundle mainBundle] loadNibNamed:@"mypausemenu" owner:self options:nil];
-    
     [self.contentView addSubview:viewLoadedFromXib];
+
     
 	return self;
 }

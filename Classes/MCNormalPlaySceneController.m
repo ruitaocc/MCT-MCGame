@@ -42,7 +42,7 @@
     //[playHelper applyRules];
     
     //大魔方
-    magicCubeUI = [[MCMagicCubeUIModelController alloc]initiateWithState:[magicCube getColorInOrientationsOfAllCubie]];
+    magicCubeUI = [[MCMagicCubeUIModelController alloc]initiateWithState:[magicCube getColorInOrientationsOfAllCubie]] ;
     magicCubeUI.target=self;
     [magicCubeUI setUsingMode:TECH_MODE];
     [magicCubeUI setStepcounterAddAction:@selector(stepcounterAdd)];
@@ -96,21 +96,12 @@
 }
 
 -(void)reloadLastTime{
-    [super removeAllObjectFromScene];
+    //[super removeAllObjectFromScene];
+    //[[super sceneObjects]removeObjectAtIndex:0];
     //大魔方
-    //magicCube = [MCMagicCube magicCube];
-    magicCubeUI = [[MCMagicCubeUIModelController alloc]initiateWithState:[ magicCube getColorInOrientationsOfAllCubie]];
-    
-    /*magicCubeUI = [[MCMagicCubeUIModelController alloc]initiate];*/
-    magicCubeUI.target=self;
-    [magicCubeUI setUsingMode:TECH_MODE];
-    [magicCubeUI setStepcounterAddAction:@selector(stepcounterAdd)];
-    [magicCubeUI setStepcounterMinusAction:@selector(stepcounterMinus)];
-    [self addObjectToScene:magicCubeUI];
-    
-     //[inputController setIsNeededReload:YES];
-    //[(MCNormalPlayInputViewController*)inputController reloadInterface];
-    //[magicCubeUI release];
+    //重置魔方到上次状态。。。
+    [magicCubeUI flashWithState:[ magicCube getColorInOrientationsOfAllCubie]];
+   
      
 }
 

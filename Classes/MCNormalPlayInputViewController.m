@@ -40,7 +40,7 @@
     [counterLabel setActive:YES];
     [counterLabel awake];
     [interfaceObjects addObject:counterLabel];
-
+    [counterLabel release];
     
     //UI timer
     MCLabel *timerLabel= [[MCLabel alloc]initWithNstring:@"timeLabel"];
@@ -49,6 +49,7 @@
     [timerLabel setActive:YES];
     [timerLabel awake];
     [interfaceObjects addObject:timerLabel];
+    [timerLabel release];
     //UI timer
     timer = [[MCTimer alloc]initWithTextureKeys:counterName];
     [timer setScale:MCPointMake(450/2, 72/2, 1.0)];
@@ -68,13 +69,13 @@
     }*/
     //[actionname addObject:names[1]];
 
-    actionQueue = [[MCActionQueue alloc]initWithActionList:actionname];
+    actionQueue = [[MCActionQueue alloc]initWithActionList:actionname] ;
     [actionQueue setScale : MCPointMake(32, 32, 1.0)];
     [actionQueue setTranslation :MCPointMake(0, 320, 0.0)];
     [actionQueue setActive:NO];
     [actionQueue awake];
     [interfaceObjects addObject:actionQueue];
-
+    [actionname release];
        
 	
 	// mainMenuBtn

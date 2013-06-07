@@ -667,26 +667,6 @@
         0.5,-0.5,-0.5,   0.5,-0.5,0.5,    -0.5,-0.5,0.5,//下
     };
     
-    //继续射线拾取
-    float V2[108] = {-1.5,1.5,1.5,    -1.5,-1.5,1.5,   1.5,-1.5,1.5,
-        1.5,-1.5,1.5,    1.5,1.5,1.5,    -1.5,1.5,1.5,//前
-        
-        -1.5,1.5,1.5,     1.5,1.5,1.5,     1.5,1.5,-1.5,
-        1.5,1.5,-1.5,   -1.5,1.5,-1.5,   -1.5,1.5,1.5,//上
-        
-        -1.5,1.5,-1.5,   -1.5,-1.5,-1.5,  -1.5,-1.5,1.5,
-        -1.5,-1.5,1.5,   -1.5,1.5,1.5,    -1.5,1.5,-1.5,//左
-        
-        1.5,1.5,1.5,     1.5,-1.5,1.5,    1.5,-1.5,-1.5,
-        1.5,-1.5,-1.5,   1.5,1.5,-1.5,    1.5,1.5,1.5,//右
-        
-        1.5,1.5,-1.5,    1.5,-1.5,-1.5,  -1.5,-1.5,-1.5,
-        -1.5,-1.5,-1.5,  -1.5,1.5,-1.5,    1.5,1.5,-1.5,//后
-        
-        -1.5,-1.5,1.5,   -1.5,-1.5,-1.5,   1.5,-1.5,-1.5,
-        1.5,-1.5,-1.5,   1.5,-1.5,1.5,    -1.5,-1.5,1.5,//下
-    };
-
     switch (fsm_Current_State) {
         case kState_S1:{
             touch = [[touches allObjects] objectAtIndex:0];
@@ -1037,7 +1017,6 @@
                 
             }
             else if([self usingMode] == TECH_MODE){
-                 
                 //教学模式下，进行严格限制
                 //记录第一个点
                 //CGPoint location = [touch locationInView:view];
@@ -1253,34 +1232,35 @@
                         }else return;
                         
                     }
-                }
-                current_rotate_axis = fuzzy_axis;
-                current_rotate_direction = fuzzy_direction;
+                
+                    current_rotate_axis = fuzzy_axis;
+                    current_rotate_direction = fuzzy_direction;
                 //旋转模型
-                [self rotateOnAxis:current_rotate_axis onLayer:current_rotate_layer inDirection:current_rotate_direction isTribleRotate:YES];
-                if (isNeededToUpdateMagicCubeState) {
-                    //加入命令队列
-                    //添加command到NSUndoManger
-                    LayerRotationDirectionType commandaxis = current_rotate_direction;
+                    [self rotateOnAxis:current_rotate_axis onLayer:current_rotate_layer inDirection:current_rotate_direction isTribleRotate:YES];
+                    if (isNeededToUpdateMagicCubeState) {
+                        //加入命令队列
+                        //添加command到NSUndoManger
+                        LayerRotationDirectionType commandaxis = current_rotate_direction;
                     
-                    NSInvocation *doinvocation = [self createInvocationOnAxis:current_rotate_axis onLayer:current_rotate_layer inDirection:commandaxis isTribleRotate:YES];
+                        NSInvocation *doinvocation = [self createInvocationOnAxis:current_rotate_axis onLayer:current_rotate_layer inDirection:commandaxis isTribleRotate:YES];
                     
-                    if(commandaxis==CCW){
-                        commandaxis=CW;
-                    }else {
-                        commandaxis=CCW;
+                        if(commandaxis==CCW){
+                            commandaxis=CW;
+                        }else {
+                            commandaxis=CCW;
+                        }
+                        NSInvocation *undoinvocation = [self createInvocationOnAxis:current_rotate_axis onLayer:current_rotate_layer inDirection:commandaxis isTribleRotate:YES];
+                        [self addInvocation:doinvocation withUndoInvocation:undoinvocation];
+                    
                     }
-                    NSInvocation *undoinvocation = [self createInvocationOnAxis:current_rotate_axis onLayer:current_rotate_layer inDirection:commandaxis isTribleRotate:YES];
-                    [self addInvocation:doinvocation withUndoInvocation:undoinvocation];
-                    
                 }
                 is_TECH_MODE_Rotate = NO;
                 //自由模式下，无限制操作
                 firstThreePointCount = 0;
-                firstThreePoint[0].x = 512;
-                firstThreePoint[1].x = 512;
-                firstThreePoint[0].y = 384;
-                firstThreePoint[1].y = 384;
+                //firstThreePoint[0].x = 512;
+                //firstThreePoint[1].x = 512;
+                //firstThreePoint[0].y = 384;
+                //firstThreePoint[1].y = 384;
                 if (selected != nil) {
                     //selected.scale = MCPointMake(30, 30, 30);
                     selected = nil;
@@ -1677,7 +1657,7 @@
     GLfloat * XYZ = VertexesArray_Matrix_Multiply(xyz, 3, 3, centerCube.matrix);
     vec3 center_ox = vec3(XYZ[0],XYZ[1],XYZ[2]);
     vec3 center_oy = vec3(XYZ[3],XYZ[4],XYZ[5]);
-    vec3 center_oz = vec3(XYZ[6],XYZ[7],XYZ[8]);
+    //vec3 center_oz = vec3(XYZ[6],XYZ[7],XYZ[8]);
     CGFloat * tmp_matrix = (CGFloat *) malloc(16 * sizeof(CGFloat));
     for (int i = 0; i < 9; i++) {
         if (true ) {

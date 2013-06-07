@@ -126,6 +126,9 @@
 		A3D67F871759E1F1002501B2 /* greenface.png in Resources */ = {isa = PBXBuildFile; fileRef = A3D67F801759E1F1002501B2 /* greenface.png */; };
 		A3D67F881759E1F1002501B2 /* blackface.png in Resources */ = {isa = PBXBuildFile; fileRef = A3D67F811759E1F1002501B2 /* blackface.png */; };
 		A3DB2596162D993900AB9F00 /* CoordinatingController.m in Sources */ = {isa = PBXBuildFile; fileRef = A3DB2595162D993900AB9F00 /* CoordinatingController.m */; };
+		A3DDBAE1176027DF000361F1 /* Start.caf in Resources */ = {isa = PBXBuildFile; fileRef = A3DDBADF176027DE000361F1 /* Start.caf */; };
+		A3DDBAE2176027DF000361F1 /* backgroundLoop.m4a in Resources */ = {isa = PBXBuildFile; fileRef = A3DDBAE0176027DF000361F1 /* backgroundLoop.m4a */; };
+		A3DDBAE51760298E000361F1 /* SoundSeetingController.m in Sources */ = {isa = PBXBuildFile; fileRef = A3DDBAE41760298E000361F1 /* SoundSeetingController.m */; };
 		A3E1ADBA16A3C3160050B52D /* readme_config.rtf in Resources */ = {isa = PBXBuildFile; fileRef = A3E1ADB916A3C3160050B52D /* readme_config.rtf */; };
 		A3E1ADBC16A3C40C0050B52D /* readme_scene5.rtf in Resources */ = {isa = PBXBuildFile; fileRef = A3E1ADBB16A3C40C0050B52D /* readme_scene5.rtf */; };
 		A3E1ADBE16A3C47D0050B52D /* readme_Scene1.rtf in Resources */ = {isa = PBXBuildFile; fileRef = A3E1ADBD16A3C47D0050B52D /* readme_Scene1.rtf */; };
@@ -337,15 +340,6 @@
 		A3D30BAC161937DF00BA477E /* MCAnimatedQuad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCAnimatedQuad.h; sourceTree = "<group>"; };
 		A3D30BAD161937DF00BA477E /* MCAnimatedQuad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCAnimatedQuad.m; sourceTree = "<group>"; };
 		A3D5B2C0175C458400833F3F /* Default-LandscapeLeft~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-LandscapeLeft~ipad.png"; sourceTree = "<group>"; };
-		A3D5B2C6175C49AD00833F3F /* DebugOutput.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DebugOutput.h; sourceTree = "<group>"; };
-		A3D5B2C7175C49AD00833F3F /* DebugOutput.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DebugOutput.m; sourceTree = "<group>"; };
-		A3D5B2C9175C49C200833F3F /* SynthesizeSingleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SynthesizeSingleton.h; sourceTree = "<group>"; };
-		A3D5B2CA175C49C200833F3F /* AppleOpenALSupport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppleOpenALSupport.h; sourceTree = "<group>"; };
-		A3D5B2CB175C49C200833F3F /* AppleOpenALSupport.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = AppleOpenALSupport.c; sourceTree = "<group>"; };
-		A3D5B2CC175C49C200833F3F /* CMOpenALSound.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMOpenALSound.h; sourceTree = "<group>"; };
-		A3D5B2CD175C49C200833F3F /* CMOpenALSound.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMOpenALSound.m; sourceTree = "<group>"; };
-		A3D5B2CE175C49C200833F3F /* CMOpenALSoundManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMOpenALSoundManager.h; sourceTree = "<group>"; };
-		A3D5B2CF175C49C200833F3F /* CMOpenALSoundManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMOpenALSoundManager.m; sourceTree = "<group>"; };
 		A3D5B2DD175C590B00833F3F /* MCSystemSettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCSystemSettingViewController.h; sourceTree = "<group>"; };
 		A3D5B2DE175C590B00833F3F /* MCSystemSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCSystemSettingViewController.m; sourceTree = "<group>"; };
 		A3D5B2DF175C590B00833F3F /* MCSystemSettingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MCSystemSettingViewController.xib; sourceTree = "<group>"; };
@@ -361,6 +355,10 @@
 		A3D67F8A1759E35E002501B2 /* MCStringDefine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MCStringDefine.h; sourceTree = "<group>"; };
 		A3DB2594162D993900AB9F00 /* CoordinatingController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoordinatingController.h; sourceTree = "<group>"; };
 		A3DB2595162D993900AB9F00 /* CoordinatingController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoordinatingController.m; sourceTree = "<group>"; };
+		A3DDBADF176027DE000361F1 /* Start.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Start.caf; sourceTree = "<group>"; };
+		A3DDBAE0176027DF000361F1 /* backgroundLoop.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = backgroundLoop.m4a; sourceTree = "<group>"; };
+		A3DDBAE31760298E000361F1 /* SoundSeetingController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SoundSeetingController.h; sourceTree = "<group>"; };
+		A3DDBAE41760298E000361F1 /* SoundSeetingController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SoundSeetingController.m; sourceTree = "<group>"; };
 		A3E1ADB916A3C3160050B52D /* readme_config.rtf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.rtf; path = readme_config.rtf; sourceTree = "<group>"; };
 		A3E1ADBB16A3C40C0050B52D /* readme_scene5.rtf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.rtf; path = readme_scene5.rtf; sourceTree = "<group>"; };
 		A3E1ADBD16A3C47D0050B52D /* readme_Scene1.rtf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.rtf; path = readme_Scene1.rtf; sourceTree = "<group>"; };
@@ -633,11 +631,10 @@
 		A3587519161F3FFD00998085 /* imageResource */ = {
 			isa = PBXGroup;
 			children = (
+				A3DDBADE176027B6000361F1 /* soundsetting */,
 				A3D67F891759E1F7002501B2 /* cubeface */,
 				A3359E64168E9777002F9459 /* progressbar */,
 				A37F8811166B876C00B0A59F /* cubeBlack2.png */,
-				A3D5B2E7175CD87900833F3F /* volumedown.png */,
-				A3D5B2E8175CD87900833F3F /* volumeup.png */,
 				A3D0704516F87F0300AA3BFF /* sixcolor.png */,
 				A3F828D616EADF8400AC5EAF /* cubeBlack3.png */,
 				A3C8FEA2165D2A52007E0046 /* cube.png */,
@@ -811,8 +808,6 @@
 		A3D5B2C4175C498A00833F3F /* debug */ = {
 			isa = PBXGroup;
 			children = (
-				A3D5B2C6175C49AD00833F3F /* DebugOutput.h */,
-				A3D5B2C7175C49AD00833F3F /* DebugOutput.m */,
 			);
 			name = debug;
 			sourceTree = "<group>";
@@ -820,13 +815,6 @@
 		A3D5B2C5175C499600833F3F /* soundengine */ = {
 			isa = PBXGroup;
 			children = (
-				A3D5B2C9175C49C200833F3F /* SynthesizeSingleton.h */,
-				A3D5B2CA175C49C200833F3F /* AppleOpenALSupport.h */,
-				A3D5B2CB175C49C200833F3F /* AppleOpenALSupport.c */,
-				A3D5B2CC175C49C200833F3F /* CMOpenALSound.h */,
-				A3D5B2CD175C49C200833F3F /* CMOpenALSound.m */,
-				A3D5B2CE175C49C200833F3F /* CMOpenALSoundManager.h */,
-				A3D5B2CF175C49C200833F3F /* CMOpenALSoundManager.m */,
 			);
 			name = soundengine;
 			sourceTree = "<group>";
@@ -843,6 +831,17 @@
 				A3D67F811759E1F1002501B2 /* blackface.png */,
 			);
 			name = cubeface;
+			sourceTree = "<group>";
+		};
+		A3DDBADE176027B6000361F1 /* soundsetting */ = {
+			isa = PBXGroup;
+			children = (
+				A3DDBADF176027DE000361F1 /* Start.caf */,
+				A3DDBAE0176027DF000361F1 /* backgroundLoop.m4a */,
+				A3D5B2E7175CD87900833F3F /* volumedown.png */,
+				A3D5B2E8175CD87900833F3F /* volumeup.png */,
+			);
+			name = soundsetting;
 			sourceTree = "<group>";
 		};
 		A3E1ADAC16A3B5EF0050B52D /* Scene1 */ = {
@@ -910,6 +909,8 @@
 				A3D5B2DD175C590B00833F3F /* MCSystemSettingViewController.h */,
 				A3D5B2DE175C590B00833F3F /* MCSystemSettingViewController.m */,
 				A3D5B2DF175C590B00833F3F /* MCSystemSettingViewController.xib */,
+				A3DDBAE31760298E000361F1 /* SoundSeetingController.h */,
+				A3DDBAE41760298E000361F1 /* SoundSeetingController.m */,
 			);
 			name = scene4;
 			sourceTree = "<group>";
@@ -1272,6 +1273,8 @@
 				A3D5B2E1175C590B00833F3F /* MCSystemSettingViewController.xib in Resources */,
 				A3D5B2E9175CD87A00833F3F /* volumedown.png in Resources */,
 				A3D5B2EA175CD87A00833F3F /* volumeup.png in Resources */,
+				A3DDBAE1176027DF000361F1 /* Start.caf in Resources */,
+				A3DDBAE2176027DF000361F1 /* backgroundLoop.m4a in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1388,6 +1391,7 @@
 				A3E469F0175482AA00A31586 /* MCRandomSolveViewInputControllerViewController.m in Sources */,
 				A392B237175484BF0091BFE9 /* MCRestoreModelController.m in Sources */,
 				A3D5B2E0175C590B00833F3F /* MCSystemSettingViewController.m in Sources */,
+				A3DDBAE51760298E000361F1 /* SoundSeetingController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

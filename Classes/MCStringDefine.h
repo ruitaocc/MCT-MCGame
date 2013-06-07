@@ -32,8 +32,10 @@
 #define Face_BlackKEY @"blackface"
 
 //音量设置key
-#define S_L_RotateEffect @"转动音效音量"
-#define S_L_BackGroundMusic @"背景音乐音量"
+#define S_L_RotateEffect @"转动音效"
+#define S_L_BackGroundMusic @"背景音乐"
+#define S_L_RotateEffectValume @"转动音效音量"
+#define S_L_BackGroundMusicValume @"背景音乐音量"
 #define S_L_RotateEffectSwitch @"转动音效开关"
 #define S_L_BackGroundMusicSwitch @"背景音乐开关"
 

@@ -8,6 +8,7 @@
 
 #import "MCSystemSettingViewController.h"
 #import "MCStringDefine.h"
+#import "CoordinatingController.h"
 @interface MCSystemSettingViewController ()
 
 @end
@@ -37,11 +38,17 @@
 #pragma mark Table view methods
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    if ([tableView isEqual:soundSettingTable]) {
+        return 2;
+    }
     return 4;
 }
 
 // Customize the number of rows in the table view.
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    if ([tableView isEqual:soundSettingTable]) {
+        return 2;
+    }
     return 1;
 }
 
@@ -57,12 +64,7 @@
         if(section == 0)
             return S_L_RotateEffect;
         else if(section == 1)
-            return S_L_RotateEffectSwitch;
-        else if(section == 2)
             return S_L_BackGroundMusic;
-        else if(section == 3)
-            return S_L_BackGroundMusicSwitch;
-	
         else return nil;
     }
 }
@@ -77,7 +79,7 @@
         cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
 		
 		// create a slider for the first 2 sections only
-		if(indexPath.section == 0||indexPath.section == 2)
+		if((indexPath.section == 0&&indexPath.row== 0)||(indexPath.section == 1&&indexPath.row== 0))
 		{
 			UISlider *slider;
 			slider = [[UISlider alloc] initWithFrame:CGRectMake(5.0, 0.0, cell.bounds.size.width - cell.indentationWidth * 2.0, cell.bounds.size.height)];
@@ -104,15 +106,15 @@
     }
     
 	// Configure the cell.
-	if(indexPath.section == 1)
+	if(indexPath.section ==0 &&indexPath.row==1)
 	{
 		cell.textLabel.text = S_L_RotateEffectSwitch;
-		cell.textLabel.textAlignment = UITextAlignmentCenter;
+        cell.accessoryView = [[[UISwitch alloc]init] autorelease];
 	}
-	else if(indexPath.section == 3)
+	else if(indexPath.section == 1&& indexPath.row == 1)
 	{
 		cell.textLabel.text = S_L_BackGroundMusicSwitch;
-		cell.textLabel.textAlignment = UITextAlignmentCenter;
+        cell.accessoryView = [[[UISwitch alloc]init] autorelease];
 	}
     
     return cell;
@@ -127,11 +129,9 @@
 {
 	//soundMgr.soundEffectsVolume = ((UISlider *)sender).value;
 }
-
-
 // Override to support row selection in the table view.
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-	if(indexPath.section < 2) return;
+	//if(indexPath.section < 2) return;
 	
 	[tableView deselectRowAtIndexPath:indexPath animated:YES];
 	
@@ -151,7 +151,10 @@
 	}*/
     
 }
-
+-(void)goBackMainMenu:(id)sender{
+    CoordinatingController *tmp = [CoordinatingController sharedCoordinatingController];
+    [tmp requestViewChangeByObject:kSystemSetting2MainMenu];
+}
 
 
 @end

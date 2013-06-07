@@ -43,5 +43,4 @@
 @property (nonatomic,retain)UserManagerSystemViewController *userManagerSystemViewController;
 +(CoordinatingController *) sharedCoordinatingController;
 -(void)requestViewChangeByObject:(int)type;
--(void)reloadMeterial;
 @end

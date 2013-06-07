@@ -23,6 +23,8 @@
 @property (retain) NSMutableSet* touchEvents;
 @property (assign) FSM_Interaction_State fsm_Previous_State;
 @property (assign) FSM_Interaction_State fsm_Current_State;
+@property (nonatomic,retain)MCParticleSystem *particleEmitter;
+
 //10
 - (CGRect)screenRectFromMeshRect:(CGRect)rect atPoint:(CGPoint)meshCenter;
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil ;
