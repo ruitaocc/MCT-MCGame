@@ -54,7 +54,7 @@
 }
 
 - (void)createBtnPress:(id)sender
-{
+{    
     [userManagerController createNewUser:inputName.text];
 }
 @end

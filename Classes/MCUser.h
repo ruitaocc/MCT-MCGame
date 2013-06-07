@@ -12,10 +12,11 @@
 @property (nonatomic) NSInteger userID;
 @property (retain, nonatomic) NSString *name;
 @property (retain, nonatomic) NSString *sex;
-@property (nonatomic) NSInteger totalGames;
 @property (nonatomic) NSInteger totalMoves;
-@property (nonatomic) double totalTimes;     //seconds
+@property (nonatomic) double totalGameTime;     //seconds
+@property (nonatomic) double totalLearnTime;    //seconds
+@property (nonatomic) NSInteger totalFinish;
 
-- (id)initWithUserID:(NSInteger)_ID UserName:(NSString*)_name UserSex:(NSString*)_sex totalGames:(NSInteger)_games totalMoves:(NSInteger)_moves totalTimes:(double)_times;
+- (id)initWithUserID:(NSInteger)_ID UserName:(NSString*)_name UserSex:(NSString*)_sex totalMoves:(NSInteger)_moves totalGameTime:(double)_gameTime totalLearnTime:(double)_learnTime totalFinish:(NSInteger)_finish;
 
 @end

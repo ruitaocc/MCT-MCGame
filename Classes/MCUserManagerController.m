@@ -31,7 +31,7 @@ static MCUserManagerController* sharedSingleton_ = nil;
 
 +(id)allocWithZone:(NSZone *)zone
 {
-    return [[self sharedInstance] retain];
+    return [[MCUserManagerController sharedInstance] retain];
 }
 
 - (id)copy
@@ -49,10 +49,6 @@ static MCUserManagerController* sharedSingleton_ = nil;
     return NSIntegerMax;
 }
 
-- (void)release
-{
-    //do nothing
-}
 
 - (NSString *)dataFilePath 
 {
@@ -75,14 +71,18 @@ static MCUserManagerController* sharedSingleton_ = nil;
         NSData *lastUser = [[NSData alloc] initWithContentsOfFile:[self dataFilePath]];
         NSString *lastName = [[NSString alloc] initWithData:lastUser encoding:NSStringEncodingConversionExternalRepresentation];
         [self changeCurrentUser:lastName];
+        [lastName release];
+        [lastUser release];
         
         //init top score
         [self updateTopScore];
         [self updateMyScore];
         
         //add observer to database and user model
+        //notification was sent by MC DB Controller
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(insertUserSuccess:) name:@"DBInsertUserSuccess" object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(insertScoreSuccess) name:@"DBInsertScoreSuccess" object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(insertLearnSuccess) name:@"DBInsertLearnSuccess" object:nil];
     }
     
     return self;
@@ -100,20 +100,31 @@ static MCUserManagerController* sharedSingleton_ = nil;
 #pragma mark user methods
 - (void)createNewUser:(NSString *)_name
 {
-    MCUser *newUser = [[MCUser alloc] initWithUserID:0 UserName:_name UserSex:@"unknown" totalGames:0 totalMoves:0 totalTimes:0];
+    for (MCUser* user in userModel.allUser) {
+        if ([user.name isEqualToString:_name]) {
+            //show it's repeat
+            UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"重复了" message:@"你所输入的用户名已经存在,请输入其他再试一次" delegate:nil cancelButtonTitle:@"好的" otherButtonTitles:nil, nil];
+            [alert show];
+            return;
+        }
+    }
+    
+    MCUser *newUser = [[MCUser alloc] initWithUserID:0 UserName:_name UserSex:@"unknown" totalMoves:0 totalGameTime:0 totalLearnTime:0 totalFinish:0];
     [database insertUser:newUser];
+    [newUser release];
 }
 
 - (void)changeCurrentUser:(NSString *)_name
 {
     for (MCUser* user in userModel.allUser) {
         if ([user.name isEqualToString:_name]) {
-            userModel.currentUser = user;
+            self.userModel.currentUser = user;
         }
     }
     NSLog(@"change user");
     
     [self saveCurrentUser];
+    [self updateMyScore];
 }
 
 - (void) insertUserSuccess:(NSNotification*)_notification
@@ -123,17 +134,18 @@ static MCUserManagerController* sharedSingleton_ = nil;
     
     NSString* name = [[NSString alloc] initWithString:[_notification.userInfo objectForKey:@"name"]];
     [self changeCurrentUser:name];
+    [name release];
 }
 
 - (void)updateAllUser
 {
-    userModel.allUser = [database queryAllUser];
+    self.userModel.allUser = [database queryAllUser];
     NSLog(@"update all user");
 }
 
 - (void)updateCurrentUser
 {
-    userModel.currentUser = [database queryUser:userModel.currentUser.name];
+    self.userModel.currentUser = [database queryUser:userModel.currentUser.name];
 }
 
 #pragma mark
@@ -142,10 +154,15 @@ static MCUserManagerController* sharedSingleton_ = nil;
 {
     NSInteger _score = [calculator calculateScoreForMove:_move Time:_time];
     double _speed = [calculator calculateSpeedForMove:_move Time:_time];
-    NSString* _date = [[[NSDate alloc] init] description];
+    
+    NSDate *date = [[NSDate alloc] init];
+    NSString* _date = [date description];
+    [date release];
     
     MCScore* newScore = [[MCScore alloc] initWithScoreID:0 userID:userModel.currentUser.userID name:userModel.currentUser.name score:_score move:_move time:_time speed:_speed date:_date];    
     [database insertScore:newScore];
+    
+    [newScore release];
 }
 
 - (void) insertScoreSuccess
@@ -161,15 +178,38 @@ static MCUserManagerController* sharedSingleton_ = nil;
     [[NSNotificationCenter defaultCenter] postNotificationName:@"UserManagerSystemUpdateScore" object:nil];
 }
 
+- (void) createNewLearnWithMove:(NSInteger)_move Time:(double)_time
+{
+    NSDate *date = [[NSDate alloc] init];
+    NSString* _date = [date description];
+    [date release];
+    
+    MCLearn* newLearn = [[MCLearn alloc] initWithLearnID:0 userID:userModel.currentUser.userID name:userModel.currentUser.name move:_move time:_time date:_date];
+    [database insertLearn:newLearn];
+    
+    [newLearn release];
+}
+
+- (void) insertLearnSuccess
+{
+    //after insert learn record. update information
+    [self updateAllUser];
+    [self updateCurrentUser];
+    
+    //post notification to view controller to refresh view
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"UserManagerSystemUpdateScore" object:nil];
+
+}
+
 - (void)updateTopScore
 {
-    userModel.topScore = [database queryTopScore];
+    self.userModel.topScore = [database queryTopScore];
     NSLog(@"update top score");
 }
 
 - (void)updateMyScore
 {
-    userModel.myScore = [database queryMyScore:userModel.currentUser.userID];
+    self.userModel.myScore = [database queryMyScore:userModel.currentUser.userID];
     NSLog(@"update my score");
 }
 

@@ -22,9 +22,6 @@
 - (id)initWithScoreID:(NSInteger)_sID userID:(NSInteger)_uID name:(NSString*)_name score:(NSInteger)_score move:(NSInteger)_move time:(double)_time speed:(double)_speed date:(NSString *)_date
 {
     if (self = [self init]) {
-
-        [_date retain];
-        [date release];
         
         self.scoreID = _sID;
         self.userID = _uID;
@@ -40,8 +37,8 @@
 
 - (void)dealloc
 {
-    [name release];
-    [date release];
+    self.name= nil;
+    self.date = nil;
     [super dealloc];
 }
 
