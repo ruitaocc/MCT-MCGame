@@ -23,7 +23,7 @@
 
 + (MCUserManagerController*) sharedInstance;
 
-- (void) createNewUser:(NSString*)_name;
+- (BOOL) createNewUser:(NSString*)_name;
 - (void) changeCurrentUser:(NSString*)_name;
 - (void) updateAllUser;
 - (void) updateCurrentUser;

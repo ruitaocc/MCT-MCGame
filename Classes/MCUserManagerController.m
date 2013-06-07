@@ -100,20 +100,19 @@ static MCUserManagerController* sharedSingleton_ = nil;
 
 #pragma mark -
 #pragma mark user methods
-- (void)createNewUser:(NSString *)_name
+- (BOOL)createNewUser:(NSString *)_name
 {
     for (MCUser* user in userModel.allUser) {
         if ([user.name isEqualToString:_name]) {
-            //show it's repeat
-            UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"重复了" message:@"你所输入的用户名已经存在,请输入其他再试一次" delegate:nil cancelButtonTitle:@"好的" otherButtonTitles:nil, nil];
-            [alert show];
-            return;
+            return NO;
         }
     }
     
     MCUser *newUser = [[MCUser alloc] initWithUserID:0 UserName:_name UserSex:@"unknown" totalMoves:0 totalGameTime:0 totalLearnTime:0 totalFinish:0];
     [database insertUser:newUser];
     [newUser release];
+    
+    return YES;
 }
 
 - (void)changeCurrentUser:(NSString *)_name

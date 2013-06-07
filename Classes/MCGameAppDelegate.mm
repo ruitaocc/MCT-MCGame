@@ -31,6 +31,8 @@
 	}
 	return sharedMCGameAppDelegate;
 }
+
+
 - (void)applicationDidFinishLaunching:(UIApplication *)application 
 {   
     //laod external OBJ 3D model into appliaction
@@ -68,6 +70,7 @@
 	// set our view as the first window view
     [window setRootViewController:sceneController.inputController];
 	//[window addSubview:sceneController.inputController.view];
+    
 	[window makeKeyAndVisible];
 	
     //开始游戏循环

@@ -416,15 +416,13 @@
                                  // Make sure to remove the overlay window from the list of windows
                                  // before trying to find the key window in that same list
                                  NSMutableArray *windows = [[NSMutableArray alloc] initWithArray:[UIApplication sharedApplication].windows];
-                                 [windows removeObject:overlayWindow];
-                                 overlayWindow = nil;
                                  
-                                 [windows enumerateObjectsWithOptions:NSEnumerationReverse usingBlock:^(UIWindow *window, NSUInteger idx, BOOL *stop) {
-                                   if([window isKindOfClass:[UIWindow class]] && window.windowLevel == UIWindowLevelNormal) {
-                                     [window makeKeyWindow];
-                                     *stop = YES;
-                                   }
-                                 }];
+                                 UIWindow *window = [[windows objectAtIndex:0] retain];
+                                 [windows removeAllObjects];
+                                 
+                                 [windows addObject:window];
+                                 [window release];
+                                 [window makeKeyAndVisible];
                                  
                                  // uncomment to make sure UIWindow is gone from app.windows
                                  //NSLog(@"%@", [UIApplication sharedApplication].windows);

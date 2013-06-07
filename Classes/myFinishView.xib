@@ -287,6 +287,7 @@
 								<string key="NSFrame">{{69, 101}, {233, 130}}</string>
 								<reference key="NSSuperview" ref="202800137"/>
 								<reference key="NSWindow"/>
+								<reference key="NSNextKeyView"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="IBUIOpaque">NO</bool>
 								<bool key="IBUIClipsSubviews">YES</bool>
@@ -479,14 +480,6 @@
 						<reference key="destination" ref="987316388"/>
 					</object>
 					<int key="connectionID">678</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">userNameEditField</string>
-						<reference key="source" ref="1056435810"/>
-						<reference key="destination" ref="987316388"/>
-					</object>
-					<int key="connectionID">675</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
@@ -1837,7 +1830,6 @@
 				<string key="-1.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="-2.CustomClassName">UIResponder</string>
 				<string key="-2.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-				<string key="250.CustomClassName">FinishView</string>
 				<string key="250.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<array class="NSMutableArray" key="250.IBViewMetadataConstraints">
 					<reference ref="182581468"/>

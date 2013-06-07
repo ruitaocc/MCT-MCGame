@@ -74,6 +74,9 @@
         _changeUserPopover.popoverContentSize = CGSizeMake(320., 216.);
         _changeUserPopover.delegate = self;
         [contentForChangeUser release];
+        
+        
+        [self.window makeKeyAndVisible];
     }    
 	return self;
 
