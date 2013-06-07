@@ -32,6 +32,8 @@
 - (void) updateTopScore;
 - (void) updateMyScore;
 
+- (void) createNewLearnWithMove:(NSInteger)_move Time:(double)_time;
+
 - (void) saveCurrentUser;
 
 @end

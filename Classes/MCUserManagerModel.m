@@ -30,7 +30,7 @@ static MCUserManagerModel* sharedSingleton_ = nil;
 
 +(id)allocWithZone:(NSZone *)zone
 {
-    return [[self sharedInstance] retain];
+    return [MCUserManagerModel sharedInstance];
 }
 
 - (id)copy
@@ -41,11 +41,6 @@ static MCUserManagerModel* sharedSingleton_ = nil;
 -(id)retain
 {
     return self;
-}
-
-- (NSUInteger)retainCount
-{
-    return NSIntegerMax;
 }
 
 
@@ -62,7 +57,9 @@ static MCUserManagerModel* sharedSingleton_ = nil;
 }
 
 - (void)dealloc{
-    [allUser release];
+    self.allUser = nil;
+    self.topScore = nil;
+    self.myScore = nil;
     [super dealloc];
 }
 

@@ -389,7 +389,9 @@
     }
     
 }
+
 -(void)showFinishView{
+    
     //停止计时器
     //[timer stopTimer];
     
@@ -398,6 +400,20 @@
     finishView.isShowColseBtn = NO;
     finishView.delegate = self;
     finishView.alpha = 0.2;
+    
+    
+    // Set step count and learing time.
+    finishView.learningStepCountLabel.text = [NSString stringWithFormat:@"%d步", stepcounter.m_counterValue];
+    finishView.learningTimeLabel.text = [timer description];
+    finishView.lastingTime = timer.totalTime/1000;
+    finishView.stepCount = stepcounter.m_counterValue;
+    
+    // If no name, set 'Rubiker'
+    if ([finishView.userNameEditField.text compare:@""] == NSOrderedSame) {
+        finishView.userNameEditField.text = @"Rubiker";
+    }
+    
+    
     ///////////////////////////////////
 	// Add the panel to our view
 	[self.view  addSubview:finishView];
@@ -407,6 +423,8 @@
 	[finishView showFromPoint:CGPointMake(512,384)];
 
 }
+
+
 -(void)askReload{
     NSString *path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
     NSString *fileName = [path stringByAppendingPathComponent:TmpMagicCubeData];
@@ -435,9 +453,12 @@
 	// Show the panel from the center of the button that was pressed
 	[askReloadView showFromPoint:CGPointMake(512,384)];
 }
+
+
 -(void)reloadLastTime{
     NSLog(@"reloadLastTime");
     MCNormalPlaySceneController *c = [MCNormalPlaySceneController sharedNormalPlaySceneController ];
     [c reloadLastTime];
 }
+
 @end

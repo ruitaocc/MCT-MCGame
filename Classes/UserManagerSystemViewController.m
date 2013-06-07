@@ -8,20 +8,24 @@
 
 #import "UserManagerSystemViewController.h"
 #import "CoordinatingController.h"
+
 @interface UserManagerSystemViewController ()
 
 @end
 
 @implementation UserManagerSystemViewController
-@synthesize backBtn;
+
 @synthesize scoreTable;
 @synthesize insertScoreTimeField;
 @synthesize insertScoreMoveField;
 
 @synthesize currentUserLabel;
-@synthesize totalGamesLabel;
-@synthesize totalTimesLabel;
+@synthesize totalFinishLabel;
+@synthesize totalGameTimeLabel;
 @synthesize totalMovesLabel;
+@synthesize totalLearnTimeLabel;
+@synthesize insertLearnTimeField;
+@synthesize insertLearnMoveField;
 @synthesize createUserPopover;
 @synthesize changeUserPopover;
 @synthesize tableSegment;
@@ -36,24 +40,26 @@
     
     //popover
     PopCreateUserViewController *contentForCreateUser = [[PopCreateUserViewController alloc] init];
-    
     createUserPopover = [[UIPopoverController alloc] initWithContentViewController:contentForCreateUser];
     createUserPopover.popoverContentSize = CGSizeMake(320., 216.);
     createUserPopover.delegate = self;
+    [contentForCreateUser release];
     
     PopChangeUserViewController *contentForChangeUser = [[PopChangeUserViewController alloc] init];
-    
     changeUserPopover = [[UIPopoverController alloc] initWithContentViewController:contentForChangeUser];
     changeUserPopover.popoverContentSize = CGSizeMake(320., 216.);
     changeUserPopover.delegate = self;
+    [contentForChangeUser release];
     
     //init user information
-    currentUserLabel.text = userManagerController.userModel.currentUser.name;
-    totalGamesLabel.text = [[NSString alloc] initWithFormat:@"%d",userManagerController.userModel.currentUser.totalGames];
-    totalMovesLabel.text = [[NSString alloc] initWithFormat:@"%d",userManagerController.userModel.currentUser.totalMoves];
-    totalTimesLabel.text = [[NSString alloc] initWithFormat:@"%0.2f",userManagerController.userModel.currentUser.totalTimes];
+    self.currentUserLabel.text = userManagerController.userModel.currentUser.name;
+    self.totalFinishLabel.text = [NSString stringWithFormat:@"%d",userManagerController.userModel.currentUser.totalFinish];
+    self.totalMovesLabel.text = [NSString stringWithFormat:@"%d",userManagerController.userModel.currentUser.totalMoves];
+    self.totalGameTimeLabel.text = [NSString stringWithFormat:@"%0.2f",userManagerController.userModel.currentUser.totalGameTime];
+    self.totalLearnTimeLabel.text = [NSString stringWithFormat:@"%0.2f",userManagerController.userModel.currentUser.totalLearnTime];
     
     //observer to refresh the table view
+    //notification was sent by user manager controller
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateUserAndScore) name:@"UserManagerSystemUpdateScore" object:nil];
 }
 
@@ -61,18 +67,20 @@
 {
     [self setScoreTable:nil];
     [self setCurrentUserLabel:nil];
-    [self setTotalGamesLabel:nil];
-    [self setTotalTimesLabel:nil];
+    [self setTotalFinishLabel:nil];
+    [self setTotalGameTimeLabel:nil];
     [self setTotalMovesLabel:nil];
     [self setInsertScoreTimeField:nil];
     [self setInsertScoreMoveField:nil];
     [self setTableSegment:nil];
+    [self setInsertLearnTimeField:nil];
+    [self setTotalLearnTimeLabel:nil];
+    [self setInsertLearnMoveField:nil];
+    [self setBackBtn:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
 }
--(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
-    
-}
+
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     return (interfaceOrientation == UIDeviceOrientationLandscapeRight);
@@ -81,13 +89,17 @@
 - (void)dealloc {
     [scoreTable release];
     [currentUserLabel release];
-    [totalGamesLabel release];
-    [totalTimesLabel release];
+    [totalFinishLabel release];
+    [totalGameTimeLabel release];
     [totalMovesLabel release];
     [insertScoreTimeField release];
     [insertScoreMoveField release];
     
     [tableSegment release];
+    [insertLearnTimeField release];
+    [totalLearnTimeLabel release];
+    [insertLearnMoveField release];
+    [_backBtn release];
     [super dealloc];
 }
 
@@ -110,14 +122,14 @@
     }
     
     //set score information
-    NSInteger row = [indexPath row];
+    NSInteger scoreIndex = [indexPath row];
     
     if (tableSegment.selectedSegmentIndex == 0) {
-        if (row < [userManagerController.userModel.topScore count]) {
+        if (scoreIndex < [userManagerController.userModel.topScore count]) {
+                    
+            MCScore *_scoreRecord = [userManagerController.userModel.topScore objectAtIndex:scoreIndex];
             
-            MCScore *_scoreRecord = [userManagerController.userModel.topScore objectAtIndex:row];
-            
-            NSString *_rank = [[NSString alloc] initWithFormat:@"%d",row+1];
+            NSString *_rank = [[NSString alloc] initWithFormat:@"%d",scoreIndex+1];
             NSString *_move = [[NSString alloc] initWithFormat:@"%d", _scoreRecord.move];
             NSString *_time = [[NSString alloc] initWithFormat:@"%0.2f", _scoreRecord.time];
             NSString *_speed = [[NSString alloc] initWithFormat:@"%0.2f", _scoreRecord.speed];
@@ -126,18 +138,20 @@
             [cell setCellWithRank:_rank Name:_scoreRecord.name Move:_move Time:_time Speed:_speed Score:_score];
             
             [_rank release];
-            [_scoreRecord release];
             [_move release];
             [_time release];
             [_speed release];
             [_score release];
         }
+        else {
+            [cell setCellWithRank:@"" Name:@"" Move:@"" Time:@"" Speed:@"" Score:@""];
+        }
             } else {
-                if (row < [userManagerController.userModel.myScore count]) {
+                if (scoreIndex < [userManagerController.userModel.myScore count]) {
+                   
+                    MCScore *_scoreRecord = [userManagerController.userModel.myScore objectAtIndex:scoreIndex];
                     
-                    MCScore *_scoreRecord = [userManagerController.userModel.myScore objectAtIndex:row];
-                    
-                    NSString *_rank = [[NSString alloc] initWithFormat:@"%d",row+1];
+                    NSString *_rank = [[NSString alloc] initWithFormat:@"%d",scoreIndex+1];
                     NSString *_move = [[NSString alloc] initWithFormat:@"%d", _scoreRecord.move];
                     NSString *_time = [[NSString alloc] initWithFormat:@"%0.2f", _scoreRecord.time];
                     NSString *_speed = [[NSString alloc] initWithFormat:@"%0.2f", _scoreRecord.speed];
@@ -146,11 +160,13 @@
                     [cell setCellWithRank:_rank Name:_scoreRecord.name Move:_move Time:_time Speed:_speed Score:_score];
                     
                     [_rank release];
-                    [_scoreRecord release];
                     [_move release];
                     [_time release];
                     [_speed release];
                     [_score release];
+               }
+                else {
+                    [cell setCellWithRank:@"" Name:@"" Move:@"" Time:@"" Speed:@"" Score:@""];
                 }
 
                     }
@@ -169,7 +185,7 @@
 - (void)popoverControllerDidDismissPopover:(UIPopoverController *)popoverController
 {
     //pop over dismiss, and update user information 
-    [self updateUserInformation];
+    [self updateUserAndScore];
     
     if (popoverController == createUserPopover) {
         
@@ -178,11 +194,6 @@
     if (popoverController == changeUserPopover) {
         
     }
-}
-#pragma mark goback
--(IBAction)goBackMainMenu:(id)sender{
-    CoordinatingController *tmp = [CoordinatingController sharedCoordinatingController];
-    [tmp requestViewChangeByObject:kScoreBoard2MainMenu];
 }
 
 #pragma mark -
@@ -206,18 +217,31 @@
     [userManagerController createNewScoreWithMove:[insertScoreMoveField.text integerValue] Time:[insertScoreTimeField.text floatValue]];
 }
 
+- (void)insertLearnPress:(id)sender
+{
+    [userManagerController createNewLearnWithMove:[insertLearnMoveField.text integerValue] Time:[insertLearnTimeField.text floatValue]];
+}
+
 - (void)segmentChange:(id)sender
 {
     [scoreTable reloadData];
 }
 
+
+#pragma mark goback
+- (IBAction)goBackMainMenu:(id)sender {
+    CoordinatingController *tmp = [CoordinatingController sharedCoordinatingController];
+    [tmp requestViewChangeByObject:kScoreBoard2MainMenu];
+}
+
 - (void) updateUserInformation
 {
     //user information
-    currentUserLabel.text = userManagerController.userModel.currentUser.name;
-    totalGamesLabel.text = [[NSString alloc] initWithFormat:@"%d",userManagerController.userModel.currentUser.totalGames];
-    totalMovesLabel.text = [[NSString alloc] initWithFormat:@"%d",userManagerController.userModel.currentUser.totalMoves];
-    totalTimesLabel.text = [[NSString alloc] initWithFormat:@"%0.2f",userManagerController.userModel.currentUser.totalTimes];
+    self.currentUserLabel.text = userManagerController.userModel.currentUser.name;
+    self.totalFinishLabel.text = [NSString stringWithFormat:@"%d",userManagerController.userModel.currentUser.totalFinish];
+    self.totalMovesLabel.text = [NSString stringWithFormat:@"%d",userManagerController.userModel.currentUser.totalMoves];
+    self.totalGameTimeLabel.text = [NSString stringWithFormat:@"%0.2f",userManagerController.userModel.currentUser.totalGameTime];
+    self.totalLearnTimeLabel.text = [NSString stringWithFormat:@"%0.2f",userManagerController.userModel.currentUser.totalLearnTime];
 }
 
 - (void)updateScoreInformation

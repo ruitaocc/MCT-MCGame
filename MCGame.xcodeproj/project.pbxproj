@@ -191,6 +191,7 @@
 		A3F8290916EF790D00AC5EAF /* DefaultButton.png in Resources */ = {isa = PBXBuildFile; fileRef = A3F8290116EF790D00AC5EAF /* DefaultButton.png */; };
 		A3F8290A16EF790D00AC5EAF /* DefaultButtonBg.png in Resources */ = {isa = PBXBuildFile; fileRef = A3F8290216EF790D00AC5EAF /* DefaultButtonBg.png */; };
 		A3F8292216F181BD00AC5EAF /* RotateType.m in Sources */ = {isa = PBXBuildFile; fileRef = A3F8292116F181BC00AC5EAF /* RotateType.m */; };
+		E02B1B2B17617A2800FA01ED /* MCLearn.m in Sources */ = {isa = PBXBuildFile; fileRef = E02B1B2A17617A2800FA01ED /* MCLearn.m */; };
 		E04E7E8717410E8E00403E92 /* MCCompositeRotationUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = E04E7E8617410E8E00403E92 /* MCCompositeRotationUtil.m */; };
 /* End PBXBuildFile section */
 
@@ -452,6 +453,8 @@
 		A3F8290216EF790D00AC5EAF /* DefaultButtonBg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DefaultButtonBg.png; sourceTree = "<group>"; };
 		A3F8292016F181BC00AC5EAF /* RotateType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RotateType.h; sourceTree = "<group>"; };
 		A3F8292116F181BC00AC5EAF /* RotateType.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RotateType.m; sourceTree = "<group>"; };
+		E02B1B2917617A2800FA01ED /* MCLearn.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCLearn.h; sourceTree = "<group>"; };
+		E02B1B2A17617A2800FA01ED /* MCLearn.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCLearn.m; sourceTree = "<group>"; };
 		E04E7E8517410E8E00403E92 /* MCCompositeRotationUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCCompositeRotationUtil.h; sourceTree = "<group>"; };
 		E04E7E8617410E8E00403E92 /* MCCompositeRotationUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCCompositeRotationUtil.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -794,6 +797,8 @@
 		A3CB5FEC16ABD284006F03D5 /* DataStructureClass */ = {
 			isa = PBXGroup;
 			children = (
+				E02B1B2917617A2800FA01ED /* MCLearn.h */,
+				E02B1B2A17617A2800FA01ED /* MCLearn.m */,
 				A3CB5FF316ABD2AC006F03D5 /* MCDBController.h */,
 				A3CB5FF416ABD2AC006F03D5 /* MCDBController.m */,
 				A3CB5FF516ABD2AC006F03D5 /* MCUserCalculator.h */,
@@ -1325,7 +1330,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "export CODESIGN_ALLOCATE=/Users/kwanterry/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/codesign_allocate\nif [ \"${PLATFORM_NAME}\" == \"iphoneos\" ] || [ \"${PLATFORM_NAME}\" == \"ipados\" ]; then\n/Applications/Xcode.app/Contents/Developer/iphoneentitlements/gen_entitlements.py \"my.company.${PROJECT_NAME}\" \"${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}/${PROJECT_NAME}.xcent\";\ncodesign -f -s \"iPhone Developer\" --entitlements \"${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}/${PROJECT_NAME}.xcent\" \"${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}/\"\nfi";
+			shellScript = "export CODESIGN_ALLOCATE=/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/codesign_allocate\nif [ \"${PLATFORM_NAME}\" == \"iphoneos\" ] || [ \"${PLATFORM_NAME}\" == \"ipados\" ]; then\n/Applications/Xcode.app/Contents/Developer/iphoneentitlements/gen_entitlements.py \"my.company.${PROJECT_NAME}\" \"${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}/${PROJECT_NAME}.xcent\";\ncodesign -f -s \"iPhone Developer\" --entitlements \"${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}/${PROJECT_NAME}.xcent\" \"${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}/\"\nfi";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -1424,8 +1429,13 @@
 				A3E469F0175482AA00A31586 /* MCRandomSolveViewInputControllerViewController.m in Sources */,
 				A392B237175484BF0091BFE9 /* MCRestoreModelController.m in Sources */,
 				A3D5B2E0175C590B00833F3F /* MCSystemSettingViewController.m in Sources */,
+<<<<<<< HEAD
 				A3DDBAE51760298E000361F1 /* SoundSettingController.m in Sources */,
 				A335C3BE1761C60700DA18EE /* MCSoundBoard.m in Sources */,
+=======
+				A3DDBAE51760298E000361F1 /* SoundSeetingController.m in Sources */,
+				E02B1B2B17617A2800FA01ED /* MCLearn.m in Sources */,
+>>>>>>> 19e7f119139008c3d0120c0f908521593ce1214c
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1449,6 +1459,7 @@
 				);
 				New_Setting = "";
 				PRODUCT_NAME = MCGame;
+				RUN_CLANG_STATIC_ANALYZER = YES;
 				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Debug;
@@ -1468,6 +1479,7 @@
 				);
 				New_Setting = "";
 				PRODUCT_NAME = MCGame;
+				RUN_CLANG_STATIC_ANALYZER = YES;
 				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Release;

@@ -117,7 +117,7 @@
         {
             NSLog(@"requestViewChangeByObject:kHeroBoard");
             userManagerSystemViewController = [[[UserManagerSystemViewController alloc] initWithNibName:@"UserManagerSystemViewController" bundle:nil] autorelease];
-            [[currentController inputController]presentModalViewController:userManagerSystemViewController animated:YES];
+            [[currentController inputController] presentModalViewController:userManagerSystemViewController animated:YES];
             //[currentController.inputController resignFirstResponder];
             
         }

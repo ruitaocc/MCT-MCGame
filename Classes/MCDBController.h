@@ -10,6 +10,7 @@
 #import "sqlite3.h"
 #import "MCUser.h"
 #import "MCScore.h"
+#import "MCLearn.h"
 
 #define DBName @"MCDatabase.sqlite3"
 
@@ -27,5 +28,8 @@
 - (NSMutableArray*) queryTopScore;
 - (NSMutableArray*) queryMyScore:(NSInteger)_userID;
 
+- (void) insertLearn:(MCLearn*)_learn;
+
 - (void)insertScoreUpdateUser:(MCScore*)_score;
+- (void)insertLearnUpdateUser:(MCLearn*)_learn;
 @end
