@@ -7,9 +7,16 @@
 //
 
 #import "FinishView.h"
+#import "PopChangeUserViewController.h"
+
 #define BLACK_BAR_COMPONENTS_Finish				{ 0.22, 0.22, 0.22, 1.0, 0.07, 0.07, 0.07, 1.0 }
 @implementation FinishView
 @synthesize viewLoadedFromXib,finishViewType;
+@synthesize changeUserPopover = _changeUserPopover;
+@synthesize lastingTime;
+@synthesize userNameEditField;
+@synthesize learningTimeLabel;
+@synthesize learningStepCountLabel;
 
 - (id)initWithFrame:(CGRect)frame title:(NSString *)title{
     if ((self = [super initWithFrame:frame])) {
@@ -53,39 +60,127 @@
         
         // The header label, a UILabel with the same frame as the titleBar
         [self headerLabel].font = [UIFont boldSystemFontOfSize:floor(self.titleBarHeight / 2.0)];
-    }
-    
-    
-    [[NSBundle mainBundle] loadNibNamed:@"myFinishView" owner:self options:nil];
-    
-    [self.contentView addSubview:viewLoadedFromXib];
-    
+        
+        [[NSBundle mainBundle] loadNibNamed:@"myFinishView" owner:self options:nil];
+        
+        [self.contentView addSubview:viewLoadedFromXib];
+        
+        // Set user name.
+        [self updateUserName];
+        
+        // Init panel for choosing user
+        PopChangeUserViewController *contentForChangeUser = [[PopChangeUserViewController alloc] init];
+        _changeUserPopover = [[UIPopoverController alloc] initWithContentViewController:contentForChangeUser];
+        _changeUserPopover.popoverContentSize = CGSizeMake(320., 216.);
+        _changeUserPopover.delegate = self;
+        [contentForChangeUser release];
+    }    
 	return self;
 
 };
+
 - (IBAction)goBackBtnPressed:(id)sender{
-    finishViewType = kFinishView_GoBack;
-    if ([delegate respondsToSelector:@selector(shouldCloseModalPanel:)]) {
-		if ([delegate shouldCloseModalPanel:self]) {
-			UADebugLog(@"Closing using delegates for modalPanel: %@", self);
-			[self hide];
-		}
+    if ([self insertRecord]) {
+        finishViewType = kFinishView_GoBack;
+        if ([delegate respondsToSelector:@selector(shouldCloseModalPanel:)]) {
+            if ([delegate shouldCloseModalPanel:self]) {
+                UADebugLog(@"Closing using delegates for modalPanel: %@", self);
+                [self hide];
+            }
+        }
     }
 };
-- (IBAction)changeNameBtnPressed:(id)sender{};
-- (IBAction)oneMoreBtnPressed:(id)sender{};
-- (IBAction)goCountingBtnPressed:(id)sender{};
-- (IBAction)shareBtnPressed:(id)sender{};
+
+- (IBAction)oneMoreBtnPressed:(id)sender{
+    if ([self insertRecord]) {
+        // append here
+    }
+};
+
+- (IBAction)goCountingBtnPressed:(id)sender{
+    if ([self insertRecord]) {
+        // append here
+    }
+};
+
+- (IBAction)shareBtnPressed:(id)sender{
+    if ([self insertRecord]) {
+        // append here
+    }
+};
+
+- (IBAction)changeUserBtn:(id)sender {
+    UIButton *tapbtn = (UIButton*)sender;
+    
+    [_changeUserPopover presentPopoverFromRect:tapbtn.frame inView:self permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+}
+
 - (void)dealloc {
 	[viewLoadedFromXib release];
+    [userNameEditField release];
+    [_changeUserPopover release];
+    [learningTimeLabel release];
+    [learningStepCountLabel release];
+    [_changeUserBtn release];
     [super dealloc];
 }
+
 - (void)layoutSubviews {
 	[super layoutSubviews];
 	
 	[viewLoadedFromXib setFrame:self.contentView.bounds];
 }
+
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
+}
+
+
+
+/* Called on the delegate when the user has taken action to dismiss the popover. This is not called when -dismissPopoverAnimated: is called directly.
+ */
+- (void)popoverControllerDidDismissPopover:(UIPopoverController *)popoverController{
+    // Update user name
+    [self updateUserName];
+}
+
+
+- (void)updateUserName{
+    // Set current user name
+    MCUserManagerController *userManagerController = [MCUserManagerController sharedInstance];
+    if (userManagerController.userModel.currentUser.name == nil || [userManagerController.userModel.currentUser.name compare:@""] != NSOrderedSame) {
+        self.userNameEditField.text = userManagerController.userModel.currentUser.name;
+    }
+    
+    // If no user, set change btn invalide.
+    if ([userManagerController.userModel.allUser count] < 2) {
+        [self.changeUserBtn removeFromSuperview];
+    }
+}
+
+- (BOOL)insertRecord{
+    if ([self.userNameEditField.text compare:@""] == NSOrderedSame) {
+        // Alter nil
+        UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"用户名不能为空" message:@"你所输入的用户名为空,请输入其他再试一次" delegate:nil cancelButtonTitle:@"好的" otherButtonTitles:nil, nil];
+        [alert show];
+        return NO;
+    }
+    
+    // While closing, save time and step date.
+    MCUserManagerController *userManagerController = [MCUserManagerController sharedInstance];
+    
+    if (userManagerController.userModel.currentUser.name != nil && [userManagerController.userModel.currentUser.name compare:self.userNameEditField.text] == NSOrderedSame) {
+        [userManagerController createNewLearnWithMove:self.stepCount Time:self.lastingTime];
+    }
+    else{
+        // New user, create it.
+        [userManagerController createNewUser:self.userNameEditField.text];
+        [userManagerController createNewLearnWithMove:self.stepCount Time:self.lastingTime];
+    }
+    
+    // Save current user name.
+    [userManagerController saveCurrentUser];
+    
+    return  YES;
 }
 
 

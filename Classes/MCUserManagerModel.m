@@ -30,9 +30,18 @@ static MCUserManagerModel* sharedSingleton_ = nil;
 
 +(id)allocWithZone:(NSZone *)zone
 {
-    return [[MCUserManagerModel sharedInstance] retain];
+    return [MCUserManagerModel sharedInstance];
 }
 
+- (id)copy
+{
+    return self;
+}
+
+-(id)retain
+{
+    return self;
+}
 
 
 - (id)init

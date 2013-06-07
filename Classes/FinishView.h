@@ -18,18 +18,29 @@
  */
 #import "UATitledModalPanel.h"
 #import "MCConfiguration.h"
-@interface FinishView : UATitledModalPanel{
+@interface FinishView : UATitledModalPanel <UIPopoverControllerDelegate>{
     FinishViewType finishViewType;
-    IBOutlet UIView	*viewLoadedFromXib;
 }
 @property (nonatomic, retain) IBOutlet UIView *viewLoadedFromXib;
 @property (nonatomic, assign) FinishViewType finishViewType;
+@property (retain, nonatomic) IBOutlet UITextField *userNameEditField;
+@property (retain, nonatomic) UIPopoverController *changeUserPopover;
+@property (retain, nonatomic) IBOutlet UILabel *learningTimeLabel;
+@property (retain, nonatomic) IBOutlet UILabel *learningStepCountLabel;
+@property (nonatomic) long lastingTime;
+@property (nonatomic) NSInteger stepCount;
+@property (retain, nonatomic) IBOutlet UIButton *changeUserBtn;
 
 - (id)initWithFrame:(CGRect)frame title:(NSString *)title;
+
 - (IBAction)goBackBtnPressed:(id)sender;
-- (IBAction)changeNameBtnPressed:(id)sender;
+
 - (IBAction)oneMoreBtnPressed:(id)sender;
+
 - (IBAction)goCountingBtnPressed:(id)sender;
+
 - (IBAction)shareBtnPressed:(id)sender;
+
+- (IBAction)changeUserBtn:(id)sender;
 
 @end

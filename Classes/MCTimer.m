@@ -134,5 +134,16 @@
     [separater22 release];
     [super dealloc];
 };
+
+
+- (NSString *)description{
+    if (m_hour.m_counterValue != 0) {
+        return [NSString stringWithFormat:@"%d小时%d分钟%d秒", m_hour.m_counterValue, m_minute.m_counterValue, m_second.m_counterValue];
+    }
+    if (m_minute.m_counterValue != 0) {
+        return [NSString stringWithFormat:@"%d分%d秒", m_minute.m_counterValue, m_second.m_counterValue];
+    }
+    return [NSString stringWithFormat:@"%d秒", m_second.m_counterValue];
+}
                                       
 @end

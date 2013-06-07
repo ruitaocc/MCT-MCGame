@@ -31,8 +31,9 @@ static MCUserManagerController* sharedSingleton_ = nil;
 
 +(id)allocWithZone:(NSZone *)zone
 {
-    return [[MCUserManagerController sharedInstance] retain];
+    return [MCUserManagerController sharedInstance];
 }
+
 
 - (id)copy
 {
@@ -43,6 +44,7 @@ static MCUserManagerController* sharedSingleton_ = nil;
 {
     return self;
 }
+
 
 - (NSUInteger)retainCount
 {

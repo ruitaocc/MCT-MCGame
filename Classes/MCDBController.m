@@ -24,7 +24,7 @@ static MCDBController* sharedSingleton_ = nil;
 
 +(id)allocWithZone:(NSZone *)zone
 {
-    return [[MCDBController sharedInstance] retain];
+    return [MCDBController sharedInstance];
 }
 
 - (id)copy
