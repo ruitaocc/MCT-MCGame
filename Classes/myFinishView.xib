@@ -2012,6 +2012,7 @@
 					<string key="className">FinishView</string>
 					<string key="superclassName">UATitledModalPanel</string>
 					<dictionary class="NSMutableDictionary" key="actions">
+						<string key="changeNameBtnPressed:">id</string>
 						<string key="changeUserBtn:">id</string>
 						<string key="goBackBtnPressed:">id</string>
 						<string key="goCountingBtnPressed:">id</string>
@@ -2019,6 +2020,10 @@
 						<string key="shareBtnPressed:">id</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="actionInfosByName">
+						<object class="IBActionInfo" key="changeNameBtnPressed:">
+							<string key="name">changeNameBtnPressed:</string>
+							<string key="candidateClassName">id</string>
+						</object>
 						<object class="IBActionInfo" key="changeUserBtn:">
 							<string key="name">changeUserBtn:</string>
 							<string key="candidateClassName">id</string>
