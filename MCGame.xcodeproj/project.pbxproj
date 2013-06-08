@@ -48,6 +48,7 @@
 		A3359E62168E9764002F9459 /* sr_refresh.png in Resources */ = {isa = PBXBuildFile; fileRef = A3359E5C168E9764002F9459 /* sr_refresh.png */; };
 		A3359E63168E9764002F9459 /* sr_refresh@2X.png in Resources */ = {isa = PBXBuildFile; fileRef = A3359E5D168E9764002F9459 /* sr_refresh@2X.png */; };
 		A3359E6B168EB6A7002F9459 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = A3359E6A168EB6A7002F9459 /* MBProgressHUD.m */; };
+		A335C3D817620B1B00DA18EE /* dididi.wav in Resources */ = {isa = PBXBuildFile; fileRef = A335C3D717620B1B00DA18EE /* dididi.wav */; };
 		A358750F161F146000998085 /* ButtonMerged.plist in Resources */ = {isa = PBXBuildFile; fileRef = A358750D161F146000998085 /* ButtonMerged.plist */; };
 		A3587515161F2C3000998085 /* ButtonMerged.png in Resources */ = {isa = PBXBuildFile; fileRef = A3587514161F2C3000998085 /* ButtonMerged.png */; };
 		A3587518161F355400998085 /* MainWindow-iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = A3587517161F355400998085 /* MainWindow-iPad.xib */; };
@@ -263,6 +264,7 @@
 		A3359E5D168E9764002F9459 /* sr_refresh@2X.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "sr_refresh@2X.png"; path = "Classes/sr_refresh@2X.png"; sourceTree = "<group>"; };
 		A3359E69168EB6A7002F9459 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
 		A3359E6A168EB6A7002F9459 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
+		A335C3D717620B1B00DA18EE /* dididi.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = dididi.wav; sourceTree = "<group>"; };
 		A358750D161F146000998085 /* ButtonMerged.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = ButtonMerged.plist; sourceTree = "<group>"; };
 		A3587514161F2C3000998085 /* ButtonMerged.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ButtonMerged.png; sourceTree = "<group>"; };
 		A3587517161F355400998085 /* MainWindow-iPad.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = "MainWindow-iPad.xib"; path = "iPad/MainWindow-iPad.xib"; sourceTree = "<group>"; };
@@ -1146,6 +1148,7 @@
 			isa = PBXGroup;
 			children = (
 				E0A7F6DA176204B400B285D4 /* backgroundLoop.m4a */,
+				A335C3D717620B1B00DA18EE /* dididi.wav */,
 				E0A7F6DB176204B400B285D4 /* ding.wav */,
 				E0A7F6DC176204B400B285D4 /* loop.mp3 */,
 				E0A7F6DD176204B400B285D4 /* play.mp3 */,
@@ -1289,6 +1292,7 @@
 				E0A7F6E1176204B400B285D4 /* loop.mp3 in Resources */,
 				E0A7F6E2176204B400B285D4 /* play.mp3 in Resources */,
 				E0A7F6E3176204B400B285D4 /* Start.caf in Resources */,
+				A335C3D817620B1B00DA18EE /* dididi.wav in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1306,7 +1310,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "export CODESIGN_ALLOCATE=/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/codesign_allocate\nif [ \"${PLATFORM_NAME}\" == \"iphoneos\" ] || [ \"${PLATFORM_NAME}\" == \"ipados\" ]; then\n/Applications/Xcode.app/Contents/Developer/iphoneentitlements/gen_entitlements.py \"my.company.${PROJECT_NAME}\" \"${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}/${PROJECT_NAME}.xcent\";\ncodesign -f -s \"iPhone Developer\" --entitlements \"${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}/${PROJECT_NAME}.xcent\" \"${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}/\"\nfi";
+			shellScript = "export CODESIGN_ALLOCATE=/Users/kwanterry/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/codesign_allocate\nif [ \"${PLATFORM_NAME}\" == \"iphoneos\" ] || [ \"${PLATFORM_NAME}\" == \"ipados\" ]; then\n/Applications/Xcode.app/Contents/Developer/iphoneentitlements/gen_entitlements.py \"my.company.${PROJECT_NAME}\" \"${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}/${PROJECT_NAME}.xcent\";\ncodesign -f -s \"iPhone Developer\" --entitlements \"${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}/${PROJECT_NAME}.xcent\" \"${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}/\"\nfi";
 		};
 /* End PBXShellScriptBuildPhase section */
 

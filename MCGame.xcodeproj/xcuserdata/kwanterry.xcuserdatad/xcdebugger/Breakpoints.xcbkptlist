@@ -176,19 +176,6 @@
          shouldBeEnabled = "Yes"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
-         filePath = "Classes/FinishView.m"
-         timestampString = "391411229.298826"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "71"
-         endingLineNumber = "71"
-         landmarkName = "-goBackBtnPressed:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "Yes"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
          filePath = "Classes/MCNormalPlayInputViewController.m"
          timestampString = "391411245.87738"
          startingColumnNumber = "9223372036854775807"
@@ -390,19 +377,6 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "350"
          endingLineNumber = "350"
-         landmarkName = "-update"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "Yes"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "Classes/MCMagicCubeUIModelController.m"
-         timestampString = "391961152.401975"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "549"
-         endingLineNumber = "549"
          landmarkName = "-update"
          landmarkType = "5">
       </FileBreakpoint>

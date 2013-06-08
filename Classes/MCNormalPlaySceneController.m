@@ -13,6 +13,7 @@
 #import "MCCollisionController.h"
 #import "MCNormalPlayInputViewController.h"
 #import "MCStringDefine.h"
+#import "SoundSettingController.h"
 @implementation MCNormalPlaySceneController
 @synthesize magicCube;
 @synthesize playHelper;
@@ -109,6 +110,9 @@
     }
     
     [magicCubeUI flashWithState:[ magicCube getColorInOrientationsOfAllCubie]];
+    SoundSettingController *soundsetting = [SoundSettingController sharedsoundSettingController];
+    [soundsetting playSoundForKey:Audio_RotateSound_Ding_key];
+
 }
 
 - (void) rotateOnAxis : (AxisType)axis onLayer: (int)layer inDirection: (LayerRotationDirectionType)direction isTribleRotate:(BOOL)is_trible_roate{
@@ -118,7 +122,7 @@
     //[playHelper rotateWithSingmasterNotation:notation];
     
     [magicCubeUI rotateOnAxis:axis onLayer:layer inDirection:direction isTribleRotate:NO];
-    //NSLog(@"notation:%@",[MCTransformUtil getRotationTagFromSingmasterNotation:notation]);
+        //NSLog(@"notation:%@",[MCTransformUtil getRotationTagFromSingmasterNotation:notation]);
     //NSLog(@"axis = %d,layer = %d,direction= %d",axis,layer,direction);
 }
 -(void)showQueue{

@@ -40,8 +40,8 @@
 #define S_L_BackGroundMusicSwitch @"背景音乐开关"
 
 //音效音乐配置
-#define Audio_RotateSound_Ding @"ding.wav"
-#define Audio_RotateSound_Ding_key @"ding"
+#define Audio_RotateSound_Ding @"dididi.wav"
+#define Audio_RotateSound_Ding_key @"dididi"
 #define Audio_BackGroundSound_Loop @"loop.mp3"
 #define Audio_BackGroundSound_Loop_key @"loop"
 
