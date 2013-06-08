@@ -238,6 +238,21 @@ struct RotationStruct {
 
 //#define ONLY_TEST
 
+//Popup item attr------------------------------------------------------------------------------
+
+
+#define POPUP_ITEM_WINDOW_SIZE_RATIO 0.1
+#define K_QUADCURVE_MENU_DEFAULT_NEAR_RADIUS 95.0f
+#define K_QUADCURVE_MENU_DEFAULT_END_RADIUS 100.0f
+#define K_QUADCURVE_MENU_DEFAULT_FAR_RADIUS 110.0f
+#define K_QUADCURVE_MENU_DEFAULT_TIME_OFFSET 0.036
+#define K_QUADCURVE_MENU_DEFAULT_ROTATE_ANGLE 0.0
+#define K_QUADCURVE_MENU_DEFAULT_WHOLE_ANGLE 3.1415926535898 * 2
+#define K_QUADCURVE_MENU_DEFAULT_SELECT_ANIM_LAST_TIME 0.3f
+#define K_QUADCURVE_MENU_DEFAULT_OPEN_ANIM_LAST_TIME 0.3f
+#define K_QUADCURVE_MENU_DEFAULT_CLOSE_ANIM_LAST_TIME 0.2f
+
+
 //-------------------------------------------------------------------------------------------
 
 #endif

@@ -19,8 +19,7 @@
 @synthesize playHelper;
 @synthesize tipsLabel = _tipsLabel;
 @synthesize isShowQueue;
-+(MCNormalPlaySceneController*)sharedNormalPlaySceneController
-{
++(MCNormalPlaySceneController*)sharedNormalPlaySceneController{
     static MCNormalPlaySceneController *sharedNormalPlaySceneController;
     @synchronized(self)
     {
