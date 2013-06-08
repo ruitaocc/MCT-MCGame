@@ -183,6 +183,10 @@
 		A3F8292216F181BD00AC5EAF /* RotateType.m in Sources */ = {isa = PBXBuildFile; fileRef = A3F8292116F181BC00AC5EAF /* RotateType.m */; };
 		E011D38B1762D23600F0B02E /* QuadCurveMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = E011D3881762D23600F0B02E /* QuadCurveMenu.m */; };
 		E011D38C1762D23600F0B02E /* QuadCurveMenuItem.m in Sources */ = {isa = PBXBuildFile; fileRef = E011D38A1762D23600F0B02E /* QuadCurveMenuItem.m */; };
+		E0167DAA176373B400F420E8 /* MCActionPerformer.m in Sources */ = {isa = PBXBuildFile; fileRef = E0167DA1176373B400F420E8 /* MCActionPerformer.m */; };
+		E0167DAB176373B400F420E8 /* MCExplanationSystem.m in Sources */ = {isa = PBXBuildFile; fileRef = E0167DA3176373B400F420E8 /* MCExplanationSystem.m */; };
+		E0167DAC176373B400F420E8 /* MCInferenceEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = E0167DA5176373B400F420E8 /* MCInferenceEngine.m */; };
+		E0167DAD176373B400F420E8 /* MCWorkingMemory.m in Sources */ = {isa = PBXBuildFile; fileRef = E0167DA9176373B400F420E8 /* MCWorkingMemory.m */; };
 		E04E7E8717410E8E00403E92 /* MCCompositeRotationUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = E04E7E8617410E8E00403E92 /* MCCompositeRotationUtil.m */; };
 		E0A7F6D21762042600B285D4 /* MCLearn.m in Sources */ = {isa = PBXBuildFile; fileRef = E0A7F6D11762042600B285D4 /* MCLearn.m */; };
 		E0A7F6D71762047B00B285D4 /* MCSoundBoard.m in Sources */ = {isa = PBXBuildFile; fileRef = E0A7F6D41762047B00B285D4 /* MCSoundBoard.m */; };
@@ -194,10 +198,6 @@
 		E0A7F6E3176204B400B285D4 /* Start.caf in Resources */ = {isa = PBXBuildFile; fileRef = E0A7F6DE176204B400B285D4 /* Start.caf */; };
 		E0A7F6E51762056200B285D4 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E0A7F6E41762056200B285D4 /* AVFoundation.framework */; };
 		E0A7F6E71762056C00B285D4 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E0A7F6E61762056C00B285D4 /* AudioToolbox.framework */; };
-		E0B0FEA517636C23005D58D7 /* MCActionPerformer.m in Sources */ = {isa = PBXBuildFile; fileRef = E0B0FE9E17636C22005D58D7 /* MCActionPerformer.m */; };
-		E0B0FEA617636C23005D58D7 /* MCExplanationSystem.m in Sources */ = {isa = PBXBuildFile; fileRef = E0B0FEA017636C23005D58D7 /* MCExplanationSystem.m */; };
-		E0B0FEA717636C23005D58D7 /* MCInferenceEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = E0B0FEA217636C23005D58D7 /* MCInferenceEngine.m */; };
-		E0B0FEA817636C23005D58D7 /* MCWorkingMemory.m in Sources */ = {isa = PBXBuildFile; fileRef = E0B0FEA417636C23005D58D7 /* MCWorkingMemory.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -447,6 +447,16 @@
 		E011D3881762D23600F0B02E /* QuadCurveMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QuadCurveMenu.m; sourceTree = "<group>"; };
 		E011D3891762D23600F0B02E /* QuadCurveMenuItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QuadCurveMenuItem.h; sourceTree = "<group>"; };
 		E011D38A1762D23600F0B02E /* QuadCurveMenuItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QuadCurveMenuItem.m; sourceTree = "<group>"; };
+		E0167DA0176373B400F420E8 /* MCActionPerformer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCActionPerformer.h; sourceTree = "<group>"; };
+		E0167DA1176373B400F420E8 /* MCActionPerformer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCActionPerformer.m; sourceTree = "<group>"; };
+		E0167DA2176373B400F420E8 /* MCExplanationSystem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCExplanationSystem.h; sourceTree = "<group>"; };
+		E0167DA3176373B400F420E8 /* MCExplanationSystem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCExplanationSystem.m; sourceTree = "<group>"; };
+		E0167DA4176373B400F420E8 /* MCInferenceEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCInferenceEngine.h; sourceTree = "<group>"; };
+		E0167DA5176373B400F420E8 /* MCInferenceEngine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCInferenceEngine.m; sourceTree = "<group>"; };
+		E0167DA6176373B400F420E8 /* MCMagicCubeDataSouceDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCMagicCubeDataSouceDelegate.h; sourceTree = "<group>"; };
+		E0167DA7176373B400F420E8 /* MCMagicCubeOperationDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCMagicCubeOperationDelegate.h; sourceTree = "<group>"; };
+		E0167DA8176373B400F420E8 /* MCWorkingMemory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCWorkingMemory.h; sourceTree = "<group>"; };
+		E0167DA9176373B400F420E8 /* MCWorkingMemory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCWorkingMemory.m; sourceTree = "<group>"; };
 		E04E7E8517410E8E00403E92 /* MCCompositeRotationUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCCompositeRotationUtil.h; sourceTree = "<group>"; };
 		E04E7E8617410E8E00403E92 /* MCCompositeRotationUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCCompositeRotationUtil.m; sourceTree = "<group>"; };
 		E0A7F6D01762042600B285D4 /* MCLearn.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCLearn.h; sourceTree = "<group>"; };
@@ -462,16 +472,6 @@
 		E0A7F6DE176204B400B285D4 /* Start.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Start.caf; sourceTree = "<group>"; };
 		E0A7F6E41762056200B285D4 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		E0A7F6E61762056C00B285D4 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
-		E0B0FE9D17636C22005D58D7 /* MCActionPerformer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCActionPerformer.h; sourceTree = "<group>"; };
-		E0B0FE9E17636C22005D58D7 /* MCActionPerformer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCActionPerformer.m; sourceTree = "<group>"; };
-		E0B0FE9F17636C23005D58D7 /* MCExplanationSystem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCExplanationSystem.h; sourceTree = "<group>"; };
-		E0B0FEA017636C23005D58D7 /* MCExplanationSystem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCExplanationSystem.m; sourceTree = "<group>"; };
-		E0B0FEA117636C23005D58D7 /* MCInferenceEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCInferenceEngine.h; sourceTree = "<group>"; };
-		E0B0FEA217636C23005D58D7 /* MCInferenceEngine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCInferenceEngine.m; sourceTree = "<group>"; };
-		E0B0FEA317636C23005D58D7 /* MCWorkingMemory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCWorkingMemory.h; sourceTree = "<group>"; };
-		E0B0FEA417636C23005D58D7 /* MCWorkingMemory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCWorkingMemory.m; sourceTree = "<group>"; };
-		E0B0FEA917636C3D005D58D7 /* MCMagicCubeDataSouceDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCMagicCubeDataSouceDelegate.h; sourceTree = "<group>"; };
-		E0B0FEAA17636C3D005D58D7 /* MCMagicCubeOperationDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCMagicCubeOperationDelegate.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -563,8 +563,6 @@
 		A309D8F7165F867800CDA1DC /* DataModel */ = {
 			isa = PBXGroup;
 			children = (
-				E0B0FEA917636C3D005D58D7 /* MCMagicCubeDataSouceDelegate.h */,
-				E0B0FEAA17636C3D005D58D7 /* MCMagicCubeOperationDelegate.h */,
 				A3EAD3D41713C18A00A95ADA /* Global.h */,
 				A3EAD3D51713C18A00A95ADA /* MCCubie.h */,
 				A3EAD3D61713C18A00A95ADA /* MCCube.m */,
@@ -572,6 +570,8 @@
 				A3EAD3D81713C18A00A95ADA /* MCMagicCube.m */,
 				A306688D17471F3A00F6004F /* MCMagicCubeDelegate.h */,
 				A306688C17471F2D00F6004F /* MCCubieDelegate.h */,
+				E0167DA6176373B400F420E8 /* MCMagicCubeDataSouceDelegate.h */,
+				E0167DA7176373B400F420E8 /* MCMagicCubeOperationDelegate.h */,
 				A3F8291516EF798C00AC5EAF /* Util */,
 				A3F8290B16EF796900AC5EAF /* MCPlayHelper */,
 				A3F828F316EF78E000AC5EAF /* Resource */,
@@ -1112,14 +1112,14 @@
 		A3F8290B16EF796900AC5EAF /* MCPlayHelper */ = {
 			isa = PBXGroup;
 			children = (
-				E0B0FE9D17636C22005D58D7 /* MCActionPerformer.h */,
-				E0B0FE9E17636C22005D58D7 /* MCActionPerformer.m */,
-				E0B0FE9F17636C23005D58D7 /* MCExplanationSystem.h */,
-				E0B0FEA017636C23005D58D7 /* MCExplanationSystem.m */,
-				E0B0FEA117636C23005D58D7 /* MCInferenceEngine.h */,
-				E0B0FEA217636C23005D58D7 /* MCInferenceEngine.m */,
-				E0B0FEA317636C23005D58D7 /* MCWorkingMemory.h */,
-				E0B0FEA417636C23005D58D7 /* MCWorkingMemory.m */,
+				E0167DA0176373B400F420E8 /* MCActionPerformer.h */,
+				E0167DA1176373B400F420E8 /* MCActionPerformer.m */,
+				E0167DA2176373B400F420E8 /* MCExplanationSystem.h */,
+				E0167DA3176373B400F420E8 /* MCExplanationSystem.m */,
+				E0167DA4176373B400F420E8 /* MCInferenceEngine.h */,
+				E0167DA5176373B400F420E8 /* MCInferenceEngine.m */,
+				E0167DA8176373B400F420E8 /* MCWorkingMemory.h */,
+				E0167DA9176373B400F420E8 /* MCWorkingMemory.m */,
 				A3EAD3DE1713C1AF00A95ADA /* MCKnowledgeBase.h */,
 				A3EAD3DF1713C1AF00A95ADA /* MCKnowledgeBase.m */,
 				A33032CD1726B1C400BAD2DE /* MCPlayHelper.h */,
@@ -1434,13 +1434,10 @@
 				E0A7F6D81762047B00B285D4 /* SoundSettingController.m in Sources */,
 				E011D38B1762D23600F0B02E /* QuadCurveMenu.m in Sources */,
 				E011D38C1762D23600F0B02E /* QuadCurveMenuItem.m in Sources */,
-<<<<<<< HEAD
-=======
-				E0B0FEA517636C23005D58D7 /* MCActionPerformer.m in Sources */,
-				E0B0FEA617636C23005D58D7 /* MCExplanationSystem.m in Sources */,
-				E0B0FEA717636C23005D58D7 /* MCInferenceEngine.m in Sources */,
-				E0B0FEA817636C23005D58D7 /* MCWorkingMemory.m in Sources */,
->>>>>>> new-for-3D-input
+				E0167DAA176373B400F420E8 /* MCActionPerformer.m in Sources */,
+				E0167DAB176373B400F420E8 /* MCExplanationSystem.m in Sources */,
+				E0167DAC176373B400F420E8 /* MCInferenceEngine.m in Sources */,
+				E0167DAD176373B400F420E8 /* MCWorkingMemory.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1464,11 +1461,7 @@
 				);
 				New_Setting = "";
 				PRODUCT_NAME = MCGame;
-<<<<<<< HEAD
-				RUN_CLANG_STATIC_ANALYZER = NO;
-=======
 				RUN_CLANG_STATIC_ANALYZER = YES;
->>>>>>> new-for-3D-input
 				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Debug;
@@ -1488,11 +1481,7 @@
 				);
 				New_Setting = "";
 				PRODUCT_NAME = MCGame;
-<<<<<<< HEAD
-				RUN_CLANG_STATIC_ANALYZER = NO;
-=======
 				RUN_CLANG_STATIC_ANALYZER = YES;
->>>>>>> new-for-3D-input
 				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Release;

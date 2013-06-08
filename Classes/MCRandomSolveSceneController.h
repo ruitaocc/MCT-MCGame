@@ -11,13 +11,9 @@
 #import "RotateType.h"
 #import "MCPlayHelper.h"
 #import "MCCollisionController.h"
-<<<<<<< HEAD
 #import "MCMagicCubeUIModelController.h"
 #import "MCPoint.h"
-=======
 
-
->>>>>>> new-for-3D-input
 @interface MCRandomSolveSceneController : sceneController{
     MCMagicCubeUIModelController* magicCubeUI;
     MCMagicCube * magicCube;
