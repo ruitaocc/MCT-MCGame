@@ -136,7 +136,6 @@
         NSArray *lockArray = [applyResult objectForKey:KEY_LOCKED_CUBIES];
         NSLog(@"applyRuleRotation:%@", [actionqueue description]);
         while([actionqueue count]==0){
-            [playHelper clearResidualActions];
             applyResult = [playHelper applyRules];
             actionqueue = [applyResult objectForKey:KEY_ROTATION_QUEUE];
             tipStrArray = [applyResult objectForKey:KEY_TIPS];
@@ -176,15 +175,11 @@
             //NSArray *actionAry = [playHelper.applyQueue getExtraQueueWithStringFormat];
             //NSLog(@"%@",  [actionAry description]);
             
-            NSMutableArray *actionAry = [[NSMutableArray alloc]init];
-            for (NSNumber *rotation in playHelper.applyQueue.extraRotations) {
-                [actionAry addObject: [MCTransformUtil getRotationTagFromSingmasterNotation:(SingmasterNotation)[rotation integerValue]]];
-            }
+            NSArray *actionAry = [playHelper extraQueue];
             [[self tipsLabel]setText:Disaccord_Msg];
              [[self tipsLabel]setTextColor:[UIColor redColor]];
             NSLog(@"extraRotation:%@", [actionAry description]);
             [[input_C actionQueue] insertQueueCurrentIndexWithNmaeList:actionAry];
-            
         }else if (result==StayForATime){
             NSLog(@"result : StayForATime");
             [[self tipsLabel]setText:StayForATime_Msg];
@@ -192,8 +187,6 @@
             //do nothing
         }else if (result ==Finished){
             NSLog(@"result : Finished");
-            //先清空数据模型对队列。
-            [playHelper clearResidualActions];
             //结束，清空当前队列
             [[input_C actionQueue]removeAllActions];
             //重新加载队列，applyRules ,
@@ -203,7 +196,6 @@
             NSArray *lockArray = [applyResult objectForKey:KEY_LOCKED_CUBIES];
             NSLog(@"applyRuleRotation:%@", [actionqueue description]);
             while([actionqueue count]==0){
-                [playHelper clearResidualActions];
                 applyResult = [playHelper applyRules];
                 actionqueue = [applyResult objectForKey:KEY_ROTATION_QUEUE];
                 tipStrArray = [applyResult objectForKey:KEY_TIPS];

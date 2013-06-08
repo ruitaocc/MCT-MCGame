@@ -135,7 +135,8 @@
     [super dealloc];
 }
 
-- (void)rotateOnAxis:(AxisType)axis onLayer:(int)layer inDirection:(LayerRotationDirectionType)direction{
+- (BOOL)rotateOnAxis:(AxisType)axis onLayer:(int)layer inDirection:(LayerRotationDirectionType)direction{
+    if (layer < 0 || layer > 2 || (direction != CW && direction != CCW)) return NO;
     MCCubie *layerCubes[9];
     switch (axis) {
         case X:
@@ -172,7 +173,7 @@
             }
             break;
         default:
-            break;
+            return NO;
     }
     
     //refresh pointer
@@ -231,13 +232,13 @@
                     orientationToMagicCubeFace[Left] = tmp;
                 }
                 break;
-            default:
-                break;
         }
     }
+    
+    return YES;
 }   //rotate operation
 
-- (void)rotateWithSingmasterNotation:(SingmasterNotation)notation{
+- (BOOL)rotateWithSingmasterNotation:(SingmasterNotation)notation{
     switch (notation) {
         case F:
             [self rotateOnAxis:Z onLayer:2 inDirection:CW];
@@ -468,8 +469,9 @@
             [self rotateOnAxis:Z onLayer:1 inDirection:CW];
             break;
         default:
-            break;
+            return NO;
     }
+    return YES;
 }
 
 - (struct Point3i)coordinateValueOfCubieWithColorCombination:(ColorCombinationType)combination{

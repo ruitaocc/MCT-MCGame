@@ -8,14 +8,12 @@
 
 #import <Foundation/Foundation.h>
 #import "MCMagicCubeDelegate.h"
-#import "MCKnowledgeBase.h"
 #import "Global.h"
 #import "MCBasicElement.h"
 #import "MCApplyQueue.h"
+#import "MCInferenceEngine.h"
+#import "MCExplanationSystem.h"
 
-
-#define DEFAULT_RESIDUAL_ACTION_NUM 3
-#define DEFAULT_PATTERN_ACCORDANCE_MESSAGE_NUM 5
 
 //rotation queue, locked cubies, tips
 #define DEFAULT_ACTION_INFOMATION_NUM 3
@@ -28,55 +26,43 @@ typedef enum _HelperStateMachine {
 
 @interface MCPlayHelper : NSObject
 
-@property(nonatomic, retain)NSObject<MCMagicCubeDelegate> *magicCube;
-@property(nonatomic, retain)NSDictionary *patterns;
-@property(nonatomic, retain)NSDictionary *rules;
-@property(nonatomic, retain)NSDictionary *specialPatterns;
-@property(nonatomic, retain)NSDictionary *specialRules;
-@property(nonatomic, retain)NSDictionary *states;
-@property(nonatomic, retain)NSString *state;
-@property(nonatomic)HelperStateMachine helperState;
-@property(nonatomic, retain)MCApplyQueue *applyQueue;
-@property(nonatomic)RotationResult rotationResult;
-@property(nonatomic, retain)NSMutableArray *residualActions;
-
-//After applying this pattern,
-//intermediate informations will be stored here.
-//However, these informations are those accordant condictions beacuse
-//this pattern maybe not completely corresponding to current state of the rubik's cube.
-@property(nonatomic, retain)NSMutableArray *accordanceMsgs;
+@property (nonatomic) HelperStateMachine helperState;
+@property (nonatomic, retain) MCInferenceEngine *inferenceEngine;
+@property (nonatomic, retain) MCExplanationSystem *explanationSystem;
+@property (nonatomic, retain) MCActionPerformer *actionPerformer;
 
 
-+ (MCPlayHelper *)playerHelperWithMagicCube:(MCMagicCube *)mc;
 
-- (id)initWithMagicCube:(MCMagicCube *)mc;
++ (MCPlayHelper *)playerHelperWithMagicCube:(NSObject<MCMagicCubeDelegate> *)mc;
 
-//see whether the target cubie is at home
-- (BOOL)isCubieAtHomeWithIdentity:(ColorCombinationType)identity;
 
-//rotate operation with axis, layer, direction
-- (void)rotateOnAxis:(AxisType)axis onLayer:(int)layer inDirection:(LayerRotationDirectionType)direction;
+- (id)initPlayerHelperWithMagicCube:(NSObject<MCMagicCubeDelegate> *)mc;
 
-//rotate operation with parameter SingmasterNotation
-- (void)rotateWithSingmasterNotation:(SingmasterNotation)notation;
 
-//get the result of the last rotation
+// Rotate operation with axis, layer, direction
+- (BOOL)rotateOnAxis:(AxisType)axis onLayer:(int)layer inDirection:(LayerRotationDirectionType)direction;
+
+// Rotate operation with parameter SingmasterNotation
+- (BOOL)rotateWithSingmasterNotation:(SingmasterNotation)notation;
+
+// Get the result of the last rotation
 - (RotationResult)getResultOfTheLastRotation;
 
-- (void)reloadRulesAccordingToCurrentStateOfRubiksCube;
+// Do some preparation work before inference.
+- (void)prepare;
 
-//check the current state and return it
-- (NSString *)checkStateFromInit:(BOOL)isCheckStateFromInit;
-
-//apply rules and return actions
-//the result is directory:
-//"RotationQueue"——the rotation queue in array
-//"LockingAt"——an array contains identities(ColorCombinationType) of cubies
-//"Tips"——the strings showing tips
-//      ——the NSArray with several NSString objects
+// Apply rules and return actions
+// the result is directory:
+// "RotationQueue"——the rotation queue in array
+// "LockingAt"——an array contains identities(ColorCombinationType) of cubies
+// "Tips"——the strings showing tips
+//       ——the NSArray with several NSString objects
 - (NSDictionary *)applyRules;
 
-//do the clear thing for next rotation queue
-- (void)clearResidualActions;
+- (NSArray *)extraQueue;
+
+- (NSString *)state;
+
+- (void)setMagicCube:(NSObject<MCMagicCubeDelegate > *)mc;
 
 @end

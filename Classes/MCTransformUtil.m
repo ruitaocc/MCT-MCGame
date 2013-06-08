@@ -8,6 +8,7 @@
 
 #import "MCTransformUtil.h"
 
+
 @implementation MCTransformUtil
 
 + (FaceOrientationType)getContraryOrientation:(FaceOrientationType)orientation{
@@ -173,7 +174,6 @@
         default:
             break;
     }
-    
     
     return notation;
 }
@@ -392,8 +392,7 @@
 }
 
 + (NSString *)getContenFromPatternNode:(MCTreeNode *)node
-                  accordingToMagicCube:(NSObject<MCMagicCubeDelegate> *)mc
-                       andLockedCubies:(NSObject<MCCubieDelegate> **)lockedCubies{
+              accordingToWorkingMemory:(MCWorkingMemory *)workingMemory{
     NSString *result = nil;
     
     //Before generate the content,
@@ -407,7 +406,7 @@
         case Home:
         {
             NSMutableString *tmpResult = [NSMutableString stringWithCapacity:24];
-            ColorCombinationType identity;
+            ColorCombinationType identity = ColorCombinationTypeBound;
             MCTreeNode *child;
             for (int i = 0; i < [node.children count]; i++) {
                 //Get the child
@@ -422,7 +421,7 @@
                 }
                 
                 //Add target cubie description
-                [tmpResult appendString:[MCTransformUtil getConcreteDescriptionOfCubie:identity fromMgaicCube:mc]];
+                [tmpResult appendString:[MCTransformUtil getConcreteDescriptionOfCubie:identity fromMgaicCube:workingMemory.magicCube]];
                 
                 if (i < [node.children count] - 1) {
                     [tmpResult appendFormat:@","];
@@ -438,7 +437,7 @@
         case Check:
         {
             NSMutableString *tmpResult = [NSMutableString stringWithCapacity:24];
-            ColorCombinationType targetCubie;
+            ColorCombinationType targetCubie = ColorCombinationTypeBound;
             for (MCTreeNode *subPattern in node.children) {
                 switch (subPattern.value) {
                     case At:
@@ -470,7 +469,7 @@
                         }
                         
                         [tmpResult appendFormat:@"%@在%@",
-                                     [MCTransformUtil getConcreteDescriptionOfCubie:targetCubie fromMgaicCube:mc],
+                                     [MCTransformUtil getConcreteDescriptionOfCubie:targetCubie fromMgaicCube:workingMemory.magicCube],
                                      [MCTransformUtil getPositionDescription:targetPosition]];
                         
                         result = [NSString stringWithString:tmpResult];
@@ -478,8 +477,8 @@
                         break;
                     case ColorBindOrientation:
                     {
-                        FaceOrientationType targetOrientation;
-                        FaceColorType targetColor;
+                        FaceOrientationType targetOrientation = WrongOrientation;
+                        FaceColorType targetColor = NoColor;
                         
                         //First child node - target cubie
                         MCTreeNode *child = [subPattern.children objectAtIndex:0];
@@ -504,13 +503,13 @@
                         if ([subPattern.children count] > 2) {
                             ColorCombinationType targetCubieIdentity = (ColorCombinationType)[(MCTreeNode *)[subPattern.children objectAtIndex:2] value];
                             [tmpResult appendFormat:@"%@%@色面朝%@",
-                             [MCTransformUtil getConcreteDescriptionOfCubie:targetCubieIdentity fromMgaicCube:mc],
-                             [MCTransformUtil getDescriptionOfFaceColorType:targetColor accordingToMagicCube:mc],
+                             [MCTransformUtil getConcreteDescriptionOfCubie:targetCubieIdentity fromMgaicCube:workingMemory.magicCube],
+                             [MCTransformUtil getDescriptionOfFaceColorType:targetColor accordingToMagicCube:workingMemory.magicCube],
                              [MCTransformUtil getDescriptionOfFaceOrientationType:targetOrientation]];
                         }
                         else{
                             [tmpResult appendFormat:@"且%@色面朝%@",
-                                [MCTransformUtil getDescriptionOfFaceColorType:targetColor accordingToMagicCube:mc],
+                                [MCTransformUtil getDescriptionOfFaceColorType:targetColor accordingToMagicCube:workingMemory.magicCube],
                                 [MCTransformUtil getDescriptionOfFaceOrientationType:targetOrientation]];
                             
                         }
@@ -547,7 +546,7 @@
                         }
                         
                         [tmpResult appendFormat:@"%@不在%@",
-                         [MCTransformUtil getConcreteDescriptionOfCubie:targetCubie fromMgaicCube:mc],
+                         [MCTransformUtil getConcreteDescriptionOfCubie:targetCubie fromMgaicCube:workingMemory.magicCube],
                          [MCTransformUtil getPositionDescription:targetPosition]];
                         
                         result = [NSString stringWithString:tmpResult];
@@ -564,10 +563,10 @@
                 [(MCTreeNode *)[node.children objectAtIndex:0] value] == 0) {
                 
                 //Avoid no cubie locked
-                if (lockedCubies[0] == nil) return nil;
+                if ([workingMemory lockerEmptyAtIndex:0]) return nil;
                 
                 //Get the description of target cubie
-                NSString *targetCubie = [MCTransformUtil getConcreteDescriptionOfCubie:[lockedCubies[0] identity] fromMgaicCube:mc];
+                NSString *targetCubie = [MCTransformUtil getConcreteDescriptionOfCubie:[[workingMemory cubieLockedInLockerAtIndex:0]identity] fromMgaicCube:workingMemory.magicCube];
                 
                 //If no nil, return message
                 if (targetCubie != nil) {
@@ -587,11 +586,9 @@
 }
 
 + (NSString *)getNegativeSentenceOfContentFromPatternNode:(MCTreeNode *)node
-                                     accordingToMagicCube:(NSObject<MCMagicCubeDelegate> *)mc
-                                          andLockedCubies:(NSObject<MCCubieDelegate> **)lockedCubies{
+                                 accordingToWorkingMemory:(MCWorkingMemory *)workingMemory{
     NSString *positiveSentence = [MCTransformUtil getContenFromPatternNode:node
-                                                      accordingToMagicCube:mc
-                                                           andLockedCubies:lockedCubies];
+                                                  accordingToWorkingMemory:workingMemory];
     return positiveSentence == nil ? nil : [NSString stringWithFormat:@"%@ 不符合", positiveSentence];
 }
 
@@ -679,7 +676,7 @@
 }
 
 
-+ (NSString *)getConcreteDescriptionOfCubie:(ColorCombinationType)identity fromMgaicCube:(NSObject<MCMagicCubeDelegate> *)mc{
++ (NSString *)getConcreteDescriptionOfCubie:(ColorCombinationType)identity fromMgaicCube:(NSObject<MCMagicCubeDataSouceDelegate> *)mc{
     //Check bounds
     if (identity >= ColorCombinationTypeBound || identity < 0) return @"";
     
@@ -830,7 +827,7 @@
 //Internal method
 //FaceColorType to real color string(Chinese)
 + (NSString *)getDescriptionOfFaceColorType:(FaceColorType)faceColor
-                       accordingToMagicCube:(NSObject<MCMagicCubeDelegate> *)mc{
+                       accordingToMagicCube:(NSObject<MCMagicCubeDataSouceDelegate> *)mc{
     NSString *realColor = [mc getRealColor:faceColor];
     if ([realColor compare:@"Yellow"] == NSOrderedSame) {
         return @"黄";
