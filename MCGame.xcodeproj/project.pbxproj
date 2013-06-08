@@ -53,7 +53,6 @@
 		A3587515161F2C3000998085 /* ButtonMerged.png in Resources */ = {isa = PBXBuildFile; fileRef = A3587514161F2C3000998085 /* ButtonMerged.png */; };
 		A3587518161F355400998085 /* MainWindow-iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = A3587517161F355400998085 /* MainWindow-iPad.xib */; };
 		A37F8812166B876C00B0A59F /* cubeBlack2.png in Resources */ = {isa = PBXBuildFile; fileRef = A37F8811166B876C00B0A59F /* cubeBlack2.png */; };
-		A392B237175484BF0091BFE9 /* MCRestoreModelController.m in Sources */ = {isa = PBXBuildFile; fileRef = A392B235175484BF0091BFE9 /* MCRestoreModelController.m */; };
 		A392B23D17549A5A0091BFE9 /* PopUpInput.xib in Resources */ = {isa = PBXBuildFile; fileRef = A392B23C17549A590091BFE9 /* PopUpInput.xib */; };
 		A3994A0316E3B36F0037DBD0 /* UIView+JMNoise.m in Sources */ = {isa = PBXBuildFile; fileRef = A3994A0216E3B36F0037DBD0 /* UIView+JMNoise.m */; };
 		A3994A0616E3B3890037DBD0 /* close.png in Resources */ = {isa = PBXBuildFile; fileRef = A3994A0416E3B3890037DBD0 /* close.png */; };
@@ -151,7 +150,6 @@
 		A3EAD3DA1713C18A00A95ADA /* MCMagicCube.m in Sources */ = {isa = PBXBuildFile; fileRef = A3EAD3D81713C18A00A95ADA /* MCMagicCube.m */; };
 		A3EAD3E41713C1AF00A95ADA /* MCKnowledgeBase.m in Sources */ = {isa = PBXBuildFile; fileRef = A3EAD3DF1713C1AF00A95ADA /* MCKnowledgeBase.m */; };
 		A3EAD3E61713C1AF00A95ADA /* MCBasicElement.m in Sources */ = {isa = PBXBuildFile; fileRef = A3EAD3E31713C1AF00A95ADA /* MCBasicElement.m */; };
-		A3EAD3EA1713C1CE00A95ADA /* CircleMenuController.m in Sources */ = {isa = PBXBuildFile; fileRef = A3EAD3E91713C1CE00A95ADA /* CircleMenuController.m */; };
 		A3EB454816BE358700DBB8B7 /* MCMultiDigitCounter.m in Sources */ = {isa = PBXBuildFile; fileRef = A3EB454716BE358700DBB8B7 /* MCMultiDigitCounter.m */; };
 		A3EB454F16BF51F800DBB8B7 /* MCTimer.m in Sources */ = {isa = PBXBuildFile; fileRef = A3EB454E16BF51F800DBB8B7 /* MCTimer.m */; };
 		A3EB455416BF5E1600DBB8B7 /* MCDotSeparater.m in Sources */ = {isa = PBXBuildFile; fileRef = A3EB455316BF5E1600DBB8B7 /* MCDotSeparater.m */; };
@@ -183,6 +181,8 @@
 		A3F8290916EF790D00AC5EAF /* DefaultButton.png in Resources */ = {isa = PBXBuildFile; fileRef = A3F8290116EF790D00AC5EAF /* DefaultButton.png */; };
 		A3F8290A16EF790D00AC5EAF /* DefaultButtonBg.png in Resources */ = {isa = PBXBuildFile; fileRef = A3F8290216EF790D00AC5EAF /* DefaultButtonBg.png */; };
 		A3F8292216F181BD00AC5EAF /* RotateType.m in Sources */ = {isa = PBXBuildFile; fileRef = A3F8292116F181BC00AC5EAF /* RotateType.m */; };
+		E011D38B1762D23600F0B02E /* QuadCurveMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = E011D3881762D23600F0B02E /* QuadCurveMenu.m */; };
+		E011D38C1762D23600F0B02E /* QuadCurveMenuItem.m in Sources */ = {isa = PBXBuildFile; fileRef = E011D38A1762D23600F0B02E /* QuadCurveMenuItem.m */; };
 		E04E7E8717410E8E00403E92 /* MCCompositeRotationUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = E04E7E8617410E8E00403E92 /* MCCompositeRotationUtil.m */; };
 		E0A7F6D21762042600B285D4 /* MCLearn.m in Sources */ = {isa = PBXBuildFile; fileRef = E0A7F6D11762042600B285D4 /* MCLearn.m */; };
 		E0A7F6D71762047B00B285D4 /* MCSoundBoard.m in Sources */ = {isa = PBXBuildFile; fileRef = E0A7F6D41762047B00B285D4 /* MCSoundBoard.m */; };
@@ -270,8 +270,6 @@
 		A3587517161F355400998085 /* MainWindow-iPad.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = "MainWindow-iPad.xib"; path = "iPad/MainWindow-iPad.xib"; sourceTree = "<group>"; };
 		A358752B161FF1C600998085 /* data.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = data.hpp; sourceTree = "<group>"; };
 		A37F8811166B876C00B0A59F /* cubeBlack2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cubeBlack2.png; sourceTree = "<group>"; };
-		A392B234175484BF0091BFE9 /* MCRestoreModelController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCRestoreModelController.h; sourceTree = "<group>"; };
-		A392B235175484BF0091BFE9 /* MCRestoreModelController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCRestoreModelController.m; sourceTree = "<group>"; };
 		A392B23C17549A590091BFE9 /* PopUpInput.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PopUpInput.xib; sourceTree = "<group>"; };
 		A3935B3C165A296400B60A07 /* MCRay.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MCRay.h; sourceTree = "<group>"; };
 		A3935B3D165A296400B60A07 /* MCRay.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = MCRay.mm; sourceTree = "<group>"; };
@@ -397,9 +395,6 @@
 		A3EAD3DF1713C1AF00A95ADA /* MCKnowledgeBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCKnowledgeBase.m; sourceTree = "<group>"; };
 		A3EAD3E21713C1AF00A95ADA /* MCBasicElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCBasicElement.h; sourceTree = "<group>"; };
 		A3EAD3E31713C1AF00A95ADA /* MCBasicElement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCBasicElement.m; sourceTree = "<group>"; };
-		A3EAD3E71713C1CE00A95ADA /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
-		A3EAD3E81713C1CE00A95ADA /* CircleMenuController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CircleMenuController.h; sourceTree = "<group>"; };
-		A3EAD3E91713C1CE00A95ADA /* CircleMenuController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CircleMenuController.m; sourceTree = "<group>"; };
 		A3EB454616BE358700DBB8B7 /* MCMultiDigitCounter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCMultiDigitCounter.h; sourceTree = "<group>"; };
 		A3EB454716BE358700DBB8B7 /* MCMultiDigitCounter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCMultiDigitCounter.m; sourceTree = "<group>"; };
 		A3EB454D16BF51F800DBB8B7 /* MCTimer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCTimer.h; sourceTree = "<group>"; };
@@ -444,6 +439,10 @@
 		A3F8290216EF790D00AC5EAF /* DefaultButtonBg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DefaultButtonBg.png; sourceTree = "<group>"; };
 		A3F8292016F181BC00AC5EAF /* RotateType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RotateType.h; sourceTree = "<group>"; };
 		A3F8292116F181BC00AC5EAF /* RotateType.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RotateType.m; sourceTree = "<group>"; };
+		E011D3871762D23600F0B02E /* QuadCurveMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QuadCurveMenu.h; sourceTree = "<group>"; };
+		E011D3881762D23600F0B02E /* QuadCurveMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QuadCurveMenu.m; sourceTree = "<group>"; };
+		E011D3891762D23600F0B02E /* QuadCurveMenuItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QuadCurveMenuItem.h; sourceTree = "<group>"; };
+		E011D38A1762D23600F0B02E /* QuadCurveMenuItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QuadCurveMenuItem.m; sourceTree = "<group>"; };
 		E04E7E8517410E8E00403E92 /* MCCompositeRotationUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCCompositeRotationUtil.h; sourceTree = "<group>"; };
 		E04E7E8617410E8E00403E92 /* MCCompositeRotationUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCCompositeRotationUtil.m; sourceTree = "<group>"; };
 		E0A7F6D01762042600B285D4 /* MCLearn.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCLearn.h; sourceTree = "<group>"; };
@@ -899,8 +898,6 @@
 				A3E469EC1754823A00A31586 /* MCRandomSolveSceneController.m */,
 				A3E469EE175482AA00A31586 /* MCRandomSolveViewInputControllerViewController.h */,
 				A3E469EF175482AA00A31586 /* MCRandomSolveViewInputControllerViewController.m */,
-				A392B234175484BF0091BFE9 /* MCRestoreModelController.h */,
-				A392B235175484BF0091BFE9 /* MCRestoreModelController.m */,
 				A392B23C17549A590091BFE9 /* PopUpInput.xib */,
 			);
 			name = Scene3;
@@ -1047,9 +1044,10 @@
 		A3F828DD16EF788200AC5EAF /* PopUpView */ = {
 			isa = PBXGroup;
 			children = (
-				A3EAD3E71713C1CE00A95ADA /* Constants.h */,
-				A3EAD3E81713C1CE00A95ADA /* CircleMenuController.h */,
-				A3EAD3E91713C1CE00A95ADA /* CircleMenuController.m */,
+				E011D3871762D23600F0B02E /* QuadCurveMenu.h */,
+				E011D3881762D23600F0B02E /* QuadCurveMenu.m */,
+				E011D3891762D23600F0B02E /* QuadCurveMenuItem.h */,
+				E011D38A1762D23600F0B02E /* QuadCurveMenuItem.m */,
 			);
 			name = PopUpView;
 			sourceTree = "<group>";
@@ -1310,7 +1308,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "export CODESIGN_ALLOCATE=/Users/kwanterry/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/codesign_allocate\nif [ \"${PLATFORM_NAME}\" == \"iphoneos\" ] || [ \"${PLATFORM_NAME}\" == \"ipados\" ]; then\n/Applications/Xcode.app/Contents/Developer/iphoneentitlements/gen_entitlements.py \"my.company.${PROJECT_NAME}\" \"${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}/${PROJECT_NAME}.xcent\";\ncodesign -f -s \"iPhone Developer\" --entitlements \"${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}/${PROJECT_NAME}.xcent\" \"${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}/\"\nfi";
+			shellScript = "export CODESIGN_ALLOCATE=/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/codesign_allocate\nif [ \"${PLATFORM_NAME}\" == \"iphoneos\" ] || [ \"${PLATFORM_NAME}\" == \"ipados\" ]; then\n/Applications/Xcode.app/Contents/Developer/iphoneentitlements/gen_entitlements.py \"my.company.${PROJECT_NAME}\" \"${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}/${PROJECT_NAME}.xcent\";\ncodesign -f -s \"iPhone Developer\" --entitlements \"${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}/${PROJECT_NAME}.xcent\" \"${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}/\"\nfi";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -1398,7 +1396,6 @@
 				A3EAD3DA1713C18A00A95ADA /* MCMagicCube.m in Sources */,
 				A3EAD3E41713C1AF00A95ADA /* MCKnowledgeBase.m in Sources */,
 				A3EAD3E61713C1AF00A95ADA /* MCBasicElement.m in Sources */,
-				A3EAD3EA1713C1CE00A95ADA /* CircleMenuController.m in Sources */,
 				A33032CC1726B19F00BAD2DE /* MCApplyQueue.m in Sources */,
 				A33032CF1726B1C400BAD2DE /* MCPlayHelper.m in Sources */,
 				A33032D21726B1E500BAD2DE /* MCTransformUtil.m in Sources */,
@@ -1407,11 +1404,12 @@
 				A3E469E8174CB91A00A31586 /* FinishView.m in Sources */,
 				A3E469ED1754823A00A31586 /* MCRandomSolveSceneController.m in Sources */,
 				A3E469F0175482AA00A31586 /* MCRandomSolveViewInputControllerViewController.m in Sources */,
-				A392B237175484BF0091BFE9 /* MCRestoreModelController.m in Sources */,
 				A3D5B2E0175C590B00833F3F /* MCSystemSettingViewController.m in Sources */,
 				E0A7F6D21762042600B285D4 /* MCLearn.m in Sources */,
 				E0A7F6D71762047B00B285D4 /* MCSoundBoard.m in Sources */,
 				E0A7F6D81762047B00B285D4 /* SoundSettingController.m in Sources */,
+				E011D38B1762D23600F0B02E /* QuadCurveMenu.m in Sources */,
+				E011D38C1762D23600F0B02E /* QuadCurveMenuItem.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1435,6 +1433,7 @@
 				);
 				New_Setting = "";
 				PRODUCT_NAME = MCGame;
+				RUN_CLANG_STATIC_ANALYZER = YES;
 				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Debug;
@@ -1454,6 +1453,7 @@
 				);
 				New_Setting = "";
 				PRODUCT_NAME = MCGame;
+				RUN_CLANG_STATIC_ANALYZER = YES;
 				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Release;

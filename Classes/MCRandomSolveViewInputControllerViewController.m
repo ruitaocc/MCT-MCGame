@@ -9,13 +9,16 @@
 #import "MCRandomSolveViewInputControllerViewController.h"
 #import "MCTexturedButton.h"
 #import "CoordinatingController.h"
-@interface MCRandomSolveViewInputControllerViewController ()
-
-@end
+#import "Global.h"
 
 @implementation MCRandomSolveViewInputControllerViewController
--(void)loadInterface
-{
+
+@synthesize selectMenu = _selectMenu;
+@synthesize lastestPoint = _lastestPoint;
+
+-(void)loadInterface{
+    [super loadInterface];
+    
 	if (interfaceObjects == nil) interfaceObjects = [[NSMutableArray alloc] init];
 	[interfaceObjects removeAllObjects];
     
@@ -32,15 +35,82 @@
 	[interfaceObjects addObject:mainMenuBtn];
 	[mainMenuBtn release];
     
+    CGRect itemFrame =  self.view.bounds;
+    itemFrame.size.height = itemFrame.size.height * POPUP_ITEM_WINDOW_SIZE_RATIO;
+    itemFrame.size.width = itemFrame.size.height;
+    
+    QuadCurveMenuItem *starMenuItem1 = [[QuadCurveMenuItem alloc] initWithImage:[UIImage imageNamed:@"Color00.png"]
+                                                               highlightedImage:[UIImage imageNamed:@"Color00.png"]
+                                                                      withFrame:itemFrame];
+    QuadCurveMenuItem *starMenuItem2 = [[QuadCurveMenuItem alloc] initWithImage:[UIImage imageNamed:@"Color01.png"]
+                                                               highlightedImage:[UIImage imageNamed:@"Color01.png"]
+                                                                      withFrame:itemFrame];
+    QuadCurveMenuItem *starMenuItem3 = [[QuadCurveMenuItem alloc] initWithImage:[UIImage imageNamed:@"Color02.png"]
+                                                               highlightedImage:[UIImage imageNamed:@"Color02.png"]
+                                                                      withFrame:itemFrame];
+    QuadCurveMenuItem *starMenuItem4 = [[QuadCurveMenuItem alloc] initWithImage:[UIImage imageNamed:@"Color03.png"]
+                                                               highlightedImage:[UIImage imageNamed:@"Color03.png"]
+                                                                      withFrame:itemFrame];
+    QuadCurveMenuItem *starMenuItem5 = [[QuadCurveMenuItem alloc] initWithImage:[UIImage imageNamed:@"Color04.png"]
+                                                               highlightedImage:[UIImage imageNamed:@"Color04.png"]
+                                                                      withFrame:itemFrame];
+    QuadCurveMenuItem *starMenuItem6 = [[QuadCurveMenuItem alloc] initWithImage:[UIImage imageNamed:@"Color05.png"]
+                                                               highlightedImage:[UIImage imageNamed:@"Color05.png"]
+                                                                      withFrame:itemFrame];
+    
+    NSArray *menus = [NSArray arrayWithObjects:starMenuItem1, starMenuItem2, starMenuItem3, starMenuItem4, starMenuItem5, starMenuItem6, nil];
+    [starMenuItem1 release];
+    [starMenuItem2 release];
+    [starMenuItem3 release];
+    [starMenuItem4 release];
+    [starMenuItem5 release];
+    [starMenuItem6 release];
+    
+    _selectMenu = [[QuadCurveMenu alloc] initWithFrame:self.view.bounds menus:menus];
+    
+    _selectMenu.delegate = self;
 }
 
 -(void)mainMenuBtnDown{
     NSLog(@"mainMenuPlayBtnDown");
 }
--(void)mainMenuBtnUp{NSLog(@"mainMenuPlayBtnUp");
+
+
+-(void)mainMenuBtnUp{
+    NSLog(@"mainMenuPlayBtnUp");
     CoordinatingController *coordinatingController_ = [CoordinatingController sharedCoordinatingController];
     [coordinatingController_ requestViewChangeByObject:kMainMenu];
 }
 
+
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
+    //do something
+    
+    UITouch *touch = [touches anyObject];
+    _lastestPoint = [touch locationInView:self.view];
+    if (!self.selectMenu.isProtection) {
+        if (!self.selectMenu.expanding) {
+            self.selectMenu.center = _lastestPoint;
+            [self.view addSubview:_selectMenu];
+            [self.selectMenu setExpanding:YES];
+        }
+        else{
+            [self.selectMenu setExpanding:NO];
+        }
+    }
+
+    
+    [super touchesBegan:touches withEvent:event];
+}
+
+
+- (void)quadCurveMenu:(QuadCurveMenu *)menu didSelectIndex:(NSInteger)idx{
+    NSLog(@"Select the index : %d",idx);
+}
+
+- (void)releaseInterface{
+    //[super releaseInterface];
+    [_selectMenu release];
+}
 
 @end

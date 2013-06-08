@@ -7,9 +7,17 @@
 //
 
 #import "InputController.h"
+#import "QuadCurveMenu.h"
 
-@interface MCRandomSolveViewInputControllerViewController : InputController
+@interface MCRandomSolveViewInputControllerViewController : InputController <QuadCurveMenuDelegate>
+
+@property (nonatomic, retain) QuadCurveMenu *selectMenu;
+@property (nonatomic) CGPoint lastestPoint;
+
 -(void)loadInterface;
+
 -(void)mainMenuBtnDown;
--(void)mainMenuPlayBtnUp;
+
+-(void)mainMenuBtnUp;
+
 @end
