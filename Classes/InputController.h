@@ -37,7 +37,7 @@
 - (void)renderInterface;
 - (void)updateInterface;
 //
--(void)releaseSrc;
+-(void)releaseInterface;
 //3
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event;
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event;

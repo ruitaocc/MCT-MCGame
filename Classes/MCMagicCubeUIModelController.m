@@ -1217,7 +1217,7 @@
                     //确定旋转方向
                     if (fabs((firstThreePoint[0].x-firstThreePoint[1].x))>fabs((firstThreePoint[0].y-firstThreePoint[1].y))) {
                         //横向操作
-                        fuzzy_axis = fuzzy_axis_y;
+                        fuzzy_axis = (AxisType)fuzzy_axis_y;
                         if ((firstThreePoint[1].x-firstThreePoint[0].x)>0) {
                             //向右
                             if(fuzzy_vec3_y.Dot(tmp_oy)>0)fuzzy_direction=CCW;
@@ -1230,7 +1230,7 @@
                         //素直向操作
                         if (firstThreePoint[1].x>512&&firstThreePoint[0].x>512) {
                             //右边
-                            fuzzy_axis = fuzzy_axis_z;
+                            fuzzy_axis = (AxisType)fuzzy_axis_z;
                             if ((firstThreePoint[1].y-firstThreePoint[0].y)>0) {
                                 //向下
                                 if(fuzzy_vec3_z.Dot(tmp_oz)>0)fuzzy_direction=CW;
@@ -1243,7 +1243,7 @@
                             
                         }else if(firstThreePoint[1].x<512&&firstThreePoint[0].x<512){
                             //左边
-                            fuzzy_axis = fuzzy_axis_x;
+                            fuzzy_axis = (AxisType)fuzzy_axis_x;
                             if ((firstThreePoint[1].y-firstThreePoint[0].y)>0) {
                                 //向下
                                 if(fuzzy_vec3_x.Dot(tmp_ox)>0)fuzzy_direction=CCW;
@@ -1994,6 +1994,68 @@ double FabsThetaBetweenV1andV2(const vec3& v1,const vec3& v2)
     }else
     return acos(fabs(cosa));
 }
+//检测是否有小块被拾取。
+-(BOOL)isSelectOneFace:(vec2)touchpoint{	
+    //继续射线拾取
+    float V[108] = {
+        
+        
+        -0.5,0.5,0.5,     0.5,0.5,0.5,     0.5,0.5,-0.5,
+        0.5,0.5,-0.5,   -0.5,0.5,-0.5,   -0.5,0.5,0.5,//上
+        
+        -0.5,-0.5,0.5,   -0.5,-0.5,-0.5,   0.5,-0.5,-0.5,
+        0.5,-0.5,-0.5,   0.5,-0.5,0.5,    -0.5,-0.5,0.5,//下
+        
+        -0.5,0.5,0.5,    -0.5,-0.5,0.5,   0.5,-0.5,0.5,
+        0.5,-0.5,0.5,    0.5,0.5,0.5,    -0.5,0.5,0.5,//前
+        
+        0.5,0.5,-0.5,    0.5,-0.5,-0.5,  -0.5,-0.5,-0.5,
+        -0.5,-0.5,-0.5,  -0.5,0.5,-0.5,    0.5,0.5,-0.5,//后
+        
+        -0.5,0.5,-0.5,   -0.5,-0.5,-0.5,  -0.5,-0.5,0.5,
+        -0.5,-0.5,0.5,   -0.5,0.5,0.5,    -0.5,0.5,-0.5,//左
+        
+        0.5,0.5,0.5,     0.5,-0.5,0.5,    0.5,-0.5,-0.5,
+        0.5,-0.5,-0.5,   0.5,0.5,-0.5,    0.5,0.5,0.5,//右
+        
+    };
+    
+            //记录第一个点
+           
+    //Once function down, update the ray.
+    [ray updateWithScreenX:touchpoint.x
+                           screenY:touchpoint.y];
+    float nearest_distance = 65535;
+    int index = -1;
+    for (Cube *tmp_cube in array27Cube) {
+        GLfloat * tmp_dection = VertexesArray_Matrix_Multiply(V, 3, 36, tmp_cube.matrix);
+        for (int i = 0; i < 12; i++) {
+            //OK, check the intersection and return the distance.
+            float distance = [ray intersectWithTriangleMadeUpOfV0:&tmp_dection[0 +i*9]
+                                                                       V1:&tmp_dection[3 +i*9]
+                                                                       V2:&tmp_dection[6 +i*9]];
+                    
+            if (distance < 0) continue;
+            if (distance < nearest_distance) {
+                //存储当前选中的三角形
+                for (int k= 0; k <9 ; k++) {
+                    selected_triangle[k] = tmp_dection[i*9+k];
+                }
+                directionVector[0] = [ray pointIntersectWithTriangleMadeUpOfV0:&tmp_dection[0 +i*9]
+                                                                                    V1:&tmp_dection[3 +i*9]
+                                                                                    V2:&tmp_dection[6 +i*9]];
+                nearest_distance = distance;
+                index = tmp_cube.index;
+                tmp_cube.index_selectedFace = i;
+            }
+        }
+    }
+    if (index != -1) {
+        return YES;
+    }else
+        return NO;
+
+};
 
 #pragma mark undo redo
 

@@ -33,11 +33,12 @@
 	// this is where we store all our objects
 	if (sceneObjects == nil) sceneObjects = [[NSMutableArray alloc] init];
 	
-    MCMagicCubeUIModelController* magicCubeUI = [[MCMagicCubeUIModelController alloc]initiateWithState:[magicCube getColorInOrientationsOfAllCubie]] ;
+    magicCubeUI = [[MCMagicCubeUIModelController alloc]initiateWithState:[magicCube getColorInOrientationsOfAllCubie]] ;
     magicCubeUI.target=self;
     [magicCubeUI setStepcounterAddAction:@selector(stepcounterAdd)];
     [magicCubeUI setStepcounterMinusAction:@selector(stepcounterMinus)];
     [self addObjectToScene:magicCubeUI];
+    [magicCubeUI setUsingMode:SOlVE_Input_MODE];
     [magicCubeUI release];
     
     collisionController = [[MCCollisionController alloc] init];
@@ -49,7 +50,9 @@
 	[(MCRandomSolveViewInputControllerViewController*)inputController loadInterface];
     
 }
-
+-(BOOL)isSelectOneFace:(vec2)touchpoint{
+    return [magicCubeUI isSelectOneFace:touchpoint];
+};
 
 - (void)dealloc{
     [super dealloc];

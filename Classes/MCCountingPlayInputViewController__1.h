@@ -34,6 +34,8 @@
 -(void)nextSolutionBtnDown;
 
 -(void)mainMenuBtnDown;
--(void)mainMenuPlayBtnUp; 
+-(void)mainMenuPlayBtnUp;
+
+-(void)releaseInterface;
 
 @end

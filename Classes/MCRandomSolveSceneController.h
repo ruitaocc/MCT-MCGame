@@ -11,9 +11,10 @@
 #import "RotateType.h"
 #import "MCPlayHelper.h"
 #import "MCCollisionController.h"
-
-
+#import "MCMagicCubeUIModelController.h"
+#import "MCPoint.h"
 @interface MCRandomSolveSceneController : sceneController{
+    MCMagicCubeUIModelController* magicCubeUI;
     MCMagicCube * magicCube;
     MCPlayHelper * playHelper;
 }
@@ -24,5 +25,7 @@
 + (MCRandomSolveSceneController*)sharedRandomSolveSceneController;
 
 -(void)loadScene;
+
+-(BOOL)isSelectOneFace:(vec2)touchpoint;
 
 @end

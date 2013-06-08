@@ -278,7 +278,7 @@
     
 }
 
--(void)releaseSrc{
+-(void)releaseInterface{
     [interfaceObjects removeAllObjects];
 }
 

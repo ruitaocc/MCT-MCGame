@@ -120,6 +120,8 @@ typedef enum _MagicCubeUIUsingMode {
 -(void)previousSolution;
 -(void)nextSolution;
 
+-(BOOL)isSelectOneFace:(vec2)touchpoint;
+
 -(vec3)MapToSphere:(vec2 )touchpoint;
 
 @end

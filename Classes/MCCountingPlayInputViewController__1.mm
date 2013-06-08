@@ -168,6 +168,9 @@
 	UADebugLog(@"willCloseModalPanel called with modalPanel: %@", modalPanel);
 }
 
+-(void)releaseInterface{
+    [super releaseInterface];
+};
 // Optional: This is called after the close animations.
 //   Only used if delegate is set.
 - (void)didCloseModalPanel:(UAModalPanel *)modalPanel {

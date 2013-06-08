@@ -10,6 +10,7 @@
 #import "MCTexturedButton.h"
 #import "CoordinatingController.h"
 #import "Global.h"
+#import "MCRandomSolveSceneController.h"
 
 @implementation MCRandomSolveViewInputControllerViewController
 
@@ -85,11 +86,23 @@
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
     //do something
+    [super touchesBegan:touches withEvent:event];
+    
+    //FSM_Interaction_State fsm_Current_State = [[[CoordinatingController sharedCoordinatingController] currentController].inputController fsm_Current_State];
+    if (fsm_Current_State == kState_F2||fsm_Current_State == kState_S2||fsm_Current_State==kState_M2) {
+        return;
+    }
     
     UITouch *touch = [touches anyObject];
     _lastestPoint = [touch locationInView:self.view];
+    //判断是否拾取到
+    MCRandomSolveSceneController * secencontroller = [MCRandomSolveSceneController sharedRandomSolveSceneController];
+    vec2 lastpoint = vec2(_lastestPoint.x,_lastestPoint.y);
+    
+    BOOL isSelectOneFace = [secencontroller isSelectOneFace:lastpoint];
+    
     if (!self.selectMenu.isProtection) {
-        if (!self.selectMenu.expanding) {
+        if (!self.selectMenu.expanding && isSelectOneFace) {
             self.selectMenu.center = _lastestPoint;
             [self.view addSubview:_selectMenu];
             [self.selectMenu setExpanding:YES];
@@ -98,18 +111,17 @@
             [self.selectMenu setExpanding:NO];
         }
     }
-
-    
-    [super touchesBegan:touches withEvent:event];
 }
 
 
 - (void)quadCurveMenu:(QuadCurveMenu *)menu didSelectIndex:(NSInteger)idx{
     NSLog(@"Select the index : %d",idx);
+    //1.选择颜色
+    //
 }
-
 - (void)releaseInterface{
-    //[super releaseInterface];
+    [super releaseInterface];
+    [_selectMenu removeFromSuperview];
     [_selectMenu release];
 }
 

@@ -20,4 +20,5 @@
 
 -(void)mainMenuBtnUp;
 
+-(void)releaseInterface;
 @end
