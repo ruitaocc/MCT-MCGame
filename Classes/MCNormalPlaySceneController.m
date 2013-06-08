@@ -67,6 +67,7 @@
 	if (DEBUG_DRAW_COLLIDERS)	[self addObjectToScene:collisionController];
 	// reload our interface
 	[inputController loadInterface];
+    
 }
 
 -(void)reloadScene{

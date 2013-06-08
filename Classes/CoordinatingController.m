@@ -65,8 +65,9 @@
         {
             NSLog(@"requestViewChangeByObject:kMainMenu");
             //Loading...
-            [SVProgressHUD show];
             [currentController stopAnimation];
+            [SVProgressHUD show];
+            
 
             //load the new scene            
             [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(loadMainMenuScene) userInfo:nil repeats:NO];
