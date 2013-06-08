@@ -194,6 +194,10 @@
 		E0A7F6E3176204B400B285D4 /* Start.caf in Resources */ = {isa = PBXBuildFile; fileRef = E0A7F6DE176204B400B285D4 /* Start.caf */; };
 		E0A7F6E51762056200B285D4 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E0A7F6E41762056200B285D4 /* AVFoundation.framework */; };
 		E0A7F6E71762056C00B285D4 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E0A7F6E61762056C00B285D4 /* AudioToolbox.framework */; };
+		E0B0FEA517636C23005D58D7 /* MCActionPerformer.m in Sources */ = {isa = PBXBuildFile; fileRef = E0B0FE9E17636C22005D58D7 /* MCActionPerformer.m */; };
+		E0B0FEA617636C23005D58D7 /* MCExplanationSystem.m in Sources */ = {isa = PBXBuildFile; fileRef = E0B0FEA017636C23005D58D7 /* MCExplanationSystem.m */; };
+		E0B0FEA717636C23005D58D7 /* MCInferenceEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = E0B0FEA217636C23005D58D7 /* MCInferenceEngine.m */; };
+		E0B0FEA817636C23005D58D7 /* MCWorkingMemory.m in Sources */ = {isa = PBXBuildFile; fileRef = E0B0FEA417636C23005D58D7 /* MCWorkingMemory.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -458,6 +462,16 @@
 		E0A7F6DE176204B400B285D4 /* Start.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Start.caf; sourceTree = "<group>"; };
 		E0A7F6E41762056200B285D4 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		E0A7F6E61762056C00B285D4 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		E0B0FE9D17636C22005D58D7 /* MCActionPerformer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCActionPerformer.h; sourceTree = "<group>"; };
+		E0B0FE9E17636C22005D58D7 /* MCActionPerformer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCActionPerformer.m; sourceTree = "<group>"; };
+		E0B0FE9F17636C23005D58D7 /* MCExplanationSystem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCExplanationSystem.h; sourceTree = "<group>"; };
+		E0B0FEA017636C23005D58D7 /* MCExplanationSystem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCExplanationSystem.m; sourceTree = "<group>"; };
+		E0B0FEA117636C23005D58D7 /* MCInferenceEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCInferenceEngine.h; sourceTree = "<group>"; };
+		E0B0FEA217636C23005D58D7 /* MCInferenceEngine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCInferenceEngine.m; sourceTree = "<group>"; };
+		E0B0FEA317636C23005D58D7 /* MCWorkingMemory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCWorkingMemory.h; sourceTree = "<group>"; };
+		E0B0FEA417636C23005D58D7 /* MCWorkingMemory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCWorkingMemory.m; sourceTree = "<group>"; };
+		E0B0FEA917636C3D005D58D7 /* MCMagicCubeDataSouceDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCMagicCubeDataSouceDelegate.h; sourceTree = "<group>"; };
+		E0B0FEAA17636C3D005D58D7 /* MCMagicCubeOperationDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCMagicCubeOperationDelegate.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -549,6 +563,8 @@
 		A309D8F7165F867800CDA1DC /* DataModel */ = {
 			isa = PBXGroup;
 			children = (
+				E0B0FEA917636C3D005D58D7 /* MCMagicCubeDataSouceDelegate.h */,
+				E0B0FEAA17636C3D005D58D7 /* MCMagicCubeOperationDelegate.h */,
 				A3EAD3D41713C18A00A95ADA /* Global.h */,
 				A3EAD3D51713C18A00A95ADA /* MCCubie.h */,
 				A3EAD3D61713C18A00A95ADA /* MCCube.m */,
@@ -1096,6 +1112,14 @@
 		A3F8290B16EF796900AC5EAF /* MCPlayHelper */ = {
 			isa = PBXGroup;
 			children = (
+				E0B0FE9D17636C22005D58D7 /* MCActionPerformer.h */,
+				E0B0FE9E17636C22005D58D7 /* MCActionPerformer.m */,
+				E0B0FE9F17636C23005D58D7 /* MCExplanationSystem.h */,
+				E0B0FEA017636C23005D58D7 /* MCExplanationSystem.m */,
+				E0B0FEA117636C23005D58D7 /* MCInferenceEngine.h */,
+				E0B0FEA217636C23005D58D7 /* MCInferenceEngine.m */,
+				E0B0FEA317636C23005D58D7 /* MCWorkingMemory.h */,
+				E0B0FEA417636C23005D58D7 /* MCWorkingMemory.m */,
 				A3EAD3DE1713C1AF00A95ADA /* MCKnowledgeBase.h */,
 				A3EAD3DF1713C1AF00A95ADA /* MCKnowledgeBase.m */,
 				A33032CD1726B1C400BAD2DE /* MCPlayHelper.h */,
@@ -1308,7 +1332,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "export CODESIGN_ALLOCATE=/Users/kwanterry/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/codesign_allocate\nif [ \"${PLATFORM_NAME}\" == \"iphoneos\" ] || [ \"${PLATFORM_NAME}\" == \"ipados\" ]; then\n/Applications/Xcode.app/Contents/Developer/iphoneentitlements/gen_entitlements.py \"my.company.${PROJECT_NAME}\" \"${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}/${PROJECT_NAME}.xcent\";\ncodesign -f -s \"iPhone Developer\" --entitlements \"${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}/${PROJECT_NAME}.xcent\" \"${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}/\"\nfi";
+			shellScript = "export CODESIGN_ALLOCATE=/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/codesign_allocate\nif [ \"${PLATFORM_NAME}\" == \"iphoneos\" ] || [ \"${PLATFORM_NAME}\" == \"ipados\" ]; then\n/Applications/Xcode.app/Contents/Developer/iphoneentitlements/gen_entitlements.py \"my.company.${PROJECT_NAME}\" \"${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}/${PROJECT_NAME}.xcent\";\ncodesign -f -s \"iPhone Developer\" --entitlements \"${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}/${PROJECT_NAME}.xcent\" \"${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}/\"\nfi";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -1410,6 +1434,13 @@
 				E0A7F6D81762047B00B285D4 /* SoundSettingController.m in Sources */,
 				E011D38B1762D23600F0B02E /* QuadCurveMenu.m in Sources */,
 				E011D38C1762D23600F0B02E /* QuadCurveMenuItem.m in Sources */,
+<<<<<<< HEAD
+=======
+				E0B0FEA517636C23005D58D7 /* MCActionPerformer.m in Sources */,
+				E0B0FEA617636C23005D58D7 /* MCExplanationSystem.m in Sources */,
+				E0B0FEA717636C23005D58D7 /* MCInferenceEngine.m in Sources */,
+				E0B0FEA817636C23005D58D7 /* MCWorkingMemory.m in Sources */,
+>>>>>>> new-for-3D-input
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1433,7 +1464,11 @@
 				);
 				New_Setting = "";
 				PRODUCT_NAME = MCGame;
+<<<<<<< HEAD
 				RUN_CLANG_STATIC_ANALYZER = NO;
+=======
+				RUN_CLANG_STATIC_ANALYZER = YES;
+>>>>>>> new-for-3D-input
 				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Debug;
@@ -1453,7 +1488,11 @@
 				);
 				New_Setting = "";
 				PRODUCT_NAME = MCGame;
+<<<<<<< HEAD
 				RUN_CLANG_STATIC_ANALYZER = NO;
+=======
+				RUN_CLANG_STATIC_ANALYZER = YES;
+>>>>>>> new-for-3D-input
 				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Release;

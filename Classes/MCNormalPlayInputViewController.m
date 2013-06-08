@@ -200,7 +200,7 @@
     //switch the isShowQueue flag in scenecontroller
     c.isShowQueue = !c.isShowQueue;
     if (self.actionQueue.active) {
-        [[c playHelper] checkStateFromInit:YES];
+        [[c playHelper] prepare];
         [c showQueue];
     }else{
         [self.actionQueue removeAllActions];

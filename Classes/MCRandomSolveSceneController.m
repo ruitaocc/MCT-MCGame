@@ -33,7 +33,11 @@
 	// this is where we store all our objects
 	if (sceneObjects == nil) sceneObjects = [[NSMutableArray alloc] init];
 	
+<<<<<<< HEAD
     magicCubeUI = [[MCMagicCubeUIModelController alloc]initiateWithState:[magicCube getColorInOrientationsOfAllCubie]] ;
+=======
+    MCMagicCubeUIModelController* magicCubeUI = [[MCMagicCubeUIModelController alloc]initiateWithState:[magicCube getColorInOrientationsOfAllCubie]] ;
+>>>>>>> new-for-3D-input
     magicCubeUI.target=self;
     [magicCubeUI setStepcounterAddAction:@selector(stepcounterAdd)];
     [magicCubeUI setStepcounterMinusAction:@selector(stepcounterMinus)];
@@ -50,9 +54,13 @@
 	[(MCRandomSolveViewInputControllerViewController*)inputController loadInterface];
     
 }
+<<<<<<< HEAD
 -(BOOL)isSelectOneFace:(vec2)touchpoint{
     return [magicCubeUI isSelectOneFace:touchpoint];
 };
+=======
+
+>>>>>>> new-for-3D-input
 
 - (void)dealloc{
     [super dealloc];

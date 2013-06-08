@@ -20,5 +20,8 @@
 
 -(void)mainMenuBtnUp;
 
+<<<<<<< HEAD
 -(void)releaseInterface;
+=======
+>>>>>>> new-for-3D-input
 @end

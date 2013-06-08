@@ -179,9 +179,13 @@ typedef enum _RotationResult{
 #define KNOWLEDGE_DB_FILE_NAME @"KnowledgeBase.sqlite3"
 
 #define ETFF 0  //method 0, 8355
-//every method's first and last state name
-#define START_STATE @"Init"
-#define END_STATE @"End"
+
+// the state of magic cube when everything is nuknown.
+#define UNKNOWN_STATE @"Unknown"
+
+// every method's first and last state name
+#define START_STATE     @"Init"
+#define END_STATE       @"End"
 
 // At most time, the general number of states of the specified method
 #define GENERAL_STATES_NUM 10
@@ -210,9 +214,6 @@ typedef enum _RotationResult{
 #define TmpMagicCubeData @"tmpMagicCube"
 
 //Helper------------------------------------------------------------------------------------
-
-// helper locker size
-#define CubieCouldBeLockMaxNum 26
 
 //the keys that get actions
 #define KEY_ROTATION_QUEUE @"RotationQueue"

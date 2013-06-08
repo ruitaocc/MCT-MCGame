@@ -262,6 +262,7 @@
                         int i = 0;
                         //test if '(' has been lost
                         if (token != Token_LeftParentheses) {
+                            [child release];
                             [self errorOccur:@"There should be '('"];
                             return [node autorelease];
                         }
@@ -280,6 +281,7 @@
                         }
                         //test if ')' has been lost
                         if (token != Token_RightParentheses) {
+                            [child release];
                             [self errorOccur:@"There should be ')'"];
                             return [node autorelease];
                         }
@@ -294,6 +296,7 @@
                         int i = 0;
                         //test if '(' has been lost
                         if (token != Token_LeftParentheses) {
+                            [child release];
                             [self errorOccur:@"There should be '('"];
                             return [node autorelease];
                         }
@@ -320,6 +323,7 @@
                         }
                         //test if ')' has been lost
                         if (token != Token_RightParentheses) {
+                            [child release];
                             [self errorOccur:@"There should be ')'"];
                             return [node autorelease];
                         }
@@ -369,7 +373,7 @@
             //test if ')' has been lost
             if (token != Token_RightParentheses) {
                 [self errorOccur:@"There should be ')'"];
-                return [node autorelease];
+                return node;
             }
             [self getToken];
         }

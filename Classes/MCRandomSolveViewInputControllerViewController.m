@@ -10,7 +10,10 @@
 #import "MCTexturedButton.h"
 #import "CoordinatingController.h"
 #import "Global.h"
+<<<<<<< HEAD
 #import "MCRandomSolveSceneController.h"
+=======
+>>>>>>> new-for-3D-input
 
 @implementation MCRandomSolveViewInputControllerViewController
 
@@ -86,6 +89,7 @@
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
     //do something
+<<<<<<< HEAD
     [super touchesBegan:touches withEvent:event];
     
     //FSM_Interaction_State fsm_Current_State = [[[CoordinatingController sharedCoordinatingController] currentController].inputController fsm_Current_State];
@@ -103,6 +107,13 @@
     
     if (!self.selectMenu.isProtection) {
         if (!self.selectMenu.expanding && isSelectOneFace) {
+=======
+    
+    UITouch *touch = [touches anyObject];
+    _lastestPoint = [touch locationInView:self.view];
+    if (!self.selectMenu.isProtection) {
+        if (!self.selectMenu.expanding) {
+>>>>>>> new-for-3D-input
             self.selectMenu.center = _lastestPoint;
             [self.view addSubview:_selectMenu];
             [self.selectMenu setExpanding:YES];
@@ -111,17 +122,30 @@
             [self.selectMenu setExpanding:NO];
         }
     }
+<<<<<<< HEAD
+=======
+
+    
+    [super touchesBegan:touches withEvent:event];
+>>>>>>> new-for-3D-input
 }
 
 
 - (void)quadCurveMenu:(QuadCurveMenu *)menu didSelectIndex:(NSInteger)idx{
     NSLog(@"Select the index : %d",idx);
+<<<<<<< HEAD
     //1.选择颜色
     //
 }
 - (void)releaseInterface{
     [super releaseInterface];
     [_selectMenu removeFromSuperview];
+=======
+}
+
+- (void)releaseInterface{
+    //[super releaseInterface];
+>>>>>>> new-for-3D-input
     [_selectMenu release];
 }
 

@@ -7,8 +7,8 @@
 //
 
 #import "MCApplyQueue.h"
-
-
+#import "MCTransformUtil.h"
+#import "MCCompositeRotationUtil.h"
 
 @implementation MCApplyQueue
 
@@ -17,32 +17,31 @@
 @synthesize currentRotationQueuePosition;
 @synthesize previousRotation;
 @synthesize previousResult;
-@synthesize magicCube;
+@synthesize queueCompleteDelegate;
 
 
-+ (id)applyQueueWithRotationAction:(MCTreeNode *)action withMagicCube:(NSObject<MCMagicCubeDelegate> *)mc{
++ (MCApplyQueue *)applyQueueWithRotationAction:(MCTreeNode *)action withMagicCube:(NSObject<MCMagicCubeDataSouceDelegate> *)mc{
     return [[[MCApplyQueue alloc] initWithRotationAction:action withMagicCube:mc] autorelease];
 }
 
-- (id)initWithRotationAction:(MCTreeNode *)action withMagicCube:(NSObject<MCMagicCubeDelegate> *)mc{
+- (id)initWithRotationAction:(MCTreeNode *)action withMagicCube:(NSObject<MCMagicCubeDataSouceDelegate> *)mc{
     if (self = [super init]) {
-        currentRotationQueuePosition = 0;
-        previousResult = NoneResult;
-        previousRotation = NoneNotation;
+        self.currentRotationQueuePosition = 0;
+        self.previousResult = NoneResult;
+        self.previousRotation = NoneNotation;
         self.rotationQueue = [NSMutableArray arrayWithCapacity:10];
         self.extraRotations = [NSMutableArray arrayWithCapacity:3];
-        self.magicCube = mc;
         switch (action.value) {
             case Rotate:
             {
                 for (MCTreeNode *child in action.children) {
                     if (child.value == Fw2 || child.value == Bw2 || child.value == Rw2 || child.value == Lw2 ||
                         child.value == Uw2 || child.value == Dw2 ) {
-                        [rotationQueue addObject:[NSNumber numberWithInteger:(child.value-2)]];
-                        [rotationQueue addObject:[NSNumber numberWithInteger:(child.value-2)]];
+                        [self.rotationQueue addObject:[NSNumber numberWithInteger:(child.value-2)]];
+                        [self.rotationQueue addObject:[NSNumber numberWithInteger:(child.value-2)]];
                     }
                     else{
-                        [rotationQueue addObject:[NSNumber numberWithInteger:child.value]];
+                        [self.rotationQueue addObject:[NSNumber numberWithInteger:child.value]];
                     }
                 }
             }
@@ -52,7 +51,7 @@
                 MCTreeNode *elementNode;
                 elementNode = [action.children objectAtIndex:0];
                 ColorCombinationType targetCombination = (ColorCombinationType)elementNode.value;
-                struct Point3i targetCoor = [magicCube coordinateValueOfCubieWithColorCombination:targetCombination];
+                struct Point3i targetCoor = [mc coordinateValueOfCubieWithColorCombination:targetCombination];
                 elementNode = [action.children objectAtIndex:1];
                 FaceOrientationType targetOrientation = (FaceOrientationType)elementNode.value;
                 [rotationQueue addObject:[NSNumber numberWithInteger:
@@ -79,7 +78,7 @@
 
 //apply rotation and return result
 //the position will move to next position
-- (RotationResult)applyRotation:(SingmasterNotation)currentRotation{
+- (void)applyRotation:(SingmasterNotation)currentRotation{
     //detect the rotation result
     //if the queue is exist, continue
     //else, return finished
@@ -128,10 +127,10 @@
         if (currentRotationQueuePosition == [self.rotationQueue count]) {
             self.rotationQueue = nil;
             previousResult = Finished;
+            [self.queueCompleteDelegate onQueueComplete];
         }
     }
     previousRotation = currentRotation;
-    return previousResult;
 }
 
 //finished or not
@@ -158,11 +157,15 @@
 
 
 - (void)dealloc{
-    self.rotationQueue = nil;
-    self.extraRotations = nil;
-    self.magicCube = nil;
     [super dealloc];
+    [rotationQueue release];
+    [extraRotations release];
+    [queueCompleteDelegate release];
 }
 
+
+- (oneway void)release{
+    return [super release];
+}
 
 @end
