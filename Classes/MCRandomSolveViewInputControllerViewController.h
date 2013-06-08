@@ -9,5 +9,7 @@
 #import "InputController.h"
 
 @interface MCRandomSolveViewInputControllerViewController : InputController
-
+-(void)loadInterface;
+-(void)mainMenuBtnDown;
+-(void)mainMenuPlayBtnUp;
 @end

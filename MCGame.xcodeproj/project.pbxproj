@@ -502,11 +502,6 @@
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
-				E0A7F6E61762056C00B285D4 /* AudioToolbox.framework */,
-				E0A7F6E41762056200B285D4 /* AVFoundation.framework */,
-				A3AA3C5A16DFBE7D006D76CC /* Icon-72@2x.png */,
-				A3AA3C5816DFBE70006D76CC /* Icon-72.png */,
-				A3CB602716ABD9BE006F03D5 /* libsqlite3.0.dylib */,
 				080E96DDFE201D6D7F000001 /* Classes */,
 				29B97315FDCFA39411CA2CEA /* Other Sources */,
 				29B97317FDCFA39411CA2CEA /* Resources */,
@@ -541,6 +536,8 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				E0A7F6E61762056C00B285D4 /* AudioToolbox.framework */,
+				E0A7F6E41762056200B285D4 /* AVFoundation.framework */,
 				48A858CE0FFAFA2E0060F0B8 /* OpenGLES.framework */,
 				4841F4710FFAFE48001CC354 /* QuartzCore.framework */,
 				1DF5F4DF0D08C38300B7A737 /* UIKit.framework */,
@@ -653,6 +650,9 @@
 		A3587519161F3FFD00998085 /* imageResource */ = {
 			isa = PBXGroup;
 			children = (
+				A3AA3C5A16DFBE7D006D76CC /* Icon-72@2x.png */,
+				A3AA3C5816DFBE70006D76CC /* Icon-72.png */,
+				A3CB602716ABD9BE006F03D5 /* libsqlite3.0.dylib */,
 				E0A7F6D91762049800B285D4 /* sounds */,
 				A3D67F891759E1F7002501B2 /* cubeface */,
 				A3359E64168E9777002F9459 /* progressbar */,

@@ -7,32 +7,40 @@
 //
 
 #import "MCRandomSolveViewInputControllerViewController.h"
-
+#import "MCTexturedButton.h"
+#import "CoordinatingController.h"
 @interface MCRandomSolveViewInputControllerViewController ()
 
 @end
 
 @implementation MCRandomSolveViewInputControllerViewController
-
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+-(void)loadInterface
 {
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
+	if (interfaceObjects == nil) interfaceObjects = [[NSMutableArray alloc] init];
+	[interfaceObjects removeAllObjects];
+    
+	// mainMenuBtn
+    //the texture 还没设计出来
+	MCTexturedButton * mainMenuBtn = [[MCTexturedButton alloc] initWithUpKey:@"mainMenuBtnUp" downKey:@"mainMenuBtnUp"];
+	mainMenuBtn.scale = MCPointMake(75, 35, 1.0);
+	mainMenuBtn.translation = MCPointMake(-450, 350.0, 0.0);
+	mainMenuBtn.target = self;
+	mainMenuBtn.buttonDownAction = @selector(mainMenuBtnDown);
+	mainMenuBtn.buttonUpAction = @selector(mainMenuBtnUp);
+	mainMenuBtn.active = YES;
+	[mainMenuBtn awake];
+	[interfaceObjects addObject:mainMenuBtn];
+	[mainMenuBtn release];
+    
 }
 
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-	// Do any additional setup after loading the view.
+-(void)mainMenuBtnDown{
+    NSLog(@"mainMenuPlayBtnDown");
+}
+-(void)mainMenuBtnUp{NSLog(@"mainMenuPlayBtnUp");
+    CoordinatingController *coordinatingController_ = [CoordinatingController sharedCoordinatingController];
+    [coordinatingController_ requestViewChangeByObject:kMainMenu];
 }
 
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
 
 @end
