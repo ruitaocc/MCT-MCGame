@@ -30,7 +30,6 @@
     BOOL needToReload;
     
 }
-
 @property (nonatomic, retain) IBOutlet UIWindow *window;
 @property (assign)BOOL needToReload;
 @property (nonatomic ,readonly)MCSceneController *_mainSceneController;

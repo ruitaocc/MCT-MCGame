@@ -21,7 +21,8 @@
 
 typedef enum _MagicCubeUIUsingMode {
     PLAY_MODE = 0,
-    TECH_MODE =1
+    TECH_MODE =1,
+    SOlVE_Input_MODE=2
 } MagicCubeUIUsingMode;
 
 @interface MCMagicCubeUIModelController : MCSceneObject{
@@ -37,6 +38,7 @@ typedef enum _MagicCubeUIUsingMode {
     BOOL isTribleAutoRotateIn_TECH_MODE;
     //教学模式下魔方整体旋转 输入处理
     BOOL is_TECH_MODE_Rotate;
+    
     
     
     AxisType current_rotate_axis;
@@ -72,9 +74,7 @@ typedef enum _MagicCubeUIUsingMode {
     BOOL isNeededToUpdateMagicCubeState;
     //但转过的角度时180时，需要更新魔方数据模型两次
     BOOL isNeededToUpadteTwice;
-    //当前整个魔方索引的状态，存储索引值
-    Cube * MagicCubeIndexState[27];
-    
+       
     //计步器
     id target;
     BOOL isAddStepWhenUpdateState;
@@ -87,10 +87,11 @@ typedef enum _MagicCubeUIUsingMode {
     int rrrr;
     
     MagicCubeUIUsingMode _usingMode;
-   
-    
+    //当前整个魔方索引的状态，存储索引值
+    Cube * MagicCubeIndexState[27];
+    NSMutableArray * lockedarray;
 }
-//@property (retain, nonatomic) MCMagicCube *magicCube;
+@property (nonatomic,retain) NSMutableArray * lockedarray;
 @property (assign) id target;
 @property (assign) SEL stepcounterAddAction;
 @property (assign) SEL stepcounterMinusAction;
@@ -98,6 +99,7 @@ typedef enum _MagicCubeUIUsingMode {
 @property (retain) NSUndoManager* undoManger;
 //是否使用教学模式下的操作模式
 @property (assign) MagicCubeUIUsingMode usingMode;
+
 -(id)initiate;
 -(id)initiateWithState:(NSArray *)stateList;
 -(void)flashWithState:(NSArray *)stateList;

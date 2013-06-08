@@ -19,9 +19,11 @@
     //CubeFace *faces[6];
     int index;
     BOOL _isLocked;
+    int index_selectedFace;
 }
 
 @property (assign) int index;
+@property (assign) int index_selectedFace;
 @property (assign) BOOL isLocked;
 @property (nonatomic,retain)NSMutableArray *cube6faces;
 @property (nonatomic,retain)NSMutableArray *cube6faces_locksign;
@@ -32,5 +34,7 @@
 - (void)awake;
 - (void)update;
 -(void)render;
+//魔方输入时
+
 
 @end

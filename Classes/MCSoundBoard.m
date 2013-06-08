@@ -43,7 +43,7 @@
 {
     NSURL* fileURL = [NSURL fileURLWithPath:filePath];
     SystemSoundID soundId;
-    AudioServicesCreateSystemSoundID((__bridge CFURLRef)fileURL, &soundId);
+    AudioServicesCreateSystemSoundID((CFURLRef)fileURL, &soundId);
     
     [_sounds setObject:[NSNumber numberWithInt:soundId] forKey:key];
 }
@@ -78,49 +78,53 @@
 
 - (void)fadeIn:(NSTimer *)timer
 {
-    AVAudioPlayer *player = timer.userInfo;
+    AVAudioPlayer *player = [timer.userInfo objectForKey:@"player"];
+    float maxvolume = [[timer.userInfo objectForKey:@"maxvolume"]floatValue];;
     float volume = player.volume;
     volume = volume + 1.0 / MCSOUNDBOARD_AUDIO_FADE_STEPS;
-    volume = volume > 1.0 ? 1.0 : volume;
+    volume = volume > maxvolume ? maxvolume : volume;
     player.volume = volume;
     
-    if (volume == 1.0) {
+    if (volume == maxvolume) {
         [timer invalidate];
     }
 }
 
-- (void)playAudioForKey:(id)key fadeInInterval:(NSTimeInterval)fadeInInterval
+- (void)playAudioForKey:(id)key fadeInInterval:(NSTimeInterval)fadeInInterval maxVolume:(NSNumber*)maxvolume
 {
     AVAudioPlayer *player = [_audio objectForKey:key];
     
     // If fade in inteval interval is not 0, schedule fade in
     if (fadeInInterval > 0.0) {
         player.volume = 0.0;
+        NSMutableDictionary *dic = [[NSMutableDictionary alloc]init];
+        [dic setObject:player forKey:@"player"];
+        [dic setObject:maxvolume forKey:@"maxvolume"];
         NSTimeInterval interval = fadeInInterval / MCSOUNDBOARD_AUDIO_FADE_STEPS;
         [NSTimer scheduledTimerWithTimeInterval:interval
                                          target:self
                                        selector:@selector(fadeIn:)
-                                       userInfo:player
+                                       userInfo:dic
                                         repeats:YES];
     }
     
     [player play];
 }
 
-+ (void)playAudioForKey:(id)key fadeInInterval:(NSTimeInterval)fadeInInterval
++ (void)playAudioForKey:(id)key fadeInInterval:(NSTimeInterval)fadeInInterval maxVolume:(NSNumber*)maxvolume
 {
-    [[self sharedInstance] playAudioForKey:key fadeInInterval:fadeInInterval];
+    [[self sharedInstance] playAudioForKey:key fadeInInterval:fadeInInterval maxVolume:maxvolume];
 }
 
-+ (void)playAudioForKey:(id)key
++ (void)playAudioForKey:(id)key maxVolume:(NSNumber*)maxvolume
 {
-    [[self sharedInstance] playAudioForKey:key fadeInInterval:0.0];
+    [[self sharedInstance] playAudioForKey:key fadeInInterval:0.0 maxVolume:maxvolume];
 }
 
 
 - (void)fadeOutAndStop:(NSTimer *)timer
 {
-    AVAudioPlayer *player = timer.userInfo;
+    AVAudioPlayer *player = timer.userInfo ;
     float volume = player.volume;
     volume = volume - 1.0 / MCSOUNDBOARD_AUDIO_FADE_STEPS;
     volume = volume < 0.0 ? 0.0 : volume;

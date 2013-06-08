@@ -13,16 +13,21 @@
 #import "Global.h"
 #import "RotateType.h"
 #import "MCTransformUtil.h"
+#import "Global.h"
 @implementation MCMagicCubeUIModelController
 @synthesize array27Cube;
 @synthesize stepcounterAddAction,stepcounterMinusAction;
 @synthesize target;
 @synthesize usingMode = _usingMode;
+@synthesize lockedarray;
 //@synthesize magicCube;
 @synthesize undoManger;
 -(id)initiate{
     if(self = [super init]){
-        if (array27Cube == nil) array27Cube = [[NSMutableArray alloc] init];	
+        if (array27Cube == nil) array27Cube = [[NSMutableArray alloc] init];
+        if (lockedarray == nil) {
+            lockedarray = [[NSMutableArray alloc]init];
+        }
         isAutoRotate = NO;
         //魔方整体三个参数
         scale = MCPointMake(84,84,84);
@@ -92,6 +97,9 @@
 -(id)initiateWithState:(NSArray *)stateList{
     if(self = [super init]){
         if (array27Cube == nil) array27Cube = [[NSMutableArray alloc] init];
+        if (lockedarray == nil) {
+            lockedarray = [[NSMutableArray alloc]init];
+        }
         //magicCube = [MCMagicCube getSharedMagicCube];
         isAutoRotate = NO;
         //魔方整体三个参数
@@ -178,12 +186,18 @@
                     //tCube = [[Cube alloc] initWithState:cubestate];
                     tCube = [array27Cube objectAtIndex:index_tmp];
                     [tCube flashWithState:cubestate];
+                    [tCube setIsLocked:NO];
                     [tCube setQuaRotation:[centercube quaRotation]];
                 }
             }
         }
     }
-    
+    for (int i = 0; i<[lockedarray count]; i++) {
+        Cube * tCube = nil;
+        Point3i point = [[[MCNormalPlaySceneController sharedNormalPlaySceneController]magicCube]coordinateValueOfCubieWithColorCombination:(ColorCombinationType)[[lockedarray objectAtIndex:i] intValue]];
+        tCube = [array27Cube objectAtIndex:point.x+1+(point.y+1)*3+(point.z+1)*9];
+        [tCube setIsLocked:YES];
+    }
 };
 
 -(void)render{
@@ -648,11 +662,20 @@
         
     
     //继续射线拾取
-    float V[108] = {-0.5,0.5,0.5,    -0.5,-0.5,0.5,   0.5,-0.5,0.5,
-        0.5,-0.5,0.5,    0.5,0.5,0.5,    -0.5,0.5,0.5,//前
+    float V[108] = {
+        
         
         -0.5,0.5,0.5,     0.5,0.5,0.5,     0.5,0.5,-0.5,
         0.5,0.5,-0.5,   -0.5,0.5,-0.5,   -0.5,0.5,0.5,//上
+        
+        -0.5,-0.5,0.5,   -0.5,-0.5,-0.5,   0.5,-0.5,-0.5,
+        0.5,-0.5,-0.5,   0.5,-0.5,0.5,    -0.5,-0.5,0.5,//下
+        
+        -0.5,0.5,0.5,    -0.5,-0.5,0.5,   0.5,-0.5,0.5,
+        0.5,-0.5,0.5,    0.5,0.5,0.5,    -0.5,0.5,0.5,//前
+        
+        0.5,0.5,-0.5,    0.5,-0.5,-0.5,  -0.5,-0.5,-0.5,
+        -0.5,-0.5,-0.5,  -0.5,0.5,-0.5,    0.5,0.5,-0.5,//后
         
         -0.5,0.5,-0.5,   -0.5,-0.5,-0.5,  -0.5,-0.5,0.5,
         -0.5,-0.5,0.5,   -0.5,0.5,0.5,    -0.5,0.5,-0.5,//左
@@ -660,11 +683,9 @@
         0.5,0.5,0.5,     0.5,-0.5,0.5,    0.5,-0.5,-0.5,
         0.5,-0.5,-0.5,   0.5,0.5,-0.5,    0.5,0.5,0.5,//右
         
-        0.5,0.5,-0.5,    0.5,-0.5,-0.5,  -0.5,-0.5,-0.5,
-        -0.5,-0.5,-0.5,  -0.5,0.5,-0.5,    0.5,0.5,-0.5,//后
+       
         
-        -0.5,-0.5,0.5,   -0.5,-0.5,-0.5,   0.5,-0.5,-0.5,
-        0.5,-0.5,-0.5,   0.5,-0.5,0.5,    -0.5,-0.5,0.5,//下
+        
     };
     
     switch (fsm_Current_State) {
@@ -704,6 +725,7 @@
                                                                                     V2:&tmp_dection[6 +i*9]];
                         nearest_distance = distance;
                         index = tmp_cube.index;
+                        tmp_cube.index_selectedFace = i;
                     }
                 }
             }
@@ -712,10 +734,14 @@
                 //NSLog(@"selected_index:%d",index);
                 //NSLog(@"(0x:%f,0y:%f,0z:%f)",directionVector[0].x,directionVector[0].y,directionVector[0].z);
                 //selected.scale = MCPointMake(20, 20, 20);
-                isLayerRotating = YES;
+                if ([self usingMode] == SOlVE_Input_MODE){
+                    isLayerRotating = NO;
+                }else{
+                    isLayerRotating = YES;
+                }
                 fingerRotate_angle = 0;
             }
-            // m_previousOrientation = m_orientation;
+            
             break;
         }
             
@@ -993,7 +1019,7 @@
             }
             isLayerRotating = NO;
             firstThreePointCount = 0;
-            if ([self usingMode] == PLAY_MODE) {
+            if ([self usingMode] == PLAY_MODE||[self usingMode] ==SOlVE_Input_MODE) {
             //自由模式下，无限制操作
                 if ([touches count]==2) {
                     UITouch *touch0 = [[touches allObjects] objectAtIndex:0];
@@ -1027,8 +1053,6 @@
                 firstThreePoint[0].x =location.x;
                 firstThreePoint[0].y =location.y;
                 //firstThreePointCount++;
-
-                
             }
             break;
         }
@@ -1036,7 +1060,7 @@
             if (isAutoRotate||is_TECH_MODE_Rotate) {
                 return;
             }
-            if ([self usingMode] == PLAY_MODE) {
+            if ([self usingMode] == PLAY_MODE||[self usingMode] ==SOlVE_Input_MODE) {
                 //自由模式下，无限制操作
                 CGPoint current;
                 if ([touches count]==2) {
@@ -1073,7 +1097,7 @@
             if (isAutoRotate||is_TECH_MODE_Rotate) {
                 return;
             }
-            if ([self usingMode] == PLAY_MODE) {
+            if ([self usingMode] == PLAY_MODE||[self usingMode] ==SOlVE_Input_MODE) {
                 //自由模式下，无限制操作
                 firstThreePointCount = 0;
                 m_spinning = NO;
@@ -1971,7 +1995,6 @@ double FabsThetaBetweenV1andV2(const vec3& v1,const vec3& v2)
     return acos(fabs(cosa));
 }
 
-
 #pragma mark undo redo
 
 -(void)previousSolution{
@@ -1990,5 +2013,6 @@ double FabsThetaBetweenV1andV2(const vec3& v1,const vec3& v2)
     }
     [[self undoManger] redo];
 }
+
 
 @end

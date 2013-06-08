@@ -11,6 +11,7 @@
 #import "CoordinatingController.h"
 #import <AVFoundation/AVFoundation.h>
 #import "MCSoundBoard.h"
+#import "SoundSettingController.h"
 @interface MCSystemSettingViewController ()
 
 @end
@@ -91,15 +92,18 @@
 			
 			slider.maximumValue = 1.0;
 			slider.minimumValue = 0.0;
-			slider.value = 1.0; // in a real app you should read this value from the user defaults
+			//slider.value = 1.0; // in a real app you should read this value from the user defaults
 			
 			if(indexPath.section == 0)
 			{
+                [slider setValue:[[[SoundSettingController sharedsoundSettingController] _RotateEffectValume] floatValue]];
 				[slider addTarget:self action:@selector(effectsVolume:) forControlEvents:UIControlEventValueChanged];
 			//	slider.enabled = !soundMgr.isiPodAudioPlaying; // disable the slider if the ipod is playing...
 			}
-			else
+			else{
+                [slider setValue:[[[SoundSettingController sharedsoundSettingController] _BackGroundMusicValume] floatValue]];
 				[slider addTarget:self action:@selector(musicVolume:) forControlEvents:UIControlEventValueChanged];
+            }
 			
 			
 			[cell.contentView addSubview:slider];
@@ -112,26 +116,25 @@
 	{
 		cell.textLabel.text = S_L_RotateEffectSwitch;
         UISwitch * uiswitch =[[UISwitch alloc]init];
+        [uiswitch setOn:[[[SoundSettingController sharedsoundSettingController] _RotateEffectSwitch] boolValue]];
         [uiswitch addTarget:self action:@selector(effectsSwitch:) forControlEvents:UIControlEventValueChanged];
         cell.accessoryView = uiswitch;
-        //[uiswitch release];
 	}
 	else if(indexPath.section == 1&& indexPath.row == 1)
 	{
 		cell.textLabel.text = S_L_BackGroundMusicSwitch;
         UISwitch * uiswitch =[[UISwitch alloc]init];
-        [uiswitch setOn:YES];
+        [uiswitch setOn:[[[SoundSettingController sharedsoundSettingController] _BackGroundMusicSwitch] boolValue]];
         [uiswitch addTarget:self action:@selector(musicSwitch:) forControlEvents:UIControlEventValueChanged];
         cell.accessoryView = uiswitch;
-        //[uiswitch release];
 	}
-    
     return cell;
 }
 
 - (void) musicVolume:(id)sender
 {
-	//soundMgr.backgroundMusicVolume = ((UISlider *)sender).value;
+	SoundSettingController * soundsetting = [SoundSettingController sharedsoundSettingController];
+    [soundsetting setBackgroundPlayer_Volume:[(UISlider*)sender value]];
 }
 - (void) musicSwitch:(id)sender
 {

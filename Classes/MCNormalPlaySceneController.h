@@ -31,4 +31,5 @@
 -(void)nextSolution;
 -(void)reloadLastTime;
 -(void)showQueue;
+-(void)checkIsOver;
 @end

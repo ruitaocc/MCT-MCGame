@@ -45,6 +45,8 @@
 #define Audio_BackGroundSound_Loop @"loop.mp3"
 #define Audio_BackGroundSound_Loop_key @"loop"
 
+#define Congig_Sound_File @"soundconfig.plist"
+
 
 
 

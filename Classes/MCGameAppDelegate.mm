@@ -18,6 +18,7 @@
 #import "CoordinatingController.h"
 #import "MCOBJLoader.h"
 #import "SoundSettingController.h"
+#import "SoundSettingController.h"
 @implementation MCGameAppDelegate
 
 @synthesize window;
@@ -42,6 +43,7 @@
     
     SoundSettingController * soundcontroller = [SoundSettingController sharedsoundSettingController];
     [soundcontroller loadSounds];
+    [soundcontroller loadSoundConfiguration];
     
     
     

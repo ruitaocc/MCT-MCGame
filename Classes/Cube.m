@@ -23,6 +23,7 @@
 @synthesize index,cube6faces;
 @synthesize cube6faces_locksign;
 @synthesize isLocked=_isLocked;
+@synthesize index_selectedFace;
 - (id) initWithState:(NSDictionary *)states
 {
 	self = [super init];
@@ -55,6 +56,7 @@
             [cube6faces addObject:faces];
             [faces release];
         }
+        index_selectedFace = -1;
         if (cube6faces_locksign==nil) {
             cube6faces_locksign = [[NSMutableArray alloc]init];
         }
@@ -99,6 +101,7 @@
         if (cube6faces==nil) {
             cube6faces = [[NSMutableArray alloc]init];
         }
+        index_selectedFace = -1;
         for (int i=0; i<6; i++) {
             //NSNumber *state = [states objectForKey:[NSNumber numberWithInteger:i ]];
             CubeFace* faces = [[CubeFace alloc]initWithVertexes:&Cube_vertex_coordinates_f[i*6*3] vertexCount:6 vertexSize:3 renderStyle:GL_TRIANGLES];

@@ -103,9 +103,7 @@
     //流程1，通知数据模型UI已经旋转
    
     [playHelper rotateWithSingmasterNotation:[rotateType notation]];
-    //if ([rotateType notation]==NoneNotation) {
-    //    int a= 1;
-    //}
+    
     if (isShowQueue) {
         [self showQueue];
     }
@@ -113,18 +111,18 @@
     [magicCubeUI flashWithState:[ magicCube getColorInOrientationsOfAllCubie]];
     SoundSettingController *soundsetting = [SoundSettingController sharedsoundSettingController];
     [soundsetting playSoundForKey:Audio_RotateSound_Ding_key];
+    
+    [self checkIsOver];
 
 }
 
 - (void) rotateOnAxis : (AxisType)axis onLayer: (int)layer inDirection: (LayerRotationDirectionType)direction isTribleRotate:(BOOL)is_trible_roate{
     
-    //SingmasterNotation notation = [MCTransformUtil getSingmasterNotationFromAxis:axis layer:layer direction:direction];
-    
     //[playHelper rotateWithSingmasterNotation:notation];
     
     [magicCubeUI rotateOnAxis:axis onLayer:layer inDirection:direction isTribleRotate:NO];
-        //NSLog(@"notation:%@",[MCTransformUtil getRotationTagFromSingmasterNotation:notation]);
-    //NSLog(@"axis = %d,layer = %d,direction= %d",axis,layer,direction);
+    
+    
 }
 -(void)showQueue{
           
@@ -155,9 +153,15 @@
         for(int i = 0;i<27;i++) {
             [[[magicCubeUI array27Cube]objectAtIndex:i]setIsLocked:NO];
         }
+        /*
         for(NSNumber *index in lockArray) {
+            //[magicCubeUI.getMagicCubeIndexState[index.intValue] setIsLocked:YES];
             [[[magicCubeUI array27Cube]objectAtIndex:[index intValue]]setIsLocked:YES];
-        }
+        }*/
+        //[magicCubeUI setLockedarray:lockArray];
+        [[magicCubeUI lockedarray]removeAllObjects];
+        [[magicCubeUI lockedarray]addObjectsFromArray:lockArray];
+        [magicCubeUI flashWithState:[magicCube getColorInOrientationsOfAllCubie]];
         [[self tipsLabel]setText:tipstr];
         [[input_C actionQueue] insertQueueCurrentIndexWithNmaeList:actionqueue];
     }else{
@@ -212,16 +216,20 @@
                 if([[playHelper state]isEqual:END_STATE]){
                     //弹出结束对话框
                     [((MCNormalPlayInputViewController*)[self inputController])showFinishView];
-                    NSLog(@"END form Scene");
                     break;
                 }
             };
             for(int i = 0;i<27;i++) {
                 [[[magicCubeUI array27Cube]objectAtIndex:i]setIsLocked:NO];
             }
+            /*
             for(NSNumber *index in lockArray) {
+                //[magicCubeUI.getMagicCubeIndexState[index.intValue] setIsLocked:YES];
                 [[[magicCubeUI array27Cube]objectAtIndex:[index intValue]]setIsLocked:YES];
-            }
+            }*/
+            [[magicCubeUI lockedarray]removeAllObjects];
+            [[magicCubeUI lockedarray]addObjectsFromArray:lockArray];
+            [magicCubeUI flashWithState:[magicCube getColorInOrientationsOfAllCubie]];
             NSMutableString *tipstr = [[NSMutableString alloc]init];
             for (NSString *msg in tipStrArray) {
                 [tipstr appendString:msg];
@@ -235,7 +243,14 @@
         }
     }
 };
-
+//检测是否结束
+-(void)checkIsOver{
+    return;
+    if ([[[self playHelper]state]isEqual: END_STATE]) {
+        [((MCNormalPlayInputViewController*)[self inputController])showFinishView];
+        NSLog(@"END form Scene");
+    } 
+};
 -(void)previousSolution{
     NSLog(@"mc previousSolution");
     [[sceneObjects objectAtIndex:0]performSelector:@selector(previousSolution)];
