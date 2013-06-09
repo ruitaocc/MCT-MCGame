@@ -71,7 +71,7 @@
 
     actionQueue = [[MCActionQueue alloc]initWithActionList:actionname] ;
     [actionQueue setScale : MCPointMake(32, 32, 1.0)];
-    [actionQueue setTranslation :MCPointMake(0, 320, 0.0)];
+    [actionQueue setTranslation :MCPointMake(0, 340, 0.0)];
     [actionQueue setActive:NO];
     [actionQueue awake];
     [interfaceObjects addObject:actionQueue];

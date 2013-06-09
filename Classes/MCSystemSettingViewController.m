@@ -150,7 +150,8 @@
 }
 - (void) effectsSwitch:(id)sender
 {
-	
+	SoundSettingController * soundsetting = [SoundSettingController sharedsoundSettingController];
+    [soundsetting rotateSoundFlipSwitch];
 }
 // Override to support row selection in the table view.
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {

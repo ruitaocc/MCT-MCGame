@@ -79,6 +79,9 @@
     [self restoreSoundConfiguration];
 };
 -(void)playSoundForKey:(NSString*)key{
+    if ((![self _RotateEffectSwitch])&&[key isEqualToString:Audio_RotateSound_Ding_key]) {
+        return;
+    }
     [MCSoundBoard playSoundForKey:key];
 };
 -(void)playAudioForKey:(NSString*)key maxVolume:(NSNumber *)maxvolume{
@@ -105,5 +108,10 @@
         [self restoreSoundConfiguration];
     }
 };
-
+-(void)rotateSoundFlipSwitch{
+    NSNumber *flip = [[NSNumber alloc]initWithBool:(![[self _RotateEffectSwitch] boolValue])];
+    [self set_RotateEffectSwitch:flip];
+    [flip release];
+    [self restoreSoundConfiguration];
+}
 @end

@@ -110,6 +110,7 @@
 		A3D67F871759E1F1002501B2 /* greenface.png in Resources */ = {isa = PBXBuildFile; fileRef = A3D67F801759E1F1002501B2 /* greenface.png */; };
 		A3D67F881759E1F1002501B2 /* blackface.png in Resources */ = {isa = PBXBuildFile; fileRef = A3D67F811759E1F1002501B2 /* blackface.png */; };
 		A3DB2596162D993900AB9F00 /* CoordinatingController.m in Sources */ = {isa = PBXBuildFile; fileRef = A3DB2595162D993900AB9F00 /* CoordinatingController.m */; };
+		A3DB413317646E5900C0D091 /* xyzCoordinateIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = A3DB413217646E5900C0D091 /* xyzCoordinateIndicator.m */; };
 		A3E1ADBA16A3C3160050B52D /* readme_config.rtf in Resources */ = {isa = PBXBuildFile; fileRef = A3E1ADB916A3C3160050B52D /* readme_config.rtf */; };
 		A3E1ADBC16A3C40C0050B52D /* readme_scene5.rtf in Resources */ = {isa = PBXBuildFile; fileRef = A3E1ADBB16A3C40C0050B52D /* readme_scene5.rtf */; };
 		A3E1ADBE16A3C47D0050B52D /* readme_Scene1.rtf in Resources */ = {isa = PBXBuildFile; fileRef = A3E1ADBD16A3C47D0050B52D /* readme_Scene1.rtf */; };
@@ -350,6 +351,8 @@
 		A3D67F8A1759E35E002501B2 /* MCStringDefine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MCStringDefine.h; sourceTree = "<group>"; };
 		A3DB2594162D993900AB9F00 /* CoordinatingController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoordinatingController.h; sourceTree = "<group>"; };
 		A3DB2595162D993900AB9F00 /* CoordinatingController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoordinatingController.m; sourceTree = "<group>"; };
+		A3DB413117646E5900C0D091 /* xyzCoordinateIndicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = xyzCoordinateIndicator.h; sourceTree = "<group>"; };
+		A3DB413217646E5900C0D091 /* xyzCoordinateIndicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = xyzCoordinateIndicator.m; sourceTree = "<group>"; };
 		A3E1ADB916A3C3160050B52D /* readme_config.rtf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.rtf; path = readme_config.rtf; sourceTree = "<group>"; };
 		A3E1ADBB16A3C40C0050B52D /* readme_scene5.rtf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.rtf; path = readme_scene5.rtf; sourceTree = "<group>"; };
 		A3E1ADBD16A3C47D0050B52D /* readme_Scene1.rtf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.rtf; path = readme_Scene1.rtf; sourceTree = "<group>"; };
@@ -846,6 +849,15 @@
 			name = cubeface;
 			sourceTree = "<group>";
 		};
+		A3DB413017646DD100C0D091 /* Coordinate indicator */ = {
+			isa = PBXGroup;
+			children = (
+				A3DB413117646E5900C0D091 /* xyzCoordinateIndicator.h */,
+				A3DB413217646E5900C0D091 /* xyzCoordinateIndicator.m */,
+			);
+			name = "Coordinate indicator";
+			sourceTree = "<group>";
+		};
 		A3E1ADAC16A3B5EF0050B52D /* Scene1 */ = {
 			isa = PBXGroup;
 			children = (
@@ -1012,6 +1024,7 @@
 		A3F2ACBD1616D97800D622B8 /* SceneObjects */ = {
 			isa = PBXGroup;
 			children = (
+				A3DB413017646DD100C0D091 /* Coordinate indicator */,
 				A3E469E0174C9AA600A31586 /* MyLabel */,
 				A3C7AA9617019B210045D963 /* ActionQueue */,
 				A3C7AA9116FDF8220045D963 /* ParticleSystem */,
@@ -1406,6 +1419,7 @@
 				E0167DAB176373B400F420E8 /* MCExplanationSystem.m in Sources */,
 				E0167DAC176373B400F420E8 /* MCInferenceEngine.m in Sources */,
 				E0167DAD176373B400F420E8 /* MCWorkingMemory.m in Sources */,
+				A3DB413317646E5900C0D091 /* xyzCoordinateIndicator.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

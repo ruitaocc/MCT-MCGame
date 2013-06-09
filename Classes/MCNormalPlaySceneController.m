@@ -14,6 +14,7 @@
 #import "MCNormalPlayInputViewController.h"
 #import "MCStringDefine.h"
 #import "SoundSettingController.h"
+#import "xyzCoordinateIndicator.h"
 @implementation MCNormalPlaySceneController
 @synthesize magicCube;
 @synthesize playHelper;
@@ -48,7 +49,16 @@
     [magicCubeUI setStepcounterAddAction:@selector(stepcounterAdd)];
     [magicCubeUI setStepcounterMinusAction:@selector(stepcounterMinus)];
     [self addObjectToScene:magicCubeUI];
-    //[magicCubeUI release];
+    [magicCubeUI release];
+    //加载坐标系
+    
+    
+    xyzCoordinateIndicator * xyz_CoorInd = [[xyzCoordinateIndicator alloc]init];
+    [xyz_CoorInd setScale:MCPointMake(67,67,67)];
+    [xyz_CoorInd setTranslation:MCPointMake(0, 0, 0)];
+    [xyz_CoorInd setRotation:MCPointMake(30,-45,0)];
+    [self addObjectToScene:xyz_CoorInd];
+    [xyz_CoorInd release];
     
     //提示标签
     [self setTipsLabel: [[[UILabel alloc]initWithFrame:CGRectMake(800,150,200,160)] autorelease]];
