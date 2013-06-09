@@ -24,5 +24,5 @@
 -(void)rotate:(RotateType*)rotateType;
 -(void)previousSolution;
 -(void)nextSolution;
-
+-(void)releaseSrc;
 @end

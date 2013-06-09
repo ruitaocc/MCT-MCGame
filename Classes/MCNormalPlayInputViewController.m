@@ -279,9 +279,9 @@
 -(void)nextSolutionBtnDown{}
 
 -(void)mainMenuBtnDown{
-    NSLog(@"mainMenuPlayBtnDown");
+    NSLog(@"mainMenuBtnDown");
 }
--(void)mainMenuBtnUp{NSLog(@"mainMenuPlayBtnUp");
+-(void)mainMenuBtnUp{NSLog(@"mainMenuBtnUp");
     
     //保存魔方状态
     NSString *path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
@@ -460,5 +460,7 @@
     MCNormalPlaySceneController *c = [MCNormalPlaySceneController sharedNormalPlaySceneController ];
     [c reloadLastTime];
 }
-
+- (void)releaseInterface{
+    [super releaseInterface];
+}
 @end

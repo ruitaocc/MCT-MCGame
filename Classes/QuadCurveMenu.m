@@ -83,7 +83,7 @@ static CGPoint RotateCGPointAroundCenter(CGPoint point, CGPoint center, float an
         [item.layer addAnimation:blowup forKey:@"blowup"];
         
         // If animation ends, remove views
-        self.closeTimer = [NSTimer timerWithTimeInterval:(K_QUADCURVE_MENU_DEFAULT_SELECT_ANIM_LAST_TIME - 0.05)
+        self.closeTimer = [NSTimer timerWithTimeInterval:(K_QUADCURVE_MENU_DEFAULT_SELECT_ANIM_LAST_TIME - 0.001)
                                                   target:self
                                                 selector:@selector(removeFromSuperview)
                                                 userInfo:nil
@@ -118,7 +118,7 @@ static CGPoint RotateCGPointAroundCenter(CGPoint point, CGPoint center, float an
         if ([_delegate respondsToSelector:@selector(quadCurveMenu:didSelectIndex:)])
         {
             [_delegate quadCurveMenu:self didSelectIndex:item.tag - 1000];
-        }
+        } 
     }
     
 }

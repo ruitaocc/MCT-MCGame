@@ -15,7 +15,8 @@
 @implementation MCRandomSolveSceneController
 
 @synthesize magicCube,playHelper;
-
+@synthesize selected_face_index;
+@synthesize selected_index;
 
 +(MCRandomSolveSceneController*)sharedRandomSolveSceneController
 {
@@ -32,7 +33,14 @@
 	RANDOM_SEED();
 	// this is where we store all our objects
 	if (sceneObjects == nil) sceneObjects = [[NSMutableArray alloc] init];
-	
+    selected_index = -1;
+    selected_face_index = -1;
+    
+    //初始化只有中心小块到魔方
+    magicCube = [[MCMagicCube magicCube]retain];
+    
+    playHelper = [[MCPlayHelper playerHelperWithMagicCube:self.magicCube]retain];
+    
     magicCubeUI = [[MCMagicCubeUIModelController alloc]initiateWithState:[magicCube getColorInOrientationsOfAllCubie]] ;
     magicCubeUI.target=self;
     [magicCubeUI setStepcounterAddAction:@selector(stepcounterAdd)];
@@ -52,9 +60,20 @@
 }
 
 -(BOOL)isSelectOneFace:(vec2)touchpoint{
-    return [magicCubeUI isSelectOneFace:touchpoint];
+    if ([magicCubeUI isSelectOneFace:touchpoint]) {
+        selected_index = [magicCubeUI selected_cube_index];
+        selected_face_index = [magicCubeUI selected_cube_face_index];
+        return YES;
+    }else
+        return NO;
+};
+-(void)flashSecne{
+    [magicCubeUI flashWithState:[magicCube getColorInOrientationsOfAllCubie]];
 };
 
+-(void)releaseSrc{
+    [super releaseSrc];
+}
 
 - (void)dealloc{
     [super dealloc];

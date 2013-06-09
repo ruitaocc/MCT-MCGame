@@ -268,8 +268,9 @@
 	[super dealloc];
 }
 - (void)releaseSrc{
-    [self stopAnimation];
-    [self restartScene];
+    [inputController releaseInterface];
+    //[self stopAnimation];
+    //[self restartScene];
 }
 
 

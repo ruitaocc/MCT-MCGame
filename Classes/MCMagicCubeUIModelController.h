@@ -90,6 +90,11 @@ typedef enum _MagicCubeUIUsingMode {
     //当前整个魔方索引的状态，存储索引值
     Cube * MagicCubeIndexState[27];
     NSMutableArray * lockedarray;
+    
+    
+    //
+    int selected_cube_index;
+    int selected_cube_face_index;
 }
 @property (nonatomic,retain) NSMutableArray * lockedarray;
 @property (assign) id target;
@@ -99,6 +104,8 @@ typedef enum _MagicCubeUIUsingMode {
 @property (retain) NSUndoManager* undoManger;
 //是否使用教学模式下的操作模式
 @property (assign) MagicCubeUIUsingMode usingMode;
+@property (assign)int selected_cube_index;
+@property (assign)int selected_cube_face_index;
 
 -(id)initiate;
 -(id)initiateWithState:(NSArray *)stateList;

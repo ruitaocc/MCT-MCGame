@@ -42,7 +42,7 @@
 -(void)nextSolutionBtnDown;
 //回到主菜单
 -(void)mainMenuBtnDown;
--(void)mainMenuPlayBtnUp;
+-(void)mainMenuBtnUp;
 //队列
 -(void)shiftLeftBtnDown;
 -(void)shiftLeftBtnUp;
@@ -51,5 +51,6 @@
 -(void)shiftRightBtnUp;
 
 -(void)showFinishView;
+- (void)releaseInterface;
 
 @end

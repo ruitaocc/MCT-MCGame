@@ -38,10 +38,10 @@
         [configDic release];
 
     }else{
-        [self set_BackGroundMusicValume:[[NSNumber alloc] initWithFloat:1.0]];
-        [self set_RotateEffectValume:[[NSNumber alloc] initWithFloat:1.0]];
-        [self set_RotateEffectSwitch :[[NSNumber alloc] initWithBool:YES]];
-        [self set_BackGroundMusicSwitch:[[NSNumber alloc] initWithBool:YES]];
+        [self set_BackGroundMusicValume:[[[NSNumber alloc] initWithFloat:1.0] autorelease]];
+        [self set_RotateEffectValume:[[[NSNumber alloc] initWithFloat:1.0] autorelease]];
+        [self set_RotateEffectSwitch :[[[NSNumber alloc] initWithBool:YES] autorelease]];
+        [self set_BackGroundMusicSwitch:[[[NSNumber alloc] initWithBool:YES] autorelease]];
     }
     if ([[self _BackGroundMusicSwitch]boolValue]) {
         backgroundPlayer = [MCSoundBoard audioPlayerForKey:Audio_BackGroundSound_Loop_key];
@@ -74,7 +74,7 @@
     backgroundPlayer = [MCSoundBoard audioPlayerForKey:Audio_BackGroundSound_Loop_key];
 };
 -(void)setBackgroundPlayer_Volume:(float)volume{
-    [self set_BackGroundMusicValume:[[NSNumber alloc] initWithFloat:volume]];
+    [self set_BackGroundMusicValume:[[[NSNumber alloc] initWithFloat:volume] autorelease]];
     backgroundPlayer.volume = volume;
     [self restoreSoundConfiguration];
 };

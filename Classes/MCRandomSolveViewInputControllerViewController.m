@@ -37,6 +37,11 @@
 	[interfaceObjects addObject:mainMenuBtn];
 	[mainMenuBtn release];
     
+    //
+   
+    //
+    isWantShowSelectView = NO;
+    //color selector pannel
     CGRect itemFrame =  self.view.bounds;
     itemFrame.size.height = itemFrame.size.height * POPUP_ITEM_WINDOW_SIZE_RATIO;
     itemFrame.size.width = itemFrame.size.height;
@@ -90,9 +95,15 @@
     [super touchesBegan:touches withEvent:event];
     
     //FSM_Interaction_State fsm_Current_State = [[[CoordinatingController sharedCoordinatingController] currentController].inputController fsm_Current_State];
-    if (fsm_Current_State == kState_F2||fsm_Current_State == kState_S2||fsm_Current_State==kState_M2) {
+    if (fsm_Current_State==kState_F2||fsm_Current_State == kState_S2||fsm_Current_State==kState_M2) {
+        isWantShowSelectView = NO;
         return;
     }
+    isWantShowSelectView = YES;
+}
+
+-(void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event{
+    [super touchesEnded:touches withEvent:event];
     
     UITouch *touch = [touches anyObject];
     _lastestPoint = [touch locationInView:self.view];
@@ -102,14 +113,17 @@
     
     BOOL isSelectOneFace = [secencontroller isSelectOneFace:lastpoint];
     
-    if (!self.selectMenu.isProtection) {
-        if (!self.selectMenu.expanding && isSelectOneFace) {
-            self.selectMenu.center = _lastestPoint;
-            [self.view addSubview:_selectMenu];
-            [self.selectMenu setExpanding:YES];
-        }
-        else{
-            [self.selectMenu setExpanding:NO];
+    
+    if (isWantShowSelectView) {
+        if (!self.selectMenu.isProtection) {
+            if (!self.selectMenu.expanding && isSelectOneFace) {
+                self.selectMenu.center = _lastestPoint;
+                [self.view addSubview:_selectMenu];
+                [self.selectMenu setExpanding:YES];
+            }
+            else{
+                [self.selectMenu setExpanding:NO];
+            }
         }
     }
 }
@@ -117,8 +131,26 @@
 
 - (void)quadCurveMenu:(QuadCurveMenu *)menu didSelectIndex:(NSInteger)idx{
     NSLog(@"Select the index : %d",idx);
-    //1.选择颜色
-    //
+    MCRandomSolveSceneController * secencontroller = [MCRandomSolveSceneController sharedRandomSolveSceneController];
+    //选择的小块0-26
+    int selected_cube_index = [secencontroller selected_index];
+    //选择到面+++上下前后左右012345
+    int selected_face_index = [secencontroller selected_face_index];
+    //给magicCube填上颜色
+    
+    //刷新magicCubeUI
+    [secencontroller flashSecne];
+    
+    //判断是否结束
+    
+        //结束则开始合成魔方，打开HUD
+    
+            //合成成功，1，则将魔方到模式变为教学模式，且45度角   2，永久关闭颜色选择框
+    
+            //合成不成功，alert。
+    
+            //关闭HUD
+    
 }
 - (void)releaseInterface{
     [super releaseInterface];

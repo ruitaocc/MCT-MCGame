@@ -16,6 +16,5 @@
 @property (nonatomic, retain) IBOutlet UIWindow *window;
 + (MCGameAppDelegate*)sharedMCGameAppDelegate;
 //程序将退出时，保存数据
--(void)applicationWillTerminate:(UIApplication *)application;
 @end
 

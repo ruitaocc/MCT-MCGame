@@ -18,15 +18,23 @@
     MCMagicCubeUIModelController* magicCubeUI;
     MCMagicCube * magicCube;
     MCPlayHelper * playHelper;
+    int selected_index;
+    int selected_face_index;
 }
 @property (nonatomic,retain)MCMagicCube * magicCube;
 @property (nonatomic,retain)MCPlayHelper * playHelper;
+@property (assign)int selected_index;
+@property (assign)int selected_face_index;
 
 
 + (MCRandomSolveSceneController*)sharedRandomSolveSceneController;
 
 -(void)loadScene;
 
+-(void)releaseSrc;
+
 -(BOOL)isSelectOneFace:(vec2)touchpoint;
+
+-(void)flashSecne;
 
 @end

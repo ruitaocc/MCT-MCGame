@@ -32,4 +32,5 @@
 -(void)reloadLastTime;
 -(void)showQueue;
 -(void)checkIsOver;
+-(void)releaseSrc;
 @end

@@ -77,4 +77,8 @@
     [[sceneObjects objectAtIndex:0]performSelector:@selector(nextSolution)];
 }
 
+-(void)releaseSrc{
+    [super releaseSrc];
+}
+
 @end

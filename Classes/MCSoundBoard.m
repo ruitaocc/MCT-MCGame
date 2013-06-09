@@ -69,6 +69,7 @@
     NSURL* fileURL = [NSURL fileURLWithPath:filePath];
     AVAudioPlayer *player = [[AVAudioPlayer alloc] initWithContentsOfURL:fileURL error:NULL];
     [_audio setObject:player forKey:key];
+    [player release];
 }
 
 + (void)addAudioAtPath:(NSString *)filePath forKey:(id)key

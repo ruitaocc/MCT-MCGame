@@ -152,6 +152,8 @@
     [_countingPlaySceneController.inputController resignFirstResponder];
     
     [window setRootViewController:_countingPlaySceneController.inputController];
+    //
+    [currentController releaseSrc];
     currentController = _countingPlaySceneController;
     [currentController removeAllObjectFromScene];
     [currentController loadScene];
@@ -177,6 +179,7 @@
     [_randomSolveSceneController.inputController resignFirstResponder];
     
     [window setRootViewController:_randomSolveSceneController.inputController];
+    [currentController releaseSrc];
     currentController = _randomSolveSceneController;
     [currentController removeAllObjectFromScene];
     [currentController loadScene];
@@ -203,6 +206,7 @@
     [_normalPlaySceneController.inputController resignFirstResponder];
     
     [window setRootViewController:_normalPlaySceneController.inputController];
+    [currentController releaseSrc];
     currentController = _normalPlaySceneController;
     [currentController removeAllObjectFromScene];
     [currentController loadScene];
@@ -227,7 +231,7 @@
     [_mainSceneController.inputController resignFirstResponder];
     
      [window setRootViewController:_mainSceneController.inputController];
-    
+   [currentController releaseSrc]; 
     currentController = _mainSceneController;
     [currentController removeAllObjectFromScene];;
     [currentController loadScene];

@@ -24,7 +24,7 @@
 	for (MCSceneObject * obj in sceneObjects) {
 		if (obj.collider != nil){
 			[allColliders addObject:obj];
-			if ([obj.collider checkForCollision]) [collidersToCheck addObject:obj];
+			//if ([obj.collider checkForCollision]) [collidersToCheck addObject:obj];
 		}	
 	}
     
@@ -32,9 +32,9 @@
 	for (MCSceneObject * colliderObject in collidersToCheck) {
 		for (MCSceneObject * collideeObject in allColliders) {
 			if (colliderObject == collideeObject) continue;
-			if ([colliderObject.collider doesCollideWithCollider:collideeObject.collider]) {
-				if ([colliderObject respondsToSelector:@selector(didCollideWith:)]) [colliderObject didCollideWith:collideeObject];
-			}
+			//if ([colliderObject.collider doesCollideWithCollider:collideeObject.collider]) {
+			//	if ([colliderObject respondsToSelector:@selector(didCollideWith:)]) [colliderObject didCollideWith:collideeObject];
+			//}
 		}
 	}
 }

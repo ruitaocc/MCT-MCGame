@@ -180,8 +180,8 @@
     GLfloat t = edge2[0]*qvec[0]+edge2[1]*qvec[1]+edge2[2]*qvec[2];
     GLfloat fInvDet = 1.0f / det;
     t *= fInvDet;
-    u *= fInvDet;
-    v *= fInvDet;
+    //u *= fInvDet;
+    //v *= fInvDet;
     vec3 distanceVector = vDirection*t;
     
     return vOrigin+distanceVector;

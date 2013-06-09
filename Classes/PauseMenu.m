@@ -60,11 +60,12 @@
         
         // The header label, a UILabel with the same frame as the titleBar
         [self headerLabel].font = [UIFont boldSystemFontOfSize:floor(self.titleBarHeight / 2.0)];
+        [[NSBundle mainBundle] loadNibNamed:@"mypausemenu" owner:self options:nil];
+        [self.contentView addSubview:viewLoadedFromXib];
     }
     
     
-    [[NSBundle mainBundle] loadNibNamed:@"mypausemenu" owner:self options:nil];
-    [self.contentView addSubview:viewLoadedFromXib];
+   
 
     
 	return self;

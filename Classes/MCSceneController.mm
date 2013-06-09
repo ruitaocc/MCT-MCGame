@@ -81,8 +81,9 @@
 	[super dealloc];
 }
 - (void)releaseSrc{
-    [self stopAnimation];
-    [self restartScene];
+    [super releaseSrc];
+    //[self stopAnimation];
+    //[self restartScene];
 }
 
 

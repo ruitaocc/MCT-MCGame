@@ -76,14 +76,8 @@
 		A3C7AA9C17019BD70045D963 /* ActionQuad.m in Sources */ = {isa = PBXBuildFile; fileRef = A3C7AA9B17019BD70045D963 /* ActionQuad.m */; };
 		A3C8FEA3165D2A53007E0046 /* cube.png in Resources */ = {isa = PBXBuildFile; fileRef = A3C8FEA2165D2A52007E0046 /* cube.png */; };
 		A3C8FEA6165D3D6A007E0046 /* MCMagicCubeUIModelController.m in Sources */ = {isa = PBXBuildFile; fileRef = A3C8FEA5165D3D69007E0046 /* MCMagicCubeUIModelController.m */; };
-		A3CB5F8A16A67A7D006F03D5 /* MCRay.h in Sources */ = {isa = PBXBuildFile; fileRef = A3935B3C165A296400B60A07 /* MCRay.h */; };
 		A3CB5F8B16A67A7D006F03D5 /* MCRay.mm in Sources */ = {isa = PBXBuildFile; fileRef = A3935B3D165A296400B60A07 /* MCRay.mm */; };
-		A3CB5F8C16A67A7D006F03D5 /* MCGL.h in Sources */ = {isa = PBXBuildFile; fileRef = A3935B3E165A296400B60A07 /* MCGL.h */; };
 		A3CB5F8D16A67A7D006F03D5 /* MCGL.mm in Sources */ = {isa = PBXBuildFile; fileRef = A3935B3F165A296400B60A07 /* MCGL.mm */; };
-		A3CB5F8E16A67ACB006F03D5 /* Quaternion.hpp in Sources */ = {isa = PBXBuildFile; fileRef = A3CB360515FF55D600914E58 /* Quaternion.hpp */; };
-		A3CB5F8F16A67ACB006F03D5 /* Matrix.hpp in Sources */ = {isa = PBXBuildFile; fileRef = A3CB360615FF55D600914E58 /* Matrix.hpp */; };
-		A3CB5F9016A67ACB006F03D5 /* Vector.hpp in Sources */ = {isa = PBXBuildFile; fileRef = A3CB360715FF55D600914E58 /* Vector.hpp */; };
-		A3CB5F9116A67ACB006F03D5 /* MCPoint.h in Sources */ = {isa = PBXBuildFile; fileRef = A3F2ACBB1616D23E00D622B8 /* MCPoint.h */; };
 		A3CB5FF116ABD29C006F03D5 /* MCScore.m in Sources */ = {isa = PBXBuildFile; fileRef = A3CB5FEE16ABD29C006F03D5 /* MCScore.m */; };
 		A3CB5FF216ABD29C006F03D5 /* MCUser.m in Sources */ = {isa = PBXBuildFile; fileRef = A3CB5FF016ABD29C006F03D5 /* MCUser.m */; };
 		A3CB5FFC16ABD2AC006F03D5 /* MCUserCalculator.m in Sources */ = {isa = PBXBuildFile; fileRef = A3CB5FF616ABD2AC006F03D5 /* MCUserCalculator.m */; };
@@ -97,16 +91,6 @@
 		A3CB601316ABD55B006F03D5 /* PopCreateUserViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A3CB600A16ABD55B006F03D5 /* PopCreateUserViewController.xib */; };
 		A3CB601416ABD55B006F03D5 /* ScoreCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A3CB600C16ABD55B006F03D5 /* ScoreCell.m */; };
 		A3CB601516ABD55B006F03D5 /* ScoreCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A3CB600D16ABD55B006F03D5 /* ScoreCell.xib */; };
-		A3CB601616ABD62A006F03D5 /* UserManagerSystemViewController.h in Sources */ = {isa = PBXBuildFile; fileRef = A3CB600216ABD55B006F03D5 /* UserManagerSystemViewController.h */; };
-		A3CB601716ABD62A006F03D5 /* PopChangeUserViewController.h in Sources */ = {isa = PBXBuildFile; fileRef = A3CB600516ABD55B006F03D5 /* PopChangeUserViewController.h */; };
-		A3CB601816ABD62A006F03D5 /* PopCreateUserViewController.h in Sources */ = {isa = PBXBuildFile; fileRef = A3CB600816ABD55B006F03D5 /* PopCreateUserViewController.h */; };
-		A3CB601916ABD62A006F03D5 /* ScoreCell.h in Sources */ = {isa = PBXBuildFile; fileRef = A3CB600B16ABD55B006F03D5 /* ScoreCell.h */; };
-		A3CB601B16ABD62A006F03D5 /* MCUserCalculator.h in Sources */ = {isa = PBXBuildFile; fileRef = A3CB5FF516ABD2AC006F03D5 /* MCUserCalculator.h */; };
-		A3CB601C16ABD62A006F03D5 /* MCUserManagerController.h in Sources */ = {isa = PBXBuildFile; fileRef = A3CB5FF716ABD2AC006F03D5 /* MCUserManagerController.h */; };
-		A3CB601D16ABD62A006F03D5 /* MCUserManagerModel.h in Sources */ = {isa = PBXBuildFile; fileRef = A3CB5FF916ABD2AC006F03D5 /* MCUserManagerModel.h */; };
-		A3CB601E16ABD62A006F03D5 /* MCScore.h in Sources */ = {isa = PBXBuildFile; fileRef = A3CB5FED16ABD29C006F03D5 /* MCScore.h */; };
-		A3CB601F16ABD62A006F03D5 /* MCUser.h in Sources */ = {isa = PBXBuildFile; fileRef = A3CB5FEF16ABD29C006F03D5 /* MCUser.h */; };
-		A3CB602216ABD903006F03D5 /* MCDBController.h in Sources */ = {isa = PBXBuildFile; fileRef = A3CB5FF316ABD2AC006F03D5 /* MCDBController.h */; };
 		A3CB602316ABD903006F03D5 /* MCDBController.m in Sources */ = {isa = PBXBuildFile; fileRef = A3CB5FF416ABD2AC006F03D5 /* MCDBController.m */; };
 		A3CB602816ABD9BE006F03D5 /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A3CB602716ABD9BE006F03D5 /* libsqlite3.0.dylib */; };
 		A3D0704616F87F0300AA3BFF /* sixcolor.png in Resources */ = {isa = PBXBuildFile; fileRef = A3D0704516F87F0300AA3BFF /* sixcolor.png */; };
@@ -1332,7 +1316,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "export CODESIGN_ALLOCATE=/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/codesign_allocate\nif [ \"${PLATFORM_NAME}\" == \"iphoneos\" ] || [ \"${PLATFORM_NAME}\" == \"ipados\" ]; then\n/Applications/Xcode.app/Contents/Developer/iphoneentitlements/gen_entitlements.py \"my.company.${PROJECT_NAME}\" \"${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}/${PROJECT_NAME}.xcent\";\ncodesign -f -s \"iPhone Developer\" --entitlements \"${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}/${PROJECT_NAME}.xcent\" \"${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}/\"\nfi";
+			shellScript = "export CODESIGN_ALLOCATE=/Users/kwanterry/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/codesign_allocate\nif [ \"${PLATFORM_NAME}\" == \"iphoneos\" ] || [ \"${PLATFORM_NAME}\" == \"ipados\" ]; then\n/Applications/Xcode.app/Contents/Developer/iphoneentitlements/gen_entitlements.py \"my.company.${PROJECT_NAME}\" \"${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}/${PROJECT_NAME}.xcent\";\ncodesign -f -s \"iPhone Developer\" --entitlements \"${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}/${PROJECT_NAME}.xcent\" \"${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}/\"\nfi";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -1341,24 +1325,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A3CB602216ABD903006F03D5 /* MCDBController.h in Sources */,
 				A3CB602316ABD903006F03D5 /* MCDBController.m in Sources */,
-				A3CB601616ABD62A006F03D5 /* UserManagerSystemViewController.h in Sources */,
-				A3CB601716ABD62A006F03D5 /* PopChangeUserViewController.h in Sources */,
-				A3CB601816ABD62A006F03D5 /* PopCreateUserViewController.h in Sources */,
-				A3CB601916ABD62A006F03D5 /* ScoreCell.h in Sources */,
-				A3CB601B16ABD62A006F03D5 /* MCUserCalculator.h in Sources */,
-				A3CB601C16ABD62A006F03D5 /* MCUserManagerController.h in Sources */,
-				A3CB601D16ABD62A006F03D5 /* MCUserManagerModel.h in Sources */,
-				A3CB601E16ABD62A006F03D5 /* MCScore.h in Sources */,
-				A3CB601F16ABD62A006F03D5 /* MCUser.h in Sources */,
-				A3CB5F8E16A67ACB006F03D5 /* Quaternion.hpp in Sources */,
-				A3CB5F8F16A67ACB006F03D5 /* Matrix.hpp in Sources */,
-				A3CB5F9016A67ACB006F03D5 /* Vector.hpp in Sources */,
-				A3CB5F9116A67ACB006F03D5 /* MCPoint.h in Sources */,
-				A3CB5F8A16A67A7D006F03D5 /* MCRay.h in Sources */,
 				A3CB5F8B16A67A7D006F03D5 /* MCRay.mm in Sources */,
-				A3CB5F8C16A67A7D006F03D5 /* MCGL.h in Sources */,
 				A3CB5F8D16A67A7D006F03D5 /* MCGL.mm in Sources */,
 				1D60589B0D05DD56006BFB54 /* main.m in Sources */,
 				1D3623260D0F684500981E51 /* MCGameAppDelegate.mm in Sources */,
@@ -1461,7 +1429,7 @@
 				);
 				New_Setting = "";
 				PRODUCT_NAME = MCGame;
-				RUN_CLANG_STATIC_ANALYZER = YES;
+				RUN_CLANG_STATIC_ANALYZER = NO;
 				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Debug;
@@ -1481,7 +1449,7 @@
 				);
 				New_Setting = "";
 				PRODUCT_NAME = MCGame;
-				RUN_CLANG_STATIC_ANALYZER = YES;
+				RUN_CLANG_STATIC_ANALYZER = NO;
 				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Release;

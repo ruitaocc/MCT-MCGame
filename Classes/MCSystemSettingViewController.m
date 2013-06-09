@@ -70,6 +70,7 @@
             return S_L_BackGroundMusic;
         else return nil;
     }
+    else return nil;
 }
 
 // Customize the appearance of table view cells.

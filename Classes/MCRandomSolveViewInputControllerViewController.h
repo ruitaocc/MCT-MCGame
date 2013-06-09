@@ -9,7 +9,11 @@
 #import "InputController.h"
 #import "QuadCurveMenu.h"
 
-@interface MCRandomSolveViewInputControllerViewController : InputController <QuadCurveMenuDelegate>
+@interface MCRandomSolveViewInputControllerViewController : InputController <QuadCurveMenuDelegate>{
+    //判断是否要弹出选择框到标记
+    BOOL isWantShowSelectView;
+  
+}
 
 @property (nonatomic, retain) QuadCurveMenu *selectMenu;
 @property (nonatomic) CGPoint lastestPoint;

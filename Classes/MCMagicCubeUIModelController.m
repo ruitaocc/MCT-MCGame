@@ -20,6 +20,8 @@
 @synthesize target;
 @synthesize usingMode = _usingMode;
 @synthesize lockedarray;
+@synthesize selected_cube_face_index;
+@synthesize selected_cube_index;
 //@synthesize magicCube;
 @synthesize undoManger;
 -(id)initiate{
@@ -1180,9 +1182,14 @@
                             fuzzy_vec3_y = center_oz;
                             fuzzy_axis_y = Z;
                         }
-                    }else if(angle_centeroy_OY<angle_centeroz_OY){
-                        fuzzy_vec3_y = center_oy;
-                        fuzzy_axis_y = Y;
+                    }else{
+                        if(angle_centeroy_OY<angle_centeroz_OY){
+                            fuzzy_vec3_y = center_oy;
+                            fuzzy_axis_y = Y;
+                        }else{
+                            fuzzy_vec3_y = center_oz;
+                            fuzzy_axis_y = Z;
+                        }
                     }
                     
                     
@@ -1195,9 +1202,14 @@
                             fuzzy_vec3_x = center_oz;
                             fuzzy_axis_x = Z;
                         }
-                    }else if(angle_centeroy_OX<angle_centeroz_OX){
-                        fuzzy_vec3_x = center_oy;
-                        fuzzy_axis_x = Y;
+                    }else {
+                        if(angle_centeroy_OX<angle_centeroz_OX){
+                            fuzzy_vec3_x = center_oy;
+                            fuzzy_axis_x = Y;
+                        }else{
+                            fuzzy_vec3_x = center_oz;
+                            fuzzy_axis_x = Z;
+                        }
                     }
                     
                     //fuzzy_z
@@ -1209,15 +1221,20 @@
                             fuzzy_vec3_z = center_oz;
                             fuzzy_axis_z = Z;
                         }
-                    }else if(angle_centeroy_OZ<angle_centeroz_OZ){
-                        fuzzy_vec3_z = center_oy;
-                        fuzzy_axis_z = Y;
+                    }else {
+                        if(angle_centeroy_OZ<angle_centeroz_OZ){
+                            fuzzy_vec3_z = center_oy;
+                            fuzzy_axis_z = Y;
+                        }else{
+                            fuzzy_vec3_z = center_oz;
+                            fuzzy_axis_z = Z;
+                        }
                     }
                     
                     //确定旋转方向
                     if (fabs((firstThreePoint[0].x-firstThreePoint[1].x))>fabs((firstThreePoint[0].y-firstThreePoint[1].y))) {
                         //横向操作
-                        fuzzy_axis = (AxisType)fuzzy_axis_y;
+                        fuzzy_axis = fuzzy_axis_y;
                         if ((firstThreePoint[1].x-firstThreePoint[0].x)>0) {
                             //向右
                             if(fuzzy_vec3_y.Dot(tmp_oy)>0)fuzzy_direction=CCW;
@@ -1243,7 +1260,7 @@
                             
                         }else if(firstThreePoint[1].x<512&&firstThreePoint[0].x<512){
                             //左边
-                            fuzzy_axis = (AxisType)fuzzy_axis_x;
+                            fuzzy_axis = fuzzy_axis_x;
                             if ((firstThreePoint[1].y-firstThreePoint[0].y)>0) {
                                 //向下
                                 if(fuzzy_vec3_x.Dot(tmp_ox)>0)fuzzy_direction=CCW;
@@ -1462,10 +1479,10 @@
     }else{
         notation =[MCTransformUtil getSingmasterNotationFromAxis:current_rotate_axis layer:current_rotate_layer direction:current_rotate_direction];
     }
-    RotateType * rotateType = [[RotateType alloc]init];
-    [rotateType setNotation:notation];
-
+    
     if ([target respondsToSelector:@selector(rotate:)]) {
+        RotateType * rotateType = [[RotateType alloc]init];
+        [rotateType setNotation:notation];
         [target performSelector:@selector(rotate:) withObject:rotateType];
     }
     
@@ -2026,7 +2043,7 @@ double FabsThetaBetweenV1andV2(const vec3& v1,const vec3& v2)
     [ray updateWithScreenX:touchpoint.x
                            screenY:touchpoint.y];
     float nearest_distance = 65535;
-    int index = -1;
+    selected_cube_index = -1;
     for (Cube *tmp_cube in array27Cube) {
         GLfloat * tmp_dection = VertexesArray_Matrix_Multiply(V, 3, 36, tmp_cube.matrix);
         for (int i = 0; i < 12; i++) {
@@ -2045,12 +2062,13 @@ double FabsThetaBetweenV1andV2(const vec3& v1,const vec3& v2)
                                                                                     V1:&tmp_dection[3 +i*9]
                                                                                     V2:&tmp_dection[6 +i*9]];
                 nearest_distance = distance;
-                index = tmp_cube.index;
-                tmp_cube.index_selectedFace = i;
+                selected_cube_index = tmp_cube.index;
+                tmp_cube.index_selectedFace = i/2;
+                selected_cube_face_index = i/2;
             }
         }
     }
-    if (index != -1) {
+    if (selected_cube_index != -1) {
         return YES;
     }else
         return NO;
