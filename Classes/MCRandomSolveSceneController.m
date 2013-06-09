@@ -37,7 +37,7 @@
     selected_face_index = -1;
     
     //初始化只有中心小块到魔方
-    magicCube = [[MCMagicCube magicCube]retain];
+    magicCube = [[MCMagicCube magicCubeOnlyWithCenterColor]retain];
     
     playHelper = [[MCPlayHelper playerHelperWithMagicCube:self.magicCube]retain];
     

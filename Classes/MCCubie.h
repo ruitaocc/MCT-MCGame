@@ -19,11 +19,14 @@
 @property(nonatomic)FaceColorType *faceColors;
 @property(nonatomic)FaceOrientationType *orientations;
 
-//initial the cube's data by orignal coordinate value
+// Initial the cube's data by orignal coordinate value
 - (id) initRightCubeWithCoordinate : (struct Point3i)value;
 
-//re-initiate the cube
+// Re-initiate the cube
 - (id)redefinedWithCoordinate:(struct Point3i)value orderedColors:(NSArray *)colors orderedOrientations:(NSArray *)orientations;
+
+// Only the center color will be filled, others will be filled with 'NoColor'
+- (id)initOnlyCenterColor:(struct Point3i)value;
 
 //return state in the "format" axis-orientation
 - (NSDictionary *)getCubieOrientationOfAxis;

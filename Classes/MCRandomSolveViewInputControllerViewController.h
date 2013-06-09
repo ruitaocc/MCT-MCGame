@@ -15,8 +15,10 @@
   
 }
 
+@property (nonatomic, retain) NSArray *menuItems;
 @property (nonatomic, retain) QuadCurveMenu *selectMenu;
 @property (nonatomic) CGPoint lastestPoint;
+@property(nonatomic, retain)NSArray *cubieArray;
 
 -(void)loadInterface;
 

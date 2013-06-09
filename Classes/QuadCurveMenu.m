@@ -83,9 +83,9 @@ static CGPoint RotateCGPointAroundCenter(CGPoint point, CGPoint center, float an
         [item.layer addAnimation:blowup forKey:@"blowup"];
         
         // If animation ends, remove views
-        self.closeTimer = [NSTimer timerWithTimeInterval:(K_QUADCURVE_MENU_DEFAULT_SELECT_ANIM_LAST_TIME - 0.001)
+        self.closeTimer = [NSTimer timerWithTimeInterval:(K_QUADCURVE_MENU_DEFAULT_SELECT_ANIM_LAST_TIME - 0.05)
                                                   target:self
-                                                selector:@selector(removeFromSuperview)
+                                                selector:@selector(didClosed)
                                                 userInfo:nil
                                                  repeats:NO];
         [[NSRunLoop currentRunLoop] addTimer:_closeTimer forMode:NSRunLoopCommonModes];
@@ -113,27 +113,16 @@ static CGPoint RotateCGPointAroundCenter(CGPoint point, CGPoint center, float an
             [otherItem.layer addAnimation:shrink forKey:@"shrink"];
             
         }
-        _expanding = NO;
         
-        if ([_delegate respondsToSelector:@selector(quadCurveMenu:didSelectIndex:)])
+        if ([_delegate respondsToSelector:@selector(quadCurveMenu:didSelectColor:)])
         {
-            [_delegate quadCurveMenu:self didSelectIndex:item.tag - 1000];
+            [_delegate quadCurveMenu:self didSelectColor:item.faceColor];
         } 
     }
     
 }
 
 #pragma mark - instant methods
-- (void)setMenusArray:(NSArray *)aMenusArray{
-    if (aMenusArray == _menusArray)
-    {
-        return;
-    }
-    [_menusArray release];
-    _menusArray = [aMenusArray copy];
-
-}
-
 
 - (void)_setMenu {
 	int count = [_menusArray count];
@@ -298,6 +287,11 @@ static CGPoint RotateCGPointAroundCenter(CGPoint point, CGPoint center, float an
 
 - (void)stopProtection{
     _isProtection = NO;
+}
+
+- (void)didClosed{
+    [super removeFromSuperview];
+    _expanding = NO;
 }
 
 - (CAAnimationGroup *)_blowupAnimationAtPoint:(CGPoint)p{

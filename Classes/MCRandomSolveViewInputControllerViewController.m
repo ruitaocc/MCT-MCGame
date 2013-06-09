@@ -12,11 +12,18 @@
 #import "Global.h"
 #import "MCRandomSolveSceneController.h"
 
+@interface MCRandomSolveViewInputControllerViewController ()
+
+- (void)checkConstraintAndReloadMenu;
+
+@end
 
 @implementation MCRandomSolveViewInputControllerViewController
 
 @synthesize selectMenu = _selectMenu;
 @synthesize lastestPoint = _lastestPoint;
+@synthesize cubieArray = _cubieArray;
+@synthesize menuItems = _menuItems;
 
 -(void)loadInterface{
     [super loadInterface];
@@ -48,24 +55,30 @@
     
     QuadCurveMenuItem *starMenuItem1 = [[QuadCurveMenuItem alloc] initWithImage:[UIImage imageNamed:@"Color00.png"]
                                                                highlightedImage:[UIImage imageNamed:@"Color00.png"]
+                                                                   presentColor:UpColor
                                                                       withFrame:itemFrame];
     QuadCurveMenuItem *starMenuItem2 = [[QuadCurveMenuItem alloc] initWithImage:[UIImage imageNamed:@"Color01.png"]
                                                                highlightedImage:[UIImage imageNamed:@"Color01.png"]
+                                                                   presentColor:DownColor
                                                                       withFrame:itemFrame];
     QuadCurveMenuItem *starMenuItem3 = [[QuadCurveMenuItem alloc] initWithImage:[UIImage imageNamed:@"Color02.png"]
                                                                highlightedImage:[UIImage imageNamed:@"Color02.png"]
+                                                                   presentColor:FrontColor
                                                                       withFrame:itemFrame];
     QuadCurveMenuItem *starMenuItem4 = [[QuadCurveMenuItem alloc] initWithImage:[UIImage imageNamed:@"Color03.png"]
                                                                highlightedImage:[UIImage imageNamed:@"Color03.png"]
+                                                                   presentColor:BackColor
                                                                       withFrame:itemFrame];
     QuadCurveMenuItem *starMenuItem5 = [[QuadCurveMenuItem alloc] initWithImage:[UIImage imageNamed:@"Color04.png"]
                                                                highlightedImage:[UIImage imageNamed:@"Color04.png"]
+                                                                   presentColor:LeftColor
                                                                       withFrame:itemFrame];
     QuadCurveMenuItem *starMenuItem6 = [[QuadCurveMenuItem alloc] initWithImage:[UIImage imageNamed:@"Color05.png"]
                                                                highlightedImage:[UIImage imageNamed:@"Color05.png"]
+                                                                   presentColor:RightColor
                                                                       withFrame:itemFrame];
     
-    NSArray *menus = [NSArray arrayWithObjects:starMenuItem1, starMenuItem2, starMenuItem3, starMenuItem4, starMenuItem5, starMenuItem6, nil];
+    self.menuItems = [NSArray arrayWithObjects:starMenuItem1, starMenuItem2, starMenuItem3, starMenuItem4, starMenuItem5, starMenuItem6, nil];
     [starMenuItem1 release];
     [starMenuItem2 release];
     [starMenuItem3 release];
@@ -73,9 +86,18 @@
     [starMenuItem5 release];
     [starMenuItem6 release];
     
-    _selectMenu = [[QuadCurveMenu alloc] initWithFrame:self.view.bounds menus:menus];
+    _selectMenu = [[QuadCurveMenu alloc] initWithFrame:self.view.bounds menus:_menuItems];
     
     _selectMenu.delegate = self;
+    
+    
+    //all data in dictionaries
+    NSMutableDictionary *cubieDics[27];
+    for (int i = 0; i < 27; i++) {
+        cubieDics[i] = [NSMutableDictionary dictionaryWithCapacity:3];
+    }
+    
+    self.cubieArray = [NSArray arrayWithObjects:cubieDics count:27];
 }
 
 -(void)mainMenuBtnDown{
@@ -92,6 +114,8 @@
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
     //do something
+    if (_selectMenu.expanding) return;
+    
     [super touchesBegan:touches withEvent:event];
     
     //FSM_Interaction_State fsm_Current_State = [[[CoordinatingController sharedCoordinatingController] currentController].inputController fsm_Current_State];
@@ -103,15 +127,27 @@
 }
 
 -(void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event{
-    [super touchesEnded:touches withEvent:event];
-    
-    UITouch *touch = [touches anyObject];
-    _lastestPoint = [touch locationInView:self.view];
-    //判断是否拾取到
-    MCRandomSolveSceneController * secencontroller = [MCRandomSolveSceneController sharedRandomSolveSceneController];
-    vec2 lastpoint = vec2(_lastestPoint.x,_lastestPoint.y);
-    
-    BOOL isSelectOneFace = [secencontroller isSelectOneFace:lastpoint];
+    BOOL isSelectOneFace = NO;
+    if (!_selectMenu.expanding){
+        [super touchesEnded:touches withEvent:event];
+        UITouch *touch = [touches anyObject];
+        _lastestPoint = [touch locationInView:self.view];
+        //判断是否拾取到
+        MCRandomSolveSceneController * secencontroller = [MCRandomSolveSceneController sharedRandomSolveSceneController];
+        vec2 lastpoint = vec2(_lastestPoint.x,_lastestPoint.y);
+        
+        isSelectOneFace = [secencontroller isSelectOneFace:lastpoint];
+        
+        if (isSelectOneFace) {
+            //选择的小块0-26
+            int index = [secencontroller selected_index];
+            if (index == UColor || index == DColor || index == FColor ||
+                index == BColor || index == LColor || index == RColor) {
+                isSelectOneFace = NO;
+            }
+        }
+        
+    }
     
     
     if (isWantShowSelectView) {
@@ -129,8 +165,7 @@
 }
 
 
-- (void)quadCurveMenu:(QuadCurveMenu *)menu didSelectIndex:(NSInteger)idx{
-    NSLog(@"Select the index : %d",idx);
+- (void)quadCurveMenu:(QuadCurveMenu *)menu didSelectColor:(FaceColorType)color{
     MCRandomSolveSceneController * secencontroller = [MCRandomSolveSceneController sharedRandomSolveSceneController];
     //选择的小块0-26
     int selected_cube_index = [secencontroller selected_index];
@@ -138,8 +173,15 @@
     int selected_face_index = [secencontroller selected_face_index];
     //给magicCube填上颜色
     
+    NSObject<MCCubieDelegate> *targetCubie = [[[MCRandomSolveSceneController sharedRandomSolveSceneController] magicCube] cubieWithColorCombination:(ColorCombinationType)selected_cube_index];
+    [targetCubie setFaceColor:color inOrientation:(FaceOrientationType)selected_face_index];
+    
+    
     //刷新magicCubeUI
     [secencontroller flashSecne];
+    
+    
+    
     
     //判断是否结束
     
@@ -152,10 +194,23 @@
             //关闭HUD
     
 }
+
+
+- (void)checkConstraintAndReloadMenu{
+    NSMutableArray *loadMenuItems = [NSMutableArray arrayWithCapacity:6];
+    
+    
+    
+    [_selectMenu setMenusArray:loadMenuItems];
+}
+
+
 - (void)releaseInterface{
     [super releaseInterface];
     [_selectMenu removeFromSuperview];
     [_selectMenu release];
+    [_cubieArray release];
+    [_menuItems release];
 }
 
 @end

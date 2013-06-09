@@ -14,7 +14,7 @@
 
 @interface QuadCurveMenu : UIView <QuadCurveMenuItemDelegate>
 {
-    NSArray *_menusArray;
+    
     int _flag;
     NSTimer *_timer;
     id<QuadCurveMenuDelegate> _delegate;
@@ -22,11 +22,10 @@
     
 }
 
-
+@property (nonatomic, copy) NSArray *menusArray;
 @property (nonatomic) BOOL isProtection;
 @property (nonatomic, retain) NSTimer *closeTimer;
 @property (nonatomic, retain) NSTimer *animationProtectionTimer;
-@property (nonatomic, copy) NSArray *menusArray;
 @property (nonatomic, getter = isExpanding) BOOL expanding;
 @property (nonatomic, assign) id<QuadCurveMenuDelegate> delegate;
 
@@ -46,5 +45,5 @@
 @end
 
 @protocol QuadCurveMenuDelegate <NSObject>
-- (void)quadCurveMenu:(QuadCurveMenu *)menu didSelectIndex:(NSInteger)idx;
+- (void)quadCurveMenu:(QuadCurveMenu *)menu didSelectColor:(FaceColorType)color;
 @end

@@ -33,6 +33,10 @@
     return [[[MCMagicCube alloc] initWithCubiesData:dataArray] autorelease];
 }
 
++ (MCMagicCube *)magicCubeOnlyWithCenterColor{
+    return [[[MCMagicCube alloc] initOnlyWithenterColor] autorelease];
+}
+
 //Initiate the magic cube by appointed all face colors.
 //All face color is stored in 27 dictionaries contained in an array.
 //Every dictionary: key=FaceOrientationType and value=FaceColorType.
@@ -94,6 +98,38 @@
     }
     return self;
 }
+
+
+- (id)initOnlyWithenterColor{
+    if (self = [super init]) {
+        for (int z = 0; z < 3; z++) {
+            for (int y = 0; y < 3; y++) {
+                for (int x = 0; x < 3; x++) {
+                    if (x != 1 || y != 1 || z != 1) {
+                        struct Point3i coordinateValue = {.x = x-1, .y = y-1, .z = z-1};
+                        BOOL isReatin = NO;
+                        if (magicCubies3D[x][y][z] == nil) {
+                            magicCubies3D[x][y][z] = [MCCubie alloc];
+                            isReatin = YES;
+                        }
+                        [magicCubies3D[x][y][z] initOnlyCenterColor:coordinateValue];
+                        magicCubiesList[x+y*3+z*9] = magicCubies3D[x][y][z];
+                        if (isReatin) [magicCubiesList[x+y*3+z*9] retain];
+                    }
+                }
+            }
+        }
+        for (int i  = 0; i < 6; i++) {
+            //At the begining, the orientation and the magic cube face orientation is same
+            orientationToMagicCubeFace[i] = (FaceOrientationType)i;
+        }
+        
+        //Load colors mapping dictionary
+        [self reloadColorMappingDictionary];
+    }
+    return self;
+}
+
 
 //initial the rubik's cube as a new state
 - (id)init{

@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Global.h"
 
 @protocol QuadCurveMenuItemDelegate;
 
@@ -20,7 +21,7 @@
     id<QuadCurveMenuItemDelegate> _delegate;
 }
 
-
+@property (nonatomic) FaceColorType faceColor;
 @property (nonatomic) CGPoint startPoint;
 @property (nonatomic) CGPoint endPoint;
 @property (nonatomic) CGPoint nearPoint;
@@ -30,6 +31,7 @@
 
 - (id)initWithImage:(UIImage *)img 
    highlightedImage:(UIImage *)himg
+       presentColor:(FaceColorType)color
           withFrame:(CGRect)frame;
 
 

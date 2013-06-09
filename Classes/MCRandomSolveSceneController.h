@@ -16,7 +16,6 @@
 
 @interface MCRandomSolveSceneController : sceneController{
     MCMagicCubeUIModelController* magicCubeUI;
-    MCMagicCube * magicCube;
     MCPlayHelper * playHelper;
     int selected_index;
     int selected_face_index;

@@ -23,7 +23,7 @@
 
 @synthesize coordinateValue;
 @synthesize skinNum;
-@synthesize type;
+@synthesize type = _type;
 @synthesize identity;
 @synthesize faceColors;
 @synthesize orientations;
@@ -38,13 +38,13 @@
         skinNum = abs(coordinateValue.x) + abs(coordinateValue.y) + abs(coordinateValue.z);
         switch (skinNum) {
             case 1:
-                type = CentralCubie;
+                _type = CentralCubie;
                 break;
             case 2:
-                type = EdgeCubie;
+                _type = EdgeCubie;
                 break;
             case 3:
-                type = CornerCubie;
+                _type = CornerCubie;
                 break;
             default:
                 break;
@@ -118,13 +118,13 @@
         self.skinNum = [colors count];
         switch (skinNum) {
             case 1:
-                type = CentralCubie;
+                _type = CentralCubie;
                 break;
             case 2:
-                type = EdgeCubie;
+                _type = EdgeCubie;
                 break;
             case 3:
-                type = CornerCubie;
+                _type = CornerCubie;
                 break;
             default:
                 break;
@@ -163,6 +163,142 @@
     }
     return self;
 }
+
+- (id)initOnlyCenterColor:(struct Point3i)value{
+    if(self = [self init]){
+        //before initiating, clear data
+        [self clearData];
+        
+        //detect the skin number and the cube type
+        coordinateValue = value;
+        skinNum = abs(coordinateValue.x) + abs(coordinateValue.y) + abs(coordinateValue.z);
+        switch (skinNum) {
+            case 1:
+                _type = CentralCubie;
+                break;
+            case 2:
+                _type = EdgeCubie;
+                break;
+            case 3:
+                _type = CornerCubie;
+                break;
+            default:
+                break;
+        }
+        //allocate memory for the skin
+        faceColors = (FaceColorType*)malloc(skinNum * sizeof(FaceColorType));
+        orientations = (FaceOrientationType*)malloc(skinNum * sizeof(FaceOrientationType));
+        
+        //intial the skin data
+        if (_type == CentralCubie) {
+            int currentIndex = 0;
+            switch (coordinateValue.x) {
+                case -1:
+                    faceColors[currentIndex] = LeftColor;
+                    orientations[currentIndex] = Left;
+                    currentIndex++;
+                    break;
+                case 0:
+                    break;
+                case 1:
+                    faceColors[currentIndex] = RightColor;
+                    orientations[currentIndex] = Right;
+                    currentIndex++;
+                    break;
+                default:
+                    break;
+            }
+            switch (coordinateValue.y) {
+                case -1:
+                    faceColors[currentIndex] = DownColor;
+                    orientations[currentIndex] = Down;
+                    currentIndex++;
+                    break;
+                case 0:
+                    break;
+                case 1:
+                    faceColors[currentIndex] = UpColor;
+                    orientations[currentIndex] = Up;
+                    currentIndex++;
+                    break;
+                default:
+                    break;
+            }
+            switch (coordinateValue.z) {
+                case -1:
+                    faceColors[currentIndex] = BackColor;
+                    orientations[currentIndex] = Back;
+                    currentIndex++;
+                    break;
+                case 0:
+                    break;
+                case 1:
+                    faceColors[currentIndex] = FrontColor;
+                    orientations[currentIndex] = Front;
+                    currentIndex++;
+                    break;
+                default:
+                    break;
+            }
+        }
+        else{
+            int currentIndex = 0;
+            switch (coordinateValue.x) {
+                case -1:
+                    faceColors[currentIndex] = NoColor;
+                    orientations[currentIndex] = Left;
+                    currentIndex++;
+                    break;
+                case 0:
+                    break;
+                case 1:
+                    faceColors[currentIndex] = NoColor;
+                    orientations[currentIndex] = Right;
+                    currentIndex++;
+                    break;
+                default:
+                    break;
+            }
+            switch (coordinateValue.y) {
+                case -1:
+                    faceColors[currentIndex] = NoColor;
+                    orientations[currentIndex] = Down;
+                    currentIndex++;
+                    break;
+                case 0:
+                    break;
+                case 1:
+                    faceColors[currentIndex] = NoColor;
+                    orientations[currentIndex] = Up;
+                    currentIndex++;
+                    break;
+                default:
+                    break;
+            }
+            switch (coordinateValue.z) {
+                case -1:
+                    faceColors[currentIndex] = NoColor;
+                    orientations[currentIndex] = Back;
+                    currentIndex++;
+                    break;
+                case 0:
+                    break;
+                case 1:
+                    faceColors[currentIndex] = NoColor;
+                    orientations[currentIndex] = Front;
+                    currentIndex++;
+                    break;
+                default:
+                    break;
+            }
+        }
+        
+        //assign the identity
+        identity = (ColorCombinationType)(coordinateValue.x + coordinateValue.y*3 + coordinateValue.z*9 + 13);
+    }
+    return self;
+}
+
 
 - (void) dealloc{
     free(faceColors);
@@ -370,6 +506,23 @@
     return NO;
 }
 
+
+// Set the face color on the specified orientation.
+// If the cubie has face on this orientation, set the color.
+// Otherwise, return NO.
+- (BOOL)setFaceColor:(FaceColorType)color inOrientation:(FaceOrientationType)orientation{
+    int i;
+    for (i = 0; i < skinNum; i++) {
+        if (orientation == orientations[i]) {
+            faceColors[i] = color;
+            return YES;
+        }
+    }
+    
+    return NO;
+}
+
+
 //clear all data, ready for re-initiate
 - (void)clearData{
     coordinateValue.x = 0;
@@ -388,7 +541,7 @@
     [aCoder encodeInteger:coordinateValue.y forKey:kCoordinateYKey];
     [aCoder encodeInteger:coordinateValue.z forKey:kCoordinateZKey];
     [aCoder encodeInteger:skinNum forKey:kSkinNumKey];
-    [aCoder encodeInteger:type forKey:kTypeKey];
+    [aCoder encodeInteger:_type forKey:kTypeKey];
     [aCoder encodeInteger:identity forKey:kIdentityKey];
     for (int i = 0; i < skinNum; i++) {
         [aCoder encodeInteger:faceColors[i] forKey:[NSString stringWithFormat:kSingleColorKeyFormat, i]];
@@ -414,6 +567,15 @@
         }
     }
     return self;
+}
+
+- (NSArray *)allFaceColors{
+    NSMutableArray *mutableColors = [NSMutableArray arrayWithCapacity:skinNum];
+    for (int i = 0; i < skinNum; i++) {
+        [mutableColors addObject:[NSNumber numberWithInteger:faceColors[i]]];
+    }
+    
+    return [NSArray arrayWithArray:mutableColors];
 }
 
 
