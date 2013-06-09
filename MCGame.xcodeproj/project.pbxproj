@@ -172,6 +172,7 @@
 		E0167DAC176373B400F420E8 /* MCInferenceEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = E0167DA5176373B400F420E8 /* MCInferenceEngine.m */; };
 		E0167DAD176373B400F420E8 /* MCWorkingMemory.m in Sources */ = {isa = PBXBuildFile; fileRef = E0167DA9176373B400F420E8 /* MCWorkingMemory.m */; };
 		E04E7E8717410E8E00403E92 /* MCCompositeRotationUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = E04E7E8617410E8E00403E92 /* MCCompositeRotationUtil.m */; };
+		E0532D6D1764A24C007B3CCE /* MCCubieColorConstraintUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = E0532D6C1764A24C007B3CCE /* MCCubieColorConstraintUtil.m */; };
 		E0A7F6D21762042600B285D4 /* MCLearn.m in Sources */ = {isa = PBXBuildFile; fileRef = E0A7F6D11762042600B285D4 /* MCLearn.m */; };
 		E0A7F6D71762047B00B285D4 /* MCSoundBoard.m in Sources */ = {isa = PBXBuildFile; fileRef = E0A7F6D41762047B00B285D4 /* MCSoundBoard.m */; };
 		E0A7F6D81762047B00B285D4 /* SoundSettingController.m in Sources */ = {isa = PBXBuildFile; fileRef = E0A7F6D61762047B00B285D4 /* SoundSettingController.m */; };
@@ -443,6 +444,8 @@
 		E0167DA9176373B400F420E8 /* MCWorkingMemory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCWorkingMemory.m; sourceTree = "<group>"; };
 		E04E7E8517410E8E00403E92 /* MCCompositeRotationUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCCompositeRotationUtil.h; sourceTree = "<group>"; };
 		E04E7E8617410E8E00403E92 /* MCCompositeRotationUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCCompositeRotationUtil.m; sourceTree = "<group>"; };
+		E0532D6B1764A24C007B3CCE /* MCCubieColorConstraintUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCCubieColorConstraintUtil.h; sourceTree = "<group>"; };
+		E0532D6C1764A24C007B3CCE /* MCCubieColorConstraintUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCCubieColorConstraintUtil.m; sourceTree = "<group>"; };
 		E0A7F6D01762042600B285D4 /* MCLearn.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCLearn.h; sourceTree = "<group>"; };
 		E0A7F6D11762042600B285D4 /* MCLearn.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCLearn.m; sourceTree = "<group>"; };
 		E0A7F6D31762047B00B285D4 /* MCSoundBoard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCSoundBoard.h; sourceTree = "<group>"; };
@@ -1123,6 +1126,8 @@
 				A33032D11726B1E500BAD2DE /* MCTransformUtil.m */,
 				E04E7E8517410E8E00403E92 /* MCCompositeRotationUtil.h */,
 				E04E7E8617410E8E00403E92 /* MCCompositeRotationUtil.m */,
+				E0532D6B1764A24C007B3CCE /* MCCubieColorConstraintUtil.h */,
+				E0532D6C1764A24C007B3CCE /* MCCubieColorConstraintUtil.m */,
 			);
 			name = Util;
 			sourceTree = "<group>";
@@ -1316,7 +1321,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "export CODESIGN_ALLOCATE=/Users/kwanterry/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/codesign_allocate\nif [ \"${PLATFORM_NAME}\" == \"iphoneos\" ] || [ \"${PLATFORM_NAME}\" == \"ipados\" ]; then\n/Applications/Xcode.app/Contents/Developer/iphoneentitlements/gen_entitlements.py \"my.company.${PROJECT_NAME}\" \"${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}/${PROJECT_NAME}.xcent\";\ncodesign -f -s \"iPhone Developer\" --entitlements \"${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}/${PROJECT_NAME}.xcent\" \"${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}/\"\nfi";
+			shellScript = "export CODESIGN_ALLOCATE=/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/codesign_allocate\nif [ \"${PLATFORM_NAME}\" == \"iphoneos\" ] || [ \"${PLATFORM_NAME}\" == \"ipados\" ]; then\n/Applications/Xcode.app/Contents/Developer/iphoneentitlements/gen_entitlements.py \"my.company.${PROJECT_NAME}\" \"${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}/${PROJECT_NAME}.xcent\";\ncodesign -f -s \"iPhone Developer\" --entitlements \"${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}/${PROJECT_NAME}.xcent\" \"${BUILT_PRODUCTS_DIR}/${WRAPPER_NAME}/\"\nfi";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -1406,6 +1411,7 @@
 				E0167DAB176373B400F420E8 /* MCExplanationSystem.m in Sources */,
 				E0167DAC176373B400F420E8 /* MCInferenceEngine.m in Sources */,
 				E0167DAD176373B400F420E8 /* MCWorkingMemory.m in Sources */,
+				E0532D6D1764A24C007B3CCE /* MCCubieColorConstraintUtil.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

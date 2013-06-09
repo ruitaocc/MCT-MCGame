@@ -15,14 +15,17 @@ static inline CGRect ScaleRect(CGRect rect, float n) {return CGRectMake((rect.si
 @synthesize nearPoint = _nearPoint;
 @synthesize farPoint = _farPoint;
 @synthesize delegate  = _delegate;
+@synthesize faceColor = _faceColor;
 
 #pragma mark - initialization & cleaning up
 - (id)initWithImage:(UIImage *)img 
    highlightedImage:(UIImage *)himg
+       presentColor:(FaceColorType)color
           withFrame:(CGRect)frame;
 {
     if (self = [self initWithFrame:frame])
     {
+        _faceColor = color;
         [self setBackgroundImage:img forState:UIControlStateNormal];
         [self setBackgroundImage:himg forState:UIControlStateHighlighted];
         self.userInteractionEnabled = YES;

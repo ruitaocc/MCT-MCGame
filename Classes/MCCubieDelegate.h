@@ -17,17 +17,28 @@
 //get the faceColor in specified orientation
 - (FaceColorType)faceColorInOrientation: (FaceOrientationType)orientation;
 
-//return wheather the face color on the specified orientation is the specified color
+// Return wheather the face color on the specified orientation is the specified color
 - (BOOL)isFaceColor:(FaceColorType)color inOrientation:(FaceOrientationType)orientation;
 
-//Return the number of cubie's faces
+// Set the face color on the specified orientation.
+// If the cubie has face on this orientation, set the color.
+// Otherwise, return NO.
+- (BOOL)setFaceColor:(FaceColorType)color inOrientation:(FaceOrientationType)orientation;
+
+// Return the number of cubie's faces
 - (NSInteger)skinNum;
 
-//Return the identity of the cubie
+// Return the identity of the cubie
 - (ColorCombinationType)identity;
 
-//Return the coordinate of the cubie
+// Return the coordinate of the cubie
 - (Point3i)coordinateValue;
+
+// Return all face colors.
+// The size of array is skinNum.
+// The Element is NSNumber of FaceColorType and it maybe 'NoColor'.
+- (NSArray *)allFaceColors;
+
 
 //Return state in the "format" orientation-facecolor
 //No reutrn 6 faces but skinNum faces.
