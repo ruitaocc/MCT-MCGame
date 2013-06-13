@@ -64,7 +64,6 @@
 	EAGLView * glView = [[EAGLView alloc] initWithFrame:window.bounds];
     
     
-    
 	sceneController.inputController.view = glView;
 	sceneController.openGLView = glView;
 	

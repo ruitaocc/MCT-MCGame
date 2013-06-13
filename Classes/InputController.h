@@ -16,6 +16,7 @@
 	NSMutableArray * interfaceObjects;
     MCParticleSystem *particleEmitter;
     int touchCount;
+    CGPoint lastpoint;
    // BOOL isNeededReload;
 }
 //@property (nonatomic,assign) BOOL isNeededReload;
@@ -24,7 +25,7 @@
 @property (assign) FSM_Interaction_State fsm_Previous_State;
 @property (assign) FSM_Interaction_State fsm_Current_State;
 @property (nonatomic,retain)MCParticleSystem *particleEmitter;
-
+@property (assign) CGPoint lastpoint;
 //10
 - (CGRect)screenRectFromMeshRect:(CGRect)rect atPoint:(CGPoint)meshCenter;
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil ;

@@ -27,6 +27,7 @@
 - (void)setPressedVertexes;
 - (void)touchDown;
 - (void)touchUp;
+- (void)showUp;
 - (void)update;
 
 

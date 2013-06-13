@@ -38,6 +38,7 @@
         [self loadTextureImage:@"sixcolor.png" materialKey:@"sixcolor"];
         [self loadTextureImage:@"cubeBlack3.png" materialKey:@"cubeTexture3"];
         [self loadTextureImage:@"cubeBlack3.png" materialKey:@"LockTexture"];
+        [self loadTextureImage:@"background2.png" materialKey:@"background"];
         //cubeface
         [self loadTextureImage:PNG_YellowFace materialKey:Face_YellowKEY];
         [self loadTextureImage:PNG_WhiteFace materialKey:Face_WhiteKEY];
@@ -50,6 +51,7 @@
         [self loadAtlasData:@"countNumber"];
         [self loadAtlasData:@"cubeAction"];
 		[self loadAtlasData:@"particleAtlas"];
+        [self loadAtlas_TexturePacker_Data:@"home_button"];
         
         //[self loadAtlasData:@"ButtonMerged"];
 	}
@@ -92,7 +94,32 @@
 	
 	[apool release];
 }
-
+-(void)loadAtlas_TexturePacker_Data:(NSString *)atlasName{
+    NSAutoreleasePool * apool = [[NSAutoreleasePool alloc] init];
+    
+	if (quadLibrary == nil) quadLibrary = [[NSMutableDictionary alloc] init];
+    
+	// load the texture and remember how big it is so we can properly calculate
+	// the UV positions
+	CGSize atlasSize = [self loadTextureImage:[atlasName stringByAppendingPathExtension:@"png"] materialKey:atlasName];
+    
+	// load all the items from the atlas plist file
+	NSDictionary * root = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle mainBundle] pathForResource:atlasName ofType:@"plist"]];
+	
+	// go through each record and build a textured quad for each record
+    NSDictionary *frames = [root objectForKey:@"frames"];
+    NSArray *keys = [frames allKeys];
+    int count = [keys count];
+    NSString *name = nil;
+	for (int i = 0; i<count; i++) {
+        name = [keys objectAtIndex:i];
+        NSDictionary *record = [frames objectForKey:name];
+		MCTexturedQuad * quad = [self texturedQuadFrom_TexturePacker_AtlasRecord:record atlasSize:atlasSize materialKey:atlasName];
+		[quadLibrary setObject:quad forKey:name];
+	}
+	
+	[apool release];
+}
 // just a handy way to get a pre-defined quad
 -(MCTexturedQuad*)quadFromAtlasKey:(NSString*)atlasKey
 {
@@ -147,7 +174,40 @@
 	
 	return [quad autorelease];
 }
-
+-(MCTexturedQuad *)texturedQuadFrom_TexturePacker_AtlasRecord:(NSDictionary *)record atlasSize:(CGSize)atlasSize materialKey:(NSString *)key{
+    MCTexturedQuad * quad = [[MCTexturedQuad alloc] init];
+	
+	GLfloat xLocation = [[record objectForKey:@"x"] floatValue];
+	GLfloat yLocation = [[record objectForKey:@"y"] floatValue];
+	GLfloat width = [[record objectForKey:@"w"] floatValue];
+	GLfloat height = [[record objectForKey:@"h"] floatValue];
+	
+	// find the normalized texture coordinates
+	GLfloat xMin = xLocation/atlasSize.width;
+	GLfloat yMin = yLocation/atlasSize.height;
+	GLfloat xMax = (xLocation + width)/atlasSize.width;
+	GLfloat yMax = (yLocation + height)/atlasSize.height;
+	//NSLog(@"xMin: %f",xMin);
+    //NSLog(@"yMin: %f",yMin);
+    //NSLog(@"xMax: %f",xMax);
+    //NSLog(@"yMax: %f",yMax);
+	// build my quad UVs
+	quad.uvCoordinates[0] = xMin;
+	quad.uvCoordinates[1] = yMax;
+	
+	quad.uvCoordinates[2] = xMax;
+	quad.uvCoordinates[3] = yMax;
+	
+	quad.uvCoordinates[4] = xMin;
+	quad.uvCoordinates[5] = yMin;
+    
+	quad.uvCoordinates[6] = xMax;
+	quad.uvCoordinates[7] = yMin;
+	
+	quad.materialKey = key;
+	
+	return [quad autorelease];
+}
 
 
 // grabs the openGL texture ID from the library and calls the openGL bind texture method
@@ -246,6 +306,24 @@
 	[materialLibrary setObject:[NSNumber numberWithUnsignedInt:textureID] forKey:materialKey];
 	return imageSize;
 }
+
++(MCPoint)getWidthAndHeightFromTextureFile:(NSString *)filename forKey:(NSString*)key{
+    //MCPoint point;
+    NSDictionary * root = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle mainBundle] pathForResource:filename ofType:@"plist"]];
+	
+	// go through each record and build a textured quad for each record
+    NSDictionary *frames = [root objectForKey:@"frames"];
+    
+    NSDictionary *dic = [frames objectForKey:key];
+    
+    CGFloat w = [[dic objectForKey:@"w"] floatValue];
+    CGFloat h = [[dic objectForKey:@"h"] floatValue];;
+    CGFloat z = 1;
+    
+    return MCPointMake(w, h, z);
+
+};
+
 
 - (void) dealloc
 {

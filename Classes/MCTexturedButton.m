@@ -73,8 +73,8 @@
 -(void)setPressedVertexes
 {
 	self.mesh = downQuad;
-    MCPoint tscale = self.scale;
-    self.scale = MCPointMake(tscale.x*1.1, tscale.y*1.1, tscale.z*1.1);
+    //MCPoint tscale = self.scale;
+    //self.scale = MCPointMake(tscale.x*1.00, tscale.y*1.00, tscale.z*1.00);
     
     if (particleEmitter.emit==NO) {
         particleEmitter.emit=YES;

@@ -9,6 +9,20 @@
 #ifndef MCGame_MCStringDefine_h
 #define MCGame_MCStringDefine_h
 
+//按钮id
+#define TextureFileName_HomeButton @"home_button"
+#define TextureKey_learnButtonDown @"learnButtonDown"
+#define TextureKey_learnButtonUp @"learnButtonUp"
+#define TextureKey_optionButtonDown @"optionButtonDown"
+#define TextureKey_optionButtonUp @"optionButtonUp"
+#define TextureKey_raceButtonDown @"raceButtonDown"
+#define TextureKey_raceButtonUp @"raceButtonUp"
+#define TextureKey_rankButtonDown @"rankButtonDown"
+#define TextureKey_rankButtonUp @"rankButtonUp"
+#define TextureKey_solveButtonDown @"solveButtonDown"
+#define TextureKey_solveButtonUp @"solveButtonUp"
+
+
 //教学系统部分提示
 #define Disaccord_Msg @"转错了哈,转回去吧^_^"
 #define Accord_Msg @"接着下一步吧"

@@ -238,29 +238,29 @@
          landmarkType = "2">
       </FileBreakpoint>
       <FileBreakpoint
-         shouldBeEnabled = "Yes"
+         shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
-         filePath = "Classes/SoundSettingController.m"
-         timestampString = "392457030.087546"
+         filePath = "Classes/MCButton.m"
+         timestampString = "392797393.686437"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "104"
-         endingLineNumber = "104"
-         landmarkName = "-loopBackGroundAudioFlipSwitch"
+         startingLineNumber = "87"
+         endingLineNumber = "87"
+         landmarkName = "-handleTouches"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
-         shouldBeEnabled = "Yes"
+         shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
-         filePath = "Classes/MCRandomSolveViewInputControllerViewController.m"
-         timestampString = "392451685.625735"
+         filePath = "Classes/MCButton.m"
+         timestampString = "392797393.686437"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "156"
-         endingLineNumber = "156"
-         landmarkName = "-releaseInterface"
+         startingLineNumber = "89"
+         endingLineNumber = "89"
+         landmarkName = "-handleTouches"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

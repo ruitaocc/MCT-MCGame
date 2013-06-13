@@ -11,7 +11,8 @@
 #import "CoordinatingController.h"
 
 #import "MCOBJLoader.h"
-
+#import "MCStringDefine.h"
+#import "MCMaterialController.h"
 @implementation MCInputViewController
 
 
@@ -19,21 +20,11 @@
 {
 	if (interfaceObjects == nil) interfaceObjects = [[NSMutableArray alloc] init];
 	[interfaceObjects removeAllObjects];
-
-    CGFloat xBased = 0.0;
-    CGFloat yBased = -200.0;
-    CGFloat xGap = 10.0;
-    CGFloat yGap = 10.0;
-    
-    CGFloat btnWidth = 175;
-    CGFloat btnHeight = 70.0;
-    
-	
 	
    	// normalPlayBtn
-	MCTexturedButton * normalPlayBtn = [[MCTexturedButton alloc] initWithUpKey:@"normalPlayBtnUp" downKey:@"normalPlayBtnUp"];
-	normalPlayBtn.scale = MCPointMake(btnWidth, btnHeight, 1.0);
-	normalPlayBtn.translation = MCPointMake(xBased-(btnWidth+xGap) , yBased, 0.0);
+	MCTexturedButton * normalPlayBtn = [[MCTexturedButton alloc] initWithUpKey:TextureKey_learnButtonUp downKey:TextureKey_learnButtonDown];
+	normalPlayBtn.scale = [MCMaterialController getWidthAndHeightFromTextureFile:TextureFileName_HomeButton forKey:TextureKey_learnButtonUp];
+	normalPlayBtn.translation = MCPointMake(-215 , -160, 0.0);
 	normalPlayBtn.target = self;
 	normalPlayBtn.buttonDownAction = @selector(normalPlayBtnDown);
 	normalPlayBtn.buttonUpAction = @selector(normalPlayBtnUp);
@@ -44,9 +35,9 @@
     
     // countingPlayBtn
 	
-	MCTexturedButton * countingPlayBtn = [[MCTexturedButton alloc] initWithUpKey:@"countingPlayBtnUp" downKey:@"countingPlayBtnUp"];
-	countingPlayBtn.scale = MCPointMake(btnWidth, btnHeight, 1.0);
-	countingPlayBtn.translation = MCPointMake(xBased , yBased, 0.0);
+	MCTexturedButton * countingPlayBtn = [[MCTexturedButton alloc] initWithUpKey:TextureKey_raceButtonUp downKey:TextureKey_raceButtonDown];
+	countingPlayBtn.scale = [MCMaterialController getWidthAndHeightFromTextureFile:TextureFileName_HomeButton forKey:TextureKey_raceButtonUp];
+	countingPlayBtn.translation = MCPointMake(0 , -170, 0.0);
 	countingPlayBtn.target = self;
 	countingPlayBtn.buttonDownAction = @selector(countingPlayBtnDown);
 	countingPlayBtn.buttonUpAction = @selector(countingPlayBtnUp);
@@ -56,9 +47,9 @@
 	[countingPlayBtn release];
 	
 	// randomSolveBtn
-	MCTexturedButton * randomSolveBtn = [[MCTexturedButton alloc] initWithUpKey:@"randomSolveBtnUp" downKey:@"randomSolveBtnUp"];
-	randomSolveBtn.scale = MCPointMake(btnWidth, btnHeight, 1.0);
-	randomSolveBtn.translation = MCPointMake(xBased+(btnWidth+xGap), yBased, 0.0);
+	MCTexturedButton * randomSolveBtn = [[MCTexturedButton alloc] initWithUpKey:TextureKey_solveButtonUp downKey:TextureKey_solveButtonDown];
+	randomSolveBtn.scale = [MCMaterialController getWidthAndHeightFromTextureFile:TextureFileName_HomeButton forKey:TextureKey_solveButtonUp];
+	randomSolveBtn.translation = MCPointMake(205, -150, 0.0);
 	randomSolveBtn.target = self;
 	randomSolveBtn.buttonDownAction = @selector(randomSolveBtnDown);
     randomSolveBtn.buttonUpAction = @selector(randomSolveBtnUp);	
@@ -68,9 +59,9 @@
 	[randomSolveBtn release];
 	
 	// systemSettingBtn
-	MCTexturedButton * systemSettingBtn = [[MCTexturedButton alloc] initWithUpKey:@"optionBtnUp" downKey:@"optionBtnUp"];
-	systemSettingBtn.scale = MCPointMake(60, 78, 1.0);
-	systemSettingBtn.translation = MCPointMake(xBased -btnWidth/2, yBased-(btnHeight+yGap), 0.0);
+	MCTexturedButton * systemSettingBtn = [[MCTexturedButton alloc] initWithUpKey:TextureKey_optionButtonUp downKey:TextureKey_optionButtonDown];
+	systemSettingBtn.scale = [MCMaterialController getWidthAndHeightFromTextureFile:TextureFileName_HomeButton forKey:TextureKey_optionButtonUp];
+	systemSettingBtn.translation = MCPointMake(-100, -300, 0.0);
 	systemSettingBtn.target = self;
 	systemSettingBtn.buttonDownAction = @selector(systemSettingBtnDown);
 	systemSettingBtn.buttonUpAction = @selector(systemSettingBtnUp);
@@ -80,9 +71,9 @@
 	[systemSettingBtn release];
 	
 	// heroBoardBtn
-	MCTexturedButton * heroBoardBtn = [[MCTexturedButton alloc] initWithUpKey:@"rankBtnUp" downKey:@"rankBtnUp"];
-	heroBoardBtn.scale = MCPointMake(60 , 78, 1.0);
-	heroBoardBtn.translation = MCPointMake(xBased +btnWidth/2, yBased-(btnHeight+yGap), 0.0);
+	MCTexturedButton * heroBoardBtn = [[MCTexturedButton alloc] initWithUpKey:TextureKey_rankButtonUp downKey:TextureKey_rankButtonDown];
+	heroBoardBtn.scale = [MCMaterialController getWidthAndHeightFromTextureFile:TextureFileName_HomeButton forKey:TextureKey_rankButtonUp];
+	heroBoardBtn.translation = MCPointMake(110, -310, 0.0);
 	heroBoardBtn.target = self;
 	heroBoardBtn.buttonDownAction = @selector(heroBoardBtnDown);
 	heroBoardBtn.buttonUpAction = @selector(heroBoardBtnUp);
@@ -90,22 +81,7 @@
 	[heroBoardBtn awake];
 	[interfaceObjects addObject:heroBoardBtn];
 	[heroBoardBtn release];
-    /*
-    particleEmitter = [[MCParticleSystem alloc]init];
-    particleEmitter.emissionRange = MCRangeMake(300.0, 50.0);
-    particleEmitter.sizeRange = MCRangeMake(8.0, 1.0);
-    particleEmitter.growRange = MCRangeMake(-0.8, 0.5);
-    particleEmitter.xVelocityRange = MCRangeMake(-0.5, 1.0);
-    particleEmitter.yVelocityRange = MCRangeMake(-0.5, 1.0);
-    particleEmitter.lifeRange = MCRangeMake(0.0, 5.5);
-    particleEmitter.decayRange = MCRangeMake(0.03, 0.05);
-    [particleEmitter setParticle:@"lightBlur"];
-    particleEmitter.translation = MCPointMake(300,10,0);
-    particleEmitter.active = YES;
-    particleEmitter.emit = YES;
-    [interfaceObjects addObject:particleEmitter];
-    [particleEmitter release];
-    */
+    
     [super loadInterface];
 }
 

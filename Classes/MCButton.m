@@ -70,16 +70,28 @@ static CGFloat MCSquareFillVertexes[8] = {-0.5,-0.5, 0.5,-0.5, -0.5,0.5, 0.5,0.5
 {
 	NSSet * touches = [[[CoordinatingController sharedCoordinatingController] currentController].inputController touchEvents];
 	if ([touches count] == 0) return;
-	
 	BOOL pointInBounds = NO;
-	for (UITouch * touch in [touches allObjects]) {
-		CGPoint touchPoint = [touch locationInView:[touch view]];
+    FSM_Interaction_State fsm_Current_State = [[[CoordinatingController sharedCoordinatingController] currentController].inputController fsm_Current_State];
+	CGPoint lastpoint = [[[CoordinatingController sharedCoordinatingController] currentController].inputController lastpoint];
+    for (UITouch * touch in [touches allObjects]) {
+        CGPoint touchPoint = [touch previousLocationInView:[touch view]];
+        if (touch.phase == UITouchPhaseEnded&&fsm_Current_State==kState_F1){
+            if (CGRectContainsPoint(screenRect, lastpoint)) {
+                [self touchUp];
+                break;
+            }
+        }
 		if (CGRectContainsPoint(screenRect, touchPoint)) {
 			pointInBounds = YES;
-			if ((touch.phase == UITouchPhaseBegan) || ((touch.phase == UITouchPhaseStationary))) [self touchDown];				
-		}
+			if ((touch.phase == UITouchPhaseBegan)||((touch.phase == UITouchPhaseStationary))) {
+                [self touchDown];
+            }
+        }
 	}
-	if (!pointInBounds) [self touchUp];
+    if (!pointInBounds) {
+        [self showUp];
+    }
+	
 }
 
 -(void)touchUp
@@ -89,6 +101,12 @@ static CGFloat MCSquareFillVertexes[8] = {-0.5,-0.5, 0.5,-0.5, -0.5,0.5, 0.5,0.5
 	[self setNotPressedVertexes];
     
 	[target performSelector:buttonUpAction];
+}
+-(void)showUp
+{
+	if (!pressed) return; // we were already up
+	pressed = NO;
+	[self setNotPressedVertexes];
 }
 
 -(void)touchDown

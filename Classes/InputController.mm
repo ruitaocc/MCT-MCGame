@@ -16,6 +16,7 @@
 @synthesize touchEvents;
 @synthesize fsm_Current_State,fsm_Previous_State;
 @synthesize particleEmitter;
+@synthesize lastpoint;
 //@synthesize isNeededReload;
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)niMCundleOrNil {
 	if (self = [super initWithNibName:nibNameOrNil bundle:niMCundleOrNil]) {
@@ -168,7 +169,7 @@
     //}
     //轨迹跟踪粒子
     UITouch* touch = [[touches allObjects] objectAtIndex:0];
-    CGPoint location = [touch previousLocationInView:self.view];
+    CGPoint location = [touch locationInView:self.view];
     particleEmitter.translation = MCPointMake(location.x-512, -(location.y-384),-1);
     particleEmitter.emit = NO;
     //单层正常结束
@@ -202,10 +203,12 @@
     if (touchCount<0) {
         touchCount=0;
     }
-    
+    lastpoint = location;
 	// just store them all in the big set.
 	[touchEvents addObjectsFromArray:[touches allObjects]];
-
+    
+    //if(touch.phase==UITouchPhaseEnded)NSLog(@"phase:end");
+    //NSLog(@"touch:in(%f,%f)",location.x,location.y);
     
 }
 #pragma mark Autorotate

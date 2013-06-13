@@ -111,6 +111,8 @@
 		A3D67F881759E1F1002501B2 /* blackface.png in Resources */ = {isa = PBXBuildFile; fileRef = A3D67F811759E1F1002501B2 /* blackface.png */; };
 		A3DB2596162D993900AB9F00 /* CoordinatingController.m in Sources */ = {isa = PBXBuildFile; fileRef = A3DB2595162D993900AB9F00 /* CoordinatingController.m */; };
 		A3DB413317646E5900C0D091 /* xyzCoordinateIndicator.m in Sources */ = {isa = PBXBuildFile; fileRef = A3DB413217646E5900C0D091 /* xyzCoordinateIndicator.m */; };
+		A3DB41361764B56400C0D091 /* home_button.png in Resources */ = {isa = PBXBuildFile; fileRef = A3DB41341764B56200C0D091 /* home_button.png */; };
+		A3DB41371764B56400C0D091 /* home_button.plist in Resources */ = {isa = PBXBuildFile; fileRef = A3DB41351764B56300C0D091 /* home_button.plist */; };
 		A3E1ADBA16A3C3160050B52D /* readme_config.rtf in Resources */ = {isa = PBXBuildFile; fileRef = A3E1ADB916A3C3160050B52D /* readme_config.rtf */; };
 		A3E1ADBC16A3C40C0050B52D /* readme_scene5.rtf in Resources */ = {isa = PBXBuildFile; fileRef = A3E1ADBB16A3C40C0050B52D /* readme_scene5.rtf */; };
 		A3E1ADBE16A3C47D0050B52D /* readme_Scene1.rtf in Resources */ = {isa = PBXBuildFile; fileRef = A3E1ADBD16A3C47D0050B52D /* readme_Scene1.rtf */; };
@@ -138,6 +140,10 @@
 		A3EB454816BE358700DBB8B7 /* MCMultiDigitCounter.m in Sources */ = {isa = PBXBuildFile; fileRef = A3EB454716BE358700DBB8B7 /* MCMultiDigitCounter.m */; };
 		A3EB454F16BF51F800DBB8B7 /* MCTimer.m in Sources */ = {isa = PBXBuildFile; fileRef = A3EB454E16BF51F800DBB8B7 /* MCTimer.m */; };
 		A3EB455416BF5E1600DBB8B7 /* MCDotSeparater.m in Sources */ = {isa = PBXBuildFile; fileRef = A3EB455316BF5E1600DBB8B7 /* MCDotSeparater.m */; };
+		A3EDD65D1769A1D8000C473B /* home.png in Resources */ = {isa = PBXBuildFile; fileRef = A3EDD65B1769A1D8000C473B /* home.png */; };
+		A3EDD65E1769A1D8000C473B /* home@2X.png in Resources */ = {isa = PBXBuildFile; fileRef = A3EDD65C1769A1D8000C473B /* home@2X.png */; };
+		A3EDD6601769A68A000C473B /* background2.png in Resources */ = {isa = PBXBuildFile; fileRef = A3EDD65F1769A68A000C473B /* background2.png */; };
+		A3EDD6631769A6D2000C473B /* MCBackGroundTexMesh.m in Sources */ = {isa = PBXBuildFile; fileRef = A3EDD6621769A6D2000C473B /* MCBackGroundTexMesh.m */; };
 		A3F2ACB61616CE6700D622B8 /* MCMaterialController.m in Sources */ = {isa = PBXBuildFile; fileRef = A3F2ACB51616CE6700D622B8 /* MCMaterialController.m */; };
 		A3F2ACBA1616CF9900D622B8 /* MCParticleSystem.m in Sources */ = {isa = PBXBuildFile; fileRef = A3F2ACB91616CF9900D622B8 /* MCParticleSystem.m */; };
 		A3F2ACC01616D9BB00D622B8 /* MCParticle.m in Sources */ = {isa = PBXBuildFile; fileRef = A3F2ACBF1616D9BB00D622B8 /* MCParticle.m */; };
@@ -353,6 +359,8 @@
 		A3DB2595162D993900AB9F00 /* CoordinatingController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoordinatingController.m; sourceTree = "<group>"; };
 		A3DB413117646E5900C0D091 /* xyzCoordinateIndicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = xyzCoordinateIndicator.h; sourceTree = "<group>"; };
 		A3DB413217646E5900C0D091 /* xyzCoordinateIndicator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = xyzCoordinateIndicator.m; sourceTree = "<group>"; };
+		A3DB41341764B56200C0D091 /* home_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = home_button.png; sourceTree = "<group>"; };
+		A3DB41351764B56300C0D091 /* home_button.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = home_button.plist; sourceTree = "<group>"; };
 		A3E1ADB916A3C3160050B52D /* readme_config.rtf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.rtf; path = readme_config.rtf; sourceTree = "<group>"; };
 		A3E1ADBB16A3C40C0050B52D /* readme_scene5.rtf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.rtf; path = readme_scene5.rtf; sourceTree = "<group>"; };
 		A3E1ADBD16A3C47D0050B52D /* readme_Scene1.rtf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.rtf; path = readme_Scene1.rtf; sourceTree = "<group>"; };
@@ -392,6 +400,11 @@
 		A3EB454E16BF51F800DBB8B7 /* MCTimer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCTimer.m; sourceTree = "<group>"; };
 		A3EB455216BF5E1600DBB8B7 /* MCDotSeparater.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCDotSeparater.h; sourceTree = "<group>"; };
 		A3EB455316BF5E1600DBB8B7 /* MCDotSeparater.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCDotSeparater.m; sourceTree = "<group>"; };
+		A3EDD65B1769A1D8000C473B /* home.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = home.png; sourceTree = "<group>"; };
+		A3EDD65C1769A1D8000C473B /* home@2X.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "home@2X.png"; sourceTree = "<group>"; };
+		A3EDD65F1769A68A000C473B /* background2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = background2.png; sourceTree = "<group>"; };
+		A3EDD6611769A6D2000C473B /* MCBackGroundTexMesh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCBackGroundTexMesh.h; sourceTree = "<group>"; };
+		A3EDD6621769A6D2000C473B /* MCBackGroundTexMesh.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCBackGroundTexMesh.m; sourceTree = "<group>"; };
 		A3F2ACB41616CE6700D622B8 /* MCMaterialController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCMaterialController.h; sourceTree = "<group>"; };
 		A3F2ACB51616CE6700D622B8 /* MCMaterialController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCMaterialController.m; sourceTree = "<group>"; };
 		A3F2ACB81616CF9900D622B8 /* MCParticleSystem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCParticleSystem.h; path = ../MCParticleSystem.h; sourceTree = "<group>"; };
@@ -659,6 +672,8 @@
 				A3D67F891759E1F7002501B2 /* cubeface */,
 				A3359E64168E9777002F9459 /* progressbar */,
 				A37F8811166B876C00B0A59F /* cubeBlack2.png */,
+				A3DB41341764B56200C0D091 /* home_button.png */,
+				A3DB41351764B56300C0D091 /* home_button.plist */,
 				A3D5B2E7175CD87900833F3F /* volumedown.png */,
 				A3D5B2E8175CD87900833F3F /* volumeup.png */,
 				A3D0704516F87F0300AA3BFF /* sixcolor.png */,
@@ -674,6 +689,9 @@
 				A30C47E3161C8A360057C5E1 /* particleAtlas.plist */,
 				A30C47E4161C8A370057C5E1 /* particleAtlas.png */,
 				A3BF9204161D4C4600829D13 /* cubeTexture.png */,
+				A3EDD65B1769A1D8000C473B /* home.png */,
+				A3EDD65C1769A1D8000C473B /* home@2X.png */,
+				A3EDD65F1769A68A000C473B /* background2.png */,
 			);
 			name = imageResource;
 			sourceTree = "<group>";
@@ -1050,6 +1068,8 @@
 				A30C47DE161C86F70057C5E1 /* Cube.m */,
 				A30C47DD161C86F70057C5E1 /* Cube.h */,
 				A3E1ADC516A3CC020050B52D /* readme_SceneObjects.rtf */,
+				A3EDD6611769A6D2000C473B /* MCBackGroundTexMesh.h */,
+				A3EDD6621769A6D2000C473B /* MCBackGroundTexMesh.m */,
 			);
 			name = SceneObjects;
 			sourceTree = "<group>";
@@ -1312,6 +1332,11 @@
 				E0A7F6E2176204B400B285D4 /* play.mp3 in Resources */,
 				E0A7F6E3176204B400B285D4 /* Start.caf in Resources */,
 				A335C3D817620B1B00DA18EE /* dididi.wav in Resources */,
+				A3DB41361764B56400C0D091 /* home_button.png in Resources */,
+				A3DB41371764B56400C0D091 /* home_button.plist in Resources */,
+				A3EDD65D1769A1D8000C473B /* home.png in Resources */,
+				A3EDD65E1769A1D8000C473B /* home@2X.png in Resources */,
+				A3EDD6601769A68A000C473B /* background2.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1420,6 +1445,7 @@
 				E0167DAC176373B400F420E8 /* MCInferenceEngine.m in Sources */,
 				E0167DAD176373B400F420E8 /* MCWorkingMemory.m in Sources */,
 				A3DB413317646E5900C0D091 /* xyzCoordinateIndicator.m in Sources */,
+				A3EDD6631769A6D2000C473B /* MCBackGroundTexMesh.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
