@@ -42,8 +42,6 @@
 
 
 - (void)dealloc{
-    [super dealloc];
-    
     // release all
     [_workingMemory release];
     [patterns release];
@@ -52,6 +50,8 @@
     [specialRules release];
     [states release];
     [actionPerformer release];
+    
+    [super dealloc];
 }
 
 

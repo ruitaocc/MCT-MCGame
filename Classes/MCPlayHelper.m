@@ -44,10 +44,10 @@
 
 
 - (void)dealloc{
-    [super dealloc];
     [_inferenceEngine release];
     [explanationSystem release];
     [_actionPerformer release];
+    [super dealloc];
 }
 
 

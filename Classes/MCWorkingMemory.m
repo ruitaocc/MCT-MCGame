@@ -35,12 +35,13 @@
 
 
 - (void)dealloc{
-    [super dealloc];
     [_applyQueue release];
     [_magicCube release];
     [_residualActions release];
     [_agendaPattern release];
     [_magicCubeState release];
+    
+    [super dealloc];
 }
 
 
