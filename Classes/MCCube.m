@@ -9,6 +9,7 @@
 #import "MCCubie.h"
 #import <math.h>
 #import "MCTransformUtil.h"
+#import "MCCubieColorConstraintUtil.h"
 
 #define kCoordinateXKey @"CoordinateX"
 #define kCoordinateYKey @"CoordinateY"
@@ -19,21 +20,26 @@
 #define kSingleColorKeyFormat @"Color%d"
 #define kSingleOrientationKeyFormat @"Orientation%d"
 
-@implementation MCCubie
+@implementation MCCubie{
+    NSInteger _completeFaceNum;
+}
 
 @synthesize coordinateValue;
 @synthesize skinNum;
 @synthesize type = _type;
-@synthesize identity;
-@synthesize faceColors;
-@synthesize orientations;
+@synthesize identity = _identity;
+@synthesize faceColors = _faceColors;
+@synthesize orientations = _orientations;
 
 //initial the cube's data by orignal coordinate value
 - (id)initRightCubeWithCoordinate:(struct Point3i)value{
     if(self = [self init]){
-        //before initiating, clear data
+        // All face will be filled.
+        _completeFaceNum = 3;
+        
+        // Before initiating, clear data
         [self clearData];
-        //detect the skin number and the cube type
+        // Detect the skin number and the cube type
         coordinateValue = value;
         skinNum = abs(coordinateValue.x) + abs(coordinateValue.y) + abs(coordinateValue.z);
         switch (skinNum) {
@@ -50,21 +56,21 @@
                 break;
         }
         //allocate memory for the skin
-        faceColors = (FaceColorType*)malloc(skinNum * sizeof(FaceColorType));
-        orientations = (FaceOrientationType*)malloc(skinNum * sizeof(FaceOrientationType));
+        _faceColors = (FaceColorType*)malloc(skinNum * sizeof(FaceColorType));
+        _orientations = (FaceOrientationType*)malloc(skinNum * sizeof(FaceOrientationType));
         //intial the skin data
         int currentIndex = 0;
         switch (coordinateValue.x) {
             case -1:
-                faceColors[currentIndex] = LeftColor;
-                orientations[currentIndex] = Left;
+                _faceColors[currentIndex] = LeftColor;
+                _orientations[currentIndex] = Left;
                 currentIndex++;
                 break;
             case 0:
                 break;
             case 1:
-                faceColors[currentIndex] = RightColor;
-                orientations[currentIndex] = Right;
+                _faceColors[currentIndex] = RightColor;
+                _orientations[currentIndex] = Right;
                 currentIndex++;
                 break;
             default:
@@ -72,15 +78,15 @@
         }
         switch (coordinateValue.y) {
             case -1:
-                faceColors[currentIndex] = DownColor;
-                orientations[currentIndex] = Down;
+                _faceColors[currentIndex] = DownColor;
+                _orientations[currentIndex] = Down;
                 currentIndex++;
                 break;
             case 0:
                 break;
             case 1:
-                faceColors[currentIndex] = UpColor;
-                orientations[currentIndex] = Up;
+                _faceColors[currentIndex] = UpColor;
+                _orientations[currentIndex] = Up;
                 currentIndex++;
                 break;
             default:
@@ -88,29 +94,31 @@
         }
         switch (coordinateValue.z) {
             case -1:
-                faceColors[currentIndex] = BackColor;
-                orientations[currentIndex] = Back;
+                _faceColors[currentIndex] = BackColor;
+                _orientations[currentIndex] = Back;
                 currentIndex++;
                 break;
             case 0:
                 break;
             case 1:
-                faceColors[currentIndex] = FrontColor;
-                orientations[currentIndex] = Front;
+                _faceColors[currentIndex] = FrontColor;
+                _orientations[currentIndex] = Front;
                 currentIndex++;
                 break;
             default:
                 break;
         }
         //assign the identity
-        identity = (ColorCombinationType)(coordinateValue.x + coordinateValue.y*3 + coordinateValue.z*9 + 13);
+        _identity = (ColorCombinationType)(coordinateValue.x + coordinateValue.y*3 + coordinateValue.z*9 + 13);
     }
     return self;
 }   
 
 - (id)redefinedWithCoordinate:(struct Point3i)value orderedColors:(NSArray *)colors orderedOrientations:(NSArray *)ors{
-    
     if([self init]){
+        // All face will be filled.
+        _completeFaceNum = 3;
+        
         //before initiating, clear data
         [self clearData];
         //detect the skin number and the cube type
@@ -132,7 +140,7 @@
         //allocate memory for the skin
         self.faceColors = (FaceColorType*)malloc(skinNum * sizeof(FaceColorType));
         self.orientations = (FaceOrientationType*)malloc(skinNum * sizeof(FaceOrientationType));
-        int tmpIdentity = identity;
+        int tmpIdentity = _identity;
         for (int i = 0; i < self.skinNum; i++) {
             self.faceColors[i] = (FaceColorType)[[colors objectAtIndex:i] integerValue];
             self.orientations[i] = (FaceOrientationType)[[ors objectAtIndex:i] integerValue];
@@ -159,7 +167,7 @@
                     break;
             }
         }
-        identity = (ColorCombinationType)tmpIdentity;
+        _identity = (ColorCombinationType)tmpIdentity;
     }
     return self;
 }
@@ -186,23 +194,26 @@
                 break;
         }
         //allocate memory for the skin
-        faceColors = (FaceColorType*)malloc(skinNum * sizeof(FaceColorType));
-        orientations = (FaceOrientationType*)malloc(skinNum * sizeof(FaceOrientationType));
+        _faceColors = (FaceColorType*)malloc(skinNum * sizeof(FaceColorType));
+        _orientations = (FaceOrientationType*)malloc(skinNum * sizeof(FaceOrientationType));
         
         //intial the skin data
         if (_type == CentralCubie) {
+            // The only one face will be filled.
+            _completeFaceNum = 1;
+            
             int currentIndex = 0;
             switch (coordinateValue.x) {
                 case -1:
-                    faceColors[currentIndex] = LeftColor;
-                    orientations[currentIndex] = Left;
+                    _faceColors[currentIndex] = LeftColor;
+                    _orientations[currentIndex] = Left;
                     currentIndex++;
                     break;
                 case 0:
                     break;
                 case 1:
-                    faceColors[currentIndex] = RightColor;
-                    orientations[currentIndex] = Right;
+                    _faceColors[currentIndex] = RightColor;
+                    _orientations[currentIndex] = Right;
                     currentIndex++;
                     break;
                 default:
@@ -210,15 +221,15 @@
             }
             switch (coordinateValue.y) {
                 case -1:
-                    faceColors[currentIndex] = DownColor;
-                    orientations[currentIndex] = Down;
+                    _faceColors[currentIndex] = DownColor;
+                    _orientations[currentIndex] = Down;
                     currentIndex++;
                     break;
                 case 0:
                     break;
                 case 1:
-                    faceColors[currentIndex] = UpColor;
-                    orientations[currentIndex] = Up;
+                    _faceColors[currentIndex] = UpColor;
+                    _orientations[currentIndex] = Up;
                     currentIndex++;
                     break;
                 default:
@@ -226,15 +237,15 @@
             }
             switch (coordinateValue.z) {
                 case -1:
-                    faceColors[currentIndex] = BackColor;
-                    orientations[currentIndex] = Back;
+                    _faceColors[currentIndex] = BackColor;
+                    _orientations[currentIndex] = Back;
                     currentIndex++;
                     break;
                 case 0:
                     break;
                 case 1:
-                    faceColors[currentIndex] = FrontColor;
-                    orientations[currentIndex] = Front;
+                    _faceColors[currentIndex] = FrontColor;
+                    _orientations[currentIndex] = Front;
                     currentIndex++;
                     break;
                 default:
@@ -242,18 +253,21 @@
             }
         }
         else{
+            // No face will be filled.
+            _completeFaceNum = 0;
+            
             int currentIndex = 0;
             switch (coordinateValue.x) {
                 case -1:
-                    faceColors[currentIndex] = NoColor;
-                    orientations[currentIndex] = Left;
+                    _faceColors[currentIndex] = NoColor;
+                    _orientations[currentIndex] = Left;
                     currentIndex++;
                     break;
                 case 0:
                     break;
                 case 1:
-                    faceColors[currentIndex] = NoColor;
-                    orientations[currentIndex] = Right;
+                    _faceColors[currentIndex] = NoColor;
+                    _orientations[currentIndex] = Right;
                     currentIndex++;
                     break;
                 default:
@@ -261,15 +275,15 @@
             }
             switch (coordinateValue.y) {
                 case -1:
-                    faceColors[currentIndex] = NoColor;
-                    orientations[currentIndex] = Down;
+                    _faceColors[currentIndex] = NoColor;
+                    _orientations[currentIndex] = Down;
                     currentIndex++;
                     break;
                 case 0:
                     break;
                 case 1:
-                    faceColors[currentIndex] = NoColor;
-                    orientations[currentIndex] = Up;
+                    _faceColors[currentIndex] = NoColor;
+                    _orientations[currentIndex] = Up;
                     currentIndex++;
                     break;
                 default:
@@ -277,32 +291,29 @@
             }
             switch (coordinateValue.z) {
                 case -1:
-                    faceColors[currentIndex] = NoColor;
-                    orientations[currentIndex] = Back;
+                    _faceColors[currentIndex] = NoColor;
+                    _orientations[currentIndex] = Back;
                     currentIndex++;
                     break;
                 case 0:
                     break;
                 case 1:
-                    faceColors[currentIndex] = NoColor;
-                    orientations[currentIndex] = Front;
+                    _faceColors[currentIndex] = NoColor;
+                    _orientations[currentIndex] = Front;
                     currentIndex++;
                     break;
                 default:
                     break;
             }
         }
-        
-        //assign the identity
-        identity = (ColorCombinationType)(coordinateValue.x + coordinateValue.y*3 + coordinateValue.z*9 + 13);
     }
     return self;
 }
 
 
 - (void) dealloc{
-    free(faceColors);
-    free(orientations);
+    free(_faceColors);
+    free(_orientations);
     [super dealloc];
 }
 
@@ -320,19 +331,19 @@
                 coordinateValue.z = temp;
                 //skin data change when shift on X axis in CW
                 for(int i = 0; i < skinNum; i++){
-                    faceOrientation = orientations[i];
+                    faceOrientation = _orientations[i];
                     switch (faceOrientation) {
                         case Front:
-                            orientations[i] = Up;
+                            _orientations[i] = Up;
                             break;
                         case Up:
-                            orientations[i] = Back;
+                            _orientations[i] = Back;
                             break;
                         case Back:
-                            orientations[i] = Down;
+                            _orientations[i] = Down;
                             break;
                         case Down:
-                            orientations[i] = Front;
+                            _orientations[i] = Front;
                             break;
                         default:
                             break;
@@ -347,19 +358,19 @@
                 coordinateValue.y = temp;
                 //skin data change when shift on X axis in CCW
                 for(int i = 0; i < skinNum; i++){
-                    faceOrientation = orientations[i];
+                    faceOrientation = _orientations[i];
                     switch (faceOrientation) {
                         case Front:
-                            orientations[i] = Down;
+                            _orientations[i] = Down;
                             break;
                         case Up:
-                            orientations[i] = Front;
+                            _orientations[i] = Front;
                             break;
                         case Back:
-                            orientations[i] = Up;
+                            _orientations[i] = Up;
                             break;
                         case Down:
-                            orientations[i] = Back;
+                            _orientations[i] = Back;
                             break;
                         default:
                             break;
@@ -376,19 +387,19 @@
                 coordinateValue.x = temp;
                 //skin data change when shift on Y axis in CW
                 for(int i = 0; i < skinNum; i++){
-                    faceOrientation = orientations[i];
+                    faceOrientation = _orientations[i];
                     switch (faceOrientation) {
                         case Front:
-                            orientations[i] = Left;
+                            _orientations[i] = Left;
                             break;
                         case Left:
-                            orientations[i] = Back;
+                            _orientations[i] = Back;
                             break;
                         case Back:
-                            orientations[i] = Right;
+                            _orientations[i] = Right;
                             break;
                         case Right:
-                            orientations[i] = Front;
+                            _orientations[i] = Front;
                             break;
                         default:
                             break;
@@ -403,19 +414,19 @@
                 coordinateValue.z = temp;
                 //skin data change when shift on Y axis in CCW
                 for(int i = 0; i < skinNum; i++){
-                    faceOrientation = orientations[i];
+                    faceOrientation = _orientations[i];
                     switch (faceOrientation) {
                         case Front:
-                            orientations[i] = Right;
+                            _orientations[i] = Right;
                             break;
                         case Left:
-                            orientations[i] = Front;
+                            _orientations[i] = Front;
                             break;
                         case Back:
-                            orientations[i] = Left;
+                            _orientations[i] = Left;
                             break;
                         case Right:
-                            orientations[i] = Back;
+                            _orientations[i] = Back;
                             break;
                         default:
                             break;
@@ -433,19 +444,19 @@
                 coordinateValue.y = temp;
                 //skin data change when shift on Z axis in CW
                 for(int i = 0; i < skinNum; i++){
-                    faceOrientation = orientations[i];
+                    faceOrientation = _orientations[i];
                     switch (faceOrientation) {
                         case Up:
-                            orientations[i] = Right;
+                            _orientations[i] = Right;
                             break;
                         case Right:
-                            orientations[i] = Down;
+                            _orientations[i] = Down;
                             break;
                         case Down:
-                            orientations[i] = Left;
+                            _orientations[i] = Left;
                             break;
                         case Left:
-                            orientations[i] = Up;
+                            _orientations[i] = Up;
                             break;
                         default:
                             break;
@@ -460,19 +471,19 @@
                 coordinateValue.x = temp;
                 //skin data change when shift on Z axis in CCW
                 for(int i = 0; i < skinNum; i++){
-                    faceOrientation = orientations[i];
+                    faceOrientation = _orientations[i];
                     switch (faceOrientation) {
                         case Up:
-                            orientations[i] = Left;
+                            _orientations[i] = Left;
                             break;
                         case Right:
-                            orientations[i] = Up;
+                            _orientations[i] = Up;
                             break;
                         case Down:
-                            orientations[i] = Right;
+                            _orientations[i] = Right;
                             break;
                         case Left:
-                            orientations[i] = Down;
+                            _orientations[i] = Down;
                             break;
                         default:
                             break;
@@ -488,8 +499,8 @@
 - (FaceColorType) faceColorInOrientation: (FaceOrientationType)orientation{
     int i;
     for (i = 0; i < skinNum; i++) {
-        if (orientation == orientations[i]) {
-            return faceColors[i];
+        if (orientation == _orientations[i]) {
+            return _faceColors[i];
         }
     }
     return NoColor;
@@ -499,8 +510,8 @@
 - (BOOL)isFaceColor:(FaceColorType)color inOrientation:(FaceOrientationType)orientation{
     int i;
     for (i = 0; i < skinNum; i++) {
-        if (orientation == orientations[i]) {
-            return faceColors[i] == color;
+        if (orientation == _orientations[i]) {
+            return _faceColors[i] == color;
         }
     }
     return NO;
@@ -513,8 +524,73 @@
 - (BOOL)setFaceColor:(FaceColorType)color inOrientation:(FaceOrientationType)orientation{
     int i;
     for (i = 0; i < skinNum; i++) {
-        if (orientation == orientations[i]) {
-            faceColors[i] = color;
+        if (orientation == _orientations[i]) {
+            // Update identity
+            switch (_faceColors[i]) {
+                case UpColor:
+                    _identity = (ColorCombinationType)((int)_identity - 3);
+                    break;
+                case DownColor:
+                    _identity = (ColorCombinationType)((int)_identity + 3);
+                    break;
+                case FrontColor:
+                    _identity = (ColorCombinationType)((int)_identity - 9);
+                    break;
+                case BackColor:
+                    _identity = (ColorCombinationType)((int)_identity + 9);
+                    break;
+                case LeftColor:
+                    _identity = (ColorCombinationType)((int)_identity + 1);
+                    break;
+                case RightColor:
+                    _identity = (ColorCombinationType)((int)_identity - 1);
+                    break;
+                default:
+                    // NO-ANY increasement.
+                    _completeFaceNum++;
+                    break;
+            }
+            
+            switch (color) {
+                case UpColor:
+                    _identity = (ColorCombinationType)((int)_identity + 3);
+                    break;
+                case DownColor:
+                    _identity = (ColorCombinationType)((int)_identity - 3);
+                    break;
+                case FrontColor:
+                    _identity = (ColorCombinationType)((int)_identity + 9);
+                    break;
+                case BackColor:
+                    _identity = (ColorCombinationType)((int)_identity - 9);
+                    break;
+                case LeftColor:
+                    _identity = (ColorCombinationType)((int)_identity - 1);
+                    break;
+                case RightColor:
+                    _identity = (ColorCombinationType)((int)_identity + 1);
+                    break;
+                default:
+                    // Avoid NO-NO increasement.
+                    // And NO-YES will increase.
+                    _completeFaceNum--;
+                    break;
+            }
+            
+            // Assign face color
+            _faceColors[i] = color;
+            
+            if (_completeFaceNum == 2 && _type == CornerCubie) {
+                int i;
+                for (i = 0; i < skinNum; i++) {
+                    if (_faceColors[i] == NoColor) {
+                        break;
+                    }
+                }
+                [MCCubieColorConstraintUtil fillRightFaceColorAtCubie:(NSObject<MCCubieDelegate> *)self
+                                                        inOrientation:(FaceOrientationType)_orientations[i]];
+            }
+            
             return YES;
         }
     }
@@ -531,8 +607,8 @@
     [self setSkinNum:0];
     [self setType:NoType];
     [self setIdentity:CenterBlank];
-    free(faceColors);
-    free(orientations);
+    free(_faceColors);
+    free(_orientations);
 }
 
 //encode the object
@@ -542,10 +618,10 @@
     [aCoder encodeInteger:coordinateValue.z forKey:kCoordinateZKey];
     [aCoder encodeInteger:skinNum forKey:kSkinNumKey];
     [aCoder encodeInteger:_type forKey:kTypeKey];
-    [aCoder encodeInteger:identity forKey:kIdentityKey];
+    [aCoder encodeInteger:_identity forKey:kIdentityKey];
     for (int i = 0; i < skinNum; i++) {
-        [aCoder encodeInteger:faceColors[i] forKey:[NSString stringWithFormat:kSingleColorKeyFormat, i]];
-        [aCoder encodeInteger:orientations[i] forKey:[NSString stringWithFormat:kSingleOrientationKeyFormat, i]];
+        [aCoder encodeInteger:_faceColors[i] forKey:[NSString stringWithFormat:kSingleColorKeyFormat, i]];
+        [aCoder encodeInteger:_orientations[i] forKey:[NSString stringWithFormat:kSingleOrientationKeyFormat, i]];
     }
 }
 
@@ -557,10 +633,10 @@
         coordinateValue.z = [aDecoder decodeIntegerForKey:kCoordinateZKey];
         self.skinNum = [aDecoder decodeIntegerForKey:kSkinNumKey];
         self.type = (CubieType)[aDecoder decodeIntegerForKey:kTypeKey];
-        self.identity = (ColorCombinationType)[aDecoder decodeIntegerForKey:kIdentityKey];
+        self.identity  = (ColorCombinationType)[aDecoder decodeIntegerForKey:kIdentityKey];
         //alloc memory
-        faceColors = (FaceColorType*)malloc(skinNum * sizeof(FaceColorType));
-        orientations = (FaceOrientationType*)malloc(skinNum * sizeof(FaceOrientationType));
+        _faceColors = (FaceColorType*)malloc(skinNum * sizeof(FaceColorType));
+        _orientations = (FaceOrientationType*)malloc(skinNum * sizeof(FaceOrientationType));
         for (int i = 0; i < skinNum; i++) {
             self.faceColors[i] = (FaceColorType)[aDecoder decodeIntegerForKey:[NSString stringWithFormat:kSingleColorKeyFormat, i]];
             self.orientations[i] = (FaceOrientationType)[aDecoder decodeIntegerForKey:[NSString stringWithFormat:kSingleOrientationKeyFormat, i]];
@@ -572,7 +648,17 @@
 - (NSArray *)allFaceColors{
     NSMutableArray *mutableColors = [NSMutableArray arrayWithCapacity:skinNum];
     for (int i = 0; i < skinNum; i++) {
-        [mutableColors addObject:[NSNumber numberWithInteger:faceColors[i]]];
+        [mutableColors addObject:[NSNumber numberWithInteger:_faceColors[i]]];
+    }
+    
+    return [NSArray arrayWithArray:mutableColors];
+}
+
+
+- (NSArray *)allOrientations{
+    NSMutableArray *mutableColors = [NSMutableArray arrayWithCapacity:skinNum];
+    for (int i = 0; i < skinNum; i++) {
+        [mutableColors addObject:[NSNumber numberWithInteger:_orientations[i]]];
     }
     
     return [NSArray arrayWithArray:mutableColors];
@@ -585,7 +671,7 @@
         [state setObject:[NSNumber numberWithInteger:NoColor] forKey:[NSNumber numberWithInteger:i]];
     }
     for (int i = 0; i < skinNum; i++) {
-        [state setObject:[NSNumber numberWithInteger:faceColors[i]] forKey:[NSNumber numberWithInteger:orientations[i]]];
+        [state setObject:[NSNumber numberWithInteger:_faceColors[i]] forKey:[NSNumber numberWithInteger:_orientations[i]]];
     }
     return [NSDictionary dictionaryWithDictionary:state];
 }
@@ -593,24 +679,24 @@
 - (NSDictionary *)getCubieOrientationOfAxis{
     NSMutableDictionary *state = [NSMutableDictionary dictionaryWithCapacity:3];
     for (int i = 0; i < skinNum; i++) {
-        switch (faceColors[i]) {
+        switch (_faceColors[i]) {
             case UpColor:
-                [state setObject:[NSNumber numberWithInteger:orientations[i]] forKey:[NSNumber numberWithInteger:Y]];
+                [state setObject:[NSNumber numberWithInteger:_orientations[i]] forKey:[NSNumber numberWithInteger:Y]];
                 break;
             case DownColor:
-                [state setObject:[NSNumber numberWithInteger:[MCTransformUtil getContraryOrientation:orientations[i]]] forKey:[NSNumber numberWithInteger:Y]];
+                [state setObject:[NSNumber numberWithInteger:[MCTransformUtil getContraryOrientation:_orientations[i]]] forKey:[NSNumber numberWithInteger:Y]];
                 break;
             case FrontColor:
-                [state setObject:[NSNumber numberWithInteger:orientations[i]] forKey:[NSNumber numberWithInteger:Z]];
+                [state setObject:[NSNumber numberWithInteger:_orientations[i]] forKey:[NSNumber numberWithInteger:Z]];
                 break;
             case BackColor:
-                [state setObject:[NSNumber numberWithInteger:[MCTransformUtil getContraryOrientation:orientations[i]]] forKey:[NSNumber numberWithInteger:Z]];
+                [state setObject:[NSNumber numberWithInteger:[MCTransformUtil getContraryOrientation:_orientations[i]]] forKey:[NSNumber numberWithInteger:Z]];
                 break;
             case LeftColor:
-                [state setObject:[NSNumber numberWithInteger:[MCTransformUtil getContraryOrientation:orientations[i]]] forKey:[NSNumber numberWithInteger:X]];
+                [state setObject:[NSNumber numberWithInteger:[MCTransformUtil getContraryOrientation:_orientations[i]]] forKey:[NSNumber numberWithInteger:X]];
                 break;
             case RightColor:
-                [state setObject:[NSNumber numberWithInteger:orientations[i]] forKey:[NSNumber numberWithInteger:X]];
+                [state setObject:[NSNumber numberWithInteger:_orientations[i]] forKey:[NSNumber numberWithInteger:X]];
                 break;
             default:
                 break;

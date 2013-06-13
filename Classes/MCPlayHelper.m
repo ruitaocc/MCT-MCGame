@@ -12,8 +12,8 @@
 
 @implementation MCPlayHelper
 
-@synthesize helperState;
-@synthesize inferenceEngine;
+@synthesize helperState = _helperState;
+@synthesize inferenceEngine = _inferenceEngine;
 @synthesize explanationSystem;
 @synthesize actionPerformer;
 
@@ -28,7 +28,7 @@
         
         
         // normal helper state
-        self.helperState = Normal;
+        _helperState = Normal;
         
         MCWorkingMemory *workingMemory = [MCWorkingMemory workingMemoryWithMagicCube:mc];
         // Init the inference engine.
@@ -45,7 +45,7 @@
 
 - (void)dealloc{
     [super dealloc];
-    [inferenceEngine release];
+    [_inferenceEngine release];
     [explanationSystem release];
     [actionPerformer release];
 }
@@ -54,7 +54,7 @@
 - (BOOL)rotateOnAxis:(AxisType)axis onLayer:(int)layer inDirection:(LayerRotationDirectionType)direction{
     BOOL result = [self.actionPerformer rotateOnAxis:axis onLayer:layer inDirection:direction];
     //apply rotation
-    if (![self.actionPerformer isQueueEmpty] && self.helperState == ApplyingRotationQueue) {
+    if (![self.actionPerformer isQueueEmpty] && _helperState == ApplyingRotationQueue) {
         SingmasterNotation currentRotation = [MCTransformUtil getSingmasterNotationFromAxis:axis layer:layer direction:direction];
         [self.actionPerformer applyRotationInQueue:currentRotation];
     }
@@ -66,7 +66,7 @@
 - (BOOL)rotateWithSingmasterNotation:(SingmasterNotation)notation{
     BOOL result = [self.actionPerformer rotateWithSingmasterNotation:notation];
     //apply rotation
-    if (![self.actionPerformer isQueueEmpty] && self.helperState == ApplyingRotationQueue) {
+    if (![self.actionPerformer isQueueEmpty] && _helperState == ApplyingRotationQueue) {
         [self.actionPerformer applyRotationInQueue:notation];
     }
     
@@ -80,7 +80,7 @@
 
 
 - (void)prepare{
-    self.helperState = Normal;
+    _helperState = ApplyingRotationQueue;
     [self.inferenceEngine prepareReasoning];
 }
 
@@ -109,7 +109,7 @@
     [self.actionPerformer treeNodesApply:[targetRule root]];
 #else
     //error occurs, we can not find the rules to apply and there isn't the finished state.
-    if ([self.inferenceEngine.magicCubeState compare:END_STATE] != NSOrderedSame && targetRule == nil) {
+    if ([_inferenceEngine.workingMemory.magicCubeState compare:END_STATE] != NSOrderedSame && targetRule == nil) {
         NSLog(@"%@", @"There must be something wrong, I don't apply any rules.");
         //save state for debug
         NSString *savedPath = [NSString stringWithFormat:@"ErrorStateForDebug_%f", [[NSDate date] timeInterval]];
@@ -133,7 +133,6 @@
         NSArray *queueStrings = [self.actionPerformer queueStrings];
         if (queueStrings != nil) {
             [resultDirectory setObject:queueStrings forKey:KEY_ROTATION_QUEUE];
-            self.helperState = ApplyingRotationQueue;
             
             // Attach inference explanation to the result directory.
             NSArray *accordanceMsgs = [self.explanationSystem translateAgendaPattern];
@@ -165,14 +164,17 @@
     return resultDirectory;
 }
 
+
+- (void)close{
+    _helperState = Normal;
+    [_inferenceEngine closeReasoning];
+}
+
+
 - (NSArray *)extraQueue{
     return [self.inferenceEngine.workingMemory.applyQueue getExtraQueueWithStringFormat];
 }
 
-
-- (NSString *)state{
-    return self.inferenceEngine.magicCubeState;
-}
 
 - (void)setMagicCube:(NSObject<MCMagicCubeDelegate > *)mc{
     self.inferenceEngine.workingMemory.magicCube = mc;

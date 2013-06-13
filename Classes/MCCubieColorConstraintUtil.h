@@ -12,7 +12,13 @@
 @interface MCCubieColorConstraintUtil : NSObject
 
 
-// Return colors that 
-+ (NSArray *)avaiableColorsOfCubie:(NSObject<MCCubieDelegate> *)cubie;
+// Return colors that can be filled in this orientation of the cubie.
++ (NSMutableArray *)avaiableColorsOfCubie:(NSObject<MCCubieDelegate> *)cubie inOrientation:(FaceOrientationType)orientation;
+
+
++ (void)fillRightFaceColorAtCubie:(NSObject<MCCubieDelegate> *)cubie inOrientation:(FaceOrientationType)orientation;
+
+// Get the right orientations in CW order.
++ (NSArray *)getFaceOrientationsInColokWiseOrderAtCornerPosition:(struct Point3i)point;
 
 @end

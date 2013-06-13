@@ -11,13 +11,12 @@
 @implementation MCInferenceEngine
 
 
-@synthesize workingMemory;
+@synthesize workingMemory = _workingMemory;
 @synthesize patterns;
 @synthesize rules;
 @synthesize specialPatterns;
 @synthesize specialRules;
 @synthesize states;
-@synthesize magicCubeState;
 @synthesize actionPerformer;
 
 
@@ -46,71 +45,18 @@
     [super dealloc];
     
     // release all
-    [workingMemory release];
+    [_workingMemory release];
     [patterns release];
     [rules release];
     [specialPatterns release];
     [specialRules release];
     [states release];
-    [magicCubeState release];
     [actionPerformer release];
 }
 
 
 - (BOOL)isCubieAtHomeWithIdentity:(ColorCombinationType)identity{
-    NSObject<MCMagicCubeDataSouceDelegate> *mcDataSource = self.workingMemory.magicCube;
-    
-    if (mcDataSource == nil) {
-        NSLog(@"set the magic cube object first.");
-        return NO;
-    }
-    else{
-        NSObject<MCCubieDelegate> *targetCubie = [mcDataSource cubieWithColorCombination:identity];
-        BOOL isHome = YES;
-        NSDictionary *colorOrientationMapping = [targetCubie getCubieColorInOrientationsWithoutNoColor];
-        NSArray *orientations = [colorOrientationMapping allKeys];
-        for (NSNumber *orientation in orientations) {
-            switch ([mcDataSource centerMagicCubeFaceInOrientation:(FaceOrientationType)[orientation integerValue]]) {
-                case Up:
-                    if ([[colorOrientationMapping objectForKey:orientation] integerValue] != UpColor) {
-                        isHome = NO;
-                    }
-                    break;
-                case Down:
-                    if ([[colorOrientationMapping objectForKey:orientation] integerValue] != DownColor) {
-                        isHome = NO;
-                    }
-                    break;
-                case Left:
-                    if ([[colorOrientationMapping objectForKey:orientation] integerValue] != LeftColor) {
-                        isHome = NO;
-                    }
-                    break;
-                case Right:
-                    if ([[colorOrientationMapping objectForKey:orientation] integerValue] != RightColor) {
-                        isHome = NO;
-                    }
-                    break;
-                case Front:
-                    if ([[colorOrientationMapping objectForKey:orientation] integerValue] != FrontColor) {
-                        isHome = NO;
-                    }
-                    break;
-                case Back:
-                    if ([[colorOrientationMapping objectForKey:orientation] integerValue] != BackColor) {
-                        isHome = NO;
-                    }
-                    break;
-                case WrongOrientation:
-                    isHome = NO;
-                    break;
-            }
-            if (!isHome) {
-                break;
-            }
-        }
-        return isHome;
-    }
+    return [self.workingMemory.magicCube isCubieAtHomeWithIdentity:identity];
 }
 
 
@@ -119,18 +65,18 @@
     NSAutoreleasePool *loopPool = [[NSAutoreleasePool alloc] init];
     
     self.patterns = [NSDictionary dictionaryWithDictionary:
-                     [[MCKnowledgeBase getSharedKnowledgeBase] getPatternsWithPreState:self.magicCubeState
+                     [[MCKnowledgeBase getSharedKnowledgeBase] getPatternsWithPreState:_workingMemory.magicCubeState
                                                                                inTable:DB_PATTERN_TABLE_NAME]];
     self.rules = [NSDictionary dictionaryWithDictionary:
                   [[MCKnowledgeBase getSharedKnowledgeBase] getRulesOfMethod:ETFF
-                                                                   withState:self.magicCubeState
+                                                                   withState:_workingMemory.magicCubeState
                                                                      inTable:DB_RULE_TABLE_NAME]];
     self.specialPatterns = [NSDictionary dictionaryWithDictionary:
-                            [[MCKnowledgeBase getSharedKnowledgeBase] getPatternsWithPreState:self.magicCubeState
+                            [[MCKnowledgeBase getSharedKnowledgeBase] getPatternsWithPreState:_workingMemory.magicCubeState
                                                                                       inTable:DB_SPECIAL_PATTERN_TABLE_NAME]];
     self.specialRules = [NSDictionary dictionaryWithDictionary:
                          [[MCKnowledgeBase getSharedKnowledgeBase] getRulesOfMethod:ETFF
-                                                                          withState:self.magicCubeState
+                                                                          withState:_workingMemory.magicCubeState
                                                                             inTable:DB_SPECIAL_RULE_TABLE_NAME]];
     [loopPool release];
 }
@@ -454,21 +400,21 @@
         [self.workingMemory unlockAllCubies];
     }
     else{
-        goStr = self.magicCubeState;
+        goStr = _workingMemory.magicCubeState;
     }
     //check state
     MCState *tmpState = [states objectForKey:goStr];
     for (; tmpState != nil && [self treeNodesApply:[tmpState root] withDeep:0]; tmpState = [states objectForKey:goStr]) {
         goStr = tmpState.afterState;
     }
-    if ([goStr compare:self.magicCubeState] != NSOrderedSame) {
-        self.magicCubeState = goStr;
+    if ([goStr compare:_workingMemory.magicCubeState] != NSOrderedSame) {
+        _workingMemory.magicCubeState = goStr;
         [self.workingMemory unlockCubieAtIndex:0];
         [self.workingMemory unlockCubiesInRange:NSMakeRange(4, CubieCouldBeLockMaxNum-4)];
         [self reloadRulesAccordingToCurrentStateOfRubiksCube];
     }
     
-    return self.magicCubeState;
+    return _workingMemory.magicCubeState;
 }
 
 
@@ -482,7 +428,7 @@
 - (MCRule *)reasoning{
     [self checkStateFromInit:NO];
     
-    NSLog(@"State:%@", self.magicCubeState);
+    NSLog(@"State:%@", _workingMemory.magicCubeState);
     
     // Check special rules firstly.
     for (NSString *key in [self.specialRules allKeys])
@@ -508,5 +454,9 @@
     return nil;
 }
 
+
+- (void)closeReasoning{
+    [_workingMemory clearExceptMagicCubeData];
+}
 
 @end
