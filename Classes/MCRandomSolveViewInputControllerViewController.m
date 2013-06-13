@@ -11,10 +11,11 @@
 #import "CoordinatingController.h"
 #import "Global.h"
 #import "MCRandomSolveSceneController.h"
+#import "MCCubieColorConstraintUtil.h"
 
 @interface MCRandomSolveViewInputControllerViewController ()
 
-- (void)checkConstraintAndReloadMenu;
+- (void)checkConstraintAtCubie:(NSObject<MCCubieDelegate> *)cubie inOrientation:(FaceOrientationType)orientation;
 
 @end
 
@@ -145,6 +146,12 @@
                 index == BColor || index == LColor || index == RColor) {
                 isSelectOneFace = NO;
             }
+            else{
+                FaceOrientationType selectedFaceOrientation = (FaceOrientationType)[secencontroller selected_face_index];
+                [self checkConstraintAtCubie:[[[MCRandomSolveSceneController sharedRandomSolveSceneController] magicCube] cubieWithColorCombination:(ColorCombinationType)index]
+                               inOrientation:selectedFaceOrientation];
+                
+            }
         }
         
     }
@@ -196,10 +203,15 @@
 }
 
 
-- (void)checkConstraintAndReloadMenu{
+- (void)checkConstraintAtCubie:(NSObject<MCCubieDelegate> *)cubie inOrientation:(FaceOrientationType)orientation{
+    NSMutableArray *avaiableColors = [MCCubieColorConstraintUtil avaiableColorsOfCubie:cubie
+                                                                         inOrientation:orientation];
+    
     NSMutableArray *loadMenuItems = [NSMutableArray arrayWithCapacity:6];
     
-    
+    for (NSNumber *color in avaiableColors) {
+        [loadMenuItems addObject:[_menuItems objectAtIndex:[color integerValue]]];
+    }
     
     [_selectMenu setMenusArray:loadMenuItems];
 }

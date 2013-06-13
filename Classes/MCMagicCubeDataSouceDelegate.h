@@ -29,4 +29,10 @@
 //you can get the real color corresponding to face color type.
 - (NSString *)getRealColor:(FaceColorType)color;
 
+
+- (BOOL)isCubieAtHomeWithIdentity:(ColorCombinationType)identity;
+
+
+- (BOOL)isFinished;
+
 @end

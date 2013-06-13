@@ -11,10 +11,11 @@
 
 @implementation MCWorkingMemory
 
-@synthesize magicCube;
-@synthesize applyQueue;
-@synthesize residualActions;
-@synthesize agendaPattern;
+@synthesize magicCube = _magicCube;
+@synthesize applyQueue = _applyQueue;
+@synthesize residualActions = _residualActions;
+@synthesize agendaPattern = _agendaPattern;
+@synthesize magicCubeState = _magicCubeState;
 
 + (MCWorkingMemory *)workingMemoryWithMagicCube:(NSObject<MCMagicCubeDelegate> *)mc{
     return [[[MCWorkingMemory alloc] initWorkingMemoryWithMagicCube:mc] autorelease];
@@ -35,10 +36,11 @@
 
 - (void)dealloc{
     [super dealloc];
-    [applyQueue release];
-    [magicCube release];
-    [residualActions release];
-    [agendaPattern release];
+    [_applyQueue release];
+    [_magicCube release];
+    [_residualActions release];
+    [_agendaPattern release];
+    [_magicCubeState release];
 }
 
 
@@ -78,6 +80,10 @@
 
 
 - (void)clearExceptMagicCubeData{
+    self.applyQueue = nil;
+    self.residualActions = nil;
+    self.agendaPattern = nil;
+    self.magicCubeState = UNKNOWN_STATE;
     [self unlockAllCubies];
 }
 
@@ -85,11 +91,12 @@
 // Once you set the magic cube object, all other data will be clear.
 - (void)setMagicCube:(NSObject<MCMagicCubeDelegate> *)mc{
     [mc retain];
-    [magicCube release];
-    magicCube = mc;
+    [_magicCube release];
+    _magicCube = mc;
     
     [self clearExceptMagicCubeData];
     
 }
+
 
 @end

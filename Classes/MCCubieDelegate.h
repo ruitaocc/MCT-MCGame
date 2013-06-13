@@ -40,6 +40,12 @@
 - (NSArray *)allFaceColors;
 
 
+// Return all face orientations.
+// The size of array is skinNum.
+// The Element is NSNumber of FaceOrientationType and it can be Up, Down...
+- (NSArray *)allOrientations;
+
+
 //Return state in the "format" orientation-facecolor
 //No reutrn 6 faces but skinNum faces.
 - (NSDictionary *)getCubieColorInOrientationsWithoutNoColor;

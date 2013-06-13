@@ -17,4 +17,7 @@
 //rotate with Singmaster Notation
 - (BOOL)rotateWithSingmasterNotation:(SingmasterNotation)notation;
 
+
+- (NSArray *)updateIndexAccordingToCubies;
+
 @end

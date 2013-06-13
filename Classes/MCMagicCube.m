@@ -12,9 +12,9 @@
 #define kSingleOrientationToMagicCubeFaceKeyFormat @"OrientationToFace%d"
 
 @implementation MCMagicCube{
-    MCCubie *magicCubies3D[3][3][3];
-    MCCubie *magicCubiesList[27];
-    FaceOrientationType orientationToMagicCubeFace[6];
+    MCCubie *_magicCubies3D[3][3][3];
+    MCCubie *_magicCubiesList[27];
+    FaceOrientationType _orientationToMagicCubeFace[6];
 }
 
 @synthesize faceColorKeyMappingToRealColor;
@@ -29,74 +29,8 @@
     return newMagicCube;
 }
 
-+ (MCMagicCube *)magicCubeWithCubiesData:(NSArray *)dataArray{
-    return [[[MCMagicCube alloc] initWithCubiesData:dataArray] autorelease];
-}
-
 + (MCMagicCube *)magicCubeOnlyWithCenterColor{
     return [[[MCMagicCube alloc] initOnlyWithenterColor] autorelease];
-}
-
-//Initiate the magic cube by appointed all face colors.
-//All face color is stored in 27 dictionaries contained in an array.
-//Every dictionary: key=FaceOrientationType and value=FaceColorType.
-//The dictionary of centre cubie whose identity is 9(coordinate[0, 0, 0]) has empty content.
-- (id)initWithCubiesData:(NSArray *)dataArray{
-    if (self = [super init]) {
-        for (int z = 0; z < 3; z++) {
-            for (int y = 0; y < 3; y++) {
-                for (int x = 0; x < 3; x++) {
-                    if (x != 1 || y != 1 || z != 1) {
-                        //Transfer coordinate to the identity of cubie
-                        NSInteger identity = x+y*3+z*9;
-                        
-                        //the coordinate of cubie
-                        struct Point3i coordinateValue = {.x = x-1, .y = y-1, .z = z-1};
-                        
-                        //Get the cubie's data dictionary
-                        NSDictionary *dataDict = [dataArray objectAtIndex:identity];
-                        
-                        //values of orientations
-                        NSArray *orderedOrientations = [dataDict allKeys];
-                        //values of face colors
-                        NSArray *orderedFaceColors = [dataDict allValues];
-                        
-                        //If this's the first time, allocate memory and key it
-                        BOOL isReatin = NO;
-                        if (magicCubies3D[x][y][z] == nil) {
-                            magicCubies3D[x][y][z] = [MCCubie alloc];
-                            isReatin = YES;
-                        }
-                        
-                        //redefine the cubie
-                        [magicCubies3D[x][y][z] redefinedWithCoordinate:coordinateValue orderedColors:orderedFaceColors orderedOrientations:orderedOrientations];
-                        
-                        magicCubiesList[identity] = magicCubies3D[x][y][z];
-                        if (isReatin) [magicCubiesList[identity] retain];
-                        
-                        //If the cubie is the centre cubie of face, get the info.
-                        //At the view point of the user, find which orientation of magic cube in specified orientation.
-                        if (z == 1 && x == 1) {
-                            if (y == 2) orientationToMagicCubeFace[Up] = (FaceOrientationType)[magicCubiesList[identity] faceColorInOrientation:Up];
-                            if (y == 0) orientationToMagicCubeFace[Down] = (FaceOrientationType)[magicCubiesList[identity] faceColorInOrientation:Down];
-                        }
-                        if (x == 1 && y == 1) {
-                            if (z == 2) orientationToMagicCubeFace[Front] = (FaceOrientationType)[magicCubiesList[identity] faceColorInOrientation:Front];
-                            if (z == 0) orientationToMagicCubeFace[Back] = (FaceOrientationType)[magicCubiesList[identity] faceColorInOrientation:Back];
-                        }
-                        if (y == 1 && z == 1) {
-                            if (x == 0) orientationToMagicCubeFace[Left] = (FaceOrientationType)[magicCubiesList[identity] faceColorInOrientation:Left];
-                            if (x == 2) orientationToMagicCubeFace[Right] = (FaceOrientationType)[magicCubiesList[identity] faceColorInOrientation:Right];
-                        }
-                    }
-                }
-            }
-        }
-        
-        //Load colors mapping dictionary
-        [self reloadColorMappingDictionary];
-    }
-    return self;
 }
 
 
@@ -108,20 +42,20 @@
                     if (x != 1 || y != 1 || z != 1) {
                         struct Point3i coordinateValue = {.x = x-1, .y = y-1, .z = z-1};
                         BOOL isReatin = NO;
-                        if (magicCubies3D[x][y][z] == nil) {
-                            magicCubies3D[x][y][z] = [MCCubie alloc];
+                        if (_magicCubies3D[x][y][z] == nil) {
+                            _magicCubies3D[x][y][z] = [MCCubie alloc];
                             isReatin = YES;
                         }
-                        [magicCubies3D[x][y][z] initOnlyCenterColor:coordinateValue];
-                        magicCubiesList[x+y*3+z*9] = magicCubies3D[x][y][z];
-                        if (isReatin) [magicCubiesList[x+y*3+z*9] retain];
+                        [_magicCubies3D[x][y][z] initOnlyCenterColor:coordinateValue];
+                        _magicCubiesList[x+y*3+z*9] = _magicCubies3D[x][y][z];
+                        if (isReatin) [_magicCubiesList[x+y*3+z*9] retain];
                     }
                 }
             }
         }
         for (int i  = 0; i < 6; i++) {
             //At the begining, the orientation and the magic cube face orientation is same
-            orientationToMagicCubeFace[i] = (FaceOrientationType)i;
+            _orientationToMagicCubeFace[i] = (FaceOrientationType)i;
         }
         
         //Load colors mapping dictionary
@@ -140,20 +74,20 @@
                     if (x != 1 || y != 1 || z != 1) {
                         struct Point3i coordinateValue = {.x = x-1, .y = y-1, .z = z-1};
                         BOOL isReatin = NO;
-                        if (magicCubies3D[x][y][z] == nil) {
-                            magicCubies3D[x][y][z] = [MCCubie alloc];
+                        if (_magicCubies3D[x][y][z] == nil) {
+                            _magicCubies3D[x][y][z] = [MCCubie alloc];
                             isReatin = YES;
                         }
-                        [magicCubies3D[x][y][z] initRightCubeWithCoordinate:coordinateValue];
-                        magicCubiesList[x+y*3+z*9] = magicCubies3D[x][y][z];
-                        if (isReatin) [magicCubiesList[x+y*3+z*9] retain];
+                        [_magicCubies3D[x][y][z] initRightCubeWithCoordinate:coordinateValue];
+                        _magicCubiesList[x+y*3+z*9] = _magicCubies3D[x][y][z];
+                        if (isReatin) [_magicCubiesList[x+y*3+z*9] retain];
                     }
                 }
             }
         }
         for (int i  = 0; i < 6; i++) {
             //At the begining, the orientation and the magic cube face orientation is same
-            orientationToMagicCubeFace[i] = (FaceOrientationType)i;
+            _orientationToMagicCubeFace[i] = (FaceOrientationType)i;
         }
         
         //Load colors mapping dictionary
@@ -165,8 +99,8 @@
 - (void)dealloc{
     for (int i = 0; i < 27; i++) {
         //release twice
-        [magicCubiesList[i] release];
-        [magicCubiesList[i] release];
+        [_magicCubiesList[i] release];
+        [_magicCubiesList[i] release];
     }
     [super dealloc];
 }
@@ -181,8 +115,8 @@
             {
                 for(int z = 0; z < 3; ++z)
                 {
-                    [magicCubies3D[layer][y][z] shiftOnAxis:axis inDirection:direction];
-                    layerCubes[z+y*3] = magicCubies3D[layer][y][z];
+                    [_magicCubies3D[layer][y][z] shiftOnAxis:axis inDirection:direction];
+                    layerCubes[z+y*3] = _magicCubies3D[layer][y][z];
                 }
             }
             break;
@@ -192,8 +126,8 @@
             {
                 for(int z = 0; z < 3; ++z)
                 {
-                    [magicCubies3D[x][layer][z] shiftOnAxis:axis inDirection:direction];
-                    layerCubes[z+x*3] = magicCubies3D[x][layer][z];
+                    [_magicCubies3D[x][layer][z] shiftOnAxis:axis inDirection:direction];
+                    layerCubes[z+x*3] = _magicCubies3D[x][layer][z];
                 }
             }
             break;
@@ -203,8 +137,8 @@
             {
                 for(int y = 0; y < 3; ++y)
                 {
-                    [magicCubies3D[x][y][layer] shiftOnAxis:axis inDirection:direction];
-                    layerCubes[y+x*3] = magicCubies3D[x][y][layer];
+                    [_magicCubies3D[x][y][layer] shiftOnAxis:axis inDirection:direction];
+                    layerCubes[y+x*3] = _magicCubies3D[x][y][layer];
                 }
             }
             break;
@@ -216,7 +150,7 @@
     for(int index = 0; index < 9; ++index)
     {
         struct Point3i value = layerCubes[index].coordinateValue;
-        magicCubies3D[value.x+1][value.y+1][value.z+1] = layerCubes[index];
+        _magicCubies3D[value.x+1][value.y+1][value.z+1] = layerCubes[index];
     }
     
     //change magic cube face orientation
@@ -224,48 +158,48 @@
         switch (axis) {
             case X:
                 if (direction == CW) {
-                    FaceOrientationType tmp = orientationToMagicCubeFace[Front];
-                    orientationToMagicCubeFace[Front] = orientationToMagicCubeFace[Down];
-                    orientationToMagicCubeFace[Down] = orientationToMagicCubeFace[Back];
-                    orientationToMagicCubeFace[Back] = orientationToMagicCubeFace[Up];
-                    orientationToMagicCubeFace[Up] = tmp;
+                    FaceOrientationType tmp = _orientationToMagicCubeFace[Front];
+                    _orientationToMagicCubeFace[Front] = _orientationToMagicCubeFace[Down];
+                    _orientationToMagicCubeFace[Down] = _orientationToMagicCubeFace[Back];
+                    _orientationToMagicCubeFace[Back] = _orientationToMagicCubeFace[Up];
+                    _orientationToMagicCubeFace[Up] = tmp;
                 }
                 else{
-                    FaceOrientationType tmp = orientationToMagicCubeFace[Front];
-                    orientationToMagicCubeFace[Front] = orientationToMagicCubeFace[Up];
-                    orientationToMagicCubeFace[Up] = orientationToMagicCubeFace[Back];
-                    orientationToMagicCubeFace[Back] = orientationToMagicCubeFace[Down];
-                    orientationToMagicCubeFace[Down] = tmp;
+                    FaceOrientationType tmp = _orientationToMagicCubeFace[Front];
+                    _orientationToMagicCubeFace[Front] = _orientationToMagicCubeFace[Up];
+                    _orientationToMagicCubeFace[Up] = _orientationToMagicCubeFace[Back];
+                    _orientationToMagicCubeFace[Back] = _orientationToMagicCubeFace[Down];
+                    _orientationToMagicCubeFace[Down] = tmp;
                 }
                 break;
             case Y:
                 if (direction == CW) {
-                    FaceOrientationType tmp = orientationToMagicCubeFace[Front];
-                    orientationToMagicCubeFace[Front] = orientationToMagicCubeFace[Right];
-                    orientationToMagicCubeFace[Right] = orientationToMagicCubeFace[Back];
-                    orientationToMagicCubeFace[Back] = orientationToMagicCubeFace[Left];
-                    orientationToMagicCubeFace[Left] = tmp;
+                    FaceOrientationType tmp = _orientationToMagicCubeFace[Front];
+                    _orientationToMagicCubeFace[Front] = _orientationToMagicCubeFace[Right];
+                    _orientationToMagicCubeFace[Right] = _orientationToMagicCubeFace[Back];
+                    _orientationToMagicCubeFace[Back] = _orientationToMagicCubeFace[Left];
+                    _orientationToMagicCubeFace[Left] = tmp;
                 } else {
-                    FaceOrientationType tmp = orientationToMagicCubeFace[Front];
-                    orientationToMagicCubeFace[Front] = orientationToMagicCubeFace[Left];
-                    orientationToMagicCubeFace[Left] = orientationToMagicCubeFace[Back];
-                    orientationToMagicCubeFace[Back] = orientationToMagicCubeFace[Right];
-                    orientationToMagicCubeFace[Right] = tmp;
+                    FaceOrientationType tmp = _orientationToMagicCubeFace[Front];
+                    _orientationToMagicCubeFace[Front] = _orientationToMagicCubeFace[Left];
+                    _orientationToMagicCubeFace[Left] = _orientationToMagicCubeFace[Back];
+                    _orientationToMagicCubeFace[Back] = _orientationToMagicCubeFace[Right];
+                    _orientationToMagicCubeFace[Right] = tmp;
                 }
                 break;
             case Z:
                 if (direction == CW) {
-                    FaceOrientationType tmp = orientationToMagicCubeFace[Up];
-                    orientationToMagicCubeFace[Up] = orientationToMagicCubeFace[Left];
-                    orientationToMagicCubeFace[Left] = orientationToMagicCubeFace[Down];
-                    orientationToMagicCubeFace[Down] = orientationToMagicCubeFace[Right];
-                    orientationToMagicCubeFace[Right] = tmp;
+                    FaceOrientationType tmp = _orientationToMagicCubeFace[Up];
+                    _orientationToMagicCubeFace[Up] = _orientationToMagicCubeFace[Left];
+                    _orientationToMagicCubeFace[Left] = _orientationToMagicCubeFace[Down];
+                    _orientationToMagicCubeFace[Down] = _orientationToMagicCubeFace[Right];
+                    _orientationToMagicCubeFace[Right] = tmp;
                 } else {
-                    FaceOrientationType tmp = orientationToMagicCubeFace[Up];
-                    orientationToMagicCubeFace[Up] = orientationToMagicCubeFace[Right];
-                    orientationToMagicCubeFace[Right] = orientationToMagicCubeFace[Down];
-                    orientationToMagicCubeFace[Down] = orientationToMagicCubeFace[Left];
-                    orientationToMagicCubeFace[Left] = tmp;
+                    FaceOrientationType tmp = _orientationToMagicCubeFace[Up];
+                    _orientationToMagicCubeFace[Up] = _orientationToMagicCubeFace[Right];
+                    _orientationToMagicCubeFace[Right] = _orientationToMagicCubeFace[Down];
+                    _orientationToMagicCubeFace[Down] = _orientationToMagicCubeFace[Left];
+                    _orientationToMagicCubeFace[Left] = tmp;
                 }
                 break;
         }
@@ -511,23 +445,23 @@
 }
 
 - (struct Point3i)coordinateValueOfCubieWithColorCombination:(ColorCombinationType)combination{
-    return magicCubiesList[combination].coordinateValue;
+    return _magicCubiesList[combination].coordinateValue;
 }   //get coordinate of cube having the color combination
 
 - (NSObject<MCCubieDelegate> *)cubieWithColorCombination:(ColorCombinationType)combination{
-    return (combination >= 0 && combination < ColorCombinationTypeBound)? magicCubiesList[combination] : nil;
+    return (combination >= 0 && combination < ColorCombinationTypeBound)? _magicCubiesList[combination] : nil;
 }
 
 - (NSObject<MCCubieDelegate> *)cubieAtCoordinateX:(NSInteger)x Y:(NSInteger)y Z:(NSInteger)z{
-    return magicCubies3D[x+1][y+1][z+1];
+    return _magicCubies3D[x+1][y+1][z+1];
 }
 
 - (NSObject<MCCubieDelegate> *)cubieAtCoordinatePoint3i:(struct Point3i)point{
-    return magicCubies3D[point.x+1][point.y+1][point.z+1];
+    return _magicCubies3D[point.x+1][point.y+1][point.z+1];
 }
 
 - (FaceOrientationType)centerMagicCubeFaceInOrientation:(FaceOrientationType)orientation{
-    return orientationToMagicCubeFace[orientation];
+    return _orientationToMagicCubeFace[orientation];
 }
 
 //encode the object
@@ -536,13 +470,13 @@
         for (int y = 0; y < 3; y++) {
             for (int x = 0; x < 3; x++) {
                 if (x != 1 || y != 1 || z != 1) {
-                    [aCoder encodeObject:magicCubies3D[x][y][z] forKey:[NSString stringWithFormat:kSingleCubieKeyFormat, x+3*y+9*z]];
+                    [aCoder encodeObject:_magicCubies3D[x][y][z] forKey:[NSString stringWithFormat:kSingleCubieKeyFormat, x+3*y+9*z]];
                 }
             }
         }
     }
     for (int i  = 0; i < 6; i++) {
-        [aCoder encodeInteger:orientationToMagicCubeFace[i] forKey:[NSString stringWithFormat:kSingleOrientationToMagicCubeFaceKeyFormat, i]];
+        [aCoder encodeInteger:_orientationToMagicCubeFace[i] forKey:[NSString stringWithFormat:kSingleOrientationToMagicCubeFaceKeyFormat, i]];
     }
 }
 
@@ -554,18 +488,18 @@
                 for (int x = 0; x < 3; x++) {
                     if (x != 1 || y != 1 || z != 1) {
                         //get the cubie object
-                        magicCubies3D[x][y][z] = [aDecoder decodeObjectForKey:[NSString stringWithFormat:kSingleCubieKeyFormat, x+3*y+9*z]];
-                        [magicCubies3D[x][y][z] retain];
+                        _magicCubies3D[x][y][z] = [aDecoder decodeObjectForKey:[NSString stringWithFormat:kSingleCubieKeyFormat, x+3*y+9*z]];
+                        [_magicCubies3D[x][y][z] retain];
                         //set the right pointer
-                        NSInteger listIndex = magicCubies3D[x][y][z].identity;
-                        magicCubiesList[listIndex] = magicCubies3D[x][y][z];
-                        [magicCubiesList[listIndex] retain];
+                        NSInteger listIndex = _magicCubies3D[x][y][z].identity;
+                        _magicCubiesList[listIndex] = _magicCubies3D[x][y][z];
+                        [_magicCubiesList[listIndex] retain];
                     }
                 }
             }
         }
         for (int i  = 0; i < 6; i++) {
-            orientationToMagicCubeFace[i] = (FaceOrientationType)[aDecoder decodeIntegerForKey:[NSString stringWithFormat:kSingleOrientationToMagicCubeFaceKeyFormat, i]];
+            _orientationToMagicCubeFace[i] = (FaceOrientationType)[aDecoder decodeIntegerForKey:[NSString stringWithFormat:kSingleOrientationToMagicCubeFaceKeyFormat, i]];
         }
     }
     return self;
@@ -578,7 +512,7 @@
         for (int y = 0; y < 3; y++) {
             for (int x = 0; x < 3; x++) {
                 if (x != 1 || y != 1 || z != 1) {
-                    [states addObject:[magicCubies3D[x][y][z] getCubieOrientationOfAxis]];
+                    [states addObject:[_magicCubies3D[x][y][z] getCubieOrientationOfAxis]];
                 }
                 else{
                     [states addObject:[NSDictionary dictionary]];
@@ -595,7 +529,7 @@
         for (int y = 0; y < 3; y++) {
             for (int x = 0; x < 3; x++) {
                 if (x != 1 || y != 1 || z != 1) {
-                    [states addObject:[magicCubies3D[x][y][z] getCubieColorInOrientations]];
+                    [states addObject:[_magicCubies3D[x][y][z] getCubieColorInOrientations]];
                 }
                 else{
                     [states addObject:[NSDictionary dictionary]];
@@ -635,5 +569,114 @@
             return @"";
     }
 }
+
+
+- (BOOL)isCubieAtHomeWithIdentity:(ColorCombinationType)identity{
+    NSObject<MCCubieDelegate> *targetCubie = [self cubieWithColorCombination:identity];
+    BOOL isHome = YES;
+    NSDictionary *colorOrientationMapping = [targetCubie getCubieColorInOrientationsWithoutNoColor];
+    NSArray *orientations = [colorOrientationMapping allKeys];
+    for (NSNumber *orientation in orientations) {
+        switch ([self centerMagicCubeFaceInOrientation:(FaceOrientationType)[orientation integerValue]]) {
+            case Up:
+                if ([[colorOrientationMapping objectForKey:orientation] integerValue] != UpColor) {
+                    isHome = NO;
+                }
+                break;
+            case Down:
+                if ([[colorOrientationMapping objectForKey:orientation] integerValue] != DownColor) {
+                    isHome = NO;
+                }
+                break;
+            case Left:
+                if ([[colorOrientationMapping objectForKey:orientation] integerValue] != LeftColor) {
+                    isHome = NO;
+                }
+                break;
+            case Right:
+                if ([[colorOrientationMapping objectForKey:orientation] integerValue] != RightColor) {
+                    isHome = NO;
+                }
+                break;
+            case Front:
+                if ([[colorOrientationMapping objectForKey:orientation] integerValue] != FrontColor) {
+                    isHome = NO;
+                }
+                break;
+            case Back:
+                if ([[colorOrientationMapping objectForKey:orientation] integerValue] != BackColor) {
+                    isHome = NO;
+                }
+                break;
+            case WrongOrientation:
+                isHome = NO;
+                break;
+        }
+        if (!isHome) {
+            break;
+        }
+    }
+    return isHome;
+}
+
+
+- (BOOL)isFinished{
+    for (int i = 0; i < 13; i++) {
+        if ([self isCubieAtHomeWithIdentity:(ColorCombinationType)i]) {
+            return NO;
+        }
+    }
+    for (int i = 14; i < 27; i++) {
+        if ([self isCubieAtHomeWithIdentity:(ColorCombinationType)i]) {
+            return NO;
+        }
+    }
+    
+    return YES;
+}
+
+
+// The center color must be stable. Otherwise, it will bring up some problems.
+- (NSArray *)updateIndexAccordingToCubies{
+    BOOL updateSuccess = YES;
+    
+    for (int i = 0; i < ColorCombinationTypeBound; i++) {
+        _magicCubiesList[i] = nil;
+    }
+    
+    for (int i = 0; i < ColorCombinationTypeBound; i++) {
+        int x = i % 3;
+        int y = i / 3 % 3;
+        int z = i / 9;
+        
+        if (x != 1 || y != 1 || z != 1) {
+            ColorCombinationType newIdentity = [_magicCubies3D[x][y][z] identity];
+            
+            // If there are two same cubies, error occures.
+            if (_magicCubiesList[i] != nil) {
+                updateSuccess = NO;
+                break;
+            }
+            
+            // Update list index.
+            _magicCubiesList[newIdentity] = _magicCubies3D[x][y][z];
+        }
+
+    }
+    
+    if (!updateSuccess) {
+        for (int z = 0; z < 3; z++) {
+            for (int y = 0; y < 3; y++) {
+                for (int x = 0; x < 3; x++) {
+                    _magicCubiesList[x + y * 3 + z * 9] = _magicCubies3D[x][y][z];
+                }
+            }
+        }
+    }
+    
+    
+    return [NSArray array];
+}
+
 
 @end

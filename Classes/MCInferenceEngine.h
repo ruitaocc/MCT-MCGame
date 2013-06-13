@@ -23,7 +23,6 @@
 @property (nonatomic, retain) NSDictionary *specialPatterns;
 @property (nonatomic, retain) NSDictionary *specialRules;
 @property (nonatomic, retain) NSDictionary *states;
-@property (nonatomic, retain) NSString *magicCubeState;
 
 
 + (MCInferenceEngine *)inferenceEngineWithWorkingMemory:(MCWorkingMemory *)wm;
@@ -53,5 +52,8 @@
 
 // Begin the inference and return appropriate result.
 - (MCRule *)reasoning;
+
+
+- (void)closeReasoning;
 
 @end

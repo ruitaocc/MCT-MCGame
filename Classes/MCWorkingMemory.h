@@ -25,6 +25,7 @@
 @property (nonatomic, retain) MCApplyQueue *applyQueue;
 @property (nonatomic, retain) NSMutableArray *residualActions;
 @property (nonatomic, retain) MCPattern *agendaPattern;
+@property (nonatomic, copy) NSString *magicCubeState;
 
 
 + (MCWorkingMemory *)workingMemoryWithMagicCube:(NSObject<MCMagicCubeDelegate> *)mc;

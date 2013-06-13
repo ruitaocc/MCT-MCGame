@@ -59,6 +59,10 @@ typedef enum _HelperStateMachine {
 //       ——the NSArray with several NSString objects
 - (NSDictionary *)applyRules;
 
+
+- (void)close;
+
+
 - (NSArray *)extraQueue;
 
 - (NSString *)state;

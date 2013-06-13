@@ -340,4 +340,23 @@ static CGPoint RotateCGPointAroundCenter(CGPoint point, CGPoint center, float an
     }
 }
 
+
+- (void)setMenusArray:(NSArray *)menusArray{
+    if (_menusArray == menusArray) {
+        return;
+    }
+    
+    [_menusArray release];
+    
+    _menusArray = [menusArray copy];
+    
+    // remove all subviews
+    NSArray *views = [self subviews];
+    for(UIView* view in views)
+    {
+        [view removeFromSuperview];
+    }
+}
+
+
 @end

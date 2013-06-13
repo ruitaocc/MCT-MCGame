@@ -45,13 +45,13 @@ typedef enum _FaceColorType {
 
 //define the orientation of face
 typedef enum _FaceOrientationType {
-    Up,
-    Down,
-    Front,
-    Back,
-    Left,
-    Right,
-    WrongOrientation
+    Up      = 0,
+    Down    = 1,
+    Front   = 2,
+    Back    = 3,
+    Left    = 4,
+    Right   = 5,
+    WrongOrientation    = 6
 } FaceOrientationType;
 
 //three types of cubies
