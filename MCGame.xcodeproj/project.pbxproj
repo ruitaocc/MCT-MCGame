@@ -144,6 +144,7 @@
 		A3EDD65E1769A1D8000C473B /* home@2X.png in Resources */ = {isa = PBXBuildFile; fileRef = A3EDD65C1769A1D8000C473B /* home@2X.png */; };
 		A3EDD6601769A68A000C473B /* background2.png in Resources */ = {isa = PBXBuildFile; fileRef = A3EDD65F1769A68A000C473B /* background2.png */; };
 		A3EDD6631769A6D2000C473B /* MCBackGroundTexMesh.m in Sources */ = {isa = PBXBuildFile; fileRef = A3EDD6621769A6D2000C473B /* MCBackGroundTexMesh.m */; };
+		A3EDD6681769DEC4000C473B /* MCCubieColorConstraintUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = A3EDD6671769DEC4000C473B /* MCCubieColorConstraintUtil.m */; };
 		A3F2ACB61616CE6700D622B8 /* MCMaterialController.m in Sources */ = {isa = PBXBuildFile; fileRef = A3F2ACB51616CE6700D622B8 /* MCMaterialController.m */; };
 		A3F2ACBA1616CF9900D622B8 /* MCParticleSystem.m in Sources */ = {isa = PBXBuildFile; fileRef = A3F2ACB91616CF9900D622B8 /* MCParticleSystem.m */; };
 		A3F2ACC01616D9BB00D622B8 /* MCParticle.m in Sources */ = {isa = PBXBuildFile; fileRef = A3F2ACBF1616D9BB00D622B8 /* MCParticle.m */; };
@@ -405,6 +406,8 @@
 		A3EDD65F1769A68A000C473B /* background2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = background2.png; sourceTree = "<group>"; };
 		A3EDD6611769A6D2000C473B /* MCBackGroundTexMesh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCBackGroundTexMesh.h; sourceTree = "<group>"; };
 		A3EDD6621769A6D2000C473B /* MCBackGroundTexMesh.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCBackGroundTexMesh.m; sourceTree = "<group>"; };
+		A3EDD6661769DEC4000C473B /* MCCubieColorConstraintUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCCubieColorConstraintUtil.h; sourceTree = "<group>"; };
+		A3EDD6671769DEC4000C473B /* MCCubieColorConstraintUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCCubieColorConstraintUtil.m; sourceTree = "<group>"; };
 		A3F2ACB41616CE6700D622B8 /* MCMaterialController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCMaterialController.h; sourceTree = "<group>"; };
 		A3F2ACB51616CE6700D622B8 /* MCMaterialController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCMaterialController.m; sourceTree = "<group>"; };
 		A3F2ACB81616CF9900D622B8 /* MCParticleSystem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCParticleSystem.h; path = ../MCParticleSystem.h; sourceTree = "<group>"; };
@@ -1152,6 +1155,8 @@
 		A3F8291516EF798C00AC5EAF /* Util */ = {
 			isa = PBXGroup;
 			children = (
+				A3EDD6661769DEC4000C473B /* MCCubieColorConstraintUtil.h */,
+				A3EDD6671769DEC4000C473B /* MCCubieColorConstraintUtil.m */,
 				A33032D01726B1E400BAD2DE /* MCTransformUtil.h */,
 				A33032D11726B1E500BAD2DE /* MCTransformUtil.m */,
 				E04E7E8517410E8E00403E92 /* MCCompositeRotationUtil.h */,
@@ -1446,6 +1451,7 @@
 				E0167DAD176373B400F420E8 /* MCWorkingMemory.m in Sources */,
 				A3DB413317646E5900C0D091 /* xyzCoordinateIndicator.m in Sources */,
 				A3EDD6631769A6D2000C473B /* MCBackGroundTexMesh.m in Sources */,
+				A3EDD6681769DEC4000C473B /* MCCubieColorConstraintUtil.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

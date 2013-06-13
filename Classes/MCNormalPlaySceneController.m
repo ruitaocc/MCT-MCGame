@@ -148,7 +148,7 @@
             actionqueue = [applyResult objectForKey:KEY_ROTATION_QUEUE];
             tipStrArray = [applyResult objectForKey:KEY_TIPS];
             lockArray = [applyResult objectForKey:KEY_LOCKED_CUBIES];
-            if([[playHelper state]isEqual:END_STATE]){//alert
+            if([playHelper isOver]){//alert
                 [((MCNormalPlayInputViewController*)[self inputController])showFinishView];
                 break;
             }
@@ -214,7 +214,7 @@
                 actionqueue = [applyResult objectForKey:KEY_ROTATION_QUEUE];
                 tipStrArray = [applyResult objectForKey:KEY_TIPS];
                 lockArray = [applyResult objectForKey:KEY_LOCKED_CUBIES];
-                if([[playHelper state]isEqual:END_STATE]){
+                if([playHelper isOver]){
                     //弹出结束对话框
                     [((MCNormalPlayInputViewController*)[self inputController])showFinishView];
                     break;
@@ -246,8 +246,7 @@
 };
 //检测是否结束
 -(void)checkIsOver{
-    return;
-    if ([[[self playHelper]state]isEqual: END_STATE]) {
+    if ([[self playHelper] isOver]) {
         [((MCNormalPlayInputViewController*)[self inputController])showFinishView];
         NSLog(@"END form Scene");
     } 

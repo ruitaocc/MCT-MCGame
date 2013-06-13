@@ -15,7 +15,7 @@
 @synthesize helperState = _helperState;
 @synthesize inferenceEngine = _inferenceEngine;
 @synthesize explanationSystem;
-@synthesize actionPerformer;
+@synthesize actionPerformer = _actionPerformer;
 
 
 
@@ -47,7 +47,7 @@
     [super dealloc];
     [_inferenceEngine release];
     [explanationSystem release];
-    [actionPerformer release];
+    [_actionPerformer release];
 }
 
 
@@ -178,6 +178,11 @@
 
 - (void)setMagicCube:(NSObject<MCMagicCubeDelegate > *)mc{
     self.inferenceEngine.workingMemory.magicCube = mc;
+}
+
+
+- (BOOL)isOver{
+    return [_actionPerformer.workingMemory.magicCube isFinished];
 }
 
 @end

@@ -622,12 +622,12 @@
 
 - (BOOL)isFinished{
     for (int i = 0; i < 13; i++) {
-        if ([self isCubieAtHomeWithIdentity:(ColorCombinationType)i]) {
+        if (![self isCubieAtHomeWithIdentity:(ColorCombinationType)i]) {
             return NO;
         }
     }
     for (int i = 14; i < 27; i++) {
-        if ([self isCubieAtHomeWithIdentity:(ColorCombinationType)i]) {
+        if (![self isCubieAtHomeWithIdentity:(ColorCombinationType)i]) {
             return NO;
         }
     }

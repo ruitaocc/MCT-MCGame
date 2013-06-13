@@ -205,6 +205,7 @@
     }else{
         [self.actionQueue removeAllActions];
         [[c tipsLabel]setText:@""];
+        [[c playHelper] close];
     }
 };
 -(void)tipsBtnDown{};

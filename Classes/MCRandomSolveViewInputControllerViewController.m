@@ -135,9 +135,9 @@
         _lastestPoint = [touch locationInView:self.view];
         //判断是否拾取到
         MCRandomSolveSceneController * secencontroller = [MCRandomSolveSceneController sharedRandomSolveSceneController];
-        vec2 lastpoint = vec2(_lastestPoint.x,_lastestPoint.y);
+        vec2 lastpoint2 = vec2(_lastestPoint.x,_lastestPoint.y);
         
-        isSelectOneFace = [secencontroller isSelectOneFace:lastpoint];
+        isSelectOneFace = [secencontroller isSelectOneFace:lastpoint2];
         
         if (isSelectOneFace) {
             //选择的小块0-26

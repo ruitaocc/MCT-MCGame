@@ -65,7 +65,7 @@ typedef enum _HelperStateMachine {
 
 - (NSArray *)extraQueue;
 
-- (NSString *)state;
+- (BOOL)isOver;
 
 - (void)setMagicCube:(NSObject<MCMagicCubeDelegate > *)mc;
 
