@@ -141,16 +141,20 @@
         
         if (isSelectOneFace) {
             //选择的小块0-26
-            int index = [secencontroller selected_index];
+            ColorCombinationType index = (ColorCombinationType)[secencontroller selected_index];
             if (index == UColor || index == DColor || index == FColor ||
                 index == BColor || index == LColor || index == RColor) {
                 isSelectOneFace = NO;
             }
             else{
                 FaceOrientationType selectedFaceOrientation = (FaceOrientationType)[secencontroller selected_face_index];
-                [self checkConstraintAtCubie:[[[MCRandomSolveSceneController sharedRandomSolveSceneController] magicCube] cubieWithColorCombination:(ColorCombinationType)index]
-                               inOrientation:selectedFaceOrientation];
-                
+                NSObject<MCCubieDelegate> *targetCubie = [[[MCRandomSolveSceneController sharedRandomSolveSceneController] magicCube] cubieWithColorCombination:index];
+                if ([targetCubie isFaceColor:NoColor inOrientation:selectedFaceOrientation]) {
+                    [self checkConstraintAtCubie:targetCubie inOrientation:selectedFaceOrientation];
+                }
+                else{
+                    [_selectMenu setMenusArray:_menuItems];
+                }
             }
         }
         

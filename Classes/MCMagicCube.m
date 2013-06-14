@@ -675,7 +675,7 @@
     }
     
     
-    return [NSArray array];
+    return nil;
 }
 
 
