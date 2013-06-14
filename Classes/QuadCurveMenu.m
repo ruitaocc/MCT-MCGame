@@ -136,7 +136,7 @@ static CGPoint RotateCGPointAroundCenter(CGPoint point, CGPoint center, float an
         CGPoint nearPoint = CGPointMake(startPoint.x + nearRadius * sinf(i * menuWholeAngle / count), startPoint.y - nearRadius * cosf(i * menuWholeAngle / count));
         item.nearPoint = RotateCGPointAroundCenter(nearPoint, startPoint, rotateAngle);
         CGPoint farPoint = CGPointMake(startPoint.x + farRadius * sinf(i * menuWholeAngle / count), startPoint.y - farRadius * cosf(i * menuWholeAngle / count));
-        item.farPoint = RotateCGPointAroundCenter(farPoint, startPoint, rotateAngle);  
+        item.farPoint = RotateCGPointAroundCenter(farPoint, startPoint, rotateAngle);
         item.center = item.startPoint;
         item.delegate = self;
         [item setEnabled:YES];
@@ -144,58 +144,52 @@ static CGPoint RotateCGPointAroundCenter(CGPoint point, CGPoint center, float an
     }
 }
 
-- (BOOL)isExpanding{
-    return _expanding;
-}
 
 - (void)setExpanding:(BOOL)expanding{
 	
-	if (!_isProtection) {
+	if (!_isProtection && !_timer) {
         if (expanding) {
             [self _setMenu];
         }
         
-        _expanding = expanding;
         
         // expand or close animation
-        if (!_timer)
-        {
-            _flag = self.isExpanding ? 0 : ([_menusArray count] - 1);
-            SEL selector = self.isExpanding ? @selector(_expand) : @selector(_close);
+        _flag = expanding ? 0 : ([_menusArray count] - 1);
+        SEL selector = expanding ? @selector(_expand) : @selector(_close);
+        
+        // Adding timer to runloop to make sure UI event won't block the timer from firing
+        _timer = [[NSTimer timerWithTimeInterval:timeOffset target:self selector:selector userInfo:nil repeats:YES] retain];
+        [[NSRunLoop currentRunLoop] addTimer:_timer forMode:NSRunLoopCommonModes];
+        
+        _isProtection = YES;
+        
+        
+        
+        if (!expanding) {
+            // Animation protection time
+            self.animationProtectionTimer = [NSTimer timerWithTimeInterval:(K_QUADCURVE_MENU_DEFAULT_CLOSE_ANIM_LAST_TIME + timeOffset * [_menusArray count])
+                                                                    target:self
+                                                                  selector:@selector(stopProtection)
+                                                                  userInfo:nil
+                                                                   repeats:NO];
+            [[NSRunLoop currentRunLoop] addTimer:_animationProtectionTimer forMode:NSRunLoopCommonModes];
             
-            // Adding timer to runloop to make sure UI event won't block the timer from firing
-            _timer = [[NSTimer timerWithTimeInterval:timeOffset target:self selector:selector userInfo:nil repeats:YES] retain];
-            [[NSRunLoop currentRunLoop] addTimer:_timer forMode:NSRunLoopCommonModes];
-            
-            _isProtection = YES;
-            
-            
-            
-            if (!expanding) {
-                // Animation protection time
-                self.animationProtectionTimer = [NSTimer timerWithTimeInterval:(K_QUADCURVE_MENU_DEFAULT_CLOSE_ANIM_LAST_TIME + timeOffset * [_menusArray count])
-                                                                        target:self
-                                                                      selector:@selector(stopProtection)
-                                                                      userInfo:nil
-                                                                       repeats:NO];
-                [[NSRunLoop currentRunLoop] addTimer:_animationProtectionTimer forMode:NSRunLoopCommonModes];
-                
-                self.closeTimer = [NSTimer timerWithTimeInterval:(K_QUADCURVE_MENU_DEFAULT_CLOSE_ANIM_LAST_TIME + timeOffset * ([_menusArray count] - 1))
-                                                          target:self
-                                                        selector:@selector(removeFromSuperview)
-                                                        userInfo:nil
-                                                         repeats:NO];
-                [[NSRunLoop currentRunLoop] addTimer:_closeTimer forMode:NSRunLoopCommonModes];
-            }
-            else{
-                // Animation protection time
-                self.animationProtectionTimer = [NSTimer timerWithTimeInterval:(K_QUADCURVE_MENU_DEFAULT_OPEN_ANIM_LAST_TIME + timeOffset * [_menusArray count])
-                                                                        target:self
-                                                                      selector:@selector(stopProtection)
-                                                                      userInfo:nil
-                                                                       repeats:NO];
-                [[NSRunLoop currentRunLoop] addTimer:_animationProtectionTimer forMode:NSRunLoopCommonModes];
-            }
+            self.closeTimer = [NSTimer timerWithTimeInterval:(K_QUADCURVE_MENU_DEFAULT_CLOSE_ANIM_LAST_TIME + timeOffset * ([_menusArray count] - 1))
+                                                      target:self
+                                                    selector:@selector(didClosed)
+                                                    userInfo:nil
+                                                     repeats:NO];
+            [[NSRunLoop currentRunLoop] addTimer:_closeTimer forMode:NSRunLoopCommonModes];
+        }
+        else{
+            // Animation protection time
+            self.animationProtectionTimer = [NSTimer timerWithTimeInterval:(K_QUADCURVE_MENU_DEFAULT_OPEN_ANIM_LAST_TIME + timeOffset * [_menusArray count])
+                                                                    target:self
+                                                                  selector:@selector(stopProtection)
+                                                                  userInfo:nil
+                                                                   repeats:NO];
+            [[NSRunLoop currentRunLoop] addTimer:_animationProtectionTimer forMode:NSRunLoopCommonModes];
+            _expanding = YES;
         }
     }
 }
@@ -290,7 +284,7 @@ static CGPoint RotateCGPointAroundCenter(CGPoint point, CGPoint center, float an
 }
 
 - (void)didClosed{
-    [super removeFromSuperview];
+    [self removeFromSuperview];
     _expanding = NO;
 }
 
