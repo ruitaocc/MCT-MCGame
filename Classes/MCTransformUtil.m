@@ -11,7 +11,7 @@
 
 @implementation MCTransformUtil
 
-+ (FaceOrientationType)getContraryOrientation:(FaceOrientationType)orientation{
++ (FaceOrientationType)getContraryOrientation:(FaceOrientationType)orientation {
     FaceOrientationType result;
     switch (orientation) {
         case Up:
@@ -38,7 +38,7 @@
     return result;
 }
 
-+ (NSString *)getRotationTagFromSingmasterNotation:(SingmasterNotation)notation{
++ (NSString *)getRotationTagFromSingmasterNotation:(SingmasterNotation)notation {
     NSString *names[54] = {
         @"frontCW",     @"frontCCW",    @"front2CW",
         @"backCW",      @"backCCW",     @"back2CW",
@@ -62,7 +62,7 @@
     return names[notation];
 }
 
-+ (SingmasterNotation)getSingmasterNotationFromAxis:(AxisType)axis layer:(int)layer direction:(LayerRotationDirectionType)direction{
++ (SingmasterNotation)getSingmasterNotationFromAxis:(AxisType)axis layer:(int)layer direction:(LayerRotationDirectionType)direction {
     SingmasterNotation notation = NoneNotation;
     switch (axis) {
         case X:
@@ -178,7 +178,7 @@
     return notation;
 }
 
-+ (SingmasterNotation)getContrarySingmasterNotation:(SingmasterNotation)notation{
++ (SingmasterNotation)getContrarySingmasterNotation:(SingmasterNotation)notation {
     if (notation == NoneNotation) {
         return NoneNotation;
     }
@@ -201,7 +201,7 @@
     return result;
 }
 
-+ (SingmasterNotation)getPathToMakeCenterCubieAtPosition:(struct Point3i)coordinate inOrientation:(FaceOrientationType)orientation{
++ (SingmasterNotation)getPathToMakeCenterCubieAtPosition:(struct Point3i)coordinate inOrientation:(FaceOrientationType)orientation {
     SingmasterNotation result = NoneNotation;
     switch (orientation) {
         case Up:
@@ -390,6 +390,450 @@
     }
     return result;
 }
+
+
++ (struct RotateNotationType)getROtateNotationTypeWithSingmasterNotation:(SingmasterNotation)notation {
+    struct RotateNotationType returnValue;
+    switch (notation) {
+        case F:
+        {
+            returnValue.axis = Z;
+            returnValue.layer = 2;
+            returnValue.direction = CW;
+            returnValue.type = Single;
+        }
+            break;
+        case Fi:
+        {
+            returnValue.axis = Z;
+            returnValue.layer = 2;
+            returnValue.direction = CCW;
+            returnValue.type = Single;
+        }
+            break;
+        case F2:
+        {
+            returnValue.axis = Z;
+            returnValue.layer = 2;
+            returnValue.direction = CW;
+            returnValue.type = SingleTwoTimes;
+        }
+            break;
+        case B:
+        {
+            returnValue.axis = Z;
+            returnValue.layer = 0;
+            returnValue.direction = CCW;
+            returnValue.type = Single;
+        }
+            break;
+        case Bi:
+        {
+            returnValue.axis = Z;
+            returnValue.layer = 0;
+            returnValue.direction = CW;
+            returnValue.type = Single;
+        }
+            break;
+        case B2:
+        {
+            returnValue.axis = Z;
+            returnValue.layer = 0;
+            returnValue.direction = CCW;
+            returnValue.type = SingleTwoTimes;
+        }
+            break;
+        case R:
+        {
+            returnValue.axis = X;
+            returnValue.layer = 2;
+            returnValue.direction = CW;
+            returnValue.type = Single;
+        }
+            break;
+        case Ri:
+        {
+            returnValue.axis = X;
+            returnValue.layer = 2;
+            returnValue.direction = CCW;
+            returnValue.type = Single;
+        }
+            break;
+        case R2:
+        {
+            returnValue.axis = X;
+            returnValue.layer = 2;
+            returnValue.direction = CW;
+            returnValue.type = SingleTwoTimes;
+        }
+            break;
+        case L:
+        {
+            returnValue.axis = X;
+            returnValue.layer = 0;
+            returnValue.direction = CCW;
+            returnValue.type = Single;
+        }
+            break;
+        case Li:
+        {
+            returnValue.axis = X;
+            returnValue.layer = 0;
+            returnValue.direction = CW;
+            returnValue.type = Single;
+        }
+            break;
+        case L2:
+        {
+            returnValue.axis = X;
+            returnValue.layer = 0;
+            returnValue.direction = CCW;
+            returnValue.type = SingleTwoTimes;
+        }
+            break;
+        case U:
+        {
+            returnValue.axis = Y;
+            returnValue.layer = 2;
+            returnValue.direction = CW;
+            returnValue.type = Single;
+        }
+            break;
+        case Ui:
+        {
+            returnValue.axis = Y;
+            returnValue.layer = 2;
+            returnValue.direction = CCW;
+            returnValue.type = Single;
+        }
+            break;
+        case U2:
+        {
+            returnValue.axis = Y;
+            returnValue.layer = 2;
+            returnValue.direction = CW;
+            returnValue.type = SingleTwoTimes;
+        }
+            break;
+        case D:
+        {
+            returnValue.axis = Y;
+            returnValue.layer = 0;
+            returnValue.direction = CCW;
+            returnValue.type = Single;
+        }
+            break;
+        case Di:
+        {
+            returnValue.axis = Y;
+            returnValue.layer = 0;
+            returnValue.direction = CW;
+            returnValue.type = Single;
+        }
+            break;
+        case D2:
+        {
+            returnValue.axis = Y;
+            returnValue.layer = 0;
+            returnValue.direction = CCW;
+            returnValue.type = SingleTwoTimes;
+        }
+            break;
+        case x:
+        {
+            returnValue.axis = X;
+            returnValue.layer = -1;
+            returnValue.direction = CW;
+            returnValue.type = Trible;
+        }
+            break;
+        case xi:
+        {
+            returnValue.axis = X;
+            returnValue.layer = -1;
+            returnValue.direction = CCW;
+            returnValue.type = Trible;
+        }
+            break;
+        case x2:
+        {
+            returnValue.axis = X;
+            returnValue.layer = -1;
+            returnValue.direction = CW;
+            returnValue.type = TribleTwoTimes;
+        }
+            break;
+        case y:
+        {
+            returnValue.axis = Y;
+            returnValue.layer = -1;
+            returnValue.direction = CW;
+            returnValue.type = Trible;
+        }
+            break;
+        case yi:
+        {
+            returnValue.axis = Y;
+            returnValue.layer = -1;
+            returnValue.direction = CCW;
+            returnValue.type = Trible;
+        }
+            break;
+        case y2:
+        {
+            returnValue.axis = Y;
+            returnValue.layer = -1;
+            returnValue.direction = CW;
+            returnValue.type = TribleTwoTimes;
+        }
+            break;
+        case z:
+        {
+            returnValue.axis = Z;
+            returnValue.layer = -1;
+            returnValue.direction = CW;
+            returnValue.type = Trible;
+        }
+            break;
+        case zi:
+        {
+            returnValue.axis = Z;
+            returnValue.layer = -1;
+            returnValue.direction = CCW;
+            returnValue.type = Trible;
+        }
+            break;
+        case z2:
+        {
+            returnValue.axis = Z;
+            returnValue.layer = -1;
+            returnValue.direction = CW;
+            returnValue.type = TribleTwoTimes;
+        }
+            break;
+        case Fw:
+        {
+            returnValue.axis = Z;
+            returnValue.layer = 2;
+            returnValue.direction = CW;
+            returnValue.type = Double;
+        }
+            break;
+        case Fwi:
+        {
+            returnValue.axis = Z;
+            returnValue.layer = 2;
+            returnValue.direction = CCW;
+            returnValue.type = Double;
+        }
+            break;
+        case Fw2:
+        {
+            returnValue.axis = Z;
+            returnValue.layer = 2;
+            returnValue.direction = CW;
+            returnValue.type = DoubleTwoTimes;
+        }
+            break;
+        case Bw:
+        {
+            returnValue.axis = Z;
+            returnValue.layer = 0;
+            returnValue.direction = CCW;
+            returnValue.type = Double;
+        }
+            break;
+        case Bwi:
+        {
+            returnValue.axis = Z;
+            returnValue.layer = 0;
+            returnValue.direction = CW;
+            returnValue.type = Double;
+        }
+            break;
+        case Bw2:
+        {
+            returnValue.axis = Z;
+            returnValue.layer = 0;
+            returnValue.direction = CCW;
+            returnValue.type = DoubleTwoTimes;
+        }
+            break;
+        case Rw:
+        {
+            returnValue.axis = X;
+            returnValue.layer = 2;
+            returnValue.direction = CW;
+            returnValue.type = Double;
+        }
+            break;
+        case Rwi:
+        {
+            returnValue.axis = X;
+            returnValue.layer = 2;
+            returnValue.direction = CCW;
+            returnValue.type = Double;
+        }
+            break;
+        case Rw2:
+        {
+            returnValue.axis = X;
+            returnValue.layer = 2;
+            returnValue.direction = CW;
+            returnValue.type = DoubleTwoTimes;
+        }
+            break;
+        case Lw:
+        {
+            returnValue.axis = X;
+            returnValue.layer = 0;
+            returnValue.direction = CCW;
+            returnValue.type = Double;
+        }
+            break;
+        case Lwi:
+        {
+            returnValue.axis = X;
+            returnValue.layer = 0;
+            returnValue.direction = CW;
+            returnValue.type = Double;
+        }
+            break;
+        case Lw2:
+        {
+            returnValue.axis = X;
+            returnValue.layer = 0;
+            returnValue.direction = CCW;
+            returnValue.type = DoubleTwoTimes;
+        }
+            break;
+        case Uw:
+        {
+            returnValue.axis = Y;
+            returnValue.layer = 2;
+            returnValue.direction = CW;
+            returnValue.type = Double;
+        }
+            break;
+        case Uwi:
+        {
+            returnValue.axis = Y;
+            returnValue.layer = 2;
+            returnValue.direction = CCW;
+            returnValue.type = Double;
+        }
+            break;
+        case Uw2:
+        {
+            returnValue.axis = Y;
+            returnValue.layer = 2;
+            returnValue.direction = CW;
+            returnValue.type = DoubleTwoTimes;
+        }
+            break;
+        case Dw:
+        {
+            returnValue.axis = Y;
+            returnValue.layer = 0;
+            returnValue.direction = CCW;
+            returnValue.type = Double;
+        }
+            break;
+        case Dwi:
+        {
+            returnValue.axis = Y;
+            returnValue.layer = 0;
+            returnValue.direction = CW;
+            returnValue.type = Double;
+        }
+            break;
+        case Dw2:
+        {
+            returnValue.axis = Y;
+            returnValue.layer = 0;
+            returnValue.direction = CCW;
+            returnValue.type = DoubleTwoTimes;
+        }
+            break;
+        case M:
+        {
+            returnValue.axis = X;
+            returnValue.layer = 1;
+            returnValue.direction = CCW;
+            returnValue.type = Single;
+        }
+            break;
+        case Mi:
+        {
+            returnValue.axis = X;
+            returnValue.layer = 1;
+            returnValue.direction = CW;
+            returnValue.type = Single;
+        }
+            break;
+        case M2:
+        {
+            returnValue.axis = X;
+            returnValue.layer = 1;
+            returnValue.direction = CCW;
+            returnValue.type = SingleTwoTimes;
+        }
+            break;
+        case E:
+        {
+            returnValue.axis = Y;
+            returnValue.layer = 1;
+            returnValue.direction = CCW;
+            returnValue.type = Single;
+        }
+            break;
+        case Ei:
+        {
+            returnValue.axis = Y;
+            returnValue.layer = 1;
+            returnValue.direction = CW;
+            returnValue.type = Single;
+        }
+            break;
+        case E2:
+        {
+            returnValue.axis = Y;
+            returnValue.layer = 1;
+            returnValue.direction = CCW;
+            returnValue.type = SingleTwoTimes;
+        }
+            break;
+        case S:
+        {
+            returnValue.axis = Z;
+            returnValue.layer = 1;
+            returnValue.direction = CW;
+            returnValue.type = Single;
+        }
+            break;
+        case Si:
+        {
+            returnValue.axis = Z;
+            returnValue.layer = 1;
+            returnValue.direction = CCW;
+            returnValue.type = Single;
+        }
+            break;
+        case S2:
+        {
+            returnValue.axis = Z;
+            returnValue.layer = 1;
+            returnValue.direction = CW;
+            returnValue.type = SingleTwoTimes;
+        }
+            break;
+        default:
+            break;
+    }
+    
+    return returnValue;
+}
+
 
 + (NSString *)getContenFromPatternNode:(MCTreeNode *)node
               accordingToWorkingMemory:(MCWorkingMemory *)workingMemory{

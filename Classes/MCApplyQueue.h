@@ -32,21 +32,24 @@
 
 - (id)initWithRotationAction:(MCTreeNode *)action withMagicCube:(NSObject<MCMagicCubeDataSouceDelegate> *)mc;
 
-//reset the current position
+// Reset the current position
 - (void)reset;
 
-//return the queue length
+// Return the queue length
 - (long)count;
 
-//apply rotation and return result
-//the position will move to next position
+// Apply rotation and return result.
+// The position will move to next position.
 - (void)applyRotation:(SingmasterNotation)currentRotation;
 
 // Get the queue in string format being contained in a array
 - (NSArray *)getQueueWithStringFormat;
 
-//get the extra queue in string format being contained in a array
+// Get the extra queue in string format being contained in a array
 - (NSArray *)getExtraQueueWithStringFormat;
+
+
+- (SingmasterNotation)currentRotation;
 
 //finished or not
 - (BOOL)isFinished;

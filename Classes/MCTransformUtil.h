@@ -18,15 +18,23 @@
 
 + (NSString *)getRotationTagFromSingmasterNotation:(SingmasterNotation)notation;
 
+// Transfer RotateNotationType containing axis, layer, direction and RotationType(Single, Double or Trible) to SingmasterNotation
 + (SingmasterNotation)getSingmasterNotationFromAxis:(AxisType)axis layer:(int)layer direction:(LayerRotationDirectionType)direction;
+
 
 + (SingmasterNotation)getContrarySingmasterNotation:(SingmasterNotation)notation;
 
+
 + (SingmasterNotation)getPathToMakeCenterCubieAtPosition:(struct Point3i)coordinate inOrientation:(FaceOrientationType)orientation;
 
-//By delivering pattern node to this function,
-//we can get the node content.
-//Notice! The type of this node must be 'PatternNode'.
+
+// Transfer SingmasterNotation to RotateNotationType containing axis, layer, direction and RotationType(Single, Double or Trible)
++ (struct RotateNotationType)getROtateNotationTypeWithSingmasterNotation:(SingmasterNotation)notation;
+
+
+// By delivering pattern node to this function,
+// we can get the node content.
+// Notice! The type of this node must be 'PatternNode'.
 + (NSString *)getContenFromPatternNode:(MCTreeNode *)node
               accordingToWorkingMemory:(MCWorkingMemory *)workingMemory;
 

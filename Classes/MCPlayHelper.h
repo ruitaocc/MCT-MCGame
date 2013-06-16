@@ -65,6 +65,10 @@ typedef enum _HelperStateMachine {
 
 - (NSArray *)extraQueue;
 
+
+// get notation of next rotation that will be finished.
+- (SingmasterNotation)nextNotation;
+
 - (BOOL)isOver;
 
 - (void)setMagicCube:(NSObject<MCMagicCubeDelegate > *)mc;

@@ -13,16 +13,18 @@
 @interface MCMagicCube : NSObject <NSCoding, MCMagicCubeDelegate>
 
 
-//FaceColorKey-RealColor
+// FaceColorKey-RealColor
 @property (retain, nonatomic) NSDictionary *faceColorKeyMappingToRealColor;
 
 
-//get a new magic cube
+// Get a new magic cube
 + (MCMagicCube *)magicCube;
 
-//get a saved magic cube from an archived file
+// Get a saved magic cube from an archived file
 + (MCMagicCube *)unarchiveMagicCubeWithFile:(NSString *)path;
 
+// Get a magic cube that only center cubie has been filled with color.
++ (id)magicCubeOnlyWithCenterColor;
 
 //get the state of cubies
 //every state in the "format" axis-orientation

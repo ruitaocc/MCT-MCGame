@@ -156,6 +156,10 @@
 }
 
 
+- (SingmasterNotation)currentRotation{
+    return (SingmasterNotation)[[self.rotationQueue objectAtIndex:currentRotationQueuePosition] integerValue];
+}
+
 - (void)dealloc{
     [super dealloc];
     [rotationQueue release];

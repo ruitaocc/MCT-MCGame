@@ -176,6 +176,10 @@
 }
 
 
+- (SingmasterNotation)nextNotation{
+    return [self.inferenceEngine.workingMemory.applyQueue currentRotation];
+}
+
 - (void)setMagicCube:(NSObject<MCMagicCubeDelegate > *)mc{
     self.inferenceEngine.workingMemory.magicCube = mc;
 }
