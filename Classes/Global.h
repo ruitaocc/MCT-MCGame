@@ -228,13 +228,24 @@ typedef enum _AppliedRuleType {
 
 //-------------------------------------------------------------------------------------------
 
-//an encapsulation
-struct RotationStruct {
+// There is three types of rotation relevant to axis, layer and direction.
+typedef enum _RotationType {
+    Single,
+    Double,
+    Trible,
+    SingleTwoTimes,
+    DoubleTwoTimes,
+    TribleTwoTimes
+} RotationType;
+
+
+// an encapsulation
+struct RotateNotationType {
     AxisType axis;
     int layer;
     LayerRotationDirectionType direction;
+    RotationType type;
 };
-
 //Test switcher--------------------------------------------------------------------------------
 
 //#define ONLY_TEST
