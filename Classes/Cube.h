@@ -11,22 +11,28 @@
 #import "CubeFace.h"
 @class MCParticleSystem;
 @class MCCollider;
-
+#import "Global.h"
 @interface Cube :MCMobileObject{
     MCParticleSystem * particleEmitter;
     NSMutableArray *cube6faces;
     NSMutableArray *cube6faces_locksign;
+    NSMutableArray *cube6faces_direction_indicator;
     //CubeFace *faces[6];
     int index;
     BOOL _isLocked;
     int index_selectedFace;
+    BOOL _isNeededToShowSpaceDirection;
+    AxisType indicator_axis;
 }
 
 @property (assign) int index;
 @property (assign) int index_selectedFace;
 @property (assign) BOOL isLocked;
+@property (assign) BOOL isNeededToShowSpaceDirection;
+@property (assign) AxisType indicator_axis;
 @property (nonatomic,retain)NSMutableArray *cube6faces;
 @property (nonatomic,retain)NSMutableArray *cube6faces_locksign;
+@property (nonatomic,retain)NSMutableArray *cube6faces_direction_indicator;
 -(id)init;
 - (id) initWithState:(NSDictionary*)states;
 - (void) flashWithState:(NSDictionary*)states;

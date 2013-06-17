@@ -17,9 +17,12 @@
 #import "MCCollider.h"
 #import "Global.h"
 #import "data.hpp"
-
+#import "MCStringDefine.h"
+#import "MCStringDefine.h"
 @implementation Cube
-
+@synthesize cube6faces_direction_indicator;
+@synthesize isNeededToShowSpaceDirection;
+@synthesize indicator_axis;
 @synthesize index,cube6faces;
 @synthesize cube6faces_locksign;
 @synthesize isLocked=_isLocked;
@@ -68,6 +71,17 @@
             [cube6faces_locksign addObject:faces_locksign];
             [faces_locksign release];
         }
+        if (cube6faces_direction_indicator==nil) {
+            cube6faces_direction_indicator = [[NSMutableArray alloc]init];
+        }
+        for (int i=0; i<6; i++) {
+            CubeFace* faces_direction_indicator = [[CubeFace alloc]initWithVertexes:&Cube_direction_indicator_vertex_coordinates[i*6*3] vertexCount:6 vertexSize:3 renderStyle:GL_TRIANGLES];
+            [(CubeFace*)faces_direction_indicator setMaterialKey:kSpaceDirectionIndicatorRight];
+            [(CubeFace*)faces_direction_indicator setUvCoordinates:&Cube_LockSign_vertex_texture_coordinates[0]];
+            [(CubeFace*)faces_direction_indicator setNormals:&Cube_normal_vectors_f[i*6*3]];
+            [cube6faces_direction_indicator addObject:faces_direction_indicator];
+            [faces_direction_indicator release];
+        }
     }
     
 	return self;
@@ -94,7 +108,7 @@
                                             vertexCount:Cube_vertex_array_size
                                              vertexSize:3
                                             renderStyle:GL_TRIANGLES];
-        [(MCTexturedMesh*)mesh setMaterialKey:@"cubeTexture3"];
+        [(MCTexturedMesh*)mesh setMaterialKey:@"cubeTexture3"];/**/
         [(MCTexturedMesh*)mesh setUvCoordinates:Cube_texture_coordinates];
         [(MCTexturedMesh*)mesh setNormals:Cube_normal_vectors];
         [self setIsLocked:NO];
@@ -122,7 +136,18 @@
             [cube6faces_locksign addObject:faces_locksign];
             [faces_locksign release];
         }
-        
+        if (cube6faces_direction_indicator==nil) {
+            cube6faces_direction_indicator = [[NSMutableArray alloc]init];
+        }
+        for (int i=0; i<6; i++) {
+            CubeFace* faces_direction_indicator = [[CubeFace alloc]initWithVertexes:&Cube_direction_indicator_vertex_coordinates[i*6*3] vertexCount:6 vertexSize:3 renderStyle:GL_TRIANGLES];
+            [(CubeFace*)faces_direction_indicator setMaterialKey:kSpaceDirectionIndicatorRight];
+            [(CubeFace*)faces_direction_indicator setUvCoordinates:&Cube_LockSign_vertex_texture_coordinates[0]];
+            [(CubeFace*)faces_direction_indicator setNormals:&Cube_normal_vectors_f[i*6*3]];
+            [cube6faces_direction_indicator addObject:faces_direction_indicator];
+            [faces_direction_indicator release];
+        }
+
     }
     
 	return self;
@@ -140,6 +165,41 @@
     [cube6faces makeObjectsPerformSelector:@selector(render)];
     if ([self isLocked]) {
         [cube6faces_locksign makeObjectsPerformSelector:@selector(render)];
+    }
+    if ([self isNeededToShowSpaceDirection]) {
+        switch (indicator_axis) {
+            case X:
+                for (int i = 0;i<6;i++) {
+                    if (i!=2&&i!=3 ) {
+                        CubeFace *tmp  =[cube6faces_direction_indicator objectAtIndex:i];
+                        [tmp render];
+                    }
+                
+                }
+                break;
+            case Y:
+                for (int i = 0;i<6;i++) {
+                    if (i!=0&&i!=1) {
+                        CubeFace *tmp  =[cube6faces_direction_indicator objectAtIndex:i];
+                        [tmp render];
+                    }
+                    
+                }
+                break;
+            case Z:
+                for (int i = 0;i<6;i++) {
+                    if (i!=5&&i!=6) {
+                        CubeFace *tmp  =[cube6faces_direction_indicator objectAtIndex:i];
+                        [tmp render];
+                    }
+                    
+                }
+                break;
+                
+            default:
+                break;
+        }
+        //[cube6faces_direction_indicator makeObjectsPerformSelector:@selector(render)];
     }
 	glPopMatrix();
 }

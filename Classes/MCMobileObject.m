@@ -21,9 +21,9 @@
 	translation.y += speed.y * deltaTime;
 	translation.z += speed.z * deltaTime;
 	
-	rotation.x += rotationalSpeed.x * deltaTime;
-	rotation.y += rotationalSpeed.y * deltaTime;
-	rotation.z += rotationalSpeed.z * deltaTime;
+	prerotation.x += rotationalSpeed.x * deltaTime;
+	prerotation.y += rotationalSpeed.y * deltaTime;
+	prerotation.z += rotationalSpeed.z * deltaTime;
 	[self checkArenaBounds];
 	[super update];
 }

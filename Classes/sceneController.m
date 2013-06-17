@@ -174,7 +174,7 @@
 	// turn openGL 'on' for this frame
 	[openGLView beginDraw];
 	//[self setupLookAt];
-	[self setupLighting];
+	//[self setupLighting];
 	// simply call 'render' on all our scene objects
 	[sceneObjects makeObjectsPerformSelector:@selector(render)];
     // draw the interface on top of everything

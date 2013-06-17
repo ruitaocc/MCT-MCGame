@@ -11,6 +11,7 @@
 #import "MCCountingPlayInputViewController__1.h"
 #import "Cube.h"
 #import "MCMultiDigitCounter.h"
+#import "MCBackGroundTexMesh.h"
 @implementation MCCountingPlaySceneController
 @synthesize magicCube;
 //@synthesize playHelper;
@@ -38,6 +39,12 @@
 	if (sceneObjects == nil) sceneObjects = [[NSMutableArray alloc] init];	
 	magicCube = [[MCMagicCube magicCube]retain];
     
+    //背景
+    MCBackGroundTexMesh* background = [[MCBackGroundTexMesh alloc]init];
+    background.pretranslation = MCPointMake(0, 0, -246);
+    background.scale = MCPointMake(64, 64, 1);
+    [self addObjectToScene:background];
+    [background release];
     //大魔方
     magicCubeUI = [[MCMagicCubeUIModelController alloc]initiateWithState:[ magicCube getColorInOrientationsOfAllCubie]];
     magicCubeUI.target=self;
@@ -70,11 +77,11 @@
 
 -(void)previousSolution{
     NSLog(@"mc previousSolution");
-    [[sceneObjects objectAtIndex:0]performSelector:@selector(previousSolution)];
+    [magicCubeUI performSelector:@selector(previousSolution)];
 }
 -(void)nextSolution{
     NSLog(@"mc nextSolution");
-    [[sceneObjects objectAtIndex:0]performSelector:@selector(nextSolution)];
+    [magicCubeUI performSelector:@selector(nextSolution)];
 }
 
 -(void)releaseSrc{

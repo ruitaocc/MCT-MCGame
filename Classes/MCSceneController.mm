@@ -14,6 +14,7 @@
 #import "MCPoint.h"
 #import "Cube.h"
 #import "MCBackGroundTexMesh.h"
+#import "MCMagicCubeUIModelController.h"
 //#import "data.hpp"
 @implementation MCSceneController
 
@@ -45,7 +46,7 @@
     background.scale = MCPointMake(64, 64, 1);
     [self addObjectToScene:background];
     [background release];
-    
+    /*
 	// our 'character' object
 	Cube * magicCube = [[Cube alloc] init];
     //[magicCube.mesh setColors:&colorss];
@@ -54,7 +55,17 @@
     magicCube.prerotation = MCPointMake(30, 30, 0);
     magicCube.rotationalSpeed = MCPointMake(20, 20, 20);
 	[self addObjectToScene:magicCube];
-	[magicCube release];	
+	[magicCube release];
+	*/
+    //大魔方
+    MCMagicCubeUIModelController* magicCubeUI = [[MCMagicCubeUIModelController alloc]initiate] ;
+    magicCubeUI.target=self;
+    [magicCubeUI setUsingMode:SOlVE_Input_MODE];
+    [magicCubeUI setStepcounterAddAction:@selector(stepcounterAdd)];
+    [magicCubeUI setStepcounterMinusAction:@selector(stepcounterMinus)];
+    [self addObjectToScene:magicCubeUI];
+    [magicCubeUI release];
+
     
 	
 	// if we do not have a collision controller, then make one and link it to our

@@ -15,6 +15,8 @@
 #import "MCStringDefine.h"
 #import "SoundSettingController.h"
 #import "xyzCoordinateIndicator.h"
+#import "MCBackGroundTexMesh.h"
+
 @implementation MCNormalPlaySceneController
 @synthesize magicCube;
 @synthesize playHelper;
@@ -41,7 +43,12 @@
 	magicCube = [[MCMagicCube magicCube]retain];
     playHelper = [[MCPlayHelper playerHelperWithMagicCube:self.magicCube]retain];
     //[playHelper applyRules];
-    
+    //背景
+    MCBackGroundTexMesh* background = [[MCBackGroundTexMesh alloc]init];
+    background.pretranslation = MCPointMake(0, 0, -246);
+    background.scale = MCPointMake(64, 64, 1);
+    [self addObjectToScene:background];
+    [background release];
     //大魔方
     magicCubeUI = [[MCMagicCubeUIModelController alloc]initiateWithState:[magicCube getColorInOrientationsOfAllCubie]] ;
     magicCubeUI.target=self;
@@ -50,16 +57,15 @@
     [magicCubeUI setStepcounterMinusAction:@selector(stepcounterMinus)];
     [self addObjectToScene:magicCubeUI];
     [magicCubeUI release];
+    /*
     //加载坐标系
-    
-    
     xyzCoordinateIndicator * xyz_CoorInd = [[xyzCoordinateIndicator alloc]init];
     [xyz_CoorInd setScale:MCPointMake(67,67,67)];
     [xyz_CoorInd setTranslation:MCPointMake(0, 0, 0)];
     [xyz_CoorInd setRotation:MCPointMake(30,-45,0)];
     [self addObjectToScene:xyz_CoorInd];
     [xyz_CoorInd release];
-    
+    */
     //提示标签
     [self setTipsLabel: [[[UILabel alloc]initWithFrame:CGRectMake(800,150,200,160)] autorelease]];
     [[self tipsLabel] setText:@""];
@@ -118,6 +124,12 @@
     }
     
     [magicCubeUI flashWithState:[ magicCube getColorInOrientationsOfAllCubie]];
+    //更新spaceindicator方向
+    //SingmasterNotation nextNotation = [playHelper nextNotation];
+    //RotateNotationType *nextRotateType = [MCTransformUtil getROtateNotationTypeWithSingmasterNotation:nextNotation];
+    [magicCubeUI nextSpaceIndicatorWithAxis:Y onLayer:2 inDirection:CCW isTribleRotate:NO];
+    
+    
     SoundSettingController *soundsetting = [SoundSettingController sharedsoundSettingController];
     [soundsetting playSoundForKey:Audio_RotateSound_Ding_key];
     
@@ -243,6 +255,8 @@
             //do nothing
         }
     }
+    
+    
 };
 //检测是否结束
 -(void)checkIsOver{
@@ -253,11 +267,11 @@
 };
 -(void)previousSolution{
     NSLog(@"mc previousSolution");
-    [[sceneObjects objectAtIndex:0]performSelector:@selector(previousSolution)];
+    [magicCubeUI performSelector:@selector(previousSolution)];
 }
 -(void)nextSolution{
     NSLog(@"mc nextSolution");
-    [[sceneObjects objectAtIndex:0]performSelector:@selector(nextSolution)];
+    [magicCubeUI performSelector:@selector(nextSolution)];
 }
 -(void)releaseSrc{
     [super releaseSrc];

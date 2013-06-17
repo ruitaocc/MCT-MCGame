@@ -10,7 +10,7 @@
 #import "MCPoint.h"
 #import "Global.h"
 #import "Cube.h"
-@class MCSceneObject;
+@class MCMobileObject;
 //旋转速度 帧率无关设计 2秒
 #define TIME_PER_ROTATION 0.5
 #define ROTATION_ANGLE 90
@@ -25,7 +25,7 @@ typedef enum _MagicCubeUIUsingMode {
     SOlVE_Input_MODE=2
 } MagicCubeUIUsingMode;
 
-@interface MCMagicCubeUIModelController : MCSceneObject{
+@interface MCMagicCubeUIModelController : MCMobileObject{
     NSMutableArray* array27Cube; 
     Cube * layerPtr[9];
 
@@ -91,7 +91,7 @@ typedef enum _MagicCubeUIUsingMode {
     Cube * MagicCubeIndexState[27];
     NSMutableArray * lockedarray;
     
-    
+    Cube * spaceIndicatorlayerPtr[9];
     //
     int selected_cube_index;
     int selected_cube_face_index;
@@ -111,6 +111,9 @@ typedef enum _MagicCubeUIUsingMode {
 -(id)initiateWithState:(NSArray *)stateList;
 -(void)flashWithState:(NSArray *)stateList;
 - (void) rotateOnAxis : (AxisType)axis onLayer: (int)layer inDirection: (LayerRotationDirectionType)direction isTribleRotate:(BOOL)is_trible_roate;
+
+- (void) nextSpaceIndicatorWithAxis : (AxisType)axis onLayer: (int)layer inDirection: (LayerRotationDirectionType)direction isTribleRotate:(BOOL)is_trible_roate;
+
 -(void)awake;
 -(void)render;
 -(void)update;

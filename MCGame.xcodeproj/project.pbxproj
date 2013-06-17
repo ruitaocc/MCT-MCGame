@@ -68,6 +68,9 @@
 		A3AA3C5B16DFBE7D006D76CC /* Icon-72@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A3AA3C5A16DFBE7D006D76CC /* Icon-72@2x.png */; };
 		A3BDFF5816BCF8FE00892504 /* MCStepCounter.m in Sources */ = {isa = PBXBuildFile; fileRef = A3BDFF5716BCF8FE00892504 /* MCStepCounter.m */; };
 		A3BF9205161D4C4600829D13 /* cubeTexture.png in Resources */ = {isa = PBXBuildFile; fileRef = A3BF9204161D4C4600829D13 /* cubeTexture.png */; };
+		A3BFF617176CD200004D18D8 /* arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = A3BFF616176CD200004D18D8 /* arrow.png */; };
+		A3BFF619176CD32F004D18D8 /* arrow_left.png in Resources */ = {isa = PBXBuildFile; fileRef = A3BFF618176CD32F004D18D8 /* arrow_left.png */; };
+		A3BFF61B176CDB5D004D18D8 /* arrow_right.png in Resources */ = {isa = PBXBuildFile; fileRef = A3BFF61A176CDB5D004D18D8 /* arrow_right.png */; };
 		A3C1D18216957371004EB56C /* MCCollider.mm in Sources */ = {isa = PBXBuildFile; fileRef = A3C1D18116957371004EB56C /* MCCollider.mm */; };
 		A3C1D18A169596DE004EB56C /* MCCollisionController.mm in Sources */ = {isa = PBXBuildFile; fileRef = A3C1D189169596DD004EB56C /* MCCollisionController.mm */; };
 		A3C1E393170440ED0033EFC1 /* cubeAction.plist in Resources */ = {isa = PBXBuildFile; fileRef = A3C1E391170440ED0033EFC1 /* cubeAction.plist */; };
@@ -145,6 +148,7 @@
 		A3EDD6601769A68A000C473B /* background2.png in Resources */ = {isa = PBXBuildFile; fileRef = A3EDD65F1769A68A000C473B /* background2.png */; };
 		A3EDD6631769A6D2000C473B /* MCBackGroundTexMesh.m in Sources */ = {isa = PBXBuildFile; fileRef = A3EDD6621769A6D2000C473B /* MCBackGroundTexMesh.m */; };
 		A3EDD6681769DEC4000C473B /* MCCubieColorConstraintUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = A3EDD6671769DEC4000C473B /* MCCubieColorConstraintUtil.m */; };
+		A3EDD66A176A0010000C473B /* sixcolor4.png in Resources */ = {isa = PBXBuildFile; fileRef = A3EDD669176A000F000C473B /* sixcolor4.png */; };
 		A3F2ACB61616CE6700D622B8 /* MCMaterialController.m in Sources */ = {isa = PBXBuildFile; fileRef = A3F2ACB51616CE6700D622B8 /* MCMaterialController.m */; };
 		A3F2ACBA1616CF9900D622B8 /* MCParticleSystem.m in Sources */ = {isa = PBXBuildFile; fileRef = A3F2ACB91616CF9900D622B8 /* MCParticleSystem.m */; };
 		A3F2ACC01616D9BB00D622B8 /* MCParticle.m in Sources */ = {isa = PBXBuildFile; fileRef = A3F2ACBF1616D9BB00D622B8 /* MCParticle.m */; };
@@ -293,6 +297,9 @@
 		A3BDFF5616BCF8FE00892504 /* MCStepCounter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCStepCounter.h; sourceTree = "<group>"; };
 		A3BDFF5716BCF8FE00892504 /* MCStepCounter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCStepCounter.m; sourceTree = "<group>"; };
 		A3BF9204161D4C4600829D13 /* cubeTexture.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = cubeTexture.png; path = Classes/cubeTexture.png; sourceTree = "<group>"; };
+		A3BFF616176CD200004D18D8 /* arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = arrow.png; sourceTree = "<group>"; };
+		A3BFF618176CD32F004D18D8 /* arrow_left.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = arrow_left.png; sourceTree = "<group>"; };
+		A3BFF61A176CDB5D004D18D8 /* arrow_right.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = arrow_right.png; sourceTree = "<group>"; };
 		A3C1D18016957371004EB56C /* MCCollider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCCollider.h; sourceTree = "<group>"; };
 		A3C1D18116957371004EB56C /* MCCollider.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = MCCollider.mm; sourceTree = "<group>"; };
 		A3C1D188169596DD004EB56C /* MCCollisionController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCCollisionController.h; sourceTree = "<group>"; };
@@ -408,6 +415,7 @@
 		A3EDD6621769A6D2000C473B /* MCBackGroundTexMesh.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCBackGroundTexMesh.m; sourceTree = "<group>"; };
 		A3EDD6661769DEC4000C473B /* MCCubieColorConstraintUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCCubieColorConstraintUtil.h; sourceTree = "<group>"; };
 		A3EDD6671769DEC4000C473B /* MCCubieColorConstraintUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCCubieColorConstraintUtil.m; sourceTree = "<group>"; };
+		A3EDD669176A000F000C473B /* sixcolor4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sixcolor4.png; sourceTree = "<group>"; };
 		A3F2ACB41616CE6700D622B8 /* MCMaterialController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCMaterialController.h; sourceTree = "<group>"; };
 		A3F2ACB51616CE6700D622B8 /* MCMaterialController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCMaterialController.m; sourceTree = "<group>"; };
 		A3F2ACB81616CF9900D622B8 /* MCParticleSystem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCParticleSystem.h; path = ../MCParticleSystem.h; sourceTree = "<group>"; };
@@ -679,6 +687,7 @@
 				A3DB41351764B56300C0D091 /* home_button.plist */,
 				A3D5B2E7175CD87900833F3F /* volumedown.png */,
 				A3D5B2E8175CD87900833F3F /* volumeup.png */,
+				A3EDD669176A000F000C473B /* sixcolor4.png */,
 				A3D0704516F87F0300AA3BFF /* sixcolor.png */,
 				A3F828D616EADF8400AC5EAF /* cubeBlack3.png */,
 				A3C8FEA2165D2A52007E0046 /* cube.png */,
@@ -695,6 +704,9 @@
 				A3EDD65B1769A1D8000C473B /* home.png */,
 				A3EDD65C1769A1D8000C473B /* home@2X.png */,
 				A3EDD65F1769A68A000C473B /* background2.png */,
+				A3BFF616176CD200004D18D8 /* arrow.png */,
+				A3BFF618176CD32F004D18D8 /* arrow_left.png */,
+				A3BFF61A176CDB5D004D18D8 /* arrow_right.png */,
 			);
 			name = imageResource;
 			sourceTree = "<group>";
@@ -1342,6 +1354,10 @@
 				A3EDD65D1769A1D8000C473B /* home.png in Resources */,
 				A3EDD65E1769A1D8000C473B /* home@2X.png in Resources */,
 				A3EDD6601769A68A000C473B /* background2.png in Resources */,
+				A3EDD66A176A0010000C473B /* sixcolor4.png in Resources */,
+				A3BFF617176CD200004D18D8 /* arrow.png in Resources */,
+				A3BFF619176CD32F004D18D8 /* arrow_left.png in Resources */,
+				A3BFF61B176CDB5D004D18D8 /* arrow_right.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

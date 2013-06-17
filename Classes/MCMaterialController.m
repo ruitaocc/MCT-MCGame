@@ -39,7 +39,10 @@
         [self loadTextureImage:@"cubeBlack3.png" materialKey:@"cubeTexture3"];
         [self loadTextureImage:@"cubeBlack3.png" materialKey:@"LockTexture"];
         [self loadTextureImage:@"background2.png" materialKey:@"background"];
-        //cubeface
+        [self loadTextureImage:@"arrow_left.png" materialKey:kSpaceDirectionIndicatorLeft];
+
+        [self loadTextureImage:@"arrow_right.png" materialKey:kSpaceDirectionIndicatorRight];
+//cubeface
         [self loadTextureImage:PNG_YellowFace materialKey:Face_YellowKEY];
         [self loadTextureImage:PNG_WhiteFace materialKey:Face_WhiteKEY];
         [self loadTextureImage:PNG_BlueFace materialKey:Face_BlueKEY];

@@ -20,11 +20,11 @@
 {
 	if (interfaceObjects == nil) interfaceObjects = [[NSMutableArray alloc] init];
 	[interfaceObjects removeAllObjects];
-	
+	CGFloat yBased = -260;
    	// normalPlayBtn
 	MCTexturedButton * normalPlayBtn = [[MCTexturedButton alloc] initWithUpKey:TextureKey_learnButtonUp downKey:TextureKey_learnButtonDown];
 	normalPlayBtn.scale = [MCMaterialController getWidthAndHeightFromTextureFile:TextureFileName_HomeButton forKey:TextureKey_learnButtonUp];
-	normalPlayBtn.translation = MCPointMake(-215 , -160, 0.0);
+	normalPlayBtn.translation = MCPointMake(0 , yBased, 0.0);
 	normalPlayBtn.target = self;
 	normalPlayBtn.buttonDownAction = @selector(normalPlayBtnDown);
 	normalPlayBtn.buttonUpAction = @selector(normalPlayBtnUp);
@@ -37,7 +37,7 @@
 	
 	MCTexturedButton * countingPlayBtn = [[MCTexturedButton alloc] initWithUpKey:TextureKey_raceButtonUp downKey:TextureKey_raceButtonDown];
 	countingPlayBtn.scale = [MCMaterialController getWidthAndHeightFromTextureFile:TextureFileName_HomeButton forKey:TextureKey_raceButtonUp];
-	countingPlayBtn.translation = MCPointMake(0 , -170, 0.0);
+	countingPlayBtn.translation = MCPointMake(-165 , yBased, 0.0);
 	countingPlayBtn.target = self;
 	countingPlayBtn.buttonDownAction = @selector(countingPlayBtnDown);
 	countingPlayBtn.buttonUpAction = @selector(countingPlayBtnUp);
@@ -49,7 +49,7 @@
 	// randomSolveBtn
 	MCTexturedButton * randomSolveBtn = [[MCTexturedButton alloc] initWithUpKey:TextureKey_solveButtonUp downKey:TextureKey_solveButtonDown];
 	randomSolveBtn.scale = [MCMaterialController getWidthAndHeightFromTextureFile:TextureFileName_HomeButton forKey:TextureKey_solveButtonUp];
-	randomSolveBtn.translation = MCPointMake(205, -150, 0.0);
+	randomSolveBtn.translation = MCPointMake(165, yBased, 0.0);
 	randomSolveBtn.target = self;
 	randomSolveBtn.buttonDownAction = @selector(randomSolveBtnDown);
     randomSolveBtn.buttonUpAction = @selector(randomSolveBtnUp);	
@@ -61,7 +61,7 @@
 	// systemSettingBtn
 	MCTexturedButton * systemSettingBtn = [[MCTexturedButton alloc] initWithUpKey:TextureKey_optionButtonUp downKey:TextureKey_optionButtonDown];
 	systemSettingBtn.scale = [MCMaterialController getWidthAndHeightFromTextureFile:TextureFileName_HomeButton forKey:TextureKey_optionButtonUp];
-	systemSettingBtn.translation = MCPointMake(-100, -300, 0.0);
+	systemSettingBtn.translation = MCPointMake(-300, yBased, 0.0);
 	systemSettingBtn.target = self;
 	systemSettingBtn.buttonDownAction = @selector(systemSettingBtnDown);
 	systemSettingBtn.buttonUpAction = @selector(systemSettingBtnUp);
@@ -73,7 +73,7 @@
 	// heroBoardBtn
 	MCTexturedButton * heroBoardBtn = [[MCTexturedButton alloc] initWithUpKey:TextureKey_rankButtonUp downKey:TextureKey_rankButtonDown];
 	heroBoardBtn.scale = [MCMaterialController getWidthAndHeightFromTextureFile:TextureFileName_HomeButton forKey:TextureKey_rankButtonUp];
-	heroBoardBtn.translation = MCPointMake(110, -310, 0.0);
+	heroBoardBtn.translation = MCPointMake(300, yBased, 0.0);
 	heroBoardBtn.target = self;
 	heroBoardBtn.buttonDownAction = @selector(heroBoardBtnDown);
 	heroBoardBtn.buttonUpAction = @selector(heroBoardBtnUp);

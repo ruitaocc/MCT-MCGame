@@ -33,8 +33,9 @@
         isAutoRotate = NO;
         //魔方整体三个参数
         scale = MCPointMake(84,84,84);
-        translation = MCPointMake(0,0,0);
+        translation = MCPointMake(0,20,0);
         rotation = MCPointMake(30,-45,0);
+        rotationalSpeed = MCPointMake(0, 30, 0);
         MCPoint sub_scale  = MCPointMake(scale.x/3, scale.y/3, scale.z/3);
         for (int  i = 0; i<9; i++) {
             layerPtr[i] = nil;
@@ -56,7 +57,7 @@
                     
                     tCube.scale = MCPointMake(sub_scale.x, sub_scale.y, sub_scale.z);
                     //Cube.rotation = MCPointMake(rotation.x, rotation.y, rotation.z);
-                    //Cube.rotationalSpeed = MCPointMake(0, 0, 0);
+                    tCube.rotationalSpeed = rotationalSpeed;
                     tCube.collider = [MCCollider collider];
                     [tCube.collider setCheckForCollision:YES];
                     [array27Cube addObject: tCube];
@@ -2074,7 +2075,61 @@ double FabsThetaBetweenV1andV2(const vec3& v1,const vec3& v2)
         return NO;
 
 };
+- (void) nextSpaceIndicatorWithAxis : (AxisType)axis onLayer: (int)layer inDirection: (LayerRotationDirectionType)direction isTribleRotate:(BOOL)is_trible_roate{
+    for (Cube *tmp in array27Cube) {
+        [tmp setIsNeededToShowSpaceDirection:NO];
+    }
+    if (is_trible_roate!=YES) {
+        //获取layer的对象指针
+        switch (axis) {
+            case X:
+                
+                for(int z = 0; z < 3; ++z)
+                {
+                    for(int y = 0; y < 3; ++y)
+                    {
+                        spaceIndicatorlayerPtr[y+z*3] = MagicCubeIndexState[z*9+y*3+layer];
+                        
+                    }
+                }
+                break;
+            case Y:
+                //change data
+                for(int z = 0; z < 3; ++z)
+                {
+                    for(int x = 0; x < 3; ++x)
+                    {
+                        spaceIndicatorlayerPtr[x+z*3] = MagicCubeIndexState[z*9+layer*3+x];
+                        
+                    }
+                }
+                break;
+            case Z:
+                //change data
+                for(int y = 0; y < 3; ++y)
+                {
+                    for(int x = 0; x < 3; ++x)
+                    {
+                        spaceIndicatorlayerPtr[x+y*3] = MagicCubeIndexState[layer*9+y*3+x];
+                    }
+                }
+                break;
+            default:
+                break;
+        }
+        for (int i =0; i<9; i++) {
+            [spaceIndicatorlayerPtr[i] setIsNeededToShowSpaceDirection:YES];
+            [spaceIndicatorlayerPtr[i] setIndicator_axis:axis];
 
+        }
+    }else{
+        for (Cube *tmp in array27Cube) {
+            [tmp setIsNeededToShowSpaceDirection:YES];
+            [tmp setIndicator_axis:axis];
+        }
+    }
+   
+};
 #pragma mark undo redo
 
 -(void)previousSolution{

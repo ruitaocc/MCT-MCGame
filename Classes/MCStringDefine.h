@@ -63,5 +63,13 @@
 
 
 
+#define kSpaceDirectionIndicatorUP @"SpaceDirectionIndicatorUp"
+#define kSpaceDirectionIndicatorDown @"SpaceDirectionIndicatorDown"
+#define kSpaceDirectionIndicatorLeft @"SpaceDirectionIndicatorLeft"
+#define kSpaceDirectionIndicatorRight @"SpaceDirectionIndicatorRight"
+
+
+
+
 
 #endif

@@ -10,7 +10,7 @@
 #import "MCConfiguration.h"
 #import "MCMagicCubeUIModelController.h"
 #import "MCRandomSolveViewInputControllerViewController.h"
-
+#import "MCBackGroundTexMesh.h"
 
 @implementation MCRandomSolveSceneController
 
@@ -40,7 +40,14 @@
     magicCube = [[MCMagicCube magicCubeOnlyWithCenterColor]retain];
     
     playHelper = [[MCPlayHelper playerHelperWithMagicCube:self.magicCube]retain];
+    //背景
+    MCBackGroundTexMesh* background = [[MCBackGroundTexMesh alloc]init];
+    background.pretranslation = MCPointMake(0, 0, -246);
+    background.scale = MCPointMake(64, 64, 1);
+    [self addObjectToScene:background];
+    [background release];
     
+    //
     magicCubeUI = [[MCMagicCubeUIModelController alloc]initiateWithState:[magicCube getColorInOrientationsOfAllCubie]] ;
     magicCubeUI.target=self;
     [magicCubeUI setStepcounterAddAction:@selector(stepcounterAdd)];
