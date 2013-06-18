@@ -16,7 +16,7 @@
 #import "SoundSettingController.h"
 #import "xyzCoordinateIndicator.h"
 #import "MCBackGroundTexMesh.h"
-
+#import "MCFonts.h"
 @implementation MCNormalPlaySceneController
 @synthesize magicCube;
 @synthesize playHelper;
@@ -75,7 +75,9 @@
     [[self tipsLabel] setOpaque:YES];
     [[self tipsLabel]setBackgroundColor:[UIColor colorWithRed:1 green:1 blue:1 alpha:0.5]];
     //[[self tipsLabel]setAlpha:0.8];
-    //[[self tipsLabel]setFont:[UIFont fontWithName:@"zhongzheng" size:30]];
+    //[[self tipsLabel]setFont:[UIFont fontWithName:@"Palatino-Roman" size:30]];
+    [[self tipsLabel]setFont:[MCFonts customFont]];
+    [self tipsLabel].layer.cornerRadius = 10.0;
     //[[[self tipsLabel] appearence]setFont:[UIFont fontWithName:@"zhongzheng" size:12]];
     //[[UILabel appearence]setFont:[UIFont fontWithName:@"zhongzheng" size:12]];
     [openGLView addSubview:[self tipsLabel]];
@@ -288,16 +290,6 @@
 -(void)releaseSrc{
     [super releaseSrc];
 }
--(UIFont*)customFont{// 你的字体路径
-    NSString *fontPath = [[NSBundle mainBundle] pathForResource:@"FZZZHONGHJW" ofType:@"TTF"];
-    NSURL *url = [NSURL fileURLWithPath:fontPath];
-    CGDataProviderRef fontDataProvider = CGDataProviderCreateWithURL(( CFURLRef)url);
-    if (fontDataProvider == NULL)        return nil;
-    CGFontRef newFont = CGFontCreateWithDataProvider(fontDataProvider);
-    CGDataProviderRelease(fontDataProvider);    if (newFont == NULL) return nil;
-    NSString *fontName = ( NSString *)CGFontCopyFullName(newFont);
-    UIFont *font = [UIFont fontWithName:fontName size:12];
-    CGFontRelease(newFont);        return font;
-}
+
     
 @end
