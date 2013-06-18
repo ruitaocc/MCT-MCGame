@@ -20,18 +20,14 @@
 
 @property (retain, nonatomic) IBOutlet UITableView *scoreTable;
 
-@property (retain, nonatomic) IBOutlet UITextField *insertScoreTimeField;
-@property (retain, nonatomic) IBOutlet UITextField *insertScoreMoveField;
-
 @property (retain, nonatomic) IBOutlet UILabel *currentUserLabel;
-
 @property (retain, nonatomic) IBOutlet UILabel *totalFinishLabel;
 @property (retain, nonatomic) IBOutlet UILabel *totalGameTimeLabel;
 @property (retain, nonatomic) IBOutlet UILabel *totalMovesLabel;
 @property (retain, nonatomic) IBOutlet UILabel *totalLearnTimeLabel;
+@property (retain, nonatomic) IBOutlet UIButton *totalRankBtn;
+@property (retain, nonatomic) IBOutlet UIButton *personalRankBtn;
 
-@property (retain, nonatomic) IBOutlet UITextField *insertLearnTimeField;
-@property (retain, nonatomic) IBOutlet UITextField *insertLearnMoveField;
 
 @property (retain, nonatomic) UIPopoverController *createUserPopover;
 @property (retain, nonatomic) UIPopoverController *changeUserPopover;
@@ -44,16 +40,16 @@
 
 - (IBAction)changeUserPress:(id)sender;
 
-- (IBAction)insertScorePress:(id)sender;
-
-- (IBAction)insertLearnPress:(id)sender;
-
 - (void)updateUserInformation;
 
 - (void)updateScoreInformation;
 
 - (IBAction)segmentChange:(id)sender;
 
+
+- (IBAction)totalRankBtnUp:(id)sender;
+
+- (IBAction)personalRankBtnUp:(id)sender;
 
 - (IBAction)goBackMainMenu:(id)sender;
 
