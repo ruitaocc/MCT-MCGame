@@ -25,7 +25,7 @@
 }
 
 @synthesize coordinateValue;
-@synthesize skinNum;
+@synthesize skinNum = _skinNum;
 @synthesize type = _type;
 @synthesize identity = _identity;
 @synthesize faceColors = _faceColors;
@@ -41,8 +41,8 @@
         [self clearData];
         // Detect the skin number and the cube type
         coordinateValue = value;
-        skinNum = abs(coordinateValue.x) + abs(coordinateValue.y) + abs(coordinateValue.z);
-        switch (skinNum) {
+        _skinNum = abs(coordinateValue.x) + abs(coordinateValue.y) + abs(coordinateValue.z);
+        switch (_skinNum) {
             case 1:
                 _type = CentralCubie;
                 break;
@@ -56,8 +56,8 @@
                 break;
         }
         //allocate memory for the skin
-        _faceColors = (FaceColorType*)malloc(skinNum * sizeof(FaceColorType));
-        _orientations = (FaceOrientationType*)malloc(skinNum * sizeof(FaceOrientationType));
+        _faceColors = (FaceColorType*)malloc(_skinNum * sizeof(FaceColorType));
+        _orientations = (FaceOrientationType*)malloc(_skinNum * sizeof(FaceOrientationType));
         //intial the skin data
         int currentIndex = 0;
         switch (coordinateValue.x) {
@@ -124,7 +124,7 @@
         //detect the skin number and the cube type
         self.coordinateValue = value;
         self.skinNum = [colors count];
-        switch (skinNum) {
+        switch (_skinNum) {
             case 1:
                 _type = CentralCubie;
                 break;
@@ -138,8 +138,8 @@
                 break;
         }
         //allocate memory for the skin
-        self.faceColors = (FaceColorType*)malloc(skinNum * sizeof(FaceColorType));
-        self.orientations = (FaceOrientationType*)malloc(skinNum * sizeof(FaceOrientationType));
+        self.faceColors = (FaceColorType*)malloc(_skinNum * sizeof(FaceColorType));
+        self.orientations = (FaceOrientationType*)malloc(_skinNum * sizeof(FaceOrientationType));
         int tmpIdentity = _identity;
         for (int i = 0; i < self.skinNum; i++) {
             self.faceColors[i] = (FaceColorType)[[colors objectAtIndex:i] integerValue];
@@ -179,8 +179,8 @@
         
         //detect the skin number and the cube type
         coordinateValue = value;
-        skinNum = abs(coordinateValue.x) + abs(coordinateValue.y) + abs(coordinateValue.z);
-        switch (skinNum) {
+        _skinNum = abs(coordinateValue.x) + abs(coordinateValue.y) + abs(coordinateValue.z);
+        switch (_skinNum) {
             case 1:
                 _type = CentralCubie;
                 break;
@@ -194,8 +194,8 @@
                 break;
         }
         //allocate memory for the skin
-        _faceColors = (FaceColorType*)malloc(skinNum * sizeof(FaceColorType));
-        _orientations = (FaceOrientationType*)malloc(skinNum * sizeof(FaceOrientationType));
+        _faceColors = (FaceColorType*)malloc(_skinNum * sizeof(FaceColorType));
+        _orientations = (FaceOrientationType*)malloc(_skinNum * sizeof(FaceOrientationType));
         
         //intial the skin data
         if (_type == CentralCubie) {
@@ -330,7 +330,7 @@
                 coordinateValue.y = coordinateValue.z;
                 coordinateValue.z = temp;
                 //skin data change when shift on X axis in CW
-                for(int i = 0; i < skinNum; i++){
+                for(int i = 0; i < _skinNum; i++){
                     faceOrientation = _orientations[i];
                     switch (faceOrientation) {
                         case Front:
@@ -357,7 +357,7 @@
                 coordinateValue.z = coordinateValue.y;
                 coordinateValue.y = temp;
                 //skin data change when shift on X axis in CCW
-                for(int i = 0; i < skinNum; i++){
+                for(int i = 0; i < _skinNum; i++){
                     faceOrientation = _orientations[i];
                     switch (faceOrientation) {
                         case Front:
@@ -386,7 +386,7 @@
                 coordinateValue.z = coordinateValue.x;
                 coordinateValue.x = temp;
                 //skin data change when shift on Y axis in CW
-                for(int i = 0; i < skinNum; i++){
+                for(int i = 0; i < _skinNum; i++){
                     faceOrientation = _orientations[i];
                     switch (faceOrientation) {
                         case Front:
@@ -413,7 +413,7 @@
                 coordinateValue.x = coordinateValue.z;
                 coordinateValue.z = temp;
                 //skin data change when shift on Y axis in CCW
-                for(int i = 0; i < skinNum; i++){
+                for(int i = 0; i < _skinNum; i++){
                     faceOrientation = _orientations[i];
                     switch (faceOrientation) {
                         case Front:
@@ -443,7 +443,7 @@
                 coordinateValue.x = coordinateValue.y;
                 coordinateValue.y = temp;
                 //skin data change when shift on Z axis in CW
-                for(int i = 0; i < skinNum; i++){
+                for(int i = 0; i < _skinNum; i++){
                     faceOrientation = _orientations[i];
                     switch (faceOrientation) {
                         case Up:
@@ -470,7 +470,7 @@
                 coordinateValue.y = coordinateValue.x;
                 coordinateValue.x = temp;
                 //skin data change when shift on Z axis in CCW
-                for(int i = 0; i < skinNum; i++){
+                for(int i = 0; i < _skinNum; i++){
                     faceOrientation = _orientations[i];
                     switch (faceOrientation) {
                         case Up:
@@ -498,7 +498,7 @@
 
 - (FaceColorType) faceColorInOrientation: (FaceOrientationType)orientation{
     int i;
-    for (i = 0; i < skinNum; i++) {
+    for (i = 0; i < _skinNum; i++) {
         if (orientation == _orientations[i]) {
             return _faceColors[i];
         }
@@ -509,7 +509,7 @@
 //return wheather the face color on the specified orientation is the specified color
 - (BOOL)isFaceColor:(FaceColorType)color inOrientation:(FaceOrientationType)orientation{
     int i;
-    for (i = 0; i < skinNum; i++) {
+    for (i = 0; i < _skinNum; i++) {
         if (orientation == _orientations[i]) {
             return _faceColors[i] == color;
         }
@@ -523,7 +523,7 @@
 // Otherwise, return NO.
 - (BOOL)setFaceColor:(FaceColorType)color inOrientation:(FaceOrientationType)orientation{
     int i;
-    for (i = 0; i < skinNum; i++) {
+    for (i = 0; i < _skinNum; i++) {
         if (orientation == _orientations[i]) {
             // Update identity
             switch (_faceColors[i]) {
@@ -582,7 +582,7 @@
             
             if (_completeFaceNum == 2 && _type == CornerCubie) {
                 int i;
-                for (i = 0; i < skinNum; i++) {
+                for (i = 0; i < _skinNum; i++) {
                     if (_faceColors[i] == NoColor) {
                         break;
                     }
@@ -616,10 +616,10 @@
     [aCoder encodeInteger:coordinateValue.x forKey:kCoordinateXKey];
     [aCoder encodeInteger:coordinateValue.y forKey:kCoordinateYKey];
     [aCoder encodeInteger:coordinateValue.z forKey:kCoordinateZKey];
-    [aCoder encodeInteger:skinNum forKey:kSkinNumKey];
+    [aCoder encodeInteger:_skinNum forKey:kSkinNumKey];
     [aCoder encodeInteger:_type forKey:kTypeKey];
     [aCoder encodeInteger:_identity forKey:kIdentityKey];
-    for (int i = 0; i < skinNum; i++) {
+    for (int i = 0; i < _skinNum; i++) {
         [aCoder encodeInteger:_faceColors[i] forKey:[NSString stringWithFormat:kSingleColorKeyFormat, i]];
         [aCoder encodeInteger:_orientations[i] forKey:[NSString stringWithFormat:kSingleOrientationKeyFormat, i]];
     }
@@ -635,9 +635,9 @@
         self.type = (CubieType)[aDecoder decodeIntegerForKey:kTypeKey];
         self.identity  = (ColorCombinationType)[aDecoder decodeIntegerForKey:kIdentityKey];
         //alloc memory
-        _faceColors = (FaceColorType*)malloc(skinNum * sizeof(FaceColorType));
-        _orientations = (FaceOrientationType*)malloc(skinNum * sizeof(FaceOrientationType));
-        for (int i = 0; i < skinNum; i++) {
+        _faceColors = (FaceColorType*)malloc(_skinNum * sizeof(FaceColorType));
+        _orientations = (FaceOrientationType*)malloc(_skinNum * sizeof(FaceOrientationType));
+        for (int i = 0; i < _skinNum; i++) {
             self.faceColors[i] = (FaceColorType)[aDecoder decodeIntegerForKey:[NSString stringWithFormat:kSingleColorKeyFormat, i]];
             self.orientations[i] = (FaceOrientationType)[aDecoder decodeIntegerForKey:[NSString stringWithFormat:kSingleOrientationKeyFormat, i]];
         }
@@ -646,8 +646,8 @@
 }
 
 - (NSArray *)allFaceColors{
-    NSMutableArray *mutableColors = [NSMutableArray arrayWithCapacity:skinNum];
-    for (int i = 0; i < skinNum; i++) {
+    NSMutableArray *mutableColors = [NSMutableArray arrayWithCapacity:_skinNum];
+    for (int i = 0; i < _skinNum; i++) {
         [mutableColors addObject:[NSNumber numberWithInteger:_faceColors[i]]];
     }
     
@@ -656,8 +656,8 @@
 
 
 - (NSArray *)allOrientations{
-    NSMutableArray *mutableColors = [NSMutableArray arrayWithCapacity:skinNum];
-    for (int i = 0; i < skinNum; i++) {
+    NSMutableArray *mutableColors = [NSMutableArray arrayWithCapacity:_skinNum];
+    for (int i = 0; i < _skinNum; i++) {
         [mutableColors addObject:[NSNumber numberWithInteger:_orientations[i]]];
     }
     
@@ -670,7 +670,7 @@
     for (int i = 0; i < 6; i++) {
         [state setObject:[NSNumber numberWithInteger:NoColor] forKey:[NSNumber numberWithInteger:i]];
     }
-    for (int i = 0; i < skinNum; i++) {
+    for (int i = 0; i < _skinNum; i++) {
         [state setObject:[NSNumber numberWithInteger:_faceColors[i]] forKey:[NSNumber numberWithInteger:_orientations[i]]];
     }
     return [NSDictionary dictionaryWithDictionary:state];
@@ -678,7 +678,7 @@
 
 - (NSDictionary *)getCubieOrientationOfAxis{
     NSMutableDictionary *state = [NSMutableDictionary dictionaryWithCapacity:3];
-    for (int i = 0; i < skinNum; i++) {
+    for (int i = 0; i < _skinNum; i++) {
         switch (_faceColors[i]) {
             case UpColor:
                 [state setObject:[NSNumber numberWithInteger:_orientations[i]] forKey:[NSNumber numberWithInteger:Y]];
@@ -713,6 +713,11 @@
         [state setObject:[NSNumber numberWithInteger:self.faceColors[i]] forKey:[NSNumber numberWithInteger:self.orientations[i]]];
     }
     return [NSDictionary dictionaryWithDictionary:state];
+}
+
+
+- (BOOL)hasAllFacesBeenFilledWithColors{
+    return _completeFaceNum == _skinNum;
 }
 
 

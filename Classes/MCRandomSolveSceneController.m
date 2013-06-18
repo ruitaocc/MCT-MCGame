@@ -18,8 +18,7 @@
 @synthesize selected_face_index;
 @synthesize selected_index;
 
-+(MCRandomSolveSceneController*)sharedRandomSolveSceneController
-{
++(MCRandomSolveSceneController*)sharedRandomSolveSceneController {
     static MCRandomSolveSceneController *sharedRandomSolveSceneController;
     @synchronized(self)
     {
@@ -28,6 +27,8 @@
 	}
 	return sharedRandomSolveSceneController;
 }
+
+
 -(void)loadScene{
     needToLoadScene = NO;
 	RANDOM_SEED();
