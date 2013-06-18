@@ -60,7 +60,7 @@
        
         [self loadAtlas_TexturePacker_Data:TextureFileName_HomePageElement];
         [self loadAtlas_TexturePacker_Data:TextureFileName_LearnPageElement];
-        [self loadAtlas_TexturePacker_Data:TextureFileName_LearnPageElement];
+        [self loadAtlas_TexturePacker_Data:TextureFileName_NumberElement];
 
         //[self loadAtlasData:@"ButtonMerged"];
 	}

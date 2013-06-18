@@ -85,6 +85,7 @@
     //[countingPlaySceneController loadScene];
     
 /////////////////////////////
+    /*
     int i = 0;
     NSArray *familyNames = [UIFont familyNames];
     for( NSString *familyName in familyNames ){
@@ -95,7 +96,8 @@
             printf( "\tFont: %s \n", [fontName UTF8String] );
         } 
     }
-printf("shulian : %d",i);
+     printf("shulian : %d",i);
+     */
 
 }
 

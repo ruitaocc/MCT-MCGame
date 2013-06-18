@@ -14,17 +14,24 @@
     self = [super init];
 	if (self != nil) {
         m_hour = [[MCMultiDigitCounter alloc]initWithNumberOfDigit:2 andKeys:texturekeys];
-        separater21 = [[MCDotSeparater alloc]initWithUpKeyS:@"dotdot"];
+        separater21 = [[MCDotSeparater alloc]initWithUpKeyS:@"dotdot2"];
         m_minute = [[MCMultiDigitCounter alloc]initWithNumberOfDigit:2 andKeys:texturekeys];
-        separater22 = [[MCDotSeparater alloc]initWithUpKeyS:@"dotdot"];
+        separater22 = [[MCDotSeparater alloc]initWithUpKeyS:@"dotdot2"];
         m_second = [[MCMultiDigitCounter alloc]initWithNumberOfDigit:2 andKeys:texturekeys];
-        separater11 = [[MCDotSeparater alloc]initWithUpKeyS:@"dot"];
+        separater11 = [[MCDotSeparater alloc]initWithUpKeyS:@"dot2"];
         m_millisecond = [[MCMultiDigitCounter alloc]initWithNumberOfDigit:3 andKeys:texturekeys];
         m_nstimer = [[NSTimer alloc]init];
         totalTime = 0;
     }
 	return self;
 }
+-(void)reset{
+    [m_hour reset];
+    [m_millisecond reset];
+    [m_minute reset];
+    [m_second reset];
+    totalTime = 0;
+};
 -(void)setScale:(MCPoint)scales{
     [super setScale:scales];
     MCPoint per = MCPointMake(scales.x/30, scales.y, scales.z);

@@ -11,6 +11,8 @@
 #import "CoordinatingController.h"
 #import "MCMultiDigitCounter.h"
 #import "PauseMenu.h"
+#import "MCStringDefine.h"
+#import "MCLabel.h"
 @implementation MCCountingPlayInputViewController
 @synthesize stepcounter;
 @synthesize timer;
@@ -21,10 +23,10 @@
 	[interfaceObjects removeAllObjects];
     
   
-    NSString *counterName[10] = {@"zero",@"one",@"two",@"three",@"four",@"five",@"six",@"seven",@"eight",@"nine"};
+    NSString *counterName[10] = {@"zero2",@"one2",@"two2",@"three2",@"four2",@"five2",@"six2",@"seven2",@"eight2",@"nine2"};
      stepcounter = [[MCMultiDigitCounter alloc]initWithNumberOfDigit:3 andKeys:counterName];
-    [stepcounter setScale : MCPointMake(135, 72, 1.0)];
-    [stepcounter setTranslation :MCPointMake(380, -320, 0.0)];
+    [stepcounter setScale : MCPointMake(96, 50, 1.0)];
+    [stepcounter setTranslation :MCPointMake(450, -340, 0.0)];
     [stepcounter setActive:YES];
     [stepcounter awake];
     [interfaceObjects addObject:stepcounter];
@@ -38,27 +40,31 @@
     [interfaceObjects addObject:timer];
     
     
+    //lebel
+    //UI UI step counter label
+    MCLabel *counterLabel= [[MCLabel alloc]initWithNstring:TextureKey_step];
+    counterLabel.scale = [MCMaterialController getWidthAndHeightFromTextureFile:TextureFileName_NumberElement forKey:TextureKey_step];
+    [counterLabel setTranslation :MCPointMake(450, -285, 0.0)];
+    [counterLabel setActive:YES];
+    [counterLabel awake];
+    [interfaceObjects addObject:counterLabel];
+    [counterLabel release];
+    
+    //UI timer
+    MCLabel *timerLabel= [[MCLabel alloc]initWithNstring:TextureKey_time];
+    [timerLabel setScale : [MCMaterialController getWidthAndHeightFromTextureFile:TextureFileName_NumberElement forKey:TextureKey_time]];
+    [timerLabel setTranslation :MCPointMake(-450, -285, 0.0)];
+    [timerLabel setActive:YES];
+    [timerLabel awake];
+    [interfaceObjects addObject:timerLabel];
+    [timerLabel release];
+    
     
 	
-	// mainMenuBtn
-    //the texture 还没设计出来
-	MCTexturedButton * mainMenuBtn = [[MCTexturedButton alloc] initWithUpKey:@"mainMenuBtnUp" downKey:@"mainMenuBtnUp"];
-	mainMenuBtn.scale = MCPointMake(75, 35, 1.0);
-	mainMenuBtn.translation = MCPointMake(-450, 350.0, 0.0);
-	mainMenuBtn.target = self;
-	mainMenuBtn.buttonDownAction = @selector(mainMenuBtnDown);
-	mainMenuBtn.buttonUpAction = @selector(mainMenuBtnUp);
-	mainMenuBtn.active = YES;
-	[mainMenuBtn awake];
-	[interfaceObjects addObject:mainMenuBtn];
-	[mainMenuBtn release];
-   
-    
-        
-    //上一步/撤销
-	MCTexturedButton * undoCommand = [[MCTexturedButton alloc] initWithUpKey:@"previousSolutionBtnUp" downKey:@"previousSolutionBtnUp"];
-	undoCommand.scale = MCPointMake(40, 40, 1.0);
-	undoCommand.translation = MCPointMake(-60, -320.0, 0.0);
+	//上一步/撤销
+	MCTexturedButton * undoCommand = [[MCTexturedButton alloc] initWithUpKey:TextureKey_previousButtonUp downKey:TextureKey_previousButtonDown];
+	undoCommand.scale = [MCMaterialController getWidthAndHeightFromTextureFile:TextureFileName_LearnPageElement forKey:TextureKey_previousButtonUp];
+	undoCommand.translation = MCPointMake(-512+46, 0.0, 0.0);
 	undoCommand.target = self;
 	undoCommand.buttonDownAction = @selector(previousSolutionBtnDown);
 	undoCommand.buttonUpAction = @selector(previousSolutionBtnUp);
@@ -67,10 +73,12 @@
 	[interfaceObjects addObject:undoCommand];
 	[undoCommand release];
     
+    
+    
     //暂停
-	MCTexturedButton * pause = [[MCTexturedButton alloc] initWithUpKey:@"pauseSolutionBtnUp" downKey:@"pauseSolutionBtnUp"];
-	pause.scale = MCPointMake(40, 40, 1.0);
-	pause.translation = MCPointMake(0, -320.0, 0.0);
+	MCTexturedButton * pause = [[MCTexturedButton alloc] initWithUpKey:TextureKey_pauseButtonUp downKey:TextureKey_pauseButtonDown];
+	pause.scale = [MCMaterialController getWidthAndHeightFromTextureFile:TextureFileName_LearnPageElement forKey:TextureKey_pauseButtonUp];
+	pause.translation = MCPointMake(-455, 345, 0.0);
 	pause.target = self;
 	pause.buttonDownAction = @selector(pauseSolutionBtnDown);
 	pause.buttonUpAction = @selector(pauseSolutionBtnUp);
@@ -78,12 +86,12 @@
 	[pause awake];
 	[interfaceObjects addObject:pause];
 	[pause release];
-
+    
     
     //下一步/恢复
-	MCTexturedButton * redoCommand = [[MCTexturedButton alloc] initWithUpKey:@"nextSolutionBtnUp" downKey:@"nextSolutionBtnUp"];
-	redoCommand.scale = MCPointMake(40, 40, 1.0);
-	redoCommand.translation = MCPointMake(60, -320.0, 0.0);
+	MCTexturedButton * redoCommand = [[MCTexturedButton alloc] initWithUpKey:TextureKey_nextButtonUp downKey:TextureKey_nextButtonDown];
+	redoCommand.scale = [MCMaterialController getWidthAndHeightFromTextureFile:TextureFileName_LearnPageElement forKey:TextureKey_nextButtonUp];
+	redoCommand.translation = MCPointMake(512-46, 0.0, 0.0);
 	redoCommand.target = self;
 	redoCommand.buttonDownAction = @selector(nextSolutionBtnDown);
 	redoCommand.buttonUpAction = @selector(nextSolutionBtnUp);
@@ -176,20 +184,69 @@
 - (void)didCloseModalPanel:(UAModalPanel *)modalPanel {
 	UADebugLog(@"didCloseModalPanel called with modalPanel: %@", modalPanel);
     
-    if (!puseMenu) {
-        return;
-    }
-    if ([puseMenu pauseSelectType]==kPauseSelect_GoBack) {
-          [self mainMenuBtnUp];
-    }else if([puseMenu pauseSelectType]==kPauseSelect_GoOn){
-        //停止计时器
+    if (puseMenu){
         
-        [[[CoordinatingController sharedCoordinatingController]currentController]startAnimation];
-        [timer startTimer];
+        if ([puseMenu pauseSelectType]==kPauseSelect_GoBack) {
+            [self mainMenuBtnUp];
+        }else if([puseMenu pauseSelectType]==kPauseSelect_GoOn){
+            //停止计时器
+            
+            [timer startTimer];
+        }else if([puseMenu pauseSelectType]==kPauseSelect_Restart){
+            //更新UI模型
+           // MCNormalPlaySceneController *c = [MCNormalPlaySceneController sharedNormalPlaySceneController ];
+            //[c reloadScene];
+            //Default
+            //[self randomBtnUp];
+
+        }
+        
+        puseMenu = nil;
     }
+    if (finishView){
+        
+        if ([finishView finishViewType]==kFinishView_GoBack) {
+            [self mainMenuBtnUp];
+        }
+        finishView = nil;
+    }
+
 
 }
 
+-(void)showFinishView{
+    
+    //停止计时器
+    [timer stopTimer];
+    
+    //弹出对话框
+    finishView = [[FinishView alloc] initWithFrame:self.view.bounds title:@"结束"]; /*autorelease*/
+    finishView.isShowColseBtn = NO;
+    finishView.delegate = self;
+    finishView.alpha = 0.2;
+    
+    
+    // Set step count and learing time.
+    finishView.learningStepCountLabel.text = [NSString stringWithFormat:@"%d步", stepcounter.m_counterValue];
+    finishView.learningTimeLabel.text = [timer description];
+    finishView.lastingTime = timer.totalTime/1000;
+    finishView.stepCount = stepcounter.m_counterValue;
+    
+    // If no name, set 'Rubiker'
+    if ([finishView.userNameEditField.text compare:@""] == NSOrderedSame) {
+        finishView.userNameEditField.text = @"Rubiker";
+    }
+    
+    
+    ///////////////////////////////////
+	// Add the panel to our view
+	[self.view  addSubview:finishView];
+	///////////////////////////////////
+    
+	// Show the panel from the center of the button that was pressed
+	[finishView showFromPoint:CGPointMake(512,384)];
+    
+}
 
 
 

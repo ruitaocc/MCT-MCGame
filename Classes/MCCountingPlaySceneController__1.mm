@@ -29,6 +29,7 @@
 -(void)rotate:(RotateType *)rotateType{
     [magicCube rotateWithSingmasterNotation:[rotateType notation]];
     [magicCubeUI flashWithState:[ magicCube getColorInOrientationsOfAllCubie]];
+    [self checkIsOver];
 }
 
 
@@ -72,6 +73,13 @@
 }
 
 
+//检测是否结束
+-(void)checkIsOver{
+    if ([[self magicCube] isFinished]) {
+        [((MCCountingPlayInputViewController*)[self inputController])showFinishView];
+        NSLog(@"END form Scene");
+    }
+};
 
 
 

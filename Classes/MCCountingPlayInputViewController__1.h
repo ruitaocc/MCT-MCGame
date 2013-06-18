@@ -12,10 +12,12 @@
 #import "MCTimer.h"
 #import "UAModalPanel.h"
 #import "PauseMenu.h"
+#import "FinishView.h"
 @interface MCCountingPlayInputViewController : InputController<UAModalPanelDelegate>{
     MCMultiDigitCounter *stepcounter;
     MCTimer * timer;
     PauseMenu* puseMenu;
+    FinishView *finishView;
 }
 @property (nonatomic,retain) MCMultiDigitCounter *stepcounter;
 @property (nonatomic,retain) MCTimer * timer;
@@ -37,5 +39,6 @@
 -(void)mainMenuBtnUp;
 
 -(void)releaseInterface;
+-(void)showFinishView;
 
 @end

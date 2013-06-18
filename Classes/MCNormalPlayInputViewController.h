@@ -11,14 +11,15 @@
 #import "MCMultiDigitCounter.h"
 #import "MCTimer.h"
 #import "AskReloadView.h"
-#import "PauseMenu.h"
+//#import "PauseMenu.h"
 #import "MCActionQueue.h"
 #import "FinishView.h"
+#import "LearnPagePauseMenu.h"
 @interface MCNormalPlayInputViewController : InputController<UAModalPanelDelegate>{
     MCMultiDigitCounter *stepcounter;
     MCTimer * timer;
     AskReloadView* askReloadView;
-    PauseMenu *pauseMenuView;
+    LearnPagePauseMenu *learnPagePauseMenuView;
     FinishView *finishView;
     MCActionQueue *actionQueue;
     int randomRotateCount;
@@ -55,4 +56,6 @@
 -(void)showFinishView;
 - (void)releaseInterface;
 
+-(void)tipsBtnUp;
+-(void)tipsBtnDown;
 @end

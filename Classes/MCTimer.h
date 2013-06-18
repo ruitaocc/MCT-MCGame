@@ -24,6 +24,7 @@
 @property (assign)long  totalTime;
 - (id) initWithTextureKeys:(NSString *[])texturekeys;
 -(void)carryLogic;
+-(void)reset;
 -(void)startTimer;
 -(void)stopTimer;
 - (void)awake;

@@ -29,27 +29,27 @@
     randomRotateCount = 0;
     
     //UI step counter
-    NSString *counterName[10] = {@"zero",@"one",@"two",@"three",@"four",@"five",@"six",@"seven",@"eight",@"nine"};
+    NSString *counterName[10] = {@"zero2",@"one2",@"two2",@"three2",@"four2",@"five2",@"six2",@"seven2",@"eight2",@"nine2"};
     stepcounter = [[MCMultiDigitCounter alloc]initWithNumberOfDigit:3 andKeys:counterName];
-    [stepcounter setScale : MCPointMake(135, 72, 1.0)];
-    [stepcounter setTranslation :MCPointMake(420, -340, 0.0)];
+    [stepcounter setScale : MCPointMake(96, 50, 1.0)];
+    [stepcounter setTranslation :MCPointMake(450, -340, 0.0)];
     [stepcounter setActive:YES];
     [stepcounter awake];
     [interfaceObjects addObject:stepcounter];
     
     //UI UI step counter label
-    MCLabel *counterLabel= [[MCLabel alloc]initWithNstring:@"moveLabel"];
-    [counterLabel setScale : MCPointMake(140, 25, 1.0)];
-    [counterLabel setTranslation :MCPointMake(415, -285, 0.0)];
+    MCLabel *counterLabel= [[MCLabel alloc]initWithNstring:TextureKey_step];
+    counterLabel.scale = [MCMaterialController getWidthAndHeightFromTextureFile:TextureFileName_NumberElement forKey:TextureKey_step];
+    [counterLabel setTranslation :MCPointMake(450, -285, 0.0)];
     [counterLabel setActive:YES];
     [counterLabel awake];
     [interfaceObjects addObject:counterLabel];
     [counterLabel release];
     
     //UI timer
-    MCLabel *timerLabel= [[MCLabel alloc]initWithNstring:@"timeLabel"];
-    [timerLabel setScale : MCPointMake(75, 30, 1.0)];
-    [timerLabel setTranslation :MCPointMake(-450, -305, 0.0)];
+    MCLabel *timerLabel= [[MCLabel alloc]initWithNstring:TextureKey_time];
+    [timerLabel setScale : [MCMaterialController getWidthAndHeightFromTextureFile:TextureFileName_NumberElement forKey:TextureKey_time]];
+    [timerLabel setTranslation :MCPointMake(-450, -285, 0.0)];
     [timerLabel setActive:YES];
     [timerLabel awake];
     [interfaceObjects addObject:timerLabel];
@@ -264,16 +264,16 @@
     [timer stopTimer];
     
     //弹出对话框
-    pauseMenuView = [[PauseMenu alloc] initWithFrame:self.view.bounds title:@"暂停"]; /*autorelease*/
-    pauseMenuView.isShowColseBtn = NO;
-    pauseMenuView.delegate = self;
+    learnPagePauseMenuView = [[LearnPagePauseMenu alloc] initWithFrame:self.view.bounds title:@"暂停"]; /*autorelease*/
+    learnPagePauseMenuView.isShowColseBtn = NO;
+    learnPagePauseMenuView.delegate = self;
     ///////////////////////////////////
 	// Add the panel to our view
-	[self.view  addSubview:pauseMenuView];
+	[self.view  addSubview:learnPagePauseMenuView];
 	///////////////////////////////////
     
 	// Show the panel from the center of the button that was pressed
-	[pauseMenuView showFromPoint:CGPointMake(512,384)];
+	[learnPagePauseMenuView showFromPoint:CGPointMake(512,384)];
 }
 -(void)pauseSolutionBtnDown{}
 //恢复
@@ -357,6 +357,7 @@
 
             //更新UI模型
             [c reloadLastTime];
+            [[self timer]startTimer];
             NSLog(@"dd");
         }else if([askReloadView askReloadType]==kAskReloadView_Reload){
             //Default
@@ -371,22 +372,28 @@
     }
     
     
-    if (pauseMenuView){
+    if (learnPagePauseMenuView){
     
-        if ([pauseMenuView pauseSelectType]==kPauseSelect_GoBack) {
+        if ([learnPagePauseMenuView learnPagePauseSelectType]==kLearnPagePauseSelect_GoBack) {
             [self mainMenuBtnUp];
-        }else if([pauseMenuView pauseSelectType]==kPauseSelect_GoOn){
+        }else if([learnPagePauseMenuView learnPagePauseSelectType]==kLearnPagePauseSelect_GoOn){
             //停止计时器
     
             [timer startTimer];
-        }else if([pauseMenuView pauseSelectType]==kPauseSelect_Restart){
+        }else if([learnPagePauseMenuView learnPagePauseSelectType]==kLearnPagePauseSelect_Restart){
             //更新UI模型
-            MCNormalPlaySceneController *c = [MCNormalPlaySceneController sharedNormalPlaySceneController ];
-            [c reloadScene];
+            //MCNormalPlaySceneController *c = [MCNormalPlaySceneController sharedNormalPlaySceneController ];
+            //[c reloadScene];
+            //Default
+            [stepcounter reset];
+            [timer reset];
+          
+            [self randomBtnUp];
+
             
         }
         
-        pauseMenuView = nil;
+        learnPagePauseMenuView = nil;
     }
     if (finishView){
         
@@ -401,7 +408,7 @@
 -(void)showFinishView{
     
     //停止计时器
-    //[timer stopTimer];
+    [timer stopTimer];
     
     //弹出对话框
     finishView = [[FinishView alloc] initWithFrame:self.view.bounds title:@"结束"]; /*autorelease*/

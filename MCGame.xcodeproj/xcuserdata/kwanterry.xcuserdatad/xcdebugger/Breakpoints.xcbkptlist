@@ -125,7 +125,7 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Classes/MCNormalPlayInputViewController.m"
-         timestampString = "393159955.335705"
+         timestampString = "393228665.938413"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "359"
@@ -138,11 +138,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Classes/MCNormalPlayInputViewController.m"
-         timestampString = "393159955.335705"
+         timestampString = "393237140.403395"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "388"
-         endingLineNumber = "388"
+         startingLineNumber = "395"
+         endingLineNumber = "395"
          landmarkName = "-didCloseModalPanel:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -151,11 +151,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Classes/MCNormalPlayInputViewController.m"
-         timestampString = "393159955.335705"
+         timestampString = "393237140.403395"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "393"
-         endingLineNumber = "393"
+         startingLineNumber = "400"
+         endingLineNumber = "400"
          landmarkName = "-didCloseModalPanel:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -183,32 +183,6 @@
          startingLineNumber = "178"
          endingLineNumber = "178"
          landmarkName = "+getSingmasterNotationFromAxis:layer:direction:"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "Yes"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "Classes/MCNormalPlayInputViewController.m"
-         timestampString = "393164105.474206"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "201"
-         endingLineNumber = "201"
-         landmarkName = "-tipsBtnUp"
-         landmarkType = "5">
-      </FileBreakpoint>
-      <FileBreakpoint
-         shouldBeEnabled = "Yes"
-         ignoreCount = "0"
-         continueAfterRunningActions = "No"
-         filePath = "Classes/MCNormalPlayInputViewController.m"
-         timestampString = "393165709.612241"
-         startingColumnNumber = "9223372036854775807"
-         endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "202"
-         endingLineNumber = "202"
-         landmarkName = "-tipsBtnUp"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint

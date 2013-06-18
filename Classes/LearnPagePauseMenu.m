@@ -1,17 +1,21 @@
 //
-//  AskReloadView.m
+//  PauseMenu.m
 //  MCGame
 //
-//  Created by kwan terry on 13-3-9.
+//  Created by kwan terry on 13-3-4.
 //
 //
 
-#import "AskReloadView.h"
+#import "LearnPagePauseMenu.h"
 #define BLACK_BAR_COMPONENTS				{ 0.171875, 0.2421875, 0.3125, 0.8, 0.07, 0.07, 0.07, 1.0 }
 
-@implementation AskReloadView
-@synthesize askReloadType,viewLoadedFromXib;
+@interface LearnPagePauseMenu ()
 
+@end
+
+@implementation LearnPagePauseMenu
+@synthesize viewLoadedFromXib;
+@synthesize learnPagePauseSelectType;
 - (id)initWithFrame:(CGRect)frame title:(NSString *)title {
 	if ((self = [super initWithFrame:frame])) {
 		
@@ -20,7 +24,7 @@
 		self.headerLabel.text = title;
 		
         self.x_outerMargin = 330;
-        self.y_outerMargin = 200;
+        self.y_outerMargin = 175;
         self.isShowColseBtn = YES;
         // Margin between edge of panel and the content area. Default = 20.0
         self.innerMargin =  8.0f;
@@ -39,9 +43,11 @@
         
         // Shows the bounce animation. Default = YES
         self.shouldBounce = YES;
-        askReloadType = kAskReloadView_Default;
+        
         // Height of the title view. Default = 40.0f
         [self setTitleBarHeight:48.0f];
+        
+        learnPagePauseSelectType = kLearnPagePauseSelect_default;
         
         // The gradient style (Linear, linear reversed, radial, radial reversed, center highlight). Default = UAGradientBackgroundStyleLinear
         [[self titleBar] setGradientStyle:UAGradientBackgroundStyleLinear];
@@ -54,13 +60,11 @@
         
         // The header label, a UILabel with the same frame as the titleBar
         [self headerLabel].font = [UIFont boldSystemFontOfSize:floor(self.titleBarHeight / 2.0)];
-        
-        
-        [[NSBundle mainBundle] loadNibNamed:@"myaskreloadview" owner:self options:nil];
+        [[NSBundle mainBundle] loadNibNamed:@"learnpagepausemenu" owner:self options:nil];
         [viewLoadedFromXib setAlpha:0.5];
         [self.contentView addSubview:viewLoadedFromXib];
-        [self.contentView setAlpha:0.5];
     }
+    
     
     
     
@@ -77,17 +81,16 @@
 	
 	[viewLoadedFromXib setFrame:self.contentView.bounds];
 }
-
-
-- (IBAction)loadLastTimeBtnPressed:(id)sender{
-    askReloadType = kAskReloadView_LoadLastTime;
+- (IBAction)goOnBtnPressed:(id)sender{
+    learnPagePauseSelectType = kLearnPagePauseSelect_GoOn;
     if ([delegate respondsToSelector:@selector(shouldCloseModalPanel:)]) {
 		if ([delegate shouldCloseModalPanel:self]) {
 			UADebugLog(@"Closing using delegates for modalPanel: %@", self);
 			[self hide];
 		}
     }};
-- (IBAction)reloadBtnPressed:(id)sender{askReloadType = kAskReloadView_Reload;
+- (IBAction)restartBtnPressed:(id)sender{
+    learnPagePauseSelectType = kLearnPagePauseSelect_Restart;
     if ([delegate respondsToSelector:@selector(shouldCloseModalPanel:)]) {
 		if ([delegate shouldCloseModalPanel:self]) {
 			UADebugLog(@"Closing using delegates for modalPanel: %@", self);
@@ -95,10 +98,14 @@
 		}
     }
 };
-- (IBAction)cancelBtnPressed:(id)sender{
-    
-    askReloadType = kAskReloadView_Cancel;
-
+- (IBAction)goBackMainMenuBtnPressed:(id)sender{
+    //    CoordinatingController *coorCol = [CoordinatingController sharedCoordinatingController];
+    //    sceneController *tmp = [coorCol currentController];
+    //    InputController *inputCol = [tmp inputController];
+    //    if ([inputCol respondsToSelector:@selector(mainMenuPlayBtnUp)]) {
+    //        [inputCol performSelector:@selector(mainMenuPlayBtnUp)];
+    //    }
+    learnPagePauseSelectType = kLearnPagePauseSelect_GoBack;
     // Using Delegates
 	if ([delegate respondsToSelector:@selector(shouldCloseModalPanel:)]) {
 		if ([delegate shouldCloseModalPanel:self]) {
