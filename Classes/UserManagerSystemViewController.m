@@ -16,16 +16,11 @@
 @implementation UserManagerSystemViewController
 
 @synthesize scoreTable;
-@synthesize insertScoreTimeField;
-@synthesize insertScoreMoveField;
-
 @synthesize currentUserLabel;
 @synthesize totalFinishLabel;
 @synthesize totalGameTimeLabel;
 @synthesize totalMovesLabel;
 @synthesize totalLearnTimeLabel;
-@synthesize insertLearnTimeField;
-@synthesize insertLearnMoveField;
 @synthesize createUserPopover;
 @synthesize changeUserPopover;
 @synthesize tableSegment;
@@ -61,6 +56,9 @@
     //observer to refresh the table view
     //notification was sent by user manager controller
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateUserAndScore) name:@"UserManagerSystemUpdateScore" object:nil];
+    
+    // Init selector btn
+    [_totalRankBtn setEnabled:NO];
 }
 
 - (void)viewDidUnload
@@ -70,13 +68,11 @@
     [self setTotalFinishLabel:nil];
     [self setTotalGameTimeLabel:nil];
     [self setTotalMovesLabel:nil];
-    [self setInsertScoreTimeField:nil];
-    [self setInsertScoreMoveField:nil];
     [self setTableSegment:nil];
-    [self setInsertLearnTimeField:nil];
     [self setTotalLearnTimeLabel:nil];
-    [self setInsertLearnMoveField:nil];
     [self setBackBtn:nil];
+    [self setTotalRankBtn:nil];
+    [self setPersonalRankBtn:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
 }
@@ -92,14 +88,11 @@
     [totalFinishLabel release];
     [totalGameTimeLabel release];
     [totalMovesLabel release];
-    [insertScoreTimeField release];
-    [insertScoreMoveField release];
-    
     [tableSegment release];
-    [insertLearnTimeField release];
     [totalLearnTimeLabel release];
-    [insertLearnMoveField release];
     [_backBtn release];
+    [_totalRankBtn release];
+    [_personalRankBtn release];
     [super dealloc];
 }
 
@@ -212,18 +205,22 @@
     [changeUserPopover presentPopoverFromRect:tapbtn.frame inView:self.view permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
 }
 
-- (void)insertScorePress:(id)sender
-{
-    [userManagerController createNewScoreWithMove:[insertScoreMoveField.text integerValue] Time:[insertScoreTimeField.text floatValue]];
-}
 
-- (void)insertLearnPress:(id)sender
-{
-    [userManagerController createNewLearnWithMove:[insertLearnMoveField.text integerValue] Time:[insertLearnTimeField.text floatValue]];
-}
 
 - (void)segmentChange:(id)sender
 {
+    [scoreTable reloadData];
+}
+
+- (IBAction)totalRankBtnUp:(id)sender {
+    [_totalRankBtn setEnabled:NO];
+    [_personalRankBtn setEnabled:YES];
+    [scoreTable reloadData];
+}
+
+- (IBAction)personalRankBtnUp:(id)sender {
+    [_totalRankBtn setEnabled:YES];
+    [_personalRankBtn setEnabled:NO];
     [scoreTable reloadData];
 }
 

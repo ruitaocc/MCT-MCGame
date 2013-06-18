@@ -161,10 +161,11 @@
 }
 
 - (void)dealloc{
-    [super dealloc];
     [rotationQueue release];
     [extraRotations release];
     [queueCompleteDelegate release];
+    
+    [super dealloc];
 }
 
 
