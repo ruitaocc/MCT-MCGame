@@ -268,7 +268,7 @@
     }
     //更新下一次spaceindicator方向
     SingmasterNotation nextNotation = [playHelper nextNotation];
-    RotateNotationType nextRotateType = [MCTransformUtil getROtateNotationTypeWithSingmasterNotation:nextNotation];
+    RotateNotationType nextRotateType = [MCTransformUtil getRotateNotationTypeWithSingmasterNotation:nextNotation];
     [magicCubeUI nextSpaceIndicatorWithRotateNotationType:nextRotateType];
     
 };

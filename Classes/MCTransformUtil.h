@@ -29,7 +29,7 @@
 
 
 // Transfer SingmasterNotation to RotateNotationType containing axis, layer, direction and RotationType(Single, Double or Trible)
-+ (struct RotateNotationType)getROtateNotationTypeWithSingmasterNotation:(SingmasterNotation)notation;
++ (struct RotateNotationType)getRotateNotationTypeWithSingmasterNotation:(SingmasterNotation)notation;
 
 
 // By delivering pattern node to this function,

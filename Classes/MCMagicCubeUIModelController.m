@@ -1491,7 +1491,7 @@
     
     if ([target respondsToSelector:@selector(rotate:)]) {
        
-        RotateNotationType currentRotateType = [MCTransformUtil getROtateNotationTypeWithSingmasterNotation:notation];
+        RotateNotationType currentRotateType = [MCTransformUtil getRotateNotationTypeWithSingmasterNotation:notation];
         //是否处于两层连动状态
         if (currentRotateType.type == Single||currentRotateType.type == SingleTwoTimes) {
             twoLayerFlag[currentRotateType.layer] = NO;

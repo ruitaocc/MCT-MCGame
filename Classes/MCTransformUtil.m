@@ -392,7 +392,7 @@
 }
 
 
-+ (struct RotateNotationType)getROtateNotationTypeWithSingmasterNotation:(SingmasterNotation)notation {
++ (struct RotateNotationType)getRotateNotationTypeWithSingmasterNotation:(SingmasterNotation)notation {
     struct RotateNotationType returnValue;
     switch (notation) {
         case F:
