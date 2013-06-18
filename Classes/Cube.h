@@ -23,6 +23,7 @@
     int index_selectedFace;
     BOOL _isNeededToShowSpaceDirection;
     AxisType indicator_axis;
+    LayerRotationDirectionType indicator_direction;
 }
 
 @property (assign) int index;
@@ -30,6 +31,7 @@
 @property (assign) BOOL isLocked;
 @property (assign) BOOL isNeededToShowSpaceDirection;
 @property (assign) AxisType indicator_axis;
+@property (assign) LayerRotationDirectionType indicator_direction;
 @property (nonatomic,retain)NSMutableArray *cube6faces;
 @property (nonatomic,retain)NSMutableArray *cube6faces_locksign;
 @property (nonatomic,retain)NSMutableArray *cube6faces_direction_indicator;

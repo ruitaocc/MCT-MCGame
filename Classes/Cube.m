@@ -23,6 +23,7 @@
 @synthesize cube6faces_direction_indicator;
 @synthesize isNeededToShowSpaceDirection;
 @synthesize indicator_axis;
+@synthesize indicator_direction;
 @synthesize index,cube6faces;
 @synthesize cube6faces_locksign;
 @synthesize isLocked=_isLocked;
@@ -53,6 +54,7 @@
         for (int i=0; i<6; i++) {
             NSNumber *state = [states objectForKey:[NSNumber numberWithInteger:i ]];
             CubeFace* faces = [[CubeFace alloc]initWithVertexes:&Cube_vertex_coordinates_f[i*6*3] vertexCount:6 vertexSize:3 renderStyle:GL_TRIANGLES];
+            [faces setIsNeedRender:YES];
             [(CubeFace*)faces setMaterialKey:@"sixcolor"];
             [(CubeFace*)faces setUvCoordinates:&Cube_texture_coordinates_f[[state integerValue]*6*2]];
             [(CubeFace*)faces setNormals:&Cube_normal_vectors_f[i*6*3]];
@@ -65,6 +67,7 @@
         }
         for (int i=0; i<6; i++) {
             CubeFace* faces_locksign = [[CubeFace alloc]initWithVertexes:&Cube_LockSign_vertex_coordinates[i*6*3] vertexCount:6 vertexSize:3 renderStyle:GL_TRIANGLES];
+            [faces_locksign setIsNeedRender:YES];
             [(CubeFace*)faces_locksign setMaterialKey:@"LockTexture"];
             [(CubeFace*)faces_locksign setUvCoordinates:&Cube_LockSign_vertex_texture_coordinates[0]];
             [(CubeFace*)faces_locksign setNormals:&Cube_normal_vectors_f[i*6*3]];
@@ -76,6 +79,7 @@
         }
         for (int i=0; i<6; i++) {
             CubeFace* faces_direction_indicator = [[CubeFace alloc]initWithVertexes:&Cube_direction_indicator_vertex_coordinates[i*6*3] vertexCount:6 vertexSize:3 renderStyle:GL_TRIANGLES];
+            [faces_direction_indicator setIsNeedRender:NO];
             [(CubeFace*)faces_direction_indicator setMaterialKey:kSpaceDirectionIndicatorRight];
             [(CubeFace*)faces_direction_indicator setUvCoordinates:&Cube_LockSign_vertex_texture_coordinates[0]];
             [(CubeFace*)faces_direction_indicator setNormals:&Cube_normal_vectors_f[i*6*3]];
@@ -119,6 +123,7 @@
         for (int i=0; i<6; i++) {
             //NSNumber *state = [states objectForKey:[NSNumber numberWithInteger:i ]];
             CubeFace* faces = [[CubeFace alloc]initWithVertexes:&Cube_vertex_coordinates_f[i*6*3] vertexCount:6 vertexSize:3 renderStyle:GL_TRIANGLES];
+            [faces setIsNeedRender:YES];
             [(CubeFace*)faces setMaterialKey:@"sixcolor"];
             [(CubeFace*)faces setUvCoordinates:&Cube_texture_coordinates_f[i*6*2]];
             [(CubeFace*)faces setNormals:&Cube_normal_vectors_f[i*6*3]];
@@ -130,6 +135,7 @@
         }
         for (int i=0; i<6; i++) {
             CubeFace* faces_locksign = [[CubeFace alloc]initWithVertexes:&Cube_LockSign_vertex_coordinates[i*6*3] vertexCount:6 vertexSize:3 renderStyle:GL_TRIANGLES];
+            [faces_locksign setIsNeedRender:YES];
             [(CubeFace*)faces_locksign setMaterialKey:@"LockTexture"];
             [(CubeFace*)faces_locksign setUvCoordinates:&Cube_LockSign_vertex_texture_coordinates[0]];
             [(CubeFace*)faces_locksign setNormals:&Cube_normal_vectors_f[i*6*3]];
@@ -141,6 +147,7 @@
         }
         for (int i=0; i<6; i++) {
             CubeFace* faces_direction_indicator = [[CubeFace alloc]initWithVertexes:&Cube_direction_indicator_vertex_coordinates[i*6*3] vertexCount:6 vertexSize:3 renderStyle:GL_TRIANGLES];
+            [faces_direction_indicator setIsNeedRender:NO];
             [(CubeFace*)faces_direction_indicator setMaterialKey:kSpaceDirectionIndicatorRight];
             [(CubeFace*)faces_direction_indicator setUvCoordinates:&Cube_LockSign_vertex_texture_coordinates[0]];
             [(CubeFace*)faces_direction_indicator setNormals:&Cube_normal_vectors_f[i*6*3]];
@@ -166,41 +173,7 @@
     if ([self isLocked]) {
         [cube6faces_locksign makeObjectsPerformSelector:@selector(render)];
     }
-    if ([self isNeededToShowSpaceDirection]) {
-        switch (indicator_axis) {
-            case X:
-                for (int i = 0;i<6;i++) {
-                    if (i!=2&&i!=3 ) {
-                        CubeFace *tmp  =[cube6faces_direction_indicator objectAtIndex:i];
-                        [tmp render];
-                    }
-                
-                }
-                break;
-            case Y:
-                for (int i = 0;i<6;i++) {
-                    if (i!=0&&i!=1) {
-                        CubeFace *tmp  =[cube6faces_direction_indicator objectAtIndex:i];
-                        [tmp render];
-                    }
-                    
-                }
-                break;
-            case Z:
-                for (int i = 0;i<6;i++) {
-                    if (i!=5&&i!=6) {
-                        CubeFace *tmp  =[cube6faces_direction_indicator objectAtIndex:i];
-                        [tmp render];
-                    }
-                    
-                }
-                break;
-                
-            default:
-                break;
-        }
-        //[cube6faces_direction_indicator makeObjectsPerformSelector:@selector(render)];
-    }
+    [cube6faces_direction_indicator makeObjectsPerformSelector:@selector(render)];
 	glPopMatrix();
 }
 -(void)awake
@@ -214,7 +187,67 @@
 // called once every frame
 -(void)update
 {
-     
+    //self work
+    for (CubeFace *tmp in cube6faces_direction_indicator) {
+        if ([tmp isNeedRender]==YES) {
+            [tmp setIsNeedRender:NO];
+        }
+    }
+    if ([self isNeededToShowSpaceDirection]) {
+        switch (indicator_axis) {
+            case X:
+                for (int i = 0;i<6;i++) {
+                    if (((self.index%9)/3==2&&i==0)||((self.index/9)==2&&i==2)) {
+                        CubeFace *tmp  =[cube6faces_direction_indicator objectAtIndex:i];
+                        if (indicator_direction == CW) {
+                            [tmp setMaterialKey:kSpaceDirectionIndicatorUP];
+                        }else
+                            [tmp setMaterialKey:kSpaceDirectionIndicatorDown];
+                        [tmp setIsNeedRender:YES];
+                    }
+                    
+                }
+                break;
+            case Y:
+                for (int i = 0;i<6;i++) {
+                    if (((self.index/9)==2&&i==2)||((self.index%3)==2&&i==5)) {
+                        CubeFace *tmp  =[cube6faces_direction_indicator objectAtIndex:i];
+                        if (indicator_direction == CW) {
+                            [tmp setMaterialKey:kSpaceDirectionIndicatorLeft];
+                        }else
+                            [tmp setMaterialKey:kSpaceDirectionIndicatorRight];
+                        [tmp setIsNeedRender:YES];
+                    }
+                    
+                }
+                break;
+            case Z:
+                for (int i = 0;i<6;i++) {
+                    if ((((self.index%9)/3)==2&&i==0)||((self.index%3)==2&&i==5)) {
+                        CubeFace *tmp  =[cube6faces_direction_indicator objectAtIndex:i];
+                         if (i== 0) {
+                             if (indicator_direction == CW) {
+                                 [tmp setMaterialKey:kSpaceDirectionIndicatorRight];
+                             }else
+                                 [tmp setMaterialKey:kSpaceDirectionIndicatorLeft];
+                         }else{
+                             if (indicator_direction == CW) {
+                                 [tmp setMaterialKey:kSpaceDirectionIndicatorDown];
+                             }else
+                                 [tmp setMaterialKey:kSpaceDirectionIndicatorUP];
+                         }
+                        [tmp setIsNeedRender:YES];
+                    }
+                    
+                }
+                break;
+                
+            default:
+                break;
+        }
+        //
+    }
+    //super work
     if (collider != nil) [collider updateCollider:self];
     [super update];
        

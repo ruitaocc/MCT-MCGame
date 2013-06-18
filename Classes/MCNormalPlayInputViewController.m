@@ -12,6 +12,9 @@
 #import "CoordinatingController.h"
 #import "MCLabel.h"
 #import "MCPlayHelper.h"
+#import "MCStringDefine.h"
+#import "MCMaterialController.h"
+#import "Global.h"
 @implementation MCNormalPlayInputViewController
 @synthesize stepcounter;
 @synthesize timer;
@@ -22,6 +25,7 @@
 {
 	if (interfaceObjects == nil) interfaceObjects = [[NSMutableArray alloc] init];
 	[interfaceObjects removeAllObjects];
+    lastRandomAxis = X;
     randomRotateCount = 0;
     
     //UI step counter
@@ -60,15 +64,6 @@
     
     //add action queue
     NSMutableArray *actionname = [[NSMutableArray alloc]init];
-    /*
-    NSString *names[45]={@"",@"frontCCW",@"front2CW",@"backCW",@"backCCW",@"back2CW",@"rightCW",@"rightCCW",@"right2CW",@"leftCW",@"leftCCW",@"left2CW",@"upCW",@"upCCW",@"up2CW",@"downCW",@"downCCW",@"down2CW",@"xCW",@"xCCW",@"x2CW",@"yCW",@"yCCW",@"y2CW",@"zCW",@"zCCW",@"z2CW",@"frontTwoCW",@"frontTwoCCW",@"frontTwo2CW",@"backTwoCW",@"backTwoCCW",@"backTwo2CW",@"rightTwoCW",@"rightTwoCCW",@"rightTwo2CW",@"leftTwoCW",@"leftTwoCCW",@"leftTwo2CW",@"upTwoCW",@"upTwoCCW",@"upTwo2CW",@"downTwoCW",@"downTwoCCW",@"downTwo2CW"};
-    */
-     /*
-    for (int i=5; i<17; i++) {
-        [actionname addObject:names[i]];
-    }*/
-    //[actionname addObject:names[1]];
-
     actionQueue = [[MCActionQueue alloc]initWithActionList:actionname] ;
     [actionQueue setScale : MCPointMake(32, 32, 1.0)];
     [actionQueue setTranslation :MCPointMake(0, 340, 0.0)];
@@ -77,7 +72,7 @@
     [interfaceObjects addObject:actionQueue];
     [actionname release];
        
-	
+	/*
 	// mainMenuBtn
     //the texture 还没设计出来
 	MCTexturedButton * mainMenuBtn = [[MCTexturedButton alloc] initWithUpKey:@"mainMenuBtnUp" downKey:@"mainMenuBtnUp"];
@@ -90,7 +85,7 @@
 	[mainMenuBtn awake];
 	[interfaceObjects addObject:mainMenuBtn];
 	[mainMenuBtn release];
-    
+    */
     
     /*
     //队列的下一步
@@ -118,16 +113,16 @@
      */
        
     //提示按钮
-    MCTexturedButton * tips = [[MCTexturedButton alloc] initWithUpKey:@"tipsBtnUp" downKey:@"tipsBtnUp"];
-	tips.scale = MCPointMake(110, 55, 1.0);
-	tips.translation = MCPointMake(450, 320.0, 0.0);
-	tips.target = self;
-	tips.buttonDownAction = @selector(tipsBtnDown);
-	tips.buttonUpAction = @selector(tipsBtnUp);
-	tips.active = YES;
-	[tips awake];
-	[interfaceObjects addObject:tips];
-	[tips release];
+    MCTexturedButton * showTipsBtn = [[MCTexturedButton alloc] initWithUpKey:TextureKey_showTipsButtonUp downKey:TextureKey_showTipsButtonDown];
+	showTipsBtn.scale = [MCMaterialController getWidthAndHeightFromTextureFile:TextureFileName_LearnPageElement forKey:TextureKey_showTipsButtonUp];
+	showTipsBtn.translation = MCPointMake(512-41, 345, 0.0);
+	showTipsBtn.target = self;
+	showTipsBtn.buttonDownAction = @selector(tipsBtnDown);
+	showTipsBtn.buttonUpAction = @selector(tipsBtnUp);
+	showTipsBtn.active = YES;
+	[showTipsBtn awake];
+	[interfaceObjects addObject:showTipsBtn];
+	[showTipsBtn release];
 
     
     /*
@@ -144,9 +139,9 @@
 	[randomBtn release];
      */
     //上一步/撤销
-	MCTexturedButton * undoCommand = [[MCTexturedButton alloc] initWithUpKey:@"previousSolutionBtnUp" downKey:@"previousSolutionBtnUp"];
-	undoCommand.scale = MCPointMake(40, 40, 1.0);
-	undoCommand.translation = MCPointMake(-70, -345.0, 0.0);
+	MCTexturedButton * undoCommand = [[MCTexturedButton alloc] initWithUpKey:TextureKey_previousButtonUp downKey:TextureKey_previousButtonDown];
+	undoCommand.scale = [MCMaterialController getWidthAndHeightFromTextureFile:TextureFileName_LearnPageElement forKey:TextureKey_previousButtonUp];
+	undoCommand.translation = MCPointMake(-512+46, 0.0, 0.0);
 	undoCommand.target = self;
 	undoCommand.buttonDownAction = @selector(previousSolutionBtnDown);
 	undoCommand.buttonUpAction = @selector(previousSolutionBtnUp);
@@ -158,9 +153,9 @@
 
     
     //暂停
-	MCTexturedButton * pause = [[MCTexturedButton alloc] initWithUpKey:@"pauseSolutionBtnUp" downKey:@"pauseSolutionBtnUp"];
-	pause.scale = MCPointMake(40, 40, 1.0);
-	pause.translation = MCPointMake(0, -345.0, 0.0);
+	MCTexturedButton * pause = [[MCTexturedButton alloc] initWithUpKey:TextureKey_pauseButtonUp downKey:TextureKey_pauseButtonDown];
+	pause.scale = [MCMaterialController getWidthAndHeightFromTextureFile:TextureFileName_LearnPageElement forKey:TextureKey_pauseButtonUp];
+	pause.translation = MCPointMake(-455, 345, 0.0);
 	pause.target = self;
 	pause.buttonDownAction = @selector(pauseSolutionBtnDown);
 	pause.buttonUpAction = @selector(pauseSolutionBtnUp);
@@ -171,9 +166,9 @@
     
     
     //下一步/恢复
-	MCTexturedButton * redoCommand = [[MCTexturedButton alloc] initWithUpKey:@"nextSolutionBtnUp" downKey:@"nextSolutionBtnUp"];
-	redoCommand.scale = MCPointMake(40, 40, 1.0);
-	redoCommand.translation = MCPointMake(70, -345.0, 0.0);
+	MCTexturedButton * redoCommand = [[MCTexturedButton alloc] initWithUpKey:TextureKey_nextButtonUp downKey:TextureKey_nextButtonDown];
+	redoCommand.scale = [MCMaterialController getWidthAndHeightFromTextureFile:TextureFileName_LearnPageElement forKey:TextureKey_nextButtonUp];
+	redoCommand.translation = MCPointMake(512-46, 0.0, 0.0);
 	redoCommand.target = self;
 	redoCommand.buttonDownAction = @selector(nextSolutionBtnDown);
 	redoCommand.buttonUpAction = @selector(nextSolutionBtnUp);
@@ -210,7 +205,10 @@
 };
 -(void)tipsBtnDown{};
 -(void)randomBtnUp{
-    
+    //TIME_PER_ROTATION = 0.15;
+    //MCNormalPlaySceneController *c = [MCNormalPlaySceneController sharedNormalPlaySceneController ];
+    //[c setRotation_per_second:2];
+    //float TIME_PER_ROTATION = [c rotation_per_second];
     radomtimer = [NSTimer scheduledTimerWithTimeInterval:TIME_PER_ROTATION+0.1 target:self selector:@selector(randomRotateHelp1) userInfo:nil repeats:YES];
     [NSTimer scheduledTimerWithTimeInterval:(TIME_PER_ROTATION+0.1)*(RandomRotateMaxCount+1)+0.1 target:self selector:@selector(randomRotateHelp2) userInfo:nil repeats:NO];
 };
@@ -219,17 +217,25 @@
     MCNormalPlaySceneController *c = [MCNormalPlaySceneController sharedNormalPlaySceneController ];
     RANDOM_SEED();
     
+    //更新下一次spaceindicator方向
+   
     AxisType axis = (AxisType)(RANDOM_INT(0, 2));
+    if (axis==lastRandomAxis) {
+        axis = (AxisType)((lastRandomAxis+1)%3);
+    }
+    lastRandomAxis = axis;
     LayerRotationDirectionType direction = (LayerRotationDirectionType)(RANDOM_INT(0, 1));
     int layer = RANDOM_INT(0, 2);
-    
     [c rotateOnAxis:axis onLayer:layer inDirection:direction isTribleRotate:NO];
+    
     if (randomRotateCount == RandomRotateMaxCount) {
         [radomtimer invalidate];
     }
 }
 -(void)randomRotateHelp2{
     randomRotateCount =0;
+    [timer startTimer];
+    //TIME_PER_ROTATION = 0.5;
     [[self stepcounter]reset];
 }
 
@@ -354,10 +360,11 @@
             NSLog(@"dd");
         }else if([askReloadView askReloadType]==kAskReloadView_Reload){
             //Default
-            [timer startTimer];
+            [self randomBtnUp];
+            
         }else{
             //cancel
-            [self randomBtnUp];
+            
             
         }
         askReloadView = nil;

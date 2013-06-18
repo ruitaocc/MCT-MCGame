@@ -12,7 +12,7 @@
 #import "Cube.h"
 @class MCMobileObject;
 //旋转速度 帧率无关设计 2秒
-#define TIME_PER_ROTATION 0.5
+#define TIME_PER_ROTATION 0.25
 #define ROTATION_ANGLE 90
 #define CUBE_CUBE_GAP 0;
 #import "MCRay.h"
@@ -95,6 +95,9 @@ typedef enum _MagicCubeUIUsingMode {
     //
     int selected_cube_index;
     int selected_cube_face_index;
+    
+    //标记两层转动
+    BOOL twoLayerFlag[3];
 }
 @property (nonatomic,retain) NSMutableArray * lockedarray;
 @property (assign) id target;
@@ -112,7 +115,7 @@ typedef enum _MagicCubeUIUsingMode {
 -(void)flashWithState:(NSArray *)stateList;
 - (void) rotateOnAxis : (AxisType)axis onLayer: (int)layer inDirection: (LayerRotationDirectionType)direction isTribleRotate:(BOOL)is_trible_roate;
 
-- (void) nextSpaceIndicatorWithAxis : (AxisType)axis onLayer: (int)layer inDirection: (LayerRotationDirectionType)direction isTribleRotate:(BOOL)is_trible_roate;
+- (void) nextSpaceIndicatorWithRotateNotationType:(struct RotateNotationType)rotationNotationType;
 
 -(void)awake;
 -(void)render;

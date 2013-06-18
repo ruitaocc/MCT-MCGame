@@ -39,9 +39,12 @@
         [self loadTextureImage:@"cubeBlack3.png" materialKey:@"cubeTexture3"];
         [self loadTextureImage:@"cubeBlack3.png" materialKey:@"LockTexture"];
         [self loadTextureImage:@"background2.png" materialKey:@"background"];
+        
+        //space indicator
         [self loadTextureImage:@"arrow_left.png" materialKey:kSpaceDirectionIndicatorLeft];
-
         [self loadTextureImage:@"arrow_right.png" materialKey:kSpaceDirectionIndicatorRight];
+        [self loadTextureImage:@"arrow_up.png" materialKey:kSpaceDirectionIndicatorUP];
+        [self loadTextureImage:@"arrow_down.png" materialKey:kSpaceDirectionIndicatorDown];
 //cubeface
         [self loadTextureImage:PNG_YellowFace materialKey:Face_YellowKEY];
         [self loadTextureImage:PNG_WhiteFace materialKey:Face_WhiteKEY];
@@ -54,8 +57,10 @@
         [self loadAtlasData:@"countNumber"];
         [self loadAtlasData:@"cubeAction"];
 		[self loadAtlasData:@"particleAtlas"];
-        [self loadAtlas_TexturePacker_Data:@"home_button"];
-        
+       
+        [self loadAtlas_TexturePacker_Data:TextureFileName_HomePageElement];
+        [self loadAtlas_TexturePacker_Data:TextureFileName_LearnPageElement];
+
         //[self loadAtlasData:@"ButtonMerged"];
 	}
 	return self;

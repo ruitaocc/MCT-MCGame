@@ -9,5 +9,5 @@
 #import "MCTexturedMesh.h"
 
 @interface CubeFace : MCTexturedMesh
-
+@property(nonatomic,assign)BOOL isNeedRender;
 @end

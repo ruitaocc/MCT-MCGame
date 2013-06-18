@@ -23,6 +23,8 @@
     MCActionQueue *actionQueue;
     int randomRotateCount;
     NSTimer *radomtimer;
+    //优化random
+    AxisType lastRandomAxis;
 }
 
 @property (nonatomic,retain) MCActionQueue *actionQueue;

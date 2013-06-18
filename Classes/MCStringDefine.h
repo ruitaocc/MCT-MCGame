@@ -9,8 +9,8 @@
 #ifndef MCGame_MCStringDefine_h
 #define MCGame_MCStringDefine_h
 
-//按钮id
-#define TextureFileName_HomeButton @"home_button"
+//homepage ui element
+#define TextureFileName_HomePageElement @"home_element"
 #define TextureKey_learnButtonDown @"learnButtonDown"
 #define TextureKey_learnButtonUp @"learnButtonUp"
 #define TextureKey_optionButtonDown @"optionButtonDown"
@@ -21,6 +21,23 @@
 #define TextureKey_rankButtonUp @"rankButtonUp"
 #define TextureKey_solveButtonDown @"solveButtonDown"
 #define TextureKey_solveButtonUp @"solveButtonUp"
+#define TextureKey_appTitle @"appTitle"
+
+
+//learnpage ui element
+#define TextureFileName_LearnPageElement @"learn_element"
+#define TextureKey_hideTipsButtonDown @"hideTipsButtonDown"
+#define TextureKey_hideTipsButtonUp @"hideTipsButtonUp"
+#define TextureKey_nextButtonDown @"nextButtonDown"
+#define TextureKey_nextButtonUp @"nextButtonUp"
+#define TextureKey_pauseButtonDown @"pauseButtonDown"
+#define TextureKey_pauseButtonUp @"pauseButtonUp"
+#define TextureKey_previousButtonDown @"previousButtonDown"
+#define TextureKey_previousButtonUp @"previousButtonUp"
+#define TextureKey_showTipsButtonDown @"showTipsButtonDown"
+#define TextureKey_showTipsButtonUp @"showTipsButtonUp"
+
+
 
 
 //教学系统部分提示

@@ -10,8 +10,12 @@
 
 @implementation CubeFace
 // called once every frame
+@synthesize isNeedRender;
 -(void)render
 {
+    if (!isNeedRender) {
+        return;
+    }
     [[MCMaterialController sharedMaterialController] bindMaterial:materialKey];
 	
     

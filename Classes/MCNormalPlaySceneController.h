@@ -17,11 +17,13 @@
     MCPlayHelper * playHelper;
     BOOL isShowQueue;
      UILabel *_tipsLabel;
+    //float rotation_per_second;
 }
 @property (nonatomic,retain)MCMagicCube * magicCube;
 @property (nonatomic,retain)MCPlayHelper * playHelper;
 @property (assign)BOOL isShowQueue;
 @property(nonatomic,retain)UILabel *tipsLabel;
+//@property(assign)float rotation_per_second;
 + (MCNormalPlaySceneController*)sharedNormalPlaySceneController;
 -(void)loadScene;
 -(void)reloadScene;

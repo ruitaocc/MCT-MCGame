@@ -22,6 +22,7 @@
 @synthesize playHelper;
 @synthesize tipsLabel = _tipsLabel;
 @synthesize isShowQueue;
+//@synthesize rotation_per_second;
 +(MCNormalPlaySceneController*)sharedNormalPlaySceneController{
     static MCNormalPlaySceneController *sharedNormalPlaySceneController;
     @synchronized(self)
@@ -67,13 +68,16 @@
     [xyz_CoorInd release];
     */
     //提示标签
-    [self setTipsLabel: [[[UILabel alloc]initWithFrame:CGRectMake(800,150,200,160)] autorelease]];
+    [self setTipsLabel: [[[UILabel alloc]initWithFrame:CGRectMake(800,100,220,160)] autorelease]];
     [[self tipsLabel] setText:@""];
     [[self tipsLabel]setNumberOfLines:15];
     [[self tipsLabel] setLineBreakMode:UILineBreakModeWordWrap|UILineBreakModeTailTruncation];
     [[self tipsLabel] setOpaque:YES];
-    [[self tipsLabel]setBackgroundColor:[UIColor colorWithRed:0.5 green:0.5 blue:0.5 alpha:0.5]];
+    [[self tipsLabel]setBackgroundColor:[UIColor colorWithRed:1 green:1 blue:1 alpha:0.5]];
     //[[self tipsLabel]setAlpha:0.8];
+    //[[self tipsLabel]setFont:[UIFont fontWithName:@"zhongzheng" size:30]];
+    //[[[self tipsLabel] appearence]setFont:[UIFont fontWithName:@"zhongzheng" size:12]];
+    //[[UILabel appearence]setFont:[UIFont fontWithName:@"zhongzheng" size:12]];
     [openGLView addSubview:[self tipsLabel]];
     [[self tipsLabel]setHidden:YES];
     
@@ -84,7 +88,10 @@
 	[inputController loadInterface];
     
 }
-
+//-(void)setRotation_per_second:(float)rotation_per_second2{
+//    [magicCubeUI setTIME_PER_ROTATION:rotation_per_second];
+//    rotation_per_second = rotation_per_second2;
+//}
 -(void)reloadScene{
     //[super removeAllObjectFromScene];
     
@@ -116,18 +123,18 @@
 
 -(void)rotate:(RotateType *)rotateType{
     //流程1，通知数据模型UI已经旋转
-   
+   //本次转动notation
     [playHelper rotateWithSingmasterNotation:[rotateType notation]];
     
+    
+    //是否更新队列
     if (isShowQueue) {
         [self showQueue];
+        
     }
     
     [magicCubeUI flashWithState:[ magicCube getColorInOrientationsOfAllCubie]];
-    //更新spaceindicator方向
-    //SingmasterNotation nextNotation = [playHelper nextNotation];
-    //RotateNotationType *nextRotateType = [MCTransformUtil getROtateNotationTypeWithSingmasterNotation:nextNotation];
-    [magicCubeUI nextSpaceIndicatorWithAxis:Y onLayer:2 inDirection:CCW isTribleRotate:NO];
+    
     
     
     SoundSettingController *soundsetting = [SoundSettingController sharedsoundSettingController];
@@ -226,11 +233,13 @@
                 actionqueue = [applyResult objectForKey:KEY_ROTATION_QUEUE];
                 tipStrArray = [applyResult objectForKey:KEY_TIPS];
                 lockArray = [applyResult objectForKey:KEY_LOCKED_CUBIES];
+                
                 if([playHelper isOver]){
                     //弹出结束对话框
-                    [((MCNormalPlayInputViewController*)[self inputController])showFinishView];
+                   // [((MCNormalPlayInputViewController*)[self inputController])showFinishView];
                     break;
                 }
+                 
             };
             for(int i = 0;i<27;i++) {
                 [[[magicCubeUI array27Cube]objectAtIndex:i]setIsLocked:NO];
@@ -255,7 +264,10 @@
             //do nothing
         }
     }
-    
+    //更新下一次spaceindicator方向
+    SingmasterNotation nextNotation = [playHelper nextNotation];
+    RotateNotationType nextRotateType = [MCTransformUtil getROtateNotationTypeWithSingmasterNotation:nextNotation];
+    [magicCubeUI nextSpaceIndicatorWithRotateNotationType:nextRotateType];
     
 };
 //检测是否结束
@@ -276,4 +288,16 @@
 -(void)releaseSrc{
     [super releaseSrc];
 }
+-(UIFont*)customFont{// 你的字体路径
+    NSString *fontPath = [[NSBundle mainBundle] pathForResource:@"FZZZHONGHJW" ofType:@"TTF"];
+    NSURL *url = [NSURL fileURLWithPath:fontPath];
+    CGDataProviderRef fontDataProvider = CGDataProviderCreateWithURL(( CFURLRef)url);
+    if (fontDataProvider == NULL)        return nil;
+    CGFontRef newFont = CGFontCreateWithDataProvider(fontDataProvider);
+    CGDataProviderRelease(fontDataProvider);    if (newFont == NULL) return nil;
+    NSString *fontName = ( NSString *)CGFontCopyFullName(newFont);
+    UIFont *font = [UIFont fontWithName:fontName size:12];
+    CGFontRelease(newFont);        return font;
+}
+    
 @end

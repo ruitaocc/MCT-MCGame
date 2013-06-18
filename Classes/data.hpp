@@ -325,52 +325,52 @@ float Cube_LockSign_vertex_coordinates []={
 };
 float Cube_direction_indicator_vertex_coordinates []={
     //上
-    -0.48,0.54,-0.48,//left top(at rear)
-    -0.48,0.54,0.48,//left buttom(at front)
-    0.48,0.54,-0.48,//top right(at rear)
-    -0.48,0.54,0.48,//left buttom(at front)
-    0.48,0.54,0.48,//right buttom(at front)
-    0.48,0.54,-0.48,//top right(at rear)
+    -0.38,0.54,-0.38,//left top(at rear)
+    -0.38,0.54,0.38,//left buttom(at front)
+    0.38,0.54,-0.38,//top right(at rear)
+    -0.38,0.54,0.38,//left buttom(at front)
+    0.38,0.54,0.38,//right buttom(at front)
+    0.38,0.54,-0.38,//top right(at rear)
     
     
     //下
-    -0.48,-0.54,0.48,//buttom left front
-    -0.48,-0.54,-0.48,//left rear
-    0.48,-0.54,0.48,//rigtht buttom
-    -0.48,-0.54,-0.48,//left rear
-    0.48,-0.54,-0.48,//right rear
-    0.48,-0.54,0.48,//rigtht buttom
+    -0.38,-0.54,0.38,//buttom left front
+    -0.38,-0.54,-0.38,//left rear
+    0.38,-0.54,0.38,//rigtht buttom
+    -0.38,-0.54,-0.38,//left rear
+    0.38,-0.54,-0.38,//right rear
+    0.38,-0.54,0.38,//rigtht buttom
     
     //前
-    -0.48,0.48,0.54,//left top
-    -0.48,-0.48,0.54,//left buttom
-    0.48,0.48,0.54,//top right
-    -0.48,-0.48,0.54,//left buttom
-    0.48,-0.48,0.54,//right buttom
-    0.48,0.48,0.54,//top right
+    -0.38,0.38,0.54,//left top
+    -0.38,-0.38,0.54,//left buttom
+    0.38,0.38,0.54,//top right
+    -0.38,-0.38,0.54,//left buttom
+    0.38,-0.38,0.54,//right buttom
+    0.38,0.38,0.54,//top right
     
     //后
-    0.48,0.48,-0.54,//right top(when viewed from front)
-    0.48,-0.48,-0.54,//left top
-    -0.48,0.48,-0.54,//rigtht buttom
-    0.48,-0.48,-0.54,//rigtht buttom
-    -0.48,-0.48,-0.54,//left top
-    -0.48,0.48,-0.54,//left buttom
+    0.38,0.38,-0.54,//right top(when viewed from front)
+    0.38,-0.38,-0.54,//left top
+    -0.38,0.38,-0.54,//rigtht buttom
+    0.38,-0.38,-0.54,//rigtht buttom
+    -0.38,-0.38,-0.54,//left top
+    -0.38,0.38,-0.54,//left buttom
     //左
-    -0.54,0.48,-0.48,// top left
-    -0.54,-0.48,-0.48,//buttom left
-    -0.54,0.48,0.48,// top right
-    -0.54,-0.48,-0.48,//buttom left
-    -0.54,-0.48,0.48,//buttom right
-    -0.54,0.48,0.48,// top right
+    -0.54,0.38,-0.38,// top left
+    -0.54,-0.38,-0.38,//buttom left
+    -0.54,0.38,0.38,// top right
+    -0.54,-0.38,-0.38,//buttom left
+    -0.54,-0.38,0.38,//buttom right
+    -0.54,0.38,0.38,// top right
     
     //右
-    0.54,0.48,0.48,//top left
-    0.54,-0.48,0.48,//left
-    0.54,0.48,-0.48,//top right
-    0.54,-0.48,0.48,//left
-    0.54,-0.48,-0.48,//right
-    0.54,0.48,-0.48//top right
+    0.54,0.38,0.38,//top left
+    0.54,-0.38,0.38,//left
+    0.54,0.38,-0.38,//top right
+    0.54,-0.38,0.38,//left
+    0.54,-0.38,-0.38,//right
+    0.54,0.38,-0.38//top right
 };
 
 float Cube_LockSign_vertex_texture_coordinates []={

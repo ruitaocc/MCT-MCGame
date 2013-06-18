@@ -22,6 +22,7 @@
 @synthesize lockedarray;
 @synthesize selected_cube_face_index;
 @synthesize selected_cube_index;
+//@synthesize TIME_PER_ROTATION;
 //@synthesize magicCube;
 @synthesize undoManger;
 -(id)initiate{
@@ -33,7 +34,7 @@
         isAutoRotate = NO;
         //魔方整体三个参数
         scale = MCPointMake(84,84,84);
-        translation = MCPointMake(0,20,0);
+        translation = MCPointMake(0,10,0);
         rotation = MCPointMake(30,-45,0);
         rotationalSpeed = MCPointMake(0, 30, 0);
         MCPoint sub_scale  = MCPointMake(scale.x/3, scale.y/3, scale.z/3);
@@ -86,11 +87,15 @@
         rrrr = 0;
         isNeededToUpadteTwice = NO;
         isTribleAutoRotateIn_TECH_MODE = NO;
-        
+        //  TIME_PER_ROTATION =0.5;
+        for (int i =0 ; i<3; i++) {
+            twoLayerFlag[i] = NO;
+        }
         is_TECH_MODE_Rotate = NO;
         undoManger = [[NSUndoManager alloc]init];
         //default mode play mode;
         [self setUsingMode:PLAY_MODE];
+        
         //magicCube = [MCMagicCube getSharedMagicCube];
     }
     
@@ -166,7 +171,10 @@
         select_trackballRadius = 260;
         is_TECH_MODE_Rotate = NO;
         isTribleAutoRotateIn_TECH_MODE = NO;
-        
+       //  TIME_PER_ROTATION =0.5;
+        for (int i =0 ; i<3; i++) {
+            twoLayerFlag[i] = NO;
+        }
         isAddStepWhenUpdateState = YES;
         rrrr = 0;
         //default mode play mode;
@@ -1482,6 +1490,12 @@
     }
     
     if ([target respondsToSelector:@selector(rotate:)]) {
+       
+        RotateNotationType currentRotateType = [MCTransformUtil getROtateNotationTypeWithSingmasterNotation:notation];
+        //是否处于两层连动状态
+        if (currentRotateType.type == Single||currentRotateType.type == SingleTwoTimes) {
+            twoLayerFlag[currentRotateType.layer] = NO;
+        }
         RotateType * rotateType = [[RotateType alloc]init];
         [rotateType setNotation:notation];
         [target performSelector:@selector(rotate:) withObject:rotateType];
@@ -2075,20 +2089,20 @@ double FabsThetaBetweenV1andV2(const vec3& v1,const vec3& v2)
         return NO;
 
 };
-- (void) nextSpaceIndicatorWithAxis : (AxisType)axis onLayer: (int)layer inDirection: (LayerRotationDirectionType)direction isTribleRotate:(BOOL)is_trible_roate{
+- (void) nextSpaceIndicatorWithRotateNotationType:(struct RotateNotationType)rotationNotationType{
     for (Cube *tmp in array27Cube) {
         [tmp setIsNeededToShowSpaceDirection:NO];
     }
-    if (is_trible_roate!=YES) {
+    if (rotationNotationType.type==Single || rotationNotationType.type == SingleTwoTimes) {
         //获取layer的对象指针
-        switch (axis) {
+        switch (rotationNotationType.axis) {
             case X:
                 
                 for(int z = 0; z < 3; ++z)
                 {
                     for(int y = 0; y < 3; ++y)
                     {
-                        spaceIndicatorlayerPtr[y+z*3] = MagicCubeIndexState[z*9+y*3+layer];
+                        spaceIndicatorlayerPtr[y+z*3] = MagicCubeIndexState[z*9+y*3+rotationNotationType.layer];
                         
                     }
                 }
@@ -2099,7 +2113,7 @@ double FabsThetaBetweenV1andV2(const vec3& v1,const vec3& v2)
                 {
                     for(int x = 0; x < 3; ++x)
                     {
-                        spaceIndicatorlayerPtr[x+z*3] = MagicCubeIndexState[z*9+layer*3+x];
+                        spaceIndicatorlayerPtr[x+z*3] = MagicCubeIndexState[z*9+rotationNotationType.layer*3+x];
                         
                     }
                 }
@@ -2110,7 +2124,7 @@ double FabsThetaBetweenV1andV2(const vec3& v1,const vec3& v2)
                 {
                     for(int x = 0; x < 3; ++x)
                     {
-                        spaceIndicatorlayerPtr[x+y*3] = MagicCubeIndexState[layer*9+y*3+x];
+                        spaceIndicatorlayerPtr[x+y*3] = MagicCubeIndexState[rotationNotationType.layer*9+y*3+x];
                     }
                 }
                 break;
@@ -2119,13 +2133,35 @@ double FabsThetaBetweenV1andV2(const vec3& v1,const vec3& v2)
         }
         for (int i =0; i<9; i++) {
             [spaceIndicatorlayerPtr[i] setIsNeededToShowSpaceDirection:YES];
-            [spaceIndicatorlayerPtr[i] setIndicator_axis:axis];
+            [spaceIndicatorlayerPtr[i] setIndicator_axis:rotationNotationType.axis];
+            [spaceIndicatorlayerPtr[i] setIndicator_direction:rotationNotationType.direction];
 
         }
+    }else if(rotationNotationType.type == Double || rotationNotationType.type == DoubleTwoTimes){
+        //两层
+        if (twoLayerFlag[0]==NO&&twoLayerFlag[1]==NO&&twoLayerFlag[2]==NO) {
+            twoLayerFlag[rotationNotationType.layer] = YES;
+            twoLayerFlag[1] = YES;
+        }
+        for (int i = 0; i<3; i++) {
+            if (twoLayerFlag[i]==YES) {
+                RotateNotationType splitRotateNotation;
+                splitRotateNotation.axis = rotationNotationType.axis;
+                splitRotateNotation.layer = i;
+                splitRotateNotation.direction = rotationNotationType.direction;
+                splitRotateNotation.type = Single;
+                [self nextSpaceIndicatorWithRotateNotationType:splitRotateNotation];
+                break;
+            }
+        }
+        
     }else{
+        //三层
         for (Cube *tmp in array27Cube) {
             [tmp setIsNeededToShowSpaceDirection:YES];
-            [tmp setIndicator_axis:axis];
+            [tmp setIndicator_axis:rotationNotationType.axis];
+            [tmp setIndicator_direction:rotationNotationType.direction];
+
         }
     }
    
