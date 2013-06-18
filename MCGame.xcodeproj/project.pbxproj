@@ -53,7 +53,6 @@
 		A3587515161F2C3000998085 /* ButtonMerged.png in Resources */ = {isa = PBXBuildFile; fileRef = A3587514161F2C3000998085 /* ButtonMerged.png */; };
 		A3587518161F355400998085 /* MainWindow-iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = A3587517161F355400998085 /* MainWindow-iPad.xib */; };
 		A37F8812166B876C00B0A59F /* cubeBlack2.png in Resources */ = {isa = PBXBuildFile; fileRef = A37F8811166B876C00B0A59F /* cubeBlack2.png */; };
-		A392B23D17549A5A0091BFE9 /* PopUpInput.xib in Resources */ = {isa = PBXBuildFile; fileRef = A392B23C17549A590091BFE9 /* PopUpInput.xib */; };
 		A3994A0316E3B36F0037DBD0 /* UIView+JMNoise.m in Sources */ = {isa = PBXBuildFile; fileRef = A3994A0216E3B36F0037DBD0 /* UIView+JMNoise.m */; };
 		A3994A0616E3B3890037DBD0 /* close.png in Resources */ = {isa = PBXBuildFile; fileRef = A3994A0416E3B3890037DBD0 /* close.png */; };
 		A3994A0716E3B3890037DBD0 /* close@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A3994A0516E3B3890037DBD0 /* close@2x.png */; };
@@ -196,6 +195,11 @@
 		E0167DAC176373B400F420E8 /* MCInferenceEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = E0167DA5176373B400F420E8 /* MCInferenceEngine.m */; };
 		E0167DAD176373B400F420E8 /* MCWorkingMemory.m in Sources */ = {isa = PBXBuildFile; fileRef = E0167DA9176373B400F420E8 /* MCWorkingMemory.m */; };
 		E04E7E8717410E8E00403E92 /* MCCompositeRotationUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = E04E7E8617410E8E00403E92 /* MCCompositeRotationUtil.m */; };
+		E05DD5C417700ACE002C16CD /* CoordCube.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E05DD5B917700ACE002C16CD /* CoordCube.cpp */; };
+		E05DD5C517700ACE002C16CD /* CubieCube.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E05DD5BB17700ACE002C16CD /* CubieCube.cpp */; };
+		E05DD5C617700ACE002C16CD /* FaceCube.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E05DD5BD17700ACE002C16CD /* FaceCube.cpp */; };
+		E05DD5C717700ACE002C16CD /* Search.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E05DD5C017700ACE002C16CD /* Search.cpp */; };
+		E05DD5C817700ACE002C16CD /* Tools.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E05DD5C217700ACE002C16CD /* Tools.cpp */; };
 		E0A7F6D21762042600B285D4 /* MCLearn.m in Sources */ = {isa = PBXBuildFile; fileRef = E0A7F6D11762042600B285D4 /* MCLearn.m */; };
 		E0A7F6D71762047B00B285D4 /* MCSoundBoard.m in Sources */ = {isa = PBXBuildFile; fileRef = E0A7F6D41762047B00B285D4 /* MCSoundBoard.m */; };
 		E0A7F6D81762047B00B285D4 /* SoundSettingController.m in Sources */ = {isa = PBXBuildFile; fileRef = E0A7F6D61762047B00B285D4 /* SoundSettingController.m */; };
@@ -282,7 +286,6 @@
 		A3587517161F355400998085 /* MainWindow-iPad.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = "MainWindow-iPad.xib"; path = "iPad/MainWindow-iPad.xib"; sourceTree = "<group>"; };
 		A358752B161FF1C600998085 /* data.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = data.hpp; sourceTree = "<group>"; };
 		A37F8811166B876C00B0A59F /* cubeBlack2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cubeBlack2.png; sourceTree = "<group>"; };
-		A392B23C17549A590091BFE9 /* PopUpInput.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PopUpInput.xib; sourceTree = "<group>"; };
 		A3935B3C165A296400B60A07 /* MCRay.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MCRay.h; sourceTree = "<group>"; };
 		A3935B3D165A296400B60A07 /* MCRay.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = MCRay.mm; sourceTree = "<group>"; };
 		A3935B3E165A296400B60A07 /* MCGL.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MCGL.h; sourceTree = "<group>"; };
@@ -495,6 +498,17 @@
 		E0167DA9176373B400F420E8 /* MCWorkingMemory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCWorkingMemory.m; sourceTree = "<group>"; };
 		E04E7E8517410E8E00403E92 /* MCCompositeRotationUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCCompositeRotationUtil.h; sourceTree = "<group>"; };
 		E04E7E8617410E8E00403E92 /* MCCompositeRotationUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCCompositeRotationUtil.m; sourceTree = "<group>"; };
+		E05DD5B917700ACE002C16CD /* CoordCube.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CoordCube.cpp; sourceTree = "<group>"; };
+		E05DD5BA17700ACE002C16CD /* CoordCube.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoordCube.h; sourceTree = "<group>"; };
+		E05DD5BB17700ACE002C16CD /* CubieCube.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CubieCube.cpp; sourceTree = "<group>"; };
+		E05DD5BC17700ACE002C16CD /* CubieCube.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CubieCube.h; sourceTree = "<group>"; };
+		E05DD5BD17700ACE002C16CD /* FaceCube.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FaceCube.cpp; sourceTree = "<group>"; };
+		E05DD5BE17700ACE002C16CD /* FaceCube.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FaceCube.h; sourceTree = "<group>"; };
+		E05DD5BF17700ACE002C16CD /* GlobalDefine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GlobalDefine.h; sourceTree = "<group>"; };
+		E05DD5C017700ACE002C16CD /* Search.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Search.cpp; sourceTree = "<group>"; };
+		E05DD5C117700ACE002C16CD /* Search.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Search.h; sourceTree = "<group>"; };
+		E05DD5C217700ACE002C16CD /* Tools.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Tools.cpp; sourceTree = "<group>"; };
+		E05DD5C317700ACE002C16CD /* Tools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Tools.h; sourceTree = "<group>"; };
 		E0A7F6D01762042600B285D4 /* MCLearn.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCLearn.h; sourceTree = "<group>"; };
 		E0A7F6D11762042600B285D4 /* MCLearn.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCLearn.m; sourceTree = "<group>"; };
 		E0A7F6D31762047B00B285D4 /* MCSoundBoard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCSoundBoard.h; sourceTree = "<group>"; };
@@ -641,6 +655,7 @@
 		A32A33B5163BA72C007840CC /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				E05DD5B817700ABE002C16CD /* TwoPhaseSolver */,
 				A309D8F7165F867800CDA1DC /* DataModel */,
 				A3CB5FEB16ABD240006F03D5 /* UserSystem */,
 				A3E1ADB516A3B7D60050B52D /* ApplicationContext */,
@@ -1012,7 +1027,6 @@
 				A3E469EC1754823A00A31586 /* MCRandomSolveSceneController.m */,
 				A3E469EE175482AA00A31586 /* MCRandomSolveViewInputControllerViewController.h */,
 				A3E469EF175482AA00A31586 /* MCRandomSolveViewInputControllerViewController.m */,
-				A392B23C17549A590091BFE9 /* PopUpInput.xib */,
 			);
 			name = Scene3;
 			sourceTree = "<group>";
@@ -1246,6 +1260,24 @@
 			name = Util;
 			sourceTree = "<group>";
 		};
+		E05DD5B817700ABE002C16CD /* TwoPhaseSolver */ = {
+			isa = PBXGroup;
+			children = (
+				E05DD5B917700ACE002C16CD /* CoordCube.cpp */,
+				E05DD5BA17700ACE002C16CD /* CoordCube.h */,
+				E05DD5BB17700ACE002C16CD /* CubieCube.cpp */,
+				E05DD5BC17700ACE002C16CD /* CubieCube.h */,
+				E05DD5BD17700ACE002C16CD /* FaceCube.cpp */,
+				E05DD5BE17700ACE002C16CD /* FaceCube.h */,
+				E05DD5BF17700ACE002C16CD /* GlobalDefine.h */,
+				E05DD5C017700ACE002C16CD /* Search.cpp */,
+				E05DD5C117700ACE002C16CD /* Search.h */,
+				E05DD5C217700ACE002C16CD /* Tools.cpp */,
+				E05DD5C317700ACE002C16CD /* Tools.h */,
+			);
+			name = TwoPhaseSolver;
+			sourceTree = "<group>";
+		};
 		E06328C8165CCAF900C28336 /* OBJ Files */ = {
 			isa = PBXGroup;
 			children = (
@@ -1401,7 +1433,6 @@
 				A306688F17471FA000F6004F /* FaceColorMapping.plist in Resources */,
 				A3E469E5174CB0A100A31586 /* KnowledgeBase.sqlite3 in Resources */,
 				A3E469EA174CBC4100A31586 /* myFinishView.xib in Resources */,
-				A392B23D17549A5A0091BFE9 /* PopUpInput.xib in Resources */,
 				A3D67F821759E1F1002501B2 /* yellowface.png in Resources */,
 				A3D67F831759E1F1002501B2 /* whiteface.png in Resources */,
 				A3D67F841759E1F1002501B2 /* blueface.png in Resources */,
@@ -1550,6 +1581,11 @@
 				A3EDD6631769A6D2000C473B /* MCBackGroundTexMesh.m in Sources */,
 				A3EDD6681769DEC4000C473B /* MCCubieColorConstraintUtil.m in Sources */,
 				A3BFF63E177001B1004D18D8 /* MCFonts.m in Sources */,
+				E05DD5C417700ACE002C16CD /* CoordCube.cpp in Sources */,
+				E05DD5C517700ACE002C16CD /* CubieCube.cpp in Sources */,
+				E05DD5C617700ACE002C16CD /* FaceCube.cpp in Sources */,
+				E05DD5C717700ACE002C16CD /* Search.cpp in Sources */,
+				E05DD5C817700ACE002C16CD /* Tools.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
