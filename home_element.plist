@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!--
+===================================================================
+
+Sprite sheet file created for UIKit using TexturePacker
+http://www.codeandweb.com/texturepacker
+
+===================================================================
+$TexturePacker:SmartUpdate:b66173c6840862a356fb89310c885ddb$
+-->
+<plist version="1.0">
+	<dict>
+		<key>frames</key>
+		<dict>
+
+                        <key>appTitle</key>
+			<dict>
+				<key>x</key><real>2</real>
+				<key>y</key><real>356</real>
+				<key>w</key><real>546</real>
+				<key>h</key><real>151</real>
+				
+				
+			</dict>
+                        <key>learnButtonDown</key>
+			<dict>
+				<key>x</key><real>2</real>
+				<key>y</key><real>179</real>
+				<key>w</key><real>175</real>
+				<key>h</key><real>175</real>
+				
+				
+			</dict>
+                        <key>learnButtonUp</key>
+			<dict>
+				<key>x</key><real>2</real>
+				<key>y</key><real>2</real>
+				<key>w</key><real>175</real>
+				<key>h</key><real>175</real>
+				
+				
+			</dict>
+                        <key>optionButtonDown</key>
+			<dict>
+				<key>x</key><real>550</real>
+				<key>y</key><real>368</real>
+				<key>w</key><real>120</real>
+				<key>h</key><real>120</real>
+				
+				
+			</dict>
+                        <key>optionButtonUp</key>
+			<dict>
+				<key>x</key><real>550</real>
+				<key>y</key><real>246</real>
+				<key>w</key><real>120</real>
+				<key>h</key><real>120</real>
+				
+				
+			</dict>
+                        <key>raceButtonDown</key>
+			<dict>
+				<key>x</key><real>325</real>
+				<key>y</key><real>148</real>
+				<key>w</key><real>144</real>
+				<key>h</key><real>144</real>
+				
+				
+			</dict>
+                        <key>raceButtonUp</key>
+			<dict>
+				<key>x</key><real>325</real>
+				<key>y</key><real>2</real>
+				<key>w</key><real>144</real>
+				<key>h</key><real>144</real>
+				
+				
+			</dict>
+                        <key>rankButtonDown</key>
+			<dict>
+				<key>x</key><real>471</real>
+				<key>y</key><real>124</real>
+				<key>w</key><real>120</real>
+				<key>h</key><real>120</real>
+				
+				
+			</dict>
+                        <key>rankButtonUp</key>
+			<dict>
+				<key>x</key><real>471</real>
+				<key>y</key><real>2</real>
+				<key>w</key><real>120</real>
+				<key>h</key><real>120</real>
+				
+				
+			</dict>
+                        <key>solveButtonDown</key>
+			<dict>
+				<key>x</key><real>179</real>
+				<key>y</key><real>148</real>
+				<key>w</key><real>144</real>
+				<key>h</key><real>144</real>
+				
+				
+			</dict>
+                        <key>solveButtonUp</key>
+			<dict>
+				<key>x</key><real>179</real>
+				<key>y</key><real>2</real>
+				<key>w</key><real>144</real>
+				<key>h</key><real>144</real>
+				
+				
+			</dict>
+		</dict>
+		<key>meta</key>
+		<dict>
+			<key>image</key>
+			<string>home.png</string>
+			<key>width</key>
+			<integer>1024</integer>
+			<key>height</key>
+			<integer>512</integer>
+		</dict>
+	</dict>
+</plist>
