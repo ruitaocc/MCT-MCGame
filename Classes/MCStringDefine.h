@@ -37,6 +37,23 @@
 #define TextureKey_showTipsButtonDown @"showTipsButtonDown"
 #define TextureKey_showTipsButtonUp @"showTipsButtonUp"
 
+//learnpage ui element
+#define TextureFileName_NumberElement @"number_element"
+#define TextureKey_dot @"dot"
+#define TextureKey_dotdot @"dotdot"
+#define TextureKey_eight @"eight"
+#define TextureKey_five @"five"
+#define TextureKey_four @"four"
+#define TextureKey_night @"night"
+#define TextureKey_one @"one"
+#define TextureKey_seven @"seven"
+#define TextureKey_six @"six"
+#define TextureKey_step @"step"
+#define TextureKey_three @"three"
+#define TextureKey_time @"time"
+#define TextureKey_two @"two"
+#define TextureKey_zero @"zero"
+
 
 
 
