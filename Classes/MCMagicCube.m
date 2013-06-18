@@ -7,6 +7,7 @@
 //
 
 #import "MCMagicCube.h"
+#import "MCTransformUtil.h"
 
 #define kSingleCubieKeyFormat @"Cubie%d"
 #define kSingleOrientationToMagicCubeFaceKeyFormat @"OrientationToFace%d"
@@ -784,6 +785,85 @@
     
     
     return nil;
+}
+
+
+- (void)resetCenterFaceOrientation{
+    [self rotateWithSingmasterNotation:
+     [MCTransformUtil getPathToMakeCenterCubieAtPosition:[self coordinateValueOfCubieWithColorCombination:DColor]
+                                           inOrientation:Down]];
+    
+    [self rotateWithSingmasterNotation:
+     [MCTransformUtil getPathToMakeCenterCubieAtPosition:[self coordinateValueOfCubieWithColorCombination:FColor]
+                                           inOrientation:Front]];
+}
+
+- (NSString *)stateString{
+    if (_orientationToMagicCubeFace[Up] != Up || _orientationToMagicCubeFace[Front] != Front) {
+        return nil;
+    }
+    
+    NSMutableString *result = [NSMutableString stringWithCapacity:54];
+    
+    // Up face
+    for (int z = 0; z < 3; z++) {
+        for (int x = 0; x < 3; x++) {
+            [result appendString:[MCTransformUtil getStringTagOfFaceColor:[_magicCubies3D[x][2][z] faceColorInOrientation:Up]]];
+        }
+    }
+    
+    // Right face
+    for (int y = 2; y >= 0; y--) {
+        for (int z = 2; z >= 0; z--) {
+            [result appendString:[MCTransformUtil getStringTagOfFaceColor:[_magicCubies3D[2][y][z] faceColorInOrientation:Right]]];
+        }
+    }
+    
+    // Right face
+    for (int y = 2; y >= 0; y--) {
+        for (int x = 0; x < 3; x++) {
+            [result appendString:[MCTransformUtil getStringTagOfFaceColor:[_magicCubies3D[x][y][2] faceColorInOrientation:Front]]];
+        }
+    }
+    
+    // Down face
+    for (int z = 2; z >= 0; z--) {
+        for (int x = 0; x < 3; x++) {
+            [result appendString:[MCTransformUtil getStringTagOfFaceColor:[_magicCubies3D[x][0][z] faceColorInOrientation:Down]]];
+        }
+    }
+    
+    // Left face
+    for (int y = 2; y >= 0; y--) {
+        for (int z = 0; z < 3; z++) {
+            [result appendString:[MCTransformUtil getStringTagOfFaceColor:[_magicCubies3D[0][y][z] faceColorInOrientation:Left]]];
+        }
+    }
+    
+    // Back face
+    for (int y = 2; y >= 0; y--) {
+        for (int x = 2; x >= 0; x--) {
+            [result appendString:[MCTransformUtil getStringTagOfFaceColor:[_magicCubies3D[x][y][0] faceColorInOrientation:Back]]];
+        }
+    }
+    
+    
+    return [NSString stringWithString:result];
+}
+
+- (BOOL)hasAllFacesBeenFilledWithColors{
+    for (int i = 0; i < 13; i++) {
+        if (![_magicCubiesList[i] hasAllFacesBeenFilledWithColors]) {
+            return NO;
+        }
+    }
+    for (int i = 14; i < 27; i++) {
+        if (![_magicCubiesList[i] hasAllFacesBeenFilledWithColors]) {
+            return NO;
+        }
+    }
+    
+    return YES;
 }
 
 

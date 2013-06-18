@@ -1315,4 +1315,68 @@
     }
 }
 
+
++ (NSString *)getStringTagOfFaceColor:(FaceColorType)faceColor{
+    switch (faceColor) {
+        case UpColor:
+            return @"U";
+        case DownColor:
+            return @"D";
+        case FrontColor:
+            return @"F";
+        case BackColor:
+            return @"B";
+        case LeftColor:
+            return @"L";
+        case RightColor:
+            return @"R";
+        default:
+            break;
+    }
+    return @"B";
+}
+
+
++ (SingmasterNotation)singmasternotationFromStringTag:(NSString *)tag{
+    if ([tag compare:@"U"] == NSOrderedSame) {
+        return U;
+    } else if ([tag compare:@"U'"] == NSOrderedSame) {
+        return Ui;
+    } else if ([tag compare:@"U2"] == NSOrderedSame) {
+        return U2;
+    } else if ([tag compare:@"D"] == NSOrderedSame) {
+        return D;
+    } else if ([tag compare:@"D'"] == NSOrderedSame) {
+        return Di;
+    } else if ([tag compare:@"D2"] == NSOrderedSame) {
+        return D2;
+    } else if ([tag compare:@"F"] == NSOrderedSame) {
+        return F;
+    } else if ([tag compare:@"F'"] == NSOrderedSame) {
+        return Fi;
+    } else if ([tag compare:@"F2"] == NSOrderedSame) {
+        return F2;
+    } else if ([tag compare:@"B"] == NSOrderedSame) {
+        return B;
+    } else if ([tag compare:@"B'"] == NSOrderedSame) {
+        return Bi;
+    } else if ([tag compare:@"B2"] == NSOrderedSame) {
+        return B2;
+    } else if ([tag compare:@"L"] == NSOrderedSame) {
+        return L;
+    } else if ([tag compare:@"L'"] == NSOrderedSame) {
+        return Li;
+    } else if ([tag compare:@"L2"] == NSOrderedSame) {
+        return L2;
+    } else if ([tag compare:@"R"] == NSOrderedSame) {
+        return R;
+    } else if ([tag compare:@"R'"] == NSOrderedSame) {
+        return Ri;
+    } else if ([tag compare:@"R2"] == NSOrderedSame) {
+        return R2;
+    };
+    return NoneNotation;
+}
+
+
 @end

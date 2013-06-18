@@ -28,11 +28,14 @@
 // Only the center color will be filled, others will be filled with 'NoColor'
 - (id)initOnlyCenterColor:(struct Point3i)value;
 
-//return state in the "format" axis-orientation
+// Return state in the "format" axis-orientation
 - (NSDictionary *)getCubieOrientationOfAxis;
 
-//return state in the "format" orientation-facecolor
-//All 6 faces will be returned.
+// Return state in the "format" orientation-facecolor
+// All 6 faces will be returned.
 - (NSDictionary *)getCubieColorInOrientations;
+
+// If all faces of this cubie have been filled.
+- (BOOL)hasAllFacesBeenFilledWithColors;
 
 @end

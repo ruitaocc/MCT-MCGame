@@ -26,6 +26,9 @@
 
 -(void)mainMenuBtnUp;
 
+-(void)qSolveBtnDown;
+-(void)qSolveBtnUp;
+
 -(void)releaseInterface;
 
 @end

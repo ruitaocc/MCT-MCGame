@@ -60,12 +60,16 @@
 + (void)convertToTreeByExpandingNotSentence:(MCTreeNode *)node;
 
 
-//E.g BColor transfer to XXX(where)XXX colors cubie
+// E.g BColor transfer to XXX(where)XXX colors cubie
 + (NSString *)getConcreteDescriptionOfCubie:(ColorCombinationType)identity fromMgaicCube:(NSObject<MCMagicCubeDataSouceDelegate> *)mc;
 
-//E.g (0, 0, 1) transfers to front center
+// E.g (0, 0, 1) transfers to front center
 + (NSString *)getPositionDescription:(Point3i)position;
 
+// E.g UpColor - @"U"
++ (NSString *)getStringTagOfFaceColor:(FaceColorType)faceColor;
 
+// Only transfer U, D, F, B, L and R(can be appended ' or 2)
++ (SingmasterNotation)singmasternotationFromStringTag:(NSString *)tag;
 
 @end

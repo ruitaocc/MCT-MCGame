@@ -97,8 +97,8 @@
                 previousResult = Disaccord;
                 //extra queue
                 [self.extraRotations removeAllObjects];
-                [self.extraRotations addObject:[NSNumber numberWithInteger:[MCTransformUtil getContrarySingmasterNotation:previousRotation]]];
                 [self.extraRotations addObject:[NSNumber numberWithInteger:[MCTransformUtil getContrarySingmasterNotation:currentRotation]]];
+                [self.extraRotations addObject:[NSNumber numberWithInteger:[MCTransformUtil getContrarySingmasterNotation:previousRotation]]];
                 //self queue
                 [self.rotationQueue insertObject:[NSNumber numberWithInteger:[MCTransformUtil getContrarySingmasterNotation:currentRotation]] atIndex:currentRotationQueuePosition];
                 [self.rotationQueue insertObject:[NSNumber numberWithInteger:[MCTransformUtil getContrarySingmasterNotation:previousRotation]] atIndex:currentRotationQueuePosition];

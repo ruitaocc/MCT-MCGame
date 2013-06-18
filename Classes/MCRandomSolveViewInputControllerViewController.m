@@ -12,10 +12,20 @@
 #import "Global.h"
 #import "MCRandomSolveSceneController.h"
 #import "MCCubieColorConstraintUtil.h"
+#import "Search.h"
+#import "CoordCube.h"
+#import "Tools.h"
 
-@interface MCRandomSolveViewInputControllerViewController ()
+@interface MCRandomSolveViewInputControllerViewController () {
+    __block BOOL _isInitFinished;
+    __block BOOL _errorFlag;
+}
 
 - (void)checkConstraintAtCubie:(NSObject<MCCubieDelegate> *)cubie inOrientation:(FaceOrientationType)orientation;
+
+
+- (BOOL)solveMagicCube;
+
 
 @end
 
@@ -45,6 +55,20 @@
 	[interfaceObjects addObject:mainMenuBtn];
 	[mainMenuBtn release];
     
+    
+    //qsolvebtn
+    //the texture 还没设计出来
+	MCTexturedButton * qSolveBtn = [[MCTexturedButton alloc] initWithUpKey:@"playSolutionBtnUp" downKey:@"playSolutionBtnUp"];
+	qSolveBtn.scale = MCPointMake(40, 40, 1.0);
+	qSolveBtn.translation = MCPointMake(450, 350.0, 0.0);
+	qSolveBtn.target = self;
+	qSolveBtn.buttonDownAction = @selector(qSolveBtnDown);
+	qSolveBtn.buttonUpAction = @selector(qSolveBtnUp);
+	qSolveBtn.active = YES;
+	[qSolveBtn awake];
+	[interfaceObjects addObject:qSolveBtn];
+	[qSolveBtn release];
+
     //
    
     //
@@ -99,6 +123,30 @@
     }
     
     self.cubieArray = [NSArray arrayWithObjects:cubieDics count:27];
+    
+    
+    // Init for two phase solver
+    // Begin
+    _isInitFinished = NO;
+    _errorFlag = NO;
+    
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        
+        // Doing
+        CubieCube::initAllStaticVariables();
+        CoordCube::initAllStaticVariables();
+        
+        // Over
+        _isInitFinished = YES;
+    });
+}
+
+-(void)qSolveBtnDown{
+}
+
+-(void)qSolveBtnUp{
+    //do solve here
+    [self solveMagicCube];
 }
 
 -(void)mainMenuBtnDown{
@@ -218,6 +266,88 @@
     }
     
     [_selectMenu setMenusArray:loadMenuItems];
+}
+
+
+- (BOOL)solveMagicCube{
+    
+    MCMagicCube *magicCube = [[MCRandomSolveSceneController sharedRandomSolveSceneController] magicCube];
+    
+    // Check fill
+    if (![magicCube hasAllFacesBeenFilledWithColors]) {
+        NSLog(@"Fill all faces firstly!");
+        return NO;
+    }
+    
+    // check finish
+    if ([magicCube isFinished]) {
+        NSLog(@"The magic cube has been finished!");
+        return NO;
+    }
+    
+    if (_isInitFinished) {
+        
+        NSString *stateString = [magicCube stateString];
+        
+        if (stateString == nil) {
+            NSLog(@"Wrong state!");
+            return NO;
+        }
+        
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            
+            // Doing...
+            
+            // Solve result
+            NSString *resultString = [NSString stringWithUTF8String:Search::solution([stateString UTF8String], 24, 1000, true).c_str()];
+            
+            // Check error
+            if ([resultString hasPrefix:@"Error"]) {
+                // Set flag yes
+                _errorFlag = YES;
+                
+                if ([resultString hasSuffix:@"1"]) {
+                    NSLog(@"%@", @"There are not exactly nine facelets of each color!");
+                } else if ([resultString hasSuffix:@"2"]) {
+                    NSLog(@"%@", @"Not all 12 edges exist exactly once!");
+                } else if ([resultString hasSuffix:@"3"]) {
+                    NSLog(@"%@", @"Flip error: One edge has to be flipped!");
+                } else if ([resultString hasSuffix:@"4"]) {
+                    NSLog(@"%@", @"Not all 8 corners exist exactly once!");
+                } else if ([resultString hasSuffix:@"5"]) {
+                    NSLog(@"%@", @"Twist error: One corner has to be twisted!");
+                } else if ([resultString hasSuffix:@"6"]) {
+                    NSLog(@"%@", @"Parity error: Two corners or two edges have to be exchanged!");
+                } else if ([resultString hasSuffix:@"7"]) {
+                    NSLog(@"%@", @"No solution exists for the given maximum move number!");
+                } else if ([resultString hasSuffix:@"8"]) {
+                    NSLog(@"%@", @"Timeout, no solution found within given maximum time!");
+                }
+                
+            }
+            else {
+                NSArray *resultStringComponents = [resultString componentsSeparatedByString:@" "];
+                
+                // transfer
+                NSMutableArray *tags = [NSMutableArray arrayWithCapacity:[resultStringComponents count]];
+                for (int i = 0; i < [resultStringComponents count] - 1; i++) {
+                    NSString *component = [resultStringComponents objectAtIndex:i];
+                    [tags addObject:[MCTransformUtil getRotationTagFromSingmasterNotation:
+                                     [MCTransformUtil singmasternotationFromStringTag:component]]];
+                }
+                
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    // Complete
+                    NSLog(@"%@", tags);
+                });
+            }
+            
+        });
+        
+    }
+    
+    
+    return YES;
 }
 
 
