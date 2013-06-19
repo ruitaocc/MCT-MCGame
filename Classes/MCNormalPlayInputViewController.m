@@ -202,6 +202,7 @@
         [c showQueue];
     }else{
         [self.actionQueue removeAllActions];
+        [c closeSpaceIndicator];
         [[c tipsLabel]setText:@""];
         [[c playHelper] close];
     }

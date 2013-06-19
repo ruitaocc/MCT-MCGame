@@ -8,5 +8,5 @@
 
 #import <Foundation/Foundation.h>
 @interface MCFonts : NSObject
-+(UIFont*)customFont;
++(UIFont*)customFontWithSize:(int)size;
 @end
