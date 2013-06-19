@@ -1,118 +1,172 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
-<!--
-===================================================================
-
-Sprite sheet file created for UIKit using TexturePacker
-http://www.codeandweb.com/texturepacker
-
-===================================================================
-$TexturePacker:SmartUpdate:b7b189e1949afc7287bca14d0f699143$
--->
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
+<dict>
+	<key>frames</key>
 	<dict>
-		<key>frames</key>
+		<key>helpButtonDown@2x</key>
 		<dict>
-
-                        <key>hideTipsButtonDown@2X</key>
-			<dict>
-				<key>x</key><real>378</real>
-				<key>y</key><real>92</real>
-				<key>w</key><real>122</real>
-				<key>h</key><real>88</real>
-				
-				
-			</dict>
-                        <key>hideTipsButtonUp@2X</key>
-			<dict>
-				<key>x</key><real>378</real>
-				<key>y</key><real>2</real>
-				<key>w</key><real>122</real>
-				<key>h</key><real>88</real>
-				
-				
-			</dict>
-                        <key>nextButtonDown@2X</key>
-			<dict>
-				<key>x</key><real>190</real>
-				<key>y</key><real>120</real>
-				<key>w</key><real>186</real>
-				<key>h</key><real>116</real>
-				
-				
-			</dict>
-                        <key>nextButtonUp@2X</key>
-			<dict>
-				<key>x</key><real>2</real>
-				<key>y</key><real>120</real>
-				<key>w</key><real>186</real>
-				<key>h</key><real>116</real>
-				
-				
-			</dict>
-                        <key>pauseButtonDown@2X</key>
-			<dict>
-				<key>x</key><real>318</real>
-				<key>y</key><real>238</real>
-				<key>w</key><real>146</real>
-				<key>h</key><real>88</real>
-				
-				
-			</dict>
-                        <key>pauseButtonUp@2X</key>
-			<dict>
-				<key>x</key><real>170</real>
-				<key>y</key><real>238</real>
-				<key>w</key><real>146</real>
-				<key>h</key><real>88</real>
-				
-				
-			</dict>
-                        <key>previousButtonDown@2X</key>
-			<dict>
-				<key>x</key><real>190</real>
-				<key>y</key><real>2</real>
-				<key>w</key><real>186</real>
-				<key>h</key><real>116</real>
-				
-				
-			</dict>
-                        <key>previousButtonUp@2X</key>
-			<dict>
-				<key>x</key><real>2</real>
-				<key>y</key><real>2</real>
-				<key>w</key><real>186</real>
-				<key>h</key><real>116</real>
-				
-				
-			</dict>
-                        <key>showTipsButtonDown@2X</key>
-			<dict>
-				<key>x</key><real>2</real>
-				<key>y</key><real>350</real>
-				<key>w</key><real>166</real>
-				<key>h</key><real>110</real>
-				
-				
-			</dict>
-                        <key>showTipsButtonUp@2X</key>
-			<dict>
-				<key>x</key><real>2</real>
-				<key>y</key><real>238</real>
-				<key>w</key><real>166</real>
-				<key>h</key><real>110</real>
-				
-				
-			</dict>
+			<key>x</key>
+			<real>2</real>
+			<key>y</key>
+			<real>350</real>
+			<key>w</key>
+			<real>164</real>
+			<key>h</key>
+			<real>112</real>
 		</dict>
-		<key>meta</key>
+		<key>helpButtonUp@2x</key>
 		<dict>
-			<key>image</key>
-			<string>learn@2X.png</string>
-			<key>width</key>
-			<integer>512</integer>
-			<key>height</key>
-			<integer>512</integer>
+			<key>x</key>
+			<real>338</real>
+			<key>y</key>
+			<real>238</real>
+			<key>w</key>
+			<real>164</real>
+			<key>h</key>
+			<real>112</real>
+		</dict>
+		<key>hideTipsButtonDown@2X</key>
+		<dict>
+			<key>x</key>
+			<real>378</real>
+			<key>y</key>
+			<real>92</real>
+			<key>w</key>
+			<real>122</real>
+			<key>h</key>
+			<real>88</real>
+		</dict>
+		<key>hideTipsButtonUp@2X</key>
+		<dict>
+			<key>x</key>
+			<real>378</real>
+			<key>y</key>
+			<real>2</real>
+			<key>w</key>
+			<real>122</real>
+			<key>h</key>
+			<real>88</real>
+		</dict>
+		<key>nextButtonDown@2X</key>
+		<dict>
+			<key>x</key>
+			<real>190</real>
+			<key>y</key>
+			<real>120</real>
+			<key>w</key>
+			<real>186</real>
+			<key>h</key>
+			<real>116</real>
+		</dict>
+		<key>nextButtonUp@2X</key>
+		<dict>
+			<key>x</key>
+			<real>2</real>
+			<key>y</key>
+			<real>120</real>
+			<key>w</key>
+			<real>186</real>
+			<key>h</key>
+			<real>116</real>
+		</dict>
+		<key>pauseButtonDown@2X</key>
+		<dict>
+			<key>x</key>
+			<real>2</real>
+			<key>y</key>
+			<real>464</real>
+			<key>w</key>
+			<real>146</real>
+			<key>h</key>
+			<real>88</real>
+		</dict>
+		<key>pauseButtonUp@2X</key>
+		<dict>
+			<key>x</key>
+			<real>168</real>
+			<key>y</key>
+			<real>462</real>
+			<key>w</key>
+			<real>146</real>
+			<key>h</key>
+			<real>88</real>
+		</dict>
+		<key>previousButtonDown@2X</key>
+		<dict>
+			<key>x</key>
+			<real>190</real>
+			<key>y</key>
+			<real>2</real>
+			<key>w</key>
+			<real>186</real>
+			<key>h</key>
+			<real>116</real>
+		</dict>
+		<key>previousButtonUp@2X</key>
+		<dict>
+			<key>x</key>
+			<real>2</real>
+			<key>y</key>
+			<real>2</real>
+			<key>w</key>
+			<real>186</real>
+			<key>h</key>
+			<real>116</real>
+		</dict>
+		<key>showTipsButtonDown@2X</key>
+		<dict>
+			<key>x</key>
+			<real>170</real>
+			<key>y</key>
+			<real>238</real>
+			<key>w</key>
+			<real>166</real>
+			<key>h</key>
+			<real>110</real>
+		</dict>
+		<key>showTipsButtonUp@2X</key>
+		<dict>
+			<key>x</key>
+			<real>2</real>
+			<key>y</key>
+			<real>238</real>
+			<key>w</key>
+			<real>166</real>
+			<key>h</key>
+			<real>110</real>
+		</dict>
+		<key>qsolveButtonDown@2x</key>
+		<dict>
+			<key>x</key>
+			<real>334</real>
+			<key>y</key>
+			<real>352</real>
+			<key>w</key>
+			<real>164</real>
+			<key>h</key>
+			<real>110</real>
+		</dict>
+		<key>qsolveButtonUp@2x</key>
+		<dict>
+			<key>x</key>
+			<real>168</real>
+			<key>y</key>
+			<real>350</real>
+			<key>w</key>
+			<real>164</real>
+			<key>h</key>
+			<real>110</real>
 		</dict>
 	</dict>
+	<key>meta</key>
+	<dict>
+		<key>image</key>
+		<string>learn@2X.png</string>
+		<key>width</key>
+		<integer>512</integer>
+		<key>height</key>
+		<integer>1024</integer>
+	</dict>
+</dict>
 </plist>

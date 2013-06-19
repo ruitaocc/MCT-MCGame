@@ -76,10 +76,6 @@
 		A3BFF629176EECE0004D18D8 /* home_element.png in Resources */ = {isa = PBXBuildFile; fileRef = A3BFF625176EECE0004D18D8 /* home_element.png */; };
 		A3BFF62A176EECE0004D18D8 /* home_element@2X.plist in Resources */ = {isa = PBXBuildFile; fileRef = A3BFF626176EECE0004D18D8 /* home_element@2X.plist */; };
 		A3BFF62B176EECE0004D18D8 /* home_element@2X.png in Resources */ = {isa = PBXBuildFile; fileRef = A3BFF627176EECE0004D18D8 /* home_element@2X.png */; };
-		A3BFF631176EF8B7004D18D8 /* learn_element.plist in Resources */ = {isa = PBXBuildFile; fileRef = A3BFF62D176EF8B7004D18D8 /* learn_element.plist */; };
-		A3BFF632176EF8B7004D18D8 /* learn_element.png in Resources */ = {isa = PBXBuildFile; fileRef = A3BFF62E176EF8B7004D18D8 /* learn_element.png */; };
-		A3BFF633176EF8B7004D18D8 /* learn_element@2X.plist in Resources */ = {isa = PBXBuildFile; fileRef = A3BFF62F176EF8B7004D18D8 /* learn_element@2X.plist */; };
-		A3BFF634176EF8B7004D18D8 /* learn_element@2X.png in Resources */ = {isa = PBXBuildFile; fileRef = A3BFF630176EF8B7004D18D8 /* learn_element@2X.png */; };
 		A3BFF63A176FF679004D18D8 /* fzzzhonghjw.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A3BFF639176FF678004D18D8 /* fzzzhonghjw.ttf */; };
 		A3BFF63E177001B1004D18D8 /* MCFonts.m in Sources */ = {isa = PBXBuildFile; fileRef = A3BFF63D177001B1004D18D8 /* MCFonts.m */; };
 		A3BFF64117700956004D18D8 /* number_element.plist in Resources */ = {isa = PBXBuildFile; fileRef = A3BFF63F17700952004D18D8 /* number_element.plist */; };
@@ -133,6 +129,12 @@
 		A3D5B2E1175C590B00833F3F /* MCSystemSettingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A3D5B2DF175C590B00833F3F /* MCSystemSettingViewController.xib */; };
 		A3D5B2E9175CD87A00833F3F /* volumedown.png in Resources */ = {isa = PBXBuildFile; fileRef = A3D5B2E7175CD87900833F3F /* volumedown.png */; };
 		A3D5B2EA175CD87A00833F3F /* volumeup.png in Resources */ = {isa = PBXBuildFile; fileRef = A3D5B2E8175CD87900833F3F /* volumeup.png */; };
+		A3D670DA17715CF000302DB8 /* InfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = A3D670D917715CF000302DB8 /* InfoView.m */; };
+		A3D670DC17715D0900302DB8 /* myInfo.xib in Resources */ = {isa = PBXBuildFile; fileRef = A3D670DB17715D0800302DB8 /* myInfo.xib */; };
+		A3D670E917718AF100302DB8 /* learn_element.png in Resources */ = {isa = PBXBuildFile; fileRef = A3D670E517718AF100302DB8 /* learn_element.png */; };
+		A3D670EA17718AF100302DB8 /* learn_element@2X.png in Resources */ = {isa = PBXBuildFile; fileRef = A3D670E617718AF100302DB8 /* learn_element@2X.png */; };
+		A3D670EB17718AF100302DB8 /* learn_element.plist in Resources */ = {isa = PBXBuildFile; fileRef = A3D670E717718AF100302DB8 /* learn_element.plist */; };
+		A3D670EC17718AF100302DB8 /* learn_element@2X.plist in Resources */ = {isa = PBXBuildFile; fileRef = A3D670E817718AF100302DB8 /* learn_element@2X.plist */; };
 		A3D67F821759E1F1002501B2 /* yellowface.png in Resources */ = {isa = PBXBuildFile; fileRef = A3D67F7B1759E1F1002501B2 /* yellowface.png */; };
 		A3D67F831759E1F1002501B2 /* whiteface.png in Resources */ = {isa = PBXBuildFile; fileRef = A3D67F7C1759E1F1002501B2 /* whiteface.png */; };
 		A3D67F841759E1F1002501B2 /* blueface.png in Resources */ = {isa = PBXBuildFile; fileRef = A3D67F7D1759E1F1002501B2 /* blueface.png */; };
@@ -399,10 +401,6 @@
 		A3BFF625176EECE0004D18D8 /* home_element.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = home_element.png; sourceTree = "<group>"; };
 		A3BFF626176EECE0004D18D8 /* home_element@2X.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "home_element@2X.plist"; sourceTree = "<group>"; };
 		A3BFF627176EECE0004D18D8 /* home_element@2X.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "home_element@2X.png"; sourceTree = "<group>"; };
-		A3BFF62D176EF8B7004D18D8 /* learn_element.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = learn_element.plist; sourceTree = "<group>"; };
-		A3BFF62E176EF8B7004D18D8 /* learn_element.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = learn_element.png; sourceTree = "<group>"; };
-		A3BFF62F176EF8B7004D18D8 /* learn_element@2X.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "learn_element@2X.plist"; sourceTree = "<group>"; };
-		A3BFF630176EF8B7004D18D8 /* learn_element@2X.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "learn_element@2X.png"; sourceTree = "<group>"; };
 		A3BFF639176FF678004D18D8 /* fzzzhonghjw.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = fzzzhonghjw.ttf; sourceTree = "<group>"; };
 		A3BFF63C177001B1004D18D8 /* MCFonts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCFonts.h; sourceTree = "<group>"; };
 		A3BFF63D177001B1004D18D8 /* MCFonts.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCFonts.m; sourceTree = "<group>"; };
@@ -479,6 +477,13 @@
 		A3D5B2DF175C590B00833F3F /* MCSystemSettingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MCSystemSettingViewController.xib; sourceTree = "<group>"; };
 		A3D5B2E7175CD87900833F3F /* volumedown.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = volumedown.png; path = Classes/volumedown.png; sourceTree = "<group>"; };
 		A3D5B2E8175CD87900833F3F /* volumeup.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = volumeup.png; path = Classes/volumeup.png; sourceTree = "<group>"; };
+		A3D670D817715CF000302DB8 /* InfoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InfoView.h; sourceTree = "<group>"; };
+		A3D670D917715CF000302DB8 /* InfoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InfoView.m; sourceTree = "<group>"; };
+		A3D670DB17715D0800302DB8 /* myInfo.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = myInfo.xib; sourceTree = "<group>"; };
+		A3D670E517718AF100302DB8 /* learn_element.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = learn_element.png; sourceTree = "<group>"; };
+		A3D670E617718AF100302DB8 /* learn_element@2X.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "learn_element@2X.png"; sourceTree = "<group>"; };
+		A3D670E717718AF100302DB8 /* learn_element.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = learn_element.plist; sourceTree = "<group>"; };
+		A3D670E817718AF100302DB8 /* learn_element@2X.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "learn_element@2X.plist"; sourceTree = "<group>"; };
 		A3D67F7B1759E1F1002501B2 /* yellowface.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = yellowface.png; sourceTree = "<group>"; };
 		A3D67F7C1759E1F1002501B2 /* whiteface.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = whiteface.png; sourceTree = "<group>"; };
 		A3D67F7D1759E1F1002501B2 /* blueface.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blueface.png; sourceTree = "<group>"; };
@@ -1015,10 +1020,10 @@
 		A3BFF62C176EF89D004D18D8 /* learnpage_element */ = {
 			isa = PBXGroup;
 			children = (
-				A3BFF62D176EF8B7004D18D8 /* learn_element.plist */,
-				A3BFF62E176EF8B7004D18D8 /* learn_element.png */,
-				A3BFF62F176EF8B7004D18D8 /* learn_element@2X.plist */,
-				A3BFF630176EF8B7004D18D8 /* learn_element@2X.png */,
+				A3D670E517718AF100302DB8 /* learn_element.png */,
+				A3D670E617718AF100302DB8 /* learn_element@2X.png */,
+				A3D670E717718AF100302DB8 /* learn_element.plist */,
+				A3D670E817718AF100302DB8 /* learn_element@2X.plist */,
 			);
 			name = learnpage_element;
 			sourceTree = "<group>";
@@ -1191,6 +1196,9 @@
 				A3E469EC1754823A00A31586 /* MCRandomSolveSceneController.m */,
 				A3E469EE175482AA00A31586 /* MCRandomSolveViewInputControllerViewController.h */,
 				A3E469EF175482AA00A31586 /* MCRandomSolveViewInputControllerViewController.m */,
+				A3D670D817715CF000302DB8 /* InfoView.h */,
+				A3D670D917715CF000302DB8 /* InfoView.m */,
+				A3D670DB17715D0800302DB8 /* myInfo.xib */,
 			);
 			name = Scene3;
 			sourceTree = "<group>";
@@ -1708,10 +1716,6 @@
 				A3BFF629176EECE0004D18D8 /* home_element.png in Resources */,
 				A3BFF62A176EECE0004D18D8 /* home_element@2X.plist in Resources */,
 				A3BFF62B176EECE0004D18D8 /* home_element@2X.png in Resources */,
-				A3BFF631176EF8B7004D18D8 /* learn_element.plist in Resources */,
-				A3BFF632176EF8B7004D18D8 /* learn_element.png in Resources */,
-				A3BFF633176EF8B7004D18D8 /* learn_element@2X.plist in Resources */,
-				A3BFF634176EF8B7004D18D8 /* learn_element@2X.png in Resources */,
 				A3BFF63A176FF679004D18D8 /* fzzzhonghjw.ttf in Resources */,
 				A3BFF64117700956004D18D8 /* number_element.plist in Resources */,
 				A3BFF64217700956004D18D8 /* number_element.png in Resources */,
@@ -1792,6 +1796,11 @@
 				E0EC3717177154FC00835785 /* changeUserButtonUp_small.png in Resources */,
 				E0EC3718177154FC00835785 /* changeUserButtonUp_small@2x.png in Resources */,
 				E0EC371C17715B9C00835785 /* CountingFinishView.xib in Resources */,
+				A3D670DC17715D0900302DB8 /* myInfo.xib in Resources */,
+				A3D670E917718AF100302DB8 /* learn_element.png in Resources */,
+				A3D670EA17718AF100302DB8 /* learn_element@2X.png in Resources */,
+				A3D670EB17718AF100302DB8 /* learn_element.plist in Resources */,
+				A3D670EC17718AF100302DB8 /* learn_element@2X.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1910,6 +1919,7 @@
 				E05DD5C817700ACE002C16CD /* Tools.cpp in Sources */,
 				A3BFF6621770327D004D18D8 /* LearnPagePauseMenu.m in Sources */,
 				E0EC371D17715B9C00835785 /* CountingFinishView.m in Sources */,
+				A3D670DA17715CF000302DB8 /* InfoView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

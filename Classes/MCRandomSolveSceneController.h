@@ -19,6 +19,7 @@
     MCPlayHelper * playHelper;
     int selected_index;
     int selected_face_index;
+    
 }
 @property (nonatomic,retain)MCMagicCube * magicCube;
 @property (nonatomic,retain)MCPlayHelper * playHelper;
@@ -30,7 +31,16 @@
 
 -(void)loadScene;
 
+//将魔方设置为教学模式下
+-(void)turnTheMCUI_Into_SOlVE_Play_MODE;
+
+-(void)rotateWithSingmasterNotation:(SingmasterNotation)notation;
+
 -(void)releaseSrc;
+
+-(void)previousSolution;
+
+-(void)nextSolution;
 
 -(BOOL)isSelectOneFace:(vec2)touchpoint;
 

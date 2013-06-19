@@ -36,6 +36,8 @@
 #define TextureKey_previousButtonUp @"previousButtonUp"
 #define TextureKey_showTipsButtonDown @"showTipsButtonDown"
 #define TextureKey_showTipsButtonUp @"showTipsButtonUp"
+#define TextureKey_QsolveButtonDown @"qsolveButtonDown"
+#define TextureKey_QsolveButtonUp @"qsolveButtonUp"
 
 //learnpage ui element
 #define TextureFileName_NumberElement @"number_element"

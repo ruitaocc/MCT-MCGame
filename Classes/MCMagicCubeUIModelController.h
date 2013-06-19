@@ -22,7 +22,8 @@
 typedef enum _MagicCubeUIUsingMode {
     PLAY_MODE = 0,
     TECH_MODE =1,
-    SOlVE_Input_MODE=2
+    SOlVE_Input_MODE=2,
+    SOlVE_Play_MODE=3
 } MagicCubeUIUsingMode;
 
 @interface MCMagicCubeUIModelController : MCMobileObject{
@@ -137,5 +138,7 @@ typedef enum _MagicCubeUIUsingMode {
 -(BOOL)isSelectOneFace:(vec2)touchpoint;
 
 -(vec3)MapToSphere:(vec2 )touchpoint;
+
+-(void)switchToOrignalPlace;
 
 @end

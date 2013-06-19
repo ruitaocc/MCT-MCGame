@@ -38,7 +38,13 @@
     selected_face_index = -1;
     
     //初始化只有中心小块到魔方
-    magicCube = [[MCMagicCube magicCubeOnlyWithCenterColor]retain];
+    NSString *path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    
+    NSString *filePath = [path stringByAppendingPathComponent:TmpMagicCubeData];
+    
+    magicCube=[MCMagicCube unarchiveMagicCubeWithFile:filePath];
+    
+    //magicCube = [[MCMagicCube magicCubeOnlyWithCenterColor]retain];
     
     playHelper = [[MCPlayHelper playerHelperWithMagicCube:self.magicCube]retain];
     //背景
@@ -67,6 +73,24 @@
     
 }
 
+-(void)previousSolution{
+    NSLog(@"mc previousSolution");
+    [magicCubeUI performSelector:@selector(previousSolution)];
+}
+-(void)nextSolution{
+    NSLog(@"mc nextSolution");
+    [magicCubeUI performSelector:@selector(nextSolution)];
+}
+
+-(void)turnTheMCUI_Into_SOlVE_Play_MODE{
+    [magicCubeUI setUsingMode:SOlVE_Play_MODE];
+    [magicCubeUI switchToOrignalPlace];
+}
+-(void)rotateWithSingmasterNotation:(SingmasterNotation)notation{
+    RotateNotationType rotate = [MCTransformUtil getRotateNotationTypeWithSingmasterNotation:notation];
+    [magicCubeUI rotateOnAxis:rotate.axis onLayer:rotate.layer inDirection:rotate.direction isTribleRotate:NO];
+    [playHelper rotateWithSingmasterNotation:notation];
+};
 -(BOOL)isSelectOneFace:(vec2)touchpoint{
     if ([magicCubeUI isSelectOneFace:touchpoint]) {
         selected_index = [magicCubeUI selected_cube_index];

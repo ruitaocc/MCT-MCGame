@@ -16,6 +16,7 @@
 #define kCoordinateZKey @"CoordinateZ"
 #define kSkinNumKey @"SkinNum"
 #define kTypeKey @"Type"
+#define kCompleteFaceNum @"CompleteNum"
 #define kIdentityKey @"Identity"
 #define kSingleColorKeyFormat @"Color%d"
 #define kSingleOrientationKeyFormat @"Orientation%d"
@@ -34,9 +35,6 @@
 //initial the cube's data by orignal coordinate value
 - (id)initRightCubeWithCoordinate:(struct Point3i)value{
     if(self = [self init]){
-        // All face will be filled.
-        _completeFaceNum = 3;
-        
         // Before initiating, clear data
         [self clearData];
         // Detect the skin number and the cube type
@@ -55,6 +53,10 @@
             default:
                 break;
         }
+        
+        // All face will be filled.
+        _completeFaceNum = _skinNum;
+        
         //allocate memory for the skin
         _faceColors = (FaceColorType*)malloc(_skinNum * sizeof(FaceColorType));
         _orientations = (FaceOrientationType*)malloc(_skinNum * sizeof(FaceOrientationType));
@@ -116,8 +118,6 @@
 
 - (id)redefinedWithCoordinate:(struct Point3i)value orderedColors:(NSArray *)colors orderedOrientations:(NSArray *)ors{
     if([self init]){
-        // All face will be filled.
-        _completeFaceNum = 3;
         
         //before initiating, clear data
         [self clearData];
@@ -137,6 +137,10 @@
             default:
                 break;
         }
+        
+        // All face will be filled.
+        _completeFaceNum = _skinNum;
+        
         //allocate memory for the skin
         self.faceColors = (FaceColorType*)malloc(_skinNum * sizeof(FaceColorType));
         self.orientations = (FaceOrientationType*)malloc(_skinNum * sizeof(FaceOrientationType));
@@ -618,6 +622,7 @@
     [aCoder encodeInteger:coordinateValue.z forKey:kCoordinateZKey];
     [aCoder encodeInteger:_skinNum forKey:kSkinNumKey];
     [aCoder encodeInteger:_type forKey:kTypeKey];
+    [aCoder encodeInteger:_completeFaceNum forKey:kCompleteFaceNum];
     [aCoder encodeInteger:_identity forKey:kIdentityKey];
     for (int i = 0; i < _skinNum; i++) {
         [aCoder encodeInteger:_faceColors[i] forKey:[NSString stringWithFormat:kSingleColorKeyFormat, i]];
@@ -631,6 +636,7 @@
         coordinateValue.x = [aDecoder decodeIntegerForKey:kCoordinateXKey];
         coordinateValue.y = [aDecoder decodeIntegerForKey:kCoordinateYKey];
         coordinateValue.z = [aDecoder decodeIntegerForKey:kCoordinateZKey];
+        _completeFaceNum = [aDecoder decodeIntegerForKey:kCompleteFaceNum];
         self.skinNum = [aDecoder decodeIntegerForKey:kSkinNumKey];
         self.type = (CubieType)[aDecoder decodeIntegerForKey:kTypeKey];
         self.identity  = (ColorCombinationType)[aDecoder decodeIntegerForKey:kIdentityKey];

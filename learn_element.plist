@@ -1,118 +1,172 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
-<!--
-===================================================================
-
-Sprite sheet file created for UIKit using TexturePacker
-http://www.codeandweb.com/texturepacker
-
-===================================================================
-$TexturePacker:SmartUpdate:7fa138bd0ba0b930640d9ffeb5eba38f$
--->
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
+<dict>
+	<key>frames</key>
 	<dict>
-		<key>frames</key>
+		<key>helpButtonDown</key>
 		<dict>
-
-                        <key>hideTipsButtonDown</key>
-			<dict>
-				<key>x</key><real>192</real>
-				<key>y</key><real>48</real>
-				<key>w</key><real>61</real>
-				<key>h</key><real>44</real>
-				
-				
-			</dict>
-                        <key>hideTipsButtonUp</key>
-			<dict>
-				<key>x</key><real>192</real>
-				<key>y</key><real>2</real>
-				<key>w</key><real>61</real>
-				<key>h</key><real>44</real>
-				
-				
-			</dict>
-                        <key>nextButtonDown</key>
-			<dict>
-				<key>x</key><real>97</real>
-				<key>y</key><real>62</real>
-				<key>w</key><real>93</real>
-				<key>h</key><real>58</real>
-				
-				
-			</dict>
-                        <key>nextButtonUp</key>
-			<dict>
-				<key>x</key><real>2</real>
-				<key>y</key><real>62</real>
-				<key>w</key><real>93</real>
-				<key>h</key><real>58</real>
-				
-				
-			</dict>
-                        <key>pauseButtonDown</key>
-			<dict>
-				<key>x</key><real>162</real>
-				<key>y</key><real>122</real>
-				<key>w</key><real>73</real>
-				<key>h</key><real>44</real>
-				
-				
-			</dict>
-                        <key>pauseButtonUp</key>
-			<dict>
-				<key>x</key><real>87</real>
-				<key>y</key><real>122</real>
-				<key>w</key><real>73</real>
-				<key>h</key><real>44</real>
-				
-				
-			</dict>
-                        <key>previousButtonDown</key>
-			<dict>
-				<key>x</key><real>97</real>
-				<key>y</key><real>2</real>
-				<key>w</key><real>93</real>
-				<key>h</key><real>58</real>
-				
-				
-			</dict>
-                        <key>previousButtonUp</key>
-			<dict>
-				<key>x</key><real>2</real>
-				<key>y</key><real>2</real>
-				<key>w</key><real>93</real>
-				<key>h</key><real>58</real>
-				
-				
-			</dict>
-                        <key>showTipsButtonDown</key>
-			<dict>
-				<key>x</key><real>2</real>
-				<key>y</key><real>179</real>
-				<key>w</key><real>83</real>
-				<key>h</key><real>55</real>
-				
-				
-			</dict>
-                        <key>showTipsButtonUp</key>
-			<dict>
-				<key>x</key><real>2</real>
-				<key>y</key><real>122</real>
-				<key>w</key><real>83</real>
-				<key>h</key><real>55</real>
-				
-				
-			</dict>
+			<key>x</key>
+			<real>2</real>
+			<key>y</key>
+			<real>179</real>
+			<key>w</key>
+			<real>82</real>
+			<key>h</key>
+			<real>56</real>
 		</dict>
-		<key>meta</key>
+		<key>helpButtonUp</key>
 		<dict>
-			<key>image</key>
-			<string>learn.png</string>
-			<key>width</key>
-			<integer>256</integer>
-			<key>height</key>
-			<integer>256</integer>
+			<key>x</key>
+			<real>172</real>
+			<key>y</key>
+			<real>122</real>
+			<key>w</key>
+			<real>82</real>
+			<key>h</key>
+			<real>56</real>
+		</dict>
+		<key>hideTipsButtonDown</key>
+		<dict>
+			<key>x</key>
+			<real>192</real>
+			<key>y</key>
+			<real>48</real>
+			<key>w</key>
+			<real>61</real>
+			<key>h</key>
+			<real>44</real>
+		</dict>
+		<key>hideTipsButtonUp</key>
+		<dict>
+			<key>x</key>
+			<real>192</real>
+			<key>y</key>
+			<real>2</real>
+			<key>w</key>
+			<real>61</real>
+			<key>h</key>
+			<real>44</real>
+		</dict>
+		<key>nextButtonDown</key>
+		<dict>
+			<key>x</key>
+			<real>97</real>
+			<key>y</key>
+			<real>62</real>
+			<key>w</key>
+			<real>93</real>
+			<key>h</key>
+			<real>58</real>
+		</dict>
+		<key>nextButtonUp</key>
+		<dict>
+			<key>x</key>
+			<real>2</real>
+			<key>y</key>
+			<real>62</real>
+			<key>w</key>
+			<real>93</real>
+			<key>h</key>
+			<real>58</real>
+		</dict>
+		<key>pauseButtonDown</key>
+		<dict>
+			<key>x</key>
+			<real>2</real>
+			<key>y</key>
+			<real>237</real>
+			<key>w</key>
+			<real>73</real>
+			<key>h</key>
+			<real>44</real>
+		</dict>
+		<key>pauseButtonUp</key>
+		<dict>
+			<key>x</key>
+			<real>86</real>
+			<key>y</key>
+			<real>236</real>
+			<key>w</key>
+			<real>73</real>
+			<key>h</key>
+			<real>44</real>
+		</dict>
+		<key>previousButtonDown</key>
+		<dict>
+			<key>x</key>
+			<real>97</real>
+			<key>y</key>
+			<real>2</real>
+			<key>w</key>
+			<real>93</real>
+			<key>h</key>
+			<real>58</real>
+		</dict>
+		<key>previousButtonUp</key>
+		<dict>
+			<key>x</key>
+			<real>2</real>
+			<key>y</key>
+			<real>2</real>
+			<key>w</key>
+			<real>93</real>
+			<key>h</key>
+			<real>58</real>
+		</dict>
+		<key>showTipsButtonDown</key>
+		<dict>
+			<key>x</key>
+			<real>87</real>
+			<key>y</key>
+			<real>122</real>
+			<key>w</key>
+			<real>83</real>
+			<key>h</key>
+			<real>55</real>
+		</dict>
+		<key>showTipsButtonUp</key>
+		<dict>
+			<key>x</key>
+			<real>2</real>
+			<key>y</key>
+			<real>122</real>
+			<key>w</key>
+			<real>83</real>
+			<key>h</key>
+			<real>55</real>
+		</dict>
+		<key>qsolveButtonDown</key>
+		<dict>
+			<key>x</key>
+			<real>170</real>
+			<key>y</key>
+			<real>180</real>
+			<key>w</key>
+			<real>82</real>
+			<key>h</key>
+			<real>55</real>
+		</dict>
+		<key>qsolveButtonUp</key>
+		<dict>
+			<key>x</key>
+			<real>86</real>
+			<key>y</key>
+			<real>179</real>
+			<key>w</key>
+			<real>82</real>
+			<key>h</key>
+			<real>55</real>
 		</dict>
 	</dict>
+	<key>meta</key>
+	<dict>
+		<key>image</key>
+		<string>learn.png</string>
+		<key>width</key>
+		<integer>256</integer>
+		<key>height</key>
+		<integer>512</integer>
+	</dict>
+</dict>
 </plist>

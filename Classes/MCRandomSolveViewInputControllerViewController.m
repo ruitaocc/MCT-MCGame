@@ -17,8 +17,11 @@
 #import "Tools.h"
 #import "MCLabel.h"
 #import "MCStringDefine.h"
+#import "SVProgressHUD.h"
+
+static BOOL _isInitFinished = NO;
+
 @interface MCRandomSolveViewInputControllerViewController () {
-    __block BOOL _isInitFinished;
     __block BOOL _errorFlag;
 }
 
@@ -43,19 +46,21 @@
     
 	if (interfaceObjects == nil) interfaceObjects = [[NSMutableArray alloc] init];
 	[interfaceObjects removeAllObjects];
-    
-	// mainMenuBtn
-    //the texture 还没设计出来
-	MCTexturedButton * mainMenuBtn = [[MCTexturedButton alloc] initWithUpKey:@"mainMenuBtnUp" downKey:@"mainMenuBtnUp"];
-	mainMenuBtn.scale = MCPointMake(75, 35, 1.0);
-	mainMenuBtn.translation = MCPointMake(-450, 350.0, 0.0);
-	mainMenuBtn.target = self;
-	mainMenuBtn.buttonDownAction = @selector(mainMenuBtnDown);
-	mainMenuBtn.buttonUpAction = @selector(mainMenuBtnUp);
-	mainMenuBtn.active = YES;
-	[mainMenuBtn awake];
-	[interfaceObjects addObject:mainMenuBtn];
-	[mainMenuBtn release];
+    isFinishInput = NO;
+    totalMove = 0;
+    currentMove = -1;
+    //暂停
+	MCTexturedButton * pause = [[MCTexturedButton alloc] initWithUpKey:TextureKey_pauseButtonUp downKey:TextureKey_pauseButtonDown];
+	pause.scale = [MCMaterialController getWidthAndHeightFromTextureFile:TextureFileName_LearnPageElement forKey:TextureKey_pauseButtonUp];
+	pause.translation = MCPointMake(-455, 345, 0.0);
+	pause.target = self;
+	pause.buttonDownAction = @selector(pauseSolutionBtnDown);
+	pause.buttonUpAction = @selector(pauseSolutionBtnUp);
+	pause.active = YES;
+	[pause awake];
+	[interfaceObjects addObject:pause];
+	[pause release];
+
     
     //UI step counter
     NSString *counterName[10] = {@"zero2",@"one2",@"two2",@"three2",@"four2",@"five2",@"six2",@"seven2",@"eight2",@"nine2"};
@@ -86,11 +91,12 @@
     [interfaceObjects addObject:actionQueue];
     [actionname release];
     
+    
     //qsolvebtn
     //the texture 还没设计出来
-	MCTexturedButton * qSolveBtn = [[MCTexturedButton alloc] initWithUpKey:@"playSolutionBtnUp" downKey:@"playSolutionBtnUp"];
-	qSolveBtn.scale = MCPointMake(40, 40, 1.0);
-	qSolveBtn.translation = MCPointMake(450, 350.0, 0.0);
+	MCTexturedButton * qSolveBtn = [[MCTexturedButton alloc] initWithUpKey:TextureKey_QsolveButtonUp downKey:TextureKey_QsolveButtonDown];
+	qSolveBtn.scale = [MCMaterialController getWidthAndHeightFromTextureFile:TextureFileName_LearnPageElement forKey:TextureKey_QsolveButtonUp];
+	qSolveBtn.translation = MCPointMake(512-41, 345, 0.0);
 	qSolveBtn.target = self;
 	qSolveBtn.buttonDownAction = @selector(qSolveBtnDown);
 	qSolveBtn.buttonUpAction = @selector(qSolveBtnUp);
@@ -100,7 +106,32 @@
 	[qSolveBtn release];
 
     //
-   
+    //上一步/撤销
+	MCTexturedButton * undoCommand = [[MCTexturedButton alloc] initWithUpKey:TextureKey_previousButtonUp downKey:TextureKey_previousButtonDown];
+	undoCommand.scale = [MCMaterialController getWidthAndHeightFromTextureFile:TextureFileName_LearnPageElement forKey:TextureKey_previousButtonUp];
+	undoCommand.translation = MCPointMake(-512+46, 0.0, 0.0);
+	undoCommand.target = self;
+	undoCommand.buttonDownAction = @selector(previousSolutionBtnDown);
+	undoCommand.buttonUpAction = @selector(previousSolutionBtnUp);
+	undoCommand.active = YES;
+	[undoCommand awake];
+	[interfaceObjects addObject:undoCommand];
+	[undoCommand release];
+    
+    
+    
+    //下一步/恢复
+	MCTexturedButton * redoCommand = [[MCTexturedButton alloc] initWithUpKey:TextureKey_nextButtonUp downKey:TextureKey_nextButtonDown];
+	redoCommand.scale = [MCMaterialController getWidthAndHeightFromTextureFile:TextureFileName_LearnPageElement forKey:TextureKey_nextButtonUp];
+	redoCommand.translation = MCPointMake(512-46, 0.0, 0.0);
+	redoCommand.target = self;
+	redoCommand.buttonDownAction = @selector(nextSolutionBtnDown);
+	redoCommand.buttonUpAction = @selector(nextSolutionBtnUp);
+	redoCommand.active = YES;
+	[redoCommand awake];
+	[interfaceObjects addObject:redoCommand];
+	[redoCommand release];
+
     //
     isWantShowSelectView = NO;
     //color selector pannel
@@ -154,28 +185,68 @@
     
     self.cubieArray = [NSArray arrayWithObjects:cubieDics count:27];
     
+    _errorFlag = NO;
     
     // Init for two phase solver
     // Begin
-    _isInitFinished = NO;
-    _errorFlag = NO;
-    
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        
-        // Doing
-        CubieCube::initAllStaticVariables();
-        CoordCube::initAllStaticVariables();
-        
-        // Over
-        _isInitFinished = YES;
-    });
+    if (!_isInitFinished) {
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            
+            // Doing
+            CubieCube::initAllStaticVariables();
+            CoordCube::initAllStaticVariables();
+            
+            // Over
+            dispatch_async(dispatch_get_main_queue(), ^{
+                _isInitFinished = YES;
+                NSLog(@"Init over.");
+            });
+            
+            
+        });
+    }
 }
+//撤销
+-(void)previousSolutionBtnUp{
+    if (currentMove<0) {
+        return;
+    }
+    MCRandomSolveSceneController *c = [MCRandomSolveSceneController sharedRandomSolveSceneController];
+    [c flashSecne];
+    [actionQueue shiftLeft];
+    [stepcounter addCounter];
+    
+    SingmasterNotation notation = (SingmasterNotation)[[singmasternotations objectAtIndex:currentMove]integerValue];
+    currentMove--;
+    
+    [c rotateWithSingmasterNotation:notation];
+    //[[c playHelper]rotateWithSingmasterNotation:notation];
+};
+-(void)previousSolutionBtnDown{};
+
+//恢复
+-(void)nextSolutionBtnUp{
+    if (currentMove==totalMove-1) {
+        return;
+    }
+    MCRandomSolveSceneController *c = [MCRandomSolveSceneController sharedRandomSolveSceneController];
+    [c flashSecne];
+     [actionQueue shiftRight];
+    [stepcounter minusCounter];
+    currentMove++;
+    SingmasterNotation notation = (SingmasterNotation)[[singmasternotations objectAtIndex:currentMove]integerValue];
+    [c rotateWithSingmasterNotation:notation];
+    
+    
+};
+-(void)nextSolutionBtnDown{};
 
 -(void)qSolveBtnDown{
 }
 
 -(void)qSolveBtnUp{
     //do solve here
+    [SVProgressHUD show];
     [self solveMagicCube];
 }
 
@@ -183,12 +254,15 @@
     NSLog(@"mainMenuPlayBtnDown");
 }
 
-
 -(void)mainMenuBtnUp{
     NSLog(@"mainMenuPlayBtnUp");
     CoordinatingController *coordinatingController_ = [CoordinatingController sharedCoordinatingController];
     [coordinatingController_ requestViewChangeByObject:kMainMenu];
 }
+
+-(void)pauseSolutionBtnDown{}
+
+-(void)pauseSolutionBtnUp{}
 
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
@@ -196,7 +270,9 @@
     if (_selectMenu.expanding) return;
     
     [super touchesBegan:touches withEvent:event];
-    
+    if (isFinishInput) {
+        return;
+    }
     //FSM_Interaction_State fsm_Current_State = [[[CoordinatingController sharedCoordinatingController] currentController].inputController fsm_Current_State];
     if (fsm_Current_State==kState_F2||fsm_Current_State == kState_S2||fsm_Current_State==kState_M2) {
         isWantShowSelectView = NO;
@@ -209,6 +285,10 @@
     BOOL isSelectOneFace = NO;
     if (!_selectMenu.expanding){
         [super touchesEnded:touches withEvent:event];
+        if (isFinishInput) {
+            return;
+        }
+
         UITouch *touch = [touches anyObject];
         _lastestPoint = [touch locationInView:self.view];
         //判断是否拾取到
@@ -322,6 +402,8 @@
         if (stateString == nil) {
             NSLog(@"Wrong state!");
             return NO;
+        } else {
+            NSLog(@"%@", stateString);
         }
         
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
@@ -360,15 +442,31 @@
                 
                 // transfer
                 NSMutableArray *tags = [NSMutableArray arrayWithCapacity:[resultStringComponents count]];
+                if (!singmasternotations) {
+                    singmasternotations = [[NSMutableArray alloc]init];
+                }
+                [singmasternotations removeAllObjects];
                 for (int i = 0; i < [resultStringComponents count] - 1; i++) {
                     NSString *component = [resultStringComponents objectAtIndex:i];
                     [tags addObject:[MCTransformUtil getRotationTagFromSingmasterNotation:
                                      [MCTransformUtil singmasternotationFromStringTag:component]]];
+                    //[singmasternotations addObject:[[MCTransformUtil singmasternotationFromStringTag:component]];
+                    [singmasternotations addObject:[NSNumber numberWithInteger:[MCTransformUtil singmasternotationFromStringTag:component]]];
                 }
-                
+                totalMove = [singmasternotations count];
+                [stepcounter setM_counterValue:totalMove];
                 dispatch_async(dispatch_get_main_queue(), ^{
                     // Complete
                     NSLog(@"%@", tags);
+                    [SVProgressHUD dismiss];
+                    [actionQueue removeAllActions];
+                    [actionQueue insertQueueCurrentIndexWithNmaeList:tags];
+                    //hiden the action queue
+                    [self.actionQueue setActive : YES];
+            
+                    MCRandomSolveSceneController *c = [MCRandomSolveSceneController sharedRandomSolveSceneController];
+                    [c turnTheMCUI_Into_SOlVE_Play_MODE];
+                    isFinishInput = YES;
                 });
             }
             

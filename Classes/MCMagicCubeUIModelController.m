@@ -671,6 +671,10 @@
 };
 -(void)handleTouches
 {
+    if ([self usingMode]==SOlVE_Play_MODE) {
+        //求解模式下，不显影任何输入
+        return;
+    }
 	NSSet * touches = [[[CoordinatingController sharedCoordinatingController] currentController].inputController touchEvents];
     UIView* view= [[[CoordinatingController sharedCoordinatingController] currentController].inputController view ];
 	FSM_Interaction_State fsm_Current_State = [[[CoordinatingController sharedCoordinatingController] currentController].inputController fsm_Current_State];
@@ -1468,11 +1472,16 @@
 };
 
 -(void)stepCounterAdd{
-    [target performSelector:stepcounterAddAction];
+    if ([target respondsToSelector:@selector(stepcounterAddAction)]) {
+        [target performSelector:stepcounterAddAction];
+    }
+    
 }
 -(void)stepCounterMinus{
-    [target performSelector:stepcounterMinusAction];
-    //target performSelector:<#(SEL)#> withObject:<#(id)#>
+    if ([target respondsToSelector:@selector(stepcounterMinusAction)]) {
+        [target performSelector:stepcounterMinusAction];
+    }
+        
 }
 
 
@@ -2178,6 +2187,12 @@ double FabsThetaBetweenV1andV2(const vec3& v1,const vec3& v2)
     }
    
 };
+
+-(void)switchToOrignalPlace{
+    for (Cube *tmp in array27Cube) {
+        [tmp setQuaRotation:Quaternion(0,0,0,1)];
+    }
+}
 #pragma mark undo redo
 
 -(void)previousSolution{
