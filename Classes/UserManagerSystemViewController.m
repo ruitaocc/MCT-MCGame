@@ -11,11 +11,14 @@
 
 @interface UserManagerSystemViewController ()
 
+- (NSString *)timeInFormatFromTotalSeconds:(NSInteger)totalSeconds;
+
+
 @end
 
 @implementation UserManagerSystemViewController
 
-@synthesize scoreTable;
+@synthesize scoreTable = _scoreTable;
 @synthesize currentUserLabel;
 @synthesize totalFinishLabel;
 @synthesize totalGameTimeLabel;
@@ -23,7 +26,6 @@
 @synthesize totalLearnTimeLabel;
 @synthesize createUserPopover;
 @synthesize changeUserPopover;
-@synthesize tableSegment;
 
 
 - (void)viewDidLoad
@@ -50,8 +52,10 @@
     self.currentUserLabel.text = userManagerController.userModel.currentUser.name;
     self.totalFinishLabel.text = [NSString stringWithFormat:@"%d",userManagerController.userModel.currentUser.totalFinish];
     self.totalMovesLabel.text = [NSString stringWithFormat:@"%d",userManagerController.userModel.currentUser.totalMoves];
-    self.totalGameTimeLabel.text = [NSString stringWithFormat:@"%0.2f",userManagerController.userModel.currentUser.totalGameTime];
-    self.totalLearnTimeLabel.text = [NSString stringWithFormat:@"%0.2f",userManagerController.userModel.currentUser.totalLearnTime];
+    self.totalGameTimeLabel.text = [self timeInFormatFromTotalSeconds:(NSInteger)(userManagerController.userModel.currentUser.totalGameTime + 0.5)];
+    
+    self.totalLearnTimeLabel.text = [self timeInFormatFromTotalSeconds:(NSInteger)(userManagerController.userModel.currentUser.totalLearnTime + 0.5)];
+    
     
     //observer to refresh the table view
     //notification was sent by user manager controller
@@ -59,6 +63,10 @@
     
     // Init selector btn
     [_totalRankBtn setEnabled:NO];
+    
+    // Circular bead
+    _scoreTable.layer.cornerRadius = 5.0;
+    _staticScrollPanel.layer.cornerRadius = 5.0;
 }
 
 - (void)viewDidUnload
@@ -68,11 +76,11 @@
     [self setTotalFinishLabel:nil];
     [self setTotalGameTimeLabel:nil];
     [self setTotalMovesLabel:nil];
-    [self setTableSegment:nil];
     [self setTotalLearnTimeLabel:nil];
     [self setBackBtn:nil];
     [self setTotalRankBtn:nil];
     [self setPersonalRankBtn:nil];
+    [self setStaticScrollPanel:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
 }
@@ -83,16 +91,16 @@
 }
 
 - (void)dealloc {
-    [scoreTable release];
+    [_scoreTable release];
     [currentUserLabel release];
     [totalFinishLabel release];
     [totalGameTimeLabel release];
     [totalMovesLabel release];
-    [tableSegment release];
     [totalLearnTimeLabel release];
     [_backBtn release];
     [_totalRankBtn release];
     [_personalRankBtn release];
+    [_staticScrollPanel release];
     [super dealloc];
 }
 
@@ -109,15 +117,27 @@
     
     ScoreCell* cell = (ScoreCell*)[tableView dequeueReusableCellWithIdentifier:@"ScoreCellIdentifier"];
     
-    if (cell == nil) {
-        NSArray *array = [[NSBundle mainBundle] loadNibNamed:@"ScoreCell" owner:self options:nil];
-        cell = [array objectAtIndex:0];
-    }
-    
     //set score information
     NSInteger scoreIndex = [indexPath row];
     
-    if (tableSegment.selectedSegmentIndex == 0) {
+    if (cell == nil) {
+        if (scoreIndex % 2 == 0) {
+            if (scoreIndex == 4) {
+                NSArray *array = [[NSBundle mainBundle] loadNibNamed:@"ScoreCellBottomDark" owner:self options:nil];
+                cell = [array objectAtIndex:0];
+            }
+            else{
+                NSArray *array = [[NSBundle mainBundle] loadNibNamed:@"ScoreCellCenterDark" owner:self options:nil];
+                cell = [array objectAtIndex:0];
+            }
+        }
+        else {
+            NSArray *array = [[NSBundle mainBundle] loadNibNamed:@"ScoreCellCenterGrey" owner:self options:nil];
+            cell = [array objectAtIndex:0];
+        }
+    }
+    
+    if ([_personalRankBtn isEnabled]) {
         if (scoreIndex < [userManagerController.userModel.topScore count]) {
                     
             MCScore *_scoreRecord = [userManagerController.userModel.topScore objectAtIndex:scoreIndex];
@@ -166,10 +186,6 @@
     return cell;
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    return 50;
-}
 
 
 #pragma mark -
@@ -206,22 +222,16 @@
 }
 
 
-
-- (void)segmentChange:(id)sender
-{
-    [scoreTable reloadData];
-}
-
 - (IBAction)totalRankBtnUp:(id)sender {
     [_totalRankBtn setEnabled:NO];
     [_personalRankBtn setEnabled:YES];
-    [scoreTable reloadData];
+    [_scoreTable reloadData];
 }
 
 - (IBAction)personalRankBtnUp:(id)sender {
     [_totalRankBtn setEnabled:YES];
     [_personalRankBtn setEnabled:NO];
-    [scoreTable reloadData];
+    [_scoreTable reloadData];
 }
 
 
@@ -243,7 +253,7 @@
 
 - (void)updateScoreInformation
 {
-    [scoreTable reloadData];
+    [_scoreTable reloadData];
 }
 
 - (void) updateUserAndScore
@@ -251,11 +261,16 @@
     [self updateUserInformation];
     [self updateScoreInformation];
 }
--(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
-};
--(void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event{};
--(void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event{};
--(void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event{};
+
+
+- (NSString *)timeInFormatFromTotalSeconds:(NSInteger)totalSeconds{
+    NSInteger second = totalSeconds % 60;
+    NSInteger minute = totalSeconds / 60 % 60;
+    NSInteger hour = totalSeconds / 3600 % 100;
+    return [NSString stringWithFormat:@"%02d:%02d:%02d", hour, minute, second];
+}
+
+
 
 
 @end

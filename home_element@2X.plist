@@ -1,127 +1,139 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
-<!--
-===================================================================
-
-Sprite sheet file created for UIKit using TexturePacker
-http://www.codeandweb.com/texturepacker
-
-===================================================================
-$TexturePacker:SmartUpdate:faed6d5e2123ee5270ef6c4f2dff4f4c$
--->
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
+<dict>
+	<key>frames</key>
 	<dict>
-		<key>frames</key>
+		<key>appTitle@2X</key>
 		<dict>
-
-                        <key>appTitle@2X</key>
-			<dict>
-				<key>x</key><real>2</real>
-				<key>y</key><real>706</real>
-				<key>w</key><real>1093</real>
-				<key>h</key><real>302</real>
-				
-				
-			</dict>
-                        <key>learnButtonDown@2X</key>
-			<dict>
-				<key>x</key><real>2</real>
-				<key>y</key><real>354</real>
-				<key>w</key><real>350</real>
-				<key>h</key><real>350</real>
-				
-				
-			</dict>
-                        <key>learnButtonUp@2X</key>
-			<dict>
-				<key>x</key><real>2</real>
-				<key>y</key><real>2</real>
-				<key>w</key><real>350</real>
-				<key>h</key><real>350</real>
-				
-				
-			</dict>
-                        <key>optionButtonDown@2X</key>
-			<dict>
-				<key>x</key><real>934</real>
-				<key>y</key><real>245</real>
-				<key>w</key><real>240</real>
-				<key>h</key><real>241</real>
-				
-				
-			</dict>
-                        <key>optionButtonUp@2X</key>
-			<dict>
-				<key>x</key><real>934</real>
-				<key>y</key><real>2</real>
-				<key>w</key><real>240</real>
-				<key>h</key><real>241</real>
-				
-				
-			</dict>
-                        <key>raceButtonDown@2X</key>
-			<dict>
-				<key>x</key><real>644</real>
-				<key>y</key><real>293</real>
-				<key>w</key><real>288</real>
-				<key>h</key><real>289</real>
-				
-				
-			</dict>
-                        <key>raceButtonUp@2X</key>
-			<dict>
-				<key>x</key><real>644</real>
-				<key>y</key><real>2</real>
-				<key>w</key><real>288</real>
-				<key>h</key><real>289</real>
-				
-				
-			</dict>
-                        <key>rankButtonDown@2X</key>
-			<dict>
-				<key>x</key><real>1097</real>
-				<key>y</key><real>730</real>
-				<key>w</key><real>240</real>
-				<key>h</key><real>240</real>
-				
-				
-			</dict>
-                        <key>rankButtonUp@2X</key>
-			<dict>
-				<key>x</key><real>1097</real>
-				<key>y</key><real>488</real>
-				<key>w</key><real>240</real>
-				<key>h</key><real>240</real>
-				
-				
-			</dict>
-                        <key>solveButtonDown@2X</key>
-			<dict>
-				<key>x</key><real>354</real>
-				<key>y</key><real>293</real>
-				<key>w</key><real>288</real>
-				<key>h</key><real>289</real>
-				
-				
-			</dict>
-                        <key>solveButtonUp@2X</key>
-			<dict>
-				<key>x</key><real>354</real>
-				<key>y</key><real>2</real>
-				<key>w</key><real>288</real>
-				<key>h</key><real>289</real>
-				
-				
-			</dict>
+			<key>x</key>
+			<real>2</real>
+			<key>y</key>
+			<real>706</real>
+			<key>w</key>
+			<real>1093</real>
+			<key>h</key>
+			<real>302</real>
 		</dict>
-		<key>meta</key>
+		<key>learnButtonDown@2X</key>
 		<dict>
-			<key>image</key>
-			<string>home@2X.png</string>
-			<key>width</key>
-			<integer>2048</integer>
-			<key>height</key>
-			<integer>1024</integer>
+			<key>x</key>
+			<real>2</real>
+			<key>y</key>
+			<real>354</real>
+			<key>w</key>
+			<real>350</real>
+			<key>h</key>
+			<real>350</real>
+		</dict>
+		<key>learnButtonUp@2X</key>
+		<dict>
+			<key>x</key>
+			<real>2</real>
+			<key>y</key>
+			<real>2</real>
+			<key>w</key>
+			<real>350</real>
+			<key>h</key>
+			<real>350</real>
+		</dict>
+		<key>optionButtonDown@2X</key>
+		<dict>
+			<key>x</key>
+			<real>934</real>
+			<key>y</key>
+			<real>245</real>
+			<key>w</key>
+			<real>240</real>
+			<key>h</key>
+			<real>241</real>
+		</dict>
+		<key>optionButtonUp@2X</key>
+		<dict>
+			<key>x</key>
+			<real>934</real>
+			<key>y</key>
+			<real>2</real>
+			<key>w</key>
+			<real>240</real>
+			<key>h</key>
+			<real>241</real>
+		</dict>
+		<key>raceButtonDown@2X</key>
+		<dict>
+			<key>x</key>
+			<real>644</real>
+			<key>y</key>
+			<real>293</real>
+			<key>w</key>
+			<real>288</real>
+			<key>h</key>
+			<real>289</real>
+		</dict>
+		<key>raceButtonUp@2X</key>
+		<dict>
+			<key>x</key>
+			<real>644</real>
+			<key>y</key>
+			<real>2</real>
+			<key>w</key>
+			<real>288</real>
+			<key>h</key>
+			<real>289</real>
+		</dict>
+		<key>rankButtonDown@2X</key>
+		<dict>
+			<key>x</key>
+			<real>1097</real>
+			<key>y</key>
+			<real>730</real>
+			<key>w</key>
+			<real>240</real>
+			<key>h</key>
+			<real>240</real>
+		</dict>
+		<key>rankButtonUp@2X</key>
+		<dict>
+			<key>x</key>
+			<real>1097</real>
+			<key>y</key>
+			<real>488</real>
+			<key>w</key>
+			<real>240</real>
+			<key>h</key>
+			<real>240</real>
+		</dict>
+		<key>solveButtonDown@2X</key>
+		<dict>
+			<key>x</key>
+			<real>354</real>
+			<key>y</key>
+			<real>293</real>
+			<key>w</key>
+			<real>288</real>
+			<key>h</key>
+			<real>289</real>
+		</dict>
+		<key>solveButtonUp@2X</key>
+		<dict>
+			<key>x</key>
+			<real>354</real>
+			<key>y</key>
+			<real>2</real>
+			<key>w</key>
+			<real>288</real>
+			<key>h</key>
+			<real>289</real>
 		</dict>
 	</dict>
+	<key>meta</key>
+	<dict>
+		<key>image</key>
+		<string>home@2X.png</string>
+		<key>width</key>
+		<integer>2048</integer>
+		<key>height</key>
+		<integer>1024</integer>
+	</dict>
+</dict>
 </plist>

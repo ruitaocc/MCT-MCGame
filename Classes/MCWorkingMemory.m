@@ -82,7 +82,7 @@
 
 - (void)clearExceptMagicCubeData{
     self.applyQueue = nil;
-    self.residualActions = nil;
+    [self.residualActions removeAllObjects];
     self.agendaPattern = nil;
     self.magicCubeState = UNKNOWN_STATE;
     [self unlockAllCubies];

@@ -27,12 +27,12 @@
 @property (retain, nonatomic) IBOutlet UILabel *totalLearnTimeLabel;
 @property (retain, nonatomic) IBOutlet UIButton *totalRankBtn;
 @property (retain, nonatomic) IBOutlet UIButton *personalRankBtn;
+@property (retain, nonatomic) IBOutlet UIScrollView *staticScrollPanel;
 
 
 @property (retain, nonatomic) UIPopoverController *createUserPopover;
 @property (retain, nonatomic) UIPopoverController *changeUserPopover;
 
-@property (retain, nonatomic) IBOutlet UISegmentedControl *tableSegment;
 
 @property (retain, nonatomic) IBOutlet UIButton *backBtn;
 
@@ -43,8 +43,6 @@
 - (void)updateUserInformation;
 
 - (void)updateScoreInformation;
-
-- (IBAction)segmentChange:(id)sender;
 
 
 - (IBAction)totalRankBtnUp:(id)sender;
