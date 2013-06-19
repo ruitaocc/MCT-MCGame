@@ -34,10 +34,10 @@
 }
 
 
-- (void)dealloc{
-    [super dealloc];
+- (void)dealloc{    
     [accordanceMsgs release];
     [workingMemory release];
+    [super dealloc];
 }
 
 

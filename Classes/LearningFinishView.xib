@@ -123,7 +123,7 @@
 						<reference key="IBUISelectedImage" ref="669879115"/>
 						<object class="NSCustomResource" key="IBUINormalImage">
 							<string key="NSClassName">NSImage</string>
-							<string key="NSResourceName">returnButtonUp.png</string>
+							<string key="NSResourceName">returnButtonUp</string>
 						</object>
 						<object class="IBUIFontDescription" key="IBUIFontDescription" id="812644789">
 							<int key="type">2</int>
@@ -267,7 +267,7 @@
 						<reference key="IBUISelectedImage" ref="764619775"/>
 						<object class="NSCustomResource" key="IBUINormalImage">
 							<string key="NSClassName">NSImage</string>
-							<string key="NSResourceName">againButtonUp.png</string>
+							<string key="NSResourceName">againButtonUp</string>
 						</object>
 						<reference key="IBUIFontDescription" ref="812644789"/>
 						<reference key="IBUIFont" ref="998320352"/>
@@ -297,7 +297,7 @@
 						<reference key="IBUISelectedImage" ref="543041468"/>
 						<object class="NSCustomResource" key="IBUINormalImage">
 							<string key="NSClassName">NSImage</string>
-							<string key="NSResourceName">goRaceButtonUp.png</string>
+							<string key="NSResourceName">goRaceButtonUp</string>
 						</object>
 						<reference key="IBUIFontDescription" ref="812644789"/>
 						<reference key="IBUIFont" ref="998320352"/>
@@ -327,7 +327,7 @@
 						<reference key="IBUISelectedImage" ref="858189094"/>
 						<object class="NSCustomResource" key="IBUINormalImage">
 							<string key="NSClassName">NSImage</string>
-							<string key="NSResourceName">shareButtonUp.png</string>
+							<string key="NSResourceName">shareButtonUp</string>
 						</object>
 						<reference key="IBUIFontDescription" ref="812644789"/>
 						<reference key="IBUIFont" ref="998320352"/>
@@ -482,7 +482,7 @@
 						<reference key="IBUISelectedImage" ref="330598912"/>
 						<object class="NSCustomResource" key="IBUINormalImage">
 							<string key="NSClassName">NSImage</string>
-							<string key="NSResourceName">changeUserButtonUp_small.png</string>
+							<string key="NSResourceName">changeUserButtonUp_small</string>
 						</object>
 						<reference key="IBUIFontDescription" ref="812644789"/>
 						<reference key="IBUIFont" ref="998320352"/>
@@ -804,7 +804,7 @@
 				<string key="-2.CustomClassName">UIResponder</string>
 				<string key="-2.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="1051.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-				<real value="1" key="1051.IBUIButtonInspectorSelectedStateConfigurationMetadataKey"/>
+				<real value="0.0" key="1051.IBUIButtonInspectorSelectedStateConfigurationMetadataKey"/>
 				<reference key="1051.IBUserGuides" ref="0"/>
 				<boolean value="NO" key="1051.showNotes"/>
 				<string key="1080.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
@@ -813,11 +813,11 @@
 				<string key="251.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<real value="0.0" key="251.IBUIButtonInspectorSelectedStateConfigurationMetadataKey"/>
 				<string key="252.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-				<real value="1" key="252.IBUIButtonInspectorSelectedStateConfigurationMetadataKey"/>
+				<real value="0.0" key="252.IBUIButtonInspectorSelectedStateConfigurationMetadataKey"/>
 				<string key="253.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-				<real value="1" key="253.IBUIButtonInspectorSelectedStateConfigurationMetadataKey"/>
+				<real value="0.0" key="253.IBUIButtonInspectorSelectedStateConfigurationMetadataKey"/>
 				<string key="254.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-				<real value="1" key="254.IBUIButtonInspectorSelectedStateConfigurationMetadataKey"/>
+				<real value="0.0" key="254.IBUIButtonInspectorSelectedStateConfigurationMetadataKey"/>
 				<string key="256.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="257.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="258.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
@@ -966,15 +966,15 @@
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
 		<dictionary class="NSMutableDictionary" key="IBDocument.LastKnownImageSizes">
 			<string key="againButtonDown">{16, 16}</string>
-			<string key="againButtonUp.png">{240, 47}</string>
+			<string key="againButtonUp">{16, 16}</string>
 			<string key="changeUserButtonDown_small">{16, 16}</string>
-			<string key="changeUserButtonUp_small.png">{57, 36}</string>
+			<string key="changeUserButtonUp_small">{16, 16}</string>
 			<string key="goRaceButtonDown">{16, 16}</string>
-			<string key="goRaceButtonUp.png">{140, 47}</string>
+			<string key="goRaceButtonUp">{16, 16}</string>
 			<string key="returnButtonDown">{16, 16}</string>
-			<string key="returnButtonUp.png">{44, 44}</string>
+			<string key="returnButtonUp">{16, 16}</string>
 			<string key="shareButtonDown">{16, 16}</string>
-			<string key="shareButtonUp.png">{140, 47}</string>
+			<string key="shareButtonUp">{16, 16}</string>
 		</dictionary>
 		<string key="IBCocoaTouchPluginVersion">2083</string>
 	</data>
