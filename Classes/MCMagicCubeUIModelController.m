@@ -111,7 +111,7 @@
         //magicCube = [MCMagicCube getSharedMagicCube];
         isAutoRotate = NO;
         //魔方整体三个参数
-        scale = MCPointMake(84,84,84);
+        scale = MCPointMake(94,94,94);
         translation = MCPointMake(0,0,0);
         rotation = MCPointMake(30,-45,0);
         MCPoint sub_scale  = MCPointMake(scale.x/3, scale.y/3, scale.z/3);
@@ -203,12 +203,18 @@
             }
         }
     }
-    for (int i = 0; i<[lockedarray count]; i++) {
-        Cube * tCube = nil;
-        Point3i point = [[[MCNormalPlaySceneController sharedNormalPlaySceneController]magicCube]coordinateValueOfCubieWithColorCombination:(ColorCombinationType)[[lockedarray objectAtIndex:i] intValue]];
-        tCube = [array27Cube objectAtIndex:point.x+1+(point.y+1)*3+(point.z+1)*9];
-        [tCube setIsLocked:YES];
+    if ([target respondsToSelector:@selector(isShowQueue)]) {
+        if ([target isShowQueue]) {
+            for (int i = 0; i<[lockedarray count]; i++) {
+                Cube * tCube = nil;
+                Point3i point = [[[MCNormalPlaySceneController sharedNormalPlaySceneController]magicCube]coordinateValueOfCubieWithColorCombination:(ColorCombinationType)[[lockedarray objectAtIndex:i] intValue]];
+                tCube = [array27Cube objectAtIndex:point.x+1+(point.y+1)*3+(point.z+1)*9];
+                [tCube setIsLocked:YES];
+            }
+        }
     }
+    
+    
 };
 
 -(void)render{

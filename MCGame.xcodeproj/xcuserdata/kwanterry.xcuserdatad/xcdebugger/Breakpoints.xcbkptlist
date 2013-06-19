@@ -39,19 +39,19 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "125"
          endingLineNumber = "125"
-         landmarkName = "@interface MCMagicCubeUIModelController"
-         landmarkType = "2">
+         landmarkName = "-adjustWithCenter_2"
+         landmarkType = "4">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Classes/MCMagicCubeUIModelController.m"
-         timestampString = "393159640.763995"
+         timestampString = "393304763.646554"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1764"
-         endingLineNumber = "1764"
+         startingLineNumber = "1770"
+         endingLineNumber = "1770"
          landmarkName = "-adjustWithCenter"
          landmarkType = "5">
       </FileBreakpoint>
@@ -60,11 +60,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Classes/MCMagicCubeUIModelController.m"
-         timestampString = "393159640.763995"
+         timestampString = "393304763.646554"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1773"
-         endingLineNumber = "1773"
+         startingLineNumber = "1779"
+         endingLineNumber = "1779"
          landmarkName = "-adjustWithCenter"
          landmarkType = "5">
       </FileBreakpoint>
@@ -73,11 +73,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Classes/MCMagicCubeUIModelController.m"
-         timestampString = "393159640.763995"
+         timestampString = "393304763.646554"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1813"
-         endingLineNumber = "1813"
+         startingLineNumber = "1819"
+         endingLineNumber = "1819"
          landmarkName = "-adjustWithCenter"
          landmarkType = "5">
       </FileBreakpoint>
@@ -86,11 +86,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Classes/MCMagicCubeUIModelController.m"
-         timestampString = "393159640.763995"
+         timestampString = "393304763.646554"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1822"
-         endingLineNumber = "1822"
+         startingLineNumber = "1828"
+         endingLineNumber = "1828"
          landmarkName = "-adjustWithCenter"
          landmarkType = "5">
       </FileBreakpoint>
