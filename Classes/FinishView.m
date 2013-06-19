@@ -8,6 +8,8 @@
 
 #import "FinishView.h"
 #import "PopChangeUserViewController.h"
+#import <QuartzCore/QuartzCore.h>
+#import "MCFonts.h"
 
 #define BLACK_BAR_COMPONENTS_Finish				{ 0.22, 0.22, 0.22, 1.0, 0.07, 0.07, 0.07, 1.0 }
 @implementation FinishView
@@ -21,24 +23,21 @@
 - (id)initWithFrame:(CGRect)frame title:(NSString *)title{
     if ((self = [super initWithFrame:frame])) {
 		
-		CGFloat colors[8] = BLACK_BAR_COMPONENTS_Finish;
-		[self.titleBar setColorComponents:colors];
-		self.headerLabel.text = title;
-		
-        self.x_outerMargin = 100;
-        self.y_outerMargin = 80;
+        self.x_outerMargin = 137;
+        self.y_outerMargin = 134;
+        
         self.isShowColseBtn = YES;
         // Margin between edge of panel and the content area. Default = 20.0
-        self.innerMargin =  10.0f;
+        self.innerMargin =  0.0f;
         
         // Border color of the panel. Default = [UIColor whiteColor]
         self.borderColor = [UIColor colorWithRed:0.5 green:0.5 blue:0.5 alpha:1.0];
         
         // Border width of the panel. Default = 1.5f;
-        self.borderWidth = 8.0f;
+        self.borderWidth = 0.0f;
         
         // Corner radius of the panel. Default = 4.0f
-        self.cornerRadius = 16;
+        self.cornerRadius = 0;
         
         // Color of the panel itself. Default = [UIColor colorWithWhite:0.0 alpha:0.8]
         self.contentColor = [UIColor colorWithRed:1 green:1 blue:1 alpha:1.0];
@@ -47,7 +46,7 @@
         self.shouldBounce = YES;
         finishViewType = kFinishView_Default;
         // Height of the title view. Default = 40.0f
-        [self setTitleBarHeight:48.0f];
+        [self setTitleBarHeight:0.0f];
         
         // The gradient style (Linear, linear reversed, radial, radial reversed, center highlight). Default = UAGradientBackgroundStyleLinear
         [[self titleBar] setGradientStyle:UAGradientBackgroundStyleLinear];
@@ -63,7 +62,17 @@
         
         [[NSBundle mainBundle] loadNibNamed:@"LearningFinishView" owner:self options:nil];
         
-        [self.contentView addSubview:viewLoadedFromXib];
+        for (UIView *view in [self.contentContainer subviews]) {
+            [view removeFromSuperview];
+        }
+        
+        CGRect xibViewFrame = viewLoadedFromXib.frame;
+        CGRect contentContainerFrame = self.contentContainer.frame;
+        
+        viewLoadedFromXib.frame = CGRectMake((contentContainerFrame.size.width - xibViewFrame.size.width)/2,
+                                             (contentContainerFrame.size.height - xibViewFrame.size.height)/2, xibViewFrame.size.width, xibViewFrame.size.height);
+        
+        [self.contentContainer addSubview:viewLoadedFromXib];
         
         // Set user name.
         [self updateUserName];
@@ -77,6 +86,22 @@
         
         
         [self.window makeKeyAndVisible];
+        
+        // KnowledgePanel
+        viewLoadedFromXib.layer.cornerRadius = 5.0;
+        _knowledgePanel.layer.cornerRadius = 6.0;
+        _userNameEditPanel.layer.cornerRadius = 5.0;
+        
+        // Set font
+        [_celebrationLabel setFont:[MCFonts customFontWithSize:35]];
+        [_userNameLabel setFont:[MCFonts customFontWithSize:23]];
+        [_learningStepTitleLabel setFont:[MCFonts customFontWithSize:23]];
+        [_learningTimeTitleLabel setFont:[MCFonts customFontWithSize:23]];
+        [learningStepCountLabel setFont:[MCFonts customFontWithSize:23]];
+        [learningTimeLabel setFont:[MCFonts customFontWithSize:23]];
+        [userNameEditField setFont:[MCFonts customFontWithSize:18]];
+        [_knowLedgeTextView setFont:[MCFonts customFontWithSize:17]];
+        [_knowledgeTitleLabel setFont:[MCFonts customFontWithSize:19]];
     }    
 	return self;
 
@@ -125,14 +150,17 @@
     [learningTimeLabel release];
     [learningStepCountLabel release];
     [_changeUserBtn release];
+    [_knowledgePanel release];
+    [_celebrationLabel release];
+    [_userNameLabel release];
+    [_learningTimeTitleLabel release];
+    [_learningStepTitleLabel release];
+    [_knowledgeTitleLabel release];
+    [_knowLedgeTextView release];
+    [_userNameEditPanel release];
     [super dealloc];
 }
 
-- (void)layoutSubviews {
-	[super layoutSubviews];
-	
-	[viewLoadedFromXib setFrame:self.contentView.bounds];
-}
 
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
 }
@@ -185,6 +213,7 @@
     
     return  YES;
 }
+
 
 
 @end

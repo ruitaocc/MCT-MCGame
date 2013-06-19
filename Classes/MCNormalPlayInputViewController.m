@@ -432,7 +432,7 @@
     
     
     // Set step count and learing time.
-    finishView.learningStepCountLabel.text = [NSString stringWithFormat:@"%d步", stepcounter.m_counterValue];
+    finishView.learningStepCountLabel.text = [NSString stringWithFormat:@"%d", stepcounter.m_counterValue];
     finishView.learningTimeLabel.text = [timer description];
     finishView.lastingTime = timer.totalTime/1000;
     finishView.stepCount = stepcounter.m_counterValue;
