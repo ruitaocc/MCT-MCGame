@@ -282,6 +282,10 @@
 		E0EC370E177152F000835785 /* shareButtonDown@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E0EC36F8177152F000835785 /* shareButtonDown@2x.png */; };
 		E0EC370F177152F000835785 /* shareButtonUp.png in Resources */ = {isa = PBXBuildFile; fileRef = E0EC36F9177152F000835785 /* shareButtonUp.png */; };
 		E0EC3710177152F000835785 /* shareButtonUp@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E0EC36FA177152F000835785 /* shareButtonUp@2x.png */; };
+		E0EC3715177154FC00835785 /* changeUserButtonDown_small.png in Resources */ = {isa = PBXBuildFile; fileRef = E0EC3711177154FC00835785 /* changeUserButtonDown_small.png */; };
+		E0EC3716177154FC00835785 /* changeUserButtonDown_small@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E0EC3712177154FC00835785 /* changeUserButtonDown_small@2x.png */; };
+		E0EC3717177154FC00835785 /* changeUserButtonUp_small.png in Resources */ = {isa = PBXBuildFile; fileRef = E0EC3713177154FC00835785 /* changeUserButtonUp_small.png */; };
+		E0EC3718177154FC00835785 /* changeUserButtonUp_small@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E0EC3714177154FC00835785 /* changeUserButtonUp_small@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -667,6 +671,10 @@
 		E0EC36F8177152F000835785 /* shareButtonDown@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "shareButtonDown@2x.png"; sourceTree = "<group>"; };
 		E0EC36F9177152F000835785 /* shareButtonUp.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shareButtonUp.png; sourceTree = "<group>"; };
 		E0EC36FA177152F000835785 /* shareButtonUp@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "shareButtonUp@2x.png"; sourceTree = "<group>"; };
+		E0EC3711177154FC00835785 /* changeUserButtonDown_small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = changeUserButtonDown_small.png; sourceTree = "<group>"; };
+		E0EC3712177154FC00835785 /* changeUserButtonDown_small@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "changeUserButtonDown_small@2x.png"; sourceTree = "<group>"; };
+		E0EC3713177154FC00835785 /* changeUserButtonUp_small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = changeUserButtonUp_small.png; sourceTree = "<group>"; };
+		E0EC3714177154FC00835785 /* changeUserButtonUp_small@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "changeUserButtonUp_small@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1519,6 +1527,10 @@
 		E0EC36E4177152F000835785 /* LearnSuccessResource */ = {
 			isa = PBXGroup;
 			children = (
+				E0EC3711177154FC00835785 /* changeUserButtonDown_small.png */,
+				E0EC3712177154FC00835785 /* changeUserButtonDown_small@2x.png */,
+				E0EC3713177154FC00835785 /* changeUserButtonUp_small.png */,
+				E0EC3714177154FC00835785 /* changeUserButtonUp_small@2x.png */,
 				E0EC36E5177152F000835785 /* againButtonDown.png */,
 				E0EC36E6177152F000835785 /* againButtonDown@2x.png */,
 				E0EC36E7177152F000835785 /* againButtonUp.png */,
@@ -1767,6 +1779,10 @@
 				E0EC370E177152F000835785 /* shareButtonDown@2x.png in Resources */,
 				E0EC370F177152F000835785 /* shareButtonUp.png in Resources */,
 				E0EC3710177152F000835785 /* shareButtonUp@2x.png in Resources */,
+				E0EC3715177154FC00835785 /* changeUserButtonDown_small.png in Resources */,
+				E0EC3716177154FC00835785 /* changeUserButtonDown_small@2x.png in Resources */,
+				E0EC3717177154FC00835785 /* changeUserButtonUp_small.png in Resources */,
+				E0EC3718177154FC00835785 /* changeUserButtonUp_small@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
