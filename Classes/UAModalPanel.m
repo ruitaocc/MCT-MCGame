@@ -50,7 +50,7 @@
 		
 		self.contentContainer = [[[UIView alloc] initWithFrame:self.bounds] autorelease];
 		self.contentContainer.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
-		self.contentContainer.autoresizesSubviews = YES;
+		self.contentContainer.autoresizesSubviews = NO;
 		[self addSubview:self.contentContainer];
 		
 		[self setBackgroundColor:[UIColor colorWithWhite:0.0 alpha:0.5]]; // Fixed value, the bacground mask.
