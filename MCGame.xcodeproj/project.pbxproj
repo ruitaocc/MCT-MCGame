@@ -158,7 +158,7 @@
 		A3E469E3174C9B1B00A31586 /* MCLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = A3E469E2174C9B1B00A31586 /* MCLabel.m */; };
 		A3E469E5174CB0A100A31586 /* KnowledgeBase.sqlite3 in Resources */ = {isa = PBXBuildFile; fileRef = A3E469E4174CB0A100A31586 /* KnowledgeBase.sqlite3 */; };
 		A3E469E8174CB91A00A31586 /* FinishView.m in Sources */ = {isa = PBXBuildFile; fileRef = A3E469E7174CB91A00A31586 /* FinishView.m */; };
-		A3E469EA174CBC4100A31586 /* myFinishView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A3E469E9174CBC4100A31586 /* myFinishView.xib */; };
+		A3E469EA174CBC4100A31586 /* LearningFinishView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A3E469E9174CBC4100A31586 /* LearningFinishView.xib */; };
 		A3E469ED1754823A00A31586 /* MCRandomSolveSceneController.m in Sources */ = {isa = PBXBuildFile; fileRef = A3E469EC1754823A00A31586 /* MCRandomSolveSceneController.m */; };
 		A3E469F0175482AA00A31586 /* MCRandomSolveViewInputControllerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A3E469EF175482AA00A31586 /* MCRandomSolveViewInputControllerViewController.m */; };
 		A3E855AC1663A50F00DE3ED9 /* cube1126_2.obj in Resources */ = {isa = PBXBuildFile; fileRef = A3E855AA1663A50F00DE3ED9 /* cube1126_2.obj */; };
@@ -286,6 +286,8 @@
 		E0EC3716177154FC00835785 /* changeUserButtonDown_small@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E0EC3712177154FC00835785 /* changeUserButtonDown_small@2x.png */; };
 		E0EC3717177154FC00835785 /* changeUserButtonUp_small.png in Resources */ = {isa = PBXBuildFile; fileRef = E0EC3713177154FC00835785 /* changeUserButtonUp_small.png */; };
 		E0EC3718177154FC00835785 /* changeUserButtonUp_small@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E0EC3714177154FC00835785 /* changeUserButtonUp_small@2x.png */; };
+		E0EC371C17715B9C00835785 /* CountingFinishView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E0EC371917715B9C00835785 /* CountingFinishView.xib */; };
+		E0EC371D17715B9C00835785 /* CountingFinishView.m in Sources */ = {isa = PBXBuildFile; fileRef = E0EC371A17715B9C00835785 /* CountingFinishView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -507,7 +509,7 @@
 		A3E469E4174CB0A100A31586 /* KnowledgeBase.sqlite3 */ = {isa = PBXFileReference; lastKnownFileType = file; path = KnowledgeBase.sqlite3; sourceTree = "<group>"; };
 		A3E469E6174CB91A00A31586 /* FinishView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FinishView.h; sourceTree = "<group>"; };
 		A3E469E7174CB91A00A31586 /* FinishView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FinishView.m; sourceTree = "<group>"; };
-		A3E469E9174CBC4100A31586 /* myFinishView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = myFinishView.xib; sourceTree = "<group>"; };
+		A3E469E9174CBC4100A31586 /* LearningFinishView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LearningFinishView.xib; sourceTree = "<group>"; };
 		A3E469EB1754823A00A31586 /* MCRandomSolveSceneController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCRandomSolveSceneController.h; sourceTree = "<group>"; };
 		A3E469EC1754823A00A31586 /* MCRandomSolveSceneController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCRandomSolveSceneController.m; sourceTree = "<group>"; };
 		A3E469EE175482AA00A31586 /* MCRandomSolveViewInputControllerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCRandomSolveViewInputControllerViewController.h; sourceTree = "<group>"; };
@@ -675,6 +677,9 @@
 		E0EC3712177154FC00835785 /* changeUserButtonDown_small@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "changeUserButtonDown_small@2x.png"; sourceTree = "<group>"; };
 		E0EC3713177154FC00835785 /* changeUserButtonUp_small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = changeUserButtonUp_small.png; sourceTree = "<group>"; };
 		E0EC3714177154FC00835785 /* changeUserButtonUp_small@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "changeUserButtonUp_small@2x.png"; sourceTree = "<group>"; };
+		E0EC371917715B9C00835785 /* CountingFinishView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CountingFinishView.xib; sourceTree = "<group>"; };
+		E0EC371A17715B9C00835785 /* CountingFinishView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CountingFinishView.m; sourceTree = "<group>"; };
+		E0EC371B17715B9C00835785 /* CountingFinishView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CountingFinishView.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1137,7 +1142,7 @@
 				A3F828CF16EAC93300AC5EAF /* MCNormalPlayInputViewController.m */,
 				A3E469E6174CB91A00A31586 /* FinishView.h */,
 				A3E469E7174CB91A00A31586 /* FinishView.m */,
-				A3E469E9174CBC4100A31586 /* myFinishView.xib */,
+				A3E469E9174CBC4100A31586 /* LearningFinishView.xib */,
 				A3F828D116EACAF700AC5EAF /* AskReloadView.h */,
 				A3F828D216EACAF700AC5EAF /* AskReloadView.m */,
 				A3F828D416EACB1C00AC5EAF /* myaskreloadview.xib */,
@@ -1159,6 +1164,9 @@
 				A3994A1716E3B4640037DBD0 /* PauseMenu.h */,
 				A3994A1816E3B4640037DBD0 /* PauseMenu.m */,
 				A3994A1F16E3C2720037DBD0 /* mypausemenu.xib */,
+				E0EC371917715B9C00835785 /* CountingFinishView.xib */,
+				E0EC371A17715B9C00835785 /* CountingFinishView.m */,
+				E0EC371B17715B9C00835785 /* CountingFinishView.h */,
 			);
 			name = Scene2;
 			sourceTree = "<group>";
@@ -1669,7 +1677,7 @@
 				A31B10F7174230840044DFFC /* cubeAction.png in Resources */,
 				A306688F17471FA000F6004F /* FaceColorMapping.plist in Resources */,
 				A3E469E5174CB0A100A31586 /* KnowledgeBase.sqlite3 in Resources */,
-				A3E469EA174CBC4100A31586 /* myFinishView.xib in Resources */,
+				A3E469EA174CBC4100A31586 /* LearningFinishView.xib in Resources */,
 				A3D67F821759E1F1002501B2 /* yellowface.png in Resources */,
 				A3D67F831759E1F1002501B2 /* whiteface.png in Resources */,
 				A3D67F841759E1F1002501B2 /* blueface.png in Resources */,
@@ -1783,6 +1791,7 @@
 				E0EC3716177154FC00835785 /* changeUserButtonDown_small@2x.png in Resources */,
 				E0EC3717177154FC00835785 /* changeUserButtonUp_small.png in Resources */,
 				E0EC3718177154FC00835785 /* changeUserButtonUp_small@2x.png in Resources */,
+				E0EC371C17715B9C00835785 /* CountingFinishView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1900,6 +1909,7 @@
 				E05DD5C717700ACE002C16CD /* Search.cpp in Sources */,
 				E05DD5C817700ACE002C16CD /* Tools.cpp in Sources */,
 				A3BFF6621770327D004D18D8 /* LearnPagePauseMenu.m in Sources */,
+				E0EC371D17715B9C00835785 /* CountingFinishView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -6,11 +6,11 @@
 //
 //
 
-#import "FinishView.h"
+#import "CountingFinishView.h"
 #import "PopChangeUserViewController.h"
 
 #define BLACK_BAR_COMPONENTS_Finish				{ 0.22, 0.22, 0.22, 1.0, 0.07, 0.07, 0.07, 1.0 }
-@implementation FinishView
+@implementation CountingFinishView
 @synthesize viewLoadedFromXib,finishViewType;
 @synthesize changeUserPopover = _changeUserPopover;
 @synthesize lastingTime;
@@ -61,7 +61,7 @@
         // The header label, a UILabel with the same frame as the titleBar
         [self headerLabel].font = [UIFont boldSystemFontOfSize:floor(self.titleBarHeight / 2.0)];
         
-        [[NSBundle mainBundle] loadNibNamed:@"LearningFinishView" owner:self options:nil];
+        [[NSBundle mainBundle] loadNibNamed:@"myFinishView" owner:self options:nil];
         
         [self.contentView addSubview:viewLoadedFromXib];
         
