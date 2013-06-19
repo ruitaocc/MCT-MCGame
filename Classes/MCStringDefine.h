@@ -40,7 +40,7 @@
 #define TextureKey_QsolveButtonUp @"qsolveButtonUp"
 
 //learnpage ui element
-#define TextureFileName_NumberElement @"number_element"
+#define TextureFileName_NumberElement @"number"
 #define TextureKey_dot @"dot2"
 #define TextureKey_dotdot @"dotdot2"
 #define TextureKey_eight @"eight2"

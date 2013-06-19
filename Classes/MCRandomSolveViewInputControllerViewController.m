@@ -49,6 +49,7 @@ static BOOL _isInitFinished = NO;
     isFinishInput = NO;
     totalMove = 0;
     currentMove = -1;
+    isStay = NO;
     //暂停
 	MCTexturedButton * pause = [[MCTexturedButton alloc] initWithUpKey:TextureKey_pauseButtonUp downKey:TextureKey_pauseButtonDown];
 	pause.scale = [MCMaterialController getWidthAndHeightFromTextureFile:TextureFileName_LearnPageElement forKey:TextureKey_pauseButtonUp];
@@ -216,10 +217,16 @@ static BOOL _isInitFinished = NO;
     [actionQueue shiftLeft];
     [stepcounter addCounter];
     
-    SingmasterNotation notation = (SingmasterNotation)[[singmasternotations objectAtIndex:currentMove]integerValue];
+    SingmasterNotation notation_Invert = (SingmasterNotation)[[singmasternotations objectAtIndex:currentMove]integerValue];
+    SingmasterNotation notation = [MCTransformUtil getContrarySingmasterNotation:notation_Invert];
     currentMove--;
+    RotateNotationType rotate = [MCTransformUtil getRotateNotationTypeWithSingmasterNotation:notation];
     
-    [c rotateWithSingmasterNotation:notation];
+    if (rotate.type==SingleTwoTimes) {
+        [c rotateWithSingmasterNotation:notation isNeedStay:isStay isTwoTimes:YES];
+    }else
+        [c rotateWithSingmasterNotation:notation isNeedStay:isStay isTwoTimes:NO];
+    
     //[[c playHelper]rotateWithSingmasterNotation:notation];
 };
 -(void)previousSolutionBtnDown{};
@@ -231,12 +238,20 @@ static BOOL _isInitFinished = NO;
     }
     MCRandomSolveSceneController *c = [MCRandomSolveSceneController sharedRandomSolveSceneController];
     [c flashSecne];
-     [actionQueue shiftRight];
-    [stepcounter minusCounter];
+     
     currentMove++;
     SingmasterNotation notation = (SingmasterNotation)[[singmasternotations objectAtIndex:currentMove]integerValue];
-    [c rotateWithSingmasterNotation:notation];
-    
+    RotateNotationType rotate = [MCTransformUtil getRotateNotationTypeWithSingmasterNotation:notation];
+    if (rotate.type==SingleTwoTimes) {
+        [c rotateWithSingmasterNotation:notation isNeedStay:isStay isTwoTimes:YES];
+     
+    }else{
+        [c rotateWithSingmasterNotation:notation isNeedStay:isStay isTwoTimes:NO];
+    }
+
+        [actionQueue shiftRight];
+        [stepcounter minusCounter];
+
     
 };
 -(void)nextSolutionBtnDown{};
@@ -256,13 +271,36 @@ static BOOL _isInitFinished = NO;
 
 -(void)mainMenuBtnUp{
     NSLog(@"mainMenuPlayBtnUp");
+    
+    //保存魔方状态
+    NSString *path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    NSString *fileName = [path stringByAppendingPathComponent:TmpInputMagicCubeData];
+    MCRandomSolveSceneController *c = [MCRandomSolveSceneController sharedRandomSolveSceneController];
+    
+    [NSKeyedArchiver archiveRootObject:[c magicCube] toFile:fileName];
+    
     CoordinatingController *coordinatingController_ = [CoordinatingController sharedCoordinatingController];
     [coordinatingController_ requestViewChangeByObject:kMainMenu];
 }
 
 -(void)pauseSolutionBtnDown{}
 
--(void)pauseSolutionBtnUp{}
+-(void)pauseSolutionBtnUp{
+    NSLog(@"pauseSolutionBtnUp");
+    //停止计时器
+        
+    //弹出对话框
+    solvePagePauseMenuView = [[SolvePagePauseMenu alloc] initWithFrame:self.view.bounds title:@"暂停"]; /*autorelease*/
+    solvePagePauseMenuView.isShowColseBtn = NO;
+    solvePagePauseMenuView.delegate = self;
+    ///////////////////////////////////
+	// Add the panel to our view
+	[self.view  addSubview:solvePagePauseMenuView];
+	///////////////////////////////////
+    
+	// Show the panel from the center of the button that was pressed
+	[solvePagePauseMenuView showFromPoint:CGPointMake(512,384)];
+}
 
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
@@ -348,19 +386,6 @@ static BOOL _isInitFinished = NO;
     
     //刷新magicCubeUI
     [secencontroller flashSecne];
-    
-    
-    
-    
-    //判断是否结束
-    
-        //结束则开始合成魔方，打开HUD
-    
-            //合成成功，1，则将魔方到模式变为教学模式，且45度角   2，永久关闭颜色选择框
-    
-            //合成不成功，alert。
-    
-            //关闭HUD
     
 }
 
@@ -476,6 +501,66 @@ static BOOL _isInitFinished = NO;
     
     
     return YES;
+}
+#pragma mark - UAModalDisplayPanelViewDelegate
+
+// Optional: This is called before the open animations.
+//   Only used if delegate is set.
+- (void)willShowModalPanel:(UAModalPanel *)modalPanel {
+	UADebugLog(@"willShowModalPanel called with modalPanel: %@", modalPanel);
+}
+
+// Optional: This is called after the open animations.
+//   Only used if delegate is set.
+- (void)didShowModalPanel:(UAModalPanel *)modalPanel {
+	UADebugLog(@"didShowModalPanel called with modalPanel: %@", modalPanel);
+}
+
+// Optional: This is called when the close button is pressed
+//   You can use it to perform validations
+//   Return YES to close the panel, otherwise NO
+//   Only used if delegate is set.
+- (BOOL)shouldCloseModalPanel:(UAModalPanel *)modalPanel {
+	UADebugLog(@"shouldCloseModalPanel called with modalPanel: %@", modalPanel);
+	return YES;
+}
+
+// Optional: This is called before the close animations.
+//   Only used if delegate is set.
+- (void)willCloseModalPanel:(UAModalPanel *)modalPanel {
+	UADebugLog(@"willCloseModalPanel called with modalPanel: %@", modalPanel);
+}
+
+
+// Optional: This is called after the close animations.
+//   Only used if delegate is set.
+- (void)didCloseModalPanel:(UAModalPanel *)modalPanel {
+	UADebugLog(@"didCloseModalPanel called with modalPanel: %@", modalPanel);
+    
+    if (solvePagePauseMenuView){
+        
+        if ([solvePagePauseMenuView solvePagePauseSelectType]==kSolvePagePauseSelect_GoOn) {
+            //go on
+            
+        }else if([solvePagePauseMenuView solvePagePauseSelectType]==kSolvePagePauseSelect_Clean_State){
+            //停止计时器
+            MCRandomSolveSceneController *c = [MCRandomSolveSceneController sharedRandomSolveSceneController];
+            [c clearState];
+            
+        }else if([solvePagePauseMenuView solvePagePauseSelectType]==kSolvePagePauseSelect_GoBack_AndSave){
+            //save and return
+            [self mainMenuBtnUp];
+        }else if([solvePagePauseMenuView solvePagePauseSelectType]==kSolvePagePauseSelect_GoBack_Directly){
+            //return direction
+            CoordinatingController *coordinatingController_ = [CoordinatingController sharedCoordinatingController];
+            [coordinatingController_ requestViewChangeByObject:kMainMenu];
+            
+        }
+
+        
+        solvePagePauseMenuView = nil;
+    }
+    
 }
 
 

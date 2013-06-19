@@ -6,16 +6,16 @@
 //
 //
 
-#import "LearnPagePauseMenu.h"
+#import "SolvePagePauseMenu.h"
 #define BLACK_BAR_COMPONENTS				{ 0.171875, 0.2421875, 0.3125, 0.8, 0.07, 0.07, 0.07, 1.0 }
 
-@interface LearnPagePauseMenu ()
+@interface SolvePagePauseMenu ()
 
 @end
 
-@implementation LearnPagePauseMenu
+@implementation SolvePagePauseMenu
 @synthesize viewLoadedFromXib;
-@synthesize learnPagePauseSelectType;
+@synthesize solvePagePauseSelectType;
 - (id)initWithFrame:(CGRect)frame title:(NSString *)title {
 	if ((self = [super initWithFrame:frame])) {
 		
@@ -47,7 +47,7 @@
         // Height of the title view. Default = 40.0f
         [self setTitleBarHeight:48.0f];
         
-        learnPagePauseSelectType = kLearnPagePauseSelect_default;
+        solvePagePauseSelectType = kSolvePagePauseSelect_default;
         
         // The gradient style (Linear, linear reversed, radial, radial reversed, center highlight). Default = UAGradientBackgroundStyleLinear
         [[self titleBar] setGradientStyle:UAGradientBackgroundStyleLinear];
@@ -60,7 +60,7 @@
         
         // The header label, a UILabel with the same frame as the titleBar
         [self headerLabel].font = [UIFont boldSystemFontOfSize:floor(self.titleBarHeight / 2.0)];
-        [[NSBundle mainBundle] loadNibNamed:@"learnpagepausemenu" owner:self options:nil];
+        [[NSBundle mainBundle] loadNibNamed:@"solvepagepausemenu" owner:self options:nil];
         [viewLoadedFromXib setAlpha:0.5];
         [self.contentView addSubview:viewLoadedFromXib];
     }
@@ -82,38 +82,40 @@
 	[viewLoadedFromXib setFrame:self.contentView.bounds];
 }
 - (IBAction)goOnBtnPressed:(id)sender{
-    learnPagePauseSelectType = kLearnPagePauseSelect_GoOn;
+    solvePagePauseSelectType = kSolvePagePauseSelect_GoOn;
     if ([delegate respondsToSelector:@selector(shouldCloseModalPanel:)]) {
 		if ([delegate shouldCloseModalPanel:self]) {
 			UADebugLog(@"Closing using delegates for modalPanel: %@", self);
 			[self hide];
 		}
-    }};
-- (IBAction)restartBtnPressed:(id)sender{
-    learnPagePauseSelectType = kLearnPagePauseSelect_Restart;
-    if ([delegate respondsToSelector:@selector(shouldCloseModalPanel:)]) {
-		if ([delegate shouldCloseModalPanel:self]) {
-			UADebugLog(@"Closing using delegates for modalPanel: %@", self);
-			[self hide];
-		}
-    }
+    };
 };
-- (IBAction)goBackMainMenuBtnPressed:(id)sender{
-    //    CoordinatingController *coorCol = [CoordinatingController sharedCoordinatingController];
-    //    sceneController *tmp = [coorCol currentController];
-    //    InputController *inputCol = [tmp inputController];
-    //    if ([inputCol respondsToSelector:@selector(mainMenuPlayBtnUp)]) {
-    //        [inputCol performSelector:@selector(mainMenuPlayBtnUp)];
-    //    }
-    learnPagePauseSelectType = kLearnPagePauseSelect_GoBack;
-    // Using Delegates
-	if ([delegate respondsToSelector:@selector(shouldCloseModalPanel:)]) {
+- (IBAction)saveAndReturnBtnPressed:(id)sender{
+    solvePagePauseSelectType = kSolvePagePauseSelect_GoBack_AndSave;
+    if ([delegate respondsToSelector:@selector(shouldCloseModalPanel:)]) {
 		if ([delegate shouldCloseModalPanel:self]) {
 			UADebugLog(@"Closing using delegates for modalPanel: %@", self);
 			[self hide];
 		}
-    }
-    
+    };
+};
+- (IBAction)returnDirectoryBtnPressed:(id)sender{
+    solvePagePauseSelectType = kSolvePagePauseSelect_GoBack_Directly;
+    if ([delegate respondsToSelector:@selector(shouldCloseModalPanel:)]) {
+		if ([delegate shouldCloseModalPanel:self]) {
+			UADebugLog(@"Closing using delegates for modalPanel: %@", self);
+			[self hide];
+		}
+    };
+};
+- (IBAction)cleanBtnPressed:(id)sender{
+    solvePagePauseSelectType = kSolvePagePauseSelect_Clean_State;
+    if ([delegate respondsToSelector:@selector(shouldCloseModalPanel:)]) {
+		if ([delegate shouldCloseModalPanel:self]) {
+			UADebugLog(@"Closing using delegates for modalPanel: %@", self);
+			[self hide];
+		}
+    };
 };
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event{
 }

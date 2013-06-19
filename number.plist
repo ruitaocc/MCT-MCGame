@@ -1,154 +1,172 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
-<!--
-===================================================================
-
-Sprite sheet file created for UIKit using TexturePacker
-http://www.codeandweb.com/texturepacker
-
-===================================================================
-$TexturePacker:SmartUpdate:b64bd0c5b50a9dec6cd3f1f2ba8f8994$
--->
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
+<dict>
+	<key>frames</key>
 	<dict>
-		<key>frames</key>
+		<key>dot2</key>
 		<dict>
-
-                        <key>dot</key>
-			<dict>
-				<key>x</key><real>55</real>
-				<key>y</key><real>83</real>
-				<key>w</key><real>13</real>
-				<key>h</key><real>25</real>
-				
-				
-			</dict>
-                        <key>dotdot</key>
-			<dict>
-				<key>x</key><real>40</real>
-				<key>y</key><real>83</real>
-				<key>w</key><real>13</real>
-				<key>h</key><real>25</real>
-				
-				
-			</dict>
-                        <key>eight</key>
-			<dict>
-				<key>x</key><real>40</real>
-				<key>y</key><real>29</real>
-				<key>w</key><real>17</real>
-				<key>h</key><real>25</real>
-				
-				
-			</dict>
-                        <key>five</key>
-			<dict>
-				<key>x</key><real>21</real>
-				<key>y</key><real>83</real>
-				<key>w</key><real>17</real>
-				<key>h</key><real>25</real>
-				
-				
-			</dict>
-                        <key>four</key>
-			<dict>
-				<key>x</key><real>21</real>
-				<key>y</key><real>56</real>
-				<key>w</key><real>17</real>
-				<key>h</key><real>25</real>
-				
-				
-			</dict>
-                        <key>nine</key>
-			<dict>
-				<key>x</key><real>21</real>
-				<key>y</key><real>29</real>
-				<key>w</key><real>17</real>
-				<key>h</key><real>25</real>
-				
-				
-			</dict>
-                        <key>one</key>
-			<dict>
-				<key>x</key><real>40</real>
-				<key>y</key><real>56</real>
-				<key>w</key><real>15</real>
-				<key>h</key><real>25</real>
-				
-				
-			</dict>
-                        <key>seven</key>
-			<dict>
-				<key>x</key><real>2</real>
-				<key>y</key><real>83</real>
-				<key>w</key><real>17</real>
-				<key>h</key><real>25</real>
-				
-				
-			</dict>
-                        <key>six</key>
-			<dict>
-				<key>x</key><real>57</real>
-				<key>y</key><real>56</real>
-				<key>w</key><real>17</real>
-				<key>h</key><real>23</real>
-				
-				
-			</dict>
-                        <key>step</key>
-			<dict>
-				<key>x</key><real>52</real>
-				<key>y</key><real>2</real>
-				<key>w</key><real>48</real>
-				<key>h</key><real>25</real>
-				
-				
-			</dict>
-                        <key>three</key>
-			<dict>
-				<key>x</key><real>2</real>
-				<key>y</key><real>56</real>
-				<key>w</key><real>17</real>
-				<key>h</key><real>25</real>
-				
-				
-			</dict>
-                        <key>time</key>
-			<dict>
-				<key>x</key><real>2</real>
-				<key>y</key><real>2</real>
-				<key>w</key><real>48</real>
-				<key>h</key><real>25</real>
-				
-				
-			</dict>
-                        <key>two</key>
-			<dict>
-				<key>x</key><real>2</real>
-				<key>y</key><real>29</real>
-				<key>w</key><real>17</real>
-				<key>h</key><real>25</real>
-				
-				
-			</dict>
-                        <key>zero</key>
-			<dict>
-				<key>x</key><real>102</real>
-				<key>y</key><real>2</real>
-				<key>w</key><real>17</real>
-				<key>h</key><real>25</real>
-				
-				
-			</dict>
+			<key>x</key>
+			<real>55</real>
+			<key>y</key>
+			<real>83</real>
+			<key>w</key>
+			<real>13</real>
+			<key>h</key>
+			<real>25</real>
 		</dict>
-		<key>meta</key>
+		<key>dotdot2</key>
 		<dict>
-			<key>image</key>
-			<string>number.png</string>
-			<key>width</key>
-			<integer>128</integer>
-			<key>height</key>
-			<integer>128</integer>
+			<key>x</key>
+			<real>40</real>
+			<key>y</key>
+			<real>83</real>
+			<key>w</key>
+			<real>13</real>
+			<key>h</key>
+			<real>25</real>
+		</dict>
+		<key>eight2</key>
+		<dict>
+			<key>x</key>
+			<real>40</real>
+			<key>y</key>
+			<real>29</real>
+			<key>w</key>
+			<real>17</real>
+			<key>h</key>
+			<real>25</real>
+		</dict>
+		<key>five2</key>
+		<dict>
+			<key>x</key>
+			<real>21</real>
+			<key>y</key>
+			<real>83</real>
+			<key>w</key>
+			<real>17</real>
+			<key>h</key>
+			<real>25</real>
+		</dict>
+		<key>four2</key>
+		<dict>
+			<key>x</key>
+			<real>21</real>
+			<key>y</key>
+			<real>56</real>
+			<key>w</key>
+			<real>17</real>
+			<key>h</key>
+			<real>25</real>
+		</dict>
+		<key>nine2</key>
+		<dict>
+			<key>x</key>
+			<real>21</real>
+			<key>y</key>
+			<real>29</real>
+			<key>w</key>
+			<real>17</real>
+			<key>h</key>
+			<real>25</real>
+		</dict>
+		<key>one2</key>
+		<dict>
+			<key>x</key>
+			<real>40</real>
+			<key>y</key>
+			<real>56</real>
+			<key>w</key>
+			<real>15</real>
+			<key>h</key>
+			<real>25</real>
+		</dict>
+		<key>seven2</key>
+		<dict>
+			<key>x</key>
+			<real>2</real>
+			<key>y</key>
+			<real>83</real>
+			<key>w</key>
+			<real>17</real>
+			<key>h</key>
+			<real>25</real>
+		</dict>
+		<key>six2</key>
+		<dict>
+			<key>x</key>
+			<real>57</real>
+			<key>y</key>
+			<real>56</real>
+			<key>w</key>
+			<real>17</real>
+			<key>h</key>
+			<real>23</real>
+		</dict>
+		<key>step2</key>
+		<dict>
+			<key>x</key>
+			<real>52</real>
+			<key>y</key>
+			<real>2</real>
+			<key>w</key>
+			<real>48</real>
+			<key>h</key>
+			<real>25</real>
+		</dict>
+		<key>three2</key>
+		<dict>
+			<key>x</key>
+			<real>2</real>
+			<key>y</key>
+			<real>56</real>
+			<key>w</key>
+			<real>17</real>
+			<key>h</key>
+			<real>25</real>
+		</dict>
+		<key>time2</key>
+		<dict>
+			<key>x</key>
+			<real>2</real>
+			<key>y</key>
+			<real>2</real>
+			<key>w</key>
+			<real>48</real>
+			<key>h</key>
+			<real>25</real>
+		</dict>
+		<key>two2</key>
+		<dict>
+			<key>x</key>
+			<real>2</real>
+			<key>y</key>
+			<real>29</real>
+			<key>w</key>
+			<real>17</real>
+			<key>h</key>
+			<real>25</real>
+		</dict>
+		<key>zero2</key>
+		<dict>
+			<key>x</key>
+			<real>102</real>
+			<key>y</key>
+			<real>2</real>
+			<key>w</key>
+			<real>17</real>
+			<key>h</key>
+			<real>25</real>
 		</dict>
 	</dict>
+	<key>meta</key>
+	<dict>
+		<key>image</key>
+		<string>number.png</string>
+		<key>width</key>
+		<integer>128</integer>
+		<key>height</key>
+		<integer>128</integer>
+	</dict>
+</dict>
 </plist>

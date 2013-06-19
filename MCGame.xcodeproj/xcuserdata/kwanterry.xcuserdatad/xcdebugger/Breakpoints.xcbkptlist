@@ -47,11 +47,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Classes/MCMagicCubeUIModelController.m"
-         timestampString = "393323229.701249"
+         timestampString = "393342096.227905"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1779"
-         endingLineNumber = "1779"
+         startingLineNumber = "1786"
+         endingLineNumber = "1786"
          landmarkName = "-adjustWithCenter"
          landmarkType = "5">
       </FileBreakpoint>
@@ -60,11 +60,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Classes/MCMagicCubeUIModelController.m"
-         timestampString = "393323229.701249"
+         timestampString = "393342096.227905"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1788"
-         endingLineNumber = "1788"
+         startingLineNumber = "1795"
+         endingLineNumber = "1795"
          landmarkName = "-adjustWithCenter"
          landmarkType = "5">
       </FileBreakpoint>
@@ -73,11 +73,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Classes/MCMagicCubeUIModelController.m"
-         timestampString = "393323229.701249"
+         timestampString = "393342096.227905"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1828"
-         endingLineNumber = "1828"
+         startingLineNumber = "1835"
+         endingLineNumber = "1835"
          landmarkName = "-adjustWithCenter"
          landmarkType = "5">
       </FileBreakpoint>
@@ -86,11 +86,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Classes/MCMagicCubeUIModelController.m"
-         timestampString = "393323229.701249"
+         timestampString = "393342096.227905"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "1837"
-         endingLineNumber = "1837"
+         startingLineNumber = "1844"
+         endingLineNumber = "1844"
          landmarkName = "-adjustWithCenter"
          landmarkType = "5">
       </FileBreakpoint>
@@ -208,7 +208,33 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "235"
          endingLineNumber = "235"
-         landmarkName = "-rotateOnAxis:onLayer:inDirection:isTribleRotate:"
+         landmarkName = "-rotateOnAxis:onLayer:inDirection:isTribleRotate:isTwoTimes:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Classes/MCRandomSolveViewInputControllerViewController.m"
+         timestampString = "393344599.045082"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "245"
+         endingLineNumber = "245"
+         landmarkName = "-nextSolutionBtnUp"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Classes/MCRandomSolveViewInputControllerViewController.m"
+         timestampString = "393344599.045082"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "246"
+         endingLineNumber = "246"
+         landmarkName = "-nextSolutionBtnUp"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

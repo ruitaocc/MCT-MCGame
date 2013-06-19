@@ -150,7 +150,7 @@
     
     //[playHelper rotateWithSingmasterNotation:notation];
     
-    [magicCubeUI rotateOnAxis:axis onLayer:layer inDirection:direction isTribleRotate:NO];
+    [magicCubeUI rotateOnAxis:axis onLayer:layer inDirection:direction isTribleRotate:NO isTwoTimes:NO];
     
     
 }

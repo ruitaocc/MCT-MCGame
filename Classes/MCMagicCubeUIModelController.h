@@ -115,7 +115,7 @@ typedef enum _MagicCubeUIUsingMode {
 -(id)initiate;
 -(id)initiateWithState:(NSArray *)stateList;
 -(void)flashWithState:(NSArray *)stateList;
-- (void) rotateOnAxis : (AxisType)axis onLayer: (int)layer inDirection: (LayerRotationDirectionType)direction isTribleRotate:(BOOL)is_trible_roate;
+- (void) rotateOnAxis : (AxisType)axis onLayer: (int)layer inDirection: (LayerRotationDirectionType)direction isTribleRotate:(BOOL)is_trible_roate isTwoTimes:(BOOL)is_twotimes;
 
 - (void) nextSpaceIndicatorWithRotateNotationType:(struct RotateNotationType)rotationNotationType;
 

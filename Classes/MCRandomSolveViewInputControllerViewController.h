@@ -11,8 +11,9 @@
 #import "MCActionQueue.h"
 #import "MCMultiDigitCounter.h"
 #import "InfoView.h"
+#import "SolvePagePauseMenu.h"
 //#import "MBProgressHUD.h"
-@interface MCRandomSolveViewInputControllerViewController : InputController <QuadCurveMenuDelegate>{
+@interface MCRandomSolveViewInputControllerViewController : InputController <QuadCurveMenuDelegate,UAModalPanelDelegate>{
     //判断是否要弹出选择框到标记
     BOOL isWantShowSelectView;
     MCActionQueue *actionQueue;
@@ -23,6 +24,9 @@
     NSMutableArray * singmasternotations;
     int totalMove;
     int currentMove;
+    BOOL isStay;
+    SolvePagePauseMenu *solvePagePauseMenuView;
+
 }
 
 @property (nonatomic, retain) NSArray *menuItems;

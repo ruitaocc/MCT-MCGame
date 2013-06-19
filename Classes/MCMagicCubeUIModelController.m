@@ -230,7 +230,7 @@
 }
 
 
-- (void) rotateOnAxis : (AxisType)axis onLayer: (int)layer inDirection: (LayerRotationDirectionType)direction isTribleRotate:(BOOL)is_trible_roate{
+- (void) rotateOnAxis : (AxisType)axis onLayer: (int)layer inDirection: (LayerRotationDirectionType)direction isTribleRotate:(BOOL)is_trible_roate isTwoTimes:(BOOL)is_twotimes{
     //当前如果有某一自动旋转正在进行，禁止再旋转，直到完成
     if (isAutoRotate) return;
     //当前如果有某一手动旋转正在进行，禁止再旋转，直到完成
@@ -239,8 +239,14 @@
     if (isNeededToAdjustment) return;
     isTribleAutoRotateIn_TECH_MODE = is_trible_roate;
     isAutoRotate = YES;
-    rest_rotate_time = TIME_PER_ROTATION;
-    rest_rotate_angle = ROTATION_ANGLE;
+   
+    if (is_twotimes) {
+        rest_rotate_angle = ROTATION_ANGLE*2;
+         rest_rotate_time = TIME_PER_ROTATION*2;
+    }else{
+        rest_rotate_angle = ROTATION_ANGLE;
+        rest_rotate_time = TIME_PER_ROTATION;
+    }
     cuculated_angle = 0;
     current_rotate_axis = axis;
     current_rotate_direction = direction;
@@ -1008,14 +1014,14 @@
                         commandaxis=CCW;
                     }
                 }
-                NSInvocation *doinvocation = [self createInvocationOnAxis:current_rotate_axis onLayer:current_rotate_layer inDirection:commandaxis isTribleRotate:NO];
+                NSInvocation *doinvocation = [self createInvocationOnAxis:current_rotate_axis onLayer:current_rotate_layer inDirection:commandaxis isTribleRotate:NO isTwoTimes:NO];
                                 
                 if(commandaxis==CCW){
                     commandaxis=CW;
                 }else {
                     commandaxis=CCW;
                 }
-                NSInvocation *undoinvocation = [self createInvocationOnAxis:current_rotate_axis onLayer:current_rotate_layer inDirection:commandaxis isTribleRotate:NO];
+                NSInvocation *undoinvocation = [self createInvocationOnAxis:current_rotate_axis onLayer:current_rotate_layer inDirection:commandaxis isTribleRotate:NO isTwoTimes:NO];
                [self addInvocation:doinvocation withUndoInvocation:undoinvocation];
                 //当旋转180度
                 if (isNeededToUpadteTwice) {
@@ -1296,20 +1302,20 @@
                     current_rotate_axis = fuzzy_axis;
                     current_rotate_direction = fuzzy_direction;
                 //旋转模型
-                    [self rotateOnAxis:current_rotate_axis onLayer:current_rotate_layer inDirection:current_rotate_direction isTribleRotate:YES];
+                    [self rotateOnAxis:current_rotate_axis onLayer:current_rotate_layer inDirection:current_rotate_direction isTribleRotate:YES isTwoTimes:NO];
                     if (isNeededToUpdateMagicCubeState) {
                         //加入命令队列
                         //添加command到NSUndoManger
                         LayerRotationDirectionType commandaxis = current_rotate_direction;
                     
-                        NSInvocation *doinvocation = [self createInvocationOnAxis:current_rotate_axis onLayer:current_rotate_layer inDirection:commandaxis isTribleRotate:YES];
+                        NSInvocation *doinvocation = [self createInvocationOnAxis:current_rotate_axis onLayer:current_rotate_layer inDirection:commandaxis isTribleRotate:YES isTwoTimes:NO];
                     
                         if(commandaxis==CCW){
                             commandaxis=CW;
                         }else {
                             commandaxis=CCW;
                         }
-                        NSInvocation *undoinvocation = [self createInvocationOnAxis:current_rotate_axis onLayer:current_rotate_layer inDirection:commandaxis isTribleRotate:YES];
+                        NSInvocation *undoinvocation = [self createInvocationOnAxis:current_rotate_axis onLayer:current_rotate_layer inDirection:commandaxis isTribleRotate:YES isTwoTimes:NO];
                         [self addInvocation:doinvocation withUndoInvocation:undoinvocation];
                     
                     }
@@ -1342,14 +1348,14 @@
             commandaxis=CCW;
         }
     }
-    NSInvocation *doinvocation = [self createInvocationOnAxis:current_rotate_axis onLayer:current_rotate_layer inDirection:commandaxis isTribleRotate:NO];
+    NSInvocation *doinvocation = [self createInvocationOnAxis:current_rotate_axis onLayer:current_rotate_layer inDirection:commandaxis isTribleRotate:NO isTwoTimes:NO];
     
     if(commandaxis==CCW){
         commandaxis=CW;
     }else {
         commandaxis=CCW;
     }
-    NSInvocation *undoinvocation = [self createInvocationOnAxis:current_rotate_axis onLayer:current_rotate_layer inDirection:commandaxis isTribleRotate:NO];
+    NSInvocation *undoinvocation = [self createInvocationOnAxis:current_rotate_axis onLayer:current_rotate_layer inDirection:commandaxis isTribleRotate:NO isTwoTimes:NO];
     [self addInvocation:doinvocation withUndoInvocation:undoinvocation];
 };
 
@@ -1686,15 +1692,16 @@
 #pragma mark undo and redo
 
 //创建撤销操作点NSInvocation对象
--(NSInvocation *)createInvocationOnAxis : (AxisType)axis onLayer: (int)layer inDirection: (LayerRotationDirectionType)direction isTribleRotate:(BOOL)is_trible_roate{
-    NSMethodSignature *executeMethodSinature = [self methodSignatureForSelector:@selector(rotateOnAxis:onLayer:inDirection:isTribleRotate:)];
+-(NSInvocation *)createInvocationOnAxis : (AxisType)axis onLayer: (int)layer inDirection: (LayerRotationDirectionType)direction isTribleRotate:(BOOL)is_trible_roate isTwoTimes:(BOOL)isTwoTimes{
+    NSMethodSignature *executeMethodSinature = [self methodSignatureForSelector:@selector(rotateOnAxis:onLayer:inDirection:isTribleRotate:isTwoTimes:)];
     NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:executeMethodSinature];
     [invocation setTarget:self];
-    [invocation setSelector:@selector(rotateOnAxis:onLayer:inDirection:isTribleRotate:)];
+    [invocation setSelector:@selector(rotateOnAxis:onLayer:inDirection:isTribleRotate:isTwoTimes:)];
     [invocation setArgument: &axis atIndex:2];
     [invocation setArgument:&layer atIndex:3];
     [invocation setArgument:&direction atIndex:4];
     [invocation setArgument:&is_trible_roate atIndex:5];
+    [invocation setArgument:&isTwoTimes atIndex:6];
     return invocation;
 }
 

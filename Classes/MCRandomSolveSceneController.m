@@ -14,7 +14,8 @@
 
 @implementation MCRandomSolveSceneController
 
-@synthesize magicCube,playHelper;
+@synthesize magicCube;
+//playHelper
 @synthesize selected_face_index;
 @synthesize selected_index;
 
@@ -42,11 +43,11 @@
     
     NSString *filePath = [path stringByAppendingPathComponent:TmpMagicCubeData];
     
-    magicCube=[MCMagicCube unarchiveMagicCubeWithFile:filePath];
+    magicCube=[[MCMagicCube unarchiveMagicCubeWithFile:filePath] retain];
     
     //magicCube = [[MCMagicCube magicCubeOnlyWithCenterColor]retain];
     
-    playHelper = [[MCPlayHelper playerHelperWithMagicCube:self.magicCube]retain];
+    //playHelper = [[MCPlayHelper playerHelperWithMagicCube:self.magicCube]retain];
     //背景
     MCBackGroundTexMesh* background = [[MCBackGroundTexMesh alloc]init];
     background.pretranslation = MCPointMake(0, 0, -246);
@@ -86,10 +87,11 @@
     [magicCubeUI setUsingMode:SOlVE_Play_MODE];
     [magicCubeUI switchToOrignalPlace];
 }
--(void)rotateWithSingmasterNotation:(SingmasterNotation)notation{
+-(void)rotateWithSingmasterNotation:(SingmasterNotation)notation isNeedStay:(BOOL)isStay isTwoTimes:(BOOL)isTwoTimes{
+    //[self flashSecne];
     RotateNotationType rotate = [MCTransformUtil getRotateNotationTypeWithSingmasterNotation:notation];
-    [magicCubeUI rotateOnAxis:rotate.axis onLayer:rotate.layer inDirection:rotate.direction isTribleRotate:NO];
-    [playHelper rotateWithSingmasterNotation:notation];
+    [magicCubeUI rotateOnAxis:rotate.axis onLayer:rotate.layer inDirection:rotate.direction isTribleRotate:NO isTwoTimes:isTwoTimes];
+    [magicCube rotateWithSingmasterNotation:notation];
 };
 -(BOOL)isSelectOneFace:(vec2)touchpoint{
     if ([magicCubeUI isSelectOneFace:touchpoint]) {
@@ -102,6 +104,13 @@
 -(void)flashSecne{
     [magicCubeUI flashWithState:[magicCube getColorInOrientationsOfAllCubie]];
 };
+
+-(void)clearState{
+    magicCube = [[MCMagicCube magicCubeOnlyWithCenterColor]retain];
+    
+    [magicCubeUI flashWithState:[magicCube getColorInOrientationsOfAllCubie]];
+
+}
 
 -(void)releaseSrc{
     [super releaseSrc];
