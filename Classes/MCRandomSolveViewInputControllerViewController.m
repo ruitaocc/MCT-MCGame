@@ -15,7 +15,8 @@
 #import "Search.h"
 #import "CoordCube.h"
 #import "Tools.h"
-
+#import "MCLabel.h"
+#import "MCStringDefine.h"
 @interface MCRandomSolveViewInputControllerViewController () {
     __block BOOL _isInitFinished;
     __block BOOL _errorFlag;
@@ -35,7 +36,8 @@
 @synthesize lastestPoint = _lastestPoint;
 @synthesize cubieArray = _cubieArray;
 @synthesize menuItems = _menuItems;
-
+@synthesize stepcounter;
+@synthesize actionQueue;
 -(void)loadInterface{
     [super loadInterface];
     
@@ -55,6 +57,34 @@
 	[interfaceObjects addObject:mainMenuBtn];
 	[mainMenuBtn release];
     
+    //UI step counter
+    NSString *counterName[10] = {@"zero2",@"one2",@"two2",@"three2",@"four2",@"five2",@"six2",@"seven2",@"eight2",@"nine2"};
+    stepcounter = [[MCMultiDigitCounter alloc]initWithNumberOfDigit:3 andKeys:counterName];
+    [stepcounter setScale : MCPointMake(96, 50, 1.0)];
+    [stepcounter setTranslation :MCPointMake(450, -340, 0.0)];
+    [stepcounter setActive:YES];
+    [stepcounter awake];
+    [interfaceObjects addObject:stepcounter];
+    
+    
+    //UI UI step counter label
+    MCLabel *counterLabel= [[MCLabel alloc]initWithNstring:TextureKey_step];
+    counterLabel.scale = [MCMaterialController getWidthAndHeightFromTextureFile:TextureFileName_NumberElement forKey:TextureKey_step];
+    [counterLabel setTranslation :MCPointMake(450, -285, 0.0)];
+    [counterLabel setActive:YES];
+    [counterLabel awake];
+    [interfaceObjects addObject:counterLabel];
+    [counterLabel release];
+
+    //add action queue
+    NSMutableArray *actionname = [[NSMutableArray alloc]init];
+    actionQueue = [[MCActionQueue alloc]initWithActionList:actionname] ;
+    [actionQueue setScale : MCPointMake(32, 32, 1.0)];
+    [actionQueue setTranslation :MCPointMake(0, 340, 0.0)];
+    [actionQueue setActive:NO];
+    [actionQueue awake];
+    [interfaceObjects addObject:actionQueue];
+    [actionname release];
     
     //qsolvebtn
     //the texture 还没设计出来
