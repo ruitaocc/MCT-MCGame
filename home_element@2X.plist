@@ -4,7 +4,7 @@
 <dict>
 	<key>frames</key>
 	<dict>
-		<key>appTitle@2X</key>
+		<key>appTitle</key>
 		<dict>
 			<key>x</key>
 			<real>2</real>
@@ -15,7 +15,7 @@
 			<key>h</key>
 			<real>302</real>
 		</dict>
-		<key>learnButtonDown@2X</key>
+		<key>learnButtonDown</key>
 		<dict>
 			<key>x</key>
 			<real>2</real>
@@ -26,7 +26,7 @@
 			<key>h</key>
 			<real>350</real>
 		</dict>
-		<key>learnButtonUp@2X</key>
+		<key>learnButtonUp</key>
 		<dict>
 			<key>x</key>
 			<real>2</real>
@@ -37,7 +37,7 @@
 			<key>h</key>
 			<real>350</real>
 		</dict>
-		<key>optionButtonDown@2X</key>
+		<key>optionButtonDown</key>
 		<dict>
 			<key>x</key>
 			<real>934</real>
@@ -48,7 +48,7 @@
 			<key>h</key>
 			<real>241</real>
 		</dict>
-		<key>optionButtonUp@2X</key>
+		<key>optionButtonUp</key>
 		<dict>
 			<key>x</key>
 			<real>934</real>
@@ -59,7 +59,7 @@
 			<key>h</key>
 			<real>241</real>
 		</dict>
-		<key>raceButtonDown@2X</key>
+		<key>raceButtonDown</key>
 		<dict>
 			<key>x</key>
 			<real>644</real>
@@ -70,7 +70,7 @@
 			<key>h</key>
 			<real>289</real>
 		</dict>
-		<key>raceButtonUp@2X</key>
+		<key>raceButtonUp</key>
 		<dict>
 			<key>x</key>
 			<real>644</real>
@@ -81,7 +81,7 @@
 			<key>h</key>
 			<real>289</real>
 		</dict>
-		<key>rankButtonDown@2X</key>
+		<key>rankButtonDown</key>
 		<dict>
 			<key>x</key>
 			<real>1097</real>
@@ -92,7 +92,7 @@
 			<key>h</key>
 			<real>240</real>
 		</dict>
-		<key>rankButtonUp@2X</key>
+		<key>rankButtonUp</key>
 		<dict>
 			<key>x</key>
 			<real>1097</real>
@@ -103,7 +103,7 @@
 			<key>h</key>
 			<real>240</real>
 		</dict>
-		<key>solveButtonDown@2X</key>
+		<key>solveButtonDown</key>
 		<dict>
 			<key>x</key>
 			<real>354</real>
@@ -114,7 +114,7 @@
 			<key>h</key>
 			<real>289</real>
 		</dict>
-		<key>solveButtonUp@2X</key>
+		<key>solveButtonUp</key>
 		<dict>
 			<key>x</key>
 			<real>354</real>
@@ -129,7 +129,7 @@
 	<key>meta</key>
 	<dict>
 		<key>image</key>
-		<string>home@2X.png</string>
+		<string>home@2x.png</string>
 		<key>width</key>
 		<integer>2048</integer>
 		<key>height</key>
