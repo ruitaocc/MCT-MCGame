@@ -26,11 +26,14 @@
     NSTimer *radomtimer;
     //优化random
     AxisType lastRandomAxis;
+    BOOL isRandoming;
 }
 
 @property (nonatomic,retain) MCActionQueue *actionQueue;
 @property (nonatomic,retain) MCMultiDigitCounter *stepcounter;
 @property (nonatomic,retain) MCTimer * timer;
+@property (nonatomic,assign) BOOL isRandoming;
+
 //overload
 -(void)loadInterface;
 //interface action selectors

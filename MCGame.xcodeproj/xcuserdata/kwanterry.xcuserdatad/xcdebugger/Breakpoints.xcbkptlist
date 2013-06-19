@@ -34,13 +34,13 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Classes/MCMagicCubeUIModelController.h"
-         timestampString = "393160629.496124"
+         timestampString = "393300928.425103"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "125"
-         endingLineNumber = "125"
-         landmarkName = "@interface MCMagicCubeUIModelController"
-         landmarkType = "2">
+         startingLineNumber = "126"
+         endingLineNumber = "126"
+         landmarkName = "-closeSpaceIndicator"
+         landmarkType = "4">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
@@ -99,11 +99,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Classes/MCNormalPlayInputViewController.m"
-         timestampString = "393159955.335705"
+         timestampString = "393300928.425103"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "346"
-         endingLineNumber = "346"
+         startingLineNumber = "350"
+         endingLineNumber = "350"
          landmarkName = "-didCloseModalPanel:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -112,11 +112,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Classes/MCNormalPlayInputViewController.m"
-         timestampString = "393159955.335705"
+         timestampString = "393300928.425103"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "352"
-         endingLineNumber = "352"
+         startingLineNumber = "356"
+         endingLineNumber = "356"
          landmarkName = "-didCloseModalPanel:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -125,11 +125,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Classes/MCNormalPlayInputViewController.m"
-         timestampString = "393228665.938413"
+         timestampString = "393300928.425103"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "359"
-         endingLineNumber = "359"
+         startingLineNumber = "363"
+         endingLineNumber = "363"
          landmarkName = "-didCloseModalPanel:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -138,11 +138,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Classes/MCNormalPlayInputViewController.m"
-         timestampString = "393237140.403395"
+         timestampString = "393300928.425103"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "395"
-         endingLineNumber = "395"
+         startingLineNumber = "408"
+         endingLineNumber = "408"
          landmarkName = "-didCloseModalPanel:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -151,11 +151,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Classes/MCNormalPlayInputViewController.m"
-         timestampString = "393237140.403395"
+         timestampString = "393300928.425103"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "400"
-         endingLineNumber = "400"
+         startingLineNumber = "413"
+         endingLineNumber = "413"
          landmarkName = "-didCloseModalPanel:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -190,11 +190,24 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Classes/MCNormalPlayInputViewController.m"
-         timestampString = "393168948.748851"
+         timestampString = "393300928.425103"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "347"
-         endingLineNumber = "347"
+         startingLineNumber = "351"
+         endingLineNumber = "351"
+         landmarkName = "-didCloseModalPanel:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Classes/MCNormalPlayInputViewController.m"
+         timestampString = "393300928.425103"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "399"
+         endingLineNumber = "399"
          landmarkName = "-didCloseModalPanel:"
          landmarkType = "5">
       </FileBreakpoint>

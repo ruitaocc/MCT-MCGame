@@ -171,7 +171,7 @@
         select_trackballRadius = 260;
         is_TECH_MODE_Rotate = NO;
         isTribleAutoRotateIn_TECH_MODE = NO;
-       //  TIME_PER_ROTATION =0.5;
+        //  TIME_PER_ROTATION =0.5;
         for (int i =0 ; i<3; i++) {
             twoLayerFlag[i] = NO;
         }
@@ -2089,6 +2089,12 @@ double FabsThetaBetweenV1andV2(const vec3& v1,const vec3& v2)
         return NO;
 
 };
+-(void)closeSpaceIndicator{
+    for (Cube *tmp in array27Cube) {
+        [tmp setIsNeededToShowSpaceDirection:NO];
+        [tmp setIsLocked:NO];
+    }
+}
 - (void) nextSpaceIndicatorWithRotateNotationType:(struct RotateNotationType)rotationNotationType{
     for (Cube *tmp in array27Cube) {
         [tmp setIsNeededToShowSpaceDirection:NO];

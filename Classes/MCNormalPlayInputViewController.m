@@ -19,7 +19,7 @@
 @synthesize stepcounter;
 @synthesize timer;
 @synthesize actionQueue;
-
+@synthesize isRandoming;
 
 -(void)loadInterface
 {
@@ -27,7 +27,7 @@
 	[interfaceObjects removeAllObjects];
     lastRandomAxis = X;
     randomRotateCount = 0;
-    
+    isRandoming = NO;
     //UI step counter
     NSString *counterName[10] = {@"zero2",@"one2",@"two2",@"three2",@"four2",@"five2",@"six2",@"seven2",@"eight2",@"nine2"};
     stepcounter = [[MCMultiDigitCounter alloc]initWithNumberOfDigit:3 andKeys:counterName];
@@ -187,6 +187,9 @@
     
 }
 -(void)tipsBtnUp{
+    if (isRandoming) {
+        return;
+    }
     MCNormalPlaySceneController *c = [MCNormalPlaySceneController sharedNormalPlaySceneController ];
     //hiden the action queue
     [self.actionQueue setActive : !self.actionQueue.active ];
@@ -206,9 +209,9 @@
 -(void)tipsBtnDown{};
 -(void)randomBtnUp{
     //TIME_PER_ROTATION = 0.15;
-    //MCNormalPlaySceneController *c = [MCNormalPlaySceneController sharedNormalPlaySceneController ];
-    //[c setRotation_per_second:2];
-    //float TIME_PER_ROTATION = [c rotation_per_second];
+    isRandoming = YES;
+    MCNormalPlaySceneController *c = [MCNormalPlaySceneController sharedNormalPlaySceneController ];
+    [c closeSpaceIndicator];
     radomtimer = [NSTimer scheduledTimerWithTimeInterval:TIME_PER_ROTATION+0.1 target:self selector:@selector(randomRotateHelp1) userInfo:nil repeats:YES];
     [NSTimer scheduledTimerWithTimeInterval:(TIME_PER_ROTATION+0.1)*(RandomRotateMaxCount+1)+0.1 target:self selector:@selector(randomRotateHelp2) userInfo:nil repeats:NO];
 };
@@ -233,6 +236,7 @@
     }
 }
 -(void)randomRotateHelp2{
+    isRandoming = NO;
     randomRotateCount =0;
     [timer startTimer];
     //TIME_PER_ROTATION = 0.5;
@@ -382,12 +386,21 @@
             [timer startTimer];
         }else if([learnPagePauseMenuView learnPagePauseSelectType]==kLearnPagePauseSelect_Restart){
             //更新UI模型
-            //MCNormalPlaySceneController *c = [MCNormalPlaySceneController sharedNormalPlaySceneController ];
-            //[c reloadScene];
+            
             //Default
+            MCNormalPlaySceneController *c = [MCNormalPlaySceneController sharedNormalPlaySceneController ];
+            //hiden the action queue
+            [self.actionQueue setActive : NO ];
+            //hiden the tips
+            [[c tipsLabel] setHidden:YES];
+            c.isShowQueue = NO;
+            [self.actionQueue removeAllActions];
+            [[c tipsLabel]setText:@""];
+            [[c playHelper] close];
+            
+            //counter reset
             [stepcounter reset];
             [timer reset];
-          
             [self randomBtnUp];
 
             

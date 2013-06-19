@@ -189,7 +189,9 @@
         }*/
         //[magicCubeUI setLockedarray:lockArray];
         [[magicCubeUI lockedarray]removeAllObjects];
-        [[magicCubeUI lockedarray]addObjectsFromArray:lockArray];
+       // if (![(MCNormalPlayInputViewController*)input_C isRandoming]) {
+            [[magicCubeUI lockedarray]addObjectsFromArray:lockArray];
+       // }
         [magicCubeUI flashWithState:[magicCube getColorInOrientationsOfAllCubie]];
         [[self tipsLabel]setText:tipstr];
         [[input_C actionQueue] insertQueueCurrentIndexWithNmaeList:actionqueue];
@@ -252,7 +254,9 @@
                 [[[magicCubeUI array27Cube]objectAtIndex:[index intValue]]setIsLocked:YES];
             }*/
             [[magicCubeUI lockedarray]removeAllObjects];
-            [[magicCubeUI lockedarray]addObjectsFromArray:lockArray];
+            //if (![(MCNormalPlayInputViewController*)input_C isRandoming]) {
+                [[magicCubeUI lockedarray]addObjectsFromArray:lockArray];
+            //}
             [magicCubeUI flashWithState:[magicCube getColorInOrientationsOfAllCubie]];
             NSMutableString *tipstr = [[NSMutableString alloc]init];
             for (NSString *msg in tipStrArray) {
@@ -271,6 +275,10 @@
     RotateNotationType nextRotateType = [MCTransformUtil getRotateNotationTypeWithSingmasterNotation:nextNotation];
     [magicCubeUI nextSpaceIndicatorWithRotateNotationType:nextRotateType];
     
+};
+//关闭空间指示器，置乱时使用
+-(void)closeSpaceIndicator{
+    [magicCubeUI closeSpaceIndicator];
 };
 //检测是否结束
 -(void)checkIsOver{

@@ -110,6 +110,7 @@ typedef enum _MagicCubeUIUsingMode {
 @property (assign)int selected_cube_index;
 @property (assign)int selected_cube_face_index;
 
+
 -(id)initiate;
 -(id)initiateWithState:(NSArray *)stateList;
 -(void)flashWithState:(NSArray *)stateList;
@@ -122,7 +123,7 @@ typedef enum _MagicCubeUIUsingMode {
 -(void)update;
 -(void)adjustWithCenter;
 -(void)adjustWithCenter_2;
-
+-(void)closeSpaceIndicator;
 //撤销栈管理
 -(void)executeInvocation:(NSInvocation *)invocation
       withUndoInvocation:(NSInvocation *)undoInvocation;
