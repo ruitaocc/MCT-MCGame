@@ -203,8 +203,10 @@
         
         //intial the skin data
         if (_type == CentralCubie) {
+            _identity = (ColorCombinationType)(coordinateValue.x + coordinateValue.y*3 + coordinateValue.z*9 + 13);
+            
             // The only one face will be filled.
-            _completeFaceNum = 1;
+            _completeFaceNum = _skinNum;
             
             int currentIndex = 0;
             switch (coordinateValue.x) {
@@ -257,6 +259,7 @@
             }
         }
         else{
+            _identity = CenterBlank;
             // No face will be filled.
             _completeFaceNum = 0;
             

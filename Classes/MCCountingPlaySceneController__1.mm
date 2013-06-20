@@ -40,7 +40,7 @@
 	if (sceneObjects == nil) sceneObjects = [[NSMutableArray alloc] init];	
 	magicCube = [[MCMagicCube magicCube]retain];
     //随机置乱魔方
-    [self randomMagiccube];
+    //[self randomMagiccube];
     //背景
     MCBackGroundTexMesh* background = [[MCBackGroundTexMesh alloc]init];
     background.pretranslation = MCPointMake(0, 0, -246);

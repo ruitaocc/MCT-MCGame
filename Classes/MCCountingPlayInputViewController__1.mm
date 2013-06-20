@@ -259,17 +259,18 @@
     [timer stopTimer];
     
     //弹出对话框
-    finishView = [[FinishView alloc] initWithFrame:self.view.bounds title:@"结束"]; /*autorelease*/
+    finishView = [[CountingFinishView alloc] initWithFrame:self.view.bounds title:@"结束"]; /*autorelease*/
     finishView.isShowColseBtn = NO;
     finishView.delegate = self;
     finishView.alpha = 0.2;
     
     
     // Set step count and learing time.
-    finishView.learningStepCountLabel.text = [NSString stringWithFormat:@"%d步", stepcounter.m_counterValue];
-    finishView.learningTimeLabel.text = [timer description];
+    finishView.raceStepCountLabel.text = [NSString stringWithFormat:@"%d步", stepcounter.m_counterValue];
+    finishView.raceTimeLabel.text = [timer description];
     finishView.lastingTime = timer.totalTime/1000;
     finishView.stepCount = stepcounter.m_counterValue;
+    finishView.raceScoreLabel.text = [NSString stringWithFormat:@"%d", [[[MCUserManagerController sharedInstance] calculator] calculateScoreForMove:finishView.stepCount Time:finishView.lastingTime]];
     
     // If no name, set 'Rubiker'
     if ([finishView.userNameEditField.text compare:@""] == NSOrderedSame) {
@@ -284,6 +285,8 @@
     
 	// Show the panel from the center of the button that was pressed
 	[finishView showFromPoint:CGPointMake(512,384)];
+    
+    
     
 }
 

@@ -418,7 +418,7 @@ static BOOL _isInitFinished = NO;
 - (BOOL)solveMagicCube{
     MCRandomSolveSceneController *c = [MCRandomSolveSceneController sharedRandomSolveSceneController ];
     
-    MCMagicCube *magicCube = [[MCRandomSolveSceneController sharedRandomSolveSceneController] magicCube];
+    MCMagicCube *magicCube = [c magicCube];
     
     // Check fill
     if (![magicCube hasAllFacesBeenFilledWithColors]) {

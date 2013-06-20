@@ -12,13 +12,13 @@
 #import "MCTimer.h"
 #import "UAModalPanel.h"
 #import "PauseMenu.h"
-#import "FinishView.h"
+#import "CountingFinishView.h"
 #import "AskReloadView.h"
 @interface MCCountingPlayInputViewController : InputController<UAModalPanelDelegate>{
     MCMultiDigitCounter *stepcounter;
     MCTimer * timer;
     PauseMenu* puseMenu;
-    FinishView *finishView;
+    CountingFinishView *finishView;
     AskReloadView* askReloadView;
 
 }
