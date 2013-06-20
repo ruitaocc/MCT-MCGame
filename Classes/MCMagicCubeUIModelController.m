@@ -111,7 +111,7 @@
         //magicCube = [MCMagicCube getSharedMagicCube];
         isAutoRotate = NO;
         //魔方整体三个参数
-        scale = MCPointMake(94,94,94);
+        scale = MCPointMake(90,90,90);
         translation = MCPointMake(0,0,0);
         rotation = MCPointMake(30,-45,0);
         MCPoint sub_scale  = MCPointMake(scale.x/3, scale.y/3, scale.z/3);
@@ -1478,13 +1478,13 @@
 };
 
 -(void)stepCounterAdd{
-    if ([target respondsToSelector:@selector(stepcounterAddAction)]) {
+    if ([target respondsToSelector:stepcounterAddAction]) {
         [target performSelector:stepcounterAddAction];
     }
     
 }
 -(void)stepCounterMinus{
-    if ([target respondsToSelector:@selector(stepcounterMinusAction)]) {
+    if ([target respondsToSelector:stepcounterMinusAction]) {
         [target performSelector:stepcounterMinusAction];
     }
         

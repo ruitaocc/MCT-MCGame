@@ -39,7 +39,7 @@
         [self loadTextureImage:@"cubeBlack3.png" materialKey:@"cubeTexture3"];
         [self loadTextureImage:@"cubeBlack3.png" materialKey:@"LockTexture"];
         [self loadTextureImage:@"background2.png" materialKey:@"background"];
-        
+        // [self loadTextureImage:@"whiteface.png" materialKey:@"background"];
         //space indicator
         [self loadTextureImage:@"arrow_left.png" materialKey:kSpaceDirectionIndicatorLeft];
         [self loadTextureImage:@"arrow_right.png" materialKey:kSpaceDirectionIndicatorRight];

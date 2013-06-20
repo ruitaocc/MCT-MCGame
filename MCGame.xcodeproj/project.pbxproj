@@ -121,7 +121,6 @@
 		A3D2FC801638D2FD00517CCF /* sceneController.m in Sources */ = {isa = PBXBuildFile; fileRef = A3D2FC7F1638D2FD00517CCF /* sceneController.m */; };
 		A3D30BAA1619356200BA477E /* MCTexturedQuad.m in Sources */ = {isa = PBXBuildFile; fileRef = A3D30BA91619356200BA477E /* MCTexturedQuad.m */; };
 		A3D30BAE161937DF00BA477E /* MCAnimatedQuad.m in Sources */ = {isa = PBXBuildFile; fileRef = A3D30BAD161937DF00BA477E /* MCAnimatedQuad.m */; };
-		A3D5B2C1175C458400833F3F /* Default-LandscapeLeft~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = A3D5B2C0175C458400833F3F /* Default-LandscapeLeft~ipad.png */; };
 		A3D5B2E0175C590B00833F3F /* MCSystemSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A3D5B2DE175C590B00833F3F /* MCSystemSettingViewController.m */; };
 		A3D5B2E1175C590B00833F3F /* MCSystemSettingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A3D5B2DF175C590B00833F3F /* MCSystemSettingViewController.xib */; };
 		A3D5B2E9175CD87A00833F3F /* volumedown.png in Resources */ = {isa = PBXBuildFile; fileRef = A3D5B2E7175CD87900833F3F /* volumedown.png */; };
@@ -151,6 +150,7 @@
 		A3D6713D1771F87300302DB8 /* continueLastButtonDown@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A3D671391771F87300302DB8 /* continueLastButtonDown@2x.png */; };
 		A3D6713E1771F87300302DB8 /* continueLastButtonUp.png in Resources */ = {isa = PBXBuildFile; fileRef = A3D6713A1771F87300302DB8 /* continueLastButtonUp.png */; };
 		A3D6713F1771F87300302DB8 /* continueLastButtonUp@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A3D6713B1771F87300302DB8 /* continueLastButtonUp@2x.png */; };
+		A3D671451772F8F900302DB8 /* Default-LandscapeLeft~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = A3D671441772F8F600302DB8 /* Default-LandscapeLeft~ipad.png */; };
 		A3D67F821759E1F1002501B2 /* yellowface.png in Resources */ = {isa = PBXBuildFile; fileRef = A3D67F7B1759E1F1002501B2 /* yellowface.png */; };
 		A3D67F831759E1F1002501B2 /* whiteface.png in Resources */ = {isa = PBXBuildFile; fileRef = A3D67F7C1759E1F1002501B2 /* whiteface.png */; };
 		A3D67F841759E1F1002501B2 /* blueface.png in Resources */ = {isa = PBXBuildFile; fileRef = A3D67F7D1759E1F1002501B2 /* blueface.png */; };
@@ -496,7 +496,6 @@
 		A3D30BA91619356200BA477E /* MCTexturedQuad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCTexturedQuad.m; sourceTree = "<group>"; };
 		A3D30BAC161937DF00BA477E /* MCAnimatedQuad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCAnimatedQuad.h; sourceTree = "<group>"; };
 		A3D30BAD161937DF00BA477E /* MCAnimatedQuad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCAnimatedQuad.m; sourceTree = "<group>"; };
-		A3D5B2C0175C458400833F3F /* Default-LandscapeLeft~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-LandscapeLeft~ipad.png"; sourceTree = "<group>"; };
 		A3D5B2DD175C590B00833F3F /* MCSystemSettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCSystemSettingViewController.h; sourceTree = "<group>"; };
 		A3D5B2DE175C590B00833F3F /* MCSystemSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCSystemSettingViewController.m; sourceTree = "<group>"; };
 		A3D5B2DF175C590B00833F3F /* MCSystemSettingViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MCSystemSettingViewController.xib; sourceTree = "<group>"; };
@@ -529,6 +528,7 @@
 		A3D671391771F87300302DB8 /* continueLastButtonDown@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "continueLastButtonDown@2x.png"; path = "Classes/continueLastButtonDown@2x.png"; sourceTree = "<group>"; };
 		A3D6713A1771F87300302DB8 /* continueLastButtonUp.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = continueLastButtonUp.png; path = Classes/continueLastButtonUp.png; sourceTree = "<group>"; };
 		A3D6713B1771F87300302DB8 /* continueLastButtonUp@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "continueLastButtonUp@2x.png"; path = "Classes/continueLastButtonUp@2x.png"; sourceTree = "<group>"; };
+		A3D671441772F8F600302DB8 /* Default-LandscapeLeft~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-LandscapeLeft~ipad.png"; sourceTree = "<group>"; };
 		A3D67F7B1759E1F1002501B2 /* yellowface.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = yellowface.png; sourceTree = "<group>"; };
 		A3D67F7C1759E1F1002501B2 /* whiteface.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = whiteface.png; sourceTree = "<group>"; };
 		A3D67F7D1759E1F1002501B2 /* blueface.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blueface.png; sourceTree = "<group>"; };
@@ -914,7 +914,7 @@
 		A3359E64168E9777002F9459 /* progressbar */ = {
 			isa = PBXGroup;
 			children = (
-				A3D5B2C0175C458400833F3F /* Default-LandscapeLeft~ipad.png */,
+				A3D671441772F8F600302DB8 /* Default-LandscapeLeft~ipad.png */,
 				A3359E58168E9764002F9459 /* error.png */,
 				A3359E59168E9764002F9459 /* error@2x.png */,
 				A3359E5A168E9764002F9459 /* success.png */,
@@ -1787,7 +1787,6 @@
 				A3D67F861759E1F1002501B2 /* redface.png in Resources */,
 				A3D67F871759E1F1002501B2 /* greenface.png in Resources */,
 				A3D67F881759E1F1002501B2 /* blackface.png in Resources */,
-				A3D5B2C1175C458400833F3F /* Default-LandscapeLeft~ipad.png in Resources */,
 				A3D5B2E1175C590B00833F3F /* MCSystemSettingViewController.xib in Resources */,
 				A3D5B2E9175CD87A00833F3F /* volumedown.png in Resources */,
 				A3D5B2EA175CD87A00833F3F /* volumeup.png in Resources */,
@@ -1922,6 +1921,7 @@
 				A3D6713D1771F87300302DB8 /* continueLastButtonDown@2x.png in Resources */,
 				A3D6713E1771F87300302DB8 /* continueLastButtonUp.png in Resources */,
 				A3D6713F1771F87300302DB8 /* continueLastButtonUp@2x.png in Resources */,
+				A3D671451772F8F900302DB8 /* Default-LandscapeLeft~ipad.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

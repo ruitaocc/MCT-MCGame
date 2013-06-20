@@ -13,19 +13,18 @@
 #import "MCCollisionController.h"
 #import "MCMagicCubeUIModelController.h"
 #import "MCPoint.h"
-
 @interface MCRandomSolveSceneController : sceneController{
     MCMagicCubeUIModelController* magicCubeUI;
 //    MCPlayHelper * playHelper;
     int selected_index;
     int selected_face_index;
-    
+     UILabel *_tipsLabel;
 }
 @property (nonatomic,retain)MCMagicCube * magicCube;
 //@property (nonatomic,retain)MCPlayHelper * playHelper;
 @property (assign)int selected_index;
 @property (assign)int selected_face_index;
-
+@property(nonatomic,retain)UILabel *tipsLabel;
 
 + (MCRandomSolveSceneController*)sharedRandomSolveSceneController;
 
@@ -47,5 +46,9 @@
 -(BOOL)isSelectOneFace:(vec2)touchpoint;
 
 -(void)flashSecne;
+
+-(void)nextSingmasterNotation:(SingmasterNotation)notation;
+
+-(void)closeSingmasterNotation;
 
 @end

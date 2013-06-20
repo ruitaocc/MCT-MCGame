@@ -39,14 +39,15 @@
 	// this is where we store all our objects
 	if (sceneObjects == nil) sceneObjects = [[NSMutableArray alloc] init];	
 	magicCube = [[MCMagicCube magicCube]retain];
-    
+    //随机置乱魔方
+    [self randomMagiccube];
     //背景
     MCBackGroundTexMesh* background = [[MCBackGroundTexMesh alloc]init];
     background.pretranslation = MCPointMake(0, 0, -246);
     background.scale = MCPointMake(64, 64, 1);
     [self addObjectToScene:background];
     [background release];
-    //大魔方
+    //魔方模型
     magicCubeUI = [[MCMagicCubeUIModelController alloc]initiateWithState:[ magicCube getColorInOrientationsOfAllCubie]];
     magicCubeUI.target=self;
     [magicCubeUI setStepcounterAddAction:@selector(stepcounterAdd)];
@@ -92,6 +93,26 @@
     [magicCubeUI performSelector:@selector(nextSolution)];
 }
 
+-(void)randomMagiccube{
+    RANDOM_SEED();
+    //更新下一次spaceindicator方向
+    AxisType lastRandomAxis = X;
+    AxisType axis;
+    for (int i = 0; i<20; i++) {
+        axis = (AxisType)(RANDOM_INT(0, 2));
+        if (axis==lastRandomAxis) {
+            axis = (AxisType)((lastRandomAxis+1)%3);
+        }
+        lastRandomAxis = axis;
+        LayerRotationDirectionType direction = (LayerRotationDirectionType)(RANDOM_INT(0, 1));
+        int layer = RANDOM_INT(0, 2);
+        [magicCube rotateOnAxis:axis onLayer:layer inDirection:direction];
+    }
+
+}
+-(void)flashScene{
+    [magicCubeUI flashWithState:[magicCube getColorInOrientationsOfAllCubie]];
+};
 -(void)releaseSrc{
     [super releaseSrc];
 }

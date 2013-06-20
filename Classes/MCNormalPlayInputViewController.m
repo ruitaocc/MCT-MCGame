@@ -31,8 +31,8 @@
     //UI step counter
     NSString *counterName[10] = {@"zero2",@"one2",@"two2",@"three2",@"four2",@"five2",@"six2",@"seven2",@"eight2",@"nine2"};
     stepcounter = [[MCMultiDigitCounter alloc]initWithNumberOfDigit:3 andKeys:counterName];
-    [stepcounter setScale : MCPointMake(96, 50, 1.0)];
-    [stepcounter setTranslation :MCPointMake(450, -340, 0.0)];
+    [stepcounter setScale : MCPointMake(51, 25, 1.0)];
+    [stepcounter setTranslation :MCPointMake(470, -360, 0.0)];
     [stepcounter setActive:YES];
     [stepcounter awake];
     [interfaceObjects addObject:stepcounter];
@@ -40,7 +40,7 @@
     //UI UI step counter label
     MCLabel *counterLabel= [[MCLabel alloc]initWithNstring:TextureKey_step];
     counterLabel.scale = [MCMaterialController getWidthAndHeightFromTextureFile:TextureFileName_NumberElement forKey:TextureKey_step];
-    [counterLabel setTranslation :MCPointMake(450, -285, 0.0)];
+    [counterLabel setTranslation :MCPointMake(410, -360, 0.0)];
     [counterLabel setActive:YES];
     [counterLabel awake];
     [interfaceObjects addObject:counterLabel];
@@ -49,15 +49,15 @@
     //UI timer
     MCLabel *timerLabel= [[MCLabel alloc]initWithNstring:TextureKey_time];
     [timerLabel setScale : [MCMaterialController getWidthAndHeightFromTextureFile:TextureFileName_NumberElement forKey:TextureKey_time]];
-    [timerLabel setTranslation :MCPointMake(-450, -285, 0.0)];
+    [timerLabel setTranslation :MCPointMake(-475, -360, 0.0)];
     [timerLabel setActive:YES];
     [timerLabel awake];
     [interfaceObjects addObject:timerLabel];
     [timerLabel release];
     //UI timer
     timer = [[MCTimer alloc]initWithTextureKeys:counterName];
-    [timer setScale:MCPointMake(450/2, 72/2, 1.0)];
-    [timer setTranslation:MCPointMake(-360, -340, 0.0)];
+    [timer setScale:MCPointMake(153, 25, 1.0)];
+    [timer setTranslation:MCPointMake(-345, -360, 0.0)];
     [timer setActive:YES];
     [timer awake];
     [interfaceObjects addObject:timer];
@@ -471,7 +471,7 @@
         
     }
     //弹出对话框
-    askReloadView = [[AskReloadView alloc] initWithFrame:self.view.bounds title:@"上次未完成"]; /*autorelease*/
+    askReloadView = [[AskReloadView alloc] initWithFrame:self.view.bounds title:@"上次学习未完成"]; /*autorelease*/
     askReloadView.isShowColseBtn = NO;
     askReloadView.delegate = self;
     ///////////////////////////////////

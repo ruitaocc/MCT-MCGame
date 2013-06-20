@@ -74,12 +74,10 @@
     [[self tipsLabel] setLineBreakMode:UILineBreakModeWordWrap|UILineBreakModeTailTruncation];
     [[self tipsLabel] setOpaque:YES];
     [[self tipsLabel]setBackgroundColor:[UIColor colorWithRed:1 green:1 blue:1 alpha:0.5]];
-    //[[self tipsLabel]setAlpha:0.8];
-    //[[self tipsLabel]setFont:[UIFont fontWithName:@"Palatino-Roman" size:30]];
+    
     [[self tipsLabel]setFont:[MCFonts customFontWithSize:18]];
     [self tipsLabel].layer.cornerRadius = 10.0;
-    //[[[self tipsLabel] appearence]setFont:[UIFont fontWithName:@"zhongzheng" size:12]];
-    //[[UILabel appearence]setFont:[UIFont fontWithName:@"zhongzheng" size:12]];
+    
     [openGLView addSubview:[self tipsLabel]];
     [[self tipsLabel]setHidden:YES];
     

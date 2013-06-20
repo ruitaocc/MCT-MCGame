@@ -19,7 +19,7 @@
 		[self.titleBar setColorComponents:colors];
 		self.headerLabel.text = title;
 		
-        self.x_outerMargin = 330;
+        self.x_outerMargin = 344;
         self.y_outerMargin = 200;
         self.isShowColseBtn = YES;
         // Margin between edge of panel and the content area. Default = 20.0

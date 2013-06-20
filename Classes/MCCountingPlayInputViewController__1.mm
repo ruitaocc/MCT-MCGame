@@ -23,28 +23,19 @@
 	[interfaceObjects removeAllObjects];
     
   
+    //UI step counter
     NSString *counterName[10] = {@"zero2",@"one2",@"two2",@"three2",@"four2",@"five2",@"six2",@"seven2",@"eight2",@"nine2"};
-     stepcounter = [[MCMultiDigitCounter alloc]initWithNumberOfDigit:3 andKeys:counterName];
-    [stepcounter setScale : MCPointMake(96, 50, 1.0)];
-    [stepcounter setTranslation :MCPointMake(450, -340, 0.0)];
+    stepcounter = [[MCMultiDigitCounter alloc]initWithNumberOfDigit:3 andKeys:counterName];
+    [stepcounter setScale : MCPointMake(51, 25, 1.0)];
+    [stepcounter setTranslation :MCPointMake(470, -360, 0.0)];
     [stepcounter setActive:YES];
     [stepcounter awake];
     [interfaceObjects addObject:stepcounter];
-    //[counter release];
-    timer = [[MCTimer alloc]initWithTextureKeys:counterName];
-    [timer setScale:MCPointMake(450/2, 72/2, 1.0)];
-    [timer setTranslation:MCPointMake(-360, -340, 0.0)];
-    [timer setActive:YES];
-    [timer awake];
-    [timer startTimer];
-    [interfaceObjects addObject:timer];
     
-    
-    //lebel
     //UI UI step counter label
     MCLabel *counterLabel= [[MCLabel alloc]initWithNstring:TextureKey_step];
     counterLabel.scale = [MCMaterialController getWidthAndHeightFromTextureFile:TextureFileName_NumberElement forKey:TextureKey_step];
-    [counterLabel setTranslation :MCPointMake(450, -285, 0.0)];
+    [counterLabel setTranslation :MCPointMake(410, -360, 0.0)];
     [counterLabel setActive:YES];
     [counterLabel awake];
     [interfaceObjects addObject:counterLabel];
@@ -53,11 +44,18 @@
     //UI timer
     MCLabel *timerLabel= [[MCLabel alloc]initWithNstring:TextureKey_time];
     [timerLabel setScale : [MCMaterialController getWidthAndHeightFromTextureFile:TextureFileName_NumberElement forKey:TextureKey_time]];
-    [timerLabel setTranslation :MCPointMake(-450, -285, 0.0)];
+    [timerLabel setTranslation :MCPointMake(-475, -360, 0.0)];
     [timerLabel setActive:YES];
     [timerLabel awake];
     [interfaceObjects addObject:timerLabel];
     [timerLabel release];
+    //UI timer
+    timer = [[MCTimer alloc]initWithTextureKeys:counterName];
+    [timer setScale:MCPointMake(153, 25, 1.0)];
+    [timer setTranslation:MCPointMake(-345, -360, 0.0)];
+    [timer setActive:YES];
+    [timer awake];
+    [interfaceObjects addObject:timer];
     
     
 	
@@ -100,6 +98,10 @@
 	[interfaceObjects addObject:redoCommand];
 	[redoCommand release];
     
+    [super loadInterface];
+    
+     [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(askReload) userInfo:nil repeats:NO];
+    
 }
 #pragma mark - button actions
 //撤销
@@ -141,6 +143,14 @@
     NSLog(@"mainMenuPlayBtnDown");
    }
 -(void)mainMenuBtnUp{NSLog(@"mainMenuPlayBtnUp");
+    
+    //保存竞赛页面魔方状态
+    NSString *path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    NSString *fileName = [path stringByAppendingPathComponent:TmpCounttingPageMagicCubeData];
+    MCCountingPlaySceneController *c = [MCCountingPlaySceneController sharedCountingPlaySceneController ];
+    [NSKeyedArchiver archiveRootObject:[c magicCube] toFile:fileName];
+    
+    //发送界面迁移请求
     CoordinatingController *coordinatingController_ = [CoordinatingController sharedCoordinatingController];
     [coordinatingController_ requestViewChangeByObject:kMainMenu];
 }
@@ -183,7 +193,36 @@
 //   Only used if delegate is set.
 - (void)didCloseModalPanel:(UAModalPanel *)modalPanel {
 	UADebugLog(@"didCloseModalPanel called with modalPanel: %@", modalPanel);
-    
+    if (askReloadView) {
+        if ([askReloadView askReloadType]==kAskReloadView_LoadLastTime) {
+            //重新加载上一次；
+            //更新数据模型
+            NSString *path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+            
+            NSString *filePath = [path stringByAppendingPathComponent:TmpCounttingPageMagicCubeData];
+            
+            MCCountingPlaySceneController *c = [MCCountingPlaySceneController sharedCountingPlaySceneController ];
+            c.magicCube=[[MCMagicCube unarchiveMagicCubeWithFile:filePath] retain];
+            [c flashScene];
+            //更新UI模型
+            //[c reloadLastTime];
+            [[self timer]startTimer];
+            NSLog(@"dd");
+        }else if([askReloadView askReloadType]==kAskReloadView_Reload){
+            //Default
+            MCCountingPlaySceneController *c = [MCCountingPlaySceneController sharedCountingPlaySceneController ];
+            [c randomMagiccube ];
+            [c flashScene];
+            [timer startTimer];
+            
+        }else{
+            //cancel
+            
+            
+        }
+        askReloadView = nil;
+    }
+
     if (puseMenu){
         
         if ([puseMenu pauseSelectType]==kPauseSelect_GoBack) {
@@ -193,11 +232,11 @@
             
             [timer startTimer];
         }else if([puseMenu pauseSelectType]==kPauseSelect_Restart){
-            //更新UI模型
-           // MCNormalPlaySceneController *c = [MCNormalPlaySceneController sharedNormalPlaySceneController ];
-            //[c reloadScene];
-            //Default
-            //[self randomBtnUp];
+            MCCountingPlaySceneController *c = [MCCountingPlaySceneController sharedCountingPlaySceneController ];
+            [c randomMagiccube];
+            [c flashScene];
+            [timer reset];
+            [timer startTimer];
 
         }
         
@@ -248,6 +287,34 @@
     
 }
 
+-(void)askReload{
+    NSString *path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    NSString *fileName = [path stringByAppendingPathComponent:TmpCounttingPageMagicCubeData];
+    if (fileName!=nil) {
+        NSFileManager *fm;
+        //Need to create an instance of the file manager
+        fm = [NSFileManager defaultManager];
+        
+        //Let's make sure our test file exists first
+        if([fm fileExistsAtPath: fileName] == NO)
+        {
+            NSLog(@"File doesn't exist'");
+            return ;
+        }
+        
+    }
+    //弹出对话框
+    askReloadView = [[AskReloadView alloc] initWithFrame:self.view.bounds title:@"上次竞速未完成"]; /*autorelease*/
+    askReloadView.isShowColseBtn = NO;
+    askReloadView.delegate = self;
+    ///////////////////////////////////
+	// Add the panel to our view
+	[self.view  addSubview:askReloadView];
+	///////////////////////////////////
+    
+	// Show the panel from the center of the button that was pressed
+	[askReloadView showFromPoint:CGPointMake(512,384)];
+}
 
 
 

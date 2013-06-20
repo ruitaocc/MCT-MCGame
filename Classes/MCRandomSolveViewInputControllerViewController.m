@@ -66,17 +66,16 @@ static BOOL _isInitFinished = NO;
     //UI step counter
     NSString *counterName[10] = {@"zero2",@"one2",@"two2",@"three2",@"four2",@"five2",@"six2",@"seven2",@"eight2",@"nine2"};
     stepcounter = [[MCMultiDigitCounter alloc]initWithNumberOfDigit:3 andKeys:counterName];
-    [stepcounter setScale : MCPointMake(96, 50, 1.0)];
-    [stepcounter setTranslation :MCPointMake(450, -340, 0.0)];
+    [stepcounter setScale : MCPointMake(51, 25, 1.0)];
+    [stepcounter setTranslation :MCPointMake(470, -360, 0.0)];
     [stepcounter setActive:YES];
     [stepcounter awake];
     [interfaceObjects addObject:stepcounter];
     
-    
     //UI UI step counter label
     MCLabel *counterLabel= [[MCLabel alloc]initWithNstring:TextureKey_step];
     counterLabel.scale = [MCMaterialController getWidthAndHeightFromTextureFile:TextureFileName_NumberElement forKey:TextureKey_step];
-    [counterLabel setTranslation :MCPointMake(450, -285, 0.0)];
+    [counterLabel setTranslation :MCPointMake(410, -360, 0.0)];
     [counterLabel setActive:YES];
     [counterLabel awake];
     [interfaceObjects addObject:counterLabel];
@@ -86,7 +85,7 @@ static BOOL _isInitFinished = NO;
     NSMutableArray *actionname = [[NSMutableArray alloc]init];
     actionQueue = [[MCActionQueue alloc]initWithActionList:actionname] ;
     [actionQueue setScale : MCPointMake(32, 32, 1.0)];
-    [actionQueue setTranslation :MCPointMake(0, 340, 0.0)];
+    [actionQueue setTranslation :MCPointMake(0, 300, 0.0)];
     [actionQueue setActive:NO];
     [actionQueue awake];
     [interfaceObjects addObject:actionQueue];
@@ -200,12 +199,15 @@ static BOOL _isInitFinished = NO;
             // Over
             dispatch_async(dispatch_get_main_queue(), ^{
                 _isInitFinished = YES;
-                NSLog(@"Init over.");
+                MCRandomSolveSceneController *c = [MCRandomSolveSceneController sharedRandomSolveSceneController];
+                [[c tipsLabel]setText:@"求解系统初始化完成!\n输入魔方所有小块颜色后,可点击求解按钮进行求解."];
             });
             
             
         });
     }
+    
+    [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(askReload) userInfo:nil repeats:NO];
 }
 //撤销
 -(void)previousSolutionBtnUp{
@@ -226,7 +228,7 @@ static BOOL _isInitFinished = NO;
         [c rotateWithSingmasterNotation:notation isNeedStay:isStay isTwoTimes:YES];
     }else
         [c rotateWithSingmasterNotation:notation isNeedStay:isStay isTwoTimes:NO];
-    
+    //[c nextSingmasterNotation: (SingmasterNotation)[[singmasternotations objectAtIndex:currentMove-1]integerValue]];
     //[[c playHelper]rotateWithSingmasterNotation:notation];
 };
 -(void)previousSolutionBtnDown{};
@@ -248,7 +250,7 @@ static BOOL _isInitFinished = NO;
     }else{
         [c rotateWithSingmasterNotation:notation isNeedStay:isStay isTwoTimes:NO];
     }
-
+    //[c nextSingmasterNotation: (SingmasterNotation)[[singmasternotations objectAtIndex:currentMove+1]integerValue]];
         [actionQueue shiftRight];
         [stepcounter minusCounter];
 
@@ -260,6 +262,13 @@ static BOOL _isInitFinished = NO;
 }
 
 -(void)qSolveBtnUp{
+    MCRandomSolveSceneController *c = [MCRandomSolveSceneController sharedRandomSolveSceneController ];
+    if (!_isInitFinished) {
+        [[c tipsLabel] setText:@"求解系统正在初始化...\n请等待..."];
+        return;
+    }else{
+        [[c tipsLabel] setText:@"系统正在求解中...\n请等待..."];
+    }
     //do solve here
     [SVProgressHUD show];
     [self solveMagicCube];
@@ -276,7 +285,9 @@ static BOOL _isInitFinished = NO;
     NSString *path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
     NSString *fileName = [path stringByAppendingPathComponent:TmpInputMagicCubeData];
     MCRandomSolveSceneController *c = [MCRandomSolveSceneController sharedRandomSolveSceneController];
-    
+    if (![[c tipsLabel]isHidden]) {
+        [[c tipsLabel]setHidden:YES];
+    }
     [NSKeyedArchiver archiveRootObject:[c magicCube] toFile:fileName];
     
     CoordinatingController *coordinatingController_ = [CoordinatingController sharedCoordinatingController];
@@ -405,18 +416,23 @@ static BOOL _isInitFinished = NO;
 
 
 - (BOOL)solveMagicCube{
+    MCRandomSolveSceneController *c = [MCRandomSolveSceneController sharedRandomSolveSceneController ];
     
     MCMagicCube *magicCube = [[MCRandomSolveSceneController sharedRandomSolveSceneController] magicCube];
     
     // Check fill
     if (![magicCube hasAllFacesBeenFilledWithColors]) {
         NSLog(@"Fill all faces firstly!");
+        [[c tipsLabel] setText:@"请先将所有面填满..."];
+        [SVProgressHUD dismiss];
         return NO;
     }
     
     // check finish
     if ([magicCube isFinished]) {
         NSLog(@"The magic cube has been finished!");
+        [[c tipsLabel] setText:@"魔方已经完成..."];
+        [SVProgressHUD dismiss];
         return NO;
     }
     
@@ -426,6 +442,8 @@ static BOOL _isInitFinished = NO;
         
         if (stateString == nil) {
             NSLog(@"Wrong state!");
+            [[c tipsLabel] setText:@"输入魔方状态错误..."];
+            [SVProgressHUD dismiss];
             return NO;
         } else {
             NSLog(@"%@", stateString);
@@ -442,23 +460,31 @@ static BOOL _isInitFinished = NO;
             if ([resultString hasPrefix:@"Error"]) {
                 // Set flag yes
                 _errorFlag = YES;
-                
+                [SVProgressHUD dismiss];
                 if ([resultString hasSuffix:@"1"]) {
                     NSLog(@"%@", @"There are not exactly nine facelets of each color!");
+                    [[c tipsLabel] setText:@"有些颜色被输入超过9次..."];
                 } else if ([resultString hasSuffix:@"2"]) {
                     NSLog(@"%@", @"Not all 12 edges exist exactly once!");
+                    [[c tipsLabel] setText:@"出现重复棱块..."];
                 } else if ([resultString hasSuffix:@"3"]) {
                     NSLog(@"%@", @"Flip error: One edge has to be flipped!");
+                    [[c tipsLabel] setText:@"有一个棱块的方向反了..."];
                 } else if ([resultString hasSuffix:@"4"]) {
                     NSLog(@"%@", @"Not all 8 corners exist exactly once!");
+                    [[c tipsLabel] setText:@"出现重复角块..."];
                 } else if ([resultString hasSuffix:@"5"]) {
                     NSLog(@"%@", @"Twist error: One corner has to be twisted!");
+                    [[c tipsLabel] setText:@"一个角块方向错了..."];
                 } else if ([resultString hasSuffix:@"6"]) {
                     NSLog(@"%@", @"Parity error: Two corners or two edges have to be exchanged!");
+                     [[c tipsLabel] setText:@"两个角块或着两个棱块对掉了..."];
                 } else if ([resultString hasSuffix:@"7"]) {
                     NSLog(@"%@", @"No solution exists for the given maximum move number!");
+                     [[c tipsLabel] setText:@"超出求解规定步数..."];
                 } else if ([resultString hasSuffix:@"8"]) {
                     NSLog(@"%@", @"Timeout, no solution found within given maximum time!");
+                     [[c tipsLabel] setText:@"超出时间限制..."];
                 }
                 
             }
@@ -480,6 +506,9 @@ static BOOL _isInitFinished = NO;
                 }
                 totalMove = [singmasternotations count];
                 [stepcounter setM_counterValue:totalMove];
+                 [[c tipsLabel] setText:[NSString stringWithFormat:@"求解成功!\n共%d步!\n根据 上一步/下一步 将手上的魔方解出来吧^_^",totalMove]];
+                
+                //[c nextSingmasterNotation: (SingmasterNotation)[[singmasternotations objectAtIndex:0]integerValue]];
                 dispatch_async(dispatch_get_main_queue(), ^{
                     // Complete
                     NSLog(@"%@", tags);
@@ -536,7 +565,48 @@ static BOOL _isInitFinished = NO;
 //   Only used if delegate is set.
 - (void)didCloseModalPanel:(UAModalPanel *)modalPanel {
 	UADebugLog(@"didCloseModalPanel called with modalPanel: %@", modalPanel);
-    
+    if (askReloadView) {
+        if ([askReloadView askReloadType]==kAskReloadView_LoadLastTime) {
+            //重新加载上一次；
+            //更新数据模型
+            NSString *path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+            
+            NSString *filePath = [path stringByAppendingPathComponent:TmpInputMagicCubeData];
+            
+            MCRandomSolveSceneController *c = [MCRandomSolveSceneController sharedRandomSolveSceneController ];
+            c.magicCube=[[MCMagicCube unarchiveMagicCubeWithFile:filePath] retain];
+            [c flashSecne];
+            [c closeSingmasterNotation];
+            //更新UI模型
+            if (!_isInitFinished) {
+                [[c tipsLabel] setText:@"求解系统正在初始化...\n请等待..."];
+            }else{
+                [[c tipsLabel] setText:@"求解系统初始化完成!\n可点击求解按钮."];
+            }
+
+            
+            NSLog(@"dd");
+        }else if([askReloadView askReloadType]==kAskReloadView_Reload){
+            //Default
+            MCRandomSolveSceneController *c = [MCRandomSolveSceneController sharedRandomSolveSceneController ];
+            //[c.magicCube release];
+            c.magicCube = [[MCMagicCube magicCubeOnlyWithCenterColor]retain];
+            [c flashSecne];
+            [c closeSingmasterNotation];
+            if (!_isInitFinished) {
+                [[c tipsLabel] setText:@"求解系统正在初始化...\n点击魔方小块输入颜色"];
+            }else{
+                [[c tipsLabel] setText:@"求解系统初始化完成!\n可点击求解按钮."];
+            }
+                        
+        }else{
+            //cancel
+            
+            
+        }
+        askReloadView = nil;
+    }
+
     if (solvePagePauseMenuView){
         
         if ([solvePagePauseMenuView solvePagePauseSelectType]==kSolvePagePauseSelect_GoOn) {
@@ -546,11 +616,22 @@ static BOOL _isInitFinished = NO;
             //停止计时器
             MCRandomSolveSceneController *c = [MCRandomSolveSceneController sharedRandomSolveSceneController];
             [c clearState];
-            
+            if (!_isInitFinished) {
+                [[c tipsLabel] setText:@"求解系统正在初始化...\n请等待..."];
+            }else{
+                [[c tipsLabel] setText:@"求解系统初始化完成!\n输入魔方后可点击求解按钮."];
+            }
+            [actionQueue removeAllActions];
+            isFinishInput = NO;
+            //[c closeSingmasterNotation];
         }else if([solvePagePauseMenuView solvePagePauseSelectType]==kSolvePagePauseSelect_GoBack_AndSave){
             //save and return
             [self mainMenuBtnUp];
         }else if([solvePagePauseMenuView solvePagePauseSelectType]==kSolvePagePauseSelect_GoBack_Directly){
+            MCRandomSolveSceneController *c = [MCRandomSolveSceneController sharedRandomSolveSceneController];
+            if (![[c tipsLabel]isHidden]) {
+                [[c tipsLabel]setHidden:YES];
+            }
             //return direction
             CoordinatingController *coordinatingController_ = [CoordinatingController sharedCoordinatingController];
             [coordinatingController_ requestViewChangeByObject:kMainMenu];
@@ -561,6 +642,34 @@ static BOOL _isInitFinished = NO;
         solvePagePauseMenuView = nil;
     }
     
+}
+-(void)askReload{
+    NSString *path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    NSString *fileName = [path stringByAppendingPathComponent:TmpInputMagicCubeData];
+    if (fileName!=nil) {
+        NSFileManager *fm;
+        //Need to create an instance of the file manager
+        fm = [NSFileManager defaultManager];
+        
+        //Let's make sure our test file exists first
+        if([fm fileExistsAtPath: fileName] == NO)
+        {
+            NSLog(@"File doesn't exist'");
+            return ;
+        }
+        
+    }
+    //弹出对话框
+    askReloadView = [[AskReloadView alloc] initWithFrame:self.view.bounds title:@"上次求解未完成"]; /*autorelease*/
+    askReloadView.isShowColseBtn = NO;
+    askReloadView.delegate = self;
+    ///////////////////////////////////
+	// Add the panel to our view
+	[self.view  addSubview:askReloadView];
+	///////////////////////////////////
+    
+	// Show the panel from the center of the button that was pressed
+	[askReloadView showFromPoint:CGPointMake(512,384)];
 }
 
 

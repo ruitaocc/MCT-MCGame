@@ -208,7 +208,85 @@
          endingColumnNumber = "9223372036854775807"
          startingLineNumber = "235"
          endingLineNumber = "235"
-         landmarkName = "-rotateOnAxis:onLayer:inDirection:isTribleRotate:"
+         landmarkName = "-rotateOnAxis:onLayer:inDirection:isTribleRotate:isTwoTimes:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Classes/MCMagicCubeUIModelController.m"
+         timestampString = "393385952.215762"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "1482"
+         endingLineNumber = "1482"
+         landmarkName = "-stepCounterAdd"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Classes/MCMagicCubeUIModelController.m"
+         timestampString = "393385954.04562"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "1488"
+         endingLineNumber = "1488"
+         landmarkName = "-stepCounterMinus"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Classes/MCMagicCubeUIModelController.m"
+         timestampString = "393385985.997152"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "1481"
+         endingLineNumber = "1481"
+         landmarkName = "-stepCounterAdd"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Classes/MCTimer.m"
+         timestampString = "393393118.572977"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "108"
+         endingLineNumber = "108"
+         landmarkName = "-update"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Classes/MCTimer.m"
+         timestampString = "393393126.40594"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "109"
+         endingLineNumber = "109"
+         landmarkName = "-update"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "Classes/MCTimer.m"
+         timestampString = "393393130.539624"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "80"
+         endingLineNumber = "80"
+         landmarkName = "-addTimerWithMilisec:"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>

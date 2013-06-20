@@ -25,4 +25,6 @@
 -(void)previousSolution;
 -(void)nextSolution;
 -(void)releaseSrc;
+-(void)randomMagiccube;
+-(void)flashScene;
 @end

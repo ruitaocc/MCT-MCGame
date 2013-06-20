@@ -215,6 +215,9 @@ namespace MC{
 
     //the temprorary file store the unfinished magic cube's status
     #define TmpInputMagicCubeData @"tmpInputMagicCube"
+    
+    //the temprorary file store the unfinished magic cube's status
+    #define TmpCounttingPageMagicCubeData @"tmpCounttingPageMagicCube"
 
     
     //Helper------------------------------------------------------------------------------------

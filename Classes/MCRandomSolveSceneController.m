@@ -11,7 +11,7 @@
 #import "MCMagicCubeUIModelController.h"
 #import "MCRandomSolveViewInputControllerViewController.h"
 #import "MCBackGroundTexMesh.h"
-
+#import "MCFonts.h"
 @implementation MCRandomSolveSceneController
 
 @synthesize magicCube;
@@ -39,13 +39,13 @@
     selected_face_index = -1;
     
     //初始化只有中心小块到魔方
-    NSString *path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    //NSString *path = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
     
-    NSString *filePath = [path stringByAppendingPathComponent:TmpMagicCubeData];
+   // NSString *filePath = [path stringByAppendingPathComponent:TmpMagicCubeData];
     
-    magicCube=[[MCMagicCube unarchiveMagicCubeWithFile:filePath] retain];
+    //magicCube=[[MCMagicCube unarchiveMagicCubeWithFile:filePath] retain];
     
-    //magicCube = [[MCMagicCube magicCubeOnlyWithCenterColor]retain];
+    magicCube = [[MCMagicCube magicCubeOnlyWithCenterColor]retain];
     
     //playHelper = [[MCPlayHelper playerHelperWithMagicCube:self.magicCube]retain];
     //背景
@@ -63,6 +63,21 @@
     [self addObjectToScene:magicCubeUI];
     [magicCubeUI setUsingMode:SOlVE_Input_MODE];
     [magicCubeUI release];
+    
+    
+    //提示标签
+    [self setTipsLabel: [[[UILabel alloc]initWithFrame:CGRectMake(800,120,220,160)] autorelease]];
+    [[self tipsLabel] setText:@""];
+    [[self tipsLabel]setNumberOfLines:15];
+    [[self tipsLabel] setLineBreakMode:UILineBreakModeWordWrap|UILineBreakModeTailTruncation];
+    [[self tipsLabel] setOpaque:YES];
+    [[self tipsLabel]setBackgroundColor:[UIColor colorWithRed:1 green:1 blue:1 alpha:0.5]];
+    [[self tipsLabel]setFont:[MCFonts customFontWithSize:18]];
+    [self tipsLabel].layer.cornerRadius = 10.0;
+    
+    [openGLView addSubview:[self tipsLabel]];
+    [[self tipsLabel]setHidden:NO];
+    
     
     collisionController = [[MCCollisionController alloc] init];
 	collisionController.sceneObjects = magicCubeUI.array27Cube;
@@ -106,10 +121,21 @@
 };
 
 -(void)clearState{
+    //[magicCube release];
     magicCube = [[MCMagicCube magicCubeOnlyWithCenterColor]retain];
     
     [magicCubeUI flashWithState:[magicCube getColorInOrientationsOfAllCubie]];
 
+}
+
+-(void)nextSingmasterNotation:(SingmasterNotation)notation{
+    //更新下一次spaceindicator方向
+    RotateNotationType nextRotateType = [MCTransformUtil getRotateNotationTypeWithSingmasterNotation:notation];
+    [magicCubeUI nextSpaceIndicatorWithRotateNotationType:nextRotateType];
+}
+
+-(void)closeSingmasterNotation{
+    [magicCubeUI closeSpaceIndicator];
 }
 
 -(void)releaseSrc{

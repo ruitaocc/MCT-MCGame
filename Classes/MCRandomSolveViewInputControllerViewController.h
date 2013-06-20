@@ -13,6 +13,7 @@
 #import "InfoView.h"
 #import "SolvePagePauseMenu.h"
 //#import "MBProgressHUD.h"
+#import "AskReloadView.h"
 @interface MCRandomSolveViewInputControllerViewController : InputController <QuadCurveMenuDelegate,UAModalPanelDelegate>{
     //判断是否要弹出选择框到标记
     BOOL isWantShowSelectView;
@@ -26,7 +27,7 @@
     int currentMove;
     BOOL isStay;
     SolvePagePauseMenu *solvePagePauseMenuView;
-
+    AskReloadView* askReloadView;
 }
 
 @property (nonatomic, retain) NSArray *menuItems;
