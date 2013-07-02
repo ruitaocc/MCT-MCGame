@@ -82,7 +82,7 @@
     //Here, you can use this advanced function to set the projection matrix.
     [MCGL perspectiveWithFovy:60.0
                        aspect:1024.0/768.0
-                        zNear:0.01
+                        zNear:100.01
                          zFar:1000];
     
     glMatrixMode(GL_MODELVIEW);

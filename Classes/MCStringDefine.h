@@ -9,8 +9,7 @@
 #ifndef MCGame_MCStringDefine_h
 #define MCGame_MCStringDefine_h
 
-//homepage ui element
-#define TextureFileName_HomePageElement @"home_element"
+//homepage ui element 
 #define TextureKey_learnButtonDown @"learnButtonDown"
 #define TextureKey_learnButtonUp @"learnButtonUp"
 #define TextureKey_optionButtonDown @"optionButtonDown"
@@ -24,8 +23,7 @@
 #define TextureKey_appTitle @"appTitle"
 
 
-//learnpage ui element
-#define TextureFileName_LearnPageElement @"learn_element"
+//learnpage ui element 
 #define TextureKey_hideTipsButtonDown @"hideTipsButtonDown"
 #define TextureKey_hideTipsButtonUp @"hideTipsButtonUp"
 #define TextureKey_nextButtonDown @"nextButtonDown"
@@ -40,7 +38,6 @@
 #define TextureKey_QsolveButtonUp @"qsolveButtonUp"
 
 //learnpage ui element
-#define TextureFileName_NumberElement @"number"
 #define TextureKey_dot @"dot2"
 #define TextureKey_dotdot @"dotdot2"
 #define TextureKey_eight @"eight2"
@@ -64,14 +61,7 @@
 #define Accord_Msg @"接着下一步吧"
 #define StayForATime_Msg @"再转一次"
 
-//面颜色名
-#define PNG_YellowFace @"yellowface.png"
-#define PNG_WhiteFace @"whiteface.png"
-#define PNG_BlueFace @"blueface.png"
-#define PNG_OrangeFace @"orangeface.png"
-#define PNG_RedFace @"redface.png"
-#define PNG_GreenFace @"greenface.png"
-#define PNG_BlackFace @"blackface.png"
+
 //面颜色材质key
 #define Face_YellowKEY @"yellowface"
 #define Face_WhiteKEY @"whiteface"

@@ -19,6 +19,7 @@
 #import "MCOBJLoader.h"
 #import "SoundSettingController.h"
 #import "SoundSettingController.h"
+#import "PlatformDetect.h"
 @implementation MCGameAppDelegate
 
 @synthesize window;
@@ -85,19 +86,8 @@
     //[countingPlaySceneController loadScene];
     
 /////////////////////////////
-    /*
-    int i = 0;
-    NSArray *familyNames = [UIFont familyNames];
-    for( NSString *familyName in familyNames ){
-        printf( "Family: %s \n", [familyName UTF8String] );
-        NSArray *fontNames = [UIFont fontNamesForFamilyName:familyName];
-        for( NSString *fontName in fontNames ){
-            i++;
-            printf( "\tFont: %s \n", [fontName UTF8String] );
-        } 
-    }
-     printf("shulian : %d",i);
-     */
+    
+    
 
 }
 

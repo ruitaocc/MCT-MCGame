@@ -34,7 +34,7 @@
     
     //UI UI step counter label
     MCLabel *counterLabel= [[MCLabel alloc]initWithNstring:TextureKey_step];
-    counterLabel.scale = [MCMaterialController getWidthAndHeightFromTextureFile:TextureFileName_NumberElement forKey:TextureKey_step];
+    counterLabel.scale = MCPointMake(48, 25, 1);
     [counterLabel setTranslation :MCPointMake(410, -360, 0.0)];
     [counterLabel setActive:YES];
     [counterLabel awake];
@@ -43,7 +43,7 @@
     
     //UI timer
     MCLabel *timerLabel= [[MCLabel alloc]initWithNstring:TextureKey_time];
-    [timerLabel setScale : [MCMaterialController getWidthAndHeightFromTextureFile:TextureFileName_NumberElement forKey:TextureKey_time]];
+    [timerLabel setScale : MCPointMake(48, 25, 1)];
     [timerLabel setTranslation :MCPointMake(-475, -360, 0.0)];
     [timerLabel setActive:YES];
     [timerLabel awake];
@@ -61,7 +61,7 @@
 	
 	//上一步/撤销
 	MCTexturedButton * undoCommand = [[MCTexturedButton alloc] initWithUpKey:TextureKey_previousButtonUp downKey:TextureKey_previousButtonDown];
-	undoCommand.scale = [MCMaterialController getWidthAndHeightFromTextureFile:TextureFileName_LearnPageElement forKey:TextureKey_previousButtonUp];
+	undoCommand.scale = MCPointMake(93, 58, 1);
 	undoCommand.translation = MCPointMake(-512+46, 0.0, 0.0);
 	undoCommand.target = self;
 	undoCommand.buttonDownAction = @selector(previousSolutionBtnDown);
@@ -75,7 +75,7 @@
     
     //暂停
 	MCTexturedButton * pause = [[MCTexturedButton alloc] initWithUpKey:TextureKey_pauseButtonUp downKey:TextureKey_pauseButtonDown];
-	pause.scale = [MCMaterialController getWidthAndHeightFromTextureFile:TextureFileName_LearnPageElement forKey:TextureKey_pauseButtonUp];
+	pause.scale =  MCPointMake(73, 44, 1);
 	pause.translation = MCPointMake(-455, 345, 0.0);
 	pause.target = self;
 	pause.buttonDownAction = @selector(pauseSolutionBtnDown);
@@ -88,7 +88,7 @@
     
     //下一步/恢复
 	MCTexturedButton * redoCommand = [[MCTexturedButton alloc] initWithUpKey:TextureKey_nextButtonUp downKey:TextureKey_nextButtonDown];
-	redoCommand.scale = [MCMaterialController getWidthAndHeightFromTextureFile:TextureFileName_LearnPageElement forKey:TextureKey_nextButtonUp];
+	redoCommand.scale =  MCPointMake(93, 58, 1);
 	redoCommand.translation = MCPointMake(512-46, 0.0, 0.0);
 	redoCommand.target = self;
 	redoCommand.buttonDownAction = @selector(nextSolutionBtnDown);

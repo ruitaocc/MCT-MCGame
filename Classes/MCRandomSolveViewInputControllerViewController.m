@@ -52,7 +52,7 @@ static BOOL _isInitFinished = NO;
     isStay = NO;
     //暂停
 	MCTexturedButton * pause = [[MCTexturedButton alloc] initWithUpKey:TextureKey_pauseButtonUp downKey:TextureKey_pauseButtonDown];
-	pause.scale = [MCMaterialController getWidthAndHeightFromTextureFile:TextureFileName_LearnPageElement forKey:TextureKey_pauseButtonUp];
+	pause.scale =  MCPointMake(73, 44, 1);;
 	pause.translation = MCPointMake(-455, 345, 0.0);
 	pause.target = self;
 	pause.buttonDownAction = @selector(pauseSolutionBtnDown);
@@ -74,7 +74,7 @@ static BOOL _isInitFinished = NO;
     
     //UI UI step counter label
     MCLabel *counterLabel= [[MCLabel alloc]initWithNstring:TextureKey_step];
-    counterLabel.scale = [MCMaterialController getWidthAndHeightFromTextureFile:TextureFileName_NumberElement forKey:TextureKey_step];
+    counterLabel.scale =  MCPointMake(48, 25, 1);
     [counterLabel setTranslation :MCPointMake(410, -360, 0.0)];
     [counterLabel setActive:YES];
     [counterLabel awake];
@@ -95,7 +95,7 @@ static BOOL _isInitFinished = NO;
     //qsolvebtn
     //the texture 还没设计出来
 	MCTexturedButton * qSolveBtn = [[MCTexturedButton alloc] initWithUpKey:TextureKey_QsolveButtonUp downKey:TextureKey_QsolveButtonDown];
-	qSolveBtn.scale = [MCMaterialController getWidthAndHeightFromTextureFile:TextureFileName_LearnPageElement forKey:TextureKey_QsolveButtonUp];
+	qSolveBtn.scale =  MCPointMake(82, 55, 1);;
 	qSolveBtn.translation = MCPointMake(512-41, 345, 0.0);
 	qSolveBtn.target = self;
 	qSolveBtn.buttonDownAction = @selector(qSolveBtnDown);
@@ -108,7 +108,7 @@ static BOOL _isInitFinished = NO;
     //
     //上一步/撤销
 	MCTexturedButton * undoCommand = [[MCTexturedButton alloc] initWithUpKey:TextureKey_previousButtonUp downKey:TextureKey_previousButtonDown];
-	undoCommand.scale = [MCMaterialController getWidthAndHeightFromTextureFile:TextureFileName_LearnPageElement forKey:TextureKey_previousButtonUp];
+	undoCommand.scale =  MCPointMake(93, 58, 1);
 	undoCommand.translation = MCPointMake(-512+46, 0.0, 0.0);
 	undoCommand.target = self;
 	undoCommand.buttonDownAction = @selector(previousSolutionBtnDown);
@@ -122,7 +122,7 @@ static BOOL _isInitFinished = NO;
     
     //下一步/恢复
 	MCTexturedButton * redoCommand = [[MCTexturedButton alloc] initWithUpKey:TextureKey_nextButtonUp downKey:TextureKey_nextButtonDown];
-	redoCommand.scale = [MCMaterialController getWidthAndHeightFromTextureFile:TextureFileName_LearnPageElement forKey:TextureKey_nextButtonUp];
+	redoCommand.scale =  MCPointMake(93, 58, 1);
 	redoCommand.translation = MCPointMake(512-46, 0.0, 0.0);
 	redoCommand.target = self;
 	redoCommand.buttonDownAction = @selector(nextSolutionBtnDown);

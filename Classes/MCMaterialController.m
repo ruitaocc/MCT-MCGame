@@ -11,6 +11,7 @@
 #import "MCAnimatedQuad.h"
 #import "MCConfiguration.h"
 #import "MCStringDefine.h"
+#import "PlatformDetect.h"
 @implementation MCMaterialController
 // Singleton accessor.  this is how you should ALWAYS get a reference
 // to the controller.  Never init your own. 
@@ -31,53 +32,85 @@
 {
 	self = [super init];
 	if (self != nil) {
-		//if (DEBUG_DRAW_COLLIDERS) [self loadTextureImage:@"" materialKey:@"testTexture"];
-        
-		// preload all our textures and atlases
-		[self loadTextureImage:@"cubeBlack2.png" materialKey:@"cubeTexture2"];
-        [self loadTextureImage:@"sixcolor.png" materialKey:@"sixcolor"];
-        [self loadTextureImage:@"cubeBlack3.png" materialKey:@"cubeTexture3"];
-        [self loadTextureImage:@"cubeBlack3.png" materialKey:@"LockTexture"];
-        [self loadTextureImage:@"background2.png" materialKey:@"background"];
-        // [self loadTextureImage:@"whiteface.png" materialKey:@"background"];
-        //space indicator
-        [self loadTextureImage:@"arrow_left.png" materialKey:kSpaceDirectionIndicatorLeft];
-        [self loadTextureImage:@"arrow_right.png" materialKey:kSpaceDirectionIndicatorRight];
-        [self loadTextureImage:@"arrow_up.png" materialKey:kSpaceDirectionIndicatorUP];
-        [self loadTextureImage:@"arrow_down.png" materialKey:kSpaceDirectionIndicatorDown];
-//cubeface
-        [self loadTextureImage:PNG_YellowFace materialKey:Face_YellowKEY];
-        [self loadTextureImage:PNG_WhiteFace materialKey:Face_WhiteKEY];
-        [self loadTextureImage:PNG_BlueFace materialKey:Face_BlueKEY];
-        [self loadTextureImage:PNG_OrangeFace materialKey:Face_OrangeKEY];
-        [self loadTextureImage:PNG_RedFace materialKey:Face_RedKEY];
-        [self loadTextureImage:PNG_GreenFace materialKey:Face_GreenKEY];
-        [self loadTextureImage:PNG_BlackFace materialKey:Face_BlackKEY];
-        
-        [self loadAtlasData:@"countNumber"];
-        [self loadAtlasData:@"cubeAction"];
-		[self loadAtlasData:@"particleAtlas"];
-       
-        [self loadAtlas_TexturePacker_Data:TextureFileName_HomePageElement];
-        [self loadAtlas_TexturePacker_Data:TextureFileName_LearnPageElement];
-        [self loadAtlas_TexturePacker_Data:TextureFileName_NumberElement];
-
-        //[self loadAtlasData:@"ButtonMerged"];
+         //判断什么分辨率
+        NSString *platform = [PlatformDetect platformString];
+        NSLog(@"This is a %@ device!",platform);
+        if ([platform isEqualToString:@"iPad 3 (GSM+CDMA)"]||
+            [platform isEqualToString:@"iPad 3"]||
+            [platform isEqualToString:@"iPad 4 (WiFi)"]||
+            [platform isEqualToString:@"iPad 4"]||
+            [platform isEqualToString:@"iPad 4 (GSM+CDMA)"]) {
+            //加载高分辨率
+            [self loadHighResolution];
+        }else{
+             //加载高分辨率
+            [self loadLowResolution];
+        }
 	}
 	return self;
 }
 
--(void)reload{
-    [materialLibrary release];
-    [quadLibrary release];
-    materialLibrary= nil;
-    quadLibrary = nil;
-    [self loadTextureImage:@"cubeBlack2.png" materialKey:@"cubeTexture2"];
-    [self loadTextureImage:@"sixcolor.png" materialKey:@"cubeTexture"];
+
+-(void)loadLowResolution{
+    // preload all our textures and atlases
+    [self loadTextureImage:@"sixcolor.png" materialKey:@"sixcolor"];
+    [self loadTextureImage:@"cubeBlack3.png" materialKey:@"cubeTexture3"];
+    [self loadTextureImage:@"cubeBlack3.png" materialKey:@"LockTexture"];
+    //低分辨背景
+    [self loadTextureImage:@"background2.png" materialKey:@"background"];
+    //space indicator
+    [self loadTextureImage:@"arrow_left.png" materialKey:kSpaceDirectionIndicatorLeft];
+    [self loadTextureImage:@"arrow_right.png" materialKey:kSpaceDirectionIndicatorRight];
+    [self loadTextureImage:@"arrow_up.png" materialKey:kSpaceDirectionIndicatorUP];
+    [self loadTextureImage:@"arrow_down.png" materialKey:kSpaceDirectionIndicatorDown];
+ 
+    //cubeface
+    [self loadTextureImage:@"yellowface.png" materialKey:Face_YellowKEY];
+    [self loadTextureImage:@"whiteface.png" materialKey:Face_WhiteKEY];
+    [self loadTextureImage:@"blueface.png" materialKey:Face_BlueKEY];
+    [self loadTextureImage:@"orangeface.png" materialKey:Face_OrangeKEY];
+    [self loadTextureImage:@"redface.png" materialKey:Face_RedKEY];
+    [self loadTextureImage:@"greenface.png" materialKey:Face_GreenKEY];
+    [self loadTextureImage:@"blackface.png" materialKey:Face_BlackKEY];
     
+    //[self loadAtlasData:@"countNumber"];
+    [self loadAtlasData:@"cubeAction"];
     [self loadAtlasData:@"particleAtlas"];
     
-    //[self loadAtlasData:@"ButtonMerged"];
+    [self loadAtlas_TexturePacker_Data:@"home_element"];
+    [self loadAtlas_TexturePacker_Data:@"learn_element"];
+    [self loadAtlas_TexturePacker_Data:@"number"];
+}
+
+-(void)loadHighResolution{
+    // preload all our textures and atlases
+    [self loadTextureImage:@"sixcolor.png" materialKey:@"sixcolor"];
+    [self loadTextureImage:@"cubeBlack3.png" materialKey:@"cubeTexture3"];
+    [self loadTextureImage:@"cubeBlack3.png" materialKey:@"LockTexture"];
+    //低分辨背景
+    [self loadTextureImage:@"background2.png" materialKey:@"background"];
+    //space indicator
+    [self loadTextureImage:@"arrow_left.png" materialKey:kSpaceDirectionIndicatorLeft];
+    [self loadTextureImage:@"arrow_right.png" materialKey:kSpaceDirectionIndicatorRight];
+    [self loadTextureImage:@"arrow_up.png" materialKey:kSpaceDirectionIndicatorUP];
+    [self loadTextureImage:@"arrow_down.png" materialKey:kSpaceDirectionIndicatorDown];
+    
+    //cubeface
+    [self loadTextureImage:@"yellowface.png" materialKey:Face_YellowKEY];
+    [self loadTextureImage:@"whiteface.png" materialKey:Face_WhiteKEY];
+    [self loadTextureImage:@"blueface.png" materialKey:Face_BlueKEY];
+    [self loadTextureImage:@"orangeface.png" materialKey:Face_OrangeKEY];
+    [self loadTextureImage:@"redface.png" materialKey:Face_RedKEY];
+    [self loadTextureImage:@"greenface.png" materialKey:Face_GreenKEY];
+    [self loadTextureImage:@"blackface.png" materialKey:Face_BlackKEY];
+    
+    //[self loadAtlasData:@"countNumber"];
+    [self loadAtlasData:@"cubeAction"];
+    [self loadAtlasData:@"particleAtlas"];
+    
+    [self loadAtlas_TexturePacker_Data:@"home_element2"];
+    [self loadAtlas_TexturePacker_Data:@"learn_element2"];
+    [self loadAtlas_TexturePacker_Data:@"number2"];
 }
 
 
@@ -270,7 +303,7 @@
 		glBindTexture(GL_TEXTURE_2D, textureID);
 		// Specidfy a 2D texture image, provideing the a pointer to the image data in memory
 		
-		//Convert "RRRRRRRRRGGGGGGGGMCMCMCMCAAAAAAAA" to "RRRRRGGGGMCMCAAAA"
+		//Convert "RRRRRRRRRGGGGGGGGBBBBBBBBAAAAAAAA" to "RRRRRGGGGBBBBAAAA"
 		if (MC_CONVERT_TO_4444) {
 			void*					tempData;
 			unsigned int*			inPixel32;

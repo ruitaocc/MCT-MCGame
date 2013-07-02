@@ -9,5 +9,5 @@
 #import <Foundation/Foundation.h>
 
 @interface PlatformDetect : NSObject
-
++(NSString *) platformString;
 @end

@@ -30,7 +30,8 @@
                                    materialKey:(NSString*)key;
 - (CGSize)loadTextureImage:(NSString*)imageName materialKey:(NSString*)materialKey;
 - (id) init;
-- (void) reload;
+- (void) loadLowResolution;
+- (void) loadHighResolution;
 - (void) dealloc;
 - (void)bindMaterial:(NSString*)materialKey;
 //旧数据plist格式文件
