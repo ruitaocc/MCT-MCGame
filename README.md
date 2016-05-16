@@ -1,7 +1,10 @@
-<p align="center"><img src='https://github.com/ruitaocc/MCT-MCGame/tree/master/Classes/Icon-72@2x.png'></p>
+
+<p align="center"><img src='https://github.com/ruitaocc/MCT-MCGame/blob/master/Classes/logo.png'></p>
+
 MCT-MCGame
 ==========
 
-this is a project that simulate Rubik's Cube on iPad.
-=======
-This a project that simulate the Rubik's Cube on iPad.
+This is a project that simulate Rubik's Cube on iPad. 
+
+* Download App : [vCode](https://itunes.apple.com/cn/app/mo-fang-da-shi/id980563392).   
+
